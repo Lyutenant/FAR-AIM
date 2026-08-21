@@ -1,0 +1,13 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Raw source cache (see plan §6.2 — manifests/checksums are committed, raw is not)
+data/raw/
+
+# OS
+.DS_Store
