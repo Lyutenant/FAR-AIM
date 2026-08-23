@@ -14,8 +14,12 @@ paraphrased or AI-generated. Full specification:
 
 ## Status
 
-**Phase 0** — repository foundation, CLI skeleton, source manifest, tests, CI.
-Upstream fetching (Phase 1) is not implemented yet.
+**Phase 1** — eCFR Title 14 acquisition: `far-aim fetch ecfr` discovers the
+current issue via the eCFR versioner API, streams the point-in-time XML into
+the raw cache with checksum + metadata, validates it (well-formedness,
+truncation floors), and records the accepted version in the source manifest.
+Re-fetching an unchanged issue is a verified no-op. `far-aim check --remote`
+polls upstream read-only. Parsing (Phase 2) is next.
 
 ## Development
 
@@ -25,6 +29,8 @@ python3 -m venv .venv                 # requires Python 3.12+
 .venv/bin/pytest                      # run tests
 .venv/bin/ruff check src tests       # lint
 .venv/bin/far-aim check              # show source registry state
+.venv/bin/far-aim check --remote     # also poll upstream for newer versions
+.venv/bin/far-aim fetch ecfr         # fetch + archive current Title 14
 ```
 
 ## Layout

@@ -33,5 +33,9 @@ normalize → validate → diff → generate. Never website → Markdown directl
 - `far_aim.cli` — command-line entry point (plan §18)
 - `far_aim.config` — filesystem layout rooted at the repo root
 - `far_aim.manifest` — source-state registry (plan §15)
-- Planned: `sources/`, `parsers/`, `models/`, `normalize/`, `links/`,
+- `far_aim.sources.ecfr` — eCFR Title 14 discovery + acquisition (Phase 1):
+  version discovery via `titles.json`, streamed point-in-time XML download
+  with retry/backoff, source-integrity gate (well-formedness, root element,
+  size/section-count floors), raw archive + checksum, manifest update
+- Planned: `parsers/`, `models/`, `normalize/`, `links/`,
   `generate/`, `diff/`, `validate/`

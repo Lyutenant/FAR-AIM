@@ -43,7 +43,10 @@ plan conflict, the plan wins.
 
 ## Current status
 
-Phase 0 (foundation) complete: package scaffold, CLI skeleton, source manifest,
-tests, CI. Next: Phase 1 (eCFR Title 14 acquisition), then Phase 2 (parsing and
-canonical model). Do not start AIM/PCG/AI-enrichment work before the eCFR
-canonical layer is trustworthy (plan §31).
+Phase 0 (foundation) and Phase 1 (eCFR Title 14 acquisition) complete:
+`far-aim fetch ecfr` discovers the current issue date, downloads and validates
+the point-in-time XML, archives it in the gitignored raw cache with checksum +
+metadata, and updates the manifest; repeat fetches are verified no-ops.
+Next: Phase 2 (eCFR parsing and canonical model). Do not start
+AIM/PCG/AI-enrichment work before the eCFR canonical layer is trustworthy
+(plan §31).

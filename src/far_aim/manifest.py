@@ -8,6 +8,7 @@ newline, `None` fields omitted.
 
 from __future__ import annotations
 
+import errno
 import json
 import os
 import tempfile
@@ -15,6 +16,11 @@ from dataclasses import asdict, dataclass, field, fields
 from pathlib import Path
 
 SCHEMA_VERSION = 1
+
+# Errors meaning "this platform/filesystem cannot fsync a directory".
+_FSYNC_DIR_UNSUPPORTED = frozenset(
+    {errno.EINVAL, errno.ENOTSUP, errno.EOPNOTSUPP, errno.EBADF, errno.EACCES, errno.EPERM}
+)
 
 KNOWN_SOURCES = ("ecfr_title_14", "aim", "pcg")
 
@@ -122,3 +128,19 @@ class SourceManifest:
         except BaseException:
             tmp_path.unlink(missing_ok=True)
             raise
+        # The rename itself is only durable once the directory entry is
+        # synced. Platforms that cannot open/fsync a directory are tolerated;
+        # real I/O errors propagate.
+        try:
+            dir_fd = os.open(path.parent, os.O_RDONLY)
+        except OSError as exc:
+            if exc.errno in _FSYNC_DIR_UNSUPPORTED:
+                return
+            raise
+        try:
+            os.fsync(dir_fd)
+        except OSError as exc:
+            if exc.errno not in _FSYNC_DIR_UNSUPPORTED:
+                raise
+        finally:
+            os.close(dir_fd)

@@ -8,6 +8,8 @@ __pycache__/
 
 # Raw source cache (see plan §6.2 — manifests/checksums are committed, raw is not)
 data/raw/
+# Inter-process fetch lock (runtime only)
+data/manifests/.sources.lock
 
 # OS
 .DS_Store

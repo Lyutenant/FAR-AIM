@@ -26,8 +26,36 @@ regulatory material; on failure, preserve the last known-good output.
 7. **FAA change-note cross-check** — compare detected AIM changes against
    the FAA's published change explanation; flag major discrepancies.
 
-## Current implementation status (Phase 0)
+## Current implementation status (Phase 1)
 
-`far-aim validate` validates the source-manifest schema. Categories above
-land with their corresponding phases (parsers: Phase 2/4/5; links: Phase 6;
-change/determinism gates: Phase 8).
+`far-aim validate` validates the source-manifest schema.
+
+`far-aim fetch ecfr` enforces category 1 (source integrity) for the eCFR
+download before accepting a snapshot: discovery waits out (and ultimately
+fails on) `meta.import_in_progress` so a half-rebuilt daily snapshot is
+never accepted; then HTTP 200 + XML content type, Content-Length agreement
+(a malformed header is a controlled failure, not a traceback), XML
+well-formedness end-to-end, expected `<ECFR>`
+root element, and data-informed truncation floors (≥ 4 MB, ≥ 4,000
+`DIV8 TYPE="SECTION"` elements; the 2026-08-19 issue measures ~16 MB /
+6,363 sections). A re-fetch of an already-accepted version whose bytes no
+longer match the recorded checksum fails closed and quarantines the download
+for inspection (`--force` overrides after human review; the superseded
+snapshot is preserved under a hash-qualified name, since in-place upstream
+changes make the old bytes unrecoverable from the point-in-time API).
+Acceptance is ordered metadata → archive publish → manifest (atomic commit,
+last), so the manifest never records a snapshot that is not durably
+archived. If the commit fails, the archive is rolled back in-process to the
+preserved last known-good bytes; after a hard crash the next fetch performs
+the same rollback offline, *before* discovery and regardless of what version
+upstream now reports (validated-but-unaccepted bytes are parked as
+`title-14.xml.unaccepted-<hash>`). Snapshot-directory entries are fsynced
+after each rename so the archive is durable before the manifest commits.
+Fetches take an exclusive non-blocking lock (`data/manifests/.sources.lock`)
+for their whole duration and write to unique temp files, so an overlapping
+fetch fails closed instead of racing on the manifest or archive. Consumers
+should still verify the archive against the manifest `raw_hash` before
+trusting it.
+
+Remaining categories land with their corresponding phases (parsers:
+Phase 2/4/5; links: Phase 6; change/determinism gates: Phase 8).
