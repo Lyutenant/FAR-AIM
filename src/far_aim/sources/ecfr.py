@@ -148,7 +148,7 @@ _FSYNC_DIR_UNSUPPORTED = frozenset(
 )
 
 
-def _fsync_dir(path: Path) -> None:
+def fsync_dir(path: Path) -> None:
     """Make renames/creates inside ``path`` durable (POSIX rename semantics).
 
     A renamed file is only guaranteed to survive power loss once its parent
@@ -172,12 +172,13 @@ def _fsync_dir(path: Path) -> None:
 
 
 @contextlib.contextmanager
-def _fetch_lock(lock_path: Path) -> Iterator[None]:
-    """Exclusive, non-blocking inter-process lock around a whole fetch.
+def exclusive_lock(lock_path: Path) -> Iterator[None]:
+    """Exclusive, non-blocking inter-process lock around a fetch or parse.
 
-    Two overlapping fetches would race on the manifest's read-modify-write
-    and on the snapshot directory; the loser fails closed immediately
-    instead of publishing the winner's bytes under its own checksum.
+    Overlapping operations would race on the manifest's read-modify-write
+    and on the snapshot/normalized directories; the loser fails closed
+    immediately instead of publishing the winner's bytes under its own
+    checksum.
     """
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     fd = os.open(lock_path, os.O_RDWR | os.O_CREAT, 0o644)
@@ -192,7 +193,7 @@ def _fetch_lock(lock_path: Path) -> Iterator[None]:
             msvcrt.locking(fd, msvcrt.LK_NBLCK, 1)
         except OSError as exc:
             raise FetchError(
-                f"another fetch is already in progress (lock {lock_path} held); "
+                f"another far-aim fetch or parse is already in progress (lock {lock_path} held); "
                 "wait for it to finish and re-run"
             ) from exc
         yield
@@ -287,7 +288,7 @@ def discover_title14(client: httpx.Client, *, sleep: Sleep | None = None) -> Tit
     )
 
 
-def _sha256_of(path: Path) -> str:
+def sha256_of(path: Path) -> str:
     hasher = hashlib.sha256()
     with path.open("rb") as fh:
         while chunk := fh.read(1 << 20):
@@ -407,7 +408,7 @@ _METADATA_KEYS = frozenset(
 )
 
 
-def _metadata_intact(
+def metadata_intact(
     path: Path, *, version: str, raw_hash: str, url: str, byte_count: int
 ) -> bool:
     """True when metadata.json is a complete provenance record for the accepted bytes.
@@ -473,7 +474,7 @@ def _write_metadata(
     except BaseException:
         tmp_path.unlink(missing_ok=True)
         raise
-    _fsync_dir(path.parent)
+    fsync_dir(path.parent)
 
 
 def _publish_xml(tmp_path: Path, xml_path: Path, *, new_hash: str, version: str) -> None:
@@ -484,13 +485,13 @@ def _publish_xml(tmp_path: Path, xml_path: Path, *, new_hash: str, version: str)
     is kept under a hash-qualified name (plan §32.13) before overwriting.
     """
     if xml_path.exists():
-        existing_hash = _sha256_of(xml_path)
+        existing_hash = sha256_of(xml_path)
         if existing_hash != new_hash:
             superseded = _superseded_path(xml_path, existing_hash)
             os.replace(xml_path, superseded)
             # The superseded copy is the only recoverable last known-good;
             # make that rename durable before the replacement is installed.
-            _fsync_dir(xml_path.parent)
+            fsync_dir(xml_path.parent)
             log.warning(
                 "eCFR Title 14 %s: previous snapshot (%s) preserved at %s",
                 version,
@@ -498,7 +499,7 @@ def _publish_xml(tmp_path: Path, xml_path: Path, *, new_hash: str, version: str)
                 superseded,
             )
     os.replace(tmp_path, xml_path)
-    _fsync_dir(xml_path.parent)
+    fsync_dir(xml_path.parent)
 
 
 def _reconcile_accepted_archive(xml_path: Path, accepted_hash: str) -> None:
@@ -510,7 +511,7 @@ def _reconcile_accepted_archive(xml_path: Path, accepted_hash: str) -> None:
     preserved copy either) nothing is done; the point-in-time API can
     re-supply it.
     """
-    if xml_path.exists() and _sha256_of(xml_path) == accepted_hash:
+    if xml_path.exists() and sha256_of(xml_path) == accepted_hash:
         return
     _restore_known_good(xml_path, accepted_hash)
 
@@ -541,17 +542,17 @@ def _restore_known_good(xml_path: Path, known_good_hash: str) -> bool:
     holds ``known_good_hash``.
     """
     superseded = _superseded_path(xml_path, known_good_hash)
-    if not superseded.exists() or _sha256_of(superseded) != known_good_hash:
+    if not superseded.exists() or sha256_of(superseded) != known_good_hash:
         return False
     if xml_path.exists():
-        current_hash = _sha256_of(xml_path)
+        current_hash = sha256_of(xml_path)
         unaccepted = xml_path.with_name(f"title-14.xml.unaccepted-{_hash_suffix(current_hash)}")
         os.replace(xml_path, unaccepted)
         log.warning(
             "archive %s held unaccepted bytes (%s); moved to %s", xml_path, current_hash, unaccepted
         )
     os.replace(superseded, xml_path)
-    _fsync_dir(xml_path.parent)
+    fsync_dir(xml_path.parent)
     log.warning("restored last known-good snapshot (%s) to %s", known_good_hash, xml_path)
     return True
 
@@ -585,14 +586,14 @@ def fetch_title14(
     manifest_path = config.manifest_path
     if not manifest_path.exists():
         raise FetchError(f"source registry missing: {manifest_path}")
-    with _fetch_lock(fetch_lock_path(config)):
+    with exclusive_lock(fetch_lock_path(config)):
         return _fetch_title14_locked(
             config, client, manifest_path=manifest_path, force=force, sleep=sleep, now=now
         )
 
 
 def fetch_lock_path(config: Config) -> Path:
-    """Lock file serializing all fetches that update the shared manifest."""
+    """Lock file serializing fetches and parses that update the shared manifest."""
     return config.manifests_dir / ".sources.lock"
 
 
@@ -644,11 +645,11 @@ def _fetch_title14_locked(
             and state.accepted_version == version
             and state.raw_hash is not None
             and xml_path.exists()
-            and _sha256_of(xml_path) == state.raw_hash
+            and sha256_of(xml_path) == state.raw_hash
         )
         if xml_cache_intact:
             section_count: int | None = None
-            if not _metadata_intact(
+            if not metadata_intact(
                 metadata_path,
                 version=version,
                 raw_hash=state.raw_hash,

@@ -342,7 +342,7 @@ def _assert_consistent(config, upstream, expected_xml: bytes):
     xml_path = config.raw_dir / "ecfr" / ISSUE_DATE / "title-14.xml"
     state = SourceManifest.load(config.manifest_path).sources["ecfr_title_14"]
     assert xml_path.read_bytes() == expected_xml
-    assert ecfr._sha256_of(xml_path) == state.raw_hash
+    assert ecfr.sha256_of(xml_path) == state.raw_hash
     metadata = json.loads((xml_path.parent / "metadata.json").read_text())
     assert metadata["raw_hash"] == state.raw_hash
     assert not (xml_path.parent / "title-14.xml.mismatch").exists()
@@ -587,8 +587,10 @@ def test_manifest_never_records_unarchived_snapshot(config):
 def test_concurrent_fetch_fails_closed_while_lock_held(config):
     upstream = Upstream()
     with (
-        ecfr._fetch_lock(ecfr.fetch_lock_path(config)),
-        pytest.raises(ecfr.FetchError, match="another fetch is already in progress"),
+        ecfr.exclusive_lock(ecfr.fetch_lock_path(config)),
+        pytest.raises(
+            ecfr.FetchError, match="another far-aim fetch or parse is already in progress"
+        ),
     ):
         fetch(config, upstream)
     assert upstream.titles_requests == 0  # refused before touching the network
@@ -628,7 +630,7 @@ def test_snapshot_dir_synced_before_manifest_commit(config):
     upstream = Upstream()
     events: list[str] = []
     snapshot_dir = config.raw_dir / "ecfr" / ISSUE_DATE
-    real_fsync_dir = ecfr._fsync_dir
+    real_fsync_dir = ecfr.fsync_dir
     real_save = SourceManifest.save
 
     def spy_fsync(path):
@@ -641,7 +643,7 @@ def test_snapshot_dir_synced_before_manifest_commit(config):
         real_save(self, path)
 
     with pytest.MonkeyPatch.context() as mp:
-        mp.setattr(ecfr, "_fsync_dir", spy_fsync)
+        mp.setattr(ecfr, "fsync_dir", spy_fsync)
         mp.setattr(SourceManifest, "save", spy_save)
         fetch(config, upstream)
 
@@ -658,7 +660,7 @@ def test_superseded_copy_synced_before_replacement_installed(config):
     upstream.xml = NEW_XML
     superseded = _named(first.xml_path, "superseded", first.raw_hash)
     events: list[str] = []
-    real_fsync_dir = ecfr._fsync_dir
+    real_fsync_dir = ecfr.fsync_dir
     real_replace = os.replace
 
     def spy_fsync(path):
@@ -675,7 +677,7 @@ def test_superseded_copy_synced_before_replacement_installed(config):
         real_replace(src, dst)
 
     with pytest.MonkeyPatch.context() as mp:
-        mp.setattr(ecfr, "_fsync_dir", spy_fsync)
+        mp.setattr(ecfr, "fsync_dir", spy_fsync)
         mp.setattr(ecfr.os, "replace", spy_replace)
         fetch(config, upstream, force=True)
 

@@ -8,6 +8,10 @@ __pycache__/
 
 # Raw source cache (see plan §6.2 — manifests/checksums are committed, raw is not)
 data/raw/
+# Normalized canonical layer: deterministically reconstructible from the
+# archived snapshot (`far-aim parse ecfr`); integrity pinned by the committed
+# manifest canonical_hash (see AGENTS.md design decisions)
+data/normalized/
 # Inter-process fetch lock (runtime only)
 data/manifests/.sources.lock
 

@@ -57,5 +57,131 @@ fetch fails closed instead of racing on the manifest or archive. Consumers
 should still verify the archive against the manifest `raw_hash` before
 trusting it.
 
-Remaining categories land with their corresponding phases (parsers:
-Phase 2/4/5; links: Phase 6; change/determinism gates: Phase 8).
+## Current implementation status (Phase 2)
+
+`far-aim parse ecfr` enforces categories 2, 3 and 6 for the eCFR canonical
+layer, and all 226 parts of the accepted Title 14 snapshot (6,363 sections —
+matching the fetch validator's `DIV8 SECTION` count exactly) parse
+losslessly:
+
+- **Structural integrity** — the DIV hierarchy is walked with an explicit
+  allowlist per container; any unhandled element or unparseable HEAD raises
+  `ParseError`. The document must contain exactly one Title 14 division
+  and all content must live inside it (a valid eCFR document for another
+  title, or malformed XML with chapters directly under the root, is
+  rejected, never republished under the wrong citation), every hierarchy
+  division (title, subtitle, chapter, subchapter) must carry exactly one
+  heading — those sit outside the per-part lossless check, so a missing
+  one, a surplus one the hierarchy walk would otherwise skip, or a stray
+  HEAD at the document root fails here instead of silently publishing
+  incomplete data — and a nonempty `N` designator (attribute text is
+  likewise outside the lossless comparison, so a missing designator would
+  silently null the hierarchy context of every part below); section HEAD
+  citations are cross-checked against the
+  `N` attribute and must carry their citation marker (markerless heads are
+  accepted only where the corpus omits them: reserved ranges and CAB-era
+  hyphen-numbered sections), section numbers must belong to their part,
+  duplicate part
+  numbers are rejected, and every stable ID across the built documents
+  (parts, sections, appendices) must be unique before anything is
+  published.
+- **Text integrity** — every part must pass a lossless-capture check (word
+  multiset of the source subtree = word multiset of the built document).
+  The comparison is strict on whitespace tokens first; a residual mismatch
+  is accepted only when the word pieces still balance after splitting on
+  the structural glyphs the parser legitimately reshapes — label
+  parentheses, joining em/en dashes, range hyphens — **and** every residue
+  token carrying one is a recognizable structural join (an embedded valid
+  paragraph label, or a dash join anchored on the part's own designators
+  or a section citation) or a fragment split off one intact. Reshaped
+  prose punctuation ("fixed-wing" → "fixed wing", "(FAA)" → "FAA") anchors
+  on neither and fails the gate, exactly like dropped periods, commas,
+  semicolons, colons, brackets and quotes. Exact-paragraph fixture tests
+  cover representative sections (91.3, 91.155, 91.175, 91.107 italic
+  levels).
+- **Determinism** — parsing is pure; re-running `parse ecfr` over unchanged
+  sources produces byte-identical files (regression-tested).
+- **Fail closed** — all requested parts are built in memory before anything
+  is written; a failure writes nothing and preserves the last known-good
+  normalized output. The archived snapshot is re-verified against the
+  manifest `raw_hash` before parsing, and its `metadata.json` must describe
+  the accepted snapshot (provider, version, URL, checksum, byte count,
+  timestamp format) — metadata left behind by an interrupted forced fetch
+  cannot attach false provenance. A full parse publishes the normalized
+  layer **transactionally**: the new layer is staged in a sibling directory
+  and swapped in with two renames, so an interruption can never leave a mix
+  of old and new part files and parts removed upstream cannot survive as
+  stale files. Every failure path restores the last known-good layer: a
+  crash between the swap renames leaves the sole copy at `.ecfr-previous`,
+  which the next publish restores (never discards) before staging; a crash
+  between the swap and the manifest commit leaves an uncommitted layer at
+  the canonical path with the manifest's layer still under `.ecfr-previous`
+  — the next publish (full or `--part`) reconciles both against the
+  recorded hash with **deep** per-document re-verification of content
+  hashes *and* provenance (stored hashes are not trusted for this
+  destructive decision, and canonical hashes exclude `source` blocks, so
+  a content-matching layer with stale or tampered provenance — one
+  `validate` rejects — cannot win the arbitration and delete the intact
+  copy) and reinstates the
+  committed one as the surviving fallback; when *neither* copy verifies,
+  recovery refuses to discard either and fails closed for human
+  inspection; a failed
+  swap reinstates it in-process; a failed manifest commit rolls the swap
+  back — unless the on-disk manifest shows the commit became visible before
+  the failure (rename landed, directory fsync did not), in which case the
+  agreeing new layer and manifest are both kept; on a first publish with no
+  earlier layer, rollback removes the uncommitted output entirely; when no
+  manifest hash exists to arbitrate, recovery reinstates the displaced
+  pre-command layer rather than treating it as superseded. Partial
+  (`--part`) parses use the same on-disk staging swap (the existing layer
+  is hard-link-copied, the requested files rewritten in the copy, and the
+  copy swapped in), so a crash, kill, or `KeyboardInterrupt` at any point —
+  which an in-memory rollback would not survive — leaves either the old
+  layer or the fully-updated one, never a mix. A partial publish first
+  deep-verifies the existing layer — every part file's root *and* nested
+  documents must recompute their canonical hashes and carry provenance
+  matching the *accepted* snapshot — because after a fetch accepts a newer
+  issue the stale layer cannot serve as the merge base (that would publish
+  a mixed-version corpus), and a carried-over part with stale nested
+  provenance would otherwise ride through to a layer `validate` rejects
+  (nested `source` blocks are excluded from canonical hashes, so the
+  staged title-hash check cannot catch them); a full parse is required
+  first. Discarding a superseded `.ecfr-previous` fallback is followed by
+  a parent-directory fsync on every path (full, partial, recovery):
+  resurrected by a power loss, it could later win recovery arbitration
+  once `canonical_hash` is unset or cleared by a newer fetch and displace
+  the newer committed layer. A partial publish whose
+  staged result would no longer match a recorded title hash (parser changes
+  altered that part's canonical content) is refused outright — publishing
+  it would leave a layer `validate` rejects while reporting success, and
+  re-recording the hash would bless a mixed-provenance layer; a full parse
+  is required instead. The entire parse — from
+  manifest read through publication — holds the same exclusive lock as
+  fetches (`data/manifests/.sources.lock`), so a concurrent fetch cannot
+  accept a newer snapshot mid-parse and be overwritten by a stale
+  publication. `far-aim validate` takes the same lock around its manifest
+  read and layer walk, so it always observes one consistent published
+  state rather than a half-committed one.
+
+The manifest `canonical_hash` for `ecfr_title_14` — the content hash over
+all part hashes — is recorded only on a successful full-title parse, never
+for partial parses. `far-aim validate` then re-verifies the normalized
+layer end-to-end: every document of a hashed type — the part and each
+nested section and appendix, identified by `document_type` so a *deleted*
+hash is a defect rather than a skipped check — must carry a
+`canonical_hash` that recomputes from its own content (nested hashes are
+excluded from their parent's hash, so the part check alone would miss
+stale or missing section hashes) and a `source` block matching the
+manifest's accepted snapshot (provider, version, URL, raw checksum,
+timestamp format — canonical hashing strips provenance, so nothing else
+would notice it missing or falsified; plan §32.8). Each file's root must
+itself be a `cfr_part` document (a stripped or mangled root type would
+dodge the type-keyed walker while its stored hash still feeds the title
+hash), each filename must match the part it contains (a valid document
+copied under another part's name is rejected, and no part may appear
+twice), and the title hash must match the manifest — so tampered,
+duplicated, or stale normalized data fails loudly before vault
+generation.
+
+Remaining categories land with their corresponding phases (AIM/PCG parsers:
+Phase 4/5; links: Phase 6; change gates: Phase 8).

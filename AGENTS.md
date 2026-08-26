@@ -40,6 +40,9 @@ plan conflict, the plan wins.
   point-in-time API (plan §6.2).
 - `canonical_hash` is computed excluding volatile provenance fields (plan §7).
 - Parsing is deterministic code; an LLM is never the parser of record (plan §20.2).
+- `data/normalized/` is a gitignored local layer: it is deterministically
+  reconstructible from the archived snapshot via `far-aim parse ecfr`, and its
+  integrity is pinned by the committed manifest `canonical_hash`.
 
 ## Current status
 
@@ -47,6 +50,16 @@ Phase 0 (foundation) and Phase 1 (eCFR Title 14 acquisition) complete:
 `far-aim fetch ecfr` discovers the current issue date, downloads and validates
 the point-in-time XML, archives it in the gitignored raw cache with checksum +
 metadata, and updates the manifest; repeat fetches are verified no-ops.
-Next: Phase 2 (eCFR parsing and canonical model). Do not start
-AIM/PCG/AI-enrichment work before the eCFR canonical layer is trustworthy
-(plan §31).
+
+Phase 2 (eCFR parsing and canonical model) complete: `far-aim parse ecfr`
+parses the entire accepted Title 14 snapshot — all 226 parts, 6,363
+sections, matching the fetch validator's section count — into deterministic
+canonical JSON (`data/normalized/ecfr/part-NNNN.json`), with per-part
+lossless-capture verification, unique stable IDs, and the title-level
+`canonical_hash` recorded in the manifest on full-title parses.
+`far-aim validate` re-verifies the normalized layer against the manifest.
+The model, parser grammar (paragraph re-nesting, definitions, re-entry,
+gap tolerance), and validation gates are documented in docs/data-model.md,
+docs/validation.md, and `far_aim.parsers.ecfr`'s module docstring.
+Next: Phase 3 (FAR Obsidian generator). Do not start AIM/PCG/AI-enrichment
+work before the eCFR canonical layer is trustworthy (plan §31).
