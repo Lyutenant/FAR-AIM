@@ -37,5 +37,11 @@ normalize → validate → diff → generate. Never website → Markdown directl
   version discovery via `titles.json`, streamed point-in-time XML download
   with retry/backoff, source-integrity gate (well-formedness, root element,
   size/section-count floors), raw archive + checksum, manifest update
-- Planned: `parsers/`, `models/`, `normalize/`, `links/`,
-  `generate/`, `diff/`, `validate/`
+- `far_aim.models.cfr` — stable IDs + canonical content hashing (Phase 2)
+- `far_aim.parsers.ecfr` — eCFR XML → canonical part JSON (Phase 2)
+- `far_aim.generate` — canonical JSON → Obsidian vault (Phase 3): naming
+  policy, deterministic frontmatter, block renderers, note builders, and the
+  plan/verify/sync build (see vault.md)
+- `far_aim.links.citations` — deterministic in-text CFR citation extraction
+  (Phase 3, plan §12.1 Tier 1)
+- Planned: `normalize/`, `diff/`, `validate/`

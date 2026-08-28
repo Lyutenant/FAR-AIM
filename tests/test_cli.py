@@ -77,7 +77,6 @@ def test_validate_invalid_manifest(tmp_path, capsys):
         ["parse", "pcg"],
         ["normalize"],
         ["diff"],
-        ["build-vault"],
         ["update"],
     ],
 )
@@ -1123,3 +1122,205 @@ def test_partial_parse_refuses_stale_base_layer(tmp_path, capsys):
     assert main(["--root", str(tmp_path), "parse", "ecfr"]) == EXIT_OK
     assert main(["--root", str(tmp_path), "parse", "ecfr", "--part", "91"]) == EXIT_OK
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+
+
+# ---------------------------------------------------------------------------
+# build-vault (Phase 3)
+# ---------------------------------------------------------------------------
+
+
+def _built_vault(tmp_path, capsys) -> Config:
+    """A root with the slice parsed and the vault generated."""
+    config = _accepted_snapshot(tmp_path, SLICE_XML.read_bytes())
+    assert main(["--root", str(tmp_path), "parse", "ecfr"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    capsys.readouterr()
+    return config
+
+
+def _vault_bytes(config: Config) -> dict:
+    return {
+        path: path.read_bytes()
+        for path in sorted(config.vault_dir.rglob("*.md"))
+    }
+
+
+def test_build_vault_generates_and_is_idempotent(tmp_path, capsys):
+    config = _accepted_snapshot(tmp_path, SLICE_XML.read_bytes())
+    assert main(["--root", str(tmp_path), "parse", "ecfr"]) == EXIT_OK
+    capsys.readouterr()
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "18 written" in out
+    assert (config.vault_dir / "FAR" / "Part 091" / "91.155.md").exists()
+    assert (config.vault_dir / "FAR" / "Part 091" / "Part 91.md").exists()
+    assert (config.vault_dir / "FAR" / "Title 14.md").exists()
+    assert (config.vault_dir / "Source Status.md").exists()
+
+    # Rebuild with unchanged sources: no writes, byte-identical tree (§32.10).
+    first = _vault_bytes(config)
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "0 written" in out and "0 stale deleted" in out
+    assert _vault_bytes(config) == first
+
+
+def test_build_vault_without_canonical_layer(tmp_path, capsys):
+    _accepted_snapshot(tmp_path, SLICE_XML.read_bytes())
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_ERROR
+    assert "run `far-aim fetch ecfr` and `far-aim parse ecfr` first" in capsys.readouterr().err
+
+
+def test_build_vault_without_manifest(tmp_path, capsys):
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_ERROR
+    assert "source registry missing" in capsys.readouterr().err
+
+
+def test_build_vault_fails_closed_while_lock_held(tmp_path, capsys):
+    config = _accepted_snapshot(tmp_path, SLICE_XML.read_bytes())
+    assert main(["--root", str(tmp_path), "parse", "ecfr"]) == EXIT_OK
+    with ecfr.exclusive_lock(ecfr.fetch_lock_path(config)):
+        assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_ERROR
+    assert "already in progress" in capsys.readouterr().err
+
+
+def test_build_vault_refuses_curated_note_at_generated_path(tmp_path, capsys):
+    config = _accepted_snapshot(tmp_path, SLICE_XML.read_bytes())
+    assert main(["--root", str(tmp_path), "parse", "ecfr"]) == EXIT_OK
+    target = config.vault_dir / "FAR" / "Part 091" / "91.155.md"
+    target.parent.mkdir(parents=True)
+    target.write_text("# my own 91.155 notes\n", encoding="utf-8")
+    capsys.readouterr()
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_ERROR
+    assert "curated note at generated path" in capsys.readouterr().err
+    assert target.read_text(encoding="utf-8") == "# my own 91.155 notes\n"
+
+
+def test_build_vault_preserves_curated_note_in_tree(tmp_path, capsys):
+    config = _built_vault(tmp_path, capsys)
+    curated = config.vault_dir / "FAR" / "Part 091" / "My Notes.md"
+    curated.write_text("mine\n", encoding="utf-8")
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    captured = capsys.readouterr()
+    assert curated.read_text(encoding="utf-8") == "mine\n"
+    assert "My Notes.md" in captured.err  # warning, not deletion
+
+
+def test_build_vault_deletes_stale_generated_note(tmp_path, capsys):
+    config = _built_vault(tmp_path, capsys)
+    stale = config.vault_dir / "FAR" / "Part 091" / "91.999.md"
+    real = config.vault_dir / "FAR" / "Part 091" / "91.155.md"
+    stale.write_bytes(real.read_bytes())
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    assert "1 stale deleted" in capsys.readouterr().out
+    assert not stale.exists()
+
+
+def test_validate_checks_vault(tmp_path, capsys):
+    config = _built_vault(tmp_path, capsys)
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    assert "ok: vault matches canonical layer (18 notes)" in capsys.readouterr().out
+
+    # A hand-edited generated note fails validation.
+    note = config.vault_dir / "FAR" / "Part 091" / "91.155.md"
+    note.write_bytes(note.read_bytes() + b"\nedited\n")
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
+    assert "differs from the canonical layer" in capsys.readouterr().err
+
+
+def test_validate_flags_missing_and_stale_vault_notes(tmp_path, capsys):
+    config = _built_vault(tmp_path, capsys)
+    note = config.vault_dir / "FAR" / "Part 091" / "91.155.md"
+
+    stale = config.vault_dir / "FAR" / "Part 091" / "91.999.md"
+    stale.write_bytes(note.read_bytes())
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
+    assert "stale generated note" in capsys.readouterr().err
+    stale.unlink()
+
+    note.unlink()
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
+    assert "missing generated note" in capsys.readouterr().err
+
+
+def test_validate_ignores_curated_notes_in_vault(tmp_path, capsys):
+    config = _built_vault(tmp_path, capsys)
+    (config.vault_dir / "FAR" / "Part 091" / "My Notes.md").write_text("mine\n", encoding="utf-8")
+    (config.vault_dir / "Topics").mkdir()
+    (config.vault_dir / "Topics" / "Airspace.md").write_text("curated\n", encoding="utf-8")
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    assert "vault matches canonical layer" in capsys.readouterr().out
+
+
+def test_validate_without_vault_still_ok(tmp_path, capsys):
+    _accepted_snapshot(tmp_path, SLICE_XML.read_bytes())
+    assert main(["--root", str(tmp_path), "parse", "ecfr"]) == EXIT_OK
+    capsys.readouterr()
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    assert "no generated vault yet" in capsys.readouterr().out
+
+
+_REPO_ROOT = __import__("pathlib").Path(__file__).resolve().parents[1]
+_NORMALIZED = _REPO_ROOT / "data" / "normalized" / "ecfr"
+_MANIFEST = _REPO_ROOT / "data" / "manifests" / "sources.json"
+
+
+@pytest.mark.skipif(
+    not (_NORMALIZED.is_dir() and _MANIFEST.exists()),
+    reason="requires the locally parsed full-title canonical layer",
+)
+def test_full_title_vault_build(tmp_path, capsys):
+    """Build the entire Title 14 vault from the real canonical layer."""
+    config = Config.load(tmp_path)
+    config.manifests_dir.mkdir(parents=True)
+    manifest = SourceManifest.load(_MANIFEST)
+    if manifest.sources["ecfr_title_14"].canonical_hash is None:
+        pytest.skip("manifest has no recorded canonical layer")
+    manifest.save(config.manifest_path)
+    (config.normalized_dir).mkdir(parents=True)
+    os.symlink(_NORMALIZED, config.normalized_dir / "ecfr")
+
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "6772 notes" in out
+
+    far = config.vault_dir / "FAR"
+    part_folders = [d for d in far.iterdir() if d.is_dir()]
+    assert len(part_folders) == 226
+    # Every part has an index note (Phase 3 exit criterion).
+    assert all(any(p.name.startswith("Part ") for p in d.glob("*.md")) for d in part_folders)
+    assert len(list(far.rglob("*.md"))) + 1 == 6772  # + Source Status.md at the root
+    assert (far / "Title 14.md").exists()
+    assert (config.vault_dir / "Source Status.md").exists()
+
+    # Double build is a no-op.
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    assert "0 written" in capsys.readouterr().out
+
+    # And validate agrees byte-for-byte.
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    assert "vault matches canonical layer (6772 notes)" in capsys.readouterr().out
+
+
+def test_validate_detects_deleted_far_tree(tmp_path, capsys):
+    # The generated Source Status.md proves a build happened; the missing
+    # FAR tree must fail the missing-note checks, not read as "no vault".
+    import shutil
+
+    config = _built_vault(tmp_path, capsys)
+    shutil.rmtree(config.vault_dir / "FAR")
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
+    assert "missing generated note" in capsys.readouterr().err
+
+
+def test_validate_ignores_curated_only_far_tree_before_first_build(tmp_path, capsys):
+    # A user may organize curated notes under vault/FAR/ before ever running
+    # build-vault; that is not a generated vault and must validate cleanly.
+    config = _accepted_snapshot(tmp_path, SLICE_XML.read_bytes())
+    assert main(["--root", str(tmp_path), "parse", "ecfr"]) == EXIT_OK
+    curated = config.vault_dir / "FAR" / "Part 091" / "My Notes.md"
+    curated.parent.mkdir(parents=True)
+    curated.write_text("mine\n", encoding="utf-8")
+    capsys.readouterr()
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    assert "no generated vault yet" in capsys.readouterr().out

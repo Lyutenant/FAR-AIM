@@ -20,6 +20,9 @@ from xml.etree import ElementTree
 
 from far_aim import __version__
 from far_aim.config import Config
+from far_aim.generate import BuildError
+from far_aim.generate import build as generate_build
+from far_aim.generate import notes as generate_notes
 from far_aim.log import setup_logging
 from far_aim.manifest import ManifestError, SourceManifest, SourceState
 from far_aim.models import cfr as cfr_model
@@ -35,7 +38,6 @@ CORPORA = ("ecfr", "aim", "pcg")
 NOT_IMPLEMENTED_PHASE = {
     ("normalize", None): "Phase 2",
     ("diff", None): "Phase 2",
-    ("build-vault", None): "Phase 3",
     ("fetch", "aim"): "Phase 4",
     ("parse", "aim"): "Phase 4",
     ("fetch", "pcg"): "Phase 5",
@@ -797,17 +799,75 @@ def _validate_locked(config: Config) -> int:
         print(f"error: {exc}", file=sys.stderr)
         return EXIT_ERROR
     print(f"ok: manifest schema valid ({path})")
-    return _validate_normalized_ecfr(config, manifest)
+    code = _validate_normalized_ecfr(config, manifest)
+    if code != EXIT_OK:
+        return code
+    return _validate_vault(config, manifest)
+
+
+def _load_verified_docs(config: Config, state: SourceState) -> dict[str, dict] | str:
+    """Deep-verified canonical part documents by part number, or a defect string.
+
+    Shared by ``validate`` and ``build-vault`` (plan §17.2/.3): every part
+    file's stored ``canonical_hash`` must recompute from its own content —
+    the part AND each nested section/appendix, since nested hashes are
+    excluded from their parent's hash — with provenance matching the
+    accepted snapshot, the filename matching the part it contains, each
+    part appearing exactly once, and the title hash over all part hashes
+    matching the manifest. Tampered, truncated, or stale normalized data
+    fails loudly instead of flowing into vault generation.
+    """
+    recorded = state.canonical_hash
+    out_dir = config.normalized_dir / "ecfr"
+    part_files = sorted(out_dir.glob("part-*.json")) if out_dir.is_dir() else []
+    if not part_files:
+        return (
+            f"manifest records canonical_hash but {out_dir} has no part files; "
+            "re-run `far-aim parse ecfr`"
+        )
+    docs: dict[str, dict] = {}
+    part_hashes: dict[str, str] = {}
+    for part_file in part_files:
+        try:
+            doc = json.loads(part_file.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            return f"cannot read {part_file}: {exc}"
+        if not isinstance(doc, dict):
+            return f"{part_file}: not a JSON object (found {type(doc).__name__})"
+        stored = doc.get("canonical_hash")
+        # The defect walker is keyed on document_type, so a root object
+        # whose type was stripped or mangled would skip its own hash check
+        # while its stored hash still feeds the title hash; the file's root
+        # must be a part document.
+        if doc.get("document_type") != cfr_model.DOCUMENT_TYPE_PART:
+            return (
+                f"{part_file}: root document_type {doc.get('document_type')!r} "
+                f"is not {cfr_model.DOCUMENT_TYPE_PART!r}"
+            )
+        bad = _first_document_defect(doc, state)
+        if bad is not None:
+            return f"{part_file}: {bad}"
+        number = doc.get("part")
+        expected_name = normalized_part_filename(number) if isinstance(number, str) else None
+        if part_file.name != expected_name:
+            return (
+                f"{part_file}: contains part {number!r} "
+                f"(expected filename {expected_name!r})"
+            )
+        if number in part_hashes:
+            return f"part {number!r} appears in more than one file"
+        part_hashes[number] = stored
+        docs[number] = doc
+    title_hash = cfr_model.canonical_hash(part_hashes)
+    if title_hash != recorded:
+        return (
+            f"normalized eCFR layer hashes to {title_hash} but the manifest "
+            f"records {recorded}; re-run `far-aim parse ecfr`"
+        )
+    return docs
 
 
 def _validate_normalized_ecfr(config: Config, manifest: SourceManifest) -> int:
-    """Verify the normalized eCFR layer against the manifest (plan §17.2/.3).
-
-    Every part file's stored ``canonical_hash`` must recompute from its own
-    content, and the title hash over all part hashes must match the
-    manifest — so tampered, truncated, or stale normalized data fails
-    loudly instead of flowing into vault generation.
-    """
     state = manifest.sources[ecfr.SOURCE_NAME]
     recorded = state.canonical_hash
     out_dir = config.normalized_dir / "ecfr"
@@ -822,76 +882,138 @@ def _validate_normalized_ecfr(config: Config, manifest: SourceManifest) -> int:
             file=sys.stderr,
         )
         return EXIT_ERROR
-    if not part_files:
+    result = _load_verified_docs(config, state)
+    if isinstance(result, str):
+        print(f"error: {result}", file=sys.stderr)
+        return EXIT_ERROR
+    print(f"ok: normalized eCFR layer verified ({len(result)} parts, {recorded})")
+    return EXIT_OK
+
+
+def _validate_vault(config: Config, manifest: SourceManifest) -> int:
+    """Verify the generated vault byte-matches the canonical layer.
+
+    Re-renders the whole plan in memory and compares against disk, making
+    "rebuild with unchanged sources produces zero diff" (plan §22) a
+    scripted check without mutating anything. Curated notes inside the
+    generated tree are ignored — only generator-owned files are compared.
+    """
+    state = manifest.sources[ecfr.SOURCE_NAME]
+    vault_far = config.vault_dir / generate_notes.FAR_DIR
+    status_path = config.vault_dir / f"{generate_notes.SOURCE_STATUS_STEM}.md"
+    # A vault "exists" only if any generator-owned note does. Directory
+    # presence alone proves nothing: `vault/FAR/` holding only curated notes
+    # is a never-built vault (curated notes are ignored, not validated),
+    # while a generated Source Status.md with the FAR tree deleted is a
+    # damaged build that must fail the missing-note checks below, not pass
+    # as "nothing to check".
+    built = (status_path.exists() and generate_build.is_generated_note(status_path)) or (
+        vault_far.is_dir()
+        and any(generate_build.is_generated_note(p) for p in sorted(vault_far.rglob("*.md")))
+    )
+    if not built:
+        print("note: no generated vault yet; run `far-aim build-vault`.")
+        return EXIT_OK
+    if state.accepted_version is None or state.canonical_hash is None:
         print(
-            f"error: manifest records canonical_hash but {out_dir} has no part files; "
-            "re-run `far-aim parse ecfr`",
+            "error: vault exists but the manifest records no accepted eCFR "
+            "canonical layer; re-run `far-aim parse ecfr` and `far-aim build-vault`",
             file=sys.stderr,
         )
         return EXIT_ERROR
-    part_hashes: dict[str, str] = {}
-    for part_file in part_files:
-        try:
-            doc = json.loads(part_file.read_text(encoding="utf-8"))
-        except (OSError, ValueError) as exc:
-            print(f"error: cannot read {part_file}: {exc}", file=sys.stderr)
+    docs = _load_verified_docs(config, state)
+    if isinstance(docs, str):
+        print(f"error: {docs}", file=sys.stderr)
+        return EXIT_ERROR
+    try:
+        plan = generate_build.plan_vault(
+            docs, state.accepted_version, state.canonical_hash, manifest.sources
+        )
+    except BuildError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    planned = {config.vault_dir.joinpath(*parts): data for parts, data in plan.items()}
+    for path, data in sorted(planned.items()):
+        if not path.exists():
+            print(f"error: vault is missing generated note {path}", file=sys.stderr)
             return EXIT_ERROR
-        if not isinstance(doc, dict):
+        if path.read_bytes() != data:
             print(
-                f"error: {part_file}: not a JSON object (found {type(doc).__name__})",
+                f"error: vault note {path} differs from the canonical layer; "
+                "re-run `far-aim build-vault`",
                 file=sys.stderr,
             )
             return EXIT_ERROR
-        stored = doc.get("canonical_hash")
-        # The defect walker is keyed on document_type, so a root object
-        # whose type was stripped or mangled would skip its own hash check
-        # while its stored hash still feeds the title hash; the file's root
-        # must be a part document.
-        if doc.get("document_type") != cfr_model.DOCUMENT_TYPE_PART:
+    on_disk = sorted(vault_far.rglob("*.md"))
+    if status_path.exists():
+        on_disk.append(status_path)
+    for path in on_disk:
+        if path not in planned and generate_build.is_generated_note(path):
             print(
-                f"error: {part_file}: root document_type "
-                f"{doc.get('document_type')!r} is not "
-                f"{cfr_model.DOCUMENT_TYPE_PART!r}",
+                f"error: stale generated note {path} not produced by the "
+                "canonical layer; re-run `far-aim build-vault`",
                 file=sys.stderr,
             )
             return EXIT_ERROR
-        # Every hashed document in the file — the part AND each nested
-        # section/appendix — must carry a hash that recomputes from its own
-        # content (nested hashes are excluded from their parent's hash, so
-        # checking only the part would let stale or deleted section-level
-        # hashes pass) and provenance matching the accepted snapshot
-        # (canonical hashing strips the source block, so nothing else
-        # would notice false provenance).
-        bad = _first_document_defect(doc, state)
-        if bad is not None:
-            print(f"error: {part_file}: {bad}", file=sys.stderr)
-            return EXIT_ERROR
-        # A valid document under the wrong filename (a copied or duplicated
-        # part file) passes its own hash check but corrupts the layer; the
-        # filename must match the part it contains, and each part must
-        # appear exactly once.
-        number = doc.get("part")
-        expected_name = normalized_part_filename(number) if isinstance(number, str) else None
-        if part_file.name != expected_name:
-            print(
-                f"error: {part_file}: contains part {number!r} "
-                f"(expected filename {expected_name!r})",
-                file=sys.stderr,
-            )
-            return EXIT_ERROR
-        if number in part_hashes:
-            print(f"error: part {number!r} appears in more than one file", file=sys.stderr)
-            return EXIT_ERROR
-        part_hashes[number] = stored
-    title_hash = cfr_model.canonical_hash(part_hashes)
-    if title_hash != recorded:
+    print(f"ok: vault matches canonical layer ({len(planned)} notes)")
+    return EXIT_OK
+
+
+def cmd_build_vault(config: Config) -> int:
+    """Generate the Obsidian vault from the verified canonical layer (Phase 3).
+
+    Runs under the shared source lock so a concurrent parse cannot swap the
+    normalized layer between verification and rendering. The whole vault is
+    planned and verified in memory before any file is written; curated notes
+    are never overwritten (plan §32.5, §32.13).
+    """
+    path = config.manifest_path
+    if not path.exists():
+        print(f"error: source registry missing: {path}", file=sys.stderr)
+        return EXIT_ERROR
+    try:
+        with ecfr.exclusive_lock(ecfr.fetch_lock_path(config)):
+            return _build_vault_locked(config)
+    except ecfr.FetchError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    except OSError as exc:
+        print(f"error: filesystem failure during build-vault: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+
+
+def _build_vault_locked(config: Config) -> int:
+    try:
+        manifest = SourceManifest.load(config.manifest_path)
+    except ManifestError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    state = manifest.sources[ecfr.SOURCE_NAME]
+    if state.accepted_version is None or state.canonical_hash is None:
         print(
-            f"error: normalized eCFR layer hashes to {title_hash} but the manifest "
-            f"records {recorded}; re-run `far-aim parse ecfr`",
+            "error: no accepted eCFR canonical layer; run `far-aim fetch ecfr` "
+            "and `far-aim parse ecfr` first",
             file=sys.stderr,
         )
         return EXIT_ERROR
-    print(f"ok: normalized eCFR layer verified ({len(part_files)} parts, {title_hash})")
+    docs = _load_verified_docs(config, state)
+    if isinstance(docs, str):
+        print(f"error: {docs}", file=sys.stderr)
+        return EXIT_ERROR
+    try:
+        stats = generate_build.build_vault(
+            config, state.accepted_version, state.canonical_hash, manifest.sources, docs
+        )
+    except BuildError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    for warning in stats.warnings:
+        print(f"warning: {warning}", file=sys.stderr)
+    total = stats.written + stats.unchanged
+    print(
+        f"ok: vault generated ({total} notes — {stats.written} written, "
+        f"{stats.unchanged} unchanged, {stats.deleted} stale deleted)"
+    )
     return EXIT_OK
 
 
@@ -908,6 +1030,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_fetch_ecfr(config, force=args.force)
     if args.command == "parse" and args.corpus == "ecfr":
         return cmd_parse_ecfr(config, args.parts)
+    if args.command == "build-vault":
+        return cmd_build_vault(config)
 
     corpus = getattr(args, "corpus", None)
     phase = NOT_IMPLEMENTED_PHASE[(args.command, corpus)]

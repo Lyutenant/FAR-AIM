@@ -15,5 +15,9 @@ data/normalized/
 # Inter-process fetch lock (runtime only)
 data/manifests/.sources.lock
 
+# Obsidian per-user workspace state (the vault itself is committed)
+vault/.obsidian/workspace.json
+vault/.obsidian/workspace-mobile.json
+
 # OS
 .DS_Store

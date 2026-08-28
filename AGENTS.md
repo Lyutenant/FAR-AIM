@@ -61,5 +61,16 @@ lossless-capture verification, unique stable IDs, and the title-level
 The model, parser grammar (paragraph re-nesting, definitions, re-entry,
 gap tolerance), and validation gates are documented in docs/data-model.md,
 docs/validation.md, and `far_aim.parsers.ecfr`'s module docstring.
-Next: Phase 3 (FAR Obsidian generator). Do not start AIM/PCG/AI-enrichment
-work before the eCFR canonical layer is trustworthy (plan §31).
+
+Phase 3 (FAR Obsidian generator) complete: `far-aim build-vault` renders
+the verified canonical layer into the committed vault — 6,772 notes (226
+part indexes, 6,363 section notes, 181 appendix notes, title index, source
+status) under `vault/FAR/`, named by stable citation only, with
+schema-checked frontmatter, global alias-collision resolution, and
+deterministically extracted in-corpus cross-reference wikilinks (zero
+broken links by construction). Rebuilds are idempotent byte-for-byte,
+curated notes are never overwritten, and `far-aim validate` byte-compares
+the vault against an in-memory re-render. Layout, rendering rules, and
+regeneration safety are documented in docs/vault.md.
+Next: Phase 4 (AIM acquisition and parser). Do not start PCG/AI-enrichment
+work before then (plan §31).
