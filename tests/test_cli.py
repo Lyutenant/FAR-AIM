@@ -7,7 +7,11 @@ import pytest
 from far_aim.cli import EXIT_ERROR, EXIT_NOT_IMPLEMENTED, EXIT_OK, main
 from far_aim.config import Config
 from far_aim.manifest import SourceManifest, SourceState
+from far_aim.parsers import aim as aim_parser
+from far_aim.sources import aim as aim_source
 from far_aim.sources import ecfr
+from tests.test_aim_source import FIXTURE_APPENDICES, FIXTURE_CHAPTERS, AimUpstream
+from tests.test_aim_source import VERSION as AIM_VERSION
 from tests.test_ecfr_source import FIXTURES as FIXTURES_DIR
 from tests.test_ecfr_source import ISSUE_DATE, Upstream
 
@@ -71,9 +75,7 @@ def test_validate_invalid_manifest(tmp_path, capsys):
 @pytest.mark.parametrize(
     "argv",
     [
-        ["fetch", "aim"],
         ["fetch", "pcg"],
-        ["parse", "aim"],
         ["parse", "pcg"],
         ["normalize"],
         ["diff"],
@@ -95,11 +97,31 @@ def test_unknown_corpus_rejected(tmp_path):
 
 @pytest.fixture
 def mock_upstream(monkeypatch):
+    """Fake eCFR *and* FAA upstreams behind one client (both sources are polled)."""
     upstream = Upstream()
-    monkeypatch.setattr(ecfr, "make_client", upstream.client)
+    upstream.aim = AimUpstream()
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.host == "www.ecfr.gov":
+            return upstream.handler(request)
+        return upstream.aim.handler(request)
+
+    def client() -> httpx.Client:
+        return httpx.Client(transport=httpx.MockTransport(handler))
+
+    monkeypatch.setattr(ecfr, "make_client", client)
     monkeypatch.setattr(ecfr, "MIN_XML_BYTES", 100)
     monkeypatch.setattr(ecfr, "MIN_SECTION_COUNT", 3)
     monkeypatch.setattr(ecfr.time, "sleep", lambda _s: None)
+    monkeypatch.setattr(aim_source, "make_client", client)
+    monkeypatch.setattr(aim_source, "MIN_PAGES", 3)
+    monkeypatch.setattr(aim_source, "MIN_PARAGRAPHS", 3)
+    monkeypatch.setattr(aim_source, "MIN_FIGURES", 2)
+    monkeypatch.setattr(aim_source, "PAUSE_SECONDS", 0)
+    monkeypatch.setattr(aim_source, "REQUIRED_CHAPTERS", FIXTURE_CHAPTERS)
+    monkeypatch.setattr(aim_source, "REQUIRED_APPENDICES", FIXTURE_APPENDICES)
+    monkeypatch.setattr(aim_source.time, "sleep", lambda _s: None)
+    monkeypatch.setattr(aim_parser, "REQUIRE_RESOLVED_REFERENCES", False)
     return upstream
 
 
@@ -162,7 +184,7 @@ def test_check_remote_reports_rollback_as_error(tmp_path, capsys, mock_upstream)
     assert main(["--root", str(tmp_path), "check", "--remote"]) == EXIT_ERROR
     captured = capsys.readouterr()
     assert "older than accepted 2026-09-01" in captured.err
-    assert "update available" not in captured.out
+    assert "ecfr_title_14: update available" not in captured.out
 
 
 def test_check_remote_upstream_failure(tmp_path, capsys, monkeypatch):
@@ -1279,10 +1301,21 @@ def test_full_title_vault_build(tmp_path, capsys):
     manifest.save(config.manifest_path)
     (config.normalized_dir).mkdir(parents=True)
     os.symlink(_NORMALIZED, config.normalized_dir / "ecfr")
+    aim_state = manifest.sources["aim"]
+    expected_total = 6772
+    if aim_state.canonical_hash is not None:
+        # The AIM layer and its archived figures ride along (Phase 4).
+        aim_raw = _NORMALIZED.parent.parent / "raw" / "aim"
+        if not (_NORMALIZED.parent / "aim").is_dir() or not aim_raw.is_dir():
+            pytest.skip("manifest records an AIM layer that is not on disk")
+        os.symlink(_NORMALIZED.parent / "aim", config.normalized_dir / "aim")
+        config.raw_dir.mkdir(parents=True, exist_ok=True)
+        os.symlink(aim_raw, config.raw_dir / "aim")
+        expected_total = 6772 + _aim_file_count(_NORMALIZED.parent / "aim")
 
     assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
     out = capsys.readouterr().out
-    assert "6772 notes" in out
+    assert f"{expected_total} notes" in out
 
     far = config.vault_dir / "FAR"
     part_folders = [d for d in far.iterdir() if d.is_dir()]
@@ -1299,7 +1332,23 @@ def test_full_title_vault_build(tmp_path, capsys):
 
     # And validate agrees byte-for-byte.
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
-    assert "vault matches canonical layer (6772 notes)" in capsys.readouterr().out
+    assert f"vault matches canonical layer ({expected_total} notes)" in capsys.readouterr().out
+
+
+def _aim_file_count(layer_dir) -> int:
+    """Notes + assets the AIM layer contributes: index, chapters, sections,
+    paragraphs, appendices, and distinct figure files."""
+    from far_aim.generate.build import aim_asset_hashes
+
+    docs = {p.stem: json.loads(p.read_text(encoding="utf-8")) for p in layer_dir.glob("*.json")}
+    notes = 1  # AIM.md (renders the publication document)
+    for doc in docs.values():
+        if doc["document_type"] == "aim_publication":
+            continue
+        notes += 1
+        for section in doc.get("sections", []):
+            notes += 1 + len(section["paragraphs"])
+    return notes + len(aim_asset_hashes(docs)) + 1  # + asset ledger
 
 
 def test_validate_detects_deleted_far_tree(tmp_path, capsys):
@@ -1324,3 +1373,398 @@ def test_validate_ignores_curated_only_far_tree_before_first_build(tmp_path, cap
     capsys.readouterr()
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
     assert "no generated vault yet" in capsys.readouterr().out
+
+
+# ---------------------------------------------------------------------------
+# AIM (Phase 4)
+# ---------------------------------------------------------------------------
+
+
+def test_fetch_aim_end_to_end(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+
+    assert main(["--root", str(tmp_path), "fetch", "aim"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "accepted: AIM Basic with Change 1, 2 and 3 (effective 2026-07-09)" in out
+    assert "7 pages, 7 paragraphs, 5 figures" in out
+    assert "archive this snapshot outside the repository" in out
+    snapshot = config.raw_dir / "aim" / AIM_VERSION
+    assert (snapshot / "pages" / "chap4_section_1.html").exists()
+    assert (snapshot / "figures" / "aim0401_fig79_recovered.svg").exists()
+    state = SourceManifest.load(config.manifest_path).sources["aim"]
+    assert state.accepted_version == AIM_VERSION and state.change == 3
+
+    assert main(["--root", str(tmp_path), "fetch", "aim"]) == EXIT_OK
+    assert "unchanged" in capsys.readouterr().out
+    requests = mock_upstream.aim.page_requests()
+    assert main(["--root", str(tmp_path), "check", "--remote"]) == EXIT_OK
+    assert "aim: up to date (Basic with Change 1, 2 and 3 (effective 2026-07-09))" in (
+        capsys.readouterr().out
+    )
+    assert mock_upstream.aim.page_requests() == requests
+
+
+def test_check_remote_reports_aim_update_available(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    manifest = SourceManifest.default()
+    manifest.sources["ecfr_title_14"] = SourceState(accepted_version=ISSUE_DATE)
+    manifest.sources["aim"] = SourceState(
+        accepted_version="2026-01-22-change-2", effective_date="2026-01-22", change=2
+    )
+    manifest.save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "check", "--remote"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "aim: update available" in out
+    assert "accepted 2026-01-22-change-2" in out
+
+
+def test_check_remote_reports_relabelled_aim_edition(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    manifest = SourceManifest.default()
+    manifest.sources["ecfr_title_14"] = SourceState(accepted_version=ISSUE_DATE)
+    manifest.sources["aim"] = SourceState(
+        accepted_version=AIM_VERSION,
+        effective_date="2026-07-09",
+        change=3,
+        edition_label="Basic with Change 1, 2 and 3",
+        source_url="https://www.faa.gov/air_traffic/publications/atpubs/aim_html/index.html",
+    )
+    manifest.save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "check", "--remote"]) == EXIT_OK
+    assert "aim: up to date" in capsys.readouterr().out
+    mock_upstream.aim.publications = mock_upstream.aim.publications.replace(
+        "(<abbr>AIM</abbr>) Basic with Change 1, 2 and 3</a> <small>(<abbr>HTML</abbr>)",
+        "(<abbr>AIM</abbr>) Basic with Changes 1, 2 and 3</a> <small>(<abbr>HTML</abbr>)",
+    )
+    assert main(["--root", str(tmp_path), "check", "--remote"]) == EXIT_ERROR
+    captured = capsys.readouterr()
+    assert "FAA now lists the accepted edition" in captured.err
+    assert "aim: up to date" not in captured.out
+
+
+def test_check_remote_reports_aim_rollback_as_error(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    manifest = SourceManifest.default()
+    manifest.sources["ecfr_title_14"] = SourceState(accepted_version=ISSUE_DATE)
+    manifest.sources["aim"] = SourceState(
+        accepted_version="2026-09-01-change-4", effective_date="2026-09-01", change=4
+    )
+    manifest.save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "check", "--remote"]) == EXIT_ERROR
+    captured = capsys.readouterr()
+    assert "older than accepted effective 2026-09-01 change 4" in captured.err
+    assert f"up to date (issue {ISSUE_DATE})" in captured.out
+
+
+def test_check_remote_one_source_unreachable_still_reports_other(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    manifest = SourceManifest.default()
+    manifest.sources["ecfr_title_14"] = SourceState(accepted_version=ISSUE_DATE)
+    manifest.save(config.manifest_path)
+    mock_upstream.aim.status_overrides["/air_traffic/publications/"] = 404
+    assert main(["--root", str(tmp_path), "check", "--remote"]) == EXIT_ERROR
+    captured = capsys.readouterr()
+    assert "error: aim:" in captured.err
+    assert f"up to date (issue {ISSUE_DATE})" in captured.out
+
+
+def test_parse_aim_requires_fetch(tmp_path, capsys):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "parse", "aim"]) == EXIT_ERROR
+    assert "run `far-aim fetch aim` first" in capsys.readouterr().err
+
+
+def test_parse_aim_rejects_part_option(tmp_path, capsys):
+    assert main(["--root", str(tmp_path), "parse", "aim", "--part", "91"]) == EXIT_ERROR
+    assert "--part applies to `parse ecfr` only" in capsys.readouterr().err
+
+
+def test_parse_aim_publishes_layer_and_validates(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "fetch", "aim"]) == EXIT_OK
+    capsys.readouterr()
+
+    assert main(["--root", str(tmp_path), "parse", "aim"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert (
+        "parsed AIM 2026-07-09-change-3: 2 chapters, 2 sections, 7 paragraphs, 2 appendices"
+    ) in out
+    assert "manifest updated: canonical_hash" in out
+    layer = config.normalized_dir / "aim"
+    assert sorted(p.name for p in layer.glob("*.json")) == [
+        "appendix-1.json",
+        "appendix-3.json",
+        "chapter-00.json",
+        "chapter-04.json",
+        "publication.json",
+    ]
+    state = SourceManifest.load(config.manifest_path).sources["aim"]
+    assert state.canonical_hash is not None
+    doc = json.loads((layer / "chapter-04.json").read_text(encoding="utf-8"))
+    assert doc["source"]["raw_checksum"] == state.raw_hash
+    assert doc["source"]["retrieved_at"] == json.loads(
+        (config.raw_dir / "aim" / AIM_VERSION / "metadata.json").read_text(encoding="utf-8")
+    )["retrieved_at"]
+
+    # Re-parsing is a no-op for the manifest and byte-identical on disk.
+    before = {p.name: p.read_bytes() for p in layer.glob("*.json")}
+    assert main(["--root", str(tmp_path), "parse", "aim"]) == EXIT_OK
+    assert "canonical_hash unchanged" in capsys.readouterr().out
+    assert {p.name: p.read_bytes() for p in layer.glob("*.json")} == before
+
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "ok: normalized AIM layer verified (5 documents" in out
+
+
+def test_validate_rejects_tampered_aim_layer(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "fetch", "aim"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "parse", "aim"]) == EXIT_OK
+    capsys.readouterr()
+    path = config.normalized_dir / "aim" / "chapter-04.json"
+    doc = json.loads(path.read_text(encoding="utf-8"))
+    doc["sections"][0]["paragraphs"][0]["content"][0]["text"] += " Tampered."
+    path.write_text(json.dumps(doc, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
+    # Parent hashes cover nested content, so the chapter document fails first.
+    assert "stored canonical_hash of 'aim-chapter-4' does not match" in capsys.readouterr().err
+
+
+def test_validate_rejects_altered_aim_provenance(tmp_path, capsys, mock_upstream):
+    """Provenance is outside the canonical hash, so every rendered field is pinned."""
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "fetch", "aim"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "parse", "aim"]) == EXIT_OK
+    capsys.readouterr()
+    path = config.normalized_dir / "aim" / "appendix-3.json"
+    original = path.read_text(encoding="utf-8")
+    base = "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/"
+    cases = (
+        ("edition_label", "Basic with Change 9", "does not match"),
+        ("url", "https://evil.invalid/appendix_3.html", "outside the accepted edition"),
+        ("url", base + "x.html", "edition page"),
+        # A valid page of the edition that is not this document's own page.
+        ("url", base + "chap_4.html", "does not match the document's identity"),
+        ("url", base + "appendix_3.html#4-1-9", "does not match the document's identity"),
+    )
+    for key, value, message in cases:
+        doc = json.loads(original)
+        doc["source"][key] = value
+        path.write_text(json.dumps(doc, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
+        err = capsys.readouterr().err
+        assert f"source {key}" in err and message in err
+        assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_ERROR
+        capsys.readouterr()
+    path.write_text(original, encoding="utf-8")
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+
+
+def test_validate_rejects_paragraph_url_pointing_at_other_paragraph(
+    tmp_path, capsys, mock_upstream
+):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "fetch", "aim"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "parse", "aim"]) == EXIT_OK
+    capsys.readouterr()
+    path = config.normalized_dir / "aim" / "chapter-04.json"
+    doc = json.loads(path.read_text(encoding="utf-8"))
+    para = doc["sections"][0]["paragraphs"][1]
+    assert para["paragraph"] == "4-1-2"
+    para["source"]["url"] = para["source"]["url"].replace("#4-1-2", "#4-1-1")
+    path.write_text(json.dumps(doc, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
+    err = capsys.readouterr().err
+    assert "'aim-4-1-2' expects page ('section', 4, 1) anchor '4-1-2'" in err
+    # Padded-but-equivalent filenames are the same identity and pass.
+    para["source"]["url"] = para["source"]["url"].replace(
+        "chap4_section_1.html#4-1-1", "chap04_section_01.html#4-1-2"
+    )
+    path.write_text(json.dumps(doc, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+
+
+def test_parse_aim_refuses_snapshot_metadata_disagreeing_with_manifest(
+    tmp_path, capsys, mock_upstream
+):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "fetch", "aim"]) == EXIT_OK
+    manifest = SourceManifest.load(config.manifest_path)
+    manifest.sources["aim"].edition_label = "Basic with Change 9"
+    manifest.save(config.manifest_path)
+    capsys.readouterr()
+    assert main(["--root", str(tmp_path), "parse", "aim"]) == EXIT_ERROR
+    assert "snapshot metadata edition_label" in capsys.readouterr().err
+
+
+def test_parse_aim_fails_closed_on_grammar_change(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "fetch", "aim"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "parse", "aim"]) == EXIT_OK
+    capsys.readouterr()
+    layer = config.normalized_dir / "aim"
+    before = {p.name: p.read_bytes() for p in layer.glob("*.json")}
+    # Upstream re-published the same edition with a new element the parser
+    # does not know: the archived bytes change, so re-fetch with --force.
+    page = mock_upstream.aim.pages["chap4_section_1.html"]
+    mock_upstream.aim.pages["chap4_section_1.html"] = page.replace(
+        b'<p class="p">Centers are established',
+        b'<details>x</details><p class="p">Centers are established',
+    )
+    assert main(["--root", str(tmp_path), "fetch", "aim", "--force"]) == EXIT_OK
+    capsys.readouterr()
+    assert main(["--root", str(tmp_path), "parse", "aim"]) == EXIT_ERROR
+    err = capsys.readouterr().err
+    assert "unexpected" in err and "<details>" in err
+    assert "last known-good output preserved" in err
+    assert {p.name: p.read_bytes() for p in layer.glob("*.json")} == before
+
+
+def _build_fixture_vault(tmp_path, capsys, mock_upstream) -> Config:
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    for argv in (["fetch", "ecfr"], ["parse", "ecfr"], ["fetch", "aim"], ["parse", "aim"]):
+        assert main(["--root", str(tmp_path), *argv]) == EXIT_OK
+    capsys.readouterr()
+    return config
+
+
+def test_build_vault_with_aim_layer(tmp_path, capsys, mock_upstream):
+    config = _build_fixture_vault(tmp_path, capsys, mock_upstream)
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "ok: vault generated" in out
+    aim_dir = config.vault_dir / "AIM"
+    assert (aim_dir / "AIM.md").exists()
+    assert (aim_dir / "Chapter 04" / "AIM Chapter 4.md").exists()
+    assert (aim_dir / "Chapter 04" / "AIM 4-1.md").exists()
+    assert (aim_dir / "Chapter 04" / "4-1-9.md").exists()
+    assert (aim_dir / "Chapter 00" / "AIM 0-0.md").exists()
+    assert (aim_dir / "Appendices" / "AIM Appendix 3.md").exists()
+    assets = sorted(p.name for p in (aim_dir / "assets").iterdir())
+    assert assets == [
+        ".generated.json",
+        "aim0401_fig79_recovered.svg",
+        "aim0401_fig80_recovered.svg",
+        "aimapd1_BlankFooter0.png",
+        "aimapd1_floating0.png",
+        "aimapd1_floating1.png",
+    ]
+    assert (aim_dir / "assets" / "aim0401_fig79_recovered.svg").read_bytes() == (
+        config.raw_dir / "aim" / AIM_VERSION / "figures" / "aim0401_fig79_recovered.svg"
+    ).read_bytes()
+    status = (config.vault_dir / "Source Status.md").read_text(encoding="utf-8")
+    assert "| AIM | Change 3 — effective 2026-07-09 |" in status
+
+    # Idempotent, and validate agrees byte-for-byte.
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    assert "0 written" in capsys.readouterr().out
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    assert "ok: vault matches canonical layer" in capsys.readouterr().out
+
+
+def test_validate_detects_stale_or_missing_aim_asset(tmp_path, capsys, mock_upstream):
+    config = _build_fixture_vault(tmp_path, capsys, mock_upstream)
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    capsys.readouterr()
+    assets = config.vault_dir / "AIM" / "assets"
+    # A curated file in the assets directory is not the generator's business.
+    curated = assets / "my_figure.png"
+    curated.write_bytes(b"\x89PNG")
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    capsys.readouterr()
+    # A file the ledger attributes to an earlier build but the layer no
+    # longer produces is stale.
+    stray = assets / "old_figure.png"
+    stray.write_bytes(b"\x89PNG old")
+    ledger_path = assets / ".generated.json"
+    ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+    ledger["generated"]["old_figure.png"] = aim_source.sha256_of_bytes(b"\x89PNG old")
+    ledger_path.write_text(json.dumps(ledger, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
+    # The ledger is itself a generated file, so validate trips on it first.
+    assert ".generated.json differs from the canonical layer" in capsys.readouterr().err
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    assert "1 stale deleted" in capsys.readouterr().out
+    assert not stray.exists() and curated.exists()
+    (assets / "aim0401_fig79_recovered.svg").unlink()
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
+    assert "missing generated note" in capsys.readouterr().err
+    # Rebuild restores it (from the archived snapshot) and removes nothing else.
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    assert "1 written" in capsys.readouterr().out
+
+
+def test_build_vault_uses_vault_assets_when_snapshot_missing(tmp_path, capsys, mock_upstream):
+    import shutil
+
+    config = _build_fixture_vault(tmp_path, capsys, mock_upstream)
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    capsys.readouterr()
+    shutil.rmtree(config.raw_dir / "aim")
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    assert "0 written" in capsys.readouterr().out
+    # With neither the archive nor the vault copy, the figure cannot be produced.
+    (config.vault_dir / "AIM" / "assets" / "aim0401_fig79_recovered.svg").unlink()
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_ERROR
+    assert "aim0401_fig79_recovered.svg" in capsys.readouterr().err
+
+
+def test_build_refuses_to_drop_aim_notes_while_new_edition_unparsed(
+    tmp_path, capsys, mock_upstream
+):
+    """fetch aim clears canonical_hash; a build in that window must not delete AIM output."""
+    config = _build_fixture_vault(tmp_path, capsys, mock_upstream)
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    capsys.readouterr()
+    aim_note = config.vault_dir / "AIM" / "Chapter 04" / "4-1-9.md"
+    before = aim_note.read_bytes()
+    # A new upstream edition arrives.
+    mock_upstream.aim.publications = mock_upstream.aim.publications.replace(
+        "Change 1, 2 and 3", "Change 1, 2, 3 and 4"
+    ).replace("7/9/2026", "1/1/2027")
+    mock_upstream.aim.pages["index.html"] = (
+        mock_upstream.aim.pages["index.html"]
+        .replace(b"<strong>Change:</strong> Change 3", b"<strong>Change:</strong> Change 4")
+        .replace(b"<strong>Effective:</strong> 7/9/2026", b"<strong>Effective:</strong> 1/1/2027")
+    )
+    assert main(["--root", str(tmp_path), "fetch", "aim"]) == EXIT_OK
+    assert SourceManifest.load(config.manifest_path).sources["aim"].canonical_hash is None
+    capsys.readouterr()
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_ERROR
+    err = capsys.readouterr().err
+    assert "has not been parsed yet" in err and "parse aim" in err
+    assert aim_note.read_bytes() == before
+    assert (config.vault_dir / "AIM" / "assets" / "aim0401_fig79_recovered.svg").exists()
+    # validate fails closed one gate earlier (unparsed normalized files).
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
+    assert "re-run `far-aim parse aim`" in capsys.readouterr().err
+    # Once the new edition is parsed, the build proceeds and re-renders the AIM.
+    assert main(["--root", str(tmp_path), "parse", "aim"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    capsys.readouterr()
+    assert b"effective 2027-01-01" in aim_note.read_bytes()
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+
+
+def test_build_vault_without_aim_layer_covers_far_only(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    for argv in (["fetch", "ecfr"], ["parse", "ecfr"]):
+        assert main(["--root", str(tmp_path), *argv]) == EXIT_OK
+    capsys.readouterr()
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "vault covers the FAR only" in out
+    assert not (config.vault_dir / "AIM").exists()
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK

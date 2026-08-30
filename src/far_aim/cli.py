@@ -1,8 +1,12 @@
 """Command-line interface for the far-aim pipeline (plan §18).
 
-Phase 1 status: `check`, `validate`, and `fetch ecfr` are implemented;
-the remaining commands are registered stubs that exit with code 2 until
-their phase is implemented.
+Implemented: `check`, `validate`, `fetch ecfr|aim`, `parse ecfr|aim`,
+`build-vault`. The remaining commands are registered stubs that exit with
+code 2 until their phase is implemented.
+
+The normalized layer of every corpus is published, recovered and verified
+by the same code, parametrized by a :class:`LayerSpec` (directory name,
+manifest source, document types, filename rule, provenance check).
 """
 
 from __future__ import annotations
@@ -15,19 +19,26 @@ import re
 import shutil
 import sys
 import tempfile
+from collections.abc import Callable
+from dataclasses import dataclass
 from pathlib import Path
 from xml.etree import ElementTree
 
 from far_aim import __version__
 from far_aim.config import Config
 from far_aim.generate import BuildError
+from far_aim.generate import aim_notes as generate_aim_notes
 from far_aim.generate import build as generate_build
 from far_aim.generate import notes as generate_notes
 from far_aim.log import setup_logging
 from far_aim.manifest import ManifestError, SourceManifest, SourceState
+from far_aim.models import aim as aim_model
 from far_aim.models import cfr as cfr_model
+from far_aim.parsers import aim as aim_parser
 from far_aim.parsers import ecfr as ecfr_parser
+from far_aim.sources import aim as aim_source
 from far_aim.sources import ecfr
+from far_aim.sources.common import FetchError, exclusive_lock, fetch_lock_path
 
 EXIT_OK = 0
 EXIT_ERROR = 1
@@ -38,8 +49,6 @@ CORPORA = ("ecfr", "aim", "pcg")
 NOT_IMPLEMENTED_PHASE = {
     ("normalize", None): "Phase 2",
     ("diff", None): "Phase 2",
-    ("fetch", "aim"): "Phase 4",
-    ("parse", "aim"): "Phase 4",
     ("fetch", "pcg"): "Phase 5",
     ("parse", "pcg"): "Phase 5",
     ("update", None): "Phase 8",
@@ -81,7 +90,7 @@ def build_parser() -> argparse.ArgumentParser:
         action="append",
         dest="parts",
         metavar="N",
-        help="limit to one part (repeatable); default: all parts",
+        help="eCFR only: limit to one part (repeatable); default: all parts",
     )
     sub.add_parser("normalize", help="normalize parsed data into canonical JSON")
     sub.add_parser("validate", help="validate manifest and normalized data")
@@ -89,6 +98,212 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("build-vault", help="generate the Obsidian vault from canonical data")
     sub.add_parser("update", help="run the full check→fetch→parse→validate→diff→generate sequence")
     return parser
+
+
+# ---------------------------------------------------------------------------
+# Layer specifications
+# ---------------------------------------------------------------------------
+
+_RETRIEVED_AT_RE = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z")
+
+
+@dataclass(frozen=True)
+class LayerSpec:
+    """How one corpus's normalized layer is laid out and verified."""
+
+    name: str  # directory under data/normalized (also names the staging dirs)
+    source_name: str  # manifest key
+    label: str  # human label in messages
+    fetch_command: str
+    parse_command: str
+    root_types: frozenset[str]
+    hashed_types: frozenset[str]
+    file_glob: str
+    file_noun: str  # "part files"
+    key_noun: str  # "part"
+    doc_key: Callable[[dict], str | None]  # root document → layer key
+    filename: Callable[[str], str]  # layer key → file name
+    source_defect: Callable[[dict, dict, SourceState], str | None]  # (document, source, state)
+
+    @property
+    def out_dir_name(self) -> str:
+        return self.name
+
+    def staging_dir(self, config: Config) -> Path:
+        return config.normalized_dir / f".{self.name}-staging"
+
+    def previous_dir(self, config: Config) -> Path:
+        return config.normalized_dir / f".{self.name}-previous"
+
+    def out_dir(self, config: Config) -> Path:
+        return config.normalized_dir / self.name
+
+
+def _ecfr_source_defect(doc: dict, source: dict, state: SourceState) -> str | None:
+    expected = {
+        "provider": "ecfr",
+        "source_version": state.accepted_version,
+        "url": ecfr.full_title14_url(state.accepted_version or ""),
+        "raw_checksum": state.raw_hash,
+    }
+    return _expected_source_fields(source, expected)
+
+
+def _aim_source_defect(doc: dict, source: dict, state: SourceState) -> str | None:
+    """Every provenance field the AIM notes render must match the manifest.
+
+    ``edition_label`` and ``url`` are pinned in the manifest at fetch time
+    precisely so an altered normalized ``source`` block (which canonical
+    hashes exclude) cannot flow into generated notes as verified provenance.
+    """
+    expected = {
+        "provider": "faa",
+        "publication": "aim",
+        "source_version": state.accepted_version,
+        "edition_label": state.edition_label,
+        "effective_date": state.effective_date,
+        "change": state.change,
+        "raw_checksum": state.raw_hash,
+    }
+    defect = _expected_source_fields(source, expected)
+    if defect is not None:
+        return defect
+    return _aim_url_defect(doc, source.get("url"), state.source_url)
+
+
+def _aim_url_defect(doc: dict, url: object, index_url: str | None) -> str | None:
+    """A document's ``source.url`` must be *its own* page of the accepted edition.
+
+    The expected page identity and anchor derive from the document's type
+    and citation (chapter → ``chap_N``, section/paragraph → ``chapN_section_M``
+    with the paragraph number as anchor, appendix → ``appendix_N``); the
+    filename may be padded (``chap_04.html``) but must denote that identity.
+    """
+    if not isinstance(index_url, str) or not isinstance(url, str):
+        return f"source url {url!r} cannot be checked against the manifest ({index_url!r})"
+    base = index_url.rsplit("/", 1)[0] + "/"
+    if not url.startswith(base):
+        return f"source url {url!r} is outside the accepted edition ({base!r})"
+    page, _, anchor = url[len(base) :].partition("#")
+    kind = doc.get("document_type")
+    if kind == aim_model.DOCUMENT_TYPE_PUBLICATION:
+        if page != aim_source.INDEX_PAGE or anchor:
+            return f"source url {url!r} is not the edition index page"
+        return None
+    try:
+        identity = aim_source.classify_page(page)
+    except ValueError:
+        return f"source url {url!r} does not name an edition page"
+    expected_anchor = ""
+    if kind == aim_model.DOCUMENT_TYPE_CHAPTER:
+        expected = ("chapter", doc.get("chapter"))
+    elif kind == aim_model.DOCUMENT_TYPE_SECTION:
+        expected = ("section", doc.get("chapter"), doc.get("section"))
+    elif kind == aim_model.DOCUMENT_TYPE_PARAGRAPH:
+        expected = ("section", doc.get("chapter"), doc.get("section"))
+        expected_anchor = str(doc.get("paragraph"))
+    elif kind == aim_model.DOCUMENT_TYPE_APPENDIX:
+        expected = ("appendix", doc.get("appendix"))
+    else:
+        return f"document type {kind!r} has no expected source page"
+    if identity != expected or anchor != expected_anchor:
+        return (
+            f"source url {url!r} does not match the document's identity "
+            f"({doc.get('id')!r} expects page {expected} anchor {expected_anchor!r})"
+        )
+    return None
+
+
+def _expected_source_fields(source: dict, expected: dict) -> str | None:
+    for key, value in expected.items():
+        if source.get(key) != value:
+            return (
+                f"source {key} {source.get(key)!r} does not match the accepted "
+                f"snapshot ({value!r})"
+            )
+    retrieved_at = source.get("retrieved_at")
+    if not isinstance(retrieved_at, str) or not _RETRIEVED_AT_RE.fullmatch(retrieved_at):
+        return f"source retrieved_at {retrieved_at!r} is not a valid timestamp"
+    return None
+
+
+def fsync_dir(path: Path) -> None:
+    """Directory fsync, resolved through ``sources.ecfr`` so tests can observe it."""
+    ecfr.fsync_dir(path)
+
+
+def normalized_part_filename(number: str) -> str:
+    """``91`` → ``part-0091.json`` (sortable); ranges keep their text."""
+    return f"part-{number.zfill(4) if number.isdigit() else number}.json"
+
+
+def _aim_doc_key(doc: dict) -> str | None:
+    kind = doc.get("document_type")
+    if kind == aim_model.DOCUMENT_TYPE_PUBLICATION:
+        return "publication"
+    if kind == aim_model.DOCUMENT_TYPE_CHAPTER and isinstance(doc.get("chapter"), int):
+        return f"chapter-{doc['chapter']:02d}"
+    if kind == aim_model.DOCUMENT_TYPE_APPENDIX and isinstance(doc.get("appendix"), int):
+        return f"appendix-{doc['appendix']}"
+    return None
+
+
+ECFR_SPEC = LayerSpec(
+    name="ecfr",
+    source_name=ecfr.SOURCE_NAME,
+    label="eCFR",
+    fetch_command="fetch ecfr",
+    parse_command="parse ecfr",
+    root_types=frozenset({cfr_model.DOCUMENT_TYPE_PART}),
+    hashed_types=frozenset(
+        {
+            cfr_model.DOCUMENT_TYPE_PART,
+            cfr_model.DOCUMENT_TYPE_SECTION,
+            cfr_model.DOCUMENT_TYPE_APPENDIX,
+        }
+    ),
+    file_glob="part-*.json",
+    file_noun="part files",
+    key_noun="part",
+    doc_key=lambda doc: doc.get("part") if isinstance(doc.get("part"), str) else None,
+    filename=normalized_part_filename,
+    source_defect=_ecfr_source_defect,
+)
+
+AIM_SPEC = LayerSpec(
+    name="aim",
+    source_name=aim_source.SOURCE_NAME,
+    label="AIM",
+    fetch_command="fetch aim",
+    parse_command="parse aim",
+    root_types=frozenset(
+        {
+            aim_model.DOCUMENT_TYPE_PUBLICATION,
+            aim_model.DOCUMENT_TYPE_CHAPTER,
+            aim_model.DOCUMENT_TYPE_APPENDIX,
+        }
+    ),
+    hashed_types=frozenset(
+        {
+            aim_model.DOCUMENT_TYPE_PUBLICATION,
+            aim_model.DOCUMENT_TYPE_CHAPTER,
+            aim_model.DOCUMENT_TYPE_SECTION,
+            aim_model.DOCUMENT_TYPE_PARAGRAPH,
+            aim_model.DOCUMENT_TYPE_APPENDIX,
+        }
+    ),
+    file_glob="*.json",
+    file_noun="document files",
+    key_noun="document",
+    doc_key=_aim_doc_key,
+    filename=lambda key: f"{key}.json",
+    source_defect=_aim_source_defect,
+)
+
+
+# ---------------------------------------------------------------------------
+# check
+# ---------------------------------------------------------------------------
 
 
 def cmd_check(config: Config, *, remote: bool = False) -> int:
@@ -116,22 +331,39 @@ def cmd_check(config: Config, *, remote: bool = False) -> int:
         print(line.rstrip())
     print()
     if not remote:
-        print("note: pass --remote to poll upstream for newer versions (eCFR only for now).")
+        print("note: pass --remote to poll upstream for newer versions (eCFR and AIM).")
         return EXIT_OK
 
-    try:
-        with ecfr.make_client() as client:
+    # Each upstream is polled independently: one unreachable source must not
+    # hide the other's status (plan §25.3 — network failure ≠ source removed).
+    code = EXIT_OK
+    with ecfr.make_client() as client:
+        try:
             discovery = ecfr.discover_title14(client)
-    except ecfr.FetchError as exc:
-        print(f"error: {exc}", file=sys.stderr)
-        return EXIT_ERROR
+        except FetchError as exc:
+            print(f"error: ecfr_title_14: {exc}", file=sys.stderr)
+            discovery = None
+        try:
+            aim_discovery = aim_source.discover_aim(client)
+        except FetchError as exc:
+            print(f"error: aim: {exc}", file=sys.stderr)
+            aim_discovery = None
+    if discovery is None or aim_discovery is None:
+        code = EXIT_ERROR
+    if discovery is not None:
+        code = max(code, _report_ecfr_remote(manifest, discovery))
+    if aim_discovery is not None:
+        code = max(code, _report_aim_remote(manifest, aim_discovery))
+    print("pcg: remote polling arrives in Phase 5.")
+    return code
+
+
+def _report_ecfr_remote(manifest: SourceManifest, discovery: ecfr.TitleDiscovery) -> int:
     accepted = manifest.sources[ecfr.SOURCE_NAME].accepted_version
     latest = discovery.latest_issue_date
-    print("aim, pcg: remote polling arrives in Phases 4-5.")
     if accepted == latest:
         print(f"ecfr_title_14: up to date (issue {accepted})")
-        return EXIT_OK
-    if accepted is not None and latest < accepted:
+    elif accepted is not None and latest < accepted:
         # Same rule as fetch_title14: issue dates only move forward, so an
         # older upstream date is a glitch or rollback, not an update.
         print(
@@ -141,16 +373,58 @@ def cmd_check(config: Config, *, remote: bool = False) -> int:
             file=sys.stderr,
         )
         return EXIT_ERROR
-    print(
-        f"ecfr_title_14: update available — latest issue {latest}, accepted {accepted or 'none'}"
-    )
+    else:
+        print(
+            f"ecfr_title_14: update available — latest issue {latest}, "
+            f"accepted {accepted or 'none'}"
+        )
     return EXIT_OK
+
+
+def _report_aim_remote(manifest: SourceManifest, aim_discovery: aim_source.AimDiscovery) -> int:
+    aim_state = manifest.sources[aim_source.SOURCE_NAME]
+    listed = f"{aim_discovery.label} (effective {aim_discovery.effective_date})"
+    if aim_state.accepted_version == aim_discovery.version:
+        if not aim_source.listing_matches_pins(aim_state, aim_discovery):
+            print(
+                f"error: aim: FAA now lists the accepted edition {aim_discovery.version} as "
+                f"{aim_discovery.label!r} at {aim_discovery.index_url!r} (accepted as "
+                f"{aim_state.edition_label!r} at {aim_state.source_url!r}); `fetch aim` will "
+                "refuse this without --force.",
+                file=sys.stderr,
+            )
+            return EXIT_ERROR
+        print(f"aim: up to date ({listed})")
+    elif (
+        aim_state.effective_date is not None
+        and aim_state.change is not None
+        and (aim_discovery.effective_date, aim_discovery.change)
+        < (aim_state.effective_date, aim_state.change)
+    ):
+        print(
+            f"error: aim: FAA lists {listed}, older than accepted effective "
+            f"{aim_state.effective_date} change {aim_state.change}; `fetch aim` will refuse "
+            "this without --force.",
+            file=sys.stderr,
+        )
+        return EXIT_ERROR
+    else:
+        print(
+            f"aim: update available — FAA lists {listed}, "
+            f"accepted {aim_state.accepted_version or 'none'}"
+        )
+    return EXIT_OK
+
+
+# ---------------------------------------------------------------------------
+# fetch
+# ---------------------------------------------------------------------------
 
 
 def cmd_fetch_ecfr(config: Config, *, force: bool) -> int:
     try:
         result = ecfr.fetch_title14(config, force=force)
-    except (ecfr.FetchError, ManifestError) as exc:
+    except (FetchError, ManifestError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return EXIT_ERROR
     except OSError as exc:
@@ -171,6 +445,38 @@ def cmd_fetch_ecfr(config: Config, *, force: bool) -> int:
     return EXIT_OK
 
 
+def cmd_fetch_aim(config: Config, *, force: bool) -> int:
+    try:
+        result = aim_source.fetch_aim(config, force=force)
+    except (FetchError, ManifestError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    except OSError as exc:
+        print(f"error: filesystem failure during fetch: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    edition = f"{result.label} (effective {result.effective_date})"
+    if result.downloaded:
+        print(f"accepted: AIM {edition}")
+        print(f"  archive:  {result.snapshot_dir}")
+        print(f"  checksum: {result.raw_hash}")
+        print(
+            f"  size:     {result.byte_count} bytes, {result.page_count} pages, "
+            f"{result.paragraph_count} paragraphs, {result.figure_count} figures"
+        )
+        print(
+            "note: the FAA offers no point-in-time access — archive this snapshot "
+            "outside the repository (plan §6.2)."
+        )
+    else:
+        print(f"unchanged: AIM {edition} already accepted; cached snapshot verified")
+    return EXIT_OK
+
+
+# ---------------------------------------------------------------------------
+# parse
+# ---------------------------------------------------------------------------
+
+
 def cmd_parse_ecfr(config: Config, parts: list[str] | None) -> int:
     """Parse the accepted raw snapshot into canonical part JSON (Phase 2).
 
@@ -185,9 +491,9 @@ def cmd_parse_ecfr(config: Config, parts: list[str] | None) -> int:
     in-memory manifest over the newly accepted version.
     """
     try:
-        with ecfr.exclusive_lock(ecfr.fetch_lock_path(config)):
+        with exclusive_lock(fetch_lock_path(config)):
             return _parse_ecfr_locked(config, parts)
-    except ecfr.FetchError as exc:
+    except FetchError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return EXIT_ERROR
     except OSError as exc:
@@ -258,7 +564,7 @@ def _parse_ecfr_locked(config: Config, parts: list[str] | None) -> int:
     # recovery deferred to the publish step would never run if parsing
     # fails, stranding the last known-good layer off its canonical path
     # while the error below claims it was preserved.
-    _recover_normalized_layer(config, state)
+    _recover_normalized_layer(config, state, ECFR_SPEC)
     try:
         root = ElementTree.parse(xml_path).getroot()
         docs = ecfr_parser.build_part_docs(root, source, set(parts) if parts else None)
@@ -272,13 +578,114 @@ def _parse_ecfr_locked(config: Config, parts: list[str] | None) -> int:
 
     if parts:
         return _publish_normalized_parts(config, state, docs)
-    return _publish_normalized_title(config, manifest, docs)
+    total_sections = sum(ecfr_parser.count_sections(doc) for doc in docs.values())
+    summary = (
+        f"parsed eCFR issue {state.accepted_version}: {len(docs)} part(s), "
+        f"{total_sections} sections"
+    )
+    return _publish_normalized_layer(config, manifest, docs, ECFR_SPEC, summary)
+
+
+def cmd_parse_aim(config: Config) -> int:
+    """Parse the accepted AIM snapshot into canonical chapter/appendix JSON (Phase 4)."""
+    try:
+        with exclusive_lock(fetch_lock_path(config)):
+            return _parse_aim_locked(config)
+    except FetchError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    except OSError as exc:
+        print(f"error: filesystem failure during parse: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+
+
+def _aim_snapshot(config: Config, state: SourceState) -> tuple[Path, dict] | str:
+    """The verified accepted AIM snapshot directory and its metadata, or a defect."""
+    if state.accepted_version is None or state.raw_hash is None:
+        return "no accepted AIM snapshot; run `far-aim fetch aim` first"
+    snapshot_dir = config.raw_dir / "aim" / state.accepted_version
+    if not snapshot_dir.is_dir():
+        return f"archived snapshot missing: {snapshot_dir}; run `far-aim fetch aim`"
+    if not aim_source.verify_snapshot(
+        snapshot_dir, version=state.accepted_version, raw_hash=state.raw_hash
+    ):
+        return (
+            f"archived snapshot {snapshot_dir} is incomplete or does not match the accepted "
+            "checksum; run `far-aim fetch aim` to restore it"
+        )
+    metadata = aim_source.load_metadata(snapshot_dir)
+    assert metadata is not None
+    return snapshot_dir, metadata
+
+
+def _parse_aim_locked(config: Config) -> int:
+    try:
+        manifest = SourceManifest.load(config.manifest_path)
+    except ManifestError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    state = manifest.sources[aim_source.SOURCE_NAME]
+    snapshot = _aim_snapshot(config, state)
+    if isinstance(snapshot, str):
+        print(f"error: {snapshot}", file=sys.stderr)
+        return EXIT_ERROR
+    snapshot_dir, metadata = snapshot
+    pinned = {
+        "edition_label": state.edition_label,
+        "effective_date": state.effective_date,
+        "change": state.change,
+        "index_url": state.source_url,
+    }
+    for key, value in pinned.items():
+        if value is None or metadata.get(key) != value:
+            print(
+                f"error: snapshot metadata {key} {metadata.get(key)!r} does not match the "
+                f"manifest ({value!r}); run `far-aim fetch aim` to re-accept the edition",
+                file=sys.stderr,
+            )
+            return EXIT_ERROR
+    source = {
+        "provider": "faa",
+        "publication": "aim",
+        "source_version": state.accepted_version,
+        "edition_label": state.edition_label,
+        "effective_date": state.effective_date,
+        "change": state.change,
+        "url": state.source_url,
+        "retrieved_at": metadata["retrieved_at"],
+        "raw_checksum": state.raw_hash,
+    }
+    _recover_normalized_layer(config, state, AIM_SPEC)
+    try:
+        docs = aim_parser.build_aim_docs(snapshot_dir, metadata, source)
+    except (aim_parser.ParseError, UnicodeDecodeError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        print("note: nothing was written; last known-good output preserved.", file=sys.stderr)
+        return EXIT_ERROR
+    chapters = sum(
+        1 for d in docs.values() if d["document_type"] == aim_model.DOCUMENT_TYPE_CHAPTER
+    )
+    appendices = sum(
+        1 for d in docs.values() if d["document_type"] == aim_model.DOCUMENT_TYPE_APPENDIX
+    )
+    sections = sum(aim_parser.count_sections(d) for d in docs.values())
+    paragraphs = sum(aim_parser.count_paragraphs(d) for d in docs.values())
+    summary = (
+        f"parsed AIM {state.accepted_version}: {chapters} chapters, {sections} sections, "
+        f"{paragraphs} paragraphs, {appendices} appendices"
+    )
+    return _publish_normalized_layer(config, manifest, docs, AIM_SPEC, summary)
+
+
+# ---------------------------------------------------------------------------
+# Normalized-layer publication (all corpora)
+# ---------------------------------------------------------------------------
 
 
 def _publish_normalized_parts(
     config: Config, state: SourceState, docs: dict[str, dict]
 ) -> int:
-    """Partial parse: update the requested part files as one on-disk unit.
+    """Partial eCFR parse: update the requested part files as one on-disk unit.
 
     The existing layer is hard-link-copied into staging (cheap: new
     directory entries sharing the same file contents), the requested part
@@ -289,21 +696,22 @@ def _publish_normalized_parts(
     — and every interruption window is repaired by the standard recovery
     on the next run (in-memory backups would not survive a kill).
     """
+    spec = ECFR_SPEC
     version = state.accepted_version
-    out_dir = config.normalized_dir / "ecfr"
-    staging = config.normalized_dir / ".ecfr-staging"
-    previous = config.normalized_dir / ".ecfr-previous"
+    out_dir = spec.out_dir(config)
+    staging = spec.staging_dir(config)
+    previous = spec.previous_dir(config)
     # An interrupted full publish may have left the committed layer
     # displaced; writing partial files into a fresh/uncommitted `ecfr`
     # would strand it, so run the same recovery the full path performs.
-    _recover_normalized_layer(config, state)
+    _recover_normalized_layer(config, state, spec)
     if out_dir.exists():
         # The untouched parts are carried over from the existing layer, so
         # that layer must have been built from the *accepted* snapshot.
         # After a fetch accepts a newer snapshot (which clears the recorded
         # canonical_hash), the old layer is stale: merging one new-version
         # part into it would publish a mixed-provenance corpus as success.
-        stale = _stale_layer_defect(out_dir, state)
+        stale = _stale_layer_defect(out_dir, state, spec)
         if stale is not None:
             print(
                 f"error: the existing normalized layer was not built from the "
@@ -326,7 +734,7 @@ def _publish_normalized_parts(
             sections = ecfr_parser.count_sections(doc)
             total_sections += sections
             written.append((out_dir / normalized_part_filename(number), sections))
-        ecfr.fsync_dir(staging)
+        fsync_dir(staging)
     except OSError as exc:
         shutil.rmtree(staging, ignore_errors=True)
         print(
@@ -341,7 +749,7 @@ def _publish_normalized_parts(
         # that `validate` rejects while reporting success — and silently
         # re-recording the hash would bless a mixed-provenance layer. Fail
         # closed instead.
-        staged_hash = _layer_title_hash(staging, state)
+        staged_hash = _layer_title_hash(staging, state, spec)
         if staged_hash != state.canonical_hash:
             shutil.rmtree(staging)
             print(
@@ -387,7 +795,7 @@ def _swap_staged_layer(
         if had_previous:
             os.replace(out_dir, previous)
         os.replace(staging, out_dir)
-        ecfr.fsync_dir(config.normalized_dir)
+        fsync_dir(config.normalized_dir)
     except OSError:
         _restore_previous_layer(
             config, out_dir, staging, previous, had_previous=had_previous
@@ -397,28 +805,28 @@ def _swap_staged_layer(
 
 
 def _discard_fallback(config: Config, fallback: Path) -> None:
-    """Remove a superseded ``.ecfr-previous`` and make the removal durable.
+    """Remove a superseded ``.<layer>-previous`` and make the removal durable.
 
     Resurrected by a power loss, a stale fallback can later win recovery
-    arbitration and displace a newer committed layer: with no full-title
-    parse yet ``canonical_hash`` was never recorded, and a subsequent fetch
-    accepting a newer snapshot *clears* it — in both states recovery
-    reinstates ``.ecfr-previous`` unconditionally.
+    arbitration and displace a newer committed layer: with no full parse yet
+    ``canonical_hash`` was never recorded, and a subsequent fetch accepting a
+    newer snapshot *clears* it — in both states recovery reinstates
+    ``previous`` unconditionally.
     """
     shutil.rmtree(fallback)
-    ecfr.fsync_dir(config.normalized_dir)
+    fsync_dir(config.normalized_dir)
 
 
-def _recover_normalized_layer(config: Config, state: SourceState) -> None:
-    """Repair the aftermath of an interrupted earlier publish (all parsers).
+def _recover_normalized_layer(config: Config, state: SourceState, spec: LayerSpec) -> None:
+    """Repair the aftermath of an interrupted earlier publish.
 
     An interrupted publish may have left the manifest's layer displaced
-    under ``.ecfr-previous``; both the full-title and the ``--part`` paths
-    must reconcile that before touching the canonical directory.
+    under ``.<layer>-previous``; every publish path must reconcile that
+    before touching the canonical directory.
     """
-    out_dir = config.normalized_dir / "ecfr"
-    staging = config.normalized_dir / ".ecfr-staging"
-    previous = config.normalized_dir / ".ecfr-previous"
+    out_dir = spec.out_dir(config)
+    staging = spec.staging_dir(config)
+    previous = spec.previous_dir(config)
     # Staging never became authoritative and is always safe to discard.
     if staging.exists():
         shutil.rmtree(staging)
@@ -427,11 +835,11 @@ def _recover_normalized_layer(config: Config, state: SourceState) -> None:
     if not out_dir.exists():
         # Crash between the two swap renames: `previous` is the sole copy.
         os.replace(previous, out_dir)
-        ecfr.fsync_dir(config.normalized_dir)
+        fsync_dir(config.normalized_dir)
         print(f"note: restored interrupted normalized layer from {previous}")
     elif state.canonical_hash is None or (
-        _layer_title_hash(previous, state) == state.canonical_hash
-        and _layer_title_hash(out_dir, state) != state.canonical_hash
+        _layer_title_hash(previous, state, spec) == state.canonical_hash
+        and _layer_title_hash(out_dir, state, spec) != state.canonical_hash
     ):
         # Crash between the swap and the manifest commit: `out_dir` holds
         # an uncommitted layer while `previous` is the pre-command state —
@@ -444,13 +852,13 @@ def _recover_normalized_layer(config: Config, state: SourceState) -> None:
         # next full parse.
         os.replace(out_dir, staging)
         os.replace(previous, out_dir)
-        ecfr.fsync_dir(config.normalized_dir)
+        fsync_dir(config.normalized_dir)
         shutil.rmtree(staging)
         print(
             "note: reinstated the previous normalized layer displaced by an "
             "interrupted publish"
         )
-    elif _layer_title_hash(out_dir, state) == state.canonical_hash:
+    elif _layer_title_hash(out_dir, state, spec) == state.canonical_hash:
         # `out_dir` verifiably matches the manifest: `previous` is
         # superseded and safe to discard.
         _discard_fallback(config, previous)
@@ -458,56 +866,58 @@ def _recover_normalized_layer(config: Config, state: SourceState) -> None:
         # Neither layer verifies against the manifest (corruption, or an
         # unreadable part file). Destructive arbitration is impossible, so
         # fail closed keeping both copies for inspection (plan §32.13).
-        raise ecfr.FetchError(
+        raise FetchError(
             f"neither the normalized layer at {out_dir} nor the displaced copy at "
             f"{previous} verifies against the manifest; refusing to discard either. "
-            "Inspect them, remove the corrupt copy, then re-run `far-aim parse ecfr`."
+            f"Inspect them, remove the corrupt copy, then re-run `far-aim {spec.parse_command}`."
         )
 
 
-def _publish_normalized_title(
-    config: Config, manifest: SourceManifest, docs: dict[str, dict]
+def _publish_normalized_layer(
+    config: Config,
+    manifest: SourceManifest,
+    docs: dict[str, dict],
+    spec: LayerSpec,
+    summary: str,
 ) -> int:
-    """Full parse: replace the whole normalized eCFR layer as one unit.
+    """Full parse: replace the whole normalized layer of one corpus as one unit.
 
     The new layer is staged in a sibling directory and swapped in with two
     renames, so a failure mid-write (full disk, interruption) can never
-    leave a mix of old and new part files, and parts removed or renumbered
+    leave a mix of old and new files, and documents removed or renumbered
     upstream cannot survive as stale files. Every failure path puts the
     last known-good layer back at its canonical path (plan §32.13):
 
     - a crash between the two swap renames leaves the old layer at
-      ``.ecfr-previous`` with ``ecfr`` absent — the next publish restores
-      it before doing anything else, never discards it;
+      ``.<layer>-previous`` with the canonical directory absent — the next
+      publish restores it before doing anything else, never discards it;
     - a crash between the swap and the manifest commit leaves an
-      *uncommitted* layer at ``ecfr`` while ``.ecfr-previous`` still holds
-      the layer the manifest records — the next publish reconciles both
-      against the recorded hash and reinstates the committed one as the
-      fallback rather than discarding it;
-    - a failed swap restores ``.ecfr-previous`` in-process;
+      *uncommitted* layer at the canonical path while ``previous`` still
+      holds the layer the manifest records — the next publish reconciles
+      both against the recorded hash and reinstates the committed one as
+      the fallback rather than discarding it;
+    - a failed swap restores ``previous`` in-process;
     - a failed manifest commit rolls the swap back — unless the on-disk
       manifest shows the commit actually became visible before the failure
       (e.g. the rename landed but its directory fsync did not), in which
       case rolling back would *create* an inconsistency and the new layer
       is kept.
     """
-    state = manifest.sources[ecfr.SOURCE_NAME]
-    out_dir = config.normalized_dir / "ecfr"
-    staging = config.normalized_dir / ".ecfr-staging"
-    previous = config.normalized_dir / ".ecfr-previous"
-    _recover_normalized_layer(config, state)
+    state = manifest.sources[spec.source_name]
+    out_dir = spec.out_dir(config)
+    staging = spec.staging_dir(config)
+    previous = spec.previous_dir(config)
+    _recover_normalized_layer(config, state, spec)
 
     staging.mkdir(parents=True)
-    total_sections = 0
     try:
-        for number, doc in docs.items():
-            write_json_atomic(staging / normalized_part_filename(number), doc)
-            total_sections += ecfr_parser.count_sections(doc)
+        for key, doc in docs.items():
+            write_json_atomic(staging / spec.filename(key), doc)
         # The file contents are fsynced individually, but their directory
         # entries live in `staging` itself: sync it before the rename makes
         # it authoritative, or a power loss after the manifest commit could
-        # leave a committed layer with unpersisted part files.
-        ecfr.fsync_dir(staging)
+        # leave a committed layer with unpersisted files.
+        fsync_dir(staging)
     except OSError:
         # The authoritative layer is untouched at this point; just drop the
         # partial staging directory before the failure propagates.
@@ -525,22 +935,21 @@ def _publish_normalized_title(
         return EXIT_ERROR
 
     title_hash = cfr_model.canonical_hash(
-        {number: doc["canonical_hash"] for number, doc in docs.items()}
+        {key: doc["canonical_hash"] for key, doc in docs.items()}
     )
-    version = state.accepted_version
-    print(f"parsed eCFR issue {version}: {len(docs)} part(s), {total_sections} sections")
+    print(summary)
     print(f"published normalized layer: {out_dir}")
     if state.canonical_hash != title_hash:
-        # Record the canonical-layer hash — the content hash over all part
-        # hashes — so a markup-only upstream change is detectable as
-        # content-identical (plan §14.4). Committed after the swap so the
+        # Record the canonical-layer hash — the content hash over all
+        # document hashes — so a markup-only upstream change is detectable
+        # as content-identical (plan §14.4). Committed after the swap so the
         # manifest never references a layer that is not on disk.
         previous_hash = state.canonical_hash
         try:
             state.canonical_hash = title_hash
             manifest.save(config.manifest_path)
         except (OSError, ManifestError) as exc:
-            if _manifest_records_canonical(config.manifest_path, title_hash):
+            if _manifest_records_canonical(config.manifest_path, title_hash, spec):
                 # manifest.save() failed *after* its atomic rename became
                 # visible (e.g. the directory fsync): manifest and layer
                 # already agree, so keep both; `previous` stays on disk as
@@ -595,36 +1004,23 @@ def _restore_previous_layer(
     if staging.exists():
         shutil.rmtree(staging)
     with contextlib.suppress(OSError):
-        ecfr.fsync_dir(config.normalized_dir)
+        fsync_dir(config.normalized_dir)
 
 
-# Document types that must each carry a self-verifying canonical_hash and a
-# provenance block. Keyed on document_type, not on the presence of a
-# canonical_hash key: a *deleted* hash must be a defect, not a skipped check
-# (parent hashes deliberately exclude nested hashes, so nothing else would
-# notice).
-_HASHED_DOCUMENT_TYPES = frozenset(
-    {
-        cfr_model.DOCUMENT_TYPE_PART,
-        cfr_model.DOCUMENT_TYPE_SECTION,
-        cfr_model.DOCUMENT_TYPE_APPENDIX,
-    }
-)
-
-_RETRIEVED_AT_RE = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z")
-
-
-def _first_document_defect(node: object, state: SourceState | None) -> str | None:
+def _first_document_defect(node: object, state: SourceState | None, spec: LayerSpec) -> str | None:
     """First integrity defect in a canonical document tree, or None.
 
-    Walks the part document and every nested hashed document (sections,
-    appendices). Each must carry a string ``canonical_hash`` that recomputes
-    from its own content, and — when ``state`` is given — a ``source``
-    block matching the manifest's accepted snapshot, so missing or false
-    provenance cannot pass the gate (plan §32.8).
+    Walks the root document and every nested hashed document. Each must
+    carry a string ``canonical_hash`` that recomputes from its own content
+    (keyed on ``document_type``, not on the presence of a hash key, so a
+    *deleted* hash is a defect rather than a skipped check — parent hashes
+    deliberately exclude nested hashes, so nothing else would notice), and
+    — when ``state`` is given — a ``source`` block matching the manifest's
+    accepted snapshot, so missing or false provenance cannot pass the gate
+    (plan §32.8).
     """
     if isinstance(node, dict):
-        if node.get("document_type") in _HASHED_DOCUMENT_TYPES:
+        if node.get("document_type") in spec.hashed_types:
             doc_id = str(node.get("id", "<unidentified document>"))
             stored = node.get("canonical_hash")
             if not isinstance(stored, str):
@@ -632,123 +1028,90 @@ def _first_document_defect(node: object, state: SourceState | None) -> str | Non
             if cfr_model.canonical_hash(node) != stored:
                 return f"stored canonical_hash of {doc_id!r} does not match its content"
             if state is not None:
-                source_defect = _source_block_defect(node.get("source"), state)
+                source = node.get("source")
+                if not isinstance(source, dict):
+                    return f"{doc_id!r}: missing source block"
+                source_defect = spec.source_defect(node, source, state)
                 if source_defect is not None:
                     return f"{doc_id!r}: {source_defect}"
         for value in node.values():
             if isinstance(value, list):
                 for item in value:
-                    bad = _first_document_defect(item, state)
+                    bad = _first_document_defect(item, state, spec)
                     if bad is not None:
                         return bad
     return None
 
 
-def _source_block_defect(source: object, state: SourceState) -> str | None:
-    """Why a document's provenance does not describe the accepted snapshot."""
-    if not isinstance(source, dict):
-        return "missing source block"
-    expected = {
-        "provider": "ecfr",
-        "source_version": state.accepted_version,
-        "url": ecfr.full_title14_url(state.accepted_version or ""),
-        "raw_checksum": state.raw_hash,
-    }
-    for key, value in expected.items():
-        if source.get(key) != value:
-            return (
-                f"source {key} {source.get(key)!r} does not match the accepted "
-                f"snapshot ({value!r})"
-            )
-    retrieved_at = source.get("retrieved_at")
-    if not isinstance(retrieved_at, str) or not _RETRIEVED_AT_RE.fullmatch(retrieved_at):
-        return f"source retrieved_at {retrieved_at!r} is not a valid timestamp"
-    return None
-
-
-def _stale_layer_defect(layer_dir: Path, state: SourceState) -> str | None:
+def _stale_layer_defect(layer_dir: Path, state: SourceState, spec: LayerSpec) -> str | None:
     """Why an on-disk layer was not built from the accepted snapshot.
 
-    Deep-walks every part file the same way ``validate`` does — root *and*
-    nested hashed documents (sections, appendices) must verify their
-    canonical hashes and carry provenance matching the manifest's accepted
-    version/checksum. A root-only check would let a carried-over part with
-    stale or tampered nested provenance ride through a partial publish
-    that reports success while ``validate`` immediately rejects the layer
-    (nested ``source`` blocks are excluded from canonical hashes, so the
-    staged title-hash check cannot catch them either). Returns None when
-    the whole layer verifies.
+    Deep-walks every file the same way ``validate`` does — root *and*
+    nested hashed documents must verify their canonical hashes and carry
+    provenance matching the manifest's accepted version/checksum. Returns
+    None when the whole layer verifies.
     """
-    for part_file in sorted(layer_dir.glob("part-*.json")):
+    for doc_file in sorted(layer_dir.glob(spec.file_glob)):
         try:
-            doc = json.loads(part_file.read_text(encoding="utf-8"))
+            doc = json.loads(doc_file.read_text(encoding="utf-8"))
         except (OSError, ValueError) as exc:
-            return f"{part_file.name}: unreadable ({exc})"
+            return f"{doc_file.name}: unreadable ({exc})"
         if not isinstance(doc, dict):
-            return f"{part_file.name}: not a JSON object"
-        defect = _first_document_defect(doc, state)
+            return f"{doc_file.name}: not a JSON object"
+        defect = _first_document_defect(doc, state, spec)
         if defect is not None:
-            return f"{part_file.name}: {defect}"
+            return f"{doc_file.name}: {defect}"
     return None
 
 
-def _layer_title_hash(layer_dir: Path, state: SourceState) -> str | None:
+def _layer_title_hash(layer_dir: Path, state: SourceState, spec: LayerSpec) -> str | None:
     """Title hash of a normalized layer, deeply verified.
 
     Used to identify which of two on-disk layers the manifest refers to
     during crash recovery — a decision that may *discard* the other layer,
     so stored hashes are not trusted: every document's hash is recomputed
     from its content, and every document's provenance must describe the
-    manifest's accepted snapshot. Canonical hashes deliberately exclude
-    ``source`` blocks, so a layer with stale or tampered provenance —
-    which ``validate`` rejects — could otherwise still win destructive
-    arbitration and delete the intact copy. A truncated or tampered file
-    whose stored hash was left intact must disqualify the layer, not
-    match. Returns None when the layer is unreadable, malformed, or fails
-    deep verification (never matches).
+    manifest's accepted snapshot. Returns None when the layer is
+    unreadable, malformed, or fails deep verification (never matches).
     """
-    part_hashes: dict[str, str] = {}
-    for part_file in sorted(layer_dir.glob("part-*.json")):
+    hashes: dict[str, str] = {}
+    for doc_file in sorted(layer_dir.glob(spec.file_glob)):
         try:
-            doc = json.loads(part_file.read_text(encoding="utf-8"))
+            doc = json.loads(doc_file.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             return None
         if not isinstance(doc, dict):
             return None
-        number, stored = doc.get("part"), doc.get("canonical_hash")
-        if not isinstance(number, str) or not isinstance(stored, str):
-            return None
+        stored = doc.get("canonical_hash")
         # The type-keyed walker would skip a root whose document_type was
         # stripped, leaving its stored hash untrusted-but-used; require it.
-        if doc.get("document_type") != cfr_model.DOCUMENT_TYPE_PART:
+        if doc.get("document_type") not in spec.root_types:
+            return None
+        key = spec.doc_key(doc)
+        if key is None or not isinstance(stored, str):
             return None
         # Mirror `validate`: a valid document under the wrong filename, or
-        # the same part in two files, must disqualify the layer here too —
-        # otherwise dict assignment would silently collapse the duplicate
-        # and a layer that `validate` rejects could still win destructive
-        # recovery arbitration.
-        if part_file.name != normalized_part_filename(number) or number in part_hashes:
+        # the same document in two files, must disqualify the layer here
+        # too — otherwise dict assignment would silently collapse the
+        # duplicate and a layer that `validate` rejects could still win
+        # destructive recovery arbitration.
+        if doc_file.name != spec.filename(key) or key in hashes:
             return None
-        if _first_document_defect(doc, state) is not None:
+        if _first_document_defect(doc, state, spec) is not None:
             return None
-        part_hashes[number] = stored
-    if not part_hashes:
+        hashes[key] = stored
+    if not hashes:
         return None
-    return cfr_model.canonical_hash(part_hashes)
+    return cfr_model.canonical_hash(hashes)
 
 
-def _manifest_records_canonical(manifest_path: Path, title_hash: str) -> bool:
-    """True if the on-disk manifest already records ``title_hash`` for eCFR."""
+def _manifest_records_canonical(manifest_path: Path, title_hash: str, spec: LayerSpec) -> bool:
+    """True if the on-disk manifest already records ``title_hash`` for the corpus."""
     try:
-        state = SourceManifest.load(manifest_path).sources[ecfr.SOURCE_NAME]
+        state = SourceManifest.load(manifest_path).sources[spec.source_name]
     except Exception:  # noqa: BLE001 - unreadable manifest: cannot prove the commit
         return False
     return state.canonical_hash == title_hash
-
-
-def normalized_part_filename(number: str) -> str:
-    """``91`` → ``part-0091.json`` (sortable); ranges keep their text."""
-    return f"part-{number.zfill(4) if number.isdigit() else number}.json"
 
 
 def write_json_atomic(path: Path, obj: dict) -> None:
@@ -767,8 +1130,13 @@ def write_json_atomic(path: Path, obj: dict) -> None:
         raise
 
 
+# ---------------------------------------------------------------------------
+# validate
+# ---------------------------------------------------------------------------
+
+
 def cmd_validate(config: Config) -> int:
-    """Validate manifest and normalized layer under the shared source lock.
+    """Validate manifest and normalized layers under the shared source lock.
 
     Without the lock, a concurrent full parse could commit the manifest
     between the manifest read and the layer walk (or swap the layer between
@@ -779,9 +1147,9 @@ def cmd_validate(config: Config) -> int:
         print(f"error: source registry missing: {path}", file=sys.stderr)
         return EXIT_ERROR
     try:
-        with ecfr.exclusive_lock(ecfr.fetch_lock_path(config)):
+        with exclusive_lock(fetch_lock_path(config)):
             return _validate_locked(config)
-    except ecfr.FetchError as exc:
+    except FetchError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return EXIT_ERROR
     except OSError as exc:
@@ -799,99 +1167,182 @@ def _validate_locked(config: Config) -> int:
         print(f"error: {exc}", file=sys.stderr)
         return EXIT_ERROR
     print(f"ok: manifest schema valid ({path})")
-    code = _validate_normalized_ecfr(config, manifest)
-    if code != EXIT_OK:
-        return code
+    for spec in (ECFR_SPEC, AIM_SPEC):
+        code = _validate_normalized_layer(config, manifest, spec)
+        if code != EXIT_OK:
+            return code
     return _validate_vault(config, manifest)
 
 
-def _load_verified_docs(config: Config, state: SourceState) -> dict[str, dict] | str:
-    """Deep-verified canonical part documents by part number, or a defect string.
+def _load_verified_docs(
+    config: Config, state: SourceState, spec: LayerSpec
+) -> dict[str, dict] | str:
+    """Deep-verified canonical documents by layer key, or a defect string.
 
-    Shared by ``validate`` and ``build-vault`` (plan §17.2/.3): every part
-    file's stored ``canonical_hash`` must recompute from its own content —
-    the part AND each nested section/appendix, since nested hashes are
-    excluded from their parent's hash — with provenance matching the
-    accepted snapshot, the filename matching the part it contains, each
-    part appearing exactly once, and the title hash over all part hashes
-    matching the manifest. Tampered, truncated, or stale normalized data
-    fails loudly instead of flowing into vault generation.
+    Shared by ``validate`` and ``build-vault`` (plan §17.2/.3): every file's
+    stored ``canonical_hash`` must recompute from its own content — the root
+    AND each nested hashed document, since nested hashes are excluded from
+    their parent's hash — with provenance matching the accepted snapshot,
+    the filename matching the document it contains, each document appearing
+    exactly once, and the layer hash over all root hashes matching the
+    manifest. Tampered, truncated, or stale normalized data fails loudly
+    instead of flowing into vault generation.
     """
     recorded = state.canonical_hash
-    out_dir = config.normalized_dir / "ecfr"
-    part_files = sorted(out_dir.glob("part-*.json")) if out_dir.is_dir() else []
-    if not part_files:
+    out_dir = spec.out_dir(config)
+    doc_files = sorted(out_dir.glob(spec.file_glob)) if out_dir.is_dir() else []
+    if not doc_files:
         return (
-            f"manifest records canonical_hash but {out_dir} has no part files; "
-            "re-run `far-aim parse ecfr`"
+            f"manifest records canonical_hash but {out_dir} has no {spec.file_noun}; "
+            f"re-run `far-aim {spec.parse_command}`"
         )
     docs: dict[str, dict] = {}
-    part_hashes: dict[str, str] = {}
-    for part_file in part_files:
+    hashes: dict[str, str] = {}
+    for doc_file in doc_files:
         try:
-            doc = json.loads(part_file.read_text(encoding="utf-8"))
+            doc = json.loads(doc_file.read_text(encoding="utf-8"))
         except (OSError, ValueError) as exc:
-            return f"cannot read {part_file}: {exc}"
+            return f"cannot read {doc_file}: {exc}"
         if not isinstance(doc, dict):
-            return f"{part_file}: not a JSON object (found {type(doc).__name__})"
+            return f"{doc_file}: not a JSON object (found {type(doc).__name__})"
         stored = doc.get("canonical_hash")
         # The defect walker is keyed on document_type, so a root object
         # whose type was stripped or mangled would skip its own hash check
         # while its stored hash still feeds the title hash; the file's root
-        # must be a part document.
-        if doc.get("document_type") != cfr_model.DOCUMENT_TYPE_PART:
+        # must be a root document.
+        if doc.get("document_type") not in spec.root_types:
+            allowed = sorted(spec.root_types)
+            expected = repr(allowed[0]) if len(allowed) == 1 else f"one of {allowed}"
             return (
-                f"{part_file}: root document_type {doc.get('document_type')!r} "
-                f"is not {cfr_model.DOCUMENT_TYPE_PART!r}"
+                f"{doc_file}: root document_type {doc.get('document_type')!r} "
+                f"is not {expected}"
             )
-        bad = _first_document_defect(doc, state)
+        bad = _first_document_defect(doc, state, spec)
         if bad is not None:
-            return f"{part_file}: {bad}"
-        number = doc.get("part")
-        expected_name = normalized_part_filename(number) if isinstance(number, str) else None
-        if part_file.name != expected_name:
+            return f"{doc_file}: {bad}"
+        key = spec.doc_key(doc)
+        expected_name = spec.filename(key) if key is not None else None
+        if doc_file.name != expected_name:
             return (
-                f"{part_file}: contains part {number!r} "
+                f"{doc_file}: contains {spec.key_noun} {key!r} "
                 f"(expected filename {expected_name!r})"
             )
-        if number in part_hashes:
-            return f"part {number!r} appears in more than one file"
-        part_hashes[number] = stored
-        docs[number] = doc
-    title_hash = cfr_model.canonical_hash(part_hashes)
+        if key in hashes:
+            return f"{spec.key_noun} {key!r} appears in more than one file"
+        hashes[key] = stored
+        docs[key] = doc
+    title_hash = cfr_model.canonical_hash(hashes)
     if title_hash != recorded:
         return (
-            f"normalized eCFR layer hashes to {title_hash} but the manifest "
-            f"records {recorded}; re-run `far-aim parse ecfr`"
+            f"normalized {spec.label} layer hashes to {title_hash} but the manifest "
+            f"records {recorded}; re-run `far-aim {spec.parse_command}`"
         )
     return docs
 
 
-def _validate_normalized_ecfr(config: Config, manifest: SourceManifest) -> int:
-    state = manifest.sources[ecfr.SOURCE_NAME]
+def _validate_normalized_layer(config: Config, manifest: SourceManifest, spec: LayerSpec) -> int:
+    state = manifest.sources[spec.source_name]
     recorded = state.canonical_hash
-    out_dir = config.normalized_dir / "ecfr"
-    part_files = sorted(out_dir.glob("part-*.json")) if out_dir.is_dir() else []
-    if recorded is None and not part_files:
-        print("note: no normalized eCFR data yet; run `far-aim parse ecfr`.")
+    out_dir = spec.out_dir(config)
+    doc_files = sorted(out_dir.glob(spec.file_glob)) if out_dir.is_dir() else []
+    if recorded is None and not doc_files:
+        print(f"note: no normalized {spec.label} data yet; run `far-aim {spec.parse_command}`.")
         return EXIT_OK
     if recorded is None:
         print(
-            "error: normalized eCFR files exist but the manifest records no "
-            "canonical_hash; re-run `far-aim parse ecfr` (full title)",
+            f"error: normalized {spec.label} files exist but the manifest records no "
+            f"canonical_hash; re-run `far-aim {spec.parse_command}`"
+            + (" (full title)" if spec is ECFR_SPEC else ""),
             file=sys.stderr,
         )
         return EXIT_ERROR
-    result = _load_verified_docs(config, state)
+    result = _load_verified_docs(config, state, spec)
     if isinstance(result, str):
         print(f"error: {result}", file=sys.stderr)
         return EXIT_ERROR
-    print(f"ok: normalized eCFR layer verified ({len(result)} parts, {recorded})")
+    if spec is ECFR_SPEC:
+        print(f"ok: normalized eCFR layer verified ({len(result)} parts, {recorded})")
+    else:
+        print(f"ok: normalized {spec.label} layer verified ({len(result)} documents, {recorded})")
     return EXIT_OK
 
 
+def _aim_layer(config: Config, manifest: SourceManifest) -> generate_build.AimLayer | str | None:
+    """The verified AIM layer with its figure bytes; None when AIM is not parsed yet.
+
+    Figure bytes come from the archived raw snapshot when it is present and
+    verifies; otherwise from the assets already in the vault. Either way each
+    file must hash to the checksum the canonical layer recorded for it.
+    """
+    state = manifest.sources[aim_source.SOURCE_NAME]
+    if state.accepted_version is None or state.canonical_hash is None:
+        return None
+    docs = _load_verified_docs(config, state, AIM_SPEC)
+    if isinstance(docs, str):
+        return docs
+    required = generate_build.aim_asset_hashes(docs)
+    snapshot_figures = config.raw_dir / "aim" / state.accepted_version / aim_source.FIGURES_DIR
+    vault_assets = config.vault_dir / generate_aim_notes.AIM_DIR / generate_aim_notes.ASSETS_DIR
+    assets: dict[str, bytes] = {}
+    for name, sha in sorted(required.items()):
+        data: bytes | None = None
+        for candidate in (snapshot_figures / name, vault_assets / name):
+            try:
+                content = candidate.read_bytes()
+            except OSError:
+                continue
+            if aim_source.sha256_of_bytes(content) == sha:
+                data = content
+                break
+        if data is None:
+            return (
+                f"AIM figure {name!r} ({sha}) is not available: neither the archived "
+                f"snapshot at {snapshot_figures} nor the vault holds it; run `far-aim fetch aim`"
+            )
+        assets[name] = data
+    return generate_build.AimLayer(docs=docs, title_hash=state.canonical_hash, assets=assets)
+
+
+def _vault_has_generated_aim(config: Config) -> bool:
+    """True when generator-owned AIM output (notes or figure assets) is on disk."""
+    vault_aim = config.vault_dir / generate_aim_notes.AIM_DIR
+    if not vault_aim.is_dir():
+        return False
+    assets = vault_aim / generate_aim_notes.ASSETS_DIR
+    if generate_build.read_asset_ledger(assets / generate_build.ASSET_LEDGER):
+        return True
+    return any(generate_build.is_generated_note(p) for p in sorted(vault_aim.rglob("*.md")))
+
+
+def _aim_layer_pending_defect(config: Config, manifest: SourceManifest) -> str | None:
+    """Why the vault's AIM output cannot be reconciled with the manifest right now.
+
+    After ``fetch aim`` accepts a newer edition the manifest's AIM
+    ``canonical_hash`` is cleared until ``parse aim`` publishes the new
+    layer. In that window a FAR-only build would treat every generated AIM
+    note and figure as stale and delete the last known-good AIM output
+    (plan §32.13) — so building and validating refuse instead.
+    """
+    if not _vault_has_generated_aim(config):
+        return None
+    state = manifest.sources[aim_source.SOURCE_NAME]
+    if state.canonical_hash is not None:
+        return None
+    if state.accepted_version is not None:
+        return (
+            f"the vault holds generated AIM notes but the accepted AIM edition "
+            f"{state.accepted_version} has not been parsed yet; run `far-aim parse aim` "
+            "first (building now would delete the existing AIM notes)"
+        )
+    return (
+        "the vault holds generated AIM notes but the manifest records no accepted AIM "
+        "snapshot; run `far-aim fetch aim` and `far-aim parse aim`, or remove "
+        f"{config.vault_dir / generate_aim_notes.AIM_DIR} deliberately"
+    )
+
+
 def _validate_vault(config: Config, manifest: SourceManifest) -> int:
-    """Verify the generated vault byte-matches the canonical layer.
+    """Verify the generated vault byte-matches the canonical layers.
 
     Re-renders the whole plan in memory and compares against disk, making
     "rebuild with unchanged sources produces zero diff" (plan §22) a
@@ -900,6 +1351,7 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
     """
     state = manifest.sources[ecfr.SOURCE_NAME]
     vault_far = config.vault_dir / generate_notes.FAR_DIR
+    vault_aim = config.vault_dir / generate_aim_notes.AIM_DIR
     status_path = config.vault_dir / f"{generate_notes.SOURCE_STATUS_STEM}.md"
     # A vault "exists" only if any generator-owned note does. Directory
     # presence alone proves nothing: `vault/FAR/` holding only curated notes
@@ -907,9 +1359,11 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
     # while a generated Source Status.md with the FAR tree deleted is a
     # damaged build that must fail the missing-note checks below, not pass
     # as "nothing to check".
-    built = (status_path.exists() and generate_build.is_generated_note(status_path)) or (
-        vault_far.is_dir()
-        and any(generate_build.is_generated_note(p) for p in sorted(vault_far.rglob("*.md")))
+    built = (status_path.exists() and generate_build.is_generated_note(status_path)) or any(
+        generate_build.is_generated_note(p)
+        for root in (vault_far, vault_aim)
+        if root.is_dir()
+        for p in sorted(root.rglob("*.md"))
     )
     if not built:
         print("note: no generated vault yet; run `far-aim build-vault`.")
@@ -921,13 +1375,21 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
             file=sys.stderr,
         )
         return EXIT_ERROR
-    docs = _load_verified_docs(config, state)
+    docs = _load_verified_docs(config, state, ECFR_SPEC)
     if isinstance(docs, str):
         print(f"error: {docs}", file=sys.stderr)
         return EXIT_ERROR
+    pending = _aim_layer_pending_defect(config, manifest)
+    if pending is not None:
+        print(f"error: {pending}", file=sys.stderr)
+        return EXIT_ERROR
+    aim = _aim_layer(config, manifest)
+    if isinstance(aim, str):
+        print(f"error: {aim}", file=sys.stderr)
+        return EXIT_ERROR
     try:
         plan = generate_build.plan_vault(
-            docs, state.accepted_version, state.canonical_hash, manifest.sources
+            docs, state.accepted_version, state.canonical_hash, manifest.sources, aim
         )
     except BuildError as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -944,11 +1406,28 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
                 file=sys.stderr,
             )
             return EXIT_ERROR
-    on_disk = sorted(vault_far.rglob("*.md"))
+    on_disk: list[Path] = []
+    for root in (vault_far, vault_aim):
+        if root.is_dir():
+            on_disk.extend(sorted(root.rglob("*.md")))
     if status_path.exists():
         on_disk.append(status_path)
+    assets_root = vault_aim / generate_aim_notes.ASSETS_DIR
+    ledger = generate_build.read_asset_ledger(assets_root / generate_build.ASSET_LEDGER)
+    if assets_root.is_dir():
+        # Only assets the ledger attributes to the generator can be stale;
+        # anything else in the directory is curated and ignored here.
+        on_disk.extend(
+            p
+            for p in sorted(assets_root.iterdir())
+            if p.is_file() and p.suffix != ".md" and p.name in ledger
+        )
     for path in on_disk:
-        if path not in planned and generate_build.is_generated_note(path):
+        if path in planned:
+            continue
+        if (path.parent == assets_root and path.suffix != ".md") or (
+            generate_build.is_generated_note(path)
+        ):
             print(
                 f"error: stale generated note {path} not produced by the "
                 "canonical layer; re-run `far-aim build-vault`",
@@ -959,10 +1438,15 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
     return EXIT_OK
 
 
-def cmd_build_vault(config: Config) -> int:
-    """Generate the Obsidian vault from the verified canonical layer (Phase 3).
+# ---------------------------------------------------------------------------
+# build-vault
+# ---------------------------------------------------------------------------
 
-    Runs under the shared source lock so a concurrent parse cannot swap the
+
+def cmd_build_vault(config: Config) -> int:
+    """Generate the Obsidian vault from the verified canonical layers (Phase 3/4).
+
+    Runs under the shared source lock so a concurrent parse cannot swap a
     normalized layer between verification and rendering. The whole vault is
     planned and verified in memory before any file is written; curated notes
     are never overwritten (plan §32.5, §32.13).
@@ -972,9 +1456,9 @@ def cmd_build_vault(config: Config) -> int:
         print(f"error: source registry missing: {path}", file=sys.stderr)
         return EXIT_ERROR
     try:
-        with ecfr.exclusive_lock(ecfr.fetch_lock_path(config)):
+        with exclusive_lock(fetch_lock_path(config)):
             return _build_vault_locked(config)
-    except ecfr.FetchError as exc:
+    except FetchError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return EXIT_ERROR
     except OSError as exc:
@@ -996,13 +1480,23 @@ def _build_vault_locked(config: Config) -> int:
             file=sys.stderr,
         )
         return EXIT_ERROR
-    docs = _load_verified_docs(config, state)
+    docs = _load_verified_docs(config, state, ECFR_SPEC)
     if isinstance(docs, str):
         print(f"error: {docs}", file=sys.stderr)
         return EXIT_ERROR
+    pending = _aim_layer_pending_defect(config, manifest)
+    if pending is not None:
+        print(f"error: {pending}", file=sys.stderr)
+        return EXIT_ERROR
+    aim = _aim_layer(config, manifest)
+    if isinstance(aim, str):
+        print(f"error: {aim}", file=sys.stderr)
+        return EXIT_ERROR
+    if aim is None:
+        print("note: no accepted AIM canonical layer; vault covers the FAR only.")
     try:
         stats = generate_build.build_vault(
-            config, state.accepted_version, state.canonical_hash, manifest.sources, docs
+            config, state.accepted_version, state.canonical_hash, manifest.sources, docs, aim
         )
     except BuildError as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -1017,6 +1511,11 @@ def _build_vault_locked(config: Config) -> int:
     return EXIT_OK
 
 
+# ---------------------------------------------------------------------------
+# entry point
+# ---------------------------------------------------------------------------
+
+
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     setup_logging(args.verbose)
@@ -1028,8 +1527,15 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_validate(config)
     if args.command == "fetch" and args.corpus == "ecfr":
         return cmd_fetch_ecfr(config, force=args.force)
+    if args.command == "fetch" and args.corpus == "aim":
+        return cmd_fetch_aim(config, force=args.force)
     if args.command == "parse" and args.corpus == "ecfr":
         return cmd_parse_ecfr(config, args.parts)
+    if args.command == "parse" and args.corpus == "aim":
+        if args.parts:
+            print("error: --part applies to `parse ecfr` only", file=sys.stderr)
+            return EXIT_ERROR
+        return cmd_parse_aim(config)
     if args.command == "build-vault":
         return cmd_build_vault(config)
 

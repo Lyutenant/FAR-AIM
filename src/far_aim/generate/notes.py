@@ -410,10 +410,13 @@ def build_source_status(sources: dict[str, object]) -> Note:
         accepted = getattr(state, "accepted_version", None)
         effective = getattr(state, "effective_date", None)
         change = getattr(state, "change", None)
+        if effective and change is not None:
+            edition = "Basic" if change == 0 else f"Change {change}"
+            return f"{edition} — effective {effective}"
         if accepted:
             return accepted
         if effective:
-            return f"Change {change} — {effective}" if change is not None else effective
+            return effective
         return "not yet ingested"
 
     rows = [

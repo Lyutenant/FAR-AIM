@@ -72,5 +72,22 @@ broken links by construction). Rebuilds are idempotent byte-for-byte,
 curated notes are never overwritten, and `far-aim validate` byte-compares
 the vault against an in-memory re-render. Layout, rendering rules, and
 regeneration safety are documented in docs/vault.md.
-Next: Phase 4 (AIM acquisition and parser). Do not start PCG/AI-enrichment
-work before then (plan §31).
+Phase 4 (AIM acquisition, parser, and vault rendering) complete:
+`far-aim fetch aim` discovers the current edition from the FAA publications
+page (cross-checked against the AIM index's own edition summary), downloads
+every chapter/section/appendix page plus all 270 referenced figures into the
+tree-hashed raw snapshot (`data/raw/aim/{date}-change-{n}/`), and records
+it in the manifest; `far-aim parse aim` turns the snapshot into canonical
+chapter/appendix JSON (`data/normalized/aim/`, plus `publication.json` for
+the index page's front matter) — 12 chapters, 48 sections, 432 paragraphs,
+5 appendices, every page (index and chapter pages included) lossless, chapter contents
+cross-checked against section pages — using the same transactional
+publish/recover/verify machinery as the eCFR (`cli.LayerSpec`);
+`far-aim build-vault` renders `vault/AIM/` (498 notes + 270 figure assets,
+embedded, stems/aliases unique across both corpora) and `far-aim validate`
+byte-compares it. Model, grammar and rendering rules: docs/data-model.md,
+docs/validation.md, docs/vault.md, `far_aim.parsers.aim`'s docstring.
+Operational note: accepted AIM snapshots must be archived outside the repo
+(plan §6.2) — the fetcher reminds but does not do it.
+Next: Phase 5 (Pilot/Controller Glossary). Do not start AI-enrichment work
+before Phase 9 (plan §31).

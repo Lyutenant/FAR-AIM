@@ -1,7 +1,16 @@
 {
   "schema_version": 1,
   "sources": {
-    "aim": {},
+    "aim": {
+      "accepted_version": "2026-07-09-change-3",
+      "canonical_hash": "sha256:fa1e70c0331b782179933b34dbdb605aaa6b2bf9b89b5f0692d4efb9e0d97317",
+      "change": 3,
+      "edition_label": "Basic with Change 1, 2 and 3",
+      "effective_date": "2026-07-09",
+      "last_checked_at": "2026-08-30T18:51:34Z",
+      "raw_hash": "sha256:1a342088eb551e65574c7ddd9a3b857f45952ae96a2f33bdb6140a4ba16aca8e",
+      "source_url": "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/index.html"
+    },
     "ecfr_title_14": {
       "accepted_version": "2026-08-19",
       "canonical_hash": "sha256:2879249d3b8fe5b1d21ca0931507050a0ea43d5fcab1628911c50591a6d7a2af",

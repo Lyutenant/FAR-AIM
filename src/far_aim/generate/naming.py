@@ -12,6 +12,10 @@ import re
 # Filename stems must stay portable and unambiguous across filesystems:
 # printable ASCII, no leading/trailing dots or spaces, wikilink-safe.
 STEM_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9 .\-]*$")
+# Vault assets keep the FAA's own figure filenames (underscores allowed); they
+# share the wikilink namespace with note stems, so they are collision-checked
+# alongside them.
+ASSET_NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.\-]*$")
 
 _DIGIT_RUN_RE = re.compile(r"[0-9]+")
 _DIGIT_RUN_SPLIT_RE = re.compile(r"([0-9]+)")
@@ -89,3 +93,32 @@ def natural_key(text: str) -> tuple[object, ...]:
         elif piece:
             key.append((0, piece))
     return tuple(key)
+
+
+# ---------------------------------------------------------------------------
+# AIM (plan §9: ``4-1-9.md`` for paragraphs; container notes carry an ``AIM``
+# prefix so they can never collide with FAR part-local section stems such as
+# part 241's ``4-1``)
+# ---------------------------------------------------------------------------
+
+
+def aim_chapter_folder(chapter: int) -> str:
+    """``4`` → ``Chapter 04`` (zero-padded so folders list in order)."""
+    return f"Chapter {chapter:02d}"
+
+
+def aim_chapter_stem(chapter: int) -> str:
+    return f"AIM Chapter {chapter}"
+
+
+def aim_section_stem(chapter: int, section: int) -> str:
+    return f"AIM {chapter}-{section}"
+
+
+def aim_paragraph_stem(paragraph: str) -> str:
+    """The paragraph number verbatim: ``4-1-9``."""
+    return paragraph
+
+
+def aim_appendix_stem(appendix: int) -> str:
+    return f"AIM Appendix {appendix}"

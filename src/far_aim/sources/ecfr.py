@@ -16,27 +16,50 @@ accepted snapshot exactly (plan §6.2) — losing the local cache is safe.
 
 from __future__ import annotations
 
-import contextlib
-import errno
 import hashlib
 import json
 import logging
 import os
-import re
 import tempfile
 import time
 import xml.etree.ElementTree as ET
-from collections.abc import Callable, Iterator
+from collections.abc import Callable
 from dataclasses import dataclass
-from datetime import UTC, date, datetime
-from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 import httpx
 
-from far_aim import __version__
 from far_aim.config import Config
 from far_aim.manifest import SourceManifest
+from far_aim.sources.common import (
+    RETRY_AFTER_MAX_SECONDS,
+    RETRYABLE_STATUS,
+    TIMESTAMP_RE,
+    TRANSIENT_HTTP_ERRORS,
+    FetchError,
+    RetryableError,
+    Sleep,
+    exclusive_lock,
+    fetch_lock_path,
+    fsync_dir,
+    hash_suffix,
+    is_calendar_date,
+    make_client,
+    retryable_status,
+    retrying,
+    sha256_of,
+    utc_now_iso,
+)
+
+__all__ = [
+    "RETRY_AFTER_MAX_SECONDS",
+    "FetchError",
+    "exclusive_lock",
+    "fetch_lock_path",
+    "fsync_dir",
+    "make_client",
+    "sha256_of",
+]
 
 log = logging.getLogger(__name__)
 
@@ -45,7 +68,6 @@ TITLES_URL = f"{ECFR_BASE_URL}/api/versioner/v1/titles.json"
 TITLE_NUMBER = 14
 SOURCE_NAME = "ecfr_title_14"
 
-USER_AGENT = f"far-aim-vault/{__version__} (FAR/AIM Obsidian knowledge-vault pipeline)"
 
 # Truncation guards (plan §17.1), data-informed: the 2026-08-19 issue is
 # 15,999,434 bytes with 6,363 DIV8 SECTION elements. Anything near these
@@ -55,169 +77,11 @@ MIN_XML_BYTES = 4_000_000
 MIN_SECTION_COUNT = 4_000
 EXPECTED_ROOT_TAG = "ECFR"
 
-RETRY_ATTEMPTS = 4
-RETRY_BACKOFF_SECONDS = 2.0
-RETRYABLE_STATUS = frozenset({429, 500, 502, 503, 504})
-_TRANSIENT_HTTP_ERRORS = (httpx.TransportError, httpx.DecodingError)
-# Upper bound on a server-requested Retry-After wait; anything longer is
-# treated as "come back later" rather than blocking a scheduled job.
-RETRY_AFTER_MAX_SECONDS = 300.0
-
-_DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}")
-_TIMESTAMP_RE = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z")
 _OPTIONAL_DATES = ("latest_amended_on", "up_to_date_as_of")
-
-Sleep = Callable[[float], None]
-
-
-class FetchError(RuntimeError):
-    """Source acquisition failed; nothing was accepted into the manifest."""
-
-
-class _RetryableError(Exception):
-    """Transient transport/server failure worth another attempt.
-
-    ``retry_after`` carries a server-requested minimum delay (seconds) from
-    a ``Retry-After`` header, honored over the default backoff (plan §26).
-    """
-
-    def __init__(self, message: str, *, retry_after: float | None = None) -> None:
-        super().__init__(message)
-        self.retry_after = retry_after
-
-
-def _is_calendar_date(value: object) -> bool:
-    """True for a real ``YYYY-MM-DD`` calendar date (``2026-02-31`` is rejected)."""
-    if not isinstance(value, str) or not _DATE_RE.fullmatch(value):
-        return False
-    try:
-        date.fromisoformat(value)
-    except ValueError:
-        return False
-    return True
-
-
-def _parse_retry_after(response: httpx.Response) -> float | None:
-    """Seconds to wait per ``Retry-After`` (delta-seconds or HTTP-date), if present."""
-    raw = response.headers.get("retry-after")
-    if raw is None:
-        return None
-    raw = raw.strip()
-    seconds: float | None = None
-    if raw.isdigit():
-        seconds = float(raw)
-    else:
-        try:
-            when = parsedate_to_datetime(raw)
-        except (TypeError, ValueError):
-            log.warning("ignoring unparseable Retry-After header: %r", raw)
-            return None
-        if when.tzinfo is None:
-            when = when.replace(tzinfo=UTC)
-        seconds = (when - datetime.now(UTC)).total_seconds()
-    return min(max(seconds, 0.0), RETRY_AFTER_MAX_SECONDS)
-
-
-def _retryable_status(response: httpx.Response) -> _RetryableError:
-    return _RetryableError(
-        f"HTTP {response.status_code}", retry_after=_parse_retry_after(response)
-    )
 
 
 def full_title14_url(version: str) -> str:
     return f"{ECFR_BASE_URL}/api/versioner/v1/full/{version}/title-{TITLE_NUMBER}.xml"
-
-
-def make_client() -> httpx.Client:
-    """Polite HTTP client (plan §26): identifying User-Agent, sane timeouts."""
-    return httpx.Client(
-        headers={"User-Agent": USER_AGENT},
-        timeout=httpx.Timeout(connect=10.0, read=120.0, write=30.0, pool=10.0),
-        follow_redirects=True,
-    )
-
-
-def _utc_now_iso() -> str:
-    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-
-# Errors meaning "this platform/filesystem cannot fsync a directory" — not
-# durability failures. Anything else (EIO, ENOSPC, ...) must abort acceptance.
-_FSYNC_DIR_UNSUPPORTED = frozenset(
-    {errno.EINVAL, errno.ENOTSUP, errno.EOPNOTSUPP, errno.EBADF, errno.EACCES, errno.EPERM}
-)
-
-
-def fsync_dir(path: Path) -> None:
-    """Make renames/creates inside ``path`` durable (POSIX rename semantics).
-
-    A renamed file is only guaranteed to survive power loss once its parent
-    directory entry is synced. Platforms that cannot open or fsync a
-    directory are tolerated; real I/O errors propagate so acceptance fails
-    closed instead of committing a manifest over an unconfirmed rename.
-    """
-    try:
-        fd = os.open(path, os.O_RDONLY)
-    except OSError as exc:
-        if exc.errno in _FSYNC_DIR_UNSUPPORTED:
-            return
-        raise
-    try:
-        os.fsync(fd)
-    except OSError as exc:
-        if exc.errno not in _FSYNC_DIR_UNSUPPORTED:
-            raise
-    finally:
-        os.close(fd)
-
-
-@contextlib.contextmanager
-def exclusive_lock(lock_path: Path) -> Iterator[None]:
-    """Exclusive, non-blocking inter-process lock around a fetch or parse.
-
-    Overlapping operations would race on the manifest's read-modify-write
-    and on the snapshot/normalized directories; the loser fails closed
-    immediately instead of publishing the winner's bytes under its own
-    checksum.
-    """
-    lock_path.parent.mkdir(parents=True, exist_ok=True)
-    fd = os.open(lock_path, os.O_RDWR | os.O_CREAT, 0o644)
-    try:
-        try:
-            import fcntl
-
-            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except ImportError:  # pragma: no cover - Windows
-            import msvcrt
-
-            msvcrt.locking(fd, msvcrt.LK_NBLCK, 1)
-        except OSError as exc:
-            raise FetchError(
-                f"another far-aim fetch or parse is already in progress (lock {lock_path} held); "
-                "wait for it to finish and re-run"
-            ) from exc
-        yield
-    finally:
-        os.close(fd)  # releases the lock
-
-
-def _retrying(operation, *, what: str, sleep: Sleep):
-    last_error: _RetryableError | None = None
-    for attempt in range(RETRY_ATTEMPTS):
-        if attempt:
-            delay = RETRY_BACKOFF_SECONDS * 2 ** (attempt - 1)
-            if last_error is not None and last_error.retry_after is not None:
-                delay = max(delay, last_error.retry_after)
-            log.info(
-                "%s: retrying in %.0fs (attempt %d/%d)", what, delay, attempt + 1, RETRY_ATTEMPTS
-            )
-            sleep(delay)
-        try:
-            return operation()
-        except _RetryableError as exc:
-            last_error = exc
-            log.warning("%s: attempt %d failed: %s", what, attempt + 1, exc)
-    raise FetchError(f"{what} failed after {RETRY_ATTEMPTS} attempts: {last_error}") from last_error
 
 
 @dataclass(frozen=True)
@@ -237,12 +101,12 @@ def discover_title14(client: httpx.Client, *, sleep: Sleep | None = None) -> Tit
     def attempt() -> object:
         try:
             response = client.get(TITLES_URL)
-        except _TRANSIENT_HTTP_ERRORS as exc:
-            raise _RetryableError(str(exc)) from exc
+        except TRANSIENT_HTTP_ERRORS as exc:
+            raise RetryableError(str(exc)) from exc
         except httpx.HTTPError as exc:
             raise FetchError(f"HTTP client error fetching {TITLES_URL}: {exc}") from exc
         if response.status_code in RETRYABLE_STATUS:
-            raise _retryable_status(response)
+            raise retryable_status(response)
         if response.status_code != 200:
             raise FetchError(f"eCFR titles endpoint returned HTTP {response.status_code}")
         try:
@@ -255,10 +119,10 @@ def discover_title14(client: httpx.Client, *, sleep: Sleep | None = None) -> Tit
         # finish; fail closed if it never does (plan §32.13).
         meta = payload.get("meta") if isinstance(payload, dict) else None
         if isinstance(meta, dict) and meta.get("import_in_progress"):
-            raise _RetryableError("eCFR import in progress (meta.import_in_progress=true)")
+            raise RetryableError("eCFR import in progress (meta.import_in_progress=true)")
         return payload
 
-    payload = _retrying(attempt, what="eCFR titles.json", sleep=sleep)
+    payload = retrying(attempt, what="eCFR titles.json", sleep=sleep)
 
     titles = payload.get("titles") if isinstance(payload, dict) else None
     if not isinstance(titles, list):
@@ -271,7 +135,7 @@ def discover_title14(client: httpx.Client, *, sleep: Sleep | None = None) -> Tit
     if entry.get("reserved"):
         raise FetchError(f"eCFR reports Title {TITLE_NUMBER} as reserved; refusing to proceed")
     issue_date = entry.get("latest_issue_date")
-    if not _is_calendar_date(issue_date):
+    if not is_calendar_date(issue_date):
         raise FetchError(
             f"Title {TITLE_NUMBER} 'latest_issue_date' is missing or not a valid "
             f"calendar date: {issue_date!r}"
@@ -279,21 +143,13 @@ def discover_title14(client: httpx.Client, *, sleep: Sleep | None = None) -> Tit
 
     def optional_date(key: str) -> str | None:
         value = entry.get(key)
-        return value if _is_calendar_date(value) else None
+        return value if is_calendar_date(value) else None
 
     return TitleDiscovery(
         latest_issue_date=issue_date,
         latest_amended_on=optional_date("latest_amended_on"),
         up_to_date_as_of=optional_date("up_to_date_as_of"),
     )
-
-
-def sha256_of(path: Path) -> str:
-    hasher = hashlib.sha256()
-    with path.open("rb") as fh:
-        while chunk := fh.read(1 << 20):
-            hasher.update(chunk)
-    return f"sha256:{hasher.hexdigest()}"
 
 
 def _download_xml(
@@ -305,7 +161,7 @@ def _download_xml(
         try:
             with client.stream("GET", url) as response:
                 if response.status_code in RETRYABLE_STATUS:
-                    raise _retryable_status(response)
+                    raise retryable_status(response)
                 if response.status_code != 200:
                     raise FetchError(
                         f"eCFR full-title endpoint returned HTTP {response.status_code}"
@@ -336,20 +192,20 @@ def _download_xml(
                             f"malformed Content-Length header from {url}: {declared!r}"
                         ) from exc
                     if expected != written:
-                        raise _RetryableError(
+                        raise RetryableError(
                             f"truncated transfer: got {written} of {expected} bytes"
                         )
                 if written == 0:
                     raise FetchError(f"empty response from {url}")
                 return f"sha256:{hasher.hexdigest()}", written
-        except _TRANSIENT_HTTP_ERRORS as exc:
+        except TRANSIENT_HTTP_ERRORS as exc:
             # Transport failures and corrupt/truncated compressed bodies
             # (DecodingError) are both worth another attempt.
-            raise _RetryableError(str(exc)) from exc
+            raise RetryableError(str(exc)) from exc
         except httpx.HTTPError as exc:
             raise FetchError(f"HTTP client error fetching {url}: {exc}") from exc
 
-    return _retrying(attempt, what=f"eCFR Title {TITLE_NUMBER} download", sleep=sleep)
+    return retrying(attempt, what=f"eCFR Title {TITLE_NUMBER} download", sleep=sleep)
 
 
 def _validate_title14_xml(path: Path) -> int:
@@ -430,13 +286,13 @@ def metadata_intact(
         and data.get("source_version") == version
         and data.get("url") == url
         and isinstance(retrieved_at, str)
-        and _TIMESTAMP_RE.fullmatch(retrieved_at) is not None
+        and TIMESTAMP_RE.fullmatch(retrieved_at) is not None
         and data.get("raw_hash") == raw_hash
         and data.get("byte_count") == byte_count
         and isinstance(section_count, int)
         and not isinstance(section_count, bool)
         and section_count >= MIN_SECTION_COUNT
-        and all(data.get(k) is None or _is_calendar_date(data.get(k)) for k in _OPTIONAL_DATES)
+        and all(data.get(k) is None or is_calendar_date(data.get(k)) for k in _OPTIONAL_DATES)
     )
 
 
@@ -524,12 +380,8 @@ def _manifest_records(manifest_path: Path, *, raw_hash: str) -> bool:
         return False
 
 
-def _hash_suffix(raw_hash: str) -> str:
-    return raw_hash.removeprefix("sha256:")[:12]
-
-
 def _superseded_path(xml_path: Path, raw_hash: str) -> Path:
-    return xml_path.with_name(f"title-14.xml.superseded-{_hash_suffix(raw_hash)}")
+    return xml_path.with_name(f"title-14.xml.superseded-{hash_suffix(raw_hash)}")
 
 
 def _restore_known_good(xml_path: Path, known_good_hash: str) -> bool:
@@ -546,7 +398,7 @@ def _restore_known_good(xml_path: Path, known_good_hash: str) -> bool:
         return False
     if xml_path.exists():
         current_hash = sha256_of(xml_path)
-        unaccepted = xml_path.with_name(f"title-14.xml.unaccepted-{_hash_suffix(current_hash)}")
+        unaccepted = xml_path.with_name(f"title-14.xml.unaccepted-{hash_suffix(current_hash)}")
         os.replace(xml_path, unaccepted)
         log.warning(
             "archive %s held unaccepted bytes (%s); moved to %s", xml_path, current_hash, unaccepted
@@ -573,7 +425,7 @@ def fetch_title14(
     *,
     force: bool = False,
     sleep: Sleep | None = None,
-    now: Callable[[], str] = _utc_now_iso,
+    now: Callable[[], str] = utc_now_iso,
 ) -> FetchResult:
     """Check → download → archive raw → hash → update manifest (plan §6).
 
@@ -590,11 +442,6 @@ def fetch_title14(
         return _fetch_title14_locked(
             config, client, manifest_path=manifest_path, force=force, sleep=sleep, now=now
         )
-
-
-def fetch_lock_path(config: Config) -> Path:
-    """Lock file serializing fetches and parses that update the shared manifest."""
-    return config.manifests_dir / ".sources.lock"
 
 
 def _fetch_title14_locked(

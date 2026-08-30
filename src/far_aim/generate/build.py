@@ -11,6 +11,8 @@ says ``generated: true``.
 from __future__ import annotations
 
 import contextlib
+import hashlib
+import json
 import os
 import re
 import shutil
@@ -19,13 +21,24 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from far_aim.config import Config
-from far_aim.generate import BuildError, naming, notes
+from far_aim.generate import BuildError, aim_notes, naming, notes
+from far_aim.generate.aim_markdown import collect_asset_names
 from far_aim.generate.frontmatter import emit_frontmatter, frontmatter_defect
+from far_aim.models import aim as aim_model
 from far_aim.models import cfr as cfr_model
+from far_aim.parsers import aim as aim_parser
 from far_aim.parsers import ecfr as ecfr_parser
 
 _WIKILINK_TARGET_RE = re.compile(r"\[\[([^\]|#]+)")
 _GENERATED_MARKER = "generated: true"
+# Binary assets carry no frontmatter, so generator ownership is recorded in
+# a ledger inside the assets directory: filename → sha256 of the bytes the
+# generator wrote. Only files the ledger lists (with unchanged bytes) are
+# ever deleted or overwritten; anything else in the directory is curated.
+ASSET_LEDGER = ".generated.json"
+# The ledger proves its own ownership the way notes do with frontmatter: a
+# file at the reserved path without this marker is curated and never touched.
+_LEDGER_MARKER = "far_aim_asset_ledger"
 
 
 @dataclass
@@ -37,6 +50,92 @@ class Registry:
     aliases: dict[str, list[str]] = field(default_factory=dict)
     section_count: int = 0
     appendix_count: int = 0
+    # AIM: id → (stem, display) link targets, note count, asset filenames.
+    aim_targets: dict[str, tuple[str, str]] = field(default_factory=dict)
+    aim_note_count: int = 0
+    aim_assets: set[str] = field(default_factory=set)
+
+
+@dataclass(frozen=True)
+class AimLayer:
+    """The verified canonical AIM layer plus the archived figure bytes."""
+
+    docs: dict[str, dict]
+    title_hash: str
+    assets: dict[str, bytes]
+
+
+def _iter_aim_documents(docs: dict[str, dict]):
+    """(kind, document) for every AIM note-bearing document, in citation order."""
+    for key in sorted(docs, key=_aim_doc_key):
+        doc = docs[key]
+        kind = doc.get("document_type")
+        if kind == aim_model.DOCUMENT_TYPE_CHAPTER:
+            yield "chapter", doc
+            for section in doc["sections"]:
+                yield "section", section
+                for para in section["paragraphs"]:
+                    yield "paragraph", para
+        elif kind == aim_model.DOCUMENT_TYPE_APPENDIX:
+            yield "appendix", doc
+        elif kind == aim_model.DOCUMENT_TYPE_PUBLICATION:
+            continue  # rendered into the AIM index note, not a note of its own
+        else:
+            raise BuildError(f"unknown AIM document type {kind!r} in {key!r}")
+
+
+def _aim_doc_key(key: str) -> tuple[int, int]:
+    doc_kind, _, number = key.partition("-")
+    if doc_kind == "publication":
+        return (-1, 0)
+    return (0 if doc_kind == "chapter" else 1, int(number))
+
+
+def aim_asset_hashes(docs: dict[str, dict]) -> dict[str, str]:
+    """Figure asset filename → sha256 recorded in the canonical AIM layer.
+
+    The same file referenced with two different checksums is a defect: the
+    vault can hold only one asset under that name.
+    """
+    hashes: dict[str, str] = {}
+
+    def record(src: str, sha: str) -> None:
+        name = src.rsplit("/", 1)[-1]
+        if hashes.setdefault(name, sha) != sha:
+            raise BuildError(f"AIM figure {name!r} is referenced with two different checksums")
+
+    def walk(blocks: list[dict]) -> None:
+        for block in blocks:
+            kind = block["type"]
+            if kind == "figure":
+                record(block["image"]["source"]["src"], block["image"]["sha256"])
+            elif kind == "image":
+                record(block["source"]["src"], block["sha256"])
+            elif kind == "list":
+                for item in block["items"]:
+                    walk(item["blocks"])
+            elif kind == "note":
+                walk(block["blocks"])
+            elif kind == "table":
+                for rows in (block["header_rows"], block["rows"], block["foot_rows"]):
+                    for row in rows:
+                        for cell in row:
+                            walk(cell["blocks"])
+
+    for kind, doc in _iter_aim_documents(docs):
+        if kind != "chapter":
+            walk(doc["content"])
+    for blocks in _publication_blocks(docs):
+        walk(blocks)
+    return hashes
+
+
+def _publication_blocks(docs: dict[str, dict]) -> list[list[dict]]:
+    """Block lists of the ``aim_publication`` document (index front matter), if any."""
+    for doc in docs.values():
+        if doc.get("document_type") == aim_model.DOCUMENT_TYPE_PUBLICATION:
+            return [doc["description"], doc["summary"]]
+    return []
 
 
 def _iter_documents(part_doc: dict):
@@ -60,8 +159,15 @@ def _iter_documents(part_doc: dict):
     yield from walk(part_doc["children"])
 
 
-def _add_stem(registry: Registry, seen: dict[str, str], stem: str, parts: tuple[str, ...]) -> None:
-    if not naming.STEM_RE.match(stem) or stem.endswith((" ", ".")):
+def _add_stem(
+    registry: Registry,
+    seen: dict[str, str],
+    stem: str,
+    parts: tuple[str, ...],
+    *,
+    pattern: re.Pattern[str] = naming.STEM_RE,
+) -> None:
+    if not pattern.match(stem) or stem.endswith((" ", ".")):
         raise BuildError(f"filename stem violates naming policy: {stem!r}")
     folded = stem.casefold()
     if folded in seen:
@@ -70,8 +176,12 @@ def _add_stem(registry: Registry, seen: dict[str, str], stem: str, parts: tuple[
     registry.stems[stem] = parts
 
 
-def build_registry(docs: dict[str, dict]) -> Registry:
-    """Pass 1: stems, link targets, and alias candidates for every note."""
+def build_registry(docs: dict[str, dict], aim: AimLayer | None = None) -> Registry:
+    """Pass 1: stems, link targets, and alias candidates for every note.
+
+    Both corpora share one namespace: filename stems and aliases are checked
+    for uniqueness across FAR and AIM together (plan §17.4).
+    """
     registry = Registry()
     seen: dict[str, str] = {}
     citation_aliases: dict[str, list[str]] = {}
@@ -81,6 +191,8 @@ def build_registry(docs: dict[str, dict]) -> Registry:
         registry, seen, notes.TITLE_INDEX_STEM, (notes.FAR_DIR, f"{notes.TITLE_INDEX_STEM}.md")
     )
     _add_stem(registry, seen, notes.SOURCE_STATUS_STEM, (f"{notes.SOURCE_STATUS_STEM}.md",))
+    if aim is not None:
+        _register_aim(registry, seen, citation_aliases, heading_candidates, aim)
     for part, doc in docs.items():
         folder = naming.part_folder_name(part)
         stem = naming.part_index_stem(part)
@@ -111,6 +223,63 @@ def build_registry(docs: dict[str, dict]) -> Registry:
 
     _resolve_alias_collisions(registry, citation_aliases, heading_candidates)
     return registry
+
+
+def _register_aim(
+    registry: Registry,
+    seen: dict[str, str],
+    citation_aliases: dict[str, list[str]],
+    heading_candidates: dict[str, str],
+    aim: AimLayer,
+) -> None:
+    index_stem = aim_notes.AIM_INDEX_STEM
+    _add_stem(registry, seen, index_stem, (aim_notes.AIM_DIR, f"{index_stem}.md"))
+    registry.aim_note_count += 1
+    for kind, doc in _iter_aim_documents(aim.docs):
+        registry.aim_note_count += 1
+        if kind == "chapter":
+            stem = naming.aim_chapter_stem(doc["chapter"])
+            folder = naming.aim_chapter_folder(doc["chapter"])
+            _add_stem(registry, seen, stem, (aim_notes.AIM_DIR, folder, f"{stem}.md"))
+            registry.aim_targets[doc["id"]] = (stem, aim_notes.chapter_display(doc))
+            citation_aliases[doc["id"]] = []
+        elif kind == "section":
+            stem = naming.aim_section_stem(doc["chapter"], doc["section"])
+            folder = naming.aim_chapter_folder(doc["chapter"])
+            _add_stem(registry, seen, stem, (aim_notes.AIM_DIR, folder, f"{stem}.md"))
+            registry.aim_targets[doc["id"]] = (stem, aim_notes.section_display(doc))
+            citation_aliases[doc["id"]] = []
+            collect_asset_names(doc["content"], registry.aim_assets)
+        elif kind == "paragraph":
+            stem = naming.aim_paragraph_stem(doc["paragraph"])
+            folder = naming.aim_chapter_folder(doc["chapter"])
+            _add_stem(registry, seen, stem, (aim_notes.AIM_DIR, folder, f"{stem}.md"))
+            registry.aim_targets[doc["id"]] = (stem, aim_notes.paragraph_display(doc))
+            citation_aliases[doc["id"]] = [f"AIM {doc['paragraph']}"]
+            collect_asset_names(doc["content"], registry.aim_assets)
+        else:
+            stem = naming.aim_appendix_stem(doc["appendix"])
+            _add_stem(
+                registry, seen, stem, (aim_notes.AIM_DIR, aim_notes.APPENDICES_DIR, f"{stem}.md")
+            )
+            registry.aim_targets[doc["id"]] = (stem, aim_notes.appendix_display(doc))
+            citation_aliases[doc["id"]] = []
+            collect_asset_names(doc["content"], registry.aim_assets)
+        heading_candidates[doc["id"]] = doc["heading"]
+    for blocks in _publication_blocks(aim.docs):
+        collect_asset_names(blocks, registry.aim_assets)
+    missing = sorted(registry.aim_assets - set(aim.assets))
+    if missing:
+        raise BuildError(f"AIM figures missing from the archived snapshot: {missing[:5]}")
+    # Asset filenames are link targets too (``![[file]]`` embeds).
+    for name in sorted(registry.aim_assets):
+        _add_stem(
+            registry,
+            seen,
+            name,
+            (aim_notes.AIM_DIR, aim_notes.ASSETS_DIR, name),
+            pattern=naming.ASSET_NAME_RE,
+        )
 
 
 def _resolve_alias_collisions(
@@ -150,10 +319,18 @@ def _assemble(note: notes.Note) -> bytes:
 
 
 def plan_vault(
-    docs: dict[str, dict], version: str, title_hash: str, sources: dict[str, object]
+    docs: dict[str, dict],
+    version: str,
+    title_hash: str,
+    sources: dict[str, object],
+    aim: AimLayer | None = None,
 ) -> dict[tuple[str, ...], bytes]:
-    """Render the complete vault in memory and verify it (nothing written)."""
-    registry = build_registry(docs)
+    """Render the complete vault in memory and verify it (nothing written).
+
+    The plan maps vault-relative path parts to bytes: Markdown notes plus,
+    when an AIM layer is given, the archived figure assets it embeds.
+    """
+    registry = build_registry(docs, aim)
     plan: dict[tuple[str, ...], bytes] = {}
 
     def add(note: notes.Note) -> None:
@@ -173,24 +350,107 @@ def plan_vault(
     add(notes.build_title_index(docs, version, title_hash))
     add(notes.build_source_status(sources))
 
-    _verify_plan(plan, registry, docs)
+    if aim is not None:
+        targets = registry.aim_targets
+        for kind, doc in _iter_aim_documents(aim.docs):
+            aliases = registry.aliases[doc["id"]]
+            if kind == "chapter":
+                add(aim_notes.build_chapter_note(doc, aliases))
+            elif kind == "section":
+                add(aim_notes.build_section_note(doc, aliases, targets))
+            elif kind == "paragraph":
+                add(aim_notes.build_paragraph_note(doc, aliases, targets))
+            else:
+                add(aim_notes.build_appendix_note(doc, aliases, targets))
+        add(aim_notes.build_aim_index(aim.docs, aim.title_hash))
+        generated = {name: aim.assets[name] for name in sorted(registry.aim_assets)}
+        for name, data in generated.items():
+            plan[(aim_notes.AIM_DIR, aim_notes.ASSETS_DIR, name)] = data
+        plan[(aim_notes.AIM_DIR, aim_notes.ASSETS_DIR, ASSET_LEDGER)] = asset_ledger_bytes(
+            generated
+        )
+
+    _verify_plan(plan, registry, docs, aim)
     return plan
 
 
+def is_note_path(parts: tuple[str, ...]) -> bool:
+    return parts[-1].endswith(".md")
+
+
+def _sha256(data: bytes) -> str:
+    return f"sha256:{hashlib.sha256(data).hexdigest()}"
+
+
+def asset_ledger_bytes(assets: dict[str, bytes]) -> bytes:
+    """Deterministic ledger content for the generated assets."""
+    ledger = {name: _sha256(data) for name, data in sorted(assets.items())}
+    payload = {_LEDGER_MARKER: 1, "generated": ledger}
+    return (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
+
+
+def _load_ledger(path: Path) -> dict | None:
+    """The parsed generator-owned ledger at ``path``, or None (absent, unreadable,
+    or a file without the ownership marker — i.e. curated)."""
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    if not isinstance(data, dict) or data.get(_LEDGER_MARKER) != 1:
+        return None
+    return data
+
+
+def is_generated_ledger(path: Path) -> bool:
+    """True only for a ledger the generator provably wrote."""
+    return _load_ledger(path) is not None
+
+
+def read_asset_ledger(path: Path) -> dict[str, str]:
+    """Filename → sha256 recorded by an earlier build; empty unless the file
+    is a generator-owned ledger."""
+    data = _load_ledger(path)
+    generated = data.get("generated") if data is not None else None
+    if not isinstance(generated, dict):
+        return {}
+    return {k: v for k, v in generated.items() if isinstance(k, str) and isinstance(v, str)}
+
+
+def _file_sha256(path: Path) -> str | None:
+    try:
+        return _sha256(path.read_bytes())
+    except OSError:
+        return None
+
+
 def _verify_plan(
-    plan: dict[tuple[str, ...], bytes], registry: Registry, docs: dict[str, dict]
+    plan: dict[tuple[str, ...], bytes],
+    registry: Registry,
+    docs: dict[str, dict],
+    aim: AimLayer | None,
 ) -> None:
-    """Phase 3 exit-criteria gates, enforced before any write."""
+    """Phase 3/4 exit-criteria gates, enforced before any write."""
     expected = len(docs) + registry.section_count + registry.appendix_count + 2
+    if aim is not None:
+        expected += registry.aim_note_count + len(registry.aim_assets) + 1  # + ledger
     if len(plan) != expected:
-        raise BuildError(f"planned {len(plan)} notes, expected {expected}")
+        raise BuildError(f"planned {len(plan)} files, expected {expected}")
     parsed_sections = sum(ecfr_parser.count_sections(doc) for doc in docs.values())
     if registry.section_count != parsed_sections:
         raise BuildError(
             f"walked {registry.section_count} sections but the canonical layer "
             f"holds {parsed_sections}"
         )
+    if aim is not None:
+        parsed = sum(aim_parser.count_paragraphs(doc) for doc in aim.docs.values())
+        walked = sum(1 for kind, _ in _iter_aim_documents(aim.docs) if kind == "paragraph")
+        if walked != parsed:
+            raise BuildError(
+                f"walked {walked} AIM paragraphs but the canonical layer holds {parsed}"
+            )
     for parts, data in plan.items():
+        if not is_note_path(parts):
+            continue
         body = data.decode("utf-8")
         for target in _WIKILINK_TARGET_RE.findall(body):
             if target not in registry.stems:
@@ -274,16 +534,44 @@ def sync_vault(config: Config, plan: dict[tuple[str, ...], bytes]) -> SyncStats:
     vault = config.vault_dir
     paths = {vault.joinpath(*parts): data for parts, data in plan.items()}
 
+    assets_root = vault / aim_notes.AIM_DIR / aim_notes.ASSETS_DIR
+    ledger_path = assets_root / ASSET_LEDGER
+    # What the previous build wrote into the assets directory: the only files
+    # there the generator may overwrite or delete (plan §32.5).
+    previous_ledger = read_asset_ledger(ledger_path)
+
+    def owned_asset(path: Path) -> bool:
+        recorded = previous_ledger.get(path.name)
+        return recorded is not None and _file_sha256(path) == recorded
+
     # Refuse before writing anything if a curated file sits at a generated
-    # path — regeneration must never overwrite user-authored notes.
+    # path — regeneration must never overwrite user-authored material. Notes
+    # prove ownership by frontmatter; assets by the ledger (bytes unchanged
+    # since the generator wrote them). An asset that merely happens to hold
+    # the same bytes is *not* adopted: recording it in the ledger would let a
+    # later edition overwrite or prune a file the user placed there.
     for path, data in sorted(paths.items()):
-        if path.exists() and path.read_bytes() != data and not is_generated_note(path):
+        if not path.exists():
+            continue
+        if path.suffix == ".md":
+            if path.read_bytes() != data and not is_generated_note(path):
+                raise BuildError(
+                    f"curated note at generated path {path}; move or rename it, then rebuild"
+                )
+        elif path == ledger_path:
+            if path.read_bytes() != data and not is_generated_ledger(path):
+                raise BuildError(
+                    f"curated file at the reserved asset-ledger path {path}; move or rename "
+                    "it, then rebuild"
+                )
+        elif path.parent == assets_root and not owned_asset(path):
             raise BuildError(
-                f"curated note at generated path {path}; move or rename it, then rebuild"
+                f"curated or modified file at generated asset path {path}; move or rename "
+                "it, then rebuild"
             )
 
     stats = SyncStats()
-    owned_roots = [vault / notes.FAR_DIR]
+    owned_roots = [vault / notes.FAR_DIR, vault / aim_notes.AIM_DIR]
     vault.mkdir(parents=True, exist_ok=True)
     backup_root = Path(tempfile.mkdtemp(dir=vault, prefix=".sync-backup-"))
     # (action, live path, backup path or None) — replayed in reverse on failure.
@@ -310,10 +598,32 @@ def sync_vault(config: Config, plan: dict[tuple[str, ...], bytes]) -> SyncStats:
         status_path = vault / f"{notes.SOURCE_STATUS_STEM}.md"
         if status_path.exists():
             candidates.append(status_path)
+        if assets_root.is_dir():
+            candidates.extend(
+                p for p in sorted(assets_root.iterdir()) if p.is_file() and p.suffix != ".md"
+            )
         for path in candidates:
             if path in paths:
                 continue
-            if is_generated_note(path):
+            if path.parent == assets_root and path.suffix != ".md":
+                if path == ledger_path:
+                    if not is_generated_ledger(path):
+                        stats.warnings.append(
+                            f"curated file at the reserved asset-ledger path kept: {path}"
+                        )
+                        continue
+                    generated_stale = True
+                elif owned_asset(path):
+                    generated_stale = True
+                elif path.name in previous_ledger:
+                    stats.warnings.append(f"modified generated asset kept: {path}")
+                    continue
+                else:
+                    stats.warnings.append(f"curated file inside generated assets kept: {path}")
+                    continue
+            else:
+                generated_stale = is_generated_note(path)
+            if generated_stale:
                 backup = backup_root / f"{len(journal)}-{path.name}"
                 os.rename(path, backup)
                 journal.append(("delete", path, backup))
@@ -340,8 +650,13 @@ def sync_vault(config: Config, plan: dict[tuple[str, ...], bytes]) -> SyncStats:
 
 
 def build_vault(
-    config: Config, version: str, title_hash: str, sources: dict[str, object], docs: dict[str, dict]
+    config: Config,
+    version: str,
+    title_hash: str,
+    sources: dict[str, object],
+    docs: dict[str, dict],
+    aim: AimLayer | None = None,
 ) -> SyncStats:
     """Plan, verify, and sync the whole vault; raises BuildError on any defect."""
-    plan = plan_vault(docs, version, title_hash, sources)
+    plan = plan_vault(docs, version, title_hash, sources, aim)
     return sync_vault(config, plan)

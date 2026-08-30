@@ -183,5 +183,116 @@ twice), and the title hash must match the manifest — so tampered,
 duplicated, or stale normalized data fails loudly before vault
 generation.
 
-Remaining categories land with their corresponding phases (AIM/PCG parsers:
-Phase 4/5; links: Phase 6; change gates: Phase 8).
+## Current implementation status (Phase 4)
+
+`far-aim fetch aim` enforces category 1 for the FAA AIM HTML edition. The
+current edition is discovered from the FAA publications landing page
+(`sources.faa_publications`: exactly one HTML listing for the AIM with a
+parseable effective date, else discovery fails closed) and cross-checked
+against the edition summary printed on the AIM index page itself — a
+disagreement means the FAA is mid-update and nothing is accepted. The page
+set comes from the index navigation — where any local link the page
+grammar does not recognize (a renamed section, a new kind of appendix)
+fails the fetch rather than being skipped — and must pass a structural gate: no
+two filenames may denote the same chapter/section/appendix (`chap_4.html`
+vs `chap_04.html`), chapter pages must match the chapters that have
+section pages, each chapter's sections must be contiguous, and the
+baseline chapters 0–11 and appendices 1–5 must all be present — a
+partially rendered index that drops a whole chapter would otherwise clear
+the aggregate floors. Every page must parse as strictly well-formed HTML
+(every element closed in order, document ending at the root — the FAA's
+DITA output is; a truncated response that still carries every marker is
+rejected here rather than accepted with its tail missing) and be HTML with a main content
+region (section/appendix pages a content body, chapter pages a contents
+list), every figure referenced from a page's `<main>` must live under the
+edition's `images/` directory (anything else is a fetch failure, not a
+dropped figure) and download as an image, and data-informed floors apply
+(≥ 40 pages, ≥ 300 numbered paragraphs, ≥ 150 distinct figures; the
+2026-07-09 Change 3 edition has 66 pages, 432 paragraphs, 270 figures).
+Content-Length agreement and retries with backoff apply as for the eCFR. The
+snapshot (`pages/`, `figures/`, `metadata.json` with per-file checksums) is
+archived under `data/raw/aim/{effective-date}-change-{n}/`; the manifest
+`raw_hash` is a tree hash over all file checksums, and `verify_snapshot`
+re-checks every file (no missing, extra, or altered files; recorded sizes,
+byte total, page/figure/paragraph counts recomputed from the archived files
+and held to the floors, since `metadata.json` sits outside the tree hash)
+— on the freshly downloaded snapshot before it is accepted, before a
+cached snapshot is trusted, before parsing, and when an accepted archive is
+reconciled after an interrupted acceptance. Filenames differing only by
+case are refused (they could not be archived faithfully on every
+filesystem). A re-fetch of an accepted
+edition whose bytes differ is quarantined (`{version}.mismatch-<hash>`) and
+refused without `--force`; a superseded snapshot is preserved as
+`{version}.superseded-<hash>` until the manifest commits — even when the
+content hash is unchanged, since its `metadata.json` is the last known-good
+provenance — and rolled back if the commit verifiably did not happen; an older edition than the accepted one is
+refused without `--force`. A cached snapshot is reported as
+verified only if its `metadata.json` provenance (label, index URL — outside
+the tree hash) still says what the manifest accepted; otherwise the archive
+was altered and the fetch fails (restore it, or `--force`). A listing whose
+label or index URL the FAA has since changed (same date and change number)
+is not a silent no-op either — with or without a cache — and
+`check --remote` reports it as an error rather than "up to date": the
+manifest keeps the snapshot's own provenance (legacy manifests are
+backfilled from the verified snapshot's metadata, never from the live
+listing) and the fetch fails until re-run with `--force`. Acceptance order and locking match the eCFR
+fetcher. The FAA offers no point-in-time access, so the CLI reminds the
+operator to archive each accepted snapshot outside the repository (plan
+§6.2).
+
+`far-aim parse aim` enforces categories 2, 3 and 6 for the AIM canonical
+layer; the whole 2026-07-09 Change 3 edition (12 chapters, 48 sections, 432
+paragraphs, 5 appendices) parses losslessly:
+
+- **Structural integrity** — every page is walked with an explicit
+  allowlist of elements (block *and* inline); anything else raises
+  `ParseError`. Section pages must carry chapter/section titles agreeing
+  with their filename, paragraph headings must match their `id` attribute
+  and belong to the page's section in increasing order, appendix pages must
+  open with an "Appendix N. <heading>" designation agreeing with their
+  filename and title (a swapped or misnamed appendix page cannot be
+  published under the wrong citation), the archived page
+  set must pass the same structural gate as the index (baseline chapters and
+  appendices, contiguous sections, no duplicate identities), the index page's
+  own front matter (title, description, edition summary) is allowlisted and
+  lossless-checked into the `aim_publication` document, and each
+  chapter page's contents list (sections, section headings, paragraph numbers and
+  headings) must agree exactly with the section pages — a renumbered or
+  dropped paragraph fails the parse instead of publishing. Chapter pages
+  are allowlisted and lossless-checked too, so unexpected prose or notices
+  on them fail rather than vanish. Every figure referenced must be present
+  in the archived snapshot. Stable IDs must be unique across the corpus.
+- **Text integrity** — every page must pass the lossless-capture check
+  (word multiset of the content region = word multiset of the built
+  documents). Exact-text fixture tests cover representative paragraphs
+  (4-1-1, 4-1-2, 4-1-4, 4-1-8, 4-1-9, 4-1-15, 4-1-20, chapter 0 and
+  appendices 1 and 3).
+- **Determinism / fail closed** — the publication machinery is the eCFR's,
+  parametrized per corpus (`cli.LayerSpec`): the same staging swap, crash
+  recovery under `.aim-previous`, deep re-verification, and manifest
+  `canonical_hash` (the hash over all chapter/appendix hashes) recorded only
+  after the layer is on disk. `far-aim validate` verifies the AIM layer the
+  same way it verifies the eCFR layer (root types `aim_chapter`/
+  `aim_appendix`, nested sections and paragraphs, provenance matching the
+  manifest's accepted edition — version, effective date, change, raw
+  checksum, the manifest-pinned edition label, and a per-document `url`
+  that must be the document's *own* page of the pinned index directory —
+  chapter/section/appendix identity and paragraph anchor derived from the
+  document's type and citation, padded filenames allowed — since canonical
+  hashes exclude the `source` block; filename ↔ document agreement).
+
+`far-aim build-vault` / `far-aim validate` extend category 4 and 6 to the
+AIM. Both refuse to run while the vault holds generated AIM output but the
+manifest's AIM `canonical_hash` is unset — the window between `fetch aim`
+accepting a newer edition and `parse aim` publishing it — because a
+FAR-only build would otherwise delete the last known-good AIM notes and
+figures as "stale" (plan §32.13). Otherwise: stems and aliases are unique across *both* corpora, every generated
+wikilink (including `![[figure]]` embeds) resolves, the archived figures are
+copied into `vault/AIM/assets/` and byte-verified against the checksums the
+canonical layer recorded (the raw snapshot is the preferred source; the
+existing vault copy is accepted when it hashes identically, so a lost cache
+does not block validation), and rebuilds are byte-idempotent.
+
+Remaining categories land with their corresponding phases (PCG parser:
+Phase 5; cross-source links: Phase 6; change gates and the FAA change-note
+cross-check: Phase 8).

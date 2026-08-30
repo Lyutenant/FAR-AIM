@@ -38,6 +38,31 @@ _REGULATION_KEYS = (
 _APPENDIX_KEYS = tuple(key if key != "section" else "appendix" for key in _REGULATION_KEYS)
 _INDEX_KEYS = tuple(key for key in _REGULATION_KEYS if key != "section")
 
+# AIM notes (plan §10.2): edition provenance is the effective date plus
+# change number rather than an issue date.
+_AIM_PARAGRAPH_KEYS = (
+    "id",
+    "type",
+    "citation",
+    "chapter",
+    "section",
+    "paragraph",
+    "source",
+    "effective_date",
+    "change",
+    "canonical_hash",
+    "generated",
+    "title",
+    "aliases",
+    "tags",
+)
+_AIM_SECTION_KEYS = tuple(key for key in _AIM_PARAGRAPH_KEYS if key != "paragraph")
+_AIM_CHAPTER_KEYS = tuple(key for key in _AIM_SECTION_KEYS if key != "section")
+_AIM_APPENDIX_KEYS = tuple(
+    key if key != "chapter" else "appendix" for key in _AIM_CHAPTER_KEYS
+)
+_AIM_INDEX_KEYS = tuple(key for key in _AIM_CHAPTER_KEYS if key not in ("chapter", "aliases"))
+
 SCHEMAS: dict[str, tuple[tuple[str, ...], frozenset[str]]] = {
     "regulation": (_REGULATION_KEYS, frozenset(_REGULATION_KEYS) - {"aliases", "tags"}),
     "appendix": (_APPENDIX_KEYS, frozenset(_APPENDIX_KEYS) - {"aliases", "tags"}),
@@ -46,6 +71,11 @@ SCHEMAS: dict[str, tuple[tuple[str, ...], frozenset[str]]] = {
         ("id", "type", "generated", "title"),
         frozenset({"id", "type", "generated", "title"}),
     ),
+    "aim": (_AIM_PARAGRAPH_KEYS, frozenset(_AIM_PARAGRAPH_KEYS) - {"aliases", "tags"}),
+    "aim_section": (_AIM_SECTION_KEYS, frozenset(_AIM_SECTION_KEYS) - {"aliases", "tags"}),
+    "aim_chapter": (_AIM_CHAPTER_KEYS, frozenset(_AIM_CHAPTER_KEYS) - {"aliases", "tags"}),
+    "aim_appendix": (_AIM_APPENDIX_KEYS, frozenset(_AIM_APPENDIX_KEYS) - {"aliases", "tags"}),
+    "aim_index": (_AIM_INDEX_KEYS, frozenset(_AIM_INDEX_KEYS) - {"tags"}),
 }
 
 _KEY_TYPES: dict[str, type | tuple[type, ...]] = {
@@ -56,6 +86,10 @@ _KEY_TYPES: dict[str, type | tuple[type, ...]] = {
     "part": (int, str),
     "section": str,
     "appendix": str,
+    "chapter": int,
+    "paragraph": str,
+    "effective_date": str,
+    "change": int,
     "source": str,
     "source_version": str,
     "canonical_hash": str,
@@ -63,6 +97,13 @@ _KEY_TYPES: dict[str, type | tuple[type, ...]] = {
     "title": str,
     "aliases": list,
     "tags": list,
+}
+
+# AIM cites sections and appendices by number (plan §10.2), FAR by string.
+_KIND_KEY_TYPES: dict[str, dict[str, type | tuple[type, ...]]] = {
+    "aim": {"section": int},
+    "aim_section": {"section": int},
+    "aim_appendix": {"appendix": int},
 }
 
 
@@ -81,7 +122,7 @@ def frontmatter_defect(kind: str, items: list[tuple[str, Value]]) -> str | None:
     for key, value in items:
         if key not in ordered:
             return f"key {key!r} not allowed for kind {kind!r}"
-        expected = _KEY_TYPES[key]
+        expected = _KIND_KEY_TYPES.get(kind, {}).get(key, _KEY_TYPES[key])
         # bool is an int subclass; keep the check exact.
         if isinstance(value, bool) and expected is not bool:
             return f"key {key!r}: expected {expected}, got bool"

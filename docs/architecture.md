@@ -37,11 +37,28 @@ normalize → validate → diff → generate. Never website → Markdown directl
   version discovery via `titles.json`, streamed point-in-time XML download
   with retry/backoff, source-integrity gate (well-formedness, root element,
   size/section-count floors), raw archive + checksum, manifest update
-- `far_aim.models.cfr` — stable IDs + canonical content hashing (Phase 2)
+- `far_aim.sources.common` — acquisition helpers shared by every fetcher:
+  polite HTTP client, retries honoring `Retry-After`, directory fsync, the
+  inter-process source lock, checksums
+- `far_aim.sources.faa_publications` — FAA publications landing page →
+  current AIM/PCG edition (label, change number, effective date, HTML URL)
+- `far_aim.sources.aim` — AIM acquisition (Phase 4): index-driven page set,
+  figure download, source-integrity gate, tree-hashed snapshot archive
+  (`pages/`, `figures/`, `metadata.json`), manifest update
+- `far_aim.htmltree` — minimal deterministic HTML DOM (stdlib `html.parser`)
+  used by the FAA parsers
+- `far_aim.models.cfr` / `far_aim.models.aim` — stable IDs + canonical
+  content hashing (Phases 2, 4)
 - `far_aim.parsers.ecfr` — eCFR XML → canonical part JSON (Phase 2)
-- `far_aim.generate` — canonical JSON → Obsidian vault (Phase 3): naming
-  policy, deterministic frontmatter, block renderers, note builders, and the
-  plan/verify/sync build (see vault.md)
+- `far_aim.parsers.aim` — FAA AIM HTML → canonical chapter/appendix JSON
+  (Phase 4): allowlisted grammar, chapter-contents cross-check, per-page
+  lossless capture, explicit-reference resolution
+- `far_aim.generate` — canonical JSON → Obsidian vault (Phases 3–4): naming
+  policy, deterministic frontmatter, block renderers (`markdown` for the
+  CFR, `aim_markdown` for the AIM), note builders (`notes`, `aim_notes`),
+  and the plan/verify/sync build with figure assets (see vault.md)
 - `far_aim.links.citations` — deterministic in-text CFR citation extraction
   (Phase 3, plan §12.1 Tier 1)
+- `far_aim.cli` — one publish/recover/verify path for every normalized
+  layer, parametrized by `LayerSpec`
 - Planned: `normalize/`, `diff/`, `validate/`

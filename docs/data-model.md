@@ -85,6 +85,94 @@ Every part parse must pass a **lossless-capture check**: the multiset of
 words in the source subtree must equal the multiset of words stored in the
 document, else `ParseError` (plan §32.2 — nothing silently omitted).
 
+## Canonical AIM model (implemented, Phase 4)
+
+`far-aim parse aim` writes one JSON document per chapter
+(`data/normalized/aim/chapter-NN.json`, two-digit zero-padded), one per
+appendix (`appendix-N.json`), and one for the publication itself
+(`publication.json`: the index page's title, description, and edition
+summary — `aim_publication`, id `aim`), with the same deterministic
+serialization as the CFR layer. Stable IDs follow the FAA's own citation scheme
+(`far_aim.models.aim`): `aim-chapter-4`, `aim-4-1`, `aim-4-1-9`,
+`aim-appendix-3` — never headings or page filenames.
+
+A **chapter document** (`aim_chapter`) carries the chapter `heading` (from the
+chapter page's title) and an ordered `sections` list. A **section**
+(`aim_section`, `aim-4-1`) carries `chapter`, `section`, `heading`,
+`toc_label` (the chapter contents page's "Section N." label, validated
+against the linked page — chapter 0's documented "Section 1." →
+`chap0_section_0.html` mismatch is the one tolerated exception), `content` (blocks that precede the first numbered paragraph — chapter 0's
+"Explanation of Changes" page is entirely section-level content and has no
+paragraphs), its own `explicit_references`, and `paragraphs`. A
+**paragraph** (`aim_paragraph`, `aim-4-1-9`) carries `chapter`, `section`,
+`paragraph` (`"4-1-9"`), `number` (9), `heading`, `content`, and
+`explicit_references`. An **appendix** (`aim_appendix`, `aim-appendix-3`)
+carries `appendix`, `heading`, `content`, and `explicit_references`. Each
+document's `source.url` is its own FAA page (plus `#4-1-9` for paragraphs);
+the page a document came from is provenance, not content. Chapter 0's lone
+section is numbered from its page filename (`chap0_section_0.html` →
+`aim-0-0`), which is the URL-stable identifier, even though the chapter
+contents page labels it "Section 1".
+
+Block types (`far_aim.parsers.aim`): `text` (a `p.p` run; `<br>` becomes a
+newline, all other whitespace collapses to one space), `heading` (chapter 0's
+`h2` section title, `level: 2`), `list` (`level` 1–6 mirroring the FAA
+edition's `ol.level-one` … `level-six` classes, whose CSS-generated markers —
+`a.` `1.` `(a)` `(1)` `[a]` `[1]` — are never stored as text; an HTML `type`
+attribute is preserved as `html_type`, while explicit numbering controls
+(`start`, `reversed`, `li value`) fail the parse because position-derived
+markers would misstate the enumeration; each item is `{"blocks": [...]}`),
+`note` (`kind` note/example/reference/phraseology, the box `title` verbatim
+— `NOTE-`, `EXAMPLE-`, `REFERENCE-`, `PHRASEOLOGY-` — and `blocks`), `figure`
+(`number` such as `FIG 4-1-15`, `title`, and an `image` with `alt`, the
+archived file's `sha256`, and its path under `source.src`), `image` (a bare
+`img`, e.g. form reproductions in appendices — same fields), and `table` (`number` such as
+`TBL 4-1-9`, `title`, `header_rows`/`rows`/`foot_rows` of cells; a cell is
+`{"blocks": [...]}` plus optional `colspan`/`rowspan`/`header`; a
+`borderless-header` presentation class is kept as `style`). Figure checksums
+are part of the hashed content, so a re-published figure changes the
+paragraph's `canonical_hash` (figures are part of the corpus, plan §4.2).
+
+Inline styling (`strong`, `em`, `sup`, `sub`) is flattened to its text, as
+for the CFR; the raw archive remains the styled record. Anchors keep their
+text inline and are additionally collected, in document order and per
+owning document, as `explicit_references`: `{"text", "target", "source":
+{"href"}}` where `target` is the in-corpus id (`chapN_section_M.html#N-M-K` →
+`aim-N-M-K`, `#chapN_section_M` → `aim-N-M`, `appendix_N.html` →
+`aim-appendix-N`, `chap_N.html` → `aim-chapter-N`); an in-corpus link
+naming a document the edition does not contain fails the parse (a broken
+or incomplete corpus, never a silently dropped relationship); external
+destinations (`https://…`, `mailto:`) are kept as a hashed `url` — an
+authoritative link changed under unchanged display text is a content
+change — while the raw `source.href` stays provenance; a paragraph link
+whose fragment names a different chapter/section than its page is
+malformed and fails the parse (plan §12.1 Tier 1 — explicit authoritative
+references; AIM → FAR links are Phase 6 work).
+
+Every page must pass a **lossless-capture check**: the multiset of words in
+the page's content region (block-element edges counted as separators;
+inline styling and anchors not) must equal the multiset of words stored in
+its documents (paragraph number + heading recombined), else `ParseError`.
+Chapter contents pages are held to the same rule: their elements are
+allowlisted (title, section entries with number label, heading and
+paragraph links; toggle buttons are controls, not content) and every word
+must be accounted for by the section/paragraph structure — added prose or
+a notice on a chapter page fails the parse instead of being dropped. A
+non-paragraph contents entry (chapter 0 lists its lone section in place of
+paragraphs) is accepted only as an exact duplicate of its section entry
+(same page, same heading), so it carries no wording the canonical layer
+lacks.
+
+Source-layout locations — `source.url`, an anchor's `source.href`, an
+image's `source.src` — sit under `source` keys and are therefore excluded
+from `canonical_hash`: a renamed page or image file with unchanged wording
+is not a content change (plan §14.4), while a changed figure *file*
+(different `sha256`) is.
+The provenance block (`source`) records `provider: faa`, `publication: aim`,
+`source_version` (`2026-07-09-change-3`), `edition_label`, `effective_date`,
+`change`, the index `url`, `retrieved_at`, and `raw_checksum` (the
+snapshot tree hash); like the CFR it is excluded from `canonical_hash`.
+
 ## Source manifest (implemented)
 
 `data/manifests/sources.json`, schema version 1:
@@ -101,8 +189,11 @@ document, else `ParseError` (plan §32.2 — nothing silently omitted).
     },
     "aim": {
       "last_checked_at": "...",
+      "accepted_version": "2026-07-09-change-3",
       "effective_date": "2026-07-09",
       "change": 3,
+      "edition_label": "Basic with Change 1, 2 and 3",
+      "source_url": "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/index.html",
       "raw_hash": "...",
       "canonical_hash": "..."
     },
@@ -118,3 +209,11 @@ Rules:
 - Serialization is deterministic: sorted keys, 2-space indent, trailing
   newline, `None` fields omitted (`far_aim.manifest`).
 - Unknown fields and wrong types fail validation loudly (`ManifestError`).
+- For the AIM, `accepted_version` is the snapshot directory name
+  (`{effective_date}-change-{n}`), and `raw_hash` is a *tree hash* — sha256
+  over the sorted (path, checksum) listing of every archived page and figure
+  — rather than a single file's checksum. `edition_label` and `source_url`
+  pin the edition text and FAA index URL the notes render: provenance is
+  outside `canonical_hash`, so `validate` compares these against every
+  document's `source` block (and `parse aim` refuses a snapshot whose
+  metadata disagrees with them).

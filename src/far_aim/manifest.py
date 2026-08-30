@@ -39,6 +39,12 @@ class SourceState:
     change: int | None = None
     raw_hash: str | None = None
     canonical_hash: str | None = None
+    # FAA publications only: the edition label and HTML index URL the
+    # accepted snapshot was fetched from. Generated notes render both, and
+    # canonical hashes exclude provenance, so `validate` needs them pinned
+    # here to detect an altered `source` block.
+    edition_label: str | None = None
+    source_url: str | None = None
 
     def to_dict(self) -> dict[str, str | int]:
         return {key: value for key, value in asdict(self).items() if value is not None}

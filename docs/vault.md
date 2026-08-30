@@ -1,7 +1,7 @@
-# Vault generation (Phase 3)
+# Vault generation (Phases 3–4)
 
-`far-aim build-vault` renders the verified canonical eCFR layer into the
-committed Obsidian vault at `vault/`. The full rules live in
+`far-aim build-vault` renders the verified canonical eCFR and AIM layers into
+the committed Obsidian vault at `vault/`. The full rules live in
 `far_aim.generate`; this note records the layout, the rendering decisions,
 and the known limitations.
 
@@ -73,8 +73,8 @@ is dropped globally whenever two notes would share it (plan §17.4; e.g.
   Official Text section — no wording is ever fabricated.
 - **Graphics** (`image`/`math` blocks) render as plain external links to
   the eCFR graphic path — not embedded/hotlinked images, and not yet
-  archived assets. Downloading graphics into the vault is later-phase work
-  alongside AIM figures (plan §4.2).
+  archived assets. Downloading eCFR graphics into the vault remains
+  later-phase work; AIM figures are archived and embedded (see below).
 
 ## Regeneration safety (plan §32.5, §32.13)
 
@@ -82,7 +82,8 @@ The whole vault is planned and verified in memory (links, counts, filename
 policy, frontmatter schemas) before any write. Sync then:
 
 1. refuses to overwrite any existing file that does not carry
-   `generated: true` frontmatter (curated note at a generated path);
+   `generated: true` frontmatter (curated note at a generated path) or, for
+   assets, that the ledger does not attribute to the generator;
 2. writes only changed files (0644), so a no-change rebuild is a byte-level
    no-op and `git status` stays clean;
 3. journals every write and deletion against a backup: a mid-sync
@@ -90,8 +91,82 @@ policy, frontmatter schemas) before any write. Sync then:
    leaving a mixed partial tree;
 4. deletes generated notes no longer produced (upstream removals) but keeps
    — with a warning — curated notes parked inside `vault/FAR/`;
-5. never touches anything outside `vault/FAR/` + `vault/Source Status.md`
-   (`.obsidian/`, `Topics/`, etc. are out of bounds).
+5. never touches anything outside `vault/FAR/`, `vault/AIM/` and
+   `vault/Source Status.md` (`.obsidian/`, `Topics/`, etc. are out of
+   bounds).
 
 `far-aim validate` re-renders the plan in memory and byte-compares it
 against the on-disk vault, making the zero-diff invariant a scripted check.
+
+## AIM (Phase 4)
+
+```text
+vault/AIM/
+├── AIM.md                       # publication index: chapters, appendices
+├── Chapter 04/                  # zero-padded for sort order
+│   ├── AIM Chapter 4.md         # chapter contents: sections → paragraphs
+│   ├── AIM 4-1.md               # section note (preamble content, paragraph list)
+│   └── 4-1-9.md                 # one note per numbered paragraph
+├── Appendices/
+│   └── AIM Appendix 3.md
+└── assets/                      # archived figures, embedded by the notes
+    └── aim0401_fig79_recovered.svg
+```
+
+- Paragraph notes are named by the paragraph number verbatim (`4-1-9.md`,
+  plan §9). Chapter, section and appendix notes carry an `AIM` prefix
+  (`AIM Chapter 4`, `AIM 4-1`, `AIM Appendix 3`) because bare `4-1` would
+  collide with FAR part-local section stems (part 241's `4-1.md`). All stems
+  and aliases are unique across both corpora; a heading alias claimed by
+  both a FAR section and an AIM note is dropped from both (this is why a
+  handful of FAR notes — e.g. part 71's "Class B airspace" — lost their
+  heading alias when the AIM arrived).
+- Frontmatter kinds `aim` (paragraph), `aim_section`, `aim_chapter`,
+  `aim_appendix`, `aim_index` carry `effective_date` + `change` instead of
+  an issue date (plan §10.2). Chapter 0's "Explanation of Changes" is a
+  section note (`AIM 0-0.md`, stable id from its page filename) with
+  section-level Official Text; its displayed citation follows the FAA's own
+  "Section 1." contents label (`toc_label`), never an invented "Section 0".
+- Body: H1 (`# AIM 4-1-9 — Heading`), a Source callout naming the edition
+  and linking the FAA page anchor, `## Official Text`, `## Paragraphs`
+  (section notes) and `## Explicit Cross-References` — the anchors the FAA
+  itself places in the text (`Para 5-4-3`, `Section 4`, `Appendix 4`),
+  linked only when the target is in the corpus.
+- **Lists render flat** with the FAA edition's markers (`**a.**`, `**1.**`,
+  `**(a)**`, `**(1)**`, `**[a]**`, `**[1]**`) derived from list level and
+  position — the same decision as the CFR's flat paragraphs, for the same
+  reason (six-deep nesting containing tables, figures and callouts). The
+  `type="a"`/`type="i"` attributes on many source `<ol>` elements are
+  ignored on purpose: the edition's stylesheet overrides them, and the
+  official text agrees with the stylesheet (AIM 4-1-20 cites the fifth
+  item of a `type="i"` level-three list as "(e) above").
+- **Boxes** become callouts titled with the verbatim label: NOTE- →
+  `[!note]`, EXAMPLE- → `[!example]`, REFERENCE- → `[!cite]`, PHRASEOLOGY- →
+  `[!quote]`.
+- **Source line breaks** (`<br>`, preserved by the parser as newlines) render
+  as backslash hard breaks, so multi-line references and phraseology keep
+  their layout under CommonMark as well as Obsidian.
+- **Figures** are embedded from `vault/AIM/assets/` as `![[file|title]]`
+  beneath a `**FIG 4-1-15** *Title*` caption line; bare images (form
+  reproductions) embed the same way. Asset files keep the FAA's filenames
+  (underscores allowed; collision-checked with note stems since they share
+  the wikilink namespace) and are byte-verified against the checksum the
+  canonical layer recorded. Binary files carry no frontmatter, so generator
+  ownership is recorded in `assets/.generated.json` (filename → sha256,
+  itself a generated file carrying a `far_aim_asset_ledger` marker, so a
+  user-authored file at that reserved path is recognized as curated and
+  refused/kept like any other): only files the ledger lists, with bytes
+  unchanged since the generator wrote them, are ever overwritten or pruned;
+  a curated file at a generated asset path refuses the build even when its
+  bytes happen to match (it is never silently adopted into the ledger), and
+  other files in `assets/` (or a generated asset edited in place) are kept
+  with a warning — the same contract as curated notes.
+- **Tables** render as pipe tables when every cell is one line of text or a
+  single image (embeds work inside cells) with a single header row and no
+  spans, and as inline HTML otherwise (nested lists and boxes are flattened
+  to marker-led `<p>` runs; image cells use `<img src="../assets/…">`, a
+  path relative to the note's own directory — TBL 7-1-10 is the one such
+  table).
+- Figures add ~54 MB of PNG/SVG to the committed vault for the current
+  edition; that is the plan's decision (§4.2: figures are part of the corpus
+  and are never hotlinked).
