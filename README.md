@@ -27,6 +27,18 @@ paraphrased or AI-generated. Full specification:
   rendered under `vault/AIM/` with figures embedded as vault assets.
 - Next: **Phase 5** — Pilot/Controller Glossary.
 
+## Operational notes
+
+- **FAA raw snapshots must be archived outside this repository** (plan §6.2:
+  the FAA offers no point-in-time access, so a lost snapshot cannot be
+  reconstructed; only its checksums are committed). `far-aim fetch aim`
+  prints this reminder on every acceptance. Currently awaiting external
+  archive: `data/raw/aim/2026-07-09-change-3/` (~61 MB — pages, figures,
+  metadata; tree hash recorded in `data/manifests/sources.json`).
+- eCFR snapshots need no external archive: any accepted issue is exactly
+  reconstructible from the eCFR point-in-time API given the manifest's
+  (version, checksum) pair.
+
 ## Development
 
 ```bash
