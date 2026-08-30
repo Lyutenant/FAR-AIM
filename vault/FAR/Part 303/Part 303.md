@@ -5,7 +5,7 @@ citation: "14 CFR Part 303"
 title_number: 14
 part: 303
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:b7104eb01400880e1902a7ee1d30691565dc9e23084759d1fa67b4e5dbb901c7"
 generated: true
 title: "REVIEW OF AIR CARRIER AGREEMENTS"
@@ -16,7 +16,7 @@ tags:
 # Part 303 — REVIEW OF AIR CARRIER AGREEMENTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-303)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-303)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER B—PROCEDURAL REGULATIONS
 

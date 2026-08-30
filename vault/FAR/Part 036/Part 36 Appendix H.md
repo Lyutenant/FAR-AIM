@@ -6,7 +6,7 @@ title_number: 14
 part: 36
 appendix: "Appendix H"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:050cdbb1712d199a48037cf82e9f72bb9af1785ebbc2508dc2a1feb017a2dad3"
 generated: true
 title: "Appendix H to Part 36—Noise Requirements For Helicopters Under Subpart H"
@@ -20,7 +20,7 @@ tags:
 # Appendix H to Part 36—Noise Requirements For Helicopters Under Subpart H
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-36)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-36)
 
 ## Official Text
 

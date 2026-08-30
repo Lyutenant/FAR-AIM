@@ -6,7 +6,7 @@ title_number: 14
 part: 25
 appendix: "Appendix H"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:348ca5e1b299d645d83ba4cc32511cb49e3d83d5ab87e1c7984dce1feb756eb8"
 generated: true
 title: "Appendix H to Part 25—Instructions for Continued Airworthiness"
@@ -20,7 +20,7 @@ tags:
 # Appendix H to Part 25—Instructions for Continued Airworthiness
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-25)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-25)
 
 ## Official Text
 

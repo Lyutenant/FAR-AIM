@@ -6,7 +6,7 @@ title_number: 14
 part: 440
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:29cba9539bca2644c024f9ec493a311bbb02ed9b2877d48dbb30e84b18d7d490"
 generated: true
 title: "Appendix A to Part 440—Information Requirements for Obtaining a Maximum Probable Loss Determination for Licensed or Permitted Activities"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 440—Information Requirements for Obtaining a Maximum Probable Loss Determination for Licensed or Permitted Activities
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-440)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-440)
 
 ## Official Text
 

@@ -5,7 +5,7 @@ citation: "14 CFR Part 218"
 title_number: 14
 part: 218
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:5e5013c4a2963a86b6b17137daed2d43bda827b0b0bacc169953575ac6dd3446"
 generated: true
 title: "LEASE BY FOREIGN AIR CARRIER OR OTHER FOREIGN PERSON OF AIRCRAFT WITH CREW"
@@ -16,7 +16,7 @@ tags:
 # Part 218 — LEASE BY FOREIGN AIR CARRIER OR OTHER FOREIGN PERSON OF AIRCRAFT WITH CREW
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-218)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-218)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

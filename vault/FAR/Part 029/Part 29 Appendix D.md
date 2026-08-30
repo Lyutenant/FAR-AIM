@@ -6,7 +6,7 @@ title_number: 14
 part: 29
 appendix: "Appendix D"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:89c55bd19533478c46d9d7ef4388fe2d48463fda19ebafd0f5ced61a19a017ae"
 generated: true
 title: "Appendix D to Part 29—Criteria for Demonstration of Emergency Evacuation Procedures Under § 29.803"
@@ -20,7 +20,7 @@ tags:
 # Appendix D to Part 29—Criteria for Demonstration of Emergency Evacuation Procedures Under § 29.803
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-29)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-29)
 
 ## Official Text
 

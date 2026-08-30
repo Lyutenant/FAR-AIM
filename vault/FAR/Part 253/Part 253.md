@@ -5,7 +5,7 @@ citation: "14 CFR Part 253"
 title_number: 14
 part: 253
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:d8f04d02fe7a0d5197a392d7c0891af2a7633051b30ac596ab639c53d3910cd6"
 generated: true
 title: "NOTICE OF TERMS OF CONTRACT OF CARRIAGE"
@@ -16,7 +16,7 @@ tags:
 # Part 253 — NOTICE OF TERMS OF CONTRACT OF CARRIAGE
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-253)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-253)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

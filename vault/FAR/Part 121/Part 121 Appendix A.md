@@ -6,7 +6,7 @@ title_number: 14
 part: 121
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:48d6b990062075fc0d88cfdd198d42b429b02538284dc298f55266307e5b2ed3"
 generated: true
 title: "Appendix A to Part 121—First Aid Kits and Emergency Medical Kits"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 121—First Aid Kits and Emergency Medical Kits
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-121)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-121)
 
 ## Official Text
 

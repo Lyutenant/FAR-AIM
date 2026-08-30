@@ -5,7 +5,7 @@ citation: "14 CFR Part 63"
 title_number: 14
 part: 63
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:2b3107d9df511c526127fe50999745831ca56b7d3711e8282e6b697fcd89e23b"
 generated: true
 title: "CERTIFICATION: FLIGHT CREWMEMBERS OTHER THAN PILOTS"
@@ -16,7 +16,7 @@ tags:
 # Part 63 — CERTIFICATION: FLIGHT CREWMEMBERS OTHER THAN PILOTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-63)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-63)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER D—AIRMEN
 

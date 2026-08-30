@@ -5,7 +5,7 @@ citation: "14 CFR Part 155"
 title_number: 14
 part: 155
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:9b31ae8dc67e47f92e11253cf7635bb25d14624dd96160ad3459460acf1338b5"
 generated: true
 title: "RELEASE OF AIRPORT PROPERTY FROM SURPLUS PROPERTY DISPOSAL RESTRICTIONS"
@@ -16,7 +16,7 @@ tags:
 # Part 155 — RELEASE OF AIRPORT PROPERTY FROM SURPLUS PROPERTY DISPOSAL RESTRICTIONS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-155)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-155)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER I—AIRPORTS
 

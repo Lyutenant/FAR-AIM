@@ -6,7 +6,7 @@ title_number: 14
 part: 135
 appendix: "Appendix C"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:9dc1388dfa088043e5cfa6ac060fa5fe4cd6a03a72577f1cfb54838cea538d2d"
 generated: true
 title: "Appendix C to Part 135—Helicopter Flight Recorder Specifications"
@@ -20,7 +20,7 @@ tags:
 # Appendix C to Part 135—Helicopter Flight Recorder Specifications
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-135)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-135)
 
 ## Official Text
 

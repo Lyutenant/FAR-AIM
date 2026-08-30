@@ -6,7 +6,7 @@ title_number: 14
 part: 125
 appendix: "SFAR 97"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:eeb58b6cc50ea3fd59bd1a2d2f4184b9e3195f2a9bb0d58bd9e0cb6a2853565a"
 generated: true
 title: "Special Federal Aviation Regulation No. 97"
@@ -18,7 +18,7 @@ tags:
 # Special Federal Aviation Regulation No. 97
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-125)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-125)
 
 ## Source Notes
 

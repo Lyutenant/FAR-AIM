@@ -5,7 +5,7 @@ citation: "14 CFR Part 262"
 title_number: 14
 part: 262
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:1d134caee7a713c54a7b495d287c02ffd7c6c71330edc255abc704ccbf7a3f35"
 generated: true
 title: "TRAVEL CREDITS OR VOUCHERS DUE TO A SERIOUS COMMUNICABLE DISEASE"
@@ -16,7 +16,7 @@ tags:
 # Part 262 — TRAVEL CREDITS OR VOUCHERS DUE TO A SERIOUS COMMUNICABLE DISEASE
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-262)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-262)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

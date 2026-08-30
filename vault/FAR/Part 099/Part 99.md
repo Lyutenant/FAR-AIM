@@ -5,7 +5,7 @@ citation: "14 CFR Part 99"
 title_number: 14
 part: 99
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:87e1a55db413ab76c69e89a239e55e936b640af7706f87f35d1e229db362cc5c"
 generated: true
 title: "SECURITY CONTROL OF AIR TRAFFIC"
@@ -16,7 +16,7 @@ tags:
 # Part 99 — SECURITY CONTROL OF AIR TRAFFIC
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-99)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-99)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER F—AIR TRAFFIC AND GENERAL OPERATING RULES
 

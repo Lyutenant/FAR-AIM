@@ -5,7 +5,7 @@ citation: "14 CFR Part 437"
 title_number: 14
 part: 437
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:316a5e0eee3c17efa9b4849225508ad7a8176a033380169190e9e69500b65505"
 generated: true
 title: "EXPERIMENTAL PERMITS"
@@ -16,7 +16,7 @@ tags:
 # Part 437 — EXPERIMENTAL PERMITS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-437)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-437)
 > CHAPTER III—COMMERCIAL SPACE TRANSPORTATION, FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—LICENSING
 

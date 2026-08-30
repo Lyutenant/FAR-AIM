@@ -6,7 +6,7 @@ title_number: 14
 part: 121
 appendix: "Appendix G"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:c7c2d8a94bc7a13e3e0f7f11ae107ba6e7270ffd835754f4b8d9de0350525332"
 generated: true
 title: "Appendix G to Part 121—Doppler Radar and Inertial Navigation System (INS): Request for Evaluation; Equipment and Equipment Installation; Training Program; Equipment Accuracy and Reliability; Evaluation Program"
@@ -20,7 +20,7 @@ tags:
 # Appendix G to Part 121—Doppler Radar and Inertial Navigation System (INS): Request for Evaluation; Equipment and Equipment Installation; Training Program; Equipment Accuracy and Reliability; Evaluation Program
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-121)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-121)
 
 ## Official Text
 

@@ -5,7 +5,7 @@ citation: "14 CFR Part 142"
 title_number: 14
 part: 142
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:2dedfa23896fcd1cf336c0a0221302b6d3bad280db2410b9e063906a12be3bb0"
 generated: true
 title: "TRAINING CENTERS"
@@ -16,7 +16,7 @@ tags:
 # Part 142 — TRAINING CENTERS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-142)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-142)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER H—SCHOOLS AND OTHER CERTIFICATED AGENCIES
 

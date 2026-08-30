@@ -6,7 +6,7 @@ title_number: 14
 part: 121
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:2040e8c64896e08671cb5e717fa345bf66601c860be10cd5f00f7af92a98c5f5"
 generated: true
 title: "Appendix B to Part 121—Airplane Flight Recorder Specification"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 121—Airplane Flight Recorder Specification
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-121)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-121)
 
 ## Official Text
 

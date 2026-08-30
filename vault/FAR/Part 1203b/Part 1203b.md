@@ -5,7 +5,7 @@ citation: "14 CFR Part 1203b"
 title_number: 14
 part: "1203b"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:cd0c52b08d6c0910eb6f35f4b0b909a59b9f29dbbe16afdc0ac2ca35178a741f"
 generated: true
 title: "SECURITY PROGRAMS; ARREST AUTHORITY AND USE OF FORCE BY NASA SECURITY FORCE PERSONNEL"
@@ -16,7 +16,7 @@ tags:
 # Part 1203b — SECURITY PROGRAMS; ARREST AUTHORITY AND USE OF FORCE BY NASA SECURITY FORCE PERSONNEL
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-1203b)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-1203b)
 > CHAPTER V—NATIONAL AERONAUTICS AND SPACE ADMINISTRATION
 
 **Authority:** The National and Commercial Space Program (51 U.S.C.). Sections 20132 and 20133 et seq.

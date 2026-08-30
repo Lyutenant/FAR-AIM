@@ -6,7 +6,7 @@ title_number: 14
 part: 152
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:cb67c46ae72b052308c62b77801af8544cfc9debab595fcfec3ba85572863695"
 generated: true
 title: "Appendix B to Part 152—List of Advisory Circulars Incorporated by § 152.11"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 152—List of Advisory Circulars Incorporated by § 152.11
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-152)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-152)
 
 ## Official Text
 

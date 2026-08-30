@@ -5,7 +5,7 @@ citation: "14 CFR Part 404"
 title_number: 14
 part: 404
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:bf30e43661cecf56b934b127ff8432706d2ac4369218d0073e48ba5cf6f30e4a"
 generated: true
 title: "PETITION AND RULEMAKING PROCEDURES"
@@ -16,7 +16,7 @@ tags:
 # Part 404 — PETITION AND RULEMAKING PROCEDURES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-404)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-404)
 > CHAPTER III—COMMERCIAL SPACE TRANSPORTATION, FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER B—PROCEDURE
 

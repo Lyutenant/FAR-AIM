@@ -6,7 +6,7 @@ title_number: 14
 part: 63
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:6cb66e5349330dd078ff658e53f495ad8a057a05a0a4a608a2f4827da92f04dc"
 generated: true
 title: "Appendix B to Part 63—Flight Navigator Training Course Requirements"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 63—Flight Navigator Training Course Requirements
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-63)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-63)
 
 ## Official Text
 

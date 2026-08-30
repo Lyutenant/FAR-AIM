@@ -5,7 +5,7 @@ citation: "14 CFR Part 14"
 title_number: 14
 part: 14
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:95141246b183de797e09886d33f7a96a67469bc99d66ad672e7a75364907f6e3"
 generated: true
 title: "RULES IMPLEMENTING THE EQUAL ACCESS TO JUSTICE ACT OF 1980"
@@ -16,7 +16,7 @@ tags:
 # Part 14 — RULES IMPLEMENTING THE EQUAL ACCESS TO JUSTICE ACT OF 1980
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-14)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-14)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER B—PROCEDURAL RULES
 

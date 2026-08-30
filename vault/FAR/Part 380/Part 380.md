@@ -5,7 +5,7 @@ citation: "14 CFR Part 380"
 title_number: 14
 part: 380
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:f2ec73343b20416a6dc09cad4248dfb2bbea10934969e3aa765a2ea721df9b6d"
 generated: true
 title: "PUBLIC CHARTERS"
@@ -16,7 +16,7 @@ tags:
 # Part 380 — PUBLIC CHARTERS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-380)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-380)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER D—SPECIAL REGULATIONS
 

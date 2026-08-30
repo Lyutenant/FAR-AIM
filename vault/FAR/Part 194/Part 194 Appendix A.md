@@ -6,7 +6,7 @@ title_number: 14
 part: 194
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:1573027aa6f08c85b8c5ef62f8279156f1e241d329ae58c44e9756b14728e80e"
 generated: true
 title: "Appendix A to Part 194—Minimum Requirements for a Pilot Training Program in a Powered-Lift Originally Type Certificated or Seeking Type Certification With One Set of Controls and a Single Pilot Station"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 194—Minimum Requirements for a Pilot Training Program in a Powered-Lift Originally Type Certificated or Seeking Type Certification With One Set of Controls and a Single Pilot Station
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-194)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-194)
 
 ## Official Text
 

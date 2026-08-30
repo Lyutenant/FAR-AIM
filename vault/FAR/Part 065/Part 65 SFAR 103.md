@@ -6,7 +6,7 @@ title_number: 14
 part: 65
 appendix: "SFAR 103"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:b2f4b10fe4df92c274477e49f69aa0da7e3e4fe537019b56b1ac468df6012347"
 generated: true
 title: "Special Federal Aviation Regulation No. 103—Process for Requesting Waiver of Mandatory Separation Age for a Federal Aviation Administration Air Traffic Control Specialist In Flight Service Stations, Enroute or Terminal Facilities, and the David J. Hurley Air Traffic Control System Command Center"
@@ -20,7 +20,7 @@ tags:
 # Special Federal Aviation Regulation No. 103—Process for Requesting Waiver of Mandatory Separation Age for a Federal Aviation Administration Air Traffic Control Specialist In Flight Service Stations, Enroute or Terminal Facilities, and the David J. Hurley Air Traffic Control System Command Center
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-65)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-65)
 
 ## Official Text
 

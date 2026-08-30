@@ -6,7 +6,7 @@ title_number: 14
 part: 60
 appendix: "Appendix F"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:d75b6111e02477f71e6938d8144a8c4da080ea17cda069ce5e3ee328fb25bdeb"
 generated: true
 title: "Appendix F to Part 60—Definitions and Abbreviations for Flight Simulation Training Devices"
@@ -20,7 +20,7 @@ tags:
 # Appendix F to Part 60—Definitions and Abbreviations for Flight Simulation Training Devices
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-60)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-60)
 
 ## Official Text
 

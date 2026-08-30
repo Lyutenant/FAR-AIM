@@ -6,7 +6,7 @@ title_number: 14
 part: 212
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:32ccb6a75a0f5fa9bbdb95d4f7807fba158c53d371369e5d0abe561769a3a4f7"
 generated: true
 title: "Appendix A to Part 212—Certificated or Foreign Air Carrier's Surety Bond Under Part 212 of the Regulations of the Department of Transportation (14 CFR Part 212)"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 212—Certificated or Foreign Air Carrier's Surety Bond Under Part 212 of the Regulations of the Department of Transportation (14 CFR Part 212)
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-212)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-212)
 
 ## Official Text
 

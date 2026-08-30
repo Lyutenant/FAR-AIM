@@ -6,7 +6,7 @@ title_number: 14
 part: 152
 appendix: "Appendix C"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:0ec8df4639dbbc8a2045ab695a657868bdec61a2f1fac871797ab473204c17f8"
 generated: true
 title: "Appendix C to Part 152—Procurement Procedures and Requirements"
@@ -20,7 +20,7 @@ tags:
 # Appendix C to Part 152—Procurement Procedures and Requirements
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-152)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-152)
 
 ## Official Text
 

@@ -5,7 +5,7 @@ citation: "14 CFR Part 295"
 title_number: 14
 part: 295
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:a9d1d57406a4fdcfa4310641192c95225f6ddc7fcb0ce6214362e95d95e4b2a2"
 generated: true
 title: "AIR CHARTER BROKERS"
@@ -16,7 +16,7 @@ tags:
 # Part 295 — AIR CHARTER BROKERS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-295)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-295)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

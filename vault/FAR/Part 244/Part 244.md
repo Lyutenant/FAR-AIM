@@ -5,7 +5,7 @@ citation: "14 CFR Part 244"
 title_number: 14
 part: 244
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:7b5337194044136feae688d1a4c8daddf627c74f5705a9805f1d6d790788e78b"
 generated: true
 title: "REPORTING TARMAC DELAY DATA"
@@ -16,7 +16,7 @@ tags:
 # Part 244 — REPORTING TARMAC DELAY DATA
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-244)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-244)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

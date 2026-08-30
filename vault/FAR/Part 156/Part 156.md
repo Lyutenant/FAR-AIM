@@ -5,7 +5,7 @@ citation: "14 CFR Part 156"
 title_number: 14
 part: 156
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:ed21f15079c76afa4017d4843c6179470e1cfefe2d692f8fbcbd1888eb883890"
 generated: true
 title: "STATE BLOCK GRANT PILOT PROGRAM"
@@ -16,7 +16,7 @@ tags:
 # Part 156 — STATE BLOCK GRANT PILOT PROGRAM
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-156)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-156)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER I—AIRPORTS
 

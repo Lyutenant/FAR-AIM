@@ -5,7 +5,7 @@ citation: "14 CFR Part 440"
 title_number: 14
 part: 440
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:8ec83fc644027357fcbd7e7b5583148157aeb3dbabfb5ed8dae50f5174883458"
 generated: true
 title: "FINANCIAL RESPONSIBILITY"
@@ -16,7 +16,7 @@ tags:
 # Part 440 — FINANCIAL RESPONSIBILITY
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-440)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-440)
 > CHAPTER III—COMMERCIAL SPACE TRANSPORTATION, FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—LICENSING
 

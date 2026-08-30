@@ -6,7 +6,7 @@ title_number: 14
 part: 135
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:8dc26b245cdb6231dafd9146aca671f6513b5fbbc552a5b43e33c82e389e3f4e"
 generated: true
 title: "Appendix A to Part 135—Additional Airworthiness Standards for 10 or More Passenger Airplanes"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 135—Additional Airworthiness Standards for 10 or More Passenger Airplanes
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-135)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-135)
 
 ## Official Text
 

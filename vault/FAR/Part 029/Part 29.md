@@ -5,7 +5,7 @@ citation: "14 CFR Part 29"
 title_number: 14
 part: 29
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:220ab8f6a24464c2ea4c583ea477248cada08ec0f5c90d08824408dff873cef9"
 generated: true
 title: "AIRWORTHINESS STANDARDS: TRANSPORT CATEGORY ROTORCRAFT"
@@ -16,7 +16,7 @@ tags:
 # Part 29 — AIRWORTHINESS STANDARDS: TRANSPORT CATEGORY ROTORCRAFT
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-29)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-29)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 

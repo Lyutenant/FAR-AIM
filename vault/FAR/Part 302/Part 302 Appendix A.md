@@ -6,7 +6,7 @@ title_number: 14
 part: 302
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:04c7bc14db8b409381f6b71642ac29e4e12cd97a05125d9ede1efb7bd6596107"
 generated: true
 title: "Appendix A to Part 302—Index to Rules of Practice"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 302—Index to Rules of Practice
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-302)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-302)
 
 ## Official Text
 

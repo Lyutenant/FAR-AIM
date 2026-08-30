@@ -6,7 +6,7 @@ title_number: 14
 part: 33
 appendix: "Appendix D"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:7f977938ddd75cf58e7b74c4e8e5df5dfbbad7d0b9b34dc41167c75026709b49"
 generated: true
 title: "Appendix D to Part 33—Mixed Phase and Ice Crystal Icing Envelope (Deep Convective Clouds)"
@@ -20,7 +20,7 @@ tags:
 # Appendix D to Part 33—Mixed Phase and Ice Crystal Icing Envelope (Deep Convective Clouds)
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-33)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-33)
 
 ## Official Text
 

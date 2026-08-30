@@ -6,7 +6,7 @@ title_number: 14
 part: 1264
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:68dd0e70dfcd89a73669765700ac7bea1aa98757f223ef5d60a6c4e1baec24e4"
 generated: true
 title: "Appendix A to Part 1264—Notice To Consent to the Chairperson, NASA Board of Contract Appeals (BCA), or Designee, as Presiding Officer"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 1264—Notice To Consent to the Chairperson, NASA Board of Contract Appeals (BCA), or Designee, as Presiding Officer
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-1264)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-1264)
 
 ## Official Text
 

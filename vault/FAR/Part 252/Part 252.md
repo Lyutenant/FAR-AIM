@@ -5,7 +5,7 @@ citation: "14 CFR Part 252"
 title_number: 14
 part: 252
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:25e17a0bef530c034410f970b0011075001d862a7b2b7027244be718ebecb391"
 generated: true
 title: "SMOKING ABOARD AIRCRAFT"
@@ -16,7 +16,7 @@ tags:
 # Part 252 — SMOKING ABOARD AIRCRAFT
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-252)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-252)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

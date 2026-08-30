@@ -5,7 +5,7 @@ citation: "14 CFR Part 200"
 title_number: 14
 part: 200
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:62c39f17b2f83e7346102b42e3fe89bf1619cb0bf5a42c18c57e52e9355e106e"
 generated: true
 title: "DEFINITIONS AND INSTRUCTIONS"
@@ -16,7 +16,7 @@ tags:
 # Part 200 — DEFINITIONS AND INSTRUCTIONS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-200)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-200)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

@@ -5,7 +5,7 @@ citation: "14 CFR Part 68"
 title_number: 14
 part: 68
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:5446eeb15aba2d5c4cfcf330035a87d70ac2af30ece44b6b189faabb3ea14909"
 generated: true
 title: "REQUIREMENTS FOR OPERATING CERTAIN SMALL AIRCRAFT WITHOUT A MEDICAL CERTIFICATE"
@@ -16,7 +16,7 @@ tags:
 # Part 68 — REQUIREMENTS FOR OPERATING CERTAIN SMALL AIRCRAFT WITHOUT A MEDICAL CERTIFICATE
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-68)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-68)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER D—AIRMEN
 

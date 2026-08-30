@@ -6,7 +6,7 @@ title_number: 14
 part: 60
 appendix: "Appendix E"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:ed5486fec4c69d16a8484f5899dfdcc14bc3e0cd7e17a24cb932b771f4eaca87"
 generated: true
 title: "Appendix E to Part 60—Qualification Performance Standards for Quality Management Systems for Flight Simulation Training Devices"
@@ -20,7 +20,7 @@ tags:
 # Appendix E to Part 60—Qualification Performance Standards for Quality Management Systems for Flight Simulation Training Devices
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-60)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-60)
 
 ## Official Text
 

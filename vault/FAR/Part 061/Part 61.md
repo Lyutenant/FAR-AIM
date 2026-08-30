@@ -5,7 +5,7 @@ citation: "14 CFR Part 61"
 title_number: 14
 part: 61
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:466280fa3b58119a078986c25824277cf980761a46dc78b9fb11b8761e7f402f"
 generated: true
 title: "CERTIFICATION: PILOTS, FLIGHT INSTRUCTORS, AND GROUND INSTRUCTORS"
@@ -16,7 +16,7 @@ tags:
 # Part 61 — CERTIFICATION: PILOTS, FLIGHT INSTRUCTORS, AND GROUND INSTRUCTORS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-61)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-61)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER D—AIRMEN
 

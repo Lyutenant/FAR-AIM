@@ -6,7 +6,7 @@ title_number: 14
 part: 141
 appendix: "Appendix J"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:ed45fce4c5e36cce520bd352860887ba273bd1fab0bd255ca319c9fed67c94a8"
 generated: true
 title: "Appendix J to Part 141—Aircraft Type Rating Course, For Other Than an Airline Transport Pilot Certificate"
@@ -20,7 +20,7 @@ tags:
 # Appendix J to Part 141—Aircraft Type Rating Course, For Other Than an Airline Transport Pilot Certificate
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-141)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-141)
 
 ## Official Text
 

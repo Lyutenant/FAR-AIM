@@ -5,7 +5,7 @@ citation: "14 CFR Part 152"
 title_number: 14
 part: 152
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:57fb1090709bf87c3f4bddabec6d36616e03180f64df79d748af824b23b12dda"
 generated: true
 title: "AIRPORT AID PROGRAM"
@@ -16,7 +16,7 @@ tags:
 # Part 152 — AIRPORT AID PROGRAM
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-152)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-152)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER I—AIRPORTS
 

@@ -5,7 +5,7 @@ citation: "14 CFR Part 420"
 title_number: 14
 part: 420
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:fb883ee708089a4edaed9e2dcc0caefa2407f275b536ca728ed3803e936bff70"
 generated: true
 title: "LICENSE TO OPERATE A LAUNCH SITE"
@@ -16,7 +16,7 @@ tags:
 # Part 420 — LICENSE TO OPERATE A LAUNCH SITE
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-420)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-420)
 > CHAPTER III—COMMERCIAL SPACE TRANSPORTATION, FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—LICENSING
 

@@ -5,7 +5,7 @@ citation: "14 CFR Part 201"
 title_number: 14
 part: 201
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:396385a65ab0797b4effce5e65f3a52a2538c3b397d2c50c180b27e5b99ca4d0"
 generated: true
 title: "AIR CARRIER AUTHORITY UNDER SUBTITLE VII OF TITLE 49 OF THE UNITED STATES CODE"
@@ -16,7 +16,7 @@ tags:
 # Part 201 — AIR CARRIER AUTHORITY UNDER SUBTITLE VII OF TITLE 49 OF THE UNITED STATES CODE
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-201)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-201)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

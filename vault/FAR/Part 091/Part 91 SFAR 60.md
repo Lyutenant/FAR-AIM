@@ -6,7 +6,7 @@ title_number: 14
 part: 91
 appendix: "SFAR 60"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:60073bdcb78e0f5bd0ccc2c9698e9e48f07b0f77b2d6de0e4c957e4c73c45b20"
 generated: true
 title: "Special Federal Aviation Regulation No. 60—Air Traffic Control System Emergency Operation"
@@ -20,7 +20,7 @@ tags:
 # Special Federal Aviation Regulation No. 60—Air Traffic Control System Emergency Operation
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-91)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-91)
 
 ## Official Text
 

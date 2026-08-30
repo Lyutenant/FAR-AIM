@@ -5,7 +5,7 @@ citation: "14 CFR Part 157"
 title_number: 14
 part: 157
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:c02876ec67892dba3318a0caf9c67e3ba4a61655bfbd2762510fdb0a316f0ec9"
 generated: true
 title: "NOTICE OF CONSTRUCTION, ALTERATION, ACTIVATION, AND DEACTIVATION OF AIRPORTS"
@@ -16,7 +16,7 @@ tags:
 # Part 157 — NOTICE OF CONSTRUCTION, ALTERATION, ACTIVATION, AND DEACTIVATION OF AIRPORTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-157)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-157)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER I—AIRPORTS
 

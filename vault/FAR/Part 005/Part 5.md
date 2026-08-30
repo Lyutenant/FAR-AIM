@@ -5,7 +5,7 @@ citation: "14 CFR Part 5"
 title_number: 14
 part: 5
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:599fdb2c46e44574793d15a22fdcbcdf9c961824f5bda2543522dff76b60b138"
 generated: true
 title: "SAFETY MANAGEMENT SYSTEMS"
@@ -16,7 +16,7 @@ tags:
 # Part 5 — SAFETY MANAGEMENT SYSTEMS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-5)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-5)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER A—DEFINITIONS AND GENERAL REQUIREMENTS
 

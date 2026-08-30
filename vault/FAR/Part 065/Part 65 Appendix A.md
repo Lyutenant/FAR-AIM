@@ -6,7 +6,7 @@ title_number: 14
 part: 65
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:e3380112abec7ed9a1106fbbf91a138e069273ddb687a5880728170f5c7421d8"
 generated: true
 title: "Appendix A to Part 65—Aircraft Dispatcher Courses"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 65—Aircraft Dispatcher Courses
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-65)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-65)
 
 ## Official Text
 

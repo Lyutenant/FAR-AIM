@@ -5,7 +5,7 @@ citation: "14 CFR Part 216"
 title_number: 14
 part: 216
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:0ca9b58fe196ff05aaffac835b06ff492cfa4228bdbff2758e3e49966f0f0aab"
 generated: true
 title: "COMMINGLING OF BLIND SECTOR TRAFFIC BY FOREIGN AIR CARRIERS"
@@ -16,7 +16,7 @@ tags:
 # Part 216 — COMMINGLING OF BLIND SECTOR TRAFFIC BY FOREIGN AIR CARRIERS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-216)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-216)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

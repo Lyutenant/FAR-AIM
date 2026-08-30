@@ -6,7 +6,7 @@ title_number: 14
 part: 36
 appendix: "Appendix K"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:63b2d4e68d512460a13eb9dcd6bfb63607add278c59b7bec065be18963a21da9"
 generated: true
 title: "Appendix K to Part 36—Noise Requirements for Tiltrotors Under Subpart K"
@@ -20,7 +20,7 @@ tags:
 # Appendix K to Part 36—Noise Requirements for Tiltrotors Under Subpart K
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-36)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-36)
 
 ## Official Text
 

@@ -6,7 +6,7 @@ title_number: 14
 part: 29
 appendix: "Appendix C"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:851cdf8bfba7776f412af4a89a35375d32336f560b35f399a5560d0d60ce5eba"
 generated: true
 title: "Appendix C to Part 29—Icing Certification"
@@ -20,7 +20,7 @@ tags:
 # Appendix C to Part 29—Icing Certification
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-29)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-29)
 
 ## Official Text
 

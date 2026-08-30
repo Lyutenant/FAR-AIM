@@ -6,7 +6,7 @@ title_number: 14
 part: 91
 appendix: "SFAR 50-2"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:e45bdcef5b9d232eee129d498bf76f0fa2b0c4e2a5a31bbfa58d0e84b39f6109"
 generated: true
 title: "Special Federal Aviation Regulation No. 50-2—Special Flight Rules in the Vicinity of the Grand Canyon National Park, AZ"
@@ -20,7 +20,7 @@ tags:
 # Special Federal Aviation Regulation No. 50-2—Special Flight Rules in the Vicinity of the Grand Canyon National Park, AZ
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-91)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-91)
 
 ## Official Text
 

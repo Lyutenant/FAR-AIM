@@ -6,7 +6,7 @@ title_number: 14
 part: 121
 appendix: "Appendix E"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:f2ee42f87a3c5e89be51c7174341bea0e7661a08234194736224200b5388b1be"
 generated: true
 title: "Appendix E to Part 121—Flight Training Requirements"
@@ -20,7 +20,7 @@ tags:
 # Appendix E to Part 121—Flight Training Requirements
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-121)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-121)
 
 ## Official Text
 

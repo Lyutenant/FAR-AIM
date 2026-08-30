@@ -5,7 +5,7 @@ citation: "14 CFR Part 215"
 title_number: 14
 part: 215
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:75b737167584eb1d9a6b85823002c3cfca2966a0182377540a909a4c241367bc"
 generated: true
 title: "USE AND CHANGE OF NAMES OF AIR CARRIERS, FOREIGN AIR CARRIERS AND COMMUTER AIR CARRIERS"
@@ -16,7 +16,7 @@ tags:
 # Part 215 — USE AND CHANGE OF NAMES OF AIR CARRIERS, FOREIGN AIR CARRIERS AND COMMUTER AIR CARRIERS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-215)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-215)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

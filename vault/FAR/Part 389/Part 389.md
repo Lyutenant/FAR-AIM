@@ -5,7 +5,7 @@ citation: "14 CFR Part 389"
 title_number: 14
 part: 389
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:3b72b7d1aaa0e33e8b260a22a1dd2456c9322b0848866ffb222c9a34c627eff0"
 generated: true
 title: "FEES AND CHARGES FOR SPECIAL SERVICES"
@@ -16,7 +16,7 @@ tags:
 # Part 389 — FEES AND CHARGES FOR SPECIAL SERVICES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-389)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-389)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER E—ORGANIZATION
 

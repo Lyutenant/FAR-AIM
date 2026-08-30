@@ -5,7 +5,7 @@ citation: "14 CFR Part 151"
 title_number: 14
 part: 151
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:5201a5a811ba086c91ed33ad3be5c69c55876236be89ea3dc1bd9a00419f22df"
 generated: true
 title: "FEDERAL AID TO AIRPORTS"
@@ -16,7 +16,7 @@ tags:
 # Part 151 — FEDERAL AID TO AIRPORTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-151)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-151)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER I—AIRPORTS
 

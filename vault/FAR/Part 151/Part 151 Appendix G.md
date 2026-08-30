@@ -6,7 +6,7 @@ title_number: 14
 part: 151
 appendix: "Appendix G"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:2842c9faf69732ed0e256f245fadc291b72198868908edbcc228e79d6f522cb1"
 generated: true
 title: "Appendix G to Part 151"
@@ -20,7 +20,7 @@ tags:
 # Appendix G to Part 151
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-151)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-151)
 
 ## Official Text
 

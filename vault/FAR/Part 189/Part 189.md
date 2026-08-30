@@ -5,7 +5,7 @@ citation: "14 CFR Part 189"
 title_number: 14
 part: 189
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:c9b87a9ce74bd4345beebce04d699e34c8841a9a84f3208cf13eefeaf9355db0"
 generated: true
 title: "USE OF FEDERAL AVIATION ADMINISTRATION COMMUNICATIONS SYSTEM"
@@ -16,7 +16,7 @@ tags:
 # Part 189 — USE OF FEDERAL AVIATION ADMINISTRATION COMMUNICATIONS SYSTEM
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-189)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-189)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER K—ADMINISTRATIVE REGULATIONS
 

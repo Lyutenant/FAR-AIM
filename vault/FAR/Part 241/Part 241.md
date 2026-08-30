@@ -5,7 +5,7 @@ citation: "14 CFR Part 241"
 title_number: 14
 part: 241
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:61d6ca41a46fcfdd663f2f771c1e49943891d9bc85ed55c11fc26c84c04f1a50"
 generated: true
 title: "UNIFORM SYSTEM OF ACCOUNTS AND REPORTS FOR LARGE CERTIFICATED AIR CARRIERS"
@@ -16,7 +16,7 @@ tags:
 # Part 241 — UNIFORM SYSTEM OF ACCOUNTS AND REPORTS FOR LARGE CERTIFICATED AIR CARRIERS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-241)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-241)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

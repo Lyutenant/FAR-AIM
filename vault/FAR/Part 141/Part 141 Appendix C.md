@@ -6,7 +6,7 @@ title_number: 14
 part: 141
 appendix: "Appendix C"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:63fb8c11fe88c9f24d2694ed9f5dcb7cdd476760d366840ec83c4dbbc70c7654"
 generated: true
 title: "Appendix C to Part 141—Instrument Rating Course"
@@ -20,7 +20,7 @@ tags:
 # Appendix C to Part 141—Instrument Rating Course
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-141)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-141)
 
 ## Official Text
 

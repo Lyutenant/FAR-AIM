@@ -5,7 +5,7 @@ citation: "14 CFR Part 292"
 title_number: 14
 part: 292
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:5cb2148ed041b4f315641ce9c66798b2e2acb7d38aac078eb008d2bb52b721f1"
 generated: true
 title: "INTERNATIONAL CARGO TRANSPORTATION"
@@ -16,7 +16,7 @@ tags:
 # Part 292 — INTERNATIONAL CARGO TRANSPORTATION
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-292)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-292)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

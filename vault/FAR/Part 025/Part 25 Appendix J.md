@@ -6,7 +6,7 @@ title_number: 14
 part: 25
 appendix: "Appendix J"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:8f5589722e34b306ec11c474993b3a2f68b3db4962704055c4e6370623f20304"
 generated: true
 title: "Appendix J to Part 25—Emergency Evacuation"
@@ -20,7 +20,7 @@ tags:
 # Appendix J to Part 25—Emergency Evacuation
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-25)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-25)
 
 ## Official Text
 

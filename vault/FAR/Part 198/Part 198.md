@@ -5,7 +5,7 @@ citation: "14 CFR Part 198"
 title_number: 14
 part: 198
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:25223270da46bd32cc5b66effc0b899bc8c8037394ff8a2d35a44ff5fdcaff5a"
 generated: true
 title: "AVIATION INSURANCE"
@@ -16,7 +16,7 @@ tags:
 # Part 198 — AVIATION INSURANCE
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-198)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-198)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER N—WAR RISK INSURANCE
 

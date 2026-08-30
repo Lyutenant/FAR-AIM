@@ -6,7 +6,7 @@ title_number: 14
 part: 25
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:c1c50a8a7c1e9056a1a2a2192a2ef9da67695bf5b5d0c9af0a8cae3683807ba7"
 generated: true
 title: "Appendix B to Part 25"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 25
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-25)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-25)
 
 ## Official Text
 

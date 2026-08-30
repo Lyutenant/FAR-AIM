@@ -6,7 +6,7 @@ title_number: 14
 part: 38
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:408bcebbef094bf0a11b35e0ab62e47ea3822d2336c827e1c6d8397c42b8deba"
 generated: true
 title: "Appendix A to Part 38—Determination of Airplane Fuel Efficiency Metric Value"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 38—Determination of Airplane Fuel Efficiency Metric Value
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-38)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-38)
 
 ## Official Text
 

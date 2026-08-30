@@ -6,7 +6,7 @@ title_number: 14
 part: 43
 appendix: "Appendix E"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:1698ea059cf8afaa516f804e3c207bee7305f8bdb2b420ff21878cdf75ab13bb"
 generated: true
 title: "Appendix E to Part 43—Altimeter System Test and Inspection"
@@ -20,7 +20,7 @@ tags:
 # Appendix E to Part 43—Altimeter System Test and Inspection
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-43)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-43)
 
 ## Official Text
 

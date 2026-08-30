@@ -5,7 +5,7 @@ citation: "14 CFR Part 234"
 title_number: 14
 part: 234
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:91cc508f0a2e932e4054ab4d5f4aa5a74671adff40f8ea4ca5be164ef07f2fb0"
 generated: true
 title: "AIRLINE SERVICE QUALITY PERFORMANCE REPORTS"
@@ -16,7 +16,7 @@ tags:
 # Part 234 — AIRLINE SERVICE QUALITY PERFORMANCE REPORTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-234)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-234)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

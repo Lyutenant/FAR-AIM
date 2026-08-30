@@ -6,7 +6,7 @@ title_number: 14
 part: 1271
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:4ffb87778c5d562216660b1f28555fe47724bb2590eeffc88b243dc7d39a9c98"
 generated: true
 title: "Appendix B to Part 1271—Disclosure Form To Report Lobbying"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 1271—Disclosure Form To Report Lobbying
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-1271)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-1271)
 
 ## Official Text
 

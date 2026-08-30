@@ -6,7 +6,7 @@ title_number: 14
 part: 152
 appendix: "Appendix D"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:dacb66b8dd2944611d354c59c651f98a5461844548f6765809acdf20c3b2588c"
 generated: true
 title: "Appendix D to Part 152—Assurances"
@@ -20,7 +20,7 @@ tags:
 # Appendix D to Part 152—Assurances
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-152)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-152)
 
 ## Official Text
 

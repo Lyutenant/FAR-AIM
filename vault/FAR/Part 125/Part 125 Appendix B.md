@@ -6,7 +6,7 @@ title_number: 14
 part: 125
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:b3338337f55523fb8bb2dec8bc803b34adafb651128ab68940093e0ba5bcf63e"
 generated: true
 title: "Appendix B to Part 125—Criteria for Demonstration of Emergency Evacuation Procedures Under § 125.189"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 125—Criteria for Demonstration of Emergency Evacuation Procedures Under § 125.189
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-125)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-125)
 
 ## Official Text
 

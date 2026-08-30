@@ -6,7 +6,7 @@ title_number: 14
 part: 117
 appendix: "Table-C-to-Part-117"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:a818fff4c50b6741000365cb5f186c02513b8ae3684458edac9e474fc3afbcb0"
 generated: true
 title: "Table C to Part 117—Flight Duty Period: Augmented Operations"
@@ -20,7 +20,7 @@ tags:
 # Table C to Part 117—Flight Duty Period: Augmented Operations
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-117)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-117)
 
 ## Official Text
 

@@ -6,7 +6,7 @@ title_number: 14
 part: 420
 appendix: "Appendix E"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:ad0575af42673913e9f3bf2546836ee4a9b1ac3e3359547d4982b63fb8af7617"
 generated: true
 title: "Appendix E to Part 420—Tables for Explosive Site Plan"
@@ -20,7 +20,7 @@ tags:
 # Appendix E to Part 420—Tables for Explosive Site Plan
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-420)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-420)
 
 ## Official Text
 

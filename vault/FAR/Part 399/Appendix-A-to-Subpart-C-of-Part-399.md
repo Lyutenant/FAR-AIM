@@ -6,7 +6,7 @@ title_number: 14
 part: 399
 appendix: "Appendix-A-to-Subpart-C-of-Part-399"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:0b09bb60338aa13100567c47d91e4685a995542996f9f716db600df85e662e99"
 generated: true
 title: "Appendix A to Subpart C of Part 399—Example of SIFL Adjustment"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Subpart C of Part 399—Example of SIFL Adjustment
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-399)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-399)
 
 ## Official Text
 

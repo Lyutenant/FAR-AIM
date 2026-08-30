@@ -5,7 +5,7 @@ citation: "14 CFR Part 95"
 title_number: 14
 part: 95
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:221e87efdee290b890fba8ce62a9a3701c6293f5eda914fb044432dbcaacc52b"
 generated: true
 title: "IFR ALTITUDES"
@@ -16,7 +16,7 @@ tags:
 # Part 95 — IFR ALTITUDES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-95)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-95)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER F—AIR TRAFFIC AND GENERAL OPERATING RULES
 

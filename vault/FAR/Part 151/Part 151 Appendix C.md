@@ -6,7 +6,7 @@ title_number: 14
 part: 151
 appendix: "Appendix C"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:55575c3ab48a01bc78e0dd92766b12c0198bede0a8aa92255ca842aef362d241"
 generated: true
 title: "Appendix C to Part 151"
@@ -20,7 +20,7 @@ tags:
 # Appendix C to Part 151
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-151)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-151)
 
 ## Official Text
 

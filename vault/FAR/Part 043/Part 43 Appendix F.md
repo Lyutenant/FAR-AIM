@@ -6,7 +6,7 @@ title_number: 14
 part: 43
 appendix: "Appendix F"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:6a72fb625435e50c3f0cd090ca6f933e78baf8f79a4af25f5fe8da119db74cfb"
 generated: true
 title: "Appendix F to Part 43—ATC Transponder Tests and Inspections"
@@ -20,7 +20,7 @@ tags:
 # Appendix F to Part 43—ATC Transponder Tests and Inspections
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-43)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-43)
 
 ## Official Text
 

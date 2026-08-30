@@ -6,7 +6,7 @@ title_number: 14
 part: 141
 appendix: "Appendix E"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:6937df2af3242d5a55c341b701729773552bb521a1fb138e432c63b5d5827415"
 generated: true
 title: "Appendix E to Part 141—Airline Transport Pilot Certification Course"
@@ -20,7 +20,7 @@ tags:
 # Appendix E to Part 141—Airline Transport Pilot Certification Course
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-141)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-141)
 
 ## Official Text
 

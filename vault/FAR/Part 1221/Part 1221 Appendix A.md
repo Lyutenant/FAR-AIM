@@ -6,7 +6,7 @@ title_number: 14
 part: 1221
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:060b694d44adad05694b952b2c95b8956fc780efdc796a097d1c67bf25296cc1"
 generated: true
 title: "Appendix A to Part 1221—Congressional Space Medal of Honor"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 1221—Congressional Space Medal of Honor
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-1221)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-1221)
 
 ## Official Text
 

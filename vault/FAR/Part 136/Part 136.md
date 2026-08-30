@@ -5,7 +5,7 @@ citation: "14 CFR Part 136"
 title_number: 14
 part: 136
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:9aa476d0057574f54d624447af00c77bf68c05416985f3400d3c1cd95e625131"
 generated: true
 title: "COMMERCIAL AIR TOURS AND NATIONAL PARKS AIR TOUR MANAGEMENT"
@@ -16,7 +16,7 @@ tags:
 # Part 136 — COMMERCIAL AIR TOURS AND NATIONAL PARKS AIR TOUR MANAGEMENT
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-136)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-136)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER G—AIR CARRIERS AND OPERATORS FOR COMPENSATION OR HIRE: CERTIFICATION AND OPERATIONS
 

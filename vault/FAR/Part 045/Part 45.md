@@ -5,7 +5,7 @@ citation: "14 CFR Part 45"
 title_number: 14
 part: 45
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:0dcd8871c601c50571d9e22648ff7c7c1b70edd7ce9d3f453ae8fdc974d1d2ef"
 generated: true
 title: "IDENTIFICATION AND REGISTRATION MARKING"
@@ -16,7 +16,7 @@ tags:
 # Part 45 — IDENTIFICATION AND REGISTRATION MARKING
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-45)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-45)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 

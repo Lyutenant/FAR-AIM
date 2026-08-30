@@ -5,7 +5,7 @@ citation: "14 CFR Part 67"
 title_number: 14
 part: 67
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:3667b5f6011df3c9d7408c68baf4bd96db1c32cdc1fb2bb2e87c91cf5f35850d"
 generated: true
 title: "MEDICAL STANDARDS AND CERTIFICATION"
@@ -16,7 +16,7 @@ tags:
 # Part 67 — MEDICAL STANDARDS AND CERTIFICATION
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-67)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-67)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER D—AIRMEN
 

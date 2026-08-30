@@ -12,9 +12,9 @@
       "source_url": "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/index.html"
     },
     "ecfr_title_14": {
-      "accepted_version": "2026-08-19",
+      "accepted_version": "2026-08-24",
       "canonical_hash": "sha256:2879249d3b8fe5b1d21ca0931507050a0ea43d5fcab1628911c50591a6d7a2af",
-      "last_checked_at": "2026-08-23T03:09:00Z",
+      "last_checked_at": "2026-08-30T19:50:56Z",
       "raw_hash": "sha256:fbbbb5301cc44152f45c4cb7d5cbac9fc30c4a5287b0ccbf0d79aefdc5480637"
     },
     "pcg": {}

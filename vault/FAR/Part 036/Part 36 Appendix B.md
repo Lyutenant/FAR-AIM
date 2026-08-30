@@ -6,7 +6,7 @@ title_number: 14
 part: 36
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:6dc975d4f0fb703109c9e10c1926baab6e31e26f1a1eff9b59154abbefd8f889"
 generated: true
 title: "Appendix B to Part 36—Noise Levels for Transport Category and Jet Airplanes Under § 36.103"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 36—Noise Levels for Transport Category and Jet Airplanes Under § 36.103
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-36)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-36)
 
 ## Official Text
 

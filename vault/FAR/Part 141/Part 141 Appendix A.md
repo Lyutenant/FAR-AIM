@@ -6,7 +6,7 @@ title_number: 14
 part: 141
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:8e9e7b175861231084b20e79615363c9bae3110b1be15f5be00d4fc429132736"
 generated: true
 title: "Appendix A to Part 141—Recreational Pilot Certification Course"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 141—Recreational Pilot Certification Course
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-141)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-141)
 
 ## Official Text
 

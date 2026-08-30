@@ -5,7 +5,7 @@ citation: "14 CFR Part 141"
 title_number: 14
 part: 141
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:ab6f050551e3ed4c6bc6d61c593749cbcb097059823609a404eb7b7e6b3fb272"
 generated: true
 title: "PILOT SCHOOLS"
@@ -16,7 +16,7 @@ tags:
 # Part 141 — PILOT SCHOOLS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-141)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-141)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER H—SCHOOLS AND OTHER CERTIFICATED AGENCIES
 

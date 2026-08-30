@@ -5,7 +5,7 @@ citation: "14 CFR Part 214"
 title_number: 14
 part: 214
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:d630bcbebae3a8d70b8045b2d838a12ba7184a9fd27f54cab06206c1a3780a9b"
 generated: true
 title: "TERMS, CONDITIONS, AND LIMITATIONS OF FOREIGN AIR CARRIER PERMITS AUTHORIZING CHARTER TRANSPORTATION ONLY"
@@ -16,7 +16,7 @@ tags:
 # Part 214 — TERMS, CONDITIONS, AND LIMITATIONS OF FOREIGN AIR CARRIER PERMITS AUTHORIZING CHARTER TRANSPORTATION ONLY
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-214)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-214)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

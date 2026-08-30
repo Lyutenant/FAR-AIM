@@ -5,7 +5,7 @@ citation: "14 CFR Part 23"
 title_number: 14
 part: 23
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:6c80f0a5a4567fffccf913029d8fc58abcbf72d4c78d1f6cae18b7bb0ffb99c7"
 generated: true
 title: "AIRWORTHINESS STANDARDS: NORMAL CATEGORY AIRPLANES"
@@ -16,7 +16,7 @@ tags:
 # Part 23 — AIRWORTHINESS STANDARDS: NORMAL CATEGORY AIRPLANES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-23)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-23)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 

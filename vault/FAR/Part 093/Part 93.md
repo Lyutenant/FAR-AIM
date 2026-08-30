@@ -5,7 +5,7 @@ citation: "14 CFR Part 93"
 title_number: 14
 part: 93
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:b0c7d47e2e04297456a24b1b270ad299a23bebae5e39002915b10b54d93db59a"
 generated: true
 title: "SPECIAL AIR TRAFFIC RULES"
@@ -16,7 +16,7 @@ tags:
 # Part 93 — SPECIAL AIR TRAFFIC RULES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-93)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-93)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER F—AIR TRAFFIC AND GENERAL OPERATING RULES
 

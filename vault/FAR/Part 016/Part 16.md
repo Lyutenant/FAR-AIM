@@ -5,7 +5,7 @@ citation: "14 CFR Part 16"
 title_number: 14
 part: 16
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:da3f25186849f00e001cc2c9bab6ba3471ac179401a07de9ed5f7c59b6d78b05"
 generated: true
 title: "RULES OF PRACTICE FOR FEDERALLY-ASSISTED AIRPORT ENFORCEMENT PROCEEDINGS"
@@ -16,7 +16,7 @@ tags:
 # Part 16 — RULES OF PRACTICE FOR FEDERALLY-ASSISTED AIRPORT ENFORCEMENT PROCEEDINGS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-16)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-16)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER B—PROCEDURAL RULES
 

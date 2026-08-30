@@ -5,7 +5,7 @@ citation: "14 CFR Part 145"
 title_number: 14
 part: 145
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:ceeb71d2aebe96ece1f46b6e9fd973e9166e8a8afcb513f40b020968ea76978c"
 generated: true
 title: "REPAIR STATIONS"
@@ -16,7 +16,7 @@ tags:
 # Part 145 — REPAIR STATIONS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-145)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-145)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER H—SCHOOLS AND OTHER CERTIFICATED AGENCIES
 

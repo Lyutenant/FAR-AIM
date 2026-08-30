@@ -5,7 +5,7 @@ citation: "14 CFR Part 381"
 title_number: 14
 part: 381
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:637d7fe9981c45d3b3355b91c5f227e734423b4e69187e95c254c0b7f343ccf8"
 generated: true
 title: "SPECIAL EVENT TOURS"
@@ -16,7 +16,7 @@ tags:
 # Part 381 — SPECIAL EVENT TOURS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-381)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-381)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER D—SPECIAL REGULATIONS
 

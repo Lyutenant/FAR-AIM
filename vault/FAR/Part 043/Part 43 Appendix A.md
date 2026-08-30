@@ -6,7 +6,7 @@ title_number: 14
 part: 43
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:a6456640ae337b84657629c7d26b4861bbc5f2f26905ea4106d9343b74eb29ea"
 generated: true
 title: "Appendix A to Part 43—Major Alterations, Major Repairs, and Preventive Maintenance"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 43—Major Alterations, Major Repairs, and Preventive Maintenance
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-43)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-43)
 
 ## Official Text
 

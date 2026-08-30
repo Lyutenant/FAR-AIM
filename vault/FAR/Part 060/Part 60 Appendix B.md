@@ -6,7 +6,7 @@ title_number: 14
 part: 60
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:c04351066e3013eed5bbc432eb86db008f9c09b18586b17ba5d916d82f74f010"
 generated: true
 title: "Appendix B to Part 60—Qualification Performance Standards for Airplane Flight Training Devices"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 60—Qualification Performance Standards for Airplane Flight Training Devices
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-60)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-60)
 
 ## Official Text
 

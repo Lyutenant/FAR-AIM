@@ -6,7 +6,7 @@ title_number: 14
 part: 27
 appendix: "Appendix D"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:e41e75a4765f9263860b23afc0a62a31bb5e70319cb6f960aae8cd890f5117bc"
 generated: true
 title: "Appendix D to Part 27—HIRF Environments and Equipment HIRF Test Levels"
@@ -20,7 +20,7 @@ tags:
 # Appendix D to Part 27—HIRF Environments and Equipment HIRF Test Levels
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-27)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-27)
 
 ## Official Text
 

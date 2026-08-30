@@ -5,7 +5,7 @@ citation: "14 CFR Part 399"
 title_number: 14
 part: 399
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:077de7dcf2f374cd8d9eac720ea1f48fbc521027d5e289a000113ab103e8d2f6"
 generated: true
 title: "STATEMENTS OF GENERAL POLICY"
@@ -16,7 +16,7 @@ tags:
 # Part 399 — STATEMENTS OF GENERAL POLICY
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-399)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-399)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER F—POLICY STATEMENTS
 

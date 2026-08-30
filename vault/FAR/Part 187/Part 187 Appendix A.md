@@ -6,7 +6,7 @@ title_number: 14
 part: 187
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:2e178ad177a8970c4eb15df420c5521e163647b560ca6ae2c735bab5ad4c4d3c"
 generated: true
 title: "Appendix A to Part 187—Methodology for Computation of Fees for Certification Services Performed Outside the United States"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 187—Methodology for Computation of Fees for Certification Services Performed Outside the United States
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-187)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-187)
 
 ## Official Text
 

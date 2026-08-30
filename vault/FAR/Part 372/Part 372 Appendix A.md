@@ -6,7 +6,7 @@ title_number: 14
 part: 372
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:25db87e02b26f057411dabc5c23ee043d5b77a52eb6f228396ccfcc562b19f17"
 generated: true
 title: "Appendix A to Part 372—Overseas Military Personnel Charter Operator's Surety Bond Under Part 372 of the Regulations of the Department of Transportation (14 CFR Part 372)"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 372—Overseas Military Personnel Charter Operator's Surety Bond Under Part 372 of the Regulations of the Department of Transportation (14 CFR Part 372)
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-372)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-372)
 
 ## Official Text
 

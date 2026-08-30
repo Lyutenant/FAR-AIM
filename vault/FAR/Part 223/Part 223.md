@@ -5,7 +5,7 @@ citation: "14 CFR Part 223"
 title_number: 14
 part: 223
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:eca5b23275c325d240d1ad13c25fbe42372365f8eead5bb803947aaa6cd8c7d3"
 generated: true
 title: "FREE AND REDUCED-RATE TRANSPORTATION"
@@ -16,7 +16,7 @@ tags:
 # Part 223 — FREE AND REDUCED-RATE TRANSPORTATION
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-223)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-223)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

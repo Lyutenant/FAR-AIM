@@ -5,7 +5,7 @@ citation: "14 CFR Part 298"
 title_number: 14
 part: 298
 source: "ecfr"
-source_version: "2026-08-19"
+source_version: "2026-08-24"
 canonical_hash: "sha256:cb90debcd06d6ef298f88969327922d94c1bbf27afd6e2d3d80c94e94d77584f"
 generated: true
 title: "EXEMPTIONS FOR AIR TAXI AND COMMUTER AIR CARRIER OPERATIONS"
@@ -16,7 +16,7 @@ tags:
 # Part 298 — EXEMPTIONS FOR AIR TAXI AND COMMUTER AIR CARRIER OPERATIONS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-19 — [view on eCFR](https://www.ecfr.gov/on/2026-08-19/title-14/part-298)
+> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-298)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 
