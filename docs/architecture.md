@@ -45,18 +45,26 @@ normalize → validate → diff → generate. Never website → Markdown directl
 - `far_aim.sources.aim` — AIM acquisition (Phase 4): index-driven page set,
   figure download, source-integrity gate, tree-hashed snapshot archive
   (`pages/`, `figures/`, `metadata.json`), manifest update
+- `far_aim.sources.pcg` — PCG acquisition (Phase 5): index-driven letter-page
+  set, source-integrity gate, tree-hashed snapshot archive (`pages/`,
+  `metadata.json`), manifest update — same transactional machinery as the AIM
 - `far_aim.htmltree` — minimal deterministic HTML DOM (stdlib `html.parser`)
   used by the FAA parsers
-- `far_aim.models.cfr` / `far_aim.models.aim` — stable IDs + canonical
-  content hashing (Phases 2, 4)
+- `far_aim.models.cfr` / `far_aim.models.aim` / `far_aim.models.pcg` —
+  stable IDs + canonical content hashing (Phases 2, 4, 5)
 - `far_aim.parsers.ecfr` — eCFR XML → canonical part JSON (Phase 2)
 - `far_aim.parsers.aim` — FAA AIM HTML → canonical chapter/appendix JSON
   (Phase 4): allowlisted grammar, chapter-contents cross-check, per-page
   lossless capture, explicit-reference resolution
-- `far_aim.generate` — canonical JSON → Obsidian vault (Phases 3–4): naming
+- `far_aim.parsers.pcg` — FAA PCG HTML → canonical letter/publication JSON
+  (Phase 5): allowlisted grammar over the glossary's legacy markup,
+  text-derived stable term IDs, per-page lossless capture, See/Refer
+  cross-reference resolution
+- `far_aim.generate` — canonical JSON → Obsidian vault (Phases 3–5): naming
   policy, deterministic frontmatter, block renderers (`markdown` for the
-  CFR, `aim_markdown` for the AIM), note builders (`notes`, `aim_notes`),
-  and the plan/verify/sync build with figure assets (see vault.md)
+  CFR, `aim_markdown` for the AIM), note builders (`notes`, `aim_notes`,
+  `pcg_notes`), and the plan/verify/sync build with figure assets (see
+  vault.md)
 - `far_aim.links.citations` — deterministic in-text CFR citation extraction
   (Phase 3, plan §12.1 Tier 1)
 - `far_aim.cli` — one publish/recover/verify path for every normalized

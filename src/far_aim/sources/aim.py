@@ -900,7 +900,16 @@ def _fetch_aim_locked(
                     tmp_dir, snapshot_dir, new_hash=raw_hash, version=version
                 )
                 state.last_checked_at = checked_at
-                if state.accepted_version != version or state.raw_hash != raw_hash:
+                if (
+                    state.accepted_version != version
+                    or state.raw_hash != raw_hash
+                    or state.edition_label != discovery.label
+                    or state.source_url != discovery.index_url
+                ):
+                    # A changed edition — or the same bytes re-accepted under
+                    # a changed listing label/URL — invalidates the parsed
+                    # layer: its documents carry the old provenance, which
+                    # `validate` pins against the manifest.
                     state.canonical_hash = None
                 state.accepted_version = version
                 state.effective_date = discovery.effective_date

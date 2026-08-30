@@ -89,5 +89,22 @@ byte-compares it. Model, grammar and rendering rules: docs/data-model.md,
 docs/validation.md, docs/vault.md, `far_aim.parsers.aim`'s docstring.
 Operational note: accepted AIM snapshots must be archived outside the repo
 (plan §6.2) — the fetcher reminds but does not do it.
-Next: Phase 5 (Pilot/Controller Glossary). Do not start AI-enrichment work
+Phase 5 (Pilot/Controller Glossary) complete: `far-aim fetch pcg` discovers
+the current edition from the FAA publications page (cross-checked against
+the PCG index's own edition summary), downloads the index plus all 23
+letter pages into the tree-hashed raw snapshot
+(`data/raw/pcg/{date}-change-{n}/`) and records it in the manifest;
+`far-aim parse pcg` turns the snapshot into canonical letter/publication
+JSON (`data/normalized/pcg/`) — 23 letters, 1,559 terms (three OR-joined
+duplicates merged), every page lossless, term ids derived from term text
+(upstream anchors are non-unique), entry paragraphs stored verbatim,
+See/Refer cross-references resolved deterministically (typos left
+unresolved, never guessed) — via the same `cli.LayerSpec` machinery;
+`far-aim build-vault` renders `vault/PCG/` (1,560 notes named by the term
+itself, letters as folders, stems/aliases unique across all three corpora)
+and `far-aim validate` byte-compares it. Model, grammar and rendering
+rules: docs/data-model.md, docs/validation.md, docs/vault.md,
+`far_aim.parsers.pcg`'s docstring. Accepted PCG snapshots must be archived
+outside the repo (plan §6.2) like the AIM's.
+Next: Phase 6 (cross-source links). Do not start AI-enrichment work
 before Phase 9 (plan §31).

@@ -30,14 +30,18 @@ from far_aim.generate import BuildError
 from far_aim.generate import aim_notes as generate_aim_notes
 from far_aim.generate import build as generate_build
 from far_aim.generate import notes as generate_notes
+from far_aim.generate import pcg_notes as generate_pcg_notes
 from far_aim.log import setup_logging
 from far_aim.manifest import ManifestError, SourceManifest, SourceState
 from far_aim.models import aim as aim_model
 from far_aim.models import cfr as cfr_model
+from far_aim.models import pcg as pcg_model
 from far_aim.parsers import aim as aim_parser
 from far_aim.parsers import ecfr as ecfr_parser
+from far_aim.parsers import pcg as pcg_parser
 from far_aim.sources import aim as aim_source
 from far_aim.sources import ecfr
+from far_aim.sources import pcg as pcg_source
 from far_aim.sources.common import FetchError, exclusive_lock, fetch_lock_path
 
 EXIT_OK = 0
@@ -49,8 +53,6 @@ CORPORA = ("ecfr", "aim", "pcg")
 NOT_IMPLEMENTED_PHASE = {
     ("normalize", None): "Phase 2",
     ("diff", None): "Phase 2",
-    ("fetch", "pcg"): "Phase 5",
-    ("parse", "pcg"): "Phase 5",
     ("update", None): "Phase 8",
 }
 
@@ -270,6 +272,74 @@ ECFR_SPEC = LayerSpec(
     source_defect=_ecfr_source_defect,
 )
 
+def _pcg_source_defect(doc: dict, source: dict, state: SourceState) -> str | None:
+    """Every provenance field the PCG notes render must match the manifest."""
+    expected = {
+        "provider": "faa",
+        "publication": "pcg",
+        "source_version": state.accepted_version,
+        "edition_label": state.edition_label,
+        "effective_date": state.effective_date,
+        "change": state.change,
+        "raw_checksum": state.raw_hash,
+    }
+    defect = _expected_source_fields(source, expected)
+    if defect is not None:
+        return defect
+    return _pcg_url_defect(doc, source.get("url"), state.source_url)
+
+
+def _pcg_url_defect(doc: dict, url: object, index_url: str | None) -> str | None:
+    """A document's ``source.url`` must be *its own* page of the accepted edition.
+
+    Publication → the index page; letter → its ``glossary-x.html`` page;
+    term → its letter's page. A term's anchor is upstream layout (anchor ids
+    are not unique in the FAA HTML), so any or no fragment is accepted on
+    term documents, but never on container documents.
+    """
+    if not isinstance(index_url, str) or not isinstance(url, str):
+        return f"source url {url!r} cannot be checked against the manifest ({index_url!r})"
+    base = index_url.rsplit("/", 1)[0] + "/"
+    if not url.startswith(base):
+        return f"source url {url!r} is outside the accepted edition ({base!r})"
+    page, _, anchor = url[len(base) :].partition("#")
+    kind = doc.get("document_type")
+    if kind == pcg_model.DOCUMENT_TYPE_PUBLICATION:
+        if page != pcg_source.INDEX_PAGE or anchor:
+            return f"source url {url!r} is not the edition index page"
+        return None
+    try:
+        identity = pcg_source.classify_page(page)
+    except ValueError:
+        return f"source url {url!r} does not name an edition page"
+    if kind == pcg_model.DOCUMENT_TYPE_LETTER:
+        expected = ("letter", str(doc.get("letter", "")).lower())
+        if identity != expected or anchor:
+            return (
+                f"source url {url!r} does not match the document's identity "
+                f"({doc.get('id')!r} expects page {expected})"
+            )
+        return None
+    if kind == pcg_model.DOCUMENT_TYPE_TERM:
+        expected = ("letter", str(doc.get("letter", "")).lower())
+        if identity != expected:
+            return (
+                f"source url {url!r} does not match the document's identity "
+                f"({doc.get('id')!r} expects page {expected})"
+            )
+        return None
+    return f"document type {kind!r} has no expected source page"
+
+
+def _pcg_doc_key(doc: dict) -> str | None:
+    kind = doc.get("document_type")
+    if kind == pcg_model.DOCUMENT_TYPE_PUBLICATION:
+        return "publication"
+    if kind == pcg_model.DOCUMENT_TYPE_LETTER and isinstance(doc.get("letter"), str):
+        return f"letter-{doc['letter'].lower()}"
+    return None
+
+
 AIM_SPEC = LayerSpec(
     name="aim",
     source_name=aim_source.SOURCE_NAME,
@@ -298,6 +368,33 @@ AIM_SPEC = LayerSpec(
     doc_key=_aim_doc_key,
     filename=lambda key: f"{key}.json",
     source_defect=_aim_source_defect,
+)
+
+PCG_SPEC = LayerSpec(
+    name="pcg",
+    source_name=pcg_source.SOURCE_NAME,
+    label="PCG",
+    fetch_command="fetch pcg",
+    parse_command="parse pcg",
+    root_types=frozenset(
+        {
+            pcg_model.DOCUMENT_TYPE_PUBLICATION,
+            pcg_model.DOCUMENT_TYPE_LETTER,
+        }
+    ),
+    hashed_types=frozenset(
+        {
+            pcg_model.DOCUMENT_TYPE_PUBLICATION,
+            pcg_model.DOCUMENT_TYPE_LETTER,
+            pcg_model.DOCUMENT_TYPE_TERM,
+        }
+    ),
+    file_glob="*.json",
+    file_noun="document files",
+    key_noun="document",
+    doc_key=_pcg_doc_key,
+    filename=lambda key: f"{key}.json",
+    source_defect=_pcg_source_defect,
 )
 
 
@@ -335,7 +432,7 @@ def cmd_check(config: Config, *, remote: bool = False) -> int:
         return EXIT_OK
 
     # Each upstream is polled independently: one unreachable source must not
-    # hide the other's status (plan §25.3 — network failure ≠ source removed).
+    # hide the others' status (plan §25.3 — network failure ≠ source removed).
     code = EXIT_OK
     with ecfr.make_client() as client:
         try:
@@ -348,13 +445,19 @@ def cmd_check(config: Config, *, remote: bool = False) -> int:
         except FetchError as exc:
             print(f"error: aim: {exc}", file=sys.stderr)
             aim_discovery = None
-    if discovery is None or aim_discovery is None:
+        try:
+            pcg_discovery = pcg_source.discover_pcg(client)
+        except FetchError as exc:
+            print(f"error: pcg: {exc}", file=sys.stderr)
+            pcg_discovery = None
+    if discovery is None or aim_discovery is None or pcg_discovery is None:
         code = EXIT_ERROR
     if discovery is not None:
         code = max(code, _report_ecfr_remote(manifest, discovery))
     if aim_discovery is not None:
         code = max(code, _report_aim_remote(manifest, aim_discovery))
-    print("pcg: remote polling arrives in Phase 5.")
+    if pcg_discovery is not None:
+        code = max(code, _report_pcg_remote(manifest, pcg_discovery))
     return code
 
 
@@ -416,6 +519,40 @@ def _report_aim_remote(manifest: SourceManifest, aim_discovery: aim_source.AimDi
     return EXIT_OK
 
 
+def _report_pcg_remote(manifest: SourceManifest, discovery: pcg_source.PcgDiscovery) -> int:
+    state = manifest.sources[pcg_source.SOURCE_NAME]
+    listed = f"{discovery.label} (effective {discovery.effective_date})"
+    if state.accepted_version == discovery.version:
+        if not pcg_source.listing_matches_pins(state, discovery):
+            print(
+                f"error: pcg: FAA now lists the accepted edition {discovery.version} as "
+                f"{discovery.label!r} at {discovery.index_url!r} (accepted as "
+                f"{state.edition_label!r} at {state.source_url!r}); `fetch pcg` will "
+                "refuse this without --force.",
+                file=sys.stderr,
+            )
+            return EXIT_ERROR
+        print(f"pcg: up to date ({listed})")
+    elif (
+        state.effective_date is not None
+        and state.change is not None
+        and (discovery.effective_date, discovery.change) < (state.effective_date, state.change)
+    ):
+        print(
+            f"error: pcg: FAA lists {listed}, older than accepted effective "
+            f"{state.effective_date} change {state.change}; `fetch pcg` will refuse "
+            "this without --force.",
+            file=sys.stderr,
+        )
+        return EXIT_ERROR
+    else:
+        print(
+            f"pcg: update available — FAA lists {listed}, "
+            f"accepted {state.accepted_version or 'none'}"
+        )
+    return EXIT_OK
+
+
 # ---------------------------------------------------------------------------
 # fetch
 # ---------------------------------------------------------------------------
@@ -469,6 +606,33 @@ def cmd_fetch_aim(config: Config, *, force: bool) -> int:
         )
     else:
         print(f"unchanged: AIM {edition} already accepted; cached snapshot verified")
+    return EXIT_OK
+
+
+def cmd_fetch_pcg(config: Config, *, force: bool) -> int:
+    try:
+        result = pcg_source.fetch_pcg(config, force=force)
+    except (FetchError, ManifestError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    except OSError as exc:
+        print(f"error: filesystem failure during fetch: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    edition = f"{result.label} (effective {result.effective_date})"
+    if result.downloaded:
+        print(f"accepted: PCG {edition}")
+        print(f"  archive:  {result.snapshot_dir}")
+        print(f"  checksum: {result.raw_hash}")
+        print(
+            f"  size:     {result.byte_count} bytes, {result.page_count} pages, "
+            f"{result.term_count} term entries"
+        )
+        print(
+            "note: the FAA offers no point-in-time access — archive this snapshot "
+            "outside the repository (plan §6.2)."
+        )
+    else:
+        print(f"unchanged: PCG {edition} already accepted; cached snapshot verified")
     return EXIT_OK
 
 
@@ -675,6 +839,90 @@ def _parse_aim_locked(config: Config) -> int:
         f"{paragraphs} paragraphs, {appendices} appendices"
     )
     return _publish_normalized_layer(config, manifest, docs, AIM_SPEC, summary)
+
+
+def cmd_parse_pcg(config: Config) -> int:
+    """Parse the accepted PCG snapshot into canonical letter/publication JSON (Phase 5)."""
+    try:
+        with exclusive_lock(fetch_lock_path(config)):
+            return _parse_pcg_locked(config)
+    except FetchError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    except OSError as exc:
+        print(f"error: filesystem failure during parse: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+
+
+def _pcg_snapshot(config: Config, state: SourceState) -> tuple[Path, dict] | str:
+    """The verified accepted PCG snapshot directory and its metadata, or a defect."""
+    if state.accepted_version is None or state.raw_hash is None:
+        return "no accepted PCG snapshot; run `far-aim fetch pcg` first"
+    snapshot_dir = config.raw_dir / "pcg" / state.accepted_version
+    if not snapshot_dir.is_dir():
+        return f"archived snapshot missing: {snapshot_dir}; run `far-aim fetch pcg`"
+    if not pcg_source.verify_snapshot(
+        snapshot_dir, version=state.accepted_version, raw_hash=state.raw_hash
+    ):
+        return (
+            f"archived snapshot {snapshot_dir} is incomplete or does not match the accepted "
+            "checksum; run `far-aim fetch pcg` to restore it"
+        )
+    metadata = pcg_source.load_metadata(snapshot_dir)
+    assert metadata is not None
+    return snapshot_dir, metadata
+
+
+def _parse_pcg_locked(config: Config) -> int:
+    try:
+        manifest = SourceManifest.load(config.manifest_path)
+    except ManifestError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    state = manifest.sources[pcg_source.SOURCE_NAME]
+    snapshot = _pcg_snapshot(config, state)
+    if isinstance(snapshot, str):
+        print(f"error: {snapshot}", file=sys.stderr)
+        return EXIT_ERROR
+    snapshot_dir, metadata = snapshot
+    pinned = {
+        "edition_label": state.edition_label,
+        "effective_date": state.effective_date,
+        "change": state.change,
+        "index_url": state.source_url,
+    }
+    for key, value in pinned.items():
+        if value is None or metadata.get(key) != value:
+            print(
+                f"error: snapshot metadata {key} {metadata.get(key)!r} does not match the "
+                f"manifest ({value!r}); run `far-aim fetch pcg` to re-accept the edition",
+                file=sys.stderr,
+            )
+            return EXIT_ERROR
+    source = {
+        "provider": "faa",
+        "publication": "pcg",
+        "source_version": state.accepted_version,
+        "edition_label": state.edition_label,
+        "effective_date": state.effective_date,
+        "change": state.change,
+        "url": state.source_url,
+        "retrieved_at": metadata["retrieved_at"],
+        "raw_checksum": state.raw_hash,
+    }
+    _recover_normalized_layer(config, state, PCG_SPEC)
+    try:
+        docs = pcg_parser.build_pcg_docs(snapshot_dir, metadata, source)
+    except (pcg_parser.ParseError, UnicodeDecodeError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        print("note: nothing was written; last known-good output preserved.", file=sys.stderr)
+        return EXIT_ERROR
+    letters = sum(
+        1 for d in docs.values() if d["document_type"] == pcg_model.DOCUMENT_TYPE_LETTER
+    )
+    terms = sum(pcg_parser.count_terms(d) for d in docs.values())
+    summary = f"parsed PCG {state.accepted_version}: {letters} letters, {terms} terms"
+    return _publish_normalized_layer(config, manifest, docs, PCG_SPEC, summary)
 
 
 # ---------------------------------------------------------------------------
@@ -1167,7 +1415,7 @@ def _validate_locked(config: Config) -> int:
         print(f"error: {exc}", file=sys.stderr)
         return EXIT_ERROR
     print(f"ok: manifest schema valid ({path})")
-    for spec in (ECFR_SPEC, AIM_SPEC):
+    for spec in (ECFR_SPEC, AIM_SPEC, PCG_SPEC):
         code = _validate_normalized_layer(config, manifest, spec)
         if code != EXIT_OK:
             return code
@@ -1341,6 +1589,50 @@ def _aim_layer_pending_defect(config: Config, manifest: SourceManifest) -> str |
     )
 
 
+def _pcg_layer(config: Config, manifest: SourceManifest) -> generate_build.PcgLayer | str | None:
+    """The verified PCG layer; None when the PCG is not parsed yet."""
+    state = manifest.sources[pcg_source.SOURCE_NAME]
+    if state.accepted_version is None or state.canonical_hash is None:
+        return None
+    docs = _load_verified_docs(config, state, PCG_SPEC)
+    if isinstance(docs, str):
+        return docs
+    return generate_build.PcgLayer(docs=docs, title_hash=state.canonical_hash)
+
+
+def _vault_has_generated_pcg(config: Config) -> bool:
+    """True when generator-owned PCG notes are on disk."""
+    vault_pcg = config.vault_dir / generate_pcg_notes.PCG_DIR
+    if not vault_pcg.is_dir():
+        return False
+    return any(generate_build.is_generated_note(p) for p in sorted(vault_pcg.rglob("*.md")))
+
+
+def _pcg_layer_pending_defect(config: Config, manifest: SourceManifest) -> str | None:
+    """Why the vault's PCG output cannot be reconciled with the manifest right now.
+
+    Same rule as the AIM (plan §32.13): between ``fetch pcg`` accepting a
+    newer edition and ``parse pcg`` publishing it, a build would delete the
+    last known-good PCG notes as stale — refuse instead.
+    """
+    if not _vault_has_generated_pcg(config):
+        return None
+    state = manifest.sources[pcg_source.SOURCE_NAME]
+    if state.canonical_hash is not None:
+        return None
+    if state.accepted_version is not None:
+        return (
+            f"the vault holds generated PCG notes but the accepted PCG edition "
+            f"{state.accepted_version} has not been parsed yet; run `far-aim parse pcg` "
+            "first (building now would delete the existing PCG notes)"
+        )
+    return (
+        "the vault holds generated PCG notes but the manifest records no accepted PCG "
+        "snapshot; run `far-aim fetch pcg` and `far-aim parse pcg`, or remove "
+        f"{config.vault_dir / generate_pcg_notes.PCG_DIR} deliberately"
+    )
+
+
 def _validate_vault(config: Config, manifest: SourceManifest) -> int:
     """Verify the generated vault byte-matches the canonical layers.
 
@@ -1352,6 +1644,7 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
     state = manifest.sources[ecfr.SOURCE_NAME]
     vault_far = config.vault_dir / generate_notes.FAR_DIR
     vault_aim = config.vault_dir / generate_aim_notes.AIM_DIR
+    vault_pcg = config.vault_dir / generate_pcg_notes.PCG_DIR
     status_path = config.vault_dir / f"{generate_notes.SOURCE_STATUS_STEM}.md"
     # A vault "exists" only if any generator-owned note does. Directory
     # presence alone proves nothing: `vault/FAR/` holding only curated notes
@@ -1361,7 +1654,7 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
     # as "nothing to check".
     built = (status_path.exists() and generate_build.is_generated_note(status_path)) or any(
         generate_build.is_generated_note(p)
-        for root in (vault_far, vault_aim)
+        for root in (vault_far, vault_aim, vault_pcg)
         if root.is_dir()
         for p in sorted(root.rglob("*.md"))
     )
@@ -1379,17 +1672,24 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
     if isinstance(docs, str):
         print(f"error: {docs}", file=sys.stderr)
         return EXIT_ERROR
-    pending = _aim_layer_pending_defect(config, manifest)
-    if pending is not None:
-        print(f"error: {pending}", file=sys.stderr)
-        return EXIT_ERROR
+    for pending in (
+        _aim_layer_pending_defect(config, manifest),
+        _pcg_layer_pending_defect(config, manifest),
+    ):
+        if pending is not None:
+            print(f"error: {pending}", file=sys.stderr)
+            return EXIT_ERROR
     aim = _aim_layer(config, manifest)
     if isinstance(aim, str):
         print(f"error: {aim}", file=sys.stderr)
         return EXIT_ERROR
+    pcg = _pcg_layer(config, manifest)
+    if isinstance(pcg, str):
+        print(f"error: {pcg}", file=sys.stderr)
+        return EXIT_ERROR
     try:
         plan = generate_build.plan_vault(
-            docs, state.accepted_version, state.canonical_hash, manifest.sources, aim
+            docs, state.accepted_version, state.canonical_hash, manifest.sources, aim, pcg
         )
     except BuildError as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -1407,7 +1707,7 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
             )
             return EXIT_ERROR
     on_disk: list[Path] = []
-    for root in (vault_far, vault_aim):
+    for root in (vault_far, vault_aim, vault_pcg):
         if root.is_dir():
             on_disk.extend(sorted(root.rglob("*.md")))
     if status_path.exists():
@@ -1484,19 +1784,28 @@ def _build_vault_locked(config: Config) -> int:
     if isinstance(docs, str):
         print(f"error: {docs}", file=sys.stderr)
         return EXIT_ERROR
-    pending = _aim_layer_pending_defect(config, manifest)
-    if pending is not None:
-        print(f"error: {pending}", file=sys.stderr)
-        return EXIT_ERROR
+    for pending in (
+        _aim_layer_pending_defect(config, manifest),
+        _pcg_layer_pending_defect(config, manifest),
+    ):
+        if pending is not None:
+            print(f"error: {pending}", file=sys.stderr)
+            return EXIT_ERROR
     aim = _aim_layer(config, manifest)
     if isinstance(aim, str):
         print(f"error: {aim}", file=sys.stderr)
         return EXIT_ERROR
+    pcg = _pcg_layer(config, manifest)
+    if isinstance(pcg, str):
+        print(f"error: {pcg}", file=sys.stderr)
+        return EXIT_ERROR
     if aim is None:
-        print("note: no accepted AIM canonical layer; vault covers the FAR only.")
+        print("note: no accepted AIM canonical layer; the vault will not cover the AIM.")
+    if pcg is None:
+        print("note: no accepted PCG canonical layer; the vault will not cover the PCG.")
     try:
         stats = generate_build.build_vault(
-            config, state.accepted_version, state.canonical_hash, manifest.sources, docs, aim
+            config, state.accepted_version, state.canonical_hash, manifest.sources, docs, aim, pcg
         )
     except BuildError as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -1529,13 +1838,15 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_fetch_ecfr(config, force=args.force)
     if args.command == "fetch" and args.corpus == "aim":
         return cmd_fetch_aim(config, force=args.force)
+    if args.command == "fetch" and args.corpus == "pcg":
+        return cmd_fetch_pcg(config, force=args.force)
     if args.command == "parse" and args.corpus == "ecfr":
         return cmd_parse_ecfr(config, args.parts)
-    if args.command == "parse" and args.corpus == "aim":
+    if args.command == "parse" and args.corpus in ("aim", "pcg"):
         if args.parts:
             print("error: --part applies to `parse ecfr` only", file=sys.stderr)
             return EXIT_ERROR
-        return cmd_parse_aim(config)
+        return cmd_parse_aim(config) if args.corpus == "aim" else cmd_parse_pcg(config)
     if args.command == "build-vault":
         return cmd_build_vault(config)
 

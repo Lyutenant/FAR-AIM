@@ -21,13 +21,15 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from far_aim.config import Config
-from far_aim.generate import BuildError, aim_notes, naming, notes
+from far_aim.generate import BuildError, aim_notes, naming, notes, pcg_notes
 from far_aim.generate.aim_markdown import collect_asset_names
 from far_aim.generate.frontmatter import emit_frontmatter, frontmatter_defect
 from far_aim.models import aim as aim_model
 from far_aim.models import cfr as cfr_model
+from far_aim.models import pcg as pcg_model
 from far_aim.parsers import aim as aim_parser
 from far_aim.parsers import ecfr as ecfr_parser
+from far_aim.parsers import pcg as pcg_parser
 
 _WIKILINK_TARGET_RE = re.compile(r"\[\[([^\]|#]+)")
 _GENERATED_MARKER = "generated: true"
@@ -54,6 +56,9 @@ class Registry:
     aim_targets: dict[str, tuple[str, str]] = field(default_factory=dict)
     aim_note_count: int = 0
     aim_assets: set[str] = field(default_factory=set)
+    # PCG: id → (stem, display) link targets and note count.
+    pcg_targets: dict[str, tuple[str, str]] = field(default_factory=dict)
+    pcg_note_count: int = 0
 
 
 @dataclass(frozen=True)
@@ -63,6 +68,27 @@ class AimLayer:
     docs: dict[str, dict]
     title_hash: str
     assets: dict[str, bytes]
+
+
+@dataclass(frozen=True)
+class PcgLayer:
+    """The verified canonical PCG layer."""
+
+    docs: dict[str, dict]
+    title_hash: str
+
+
+def _iter_pcg_terms(docs: dict[str, dict]):
+    """Term documents of the PCG layer, in letter/document order."""
+    for key in sorted(docs):
+        doc = docs[key]
+        kind = doc.get("document_type")
+        if kind == pcg_model.DOCUMENT_TYPE_LETTER:
+            yield from doc["terms"]
+        elif kind == pcg_model.DOCUMENT_TYPE_PUBLICATION:
+            continue  # rendered into the PCG index note, not a note of its own
+        else:
+            raise BuildError(f"unknown PCG document type {kind!r} in {key!r}")
 
 
 def _iter_aim_documents(docs: dict[str, dict]):
@@ -176,11 +202,13 @@ def _add_stem(
     registry.stems[stem] = parts
 
 
-def build_registry(docs: dict[str, dict], aim: AimLayer | None = None) -> Registry:
+def build_registry(
+    docs: dict[str, dict], aim: AimLayer | None = None, pcg: PcgLayer | None = None
+) -> Registry:
     """Pass 1: stems, link targets, and alias candidates for every note.
 
-    Both corpora share one namespace: filename stems and aliases are checked
-    for uniqueness across FAR and AIM together (plan §17.4).
+    All corpora share one namespace: filename stems and aliases are checked
+    for uniqueness across FAR, AIM and PCG together (plan §17.4).
     """
     registry = Registry()
     seen: dict[str, str] = {}
@@ -193,6 +221,8 @@ def build_registry(docs: dict[str, dict], aim: AimLayer | None = None) -> Regist
     _add_stem(registry, seen, notes.SOURCE_STATUS_STEM, (f"{notes.SOURCE_STATUS_STEM}.md",))
     if aim is not None:
         _register_aim(registry, seen, citation_aliases, heading_candidates, aim)
+    if pcg is not None:
+        _register_pcg(registry, seen, citation_aliases, heading_candidates, pcg)
     for part, doc in docs.items():
         folder = naming.part_folder_name(part)
         stem = naming.part_index_stem(part)
@@ -282,6 +312,39 @@ def _register_aim(
         )
 
 
+def _register_pcg(
+    registry: Registry,
+    seen: dict[str, str],
+    citation_aliases: dict[str, list[str]],
+    heading_candidates: dict[str, str],
+    pcg: PcgLayer,
+) -> None:
+    index_stem = pcg_notes.PCG_INDEX_STEM
+    _add_stem(registry, seen, index_stem, (pcg_notes.PCG_DIR, f"{index_stem}.md"))
+    registry.pcg_note_count += 1
+    for term_doc in _iter_pcg_terms(pcg.docs):
+        registry.pcg_note_count += 1
+        term = term_doc["term"]
+        stem = naming.pcg_term_stem(term)
+        folder = naming.pcg_letter_folder(term_doc["letter"].lower())
+        _add_stem(
+            registry,
+            seen,
+            stem,
+            (pcg_notes.PCG_DIR, folder, f"{stem}.md"),
+            pattern=naming.PCG_STEM_RE,
+        )
+        registry.pcg_targets[term_doc["id"]] = (stem, pcg_notes.term_display(term_doc))
+        citation_aliases[term_doc["id"]] = []
+        # The verbatim term is an alias candidate when sanitization changed
+        # it — filtered through the global collision rule like heading
+        # aliases (plan §17.4): a reserved term's verbatim form can equal
+        # another note's stem (the term ``AIM`` vs the AIM index note), and
+        # an ambiguous alias must be dropped, not emitted.
+        if term != stem:
+            heading_candidates[term_doc["id"]] = term
+
+
 def _resolve_alias_collisions(
     registry: Registry,
     citation_aliases: dict[str, list[str]],
@@ -301,10 +364,11 @@ def _resolve_alias_collisions(
         counts[folded] = counts.get(folded, 0) + 1
     for note_id, cite in citation_aliases.items():
         aliases = list(cite)
-        heading = heading_candidates[note_id]
-        folded = heading.casefold()
-        if counts[folded] == 1 and folded not in taken:
-            aliases.append(heading)
+        heading = heading_candidates.get(note_id)
+        if heading is not None:
+            folded = heading.casefold()
+            if counts[folded] == 1 and folded not in taken:
+                aliases.append(heading)
         registry.aliases[note_id] = aliases
 
 
@@ -324,13 +388,14 @@ def plan_vault(
     title_hash: str,
     sources: dict[str, object],
     aim: AimLayer | None = None,
+    pcg: PcgLayer | None = None,
 ) -> dict[tuple[str, ...], bytes]:
     """Render the complete vault in memory and verify it (nothing written).
 
     The plan maps vault-relative path parts to bytes: Markdown notes plus,
     when an AIM layer is given, the archived figure assets it embeds.
     """
-    registry = build_registry(docs, aim)
+    registry = build_registry(docs, aim, pcg)
     plan: dict[tuple[str, ...], bytes] = {}
 
     def add(note: notes.Note) -> None:
@@ -370,7 +435,13 @@ def plan_vault(
             generated
         )
 
-    _verify_plan(plan, registry, docs, aim)
+    if pcg is not None:
+        for term_doc in _iter_pcg_terms(pcg.docs):
+            aliases = registry.aliases[term_doc["id"]]
+            add(pcg_notes.build_term_note(term_doc, aliases, registry.pcg_targets))
+        add(pcg_notes.build_pcg_index(pcg.docs, pcg.title_hash))
+
+    _verify_plan(plan, registry, docs, aim, pcg)
     return plan
 
 
@@ -428,11 +499,14 @@ def _verify_plan(
     registry: Registry,
     docs: dict[str, dict],
     aim: AimLayer | None,
+    pcg: PcgLayer | None = None,
 ) -> None:
-    """Phase 3/4 exit-criteria gates, enforced before any write."""
+    """Phase 3/4/5 exit-criteria gates, enforced before any write."""
     expected = len(docs) + registry.section_count + registry.appendix_count + 2
     if aim is not None:
         expected += registry.aim_note_count + len(registry.aim_assets) + 1  # + ledger
+    if pcg is not None:
+        expected += registry.pcg_note_count
     if len(plan) != expected:
         raise BuildError(f"planned {len(plan)} files, expected {expected}")
     parsed_sections = sum(ecfr_parser.count_sections(doc) for doc in docs.values())
@@ -447,6 +521,13 @@ def _verify_plan(
         if walked != parsed:
             raise BuildError(
                 f"walked {walked} AIM paragraphs but the canonical layer holds {parsed}"
+            )
+    if pcg is not None:
+        parsed = sum(pcg_parser.count_terms(doc) for doc in pcg.docs.values())
+        walked = registry.pcg_note_count - 1  # minus the PCG index note
+        if walked != parsed:
+            raise BuildError(
+                f"walked {walked} PCG terms but the canonical layer holds {parsed}"
             )
     for parts, data in plan.items():
         if not is_note_path(parts):
@@ -571,7 +652,7 @@ def sync_vault(config: Config, plan: dict[tuple[str, ...], bytes]) -> SyncStats:
             )
 
     stats = SyncStats()
-    owned_roots = [vault / notes.FAR_DIR, vault / aim_notes.AIM_DIR]
+    owned_roots = [vault / notes.FAR_DIR, vault / aim_notes.AIM_DIR, vault / pcg_notes.PCG_DIR]
     vault.mkdir(parents=True, exist_ok=True)
     backup_root = Path(tempfile.mkdtemp(dir=vault, prefix=".sync-backup-"))
     # (action, live path, backup path or None) — replayed in reverse on failure.
@@ -656,7 +737,8 @@ def build_vault(
     sources: dict[str, object],
     docs: dict[str, dict],
     aim: AimLayer | None = None,
+    pcg: PcgLayer | None = None,
 ) -> SyncStats:
     """Plan, verify, and sync the whole vault; raises BuildError on any defect."""
-    plan = plan_vault(docs, version, title_hash, sources, aim)
+    plan = plan_vault(docs, version, title_hash, sources, aim, pcg)
     return sync_vault(config, plan)

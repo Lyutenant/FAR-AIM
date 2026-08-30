@@ -35,7 +35,10 @@ Full specification: plan §5 (sources), §6 (acquisition), §26 (etiquette).
   LFS, or object storage). AIM figures/images are part of the snapshot:
   `data/raw/aim/{effective-date}-change-{n}/{pages,figures,metadata.json}`
   (~61 MB for the 2026-07-09 Change 3 edition), identified in the manifest by
-  a tree hash over every file's checksum. `far-aim fetch aim` prints a
+  a tree hash over every file's checksum. The PCG snapshot is
+  `data/raw/pcg/{effective-date}-change-{n}/{pages,metadata.json}` (~1.1 MB
+  — the index page plus one page per glossary letter; no figures), archived
+  and tree-hashed the same way. `far-aim fetch aim` / `fetch pcg` print a
   reminder on every acceptance; the archive step itself is operational and
   not automated here.
 

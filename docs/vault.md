@@ -170,3 +170,43 @@ vault/AIM/
 - Figures add ~54 MB of PNG/SVG to the committed vault for the current
   edition; that is the plan's decision (§4.2: figures are part of the corpus
   and are never hotlinked).
+
+## PCG (Phase 5)
+
+```text
+vault/PCG/
+├── PCG.md                       # publication index: purpose, terms by letter
+├── A/
+│   └── ABEAM.md                 # one note per term, named by the term itself
+├── C/
+│   └── CONTROLLED AIRSPACE.md
+└── N/
+    └── NAVIGATION SPECIFICATION (ICAO).md
+```
+
+- The term is the citation (plan §9): the stem is the term text verbatim,
+  deterministically sanitized to a portable, wikilink-safe filename
+  (`naming.pcg_term_stem`): unicode hyphens and `/` become `-`, `[…]`
+  becomes `(…)`, a trailing period drops (`CHART SUPPLEMENT U.S`), and a
+  term matching a reserved stem or a FAR/AIM citation shape gets a
+  ` (PCG)` suffix (today only the term `AIM`). Terms are published in
+  capitals and the stems keep that capitalization — deriving mixed case
+  from all-caps official text would be guesswork. When sanitization
+  changed anything, the verbatim term rides along as an alias — filtered
+  through the global alias-uniqueness rule, so a verbatim form that equals
+  another note's stem is dropped (the term `AIM`'s verbatim form is the
+  AIM index note's stem; `[[AIM]]` stays unambiguous).
+- Note body: H1 (the verbatim term), the Source callout naming the edition
+  and linking the term's own FAA page anchor, `## Official Text` — the
+  full entry paragraph(s) verbatim (term, dash and all), sub-lists flat
+  with `**a.**`-style markers, note boxes as callouts — then `## See Also`
+  (glossary cross-references, wikilinked when the target term is in the
+  corpus, plain text when the FAA's citation matches no term) and
+  `## References` (external documents; linked when the source carried a
+  URL — the AIM, eCFR parts). Bracketed `[ICAO]` tags display as `(ICAO)`
+  inside wikilinks, whose syntax reserves square brackets.
+- `PCG.md` renders the index page's purpose section and edition summary,
+  then every term as a link under its letter heading.
+- Cross-corpus effects: PCG stems join the global namespace, so a FAR/AIM
+  heading alias that case-folds to a glossary term (e.g. "Wake Turbulence")
+  is dropped by the existing global alias-uniqueness rule (plan §17.4).

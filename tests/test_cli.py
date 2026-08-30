@@ -8,12 +8,17 @@ from far_aim.cli import EXIT_ERROR, EXIT_NOT_IMPLEMENTED, EXIT_OK, main
 from far_aim.config import Config
 from far_aim.manifest import SourceManifest, SourceState
 from far_aim.parsers import aim as aim_parser
+from far_aim.parsers import pcg as pcg_parser
 from far_aim.sources import aim as aim_source
 from far_aim.sources import ecfr
+from far_aim.sources import pcg as pcg_src
 from tests.test_aim_source import FIXTURE_APPENDICES, FIXTURE_CHAPTERS, AimUpstream
 from tests.test_aim_source import VERSION as AIM_VERSION
 from tests.test_ecfr_source import FIXTURES as FIXTURES_DIR
 from tests.test_ecfr_source import ISSUE_DATE, Upstream
+from tests.test_pcg_source import FIXTURE_LETTERS as PCG_LETTERS
+from tests.test_pcg_source import VERSION as PCG_VERSION
+from tests.test_pcg_source import PcgUpstream
 
 
 def test_version_flag(capsys):
@@ -75,8 +80,6 @@ def test_validate_invalid_manifest(tmp_path, capsys):
 @pytest.mark.parametrize(
     "argv",
     [
-        ["fetch", "pcg"],
-        ["parse", "pcg"],
         ["normalize"],
         ["diff"],
         ["update"],
@@ -97,13 +100,16 @@ def test_unknown_corpus_rejected(tmp_path):
 
 @pytest.fixture
 def mock_upstream(monkeypatch):
-    """Fake eCFR *and* FAA upstreams behind one client (both sources are polled)."""
+    """Fake eCFR *and* FAA upstreams behind one client (all sources are polled)."""
     upstream = Upstream()
     upstream.aim = AimUpstream()
+    upstream.pcg = PcgUpstream()
 
     def handler(request: httpx.Request) -> httpx.Response:
         if request.url.host == "www.ecfr.gov":
             return upstream.handler(request)
+        if request.url.path.startswith(PcgUpstream.PREFIX):
+            return upstream.pcg.handler(request)
         return upstream.aim.handler(request)
 
     def client() -> httpx.Client:
@@ -122,6 +128,13 @@ def mock_upstream(monkeypatch):
     monkeypatch.setattr(aim_source, "REQUIRED_APPENDICES", FIXTURE_APPENDICES)
     monkeypatch.setattr(aim_source.time, "sleep", lambda _s: None)
     monkeypatch.setattr(aim_parser, "REQUIRE_RESOLVED_REFERENCES", False)
+    monkeypatch.setattr(pcg_src, "make_client", client)
+    monkeypatch.setattr(pcg_src, "MIN_PAGES", 3)
+    monkeypatch.setattr(pcg_src, "MIN_TERMS", 5)
+    monkeypatch.setattr(pcg_src, "PAUSE_SECONDS", 0)
+    monkeypatch.setattr(pcg_src, "REQUIRED_LETTERS", PCG_LETTERS)
+    monkeypatch.setattr(pcg_src.time, "sleep", lambda _s: None)
+    monkeypatch.setattr(pcg_parser, "REQUIRE_RESOLVED_REFERENCES", False)
     return upstream
 
 
@@ -1311,7 +1324,13 @@ def test_full_title_vault_build(tmp_path, capsys):
         os.symlink(_NORMALIZED.parent / "aim", config.normalized_dir / "aim")
         config.raw_dir.mkdir(parents=True, exist_ok=True)
         os.symlink(aim_raw, config.raw_dir / "aim")
-        expected_total = 6772 + _aim_file_count(_NORMALIZED.parent / "aim")
+        expected_total += _aim_file_count(_NORMALIZED.parent / "aim")
+    if manifest.sources["pcg"].canonical_hash is not None:
+        # The PCG layer rides along too (Phase 5).
+        if not (_NORMALIZED.parent / "pcg").is_dir():
+            pytest.skip("manifest records a PCG layer that is not on disk")
+        os.symlink(_NORMALIZED.parent / "pcg", config.normalized_dir / "pcg")
+        expected_total += _pcg_file_count(_NORMALIZED.parent / "pcg")
 
     assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
     out = capsys.readouterr().out
@@ -1349,6 +1368,15 @@ def _aim_file_count(layer_dir) -> int:
         for section in doc.get("sections", []):
             notes += 1 + len(section["paragraphs"])
     return notes + len(aim_asset_hashes(docs)) + 1  # + asset ledger
+
+
+def _pcg_file_count(layer_dir) -> int:
+    """Notes the PCG layer contributes: the index plus one per term."""
+    notes = 1  # PCG.md (renders the publication document)
+    for path in layer_dir.glob("*.json"):
+        doc = json.loads(path.read_text(encoding="utf-8"))
+        notes += len(doc.get("terms", []))
+    return notes
 
 
 def test_validate_detects_deleted_far_tree(tmp_path, capsys):
@@ -1757,6 +1785,205 @@ def test_build_refuses_to_drop_aim_notes_while_new_edition_unparsed(
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
 
 
+# ---------------------------------------------------------------------------
+# PCG (Phase 5)
+# ---------------------------------------------------------------------------
+
+
+def test_fetch_pcg_end_to_end(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+
+    assert main(["--root", str(tmp_path), "fetch", "pcg"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "accepted: PCG Basic with Change 1, 2 and 3 (effective 2026-07-09)" in out
+    assert "6 pages, 117 term entries" in out
+    assert "archive this snapshot outside the repository" in out
+    snapshot = config.raw_dir / "pcg" / PCG_VERSION
+    assert (snapshot / "pages" / "glossary-o.html").exists()
+    state = SourceManifest.load(config.manifest_path).sources["pcg"]
+    assert state.accepted_version == PCG_VERSION and state.change == 3
+
+    assert main(["--root", str(tmp_path), "fetch", "pcg"]) == EXIT_OK
+    assert "unchanged" in capsys.readouterr().out
+    requests = mock_upstream.pcg.page_requests()
+    assert main(["--root", str(tmp_path), "check", "--remote"]) == EXIT_OK
+    assert "pcg: up to date (Basic with Change 1, 2 and 3 (effective 2026-07-09))" in (
+        capsys.readouterr().out
+    )
+    assert mock_upstream.pcg.page_requests() == requests
+
+
+def test_check_remote_reports_pcg_update_available(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    manifest = SourceManifest.default()
+    manifest.sources["ecfr_title_14"] = SourceState(accepted_version=ISSUE_DATE)
+    manifest.sources["pcg"] = SourceState(
+        accepted_version="2026-01-22-change-2", effective_date="2026-01-22", change=2
+    )
+    manifest.save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "check", "--remote"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "pcg: update available" in out
+    assert "accepted 2026-01-22-change-2" in out
+
+
+def test_parse_pcg_requires_fetch(tmp_path, capsys):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "parse", "pcg"]) == EXIT_ERROR
+    assert "run `far-aim fetch pcg` first" in capsys.readouterr().err
+
+
+def test_parse_pcg_rejects_part_option(tmp_path, capsys):
+    assert main(["--root", str(tmp_path), "parse", "pcg", "--part", "91"]) == EXIT_ERROR
+    assert "--part applies to `parse ecfr` only" in capsys.readouterr().err
+
+
+def test_parse_pcg_publishes_layer_and_validates(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "fetch", "pcg"]) == EXIT_OK
+    capsys.readouterr()
+
+    assert main(["--root", str(tmp_path), "parse", "pcg"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "parsed PCG 2026-07-09-change-3: 5 letters, 117 terms" in out
+    assert "manifest updated: canonical_hash" in out
+    layer = config.normalized_dir / "pcg"
+    assert sorted(p.name for p in layer.glob("*.json")) == [
+        "letter-b.json",
+        "letter-k.json",
+        "letter-n.json",
+        "letter-o.json",
+        "letter-t.json",
+        "publication.json",
+    ]
+    state = SourceManifest.load(config.manifest_path).sources["pcg"]
+    assert state.canonical_hash is not None
+    doc = json.loads((layer / "letter-k.json").read_text(encoding="utf-8"))
+    assert doc["source"]["raw_checksum"] == state.raw_hash
+
+    # Re-parsing is a no-op for the manifest and byte-identical on disk.
+    before = {p.name: p.read_bytes() for p in layer.glob("*.json")}
+    assert main(["--root", str(tmp_path), "parse", "pcg"]) == EXIT_OK
+    assert "canonical_hash unchanged" in capsys.readouterr().out
+    assert {p.name: p.read_bytes() for p in layer.glob("*.json")} == before
+
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    assert "ok: normalized PCG layer verified (6 documents" in capsys.readouterr().out
+
+
+def test_validate_rejects_tampered_pcg_layer(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "fetch", "pcg"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "parse", "pcg"]) == EXIT_OK
+    capsys.readouterr()
+    path = config.normalized_dir / "pcg" / "letter-k.json"
+    doc = json.loads(path.read_text(encoding="utf-8"))
+    doc["terms"][0]["content"][0]["text"] += " Tampered."
+    path.write_text(json.dumps(doc, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
+    assert "stored canonical_hash of 'pcg-letter-k' does not match" in capsys.readouterr().err
+
+
+def test_validate_rejects_altered_pcg_provenance(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "fetch", "pcg"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "parse", "pcg"]) == EXIT_OK
+    capsys.readouterr()
+    path = config.normalized_dir / "pcg" / "letter-k.json"
+    original = path.read_text(encoding="utf-8")
+    base = "https://www.faa.gov/air_traffic/publications/atpubs/pcg_html/"
+    cases = (
+        ("edition_label", "Basic with Change 9", "does not match"),
+        ("url", "https://evil.invalid/glossary-k.html", "outside the accepted edition"),
+        ("url", base + "x.html", "edition page"),
+        ("url", base + "glossary-b.html", "does not match the document's identity"),
+        ("url", base + "glossary-k.html#X", "does not match the document's identity"),
+    )
+    for key, value, message in cases:
+        doc = json.loads(original)
+        doc["source"][key] = value
+        path.write_text(json.dumps(doc, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
+        err = capsys.readouterr().err
+        assert f"source {key}" in err and message in err
+    path.write_text(original, encoding="utf-8")
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+
+
+def _build_full_fixture_vault(tmp_path, capsys, mock_upstream) -> Config:
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    for argv in (
+        ["fetch", "ecfr"], ["parse", "ecfr"],
+        ["fetch", "aim"], ["parse", "aim"],
+        ["fetch", "pcg"], ["parse", "pcg"],
+    ):
+        assert main(["--root", str(tmp_path), *argv]) == EXIT_OK
+    capsys.readouterr()
+    return config
+
+
+def test_build_vault_with_pcg_layer(tmp_path, capsys, mock_upstream):
+    config = _build_full_fixture_vault(tmp_path, capsys, mock_upstream)
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    assert "ok: vault generated" in capsys.readouterr().out
+    pcg_dir = config.vault_dir / "PCG"
+    assert (pcg_dir / "PCG.md").exists()
+    assert (pcg_dir / "K" / "KNOWN TRAFFIC.md").exists()
+    assert (pcg_dir / "T" / "TRAFFIC PATTERN.md").exists()
+    assert (pcg_dir / "O" / "OUTER FIX.md").exists()
+    status = (config.vault_dir / "Source Status.md").read_text(encoding="utf-8")
+    assert "| Pilot/Controller Glossary | Change 3 — effective 2026-07-09 |" in status
+
+    # Idempotent, and validate agrees byte-for-byte.
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    assert "0 written" in capsys.readouterr().out
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    assert "ok: vault matches canonical layer" in capsys.readouterr().out
+
+
+def test_build_refuses_to_drop_pcg_notes_while_new_edition_unparsed(
+    tmp_path, capsys, mock_upstream
+):
+    """fetch pcg clears canonical_hash; a build in that window must not delete PCG output."""
+    config = _build_full_fixture_vault(tmp_path, capsys, mock_upstream)
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    capsys.readouterr()
+    note = config.vault_dir / "PCG" / "K" / "KNOWN TRAFFIC.md"
+    before = note.read_bytes()
+    # The publications page is served by the shared FAA fake (`upstream.aim`).
+    replaced = mock_upstream.aim.publications.replace(
+        "Pilot/Controller Glossary Basic with Change 1, 2 and 3</a> "
+        "<small>(<abbr>HTML</abbr>)</small> <small>(effective 7/9/2026)</small>",
+        "Pilot/Controller Glossary Basic with Change 1, 2, 3 and 4</a> "
+        "<small>(<abbr>HTML</abbr>)</small> <small>(effective 1/1/2027)</small>",
+    )
+    assert replaced != mock_upstream.aim.publications
+    mock_upstream.aim.publications = replaced
+    mock_upstream.pcg.pages["index.html"] = (
+        mock_upstream.pcg.pages["index.html"]
+        .replace(b"<p>Change: 3</p>", b"<p>Change: 4</p>")
+        .replace(b"<p>Effective: 7/9/26</p>", b"<p>Effective: 1/1/27</p>")
+    )
+    assert main(["--root", str(tmp_path), "fetch", "pcg"]) == EXIT_OK
+    assert SourceManifest.load(config.manifest_path).sources["pcg"].canonical_hash is None
+    capsys.readouterr()
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_ERROR
+    err = capsys.readouterr().err
+    assert "has not been parsed yet" in err and "parse pcg" in err
+    assert note.read_bytes() == before
+    assert main(["--root", str(tmp_path), "parse", "pcg"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    capsys.readouterr()
+    assert b"effective 2027-01-01" in note.read_bytes()
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+
+
 def test_build_vault_without_aim_layer_covers_far_only(tmp_path, capsys, mock_upstream):
     config = Config.load(tmp_path)
     SourceManifest.default().save(config.manifest_path)
@@ -1765,6 +1992,7 @@ def test_build_vault_without_aim_layer_covers_far_only(tmp_path, capsys, mock_up
     capsys.readouterr()
     assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
     out = capsys.readouterr().out
-    assert "vault covers the FAR only" in out
+    assert "the vault will not cover the AIM" in out
+    assert "the vault will not cover the PCG" in out
     assert not (config.vault_dir / "AIM").exists()
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK

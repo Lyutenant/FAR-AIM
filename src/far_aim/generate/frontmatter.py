@@ -63,6 +63,35 @@ _AIM_APPENDIX_KEYS = tuple(
 )
 _AIM_INDEX_KEYS = tuple(key for key in _AIM_CHAPTER_KEYS if key not in ("chapter", "aliases"))
 
+# PCG notes (plan §10.3): the term itself is the citation; edition
+# provenance mirrors the AIM (effective date + change number).
+_PCG_TERM_KEYS = (
+    "id",
+    "type",
+    "term",
+    "letter",
+    "source",
+    "effective_date",
+    "change",
+    "canonical_hash",
+    "generated",
+    "title",
+    "aliases",
+    "tags",
+)
+_PCG_INDEX_KEYS = (
+    "id",
+    "type",
+    "citation",
+    "source",
+    "effective_date",
+    "change",
+    "canonical_hash",
+    "generated",
+    "title",
+    "tags",
+)
+
 SCHEMAS: dict[str, tuple[tuple[str, ...], frozenset[str]]] = {
     "regulation": (_REGULATION_KEYS, frozenset(_REGULATION_KEYS) - {"aliases", "tags"}),
     "appendix": (_APPENDIX_KEYS, frozenset(_APPENDIX_KEYS) - {"aliases", "tags"}),
@@ -76,12 +105,16 @@ SCHEMAS: dict[str, tuple[tuple[str, ...], frozenset[str]]] = {
     "aim_chapter": (_AIM_CHAPTER_KEYS, frozenset(_AIM_CHAPTER_KEYS) - {"aliases", "tags"}),
     "aim_appendix": (_AIM_APPENDIX_KEYS, frozenset(_AIM_APPENDIX_KEYS) - {"aliases", "tags"}),
     "aim_index": (_AIM_INDEX_KEYS, frozenset(_AIM_INDEX_KEYS) - {"tags"}),
+    "pcg": (_PCG_TERM_KEYS, frozenset(_PCG_TERM_KEYS) - {"aliases", "tags"}),
+    "pcg_index": (_PCG_INDEX_KEYS, frozenset(_PCG_INDEX_KEYS) - {"tags"}),
 }
 
 _KEY_TYPES: dict[str, type | tuple[type, ...]] = {
     "id": str,
     "type": str,
     "citation": str,
+    "term": str,
+    "letter": str,
     "title_number": int,
     "part": (int, str),
     "section": str,

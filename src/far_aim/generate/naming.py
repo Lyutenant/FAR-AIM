@@ -122,3 +122,53 @@ def aim_paragraph_stem(paragraph: str) -> str:
 
 def aim_appendix_stem(appendix: int) -> str:
     return f"AIM Appendix {appendix}"
+
+
+# ---------------------------------------------------------------------------
+# PCG (plan §9: the term itself is the citation; the note is named by the
+# term, deterministically sanitized to a portable, wikilink-safe filename)
+# ---------------------------------------------------------------------------
+
+# Term stems additionally allow characters glossary terms actually contain
+# and that are safe in filenames and inside ``[[wikilinks]]``: parentheses,
+# comma, apostrophe. Brackets, slashes, colons and unicode hyphens are NOT
+# safe (wikilink syntax, path separators, Windows) and are sanitized away.
+PCG_STEM_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9 .,'()\-]*$")
+
+_PCG_DASHES = str.maketrans({"‐": "-", "‑": "-", "–": "-", "—": "-", "/": "-"})
+_PCG_DROP_RE = re.compile(r"[^A-Za-z0-9 .,'()\-]+")
+_WS_RUN_RE = re.compile(r"\s+")
+# Stems a term may never claim: fixed generated notes, and the citation
+# shapes FAR/AIM notes are named by (section numbers, AIM paragraph
+# numbers, ``Part …``/``AIM …``/``Chapter …`` containers). A term matching
+# one gets a ``(PCG)`` suffix so the namespaces can never collide (today
+# only the term ``AIM`` needs it).
+_RESERVED_STEMS = frozenset({"aim", "far", "pcg", "title 14", "source status"})
+_RESERVED_SHAPE_RE = re.compile(
+    r"^(?:\d[\d.\-]*|(?:part|aim|chapter|appendix|section|title)\b.*)$", re.IGNORECASE
+)
+
+
+def pcg_letter_folder(letter: str) -> str:
+    """``a`` → ``A`` (the glossary section folder)."""
+    return letter.upper()
+
+
+def pcg_term_stem(term: str) -> str:
+    """Deterministic filename stem for a glossary term.
+
+    ``DECISION ALTITUDE/DECISION HEIGHT [ICAO Annex 6]`` →
+    ``DECISION ALTITUDE-DECISION HEIGHT (ICAO Annex 6)``;
+    ``CHART SUPPLEMENT U.S.`` → ``CHART SUPPLEMENT U.S`` (no trailing dot);
+    ``AIM`` → ``AIM (PCG)`` (reserved by the AIM index note).
+    The term's verbatim text remains the citation and the note title; the
+    stem is only its portable filename form.
+    """
+    stem = term.translate(_PCG_DASHES).replace("[", "(").replace("]", ")")
+    stem = _PCG_DROP_RE.sub("", stem)
+    stem = _WS_RUN_RE.sub(" ", stem).strip().rstrip(" .")
+    if not stem:
+        raise ValueError(f"term {term!r} yields an empty filename stem")
+    if stem.casefold() in _RESERVED_STEMS or _RESERVED_SHAPE_RE.match(stem):
+        stem = f"{stem} (PCG)"
+    return stem

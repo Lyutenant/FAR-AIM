@@ -11,4 +11,4 @@ title: "Source Status"
 | --- | --- |
 | eCFR Title 14 | 2026-08-24 |
 | AIM | Change 3 — effective 2026-07-09 |
-| Pilot/Controller Glossary | not yet ingested |
+| Pilot/Controller Glossary | Change 3 — effective 2026-07-09 |

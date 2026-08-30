@@ -173,6 +173,57 @@ The provenance block (`source`) records `provider: faa`, `publication: aim`,
 `change`, the index `url`, `retrieved_at`, and `raw_checksum` (the
 snapshot tree hash); like the CFR it is excluded from `canonical_hash`.
 
+## Canonical PCG model (implemented, Phase 5)
+
+`far-aim parse pcg` writes one JSON document per glossary letter
+(`data/normalized/pcg/letter-a.json` … `letter-w.json`) and one for the
+publication itself (`publication.json`: the index page's title, purpose
+section, and edition summary — `pcg_publication`, id `pcg`), with the same
+deterministic serialization as the other layers.
+
+**Stable term IDs derive from the term text itself** (`far_aim.models.pcg`:
+`pcg-controlled-airspace`, `pcg-acc-icao`) — never from upstream anchors,
+which are demonstrably non-unique in the FAA HTML (`ACROBATIC FLIGHT` and
+`ACROBATIC FLIGHT [ICAO]` share one `id`), and never from headings-as-display
+(the term *is* the citation, plan §9). A **letter document** (`pcg_letter`,
+`pcg-letter-a`) carries the page's big-letter heading and an ordered `terms`
+list. A **term** (`pcg_term`) carries `letter`, `term` (extracted from the
+entry's `dfn` or, for the 165 dfn-less entries, split from the text by a
+validated deterministic rule — see `far_aim.parsers.pcg`'s docstring), and
+`content`: ordered blocks in which the full entry paragraph is stored
+**verbatim** (`entry` — term, separator and all; the extracted `term` field
+is derived identity metadata, never a rewrite). The glossary lists a few
+terms twice with an `OR` row between alternative definitions (`COMMON
+ROUTE`, `OUTER FIX`); repeated entries merge into one term document in
+document order, the `OR` preserved as a text block.
+
+Block types: `entry` (verbatim definition paragraph), `text` (continuation
+paragraphs, `OR` rows, `(a)`-labelled sub-items), `list` (the `a.`/`1.`
+glossary sub-lists; explicit numbering controls are rejected), `note`
+(`aside` note boxes and the italic `NOTE-`/`REFERENCE-` boxes; `label` +
+`text`), and `reference` — the See/Refer cross-reference rows (`kind`
+see/refer, verbatim target `text`, `form` row/parenthetical/embedded, the
+raw href under `source`, external destinations as a hashed `url` exactly as
+in the AIM model). References resolve to term ids (plan §12.1 Tier 1):
+linked rows via the archived page+anchor (a dangling one fails the parse),
+unlinked rows by term text — exact match first, then `ICAO term X` →
+`X [ICAO]`, then a parenthetical-stripped match accepted only when
+unambiguous (the glossary cites "ADVISORY CIRCULAR" for "ADVISORY CIRCULAR
+(AC)"; the `[ICAO]` tag stays significant). Targets that match no term
+(upstream typos like "PREFFERED IFR ROUTES") stay unresolved as plain text
+rather than guessed. The decorative glyphs on external rows ("📖", "↗") and
+screen-reader-only spans are presentation chrome, excluded from captured
+text; the index page's breadcrumb, sidebar, letter-card grid and statistics
+are navigation with derived counts (absent from the printed glossary) and
+are likewise not canonical content.
+
+Every page must pass the **lossless-capture check** (word multiset of the
+letter page's content region = word multiset of its documents), term ids
+must be unique corpus-wide, and parsing is deterministic; the provenance
+block matches the AIM's (`provider: faa`, `publication: pcg`, edition
+label/date/change, the document's own page URL — a term's anchor — and the
+snapshot tree hash), excluded from `canonical_hash`.
+
 ## Source manifest (implemented)
 
 `data/manifests/sources.json`, schema version 1:

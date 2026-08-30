@@ -586,6 +586,25 @@ def test_upstream_rollback_is_refused_without_force(config, upstream):
     assert state.accepted_version == VERSION and state.change == 3
 
 
+def test_forced_relabel_of_parsed_edition_clears_canonical_hash(config, upstream):
+    """Same version and bytes re-accepted under a new listing label: the
+    normalized layer still carries the old provenance, so the recorded
+    canonical_hash must be cleared."""
+    fetch(config, upstream)
+    manifest = SourceManifest.load(config.manifest_path)
+    manifest.sources["aim"].canonical_hash = "sha256:" + "1" * 64
+    manifest.save(config.manifest_path)
+    upstream.publications = upstream.publications.replace(
+        "(<abbr>AIM</abbr>) Basic with Change 1, 2 and 3</a> <small>(<abbr>HTML</abbr>)",
+        "(<abbr>AIM</abbr>) Basic with Changes 1, 2 and 3</a> <small>(<abbr>HTML</abbr>)",
+    )
+    result = fetch(config, upstream, force=True)
+    assert result.downloaded
+    state = SourceManifest.load(config.manifest_path).sources["aim"]
+    assert state.edition_label == "Basic with Changes 1, 2 and 3"
+    assert state.canonical_hash is None
+
+
 def test_new_edition_clears_stale_canonical_hash(config, upstream):
     manifest = SourceManifest.load(config.manifest_path)
     manifest.sources["aim"] = SourceState(

@@ -10,8 +10,6 @@ change: 3
 canonical_hash: "sha256:774e7957e6db18048aca05fff64759e46f06f4d3ff1d747f6cd309df54865c29"
 generated: true
 title: "Class G Airspace"
-aliases:
-  - "Class G Airspace"
 tags:
   - "aim"
 ---

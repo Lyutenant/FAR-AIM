@@ -10,8 +10,6 @@ change: 3
 canonical_hash: "sha256:73f300dd7f2d4a9538999f7445f6829fdf6f46aad5f04f156709d238f2c06e29"
 generated: true
 title: "Wake Turbulence"
-aliases:
-  - "Wake Turbulence"
 tags:
   - "aim"
 ---

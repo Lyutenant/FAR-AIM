@@ -10,8 +10,6 @@ change: 3
 canonical_hash: "sha256:6995f4b11b65633bfb65f92d1cd378b6cd2e71216040911d069b36dedbc5a6fb"
 generated: true
 title: "Controlled Airspace"
-aliases:
-  - "Controlled Airspace"
 tags:
   - "aim"
 ---

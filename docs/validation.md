@@ -293,6 +293,55 @@ canonical layer recorded (the raw snapshot is the preferred source; the
 existing vault copy is accepted when it hashes identically, so a lost cache
 does not block validation), and rebuilds are byte-idempotent.
 
-Remaining categories land with their corresponding phases (PCG parser:
-Phase 5; cross-source links: Phase 6; change gates and the FAA change-note
-cross-check: Phase 8).
+## Current implementation status (Phase 5)
+
+`far-aim fetch pcg` enforces category 1 for the FAA PCG HTML edition with
+the same structure as the AIM fetcher: discovery from the FAA publications
+landing page (exactly one HTML listing), cross-check against the edition
+summary printed on the PCG index page itself (two-digit years tolerated —
+the FAA prints "Effective: 7/9/26"), the page set from the index's sidebar
+letter navigation (an unrecognized link fails; the letter-card grid must
+agree with the navigation; baseline letters a–w required — the current
+glossary has no X/Y/Z sections; duplicates refused), strict well-formedness
+per page, a content-region and term-entry marker check per letter page, and
+data-informed floors (≥ 15 pages, ≥ 1,200 term-entry paragraphs; the
+2026-07-09 Change 3 edition has 24 pages and 1,562). The snapshot
+(`pages/`, `metadata.json` with per-file checksums) is archived under
+`data/raw/pcg/{effective-date}-change-{n}/` with a tree-hash `raw_hash`;
+`verify_snapshot`, quarantine/superseded handling, listing-pin
+reconciliation, rollback refusal and acceptance ordering all match the AIM
+fetcher, and the CLI prints the same external-archive reminder (plan §6.2).
+
+`far-aim parse pcg` enforces categories 2, 3 and 6 for the PCG canonical
+layer; the whole 2026-07-09 Change 3 edition (23 letters, 1,559 terms —
+1,562 entry paragraphs: three terms are published twice with OR-joined
+alternative definitions and merge) parses losslessly:
+
+- **Structural integrity** — every letter page is walked with an explicit
+  allowlist over the glossary's legacy markup (term entries with and
+  without `dfn`, the `CLASS_21` entries missing the entry class,
+  cross-reference rows, sub-lists, both note-box markups, `OR`/labelled
+  continuation paragraphs); anything else raises `ParseError`. The letter
+  heading must match the page's filename letter, term ids must be unique
+  across the corpus (uniquely addressable terms, plan §17.2), and a linked
+  cross-reference naming an anchor the edition lacks fails the parse.
+- **Text integrity** — the full entry paragraph is stored verbatim, and
+  every page passes the lossless-capture word-multiset check (navigation
+  chrome and the decorative external-row glyphs excluded, like the AIM's
+  toggle buttons). Exact-text fixture tests cover representative terms
+  (KNOWN TRAFFIC, TRAFFIC PATTERN, OUTER FIX, NAVSPEC, BRAKING ACTION).
+- **Determinism / fail closed** — publication uses the same `cli.LayerSpec`
+  machinery (staging swap, `.pcg-previous` recovery, deep re-verification,
+  manifest `canonical_hash` recorded after the layer is on disk).
+  `far-aim validate` verifies the layer like the others (root types
+  `pcg_publication`/`pcg_letter`, nested terms, provenance pinned to the
+  manifest — including each document's own page URL; a term's anchor is
+  upstream layout and not pinned, container documents allow none).
+
+`far-aim build-vault` / `far-aim validate` extend categories 4 and 6 to the
+PCG: the fetch-accepted-but-unparsed window refuses to build (as for the
+AIM), stems and aliases are unique across all three corpora, every
+generated wikilink resolves, and rebuilds are byte-idempotent.
+
+Remaining categories land with their corresponding phases (cross-source
+links: Phase 6; change gates and the FAA change-note cross-check: Phase 8).

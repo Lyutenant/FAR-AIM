@@ -17,6 +17,15 @@
       "last_checked_at": "2026-08-30T19:50:56Z",
       "raw_hash": "sha256:fbbbb5301cc44152f45c4cb7d5cbac9fc30c4a5287b0ccbf0d79aefdc5480637"
     },
-    "pcg": {}
+    "pcg": {
+      "accepted_version": "2026-07-09-change-3",
+      "canonical_hash": "sha256:2c41965e415ae056f512f1a4733fa0b23667086829460c36c5541d9bf71f064f",
+      "change": 3,
+      "edition_label": "Basic with Change 1, 2 and 3",
+      "effective_date": "2026-07-09",
+      "last_checked_at": "2026-08-30T20:41:08Z",
+      "raw_hash": "sha256:4fc317d0064758302ddf9c3b452047f91098c056cd995b02ab680bd4574a4c1d",
+      "source_url": "https://www.faa.gov/air_traffic/publications/atpubs/pcg_html/index.html"
+    }
   }
 }

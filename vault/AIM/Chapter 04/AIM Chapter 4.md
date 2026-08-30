@@ -9,8 +9,6 @@ change: 3
 canonical_hash: "sha256:153dbe90533f7994978405010f01ae76098f19e24ab9186ad96f8f928f50a56c"
 generated: true
 title: "Air Traffic Control"
-aliases:
-  - "Air Traffic Control"
 tags:
   - "aim"
 ---

@@ -25,7 +25,12 @@ paraphrased or AI-generated. Full specification:
   the current FAA HTML edition is discovered from the FAA publications page,
   archived with all 270 figures, parsed losslessly (432 paragraphs), and
   rendered under `vault/AIM/` with figures embedded as vault assets.
-- Next: **Phase 5** — Pilot/Controller Glossary.
+- **Phase 5** — PCG (`far-aim fetch pcg`, `far-aim parse pcg`, `build-vault`):
+  the current Pilot/Controller Glossary HTML edition, archived and parsed
+  losslessly (23 letters, 1,559 terms), rendered under `vault/PCG/` — one
+  note per term, named by the term itself, with See/Refer cross-references
+  resolved into wikilinks.
+- Next: **Phase 6** — cross-source links (FAR ↔ AIM ↔ PCG).
 
 ## Operational notes
 
@@ -34,7 +39,8 @@ paraphrased or AI-generated. Full specification:
   reconstructed; only its checksums are committed). `far-aim fetch aim`
   prints this reminder on every acceptance. Currently awaiting external
   archive: `data/raw/aim/2026-07-09-change-3/` (~61 MB — pages, figures,
-  metadata; tree hash recorded in `data/manifests/sources.json`).
+  metadata) and `data/raw/pcg/2026-07-09-change-3/` (~1.1 MB — pages,
+  metadata); tree hashes recorded in `data/manifests/sources.json`.
 - eCFR snapshots need no external archive: any accepted issue is exactly
   reconstructible from the eCFR point-in-time API given the manifest's
   (version, checksum) pair.
@@ -52,7 +58,9 @@ python3 -m venv .venv                 # requires Python 3.12+
 .venv/bin/far-aim parse ecfr         # canonical JSON for the accepted Title 14
 .venv/bin/far-aim fetch aim          # fetch + archive current AIM HTML edition + figures
 .venv/bin/far-aim parse aim          # canonical JSON for the accepted AIM
-.venv/bin/far-aim build-vault        # render vault/FAR and vault/AIM
+.venv/bin/far-aim fetch pcg          # fetch + archive current PCG HTML edition
+.venv/bin/far-aim parse pcg          # canonical JSON for the accepted PCG
+.venv/bin/far-aim build-vault        # render vault/FAR, vault/AIM and vault/PCG
 .venv/bin/far-aim validate           # verify manifest, canonical layers, vault
 ```
 
@@ -61,6 +69,6 @@ python3 -m venv .venv                 # requires Python 3.12+
 - `src/far_aim/` — pipeline package (CLI, config, manifest, sources, parsers, generator)
 - `tests/` — pytest suite (`tests/fixtures/` for source fixtures)
 - `data/manifests/` — committed source-state registry; `data/raw/` is a gitignored cache
-- `vault/` — generated Obsidian vault (`FAR/`, `AIM/` incl. figure assets)
+- `vault/` — generated Obsidian vault (`FAR/`, `AIM/` incl. figure assets, `PCG/`)
 - `plans/` — project specification
 - `docs/` — architecture and policy notes
