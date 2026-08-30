@@ -18,6 +18,7 @@ data/manifests/.sources.lock
 # Obsidian per-user workspace state (the vault itself is committed)
 vault/.obsidian/workspace.json
 vault/.obsidian/workspace-mobile.json
+vault/.obsidian/graph.json
 
 # OS
 .DS_Store
