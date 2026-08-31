@@ -48,6 +48,7 @@ class Registry:
     """Everything the render pass needs to link and alias globally."""
 
     section_numbers: set[str] = field(default_factory=set)
+    part_numbers: set[str] = field(default_factory=set)
     stems: dict[str, tuple[str, ...]] = field(default_factory=dict)
     aliases: dict[str, list[str]] = field(default_factory=dict)
     section_count: int = 0
@@ -227,6 +228,7 @@ def build_registry(
         folder = naming.part_folder_name(part)
         stem = naming.part_index_stem(part)
         _add_stem(registry, seen, stem, (notes.FAR_DIR, folder, f"{stem}.md"))
+        registry.part_numbers.add(part)
         for child in _iter_documents(doc):
             if child["document_type"] == cfr_model.DOCUMENT_TYPE_SECTION:
                 registry.section_count += 1
@@ -417,16 +419,20 @@ def plan_vault(
 
     if aim is not None:
         targets = registry.aim_targets
+        far = aim_notes.FarTargets(
+            sections=frozenset(registry.section_numbers),
+            parts=frozenset(registry.part_numbers),
+        )
         for kind, doc in _iter_aim_documents(aim.docs):
             aliases = registry.aliases[doc["id"]]
             if kind == "chapter":
                 add(aim_notes.build_chapter_note(doc, aliases))
             elif kind == "section":
-                add(aim_notes.build_section_note(doc, aliases, targets))
+                add(aim_notes.build_section_note(doc, aliases, targets, far))
             elif kind == "paragraph":
-                add(aim_notes.build_paragraph_note(doc, aliases, targets))
+                add(aim_notes.build_paragraph_note(doc, aliases, targets, far))
             else:
-                add(aim_notes.build_appendix_note(doc, aliases, targets))
+                add(aim_notes.build_appendix_note(doc, aliases, targets, far))
         add(aim_notes.build_aim_index(aim.docs, aim.title_hash))
         generated = {name: aim.assets[name] for name in sorted(registry.aim_assets)}
         for name, data in generated.items():

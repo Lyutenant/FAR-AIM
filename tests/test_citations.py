@@ -131,3 +131,114 @@ def test_bare_sign_banned_when_text_attributes_token_to_other_title():
 def test_ban_does_not_leak_to_other_tokens():
     text = "see § 91.205, and § 21.7 of the DOT regulations (49 CFR 21.7)"
     assert citations.extract_citations(text) == ["91.205"]
+
+
+# ---------------------------------------------------------------------------
+# Phase 6: AIM → FAR. Quoted strings are transcribed verbatim from the
+# accepted AIM 2026-07-09 Change 3 snapshot.
+# ---------------------------------------------------------------------------
+
+
+def test_aim_cfr_section_word_anchor():
+    text = (
+        "unless the installed equipment has not been tested and calibrated as "
+        "required by 14 CFR section 91.217. If deactivation is required, turn off"
+    )
+    assert citations.extract_citations(text) == ["91.217"]
+
+
+def test_aim_cfr_sections_list_and_capitalizations():
+    assert citations.extract_citations(
+        "are found in 14 CFR sections 91.215, 91.225, and 99.13."
+    ) == ["91.215", "91.225", "99.13"]
+    assert citations.extract_citations(
+        "14 CFR Section 91.125 and 14 CFR Section 91.129."
+    ) == ["91.125", "91.129"]
+    assert citations.extract_citations("14 CFR SECTION 91.155. WHENEVER") == ["91.155"]
+
+
+def test_aim_cfr_sign_anchor_variants():
+    text = (
+        "The airspace described in (e) above is specified in 14 CFR § 91.225 for "
+        "ADS-B Out requirements. However, 14 CFR § 91.215 does not include this"
+    )
+    assert citations.extract_citations(text) == ["91.225", "91.215"]
+    assert citations.extract_citations("in 14 CFR §§ 61.66, 91.1065, 121.441, Appendix F") == [
+        "61.66",
+        "91.1065",
+        "121.441",
+    ]
+    # The FAA's "91.113b" (for 91.113(b)) is captured as written and left for
+    # ``resolve`` to drop — never rewritten into a guess.
+    assert citations.extract_citations("in accordance with 14CFR §91.113b. TIS-B") == ["91.113b"]
+    assert citations.resolve(["91.113b"], {"91.113"}) == []
+
+
+def test_aim_repeated_section_word_continues_list():
+    # AIM 3-2-2, verbatim: the section word recurs mid-list.
+    text = (
+        "all persons must operate their aircraft under IFR. (See 14 CFR section "
+        "71.33, sections 91.167 through 91.193, sections 91.215 through 91.217, "
+        "and sections 91.225 through 91.227.)"
+    )
+    assert citations.extract_citations(text) == [
+        "71.33",
+        "91.167",
+        "91.193",
+        "91.215",
+        "91.217",
+        "91.225",
+        "91.227",
+    ]
+    assert citations.extract_citations("§ 91.3, Section 91.5") == ["91.3", "91.5"]
+
+
+def test_aim_bare_section_word_not_linked():
+    assert citations.extract_citations("prescribed by section 91.185(c)(2) until") == []
+
+
+def test_part_citations_cfr_anchored():
+    assert citations.extract_part_citations("14 CFR part 121 or equivalent criteria.") == ["121"]
+    assert citations.extract_part_citations("14 CFR part 91.") == ["91"]
+    assert citations.extract_part_citations(
+        "120-74A, Parts 91, 121, 125, and 135 Flightcrew Procedures"
+    ) == ["91", "121", "125", "135"]
+    assert citations.extract_part_citations("Appendix C (14 CFR, part 25 and 29) is") == [
+        "25",
+        "29",
+    ]
+    assert citations.extract_part_citations("14 CFR part 91, Appendix D, Section 3") == ["91"]
+
+
+def test_part_citations_bare_and_subpart_shorthand():
+    assert citations.extract_part_citations(
+        "Parts 91K, 121, 125, 129, and 135 operators"
+    ) == ["91", "121", "125", "129", "135"]
+    assert citations.extract_part_citations("for example, part 121, part 91, etc.") == [
+        "121",
+        "91",
+    ]
+    assert citations.extract_part_citations(
+        "Title 14 of the Code of Federal Regulations, part 97, and are"
+    ) == ["97"]
+    assert citations.extract_part_citations("Part 107 remote pilots and operators") == ["107"]
+
+
+def test_part_citations_never_read_sections_or_titles_as_parts():
+    assert citations.extract_part_citations("14 CFR part 91.155 applies") == []
+    assert citations.extract_part_citations("under part 830 and 14 CFR part 91") == ["830", "91"]
+    assert citations.extract_part_citations("no reference at all") == []
+
+
+def test_part_citations_other_title_banned_textwide():
+    text = "in accordance with 49 CFR part 1542. A SIDA can include part 1542 areas and part 91"
+    assert citations.extract_part_citations(text) == ["91"]
+    assert citations.extract_other_title_parts(text) == {"1542"}
+    assert citations.extract_part_citations("49 CFR Part 830 and 14 CFR part 91") == ["91"]
+
+
+def test_resolve_parts_filters_dedups_orders():
+    assert citations.resolve_parts(["135", "91", "1542", "91"], {"91", "135", "1"}) == [
+        "91",
+        "135",
+    ]

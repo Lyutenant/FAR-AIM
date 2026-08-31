@@ -853,3 +853,7 @@ g. Flight Specific Supplemental Information (Item 19)
 
 > [!note] NOTE-
 > Current FAA Form 7233-4 available at https://www.faa.gov/forms/.
+
+## Explicit Cross-References
+
+- [[91.227|14 CFR § 91.227]]

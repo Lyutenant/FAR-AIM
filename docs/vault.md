@@ -131,7 +131,18 @@ vault/AIM/
   and linking the FAA page anchor, `## Official Text`, `## Paragraphs`
   (section notes) and `## Explicit Cross-References` — the anchors the FAA
   itself places in the text (`Para 5-4-3`, `Section 4`, `Appendix 4`),
-  linked only when the target is in the corpus.
+  linked only when the target is in the corpus, followed by the **FAR
+  sections and parts the official text cites** (Phase 6, plan §12.1 "AIM
+  citing a FAR"): `14 CFR section 91.171`, `14 CFR § 91.225`, `14 CFR
+  91.113(g)`, `14 CFR part 91`, and bare `Part 107 operations` are
+  recognized deterministically (`far_aim.links.citations`) and rendered as
+  `[[91.155|14 CFR § 91.155]]` / `[[Part 91|14 CFR Part 91]]` — sections in
+  citation order, then parts — only when the FAR note exists. Other-title
+  citations (`49 CFR part 1542`) never link and ban that number for the
+  whole note; a bare `section 91.185` without a `CFR`/`§` anchor, appendix
+  references and the FAA's own typos (`91.113b`) stay plain text. The FAR
+  links are derived at render time from the official text, so the canonical
+  AIM JSON and its hashes are unchanged.
 - **Lists render flat** with the FAA edition's markers (`**a.**`, `**1.**`,
   `**(a)**`, `**(1)**`, `**[a]**`, `**[1]**`) derived from list level and
   position — the same decision as the CFR's flat paragraphs, for the same

@@ -659,3 +659,110 @@ def test_sync_refuses_curated_note_at_generated_aim_path(tmp_path, combined_plan
     with pytest.raises(BuildError, match="curated note at generated path"):
         sync_vault(config, combined_plan)
     assert path.read_text(encoding="utf-8") == "# my own 4-1-9\n"
+
+
+# ---------------------------------------------------------------------------
+# Phase 6: AIM → FAR links
+# ---------------------------------------------------------------------------
+
+
+def test_collect_aim_text_covers_block_kinds():
+    blocks = [
+        _text("14 CFR section 1.1"),
+        {"type": "heading", "text": "§ 2.2"},
+        {
+            "type": "list",
+            "level": 1,
+            "items": [{"blocks": [_text("§ 3.3")]}, {"blocks": [_text("§ 4.4")]}],
+        },
+        {"type": "note", "kind": "note", "title": "NOTE- § 5.5", "blocks": [_text("§ 6.6")]},
+        {"type": "figure", "number": "FIG 1", "title": "§ 7.7", "image": {"alt": "§ 99.99"}},
+        {"type": "image", "alt": "§ 99.98", "source": {"src": "x.png"}},
+        {
+            "type": "table",
+            "number": "TBL 1",
+            "title": "§ 8.8",
+            "header_rows": [[{"blocks": [_text("§ 9.9")]}]],
+            "rows": [[{"blocks": [_text("§ 10.10")]}]],
+            "foot_rows": [],
+        },
+    ]
+    from far_aim.generate.aim_markdown import collect_text
+    from far_aim.links import citations
+
+    tokens = [t for text in collect_text(blocks) for t in citations.extract_citations(text)]
+    # Image alt text is layout, never content.
+    assert tokens == ["1.1", "2.2", "3.3", "4.4", "5.5", "6.6", "7.7", "8.8", "9.9", "10.10"]
+
+
+def _aim_paragraph(aim: AimLayer, number: str) -> dict:
+    for doc in aim.docs.values():
+        for section in doc.get("sections") or []:
+            for para in section["paragraphs"]:
+                if para["paragraph"] == number:
+                    return para
+    raise AssertionError(number)
+
+
+def test_far_links_from_fixture_paragraph(aim_layer):
+    # AIM 4-1-20 cites "14 CFR section 91.217", "14 CFR sections 91.215,
+    # 91.225, and 99.13" and "14 CFR § 91.225 ... 14 CFR § 91.215".
+    para = _aim_paragraph(aim_layer, "4-1-20")
+    far = aim_notes.FarTargets(
+        sections=frozenset({"91.215", "91.217", "91.225", "99.13", "91.155"}),
+        parts=frozenset({"91", "99"}),
+    )
+    assert aim_notes.far_links(para["content"], far) == [
+        "- [[91.215|14 CFR § 91.215]]",
+        "- [[91.217|14 CFR § 91.217]]",
+        "- [[91.225|14 CFR § 91.225]]",
+        "- [[99.13|14 CFR § 99.13]]",
+    ]
+    # Only in-corpus targets link; nothing links without a FAR corpus.
+    assert aim_notes.far_links(para["content"], aim_notes.FarTargets(frozenset({"91.217"}))) == [
+        "- [[91.217|14 CFR § 91.217]]"
+    ]
+    assert aim_notes.far_links(para["content"], aim_notes.FarTargets()) == []
+
+
+def test_far_part_links_follow_sections():
+    content = [_text("Operations under 14 CFR part 91 must comply with 14 CFR section 91.155.")]
+    far = aim_notes.FarTargets(sections=frozenset({"91.155"}), parts=frozenset({"91"}))
+    assert aim_notes.far_links(content, far) == [
+        "- [[91.155|14 CFR § 91.155]]",
+        "- [[Part 91|14 CFR Part 91]]",
+    ]
+    # An other-title attribution anywhere in the note bans the number.
+    content.append(_text("Security areas are defined in 49 CFR part 91."))
+    assert aim_notes.far_links(content, far) == ["- [[91.155|14 CFR § 91.155]]"]
+
+
+def test_paragraph_note_lists_aim_anchors_then_far_links(aim_layer, far_docs):
+    import copy
+
+    para = copy.deepcopy(_aim_paragraph(aim_layer, "4-1-20"))
+    # The fixture's own anchors all point outside the fixture; give it one
+    # in-corpus AIM anchor so the ordering rule is exercised.
+    para["explicit_references"].insert(
+        0, {"text": "Paragraph 4-1-9", "target": "aim-4-1-9", "source": {"href": "x"}}
+    )
+    registry = build_registry(far_docs, aim_layer)
+    far = aim_notes.FarTargets(sections=frozenset({"91.217"}), parts=frozenset())
+    note = aim_notes.build_paragraph_note(para, [], registry.aim_targets, far)
+    section = note.body.split("## Explicit Cross-References\n\n", 1)[1].strip().splitlines()
+    assert section == [
+        "- [[4-1-9|AIM 4-1-9 — Traffic Advisory Practices at Airports Without "
+        "Operating Control Towers]]",
+        "- [[91.217|14 CFR § 91.217]]",
+    ]
+    # Without a FAR corpus the note is unchanged apart from the FAR link.
+    plain = aim_notes.build_paragraph_note(para, [], registry.aim_targets)
+    assert plain.body == note.body.replace("\n- [[91.217|14 CFR § 91.217]]", "")
+
+
+def test_combined_plan_links_only_far_notes_that_exist(combined_plan):
+    # The part-91 slice lacks 91.215/91.217/91.225 and 99.13, so 4-1-20 gains
+    # no FAR link: zero broken links by construction.
+    note = combined_plan[("AIM", "Chapter 04", "4-1-20.md")].decode()
+    assert "|14 CFR §" not in note
+    assert "[[Part " not in note

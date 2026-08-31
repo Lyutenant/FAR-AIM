@@ -16,12 +16,14 @@ an ``AIM`` prefix so they never collide with FAR part-local section stems.
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass, field
 
 from far_aim.generate import BuildError, naming
-from far_aim.generate.aim_markdown import asset_prefix_for, render_aim_blocks
+from far_aim.generate.aim_markdown import asset_prefix_for, collect_text, render_aim_blocks
 from far_aim.generate.frontmatter import Value
 from far_aim.generate.markdown import escape_md
 from far_aim.generate.notes import Note, link_display
+from far_aim.links import citations as cites
 
 AIM_DIR = "AIM"
 AIM_INDEX_STEM = "AIM"
@@ -30,6 +32,20 @@ ASSETS_DIR = "assets"
 
 # id → (stem, display text) for every linkable AIM note, built by the registry.
 Targets = dict[str, tuple[str, str]]
+
+
+@dataclass(frozen=True)
+class FarTargets:
+    """FAR notes an AIM note may link to (plan §12.1: "AIM citing a FAR").
+
+    ``sections`` are global section numbers (``91.155``) whose section notes
+    exist; ``parts`` are part numbers (``91``) whose part indexes exist. An
+    empty instance links nothing, which is what a vault without the FAR
+    corpus wants.
+    """
+
+    sections: frozenset[str] = field(default_factory=frozenset)
+    parts: frozenset[str] = field(default_factory=frozenset)
 
 
 def edition_text(source: dict) -> str:
@@ -77,12 +93,49 @@ def appendix_display(apx: dict) -> str:
     return f"AIM Appendix {apx['appendix']} — {apx['heading']}"
 
 
-def _xref_chunks(refs: list[dict], targets: Targets, self_id: str) -> list[str]:
+def far_links(content: list[dict], far: FarTargets) -> list[str]:
+    """Wikelinks for the FAR sections and parts the official text cites.
+
+    Citations are recognized deterministically in the note's own text
+    (``14 CFR section 91.171``, ``14 CFR § 91.225``, ``14 CFR part 91``,
+    ``Part 107 operations``; see ``far_aim.links.citations``) and linked
+    only when the FAR note exists — sections first in citation order, then
+    parts. A number the text attributes to another CFR title anywhere is
+    never linked as Title 14.
+    """
+    if not far.sections and not far.parts:
+        return []
+    sections: list[str] = []
+    parts: list[str] = []
+    banned_sections: set[str] = set()
+    banned_parts: set[str] = set()
+    for text in collect_text(content):
+        sections.extend(cites.extract_citations(text))
+        banned_sections.update(cites.extract_other_title_citations(text))
+        parts.extend(cites.extract_part_citations(text))
+        banned_parts.update(cites.extract_other_title_parts(text))
+    sections = [token for token in sections if token not in banned_sections]
+    parts = [token for token in parts if token not in banned_parts]
+    links = [
+        f"- [[{naming.section_stem(section)}|14 CFR § {section}]]"
+        for section in cites.resolve(sections, set(far.sections))
+    ]
+    links.extend(
+        f"- [[{naming.part_index_stem(part)}|14 CFR Part {part}]]"
+        for part in cites.resolve_parts(parts, set(far.parts))
+    )
+    return links
+
+
+def _xref_chunks(doc: dict, targets: Targets, far: FarTargets | None) -> list[str]:
+    """``## Explicit Cross-References``: the FAA's own AIM anchors (document
+    order, in-corpus only), then the FAR sections and parts the text cites.
+    """
     seen: set[str] = set()
     items: list[str] = []
-    for ref in refs:
+    for ref in doc["explicit_references"]:
         target = ref.get("target")
-        if target is None or target == self_id or target in seen:
+        if target is None or target == doc["id"] or target in seen:
             continue
         entry = targets.get(target)
         if entry is None:
@@ -90,6 +143,7 @@ def _xref_chunks(refs: list[dict], targets: Targets, self_id: str) -> list[str]:
         seen.add(target)
         stem, display = entry
         items.append(f"- [[{stem}|{link_display(display)}]]")
+    items.extend(far_links(doc["content"], far or FarTargets()))
     if not items:
         return []
     return ["## Explicit Cross-References", "\n".join(items)]
@@ -108,7 +162,9 @@ def _edition_frontmatter(source: dict) -> list[tuple[str, Value]]:
     ]
 
 
-def build_paragraph_note(para: dict, aliases: list[str], targets: Targets) -> Note:
+def build_paragraph_note(
+    para: dict, aliases: list[str], targets: Targets, far: FarTargets | None = None
+) -> Note:
     source = para["source"]
     frontmatter: list[tuple[str, Value]] = [
         ("id", para["id"]),
@@ -134,7 +190,7 @@ def build_paragraph_note(para: dict, aliases: list[str], targets: Targets) -> No
         f"# AIM {para['paragraph']} — {escape_md(para['heading'])}",
         _source_callout(source, source["url"]),
         *_official_text_chunks(para["content"], path_parts),
-        *_xref_chunks(para["explicit_references"], targets, para["id"]),
+        *_xref_chunks(para, targets, far),
     ]
     return Note(
         kind="aim",
@@ -144,7 +200,9 @@ def build_paragraph_note(para: dict, aliases: list[str], targets: Targets) -> No
     )
 
 
-def build_section_note(sec: dict, aliases: list[str], targets: Targets) -> Note:
+def build_section_note(
+    sec: dict, aliases: list[str], targets: Targets, far: FarTargets | None = None
+) -> Note:
     source = sec["source"]
     display_number = section_number_display(sec)
     frontmatter: list[tuple[str, Value]] = [
@@ -178,7 +236,7 @@ def build_section_note(sec: dict, aliases: list[str], targets: Targets) -> Note:
             for p in sec["paragraphs"]
         ]
         chunks.extend(["## Paragraphs", "\n".join(items)])
-    chunks.extend(_xref_chunks(sec["explicit_references"], targets, sec["id"]))
+    chunks.extend(_xref_chunks(sec, targets, far))
     return Note(
         kind="aim_section",
         path_parts=path_parts,
@@ -228,7 +286,9 @@ def build_chapter_note(chapter: dict, aliases: list[str]) -> Note:
     )
 
 
-def build_appendix_note(apx: dict, aliases: list[str], targets: Targets) -> Note:
+def build_appendix_note(
+    apx: dict, aliases: list[str], targets: Targets, far: FarTargets | None = None
+) -> Note:
     source = apx["source"]
     frontmatter: list[tuple[str, Value]] = [
         ("id", apx["id"]),
@@ -248,7 +308,7 @@ def build_appendix_note(apx: dict, aliases: list[str], targets: Targets) -> Note
         f"# AIM Appendix {apx['appendix']} — {escape_md(apx['heading'])}",
         _source_callout(source, source["url"]),
         *_official_text_chunks(apx["content"], path_parts),
-        *_xref_chunks(apx["explicit_references"], targets, apx["id"]),
+        *_xref_chunks(apx, targets, far),
     ]
     return Note(
         kind="aim_appendix",

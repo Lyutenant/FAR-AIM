@@ -106,5 +106,16 @@ and `far-aim validate` byte-compares it. Model, grammar and rendering
 rules: docs/data-model.md, docs/validation.md, docs/vault.md,
 `far_aim.parsers.pcg`'s docstring. Accepted PCG snapshots must be archived
 outside the repo (plan §6.2) like the AIM's.
-Next: Phase 6 (cross-source links). Do not start AI-enrichment work
+Phase 6 (cross-source links) in progress — AIM → FAR done: the citation
+recognizer (`far_aim.links.citations`) also understands the AIM's house
+styles (`14 CFR section 91.171`, `14 CFR § 91.225`, `14CFR §91.113`) and
+part references (`14 CFR part 91`, `Parts 91K, 121`, bare `Part 107`), with
+other-title bans (`49 CFR part 1542`); `build-vault` appends the resolved
+FAR section and part links to each AIM note's `## Explicit Cross-References`
+(309 links from 138 notes; derived at render time, canonical JSON unchanged;
+FAR notes unchanged). Deliberately unlinked: bare `section 91.185` without an
+anchor, appendix references, FAA typos (`91.113b`). Remaining Phase 6 work:
+FAR/AIM → PCG glossary links where unambiguous and justified (plan §12.2),
+and optionally FAR part links inside FAR notes (the recognizer exists;
+the FAR generator does not use it yet). Do not start AI-enrichment work
 before Phase 9 (plan §31).

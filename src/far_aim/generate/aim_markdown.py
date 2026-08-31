@@ -28,6 +28,8 @@ Every block type must have a renderer; an unknown type raises (plan §32.2).
 
 from __future__ import annotations
 
+from collections.abc import Iterator
+
 from far_aim.generate import BuildError
 from far_aim.generate.markdown import escape_md, html_escape
 
@@ -356,6 +358,39 @@ _RENDERERS = {
     "figure": _render_figure,
     "image": _render_image,
 }
+
+
+def collect_text(blocks: list[dict]) -> Iterator[str]:
+    """Every text-bearing string of an AIM content tree, in document order.
+
+    Mirrors ``far_aim.links.citations.collect_text`` for the AIM block
+    grammar: text and heading blocks, list items, note boxes (title and
+    body), figure captions (number and title) and table captions and cells.
+    Image alt text is layout, not content, and is skipped.
+    """
+    for block in blocks:
+        kind = block["type"]
+        if kind in ("text", "heading"):
+            if block.get("text"):
+                yield block["text"]
+        elif kind == "list":
+            for item in block["items"]:
+                yield from collect_text(item["blocks"])
+        elif kind == "note":
+            if block.get("title"):
+                yield block["title"]
+            yield from collect_text(block["blocks"])
+        elif kind in ("figure", "table"):
+            if block.get("number"):
+                yield block["number"]
+            if block.get("title"):
+                yield block["title"]
+            if kind == "table":
+                for rows in (block["header_rows"], block["rows"], block["foot_rows"]):
+                    for row in rows:
+                        for cell in row:
+                            yield from collect_text(cell["blocks"])
+        # image: no text content
 
 
 def collect_asset_names(blocks: list[dict], out: set[str]) -> None:
