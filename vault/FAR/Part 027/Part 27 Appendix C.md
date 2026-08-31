@@ -126,3 +126,7 @@ C27.2 Applicable part 29 sections. The following sections of part 29 of this cha
 **Citations:**
 
 \[Doc. No. 28008, 61 FR 21907, May 10, 1996, as amended by Amdt. 27-51, 88 FR 8739, Feb. 10, 2023]
+
+## Explicit Cross-References
+
+- [[Part 29]]

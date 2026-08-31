@@ -13,10 +13,16 @@ rejected; a bare ``§`` inside Title 14 text always means Title 14.
 Paragraph suffixes (``(a)(1)``) are stripped — links target whole sections.
 
 Part references are extracted separately (``extract_part_citations``):
-``14 CFR part 91``, ``14 CFR Parts 121, 125, and 135``, and bare ``part 107``
-/ ``Part 91 operators`` — a bare ``part`` in FAA text means Title 14 unless
-the text attributes that number to another title (``49 CFR part 1542``).
-The FAR generator does not yet link parts; the AIM generator does.
+``14 CFR part 91``, ``14 CFR Parts 121, 125, and 135``, ``part 121 or part
+135 of this chapter``, and bare ``part 107`` / ``Part 91 operators`` — a
+bare ``part`` in FAA prose means Title 14 unless the text attributes that
+number to another title (``49 CFR part 1542``); inside Title 14 text itself
+only ``14 CFR``-anchored or ``of this chapter``-qualified references count
+(``qualified_only``), because the CFR also writes ``Part 1`` for other
+documents' subdivisions (ICAO Annex 6 Part 1, IEC 61094-3 Part 3). Rejected
+as not-a-CFR-part: ``CAR Part 3`` / ``part 4a of the Civil Air
+Regulations``, ``part 60-1``, ``parts 1 to 59`` (a printed volume), and
+``Part 1 of this appendix`` / ``part 1 of appendix C to part 25``.
 
 Out of scope (left as plain official text): bare ``section 91.185`` without
 a ``CFR``/``§`` anchor, ``appendix A to part 91``, SFAR references,
@@ -54,11 +60,33 @@ _CONT_RE = re.compile(
 # Part references. Title 14 part numbers are plain integers (letter and
 # range ids like "374a" or "50-59" are never cited as such); a trailing
 # uppercase letter is the FAA's subpart shorthand ("Parts 91K, 121") and is
-# dropped. A digit or dotted continuation means the token is a section, and
-# a following "CFR" means it is a title number ("part 830 and 14 CFR ...").
+# dropped. The number must end at a word boundary ("part 4a of the Civil Air
+# Regulations" is not part 4); a dotted continuation means a section, a
+# dashed one another title's numbering ("41 CFR part 60-1"), a following
+# "CFR" a title number ("part 830 and 14 CFR ..."), and "to <n>" a printed
+# volume range ("14 CFR parts 1 to 59, Revised as of ...").
 _PART_TOKEN_RE = re.compile(
-    r"[0-9]{1,4}(?:[A-Z](?![A-Za-z]))?(?![0-9]|\.[0-9]|\s*C\.?F\.?R)"
+    r"[0-9]{1,4}(?:[A-Z](?![A-Za-z0-9]))?"
+    r"(?![A-Za-z0-9]|\.[0-9]|-[0-9]|\s*C\.?F\.?R|\s+to\s+[0-9])"
 )
+# A part list qualified this way numbers a document's own subdivisions
+# ("Part 1 of this appendix", "part 1 of appendix C to part 25", "part 3 of
+# this order"), not a CFR part.
+_PART_LOCAL_RE = re.compile(
+    r"\s+of\s+(?:this\s+(?:appendix|order|attachment|form|exhibit)|appendix)\b"
+)
+# The superseded Civil Air Regulations: "CAR Part 3", "Part 3 of the Civil
+# Air Regulations" — another code's numbering, banned like another title.
+_CAR_BEFORE_RE = re.compile(r"\bCAR\s*$")
+_CAR_AFTER_RE = re.compile(r"\s+of\s+the\s+(?:former\s+)?Civil\s+Air\s+Regulations\b")
+# CFR drafting style qualifies a Title 14 part reference ("part 121 or part
+# 135 of this chapter", "Part 375 of this title", "part 26 of this
+# subchapter", "part 11 of the Federal Aviation Regulations"); "of title 31"
+# names another title and bans the number.
+_PART_QUALIFIER_RE = re.compile(
+    r"\s+of\s+(?:this\s+(?:chapter|title|subchapter)|the\s+Federal\s+Aviation\s+Regulations)\b"
+)
+_PART_TITLE_AFTER_RE = re.compile(r"\s+of\s+[Tt]itle\s+([0-9]{1,3})\b")
 _PART_CFR_ANCHOR_RE = re.compile(r"\b([0-9]{1,3})\s*C\.?F\.?R\.?,?\s*[Pp]arts?\s+(?=[0-9])")
 _PART_BARE_ANCHOR_RE = re.compile(r"\b[Pp]arts?\s+(?=[0-9])")
 _PART_CONT_RE = re.compile(r"(?:\s*(?:,|;|\bthrough\b|\band\b|\bor\b)\s*)+(?:[Pp]arts?\s+)?")
@@ -196,12 +224,20 @@ def _consume_part_list(text: str, pos: int, out: list[str]) -> int:
         pos = cont.end()
 
 
-def _scan_parts(text: str) -> tuple[list[str], set[str]]:
+def _scan_parts(text: str, qualified_only: bool = False) -> tuple[list[str], set[str]]:
     """(Title 14 part numbers in order, parts claimed by another title).
 
     Mirrors ``_scan``: a ``49 CFR part 1542`` anywhere in the text bans that
     part number for the whole text, so a later bare ``part 1542`` is never
     read as Title 14.
+
+    With ``qualified_only`` a list is kept only when it is positively Title
+    14 — anchored by ``14 CFR`` or followed by a CFR-style qualifier (``of
+    this chapter``). Title 14 text uses bare ``Part 1`` / ``Part 3`` for
+    other documents' subdivisions too (an IEC standard's parts, ICAO Annex
+    6 Part 1, an appendix's own "Part 1:" headings), so only the qualified
+    forms are safe there; FAA prose (the AIM) means Title 14 by a bare
+    ``part``, and its callers leave this off.
     """
     found: list[str] = []
     banned: set[str] = set()
@@ -222,24 +258,36 @@ def _scan_parts(text: str) -> tuple[list[str], set[str]]:
             context = text[max(0, anchor.start() - 12) : anchor.start()]
             other = _OTHER_TITLE_RE.search(context)
             other_title = other is not None and other.group(1) != "14"
+            other_title = other_title or _CAR_BEFORE_RE.search(context) is not None
         out: list[str] = []
         end = _consume_part_list(text, anchor.end(), out)
+        qualified = anchor is cfr
+        if _PART_LOCAL_RE.match(text, end):
+            out = []
+        elif _CAR_AFTER_RE.match(text, end):
+            other_title = True
+        elif (title := _PART_TITLE_AFTER_RE.match(text, end)) is not None:
+            other_title = other_title or title.group(1) != "14"
+            qualified = True
+        elif _PART_QUALIFIER_RE.match(text, end):
+            qualified = True
         if other_title:
             banned.update(out)
-        else:
+        elif qualified or not qualified_only:
             found.extend(out)
         pos = max(end, anchor.end())
     return found, banned
 
 
-def extract_part_citations(text: str) -> list[str]:
+def extract_part_citations(text: str, *, qualified_only: bool = False) -> list[str]:
     """Recognized Title 14 part numbers in ``text``, in order.
 
     Parts the same text attributes to another title are excluded; callers
     linking a whole document should also apply ``extract_other_title_parts``
-    over all of its text.
+    over all of its text. ``qualified_only`` is for Title 14 text itself —
+    see ``_scan_parts``.
     """
-    found, banned = _scan_parts(text)
+    found, banned = _scan_parts(text, qualified_only)
     return [part for part in found if part not in banned]
 
 

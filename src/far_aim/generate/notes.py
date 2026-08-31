@@ -104,21 +104,40 @@ def _source_notes_chunks(
 
 
 def _xref_chunks(
-    content: list[dict], known_sections: set[str], self_section: str | None
+    content: list[dict],
+    known_sections: set[str],
+    self_section: str | None,
+    known_parts: set[str] | None = None,
+    self_part: str | None = None,
 ) -> list[str]:
+    """Sections the text cites (natural order), then parts (part order).
+
+    A number this document attributes to another CFR title anywhere in its
+    text is never linked as Title 14, even from a bare ``§``/``part``
+    elsewhere. Parts count only in their CFR-qualified forms (``part 121 of
+    this chapter``, ``14 CFR part 121``): Title 14 text also says ``Part 1``
+    of an ICAO Annex or an IEC standard, or heads an appendix's own parts.
+    The document's own section and part are never listed.
+    """
     tokens: list[str] = []
     banned: set[str] = set()
+    parts: list[str] = []
+    banned_parts: set[str] = set()
     for text in cites.collect_text(content):
         tokens.extend(cites.extract_citations(text))
         banned.update(cites.extract_other_title_citations(text))
-    # A section number this document attributes to another CFR title anywhere
-    # in its text is never linked as Title 14, even from a bare § elsewhere.
+        if known_parts:
+            parts.extend(cites.extract_part_citations(text, qualified_only=True))
+            banned_parts.update(cites.extract_other_title_parts(text))
     tokens = [token for token in tokens if token not in banned]
+    parts = [part for part in parts if part not in banned_parts and part != self_part]
     resolved = cites.resolve(tokens, known_sections, exclude=self_section)
-    if not resolved:
+    items = [f"- [[{sec}|§ {sec}]]" for sec in resolved]
+    for part in cites.resolve_parts(parts, known_parts or set()):
+        items.append(f"- [[{naming.part_index_stem(part)}]]")
+    if not items:
         return []
-    items = "\n".join(f"- [[{sec}|§ {sec}]]" for sec in resolved)
-    return ["## Explicit Cross-References", items]
+    return ["## Explicit Cross-References", "\n".join(items)]
 
 
 def _official_text_chunks(content: list[dict], *, reserved: bool) -> list[str]:
@@ -139,7 +158,7 @@ def _official_text_chunks(content: list[dict], *, reserved: bool) -> list[str]:
 
 
 def build_section_note(
-    sec: dict, aliases: list[str], known_sections: set[str]
+    sec: dict, aliases: list[str], known_sections: set[str], known_parts: set[str] | None = None
 ) -> Note:
     part = sec["part"]
     section = sec["section"]
@@ -188,7 +207,7 @@ def build_section_note(
     )
     if source_notes:
         chunks.extend(["## Source Notes", *source_notes])
-    chunks.extend(_xref_chunks(sec["content"], known_sections, section))
+    chunks.extend(_xref_chunks(sec["content"], known_sections, section, known_parts, sec["part"]))
 
     return Note(
         kind="regulation",
@@ -199,7 +218,7 @@ def build_section_note(
 
 
 def build_appendix_note(
-    apx: dict, aliases: list[str], known_sections: set[str]
+    apx: dict, aliases: list[str], known_sections: set[str], known_parts: set[str] | None = None
 ) -> Note:
     part = apx["part"]
     version = apx["source"]["source_version"]
@@ -236,7 +255,7 @@ def build_appendix_note(
     )
     if source_notes:
         chunks.extend(["## Source Notes", *source_notes])
-    chunks.extend(_xref_chunks(apx["content"], known_sections, None))
+    chunks.extend(_xref_chunks(apx["content"], known_sections, None, known_parts, apx["part"]))
 
     return Note(
         kind="appendix",

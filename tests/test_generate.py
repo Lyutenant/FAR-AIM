@@ -709,3 +709,46 @@ def test_escape_md_dollar_prevents_inline_math():
         escape_md("a fine of $300,000 up to $20,000,000")
         == "a fine of \\$300,000 up to \\$20,000,000"
     )
+
+
+# ---------------------------------------------------------------------------
+# Phase 6: FAR → FAR part links
+# ---------------------------------------------------------------------------
+
+
+def _far_section(part: str, section: str, text: str) -> dict:
+    sec = _mini_section(part, section, "Test.")
+    sec["content"] = [{"type": "text", "style": "paragraph", "text": text}]
+    return sec
+
+
+def _xrefs(note) -> list[str]:
+    tail = note.body.split("## Explicit Cross-References\n\n", 1)
+    return tail[1].strip().splitlines() if len(tail) == 2 else []
+
+
+def test_section_note_lists_sections_then_parts_and_skips_own_part():
+    from far_aim.generate.notes import build_section_note
+
+    sec = _far_section(
+        "61",
+        "61.3",
+        "issued under part 61 or part 143 of this chapter, see § 91.3 and part 91 of this chapter",
+    )
+    note = build_section_note(sec, [], {"91.3"}, {"61", "91", "143"})
+    assert _xrefs(note) == ["- [[91.3|§ 91.3]]", "- [[Part 91]]", "- [[Part 143]]"]
+    # Without a known-parts registry the note is unchanged from Phase 3.
+    assert _xrefs(build_section_note(sec, [], {"91.3"})) == ["- [[91.3|§ 91.3]]"]
+
+
+def test_section_note_part_links_honour_other_title_ban():
+    from far_aim.generate.notes import build_section_note
+
+    sec = _far_section(
+        "152",
+        "152.421",
+        "part 21 of the regulations of the Office of the Secretary of Transportation "
+        "(49 CFR part 21) apply; see also part 15 of this chapter",
+    )
+    note = build_section_note(sec, [], set(), {"15", "21"})
+    assert _xrefs(note) == ["- [[Part 15]]"]

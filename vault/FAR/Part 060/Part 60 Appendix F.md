@@ -411,3 +411,14 @@ WAT Weight, Altitude, Temperature.
 **Citations:**
 
 \[Docket FAA-2002-12461, 73 FR 26490, May 9, 2008, as amended by Docket FAA-2022-1355, Amdt. 60-7, 87 FR 75845, Dec. 9, 2022]
+
+## Explicit Cross-References
+
+- [[Part 1]]
+- [[Part 61]]
+- [[Part 63]]
+- [[Part 119]]
+- [[Part 121]]
+- [[Part 135]]
+- [[Part 141]]
+- [[Part 142]]

@@ -411,9 +411,17 @@ def plan_vault(
         for child in _iter_documents(doc):
             aliases = registry.aliases[child["id"]]
             if child["document_type"] == cfr_model.DOCUMENT_TYPE_SECTION:
-                add(notes.build_section_note(child, aliases, registry.section_numbers))
+                add(
+                    notes.build_section_note(
+                        child, aliases, registry.section_numbers, registry.part_numbers
+                    )
+                )
             else:
-                add(notes.build_appendix_note(child, aliases, registry.section_numbers))
+                add(
+                    notes.build_appendix_note(
+                        child, aliases, registry.section_numbers, registry.part_numbers
+                    )
+                )
     add(notes.build_title_index(docs, version, title_hash))
     add(notes.build_source_status(sources))
 

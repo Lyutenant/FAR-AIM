@@ -136,3 +136,5 @@ H25.5 Electrical Wiring Interconnection System (EWIS) Instructions for Continued
 - [[25.1729|§ 25.1729]]
 - [[43.16|§ 43.16]]
 - [[91.403|§ 91.403]]
+- [[Part 21]]
+- [[Part 26]]

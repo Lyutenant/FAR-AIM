@@ -81,3 +81,7 @@ The effects of airplane component failures on FRM reliability must be assessed o
 **Citations:**
 
 \[Doc. No. FAA-2005-22997, 73 FR 42494, July 21, 2008, as amended by Doc. No. FAA-2018-0119, Amdt. 25-145, 83 FR 9169, Mar. 5, 2018]
+
+## Explicit Cross-References
+
+- [[Part 26]]

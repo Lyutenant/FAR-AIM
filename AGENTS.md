@@ -112,10 +112,19 @@ styles (`14 CFR section 91.171`, `14 CFR § 91.225`, `14CFR §91.113`) and
 part references (`14 CFR part 91`, `Parts 91K, 121`, bare `Part 107`), with
 other-title bans (`49 CFR part 1542`); `build-vault` appends the resolved
 FAR section and part links to each AIM note's `## Explicit Cross-References`
-(309 links from 138 notes; derived at render time, canonical JSON unchanged;
-FAR notes unchanged). Deliberately unlinked: bare `section 91.185` without an
-anchor, appendix references, FAA typos (`91.113b`). Remaining Phase 6 work:
-FAR/AIM → PCG glossary links where unambiguous and justified (plan §12.2),
-and optionally FAR part links inside FAR notes (the recognizer exists;
-the FAR generator does not use it yet). Do not start AI-enrichment work
-before Phase 9 (plan §31).
+(309 links from 138 notes; derived at render time, canonical JSON unchanged).
+FAR → FAR part links done: FAR section/appendix notes list the parts their
+text cites as `[[Part 121]]` after the section links, own part excluded
+(1,315 links from 704 notes to 133 part indexes). Inside Title 14 text only
+CFR-qualified forms count (`part 121 of this chapter`, `Part 375 of this
+title`, `14 CFR part 13`; `qualified_only`) because the CFR also writes bare
+`Part 1` for an ICAO Annex, an IEC standard or an appendix's own headings —
+unqualified `part 119 certificate holder` stays plain; the recognizer rejects
+Civil Air Regulations numbering (`CAR Part 3`, `part 4a`), dashed other-code
+numbers (`part 60-1`), printed volume ranges (`parts 1 to 59`) and a
+document's own subdivisions (`Part 1 of this appendix`, `part 1 of appendix
+C`). Deliberately unlinked: bare `section 91.185` without an anchor,
+appendix references, FAA typos (`91.113b`). Remaining Phase 6 work:
+FAR/AIM → PCG glossary links where unambiguous and justified (plan §12.2) —
+measure candidate counts per term and agree a precision gate before
+rendering. Do not start AI-enrichment work before Phase 9 (plan §31).

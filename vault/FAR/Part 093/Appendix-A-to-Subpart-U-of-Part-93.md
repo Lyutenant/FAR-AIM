@@ -55,3 +55,4 @@ LAmax(G) = 77 + 10log(# PAX seats/2) dB for certifications obtained under 14 CFR
 ## Explicit Cross-References
 
 - [[93.301|§ 93.301]]
+- [[Part 36]]

@@ -61,12 +61,26 @@ is dropped globally whenever two notes would share it (plan §17.4; e.g.
 - **Cross-references** are extracted deterministically from official text
   (`§ 91.157`, `§§ 91.101 through 91.135` endpoints, `14 CFR 121.317(c)`
   lists) and listed as wikilinks only when the target section exists in the
-  corpus — zero broken generated links by construction. Other-title
-  citations (`49 CFR …`), bare `part 121` references, and appendix
-  references stay plain text; a section number the document attributes to
-  another title anywhere in its text (`§ 21.7 … (49 CFR 21.7)`) is never
-  linked as Title 14, even from a bare `§`. The official text body itself
-  is never rewritten into links.
+  corpus — zero broken generated links by construction. Since Phase 6 the
+  same list continues with the **parts** the text cites as `[[Part 121]]`
+  links to the part index, in part order after the sections; the
+  document's own part is never listed. Only CFR-qualified forms count —
+  `part 121 or part 135 of this chapter`, `parts 43 and 91 of this
+  chapter`, `Part 375 of this title`, `part 26 of this subchapter`,
+  `14 CFR part 13` — because Title 14 text also writes a bare `Part 1` for
+  ICAO Annex 6, an IEC standard, or an appendix's own headings; an
+  unqualified `part 119 certificate holder` or `Part 121 or 135` therefore
+  stays plain text unless the same note qualifies that number elsewhere
+  (the list is per-note and deduplicated). Other-title
+  citations (`49 CFR …`) and appendix references stay plain text; a number
+  the document attributes to another title anywhere in its text (`§ 21.7 …
+  (49 CFR 21.7)`, `part 21 … (49 CFR part 21)`) is never linked as Title
+  14, even from a bare `§`/`part`. Not read as parts: Civil Air
+  Regulations numbering (`CAR Part 3`, `part 4a of the Civil Air
+  Regulations`), dashed other-code numbers (`41 CFR part 60-1`), printed
+  volume ranges (`14 CFR parts 1 to 59`), and a document's own
+  subdivisions (`Part 1 of this appendix`, `part 1 of appendix C to part
+  25`). The official text body itself is never rewritten into links.
 - **Reserved documents**: `[Reserved]` under `## Official Text` is emitted
   only when the source itself marks the document reserved. A non-reserved
   document with no content (text pending as an amendment link) carries no

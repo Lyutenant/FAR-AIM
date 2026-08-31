@@ -180,3 +180,8 @@ The approved course operator may contract or obtain written agreements with airc
 **Citations:**
 
 \[Docket 1179, 27 FR 7970, Aug. 10, 1962, as amended by Amdt. 63-6, 31 FR 9211, July 6, 1966; Amdt. 63-28, 54 FR 39291, Sept. 25, 1989; Docket FAA-2017-0733, Amdt. 63-39, 82 FR 34398, July 25, 2017; Docket FAA-2018-0119, Amdt. 63-40, 83 FR 9170, Mar. 5, 2018]
+
+## Explicit Cross-References
+
+- [[Part 91]]
+- [[Part 121]]

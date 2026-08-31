@@ -30,12 +30,15 @@ paraphrased or AI-generated. Full specification:
   losslessly (23 letters, 1,559 terms), rendered under `vault/PCG/` — one
   note per term, named by the term itself, with See/Refer cross-references
   resolved into wikilinks.
-- **Phase 6 (in progress)** — cross-source links: AIM → FAR. Every AIM
-  note's `## Explicit Cross-References` now also lists the FAR sections and
+- **Phase 6 (in progress)** — cross-source links. AIM → FAR: every AIM
+  note's `## Explicit Cross-References` also lists the FAR sections and
   parts its official text cites (`14 CFR section 91.171`, `14 CFR part 91`,
   `Part 107 operations`), linked only when the FAR note exists — 309 links
-  from 138 AIM notes to 90 sections and 31 parts. Next: FAR/AIM → PCG where
-  unambiguous.
+  from 138 AIM notes to 90 sections and 31 parts. FAR → FAR parts: section
+  and appendix notes also link the parts they cite (`part 121 or part 135
+  of this chapter`; CFR-qualified forms only) — 1,315 links from 704 notes to
+  133 part indexes. Next:
+  FAR/AIM → PCG where unambiguous.
 
 ## Operational notes
 

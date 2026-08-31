@@ -633,3 +633,5 @@ VFC/MFC may not be less than a speed midway between VMO/MMO and VDF/MDF, except 
 ## Explicit Cross-References
 
 - [[135.169|§ 135.169]]
+- [[Part 23]]
+- [[Part 25]]

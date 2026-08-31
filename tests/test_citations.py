@@ -218,6 +218,8 @@ def test_part_citations_bare_and_subpart_shorthand():
         "121",
         "91",
     ]
+    # A number fused to a word is not read as a part ("parts 121and 135").
+    assert citations.extract_part_citations("AC 120-49A, parts 121and 135 Certification") == []
     assert citations.extract_part_citations(
         "Title 14 of the Code of Federal Regulations, part 97, and are"
     ) == ["97"]
@@ -242,3 +244,90 @@ def test_resolve_parts_filters_dedups_orders():
         "91",
         "135",
     ]
+
+
+# ---------------------------------------------------------------------------
+# Phase 6: FAR → FAR part links. Quoted strings are verbatim Title 14 text.
+# ---------------------------------------------------------------------------
+
+
+def test_far_part_reference_shapes():
+    assert citations.extract_part_citations(
+        "flight time threshold identified in part 121 or part 135 of this chapter"
+    ) == ["121", "135"]
+    assert citations.extract_part_citations(
+        "performed in accordance with parts 43 and 91 of this chapter."
+    ) == ["43", "91"]
+    assert citations.extract_part_citations(
+        "certificate issued under Part 121 or 135, may perform maintenance"
+    ) == ["121", "135"]
+    assert citations.extract_part_citations(
+        "subchapter A (except parts 1 and 3), subchapter C (except part 39), subchapter D,"
+    ) == ["1", "3", "39"]
+    assert citations.extract_part_citations("under the authority of Part 375 of this title.") == [
+        "375"
+    ]
+
+
+def test_far_part_reference_rejections():
+    # Civil Air Regulations numbering, before or after the number.
+    assert citations.extract_part_citations(
+        "CAR Part 3, as effective May 15, 1956. CAR Part 3, or 14 CFR Part 23."
+    ) == ["23"]
+    assert citations.extract_part_citations(
+        "under the normal category of part 4a of the former Civil Air Regulations"
+    ) == []
+    assert citations.extract_part_citations("Part 3 of the Civil Air Regulations and part 91") == [
+        "91"
+    ]
+    assert citations.extract_other_title_parts("Part 3 of the Civil Air Regulations") == {"3"}
+    # Another title's dashed numbering, printed volume ranges, local numbering.
+    assert citations.extract_part_citations("41 CFR part 60-1 (28 FR 9812), as adopted") == []
+    assert citations.extract_part_citations("was published in 14 CFR parts 1 to 59, Revised") == []
+    assert citations.extract_part_citations("as described in Part 1 of this appendix.") == []
+    assert citations.extract_part_citations("in accordance with part 3 of this order.") == []
+    assert citations.extract_part_citations(
+        "defined in part 1 of appendix C to part 25 of this chapter, or"
+    ) == ["25"]
+    # The other-title ban is text-wide, as for sections.
+    text = (
+        "part 21 of the regulations of the Office of the Secretary of Transportation "
+        "(49 CFR part 21) implementing Title VI"
+    )
+    assert citations.extract_part_citations(text) == []
+    assert citations.extract_other_title_parts(text) == {"21"}
+
+
+def test_far_qualified_only_keeps_cfr_style_references():
+    q = lambda text: citations.extract_part_citations(text, qualified_only=True)  # noqa: E731
+    assert q("identified in part 121 or part 135 of this chapter that is") == ["121", "135"]
+    assert q("in accordance with parts 43 and 91 of this chapter.") == ["43", "91"]
+    assert q("under the authority of Part 375 of this title.") == ["375"]
+    assert q("requirements of part 26 of this subchapter.") == ["26"]
+    assert q("Notwithstanding part 11 of the Federal Aviation Regulations") == ["11"]
+    assert q("enforcement action under 14 CFR part 13, “Investigative") == ["13"]
+    # Unqualified mentions are legitimate Title 14 more often than not, but
+    # not reliably so; they are left plain (the AIM caller keeps them).
+    assert q("Employer is a part 119 certificate holder with authority") == []
+    assert q("certificate issued under Part 121 or 135, may perform") == []
+    assert citations.extract_part_citations("a part 119 certificate holder") == ["119"]
+
+
+def test_far_qualified_only_rejects_other_documents_parts():
+    # Verbatim Title 14 contexts a bare match would have linked (review).
+    q = lambda text: citations.extract_part_citations(text, qualified_only=True)  # noqa: E731
+    assert q("Publication No. 61094-3, Measurement Microphones—Part 3: Primary Method") == []
+    assert q("ICAO Pilots and Airmen Annexes 1, 6 (Part 1) and 7. Also state") == []
+    assert q("Part 1: Information Requirements for Licensed Launch") == []
+    # § 1310.8, verbatim: a parenthetical separates the number from its
+    # title, so the first mention is merely unqualified; the second names
+    # title 31 and bans the number text-wide.
+    assert q(
+        "at subpart A (“Freedom of Information Act”) of part 1 (“Disclosure of Records”) "
+        "of title 31 (“Money and Finance: Treasury”)"
+    ) == []
+    assert q("regulations at subpart A of part 1 of title 31 of the CFR subsequently") == []
+    assert citations.extract_other_title_parts("subpart A of part 1 of title 31 of the CFR") == {
+        "1"
+    }
+    assert q("as provided in part 91 of title 14") == ["91"]
