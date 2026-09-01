@@ -28,4 +28,4 @@ CENTER'S AREA- The specified airspace within which an air route traffic control 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

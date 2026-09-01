@@ -61,3 +61,23 @@ Editorial changes include adding 23 NM Lateral and 20 NM Longitudinal separation
 h. Entire Publication
 
 Additional editorial/format changes were made where necessary. Revision bars were not used because of the insignificant nature of these changes.
+
+## Glossary Terms
+
+- [[CCF|CCF]]
+- [[COMBINED CONTROL FACILITY (CCF)|COMBINED CONTROL FACILITY (CCF)]]
+- [[DECISION ALTITUDE (DA)|DECISION ALTITUDE (DA)]]
+- [[DECISION HEIGHT (DH)|DECISION HEIGHT (DH)]]
+- [[GPS|GPS]]
+- [[IAP|IAP]]
+- [[IFR|IFR]]
+- [[INSTRUMENT APPROACH PROCEDURE|INSTRUMENT APPROACH PROCEDURE]]
+- [[LONGITUDINAL SEPARATION|LONGITUDINAL SEPARATION]]
+- [[MISSED APPROACH|MISSED APPROACH]]
+- [[NAS|NAS]]
+- [[NOTAM|NOTAM]]
+- [[PAR|PAR]]
+- [[PRECISION APPROACH|PRECISION APPROACH]]
+- [[PRIOR PERMISSION REQUIRED (PPR)|PRIOR PERMISSION REQUIRED (PPR)]]
+- [[RADAR APPROACH|RADAR APPROACH]]
+- [[VFR|VFR]]

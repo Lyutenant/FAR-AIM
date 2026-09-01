@@ -33,4 +33,4 @@ SIGMET- A weather advisory issued concerning weather significant to the safety o
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -44,6 +44,6 @@ SPECIAL USE AIRSPACE- Airspace of defined dimensions identified by an area on th
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]
 - [[EN ROUTE CHARTS|EN ROUTE CHARTS]]
-- 14 CFR part 73
+- [[Part 73|14 CFR part 73]]

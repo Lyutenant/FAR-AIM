@@ -24,4 +24,4 @@ LOCALIZER TYPE DIRECTIONAL AID (LDA)- A localizer with an angular offset that ex
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

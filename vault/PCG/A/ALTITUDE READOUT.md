@@ -28,4 +28,4 @@ ALTITUDE READOUT- An aircraft's altitude, transmitted via the Mode C transponder
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -24,4 +24,4 @@ LIGHT GUN- A handheld directional light signaling device which emits a brilliant
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

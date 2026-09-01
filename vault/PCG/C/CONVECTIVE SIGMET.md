@@ -32,4 +32,4 @@ CONVECTIVE SIGMET- A weather advisory concerning convective weather significant 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

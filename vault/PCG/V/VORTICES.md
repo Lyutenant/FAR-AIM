@@ -29,4 +29,4 @@ VORTICES- Circular patterns of air created by the movement of an airfoil through
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

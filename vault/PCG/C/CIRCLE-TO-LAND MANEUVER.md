@@ -31,4 +31,4 @@ CIRCLE‐TO‐LAND MANEUVER- A maneuver initiated by the pilot to align the airc
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

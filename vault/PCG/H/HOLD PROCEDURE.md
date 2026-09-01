@@ -28,4 +28,4 @@ HOLD PROCEDURE- A predetermined maneuver which keeps aircraft within a specified
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

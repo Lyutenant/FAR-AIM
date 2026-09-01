@@ -38,4 +38,4 @@ MINIMUM IFR ALTITUDES (MIA)- Minimum altitudes for IFR operations as prescribed 
 
 ## References
 
-- 14 CFR part 91
+- [[Part 91|14 CFR part 91]]

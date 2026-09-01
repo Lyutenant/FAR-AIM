@@ -24,4 +24,4 @@ AIRWAY BEACON- Used to mark airway segments in remote mountain areas. The light 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -31,4 +31,4 @@ VORTAC- A navigation aid providing VOR azimuth, TACAN azimuth, and TACAN distanc
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -28,4 +28,4 @@ ARRESTING SYSTEM- A safety device consisting of two major components, namely, en
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

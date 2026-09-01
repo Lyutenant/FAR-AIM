@@ -28,4 +28,4 @@ AIRSPEED- The speed of an aircraft relative to its surrounding air mass. The unq
 
 ## References
 
-- 14 CFR part 1
+- [[Part 1|14 CFR part 1]]

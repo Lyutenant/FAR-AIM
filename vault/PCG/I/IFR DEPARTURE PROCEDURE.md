@@ -28,4 +28,4 @@ IFR DEPARTURE PROCEDURE-
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

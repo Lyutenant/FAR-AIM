@@ -28,4 +28,4 @@ LONGITUDINAL SEPARATION- The longitudinal spacing of aircraft at the same altitu
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

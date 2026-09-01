@@ -28,4 +28,4 @@ OPTION APPROACH- An approach requested and conducted by a pilot which will resul
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

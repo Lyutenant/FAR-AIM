@@ -24,4 +24,4 @@ LIGHT-SPORT AIRCRAFT (LSA)- An FAA-registered aircraft, other than a helicopter 
 
 ## References
 
-- [14 CFR part 1, §1.1](https://www.ecfr.gov/current/title-14/part-1)
+- 14 CFR part 1, §1.1 — [[1.1|§ 1.1]], [[Part 1]]

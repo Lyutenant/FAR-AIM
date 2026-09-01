@@ -53,3 +53,8 @@ Air-reports are critically important in assessing the hazards which volcanic ash
 </table>
 
 Date: 07/19/2010
+
+## Glossary Terms
+
+- [[FLIGHT LEVEL|FLIGHT LEVEL]]
+- [[FLIGHT PLAN|FLIGHT PLAN]]

@@ -24,4 +24,4 @@ CONTACT APPROACH- An approach wherein an aircraft on an IFR flight plan, having 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

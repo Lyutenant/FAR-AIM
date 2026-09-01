@@ -28,4 +28,4 @@ FLIGHT CHECK- A call sign prefix used by FAA aircraft engaged in flight inspecti
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

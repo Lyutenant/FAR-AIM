@@ -124,7 +124,18 @@ Civil Air Regulations numbering (`CAR Part 3`, `part 4a`), dashed other-code
 numbers (`part 60-1`), printed volume ranges (`parts 1 to 59`) and a
 document's own subdivisions (`Part 1 of this appendix`, `part 1 of appendix
 C`). Deliberately unlinked: bare `section 91.185` without an anchor,
-appendix references, FAA typos (`91.113b`). Remaining Phase 6 work:
-FAR/AIM → PCG glossary links where unambiguous and justified (plan §12.2) —
-measure candidate counts per term and agree a precision gate before
-rendering. Do not start AI-enrichment work before Phase 9 (plan §31).
+appendix references, FAA typos (`91.113b`). PCG → FAR/AIM done: `Refer to`
+rows link `[[Part 91]]`, `[[1.1|§ 1.1]]` or `[[AIM]]` (185 links). AIM → PCG
+done (plan §12.2, Tier 2): every AIM note ends with `## Glossary Terms` —
+separate from the Tier 1 cross-references — produced by
+`far_aim.links.glossary` (phrases case-insensitive; acronyms = parenthetical
+or `See`-only entries, capitals only, ≥3 letters; single defined words only
+via the gate) and the committed gate `data/links/pcg-glossary-gate.json`
+(deny/allow with reasons; stale entries fail the build): 4,677 links from
+406 notes to 740 terms. Settled: **FAR notes get no PCG glossary links** —
+FAR vocabulary is defined by 14 CFR Part 1 and PCG definitions can differ
+(`NIGHT`, `CEILING`, `AIR TAXI`); a FAR → Part 1 definitions layer is the
+FAR-side analogue if wanted later. Phase 6 exit criteria met (citation
+parser tested, high-confidence links resolve, no mass false positives).
+Next: Phase 7 (Obsidian quality layer). Do not start AI-enrichment work
+before Phase 9 (plan §31).

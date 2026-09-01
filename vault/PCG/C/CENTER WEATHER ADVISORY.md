@@ -32,4 +32,4 @@ CENTER WEATHER ADVISORY- An unscheduled weather advisory issued by Center Weathe
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

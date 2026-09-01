@@ -32,4 +32,4 @@ AIRCRAFT CLASSES- For the purposes of Wake Turbulence Separation Minima, ATC cla
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

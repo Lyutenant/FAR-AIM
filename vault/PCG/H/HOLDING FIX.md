@@ -29,4 +29,4 @@ HOLDING FIX- A specified fix identifiable to a pilot by NAVAIDs or visual refere
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

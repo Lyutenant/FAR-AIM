@@ -37,8 +37,13 @@ paraphrased or AI-generated. Full specification:
   from 138 AIM notes to 90 sections and 31 parts. FAR → FAR parts: section
   and appendix notes also link the parts they cite (`part 121 or part 135
   of this chapter`; CFR-qualified forms only) — 1,315 links from 704 notes to
-  133 part indexes. Next:
-  FAR/AIM → PCG where unambiguous.
+  133 part indexes. PCG → FAR/AIM: glossary `Refer to` rows link the part,
+  section or AIM index they name (185 links). AIM → PCG: every AIM note
+  ends with `## Glossary Terms`, the Pilot/Controller Glossary terms its
+  text uses, under a deterministic, human-gated recognizer
+  (`data/links/pcg-glossary-gate.json`) — 4,677 links from 406 notes to 740
+  terms. The FAR deliberately gets no glossary links (its vocabulary is
+  defined by 14 CFR Part 1).
 
 ## Operational notes
 
@@ -76,7 +81,8 @@ python3 -m venv .venv                 # requires Python 3.12+
 
 - `src/far_aim/` — pipeline package (CLI, config, manifest, sources, parsers, generator)
 - `tests/` — pytest suite (`tests/fixtures/` for source fixtures)
-- `data/manifests/` — committed source-state registry; `data/raw/` is a gitignored cache
+- `data/manifests/` — committed source-state registry; `data/links/` — committed,
+  human-maintained link curation (the PCG glossary gate); `data/raw/` is a gitignored cache
 - `vault/` — generated Obsidian vault (`FAR/`, `AIM/` incl. figure assets, `PCG/`)
 - `plans/` — project specification
 - `docs/` — architecture and policy notes

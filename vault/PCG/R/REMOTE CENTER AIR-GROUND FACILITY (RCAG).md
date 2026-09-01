@@ -26,4 +26,4 @@ REMOTE CENTER AIR/GROUND FACILITY (RCAG)- An unmanned VHF/UHF transmitter/receiv
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -28,4 +28,4 @@ CROSS (FIX) AT OR ABOVE (ALTITUDE)- Used by ATC when an altitude restriction at 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

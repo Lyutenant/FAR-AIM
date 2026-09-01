@@ -31,6 +31,7 @@ from far_aim.generate import aim_notes as generate_aim_notes
 from far_aim.generate import build as generate_build
 from far_aim.generate import notes as generate_notes
 from far_aim.generate import pcg_notes as generate_pcg_notes
+from far_aim.links import glossary
 from far_aim.log import setup_logging
 from far_aim.manifest import ManifestError, SourceManifest, SourceState
 from far_aim.models import aim as aim_model
@@ -1597,7 +1598,11 @@ def _pcg_layer(config: Config, manifest: SourceManifest) -> generate_build.PcgLa
     docs = _load_verified_docs(config, state, PCG_SPEC)
     if isinstance(docs, str):
         return docs
-    return generate_build.PcgLayer(docs=docs, title_hash=state.canonical_hash)
+    try:
+        gate = glossary.Gate.load(config.pcg_gate_path)
+    except BuildError as exc:
+        return str(exc)
+    return generate_build.PcgLayer(docs=docs, title_hash=state.canonical_hash, gate=gate)
 
 
 def _vault_has_generated_pcg(config: Config) -> bool:

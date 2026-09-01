@@ -24,4 +24,4 @@ EXPECT (ALTITUDE) AT (TIME) or (FIX)- Used under certain conditions to provide a
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -28,4 +28,4 @@ TETRAHEDRON- A device normally located on uncontrolled airports and used as a la
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -29,4 +29,4 @@ LOCALIZER- The component of an ILS which provides course guidance to the runway.
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

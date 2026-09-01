@@ -28,4 +28,4 @@ CLEARED FOR THE OPTION- ATC authorization for an aircraft to make a touch‚Äêand‚
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

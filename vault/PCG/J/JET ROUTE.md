@@ -28,4 +28,4 @@ JET ROUTE- A route designed to serve aircraft operations from 18,000 feet MSL up
 
 ## References
 
-- 14 CFR part 71
+- [[Part 71|14 CFR part 71]]

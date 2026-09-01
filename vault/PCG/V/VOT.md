@@ -28,5 +28,5 @@ VOT- A ground facility which emits a test signal to check VOR receiver accuracy.
 
 ## References
 
-- 14 CFR part 91
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[Part 91|14 CFR part 91]]
+- [[AIM]]

@@ -19,6 +19,7 @@ place and imported here:
 - `src/far_aim/` — pipeline package (CLI, config, manifest; parsers arrive in later phases)
 - `tests/` — pytest suite; `tests/fixtures/` for source fixtures
 - `docs/` — architecture, data-model, source-policy, validation notes
-- `data/manifests/sources.json` — committed source registry; `data/raw/` is a gitignored cache
+- `data/manifests/sources.json` — committed source registry; `data/links/` — committed
+  link curation (PCG glossary gate); `data/raw/` is a gitignored cache
 - `.venv/` — Python virtual environment (gitignored)
 - Coming in later phases: `vault/` (generated Obsidian vault)

@@ -29,5 +29,5 @@ CLEARED APPROACH- ATC authorization for an aircraft to execute any standard or s
 
 ## References
 
-- 14 CFR part 91
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[Part 91|14 CFR part 91]]
+- [[AIM]]

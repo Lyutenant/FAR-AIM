@@ -36,6 +36,15 @@ class Config:
         return self.data_dir / "manifests"
 
     @property
+    def links_dir(self) -> Path:
+        """Committed, human-maintained link curation (plan §12.3)."""
+        return self.data_dir / "links"
+
+    @property
+    def pcg_gate_path(self) -> Path:
+        return self.links_dir / "pcg-glossary-gate.json"
+
+    @property
     def manifest_path(self) -> Path:
         return self.manifests_dir / "sources.json"
 

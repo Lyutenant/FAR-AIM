@@ -24,4 +24,4 @@ EXECUTE MISSED APPROACH- Instructions issued to a pilot making an instrument app
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

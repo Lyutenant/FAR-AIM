@@ -61,4 +61,4 @@ AIRPORT LIGHTING- Various lighting aids that may be installed on an airport. Typ
 ## References
 
 - FAA Order JO 6850.2, Visual Guidance Lighting Systems
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

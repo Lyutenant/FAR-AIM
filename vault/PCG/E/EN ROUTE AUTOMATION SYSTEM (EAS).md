@@ -24,4 +24,4 @@ EN ROUTE AUTOMATION SYSTEM (EAS)- The complex integrated environment consisting 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

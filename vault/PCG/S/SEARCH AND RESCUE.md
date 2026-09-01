@@ -29,4 +29,4 @@ SEARCH AND RESCUE- A service which seeks missing aircraft and assists those foun
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

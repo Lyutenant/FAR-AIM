@@ -24,4 +24,4 @@ VOICE SWITCHING AND CONTROL SYSTEM (VSCS)- A computer controlled switching syste
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

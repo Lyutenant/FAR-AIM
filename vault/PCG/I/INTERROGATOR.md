@@ -28,4 +28,4 @@ INTERROGATOR- The ground‐based surveillance radar beacon transmitter‐receive
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

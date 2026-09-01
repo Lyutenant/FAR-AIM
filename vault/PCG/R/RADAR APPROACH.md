@@ -32,4 +32,4 @@ RADAR APPROACH- An instrument approach procedure which utilizes Precision Approa
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

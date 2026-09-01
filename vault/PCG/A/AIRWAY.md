@@ -29,5 +29,5 @@ AIRWAY- A Class E airspace area established in the form of a corridor, the cente
 
 ## References
 
-- 14 CFR part 71
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[Part 71|14 CFR part 71]]
+- [[AIM]]

@@ -343,10 +343,15 @@ PCG: the fetch-accepted-but-unparsed window refuses to build (as for the
 AIM), stems and aliases are unique across all three corpora, every
 generated wikilink resolves, and rebuilds are byte-idempotent.
 
-Phase 6 (cross-source links) adds AIM → FAR links: the citation recognizer
-(`far_aim.links.citations`) is fixture-tested on verbatim AIM phrasing
-(`tests/test_citations.py`), links are emitted only for FAR notes that exist
-(`tests/test_aim_generate.py`), and the same zero-broken-links and
-byte-idempotency checks cover them. Remaining categories land with their
-corresponding phases (change gates and the FAA change-note cross-check:
-Phase 8).
+Phase 6 (cross-source links) adds AIM → FAR, FAR → FAR part, PCG → FAR/AIM
+`Refer to` and AIM → PCG glossary links. The citation recognizer
+(`far_aim.links.citations`) is fixture-tested on verbatim AIM and Title 14
+phrasing (`tests/test_citations.py`); the glossary matcher
+(`far_aim.links.glossary`) on its case, length, overlap and gate rules
+(`tests/test_glossary.py`), and the committed gate file is checked against
+the parsed PCG so a stale entry fails both the test and the build. Links
+are emitted only for notes that exist (`tests/test_aim_generate.py`,
+`tests/test_generate.py`, `tests/test_pcg_generate.py`), and the same
+zero-broken-links and byte-idempotency checks cover them. Remaining
+categories land with their corresponding phases (change gates and the FAA
+change-note cross-check: Phase 8).

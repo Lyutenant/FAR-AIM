@@ -29,4 +29,4 @@ MIDDLE MARKER- A marker beacon that defines a point along the glideslope of an I
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

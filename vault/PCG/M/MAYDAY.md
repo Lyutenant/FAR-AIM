@@ -28,4 +28,4 @@ MAYDAY- The international radiotelephony distress signal. When repeated three ti
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

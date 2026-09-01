@@ -27,11 +27,15 @@ label).
 
 from __future__ import annotations
 
+import re
+from dataclasses import dataclass
+
 from far_aim.generate import BuildError, naming
 from far_aim.generate.aim_markdown import text_md
 from far_aim.generate.frontmatter import Value
 from far_aim.generate.markdown import escape_md
 from far_aim.generate.notes import Note, link_display
+from far_aim.links import citations as cites
 
 PCG_DIR = "PCG"
 PCG_INDEX_STEM = "PCG"
@@ -113,7 +117,44 @@ def render_pcg_blocks(blocks: list[dict]) -> list[str]:
     return chunks
 
 
-def _reference_sections(term_doc: dict, targets: Targets) -> list[str]:
+@dataclass(frozen=True)
+class ReferTargets:
+    """Where a ``Refer to`` row may link outside the glossary (plan §12.1).
+
+    ``far`` carries the FAR section and part numbers whose notes exist;
+    ``aim_index_stem`` is the AIM publication note's stem when the AIM
+    corpus is built (the PCG's bare ``Refer to AIM`` rows point there).
+    """
+
+    far: object  # aim_notes.FarTargets; typed loosely to avoid a cycle
+    aim_index_stem: str | None = None
+
+
+_AIM_REFER_RE = re.compile(r"^\s*AIM\.?\s*$")
+
+
+def _refer_links(text: str, refer: ReferTargets | None) -> list[str]:
+    """Wikilinks for the FAR/AIM documents a ``Refer to`` row names."""
+    if refer is None:
+        return []
+    links: list[str] = []
+    if refer.aim_index_stem and _AIM_REFER_RE.match(text):
+        return [f"[[{refer.aim_index_stem}]]"]
+    far = refer.far
+    banned_sections = cites.extract_other_title_citations(text)
+    banned_parts = cites.extract_other_title_parts(text)
+    sections = [t for t in cites.extract_citations(text) if t not in banned_sections]
+    parts = [t for t in cites.extract_part_citations(text) if t not in banned_parts]
+    for sec in cites.resolve(sections, set(far.sections)):
+        links.append(f"[[{naming.section_stem(sec)}|§ {sec}]]")
+    for part in cites.resolve_parts(parts, set(far.parts)):
+        links.append(f"[[{naming.part_index_stem(part)}]]")
+    return links
+
+
+def _reference_sections(
+    term_doc: dict, targets: Targets, refer: ReferTargets | None = None
+) -> list[str]:
     see_items: list[str] = []
     refer_items: list[str] = []
     seen: set[tuple[str, str | None]] = set()
@@ -126,7 +167,17 @@ def _reference_sections(term_doc: dict, targets: Targets) -> list[str]:
         seen.add(key)
         target = block.get("target")
         entry = targets.get(target) if target else None
-        if entry is not None and target != term_doc["id"]:
+        # A "Refer to" row naming the AIM or a FAR document means that
+        # publication, even when the parser also matched a glossary entry of
+        # the same name ("Refer to AIM" → the manual, not the PCG's AIM term).
+        outside = _refer_links(block["text"], refer) if block["kind"] == "refer" else []
+        if len(outside) == 1 and outside[0].startswith("[[") and "|" not in outside[0]:
+            item = f"- {outside[0]}" if _AIM_REFER_RE.match(block["text"]) else (
+                f"- [[{outside[0][2:-2]}|{link_display(block['text'])}]]"
+            )
+        elif outside:
+            item = f"- {escape_md(block['text'])} — " + ", ".join(outside)
+        elif entry is not None and target != term_doc["id"]:
             stem, display = entry
             item = f"- [[{stem}|{link_display(display)}]]"
         elif block.get("url"):
@@ -153,7 +204,9 @@ def _edition_frontmatter(source: dict) -> list[tuple[str, Value]]:
     ]
 
 
-def build_term_note(term_doc: dict, aliases: list[str], targets: Targets) -> Note:
+def build_term_note(
+    term_doc: dict, aliases: list[str], targets: Targets, refer: ReferTargets | None = None
+) -> Note:
     source = term_doc["source"]
     term = term_doc["term"]
     stem = naming.pcg_term_stem(term)
@@ -177,7 +230,7 @@ def build_term_note(term_doc: dict, aliases: list[str], targets: Targets) -> Not
     ]
     if body_chunks:
         chunks.extend(["## Official Text", *body_chunks])
-    chunks.extend(_reference_sections(term_doc, targets))
+    chunks.extend(_reference_sections(term_doc, targets, refer))
     return Note(
         kind="pcg",
         path_parts=(PCG_DIR, naming.pcg_letter_folder(term_doc["letter"].lower()), f"{stem}.md"),

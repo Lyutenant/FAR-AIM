@@ -24,4 +24,4 @@ LOW FREQUENCY (LF)- The frequency band between 30 and 300 kHz.
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

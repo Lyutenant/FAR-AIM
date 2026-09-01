@@ -39,4 +39,4 @@ SEGMENTS OF AN INSTRUMENT APPROACH PROCEDURE- An instrument approach procedure m
 
 ## References
 
-- 14 CFR part 97
+- [[Part 97|14 CFR part 97]]

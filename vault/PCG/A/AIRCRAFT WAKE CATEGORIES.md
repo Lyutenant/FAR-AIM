@@ -34,4 +34,4 @@ AIRCRAFT WAKE CATEGORIES- For the purposes of Terminal Wake Turbulence Separatio
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

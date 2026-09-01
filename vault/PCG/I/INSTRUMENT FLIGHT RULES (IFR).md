@@ -31,4 +31,4 @@ INSTRUMENT FLIGHT RULES (IFR)- Rules governing the procedures for conducting ins
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

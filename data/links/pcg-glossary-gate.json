@@ -1,0 +1,261 @@
+{
+  "_comment": "Human-maintained gate for AIM → Pilot/Controller Glossary term links (plan §12.2/§12.3; rules in far_aim/links/glossary.py). Terms are verbatim PCG entry text. deny: never link this entry. allow_words: link this single-word defined entry case-insensitively. allow_acronyms: link this single-word defined entry only in capitals. Every entry needs a reason; an entry naming a term the accepted PCG edition lacks fails the build.",
+  "deny": [
+    {
+      "term": "AIM",
+      "reason": "The AIM's own name appears in every note; the PCG entry only points back at the manual."
+    },
+    {
+      "term": "CFR",
+      "reason": "Every '14 CFR' citation would link the glossary's 'Code of Federal Regulations' entry; citations already link the regulation itself."
+    },
+    {
+      "term": "CAT",
+      "reason": "In the AIM capital 'CAT' is an approach category (CAT II/III); the glossary CAT is clear-air turbulence."
+    },
+    {
+      "term": "BEACON",
+      "reason": "Word-like alias entry; capitalized in headings and phraseology with its ordinary meaning."
+    },
+    {
+      "term": "CENTER",
+      "reason": "Word-like alias entry; capitalized in phraseology examples ('CONTACT CENTER') and headings."
+    },
+    {
+      "term": "CLEARANCE",
+      "reason": "Word-like alias entry; capitalized throughout phraseology examples."
+    },
+    {
+      "term": "CONTROLLER",
+      "reason": "Word-like alias entry; capitalized in headings and tables."
+    },
+    {
+      "term": "COPTER",
+      "reason": "Word-like alias entry; capitalized in phraseology examples."
+    },
+    {
+      "term": "MINIMA",
+      "reason": "Word-like alias entry; capitalized in table headers."
+    },
+    {
+      "term": "OPERATIONAL",
+      "reason": "Word-like alias entry; capitalized in headings."
+    },
+    {
+      "term": "RAMP",
+      "reason": "Word-like alias entry; capitalized in signage and headings."
+    },
+    {
+      "term": "SPEED",
+      "reason": "Word-like alias entry; capitalized throughout phraseology examples ('REDUCE SPEED TO')."
+    },
+    {
+      "term": "SWAP",
+      "reason": "Word-like alias entry (severe weather avoidance plan); capitalized use is rare and ambiguous."
+    },
+    {
+      "term": "FLIP",
+      "reason": "Word-like alias entry (flight information publication); capitalized use is ambiguous."
+    },
+    {
+      "term": "TRUST",
+      "reason": "Word-like alias entry (recreational UAS safety test); capitalized use is ambiguous."
+    }
+  ],
+  "allow_words": [
+    {
+      "term": "NOTAM",
+      "reason": "Aviation-specific noun with one meaning."
+    },
+    {
+      "term": "TRANSPONDER",
+      "reason": "Aviation-specific noun; the glossary definition is the operative one."
+    },
+    {
+      "term": "WAYPOINT",
+      "reason": "Aviation-specific noun with one meaning."
+    },
+    {
+      "term": "GLIDESLOPE",
+      "reason": "Aviation-specific noun with one meaning."
+    },
+    {
+      "term": "GLIDEPATH",
+      "reason": "Aviation-specific noun with one meaning."
+    },
+    {
+      "term": "HANDOFF",
+      "reason": "ATC term of art with one meaning."
+    },
+    {
+      "term": "MICROBURST",
+      "reason": "Meteorological term of art with one meaning."
+    },
+    {
+      "term": "DOWNBURST",
+      "reason": "Meteorological term of art with one meaning."
+    },
+    {
+      "term": "CLEARWAY",
+      "reason": "Airport design term with one meaning."
+    },
+    {
+      "term": "STOPWAY",
+      "reason": "Airport design term with one meaning."
+    },
+    {
+      "term": "FLAMEOUT",
+      "reason": "Aviation-specific noun with one meaning."
+    },
+    {
+      "term": "HELIPAD",
+      "reason": "Aviation-specific noun with one meaning."
+    },
+    {
+      "term": "VERTIPORT",
+      "reason": "Aviation-specific noun with one meaning."
+    },
+    {
+      "term": "VERTIPAD",
+      "reason": "Aviation-specific noun with one meaning."
+    },
+    {
+      "term": "NONRADAR",
+      "reason": "ATC term of art with one meaning."
+    },
+    {
+      "term": "UNICOM",
+      "reason": "Aviation-specific noun with one meaning."
+    },
+    {
+      "term": "MULTICOM",
+      "reason": "Aviation-specific noun with one meaning."
+    },
+    {
+      "term": "SIGMET",
+      "reason": "Aviation-specific noun with one meaning."
+    },
+    {
+      "term": "VORTAC",
+      "reason": "Aviation-specific noun with one meaning."
+    },
+    {
+      "term": "AIRSPEED",
+      "reason": "Aviation-specific noun; the glossary defines the indicated/true distinction the AIM relies on."
+    },
+    {
+      "term": "MINIMUMS",
+      "reason": "In the AIM 'minimums' is the weather/approach minimums term of art."
+    },
+    {
+      "term": "IDENT",
+      "reason": "Transponder feature/phraseology with one meaning."
+    },
+    {
+      "term": "WILCO",
+      "reason": "Phraseology word with one meaning."
+    },
+    {
+      "term": "CLIMBOUT",
+      "reason": "Aviation-specific noun with one meaning."
+    },
+    {
+      "term": "AIRSTART",
+      "reason": "Aviation-specific noun with one meaning."
+    },
+    {
+      "term": "TORCHING",
+      "reason": "Aviation-specific term with one meaning."
+    },
+    {
+      "term": "CONSOLAN",
+      "reason": "Navigation system name with one meaning."
+    },
+    {
+      "term": "SKYSPOTTER",
+      "reason": "Program name with one meaning."
+    },
+    {
+      "term": "B4UFLY",
+      "reason": "Application name with one meaning."
+    },
+    {
+      "term": "SURPIC",
+      "reason": "Search-and-rescue term with one meaning."
+    },
+    {
+      "term": "RECONFORMANCE",
+      "reason": "Traffic-management term with one meaning."
+    }
+  ],
+  "allow_acronyms": [
+    {
+      "term": "VOR",
+      "reason": "Defined (not alias) entry; capitals are unambiguous."
+    },
+    {
+      "term": "VOT",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "GNSS [ICAO]",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "QNH",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "QNE",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "QFE",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "ASDA",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "FAWP",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "IAWP",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "IFWP",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "MAHWP",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "CPL [ICAO]",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "DCL",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "ACC [ICAO]",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "ADS [ICAO]",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "AIP [ICAO]",
+      "reason": "Defined entry; capitals are unambiguous."
+    },
+    {
+      "term": "SUPPS",
+      "reason": "Defined entry; capitals are unambiguous."
+    }
+  ]
+}

@@ -24,4 +24,4 @@ MINIMUM VECTORING ALTITUDE (MVA)- The lowest MSL altitude at which an IFR aircra
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -44,4 +44,4 @@ ADDITIONAL SERVICES- Advisory information provided by ATC which includes but is 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

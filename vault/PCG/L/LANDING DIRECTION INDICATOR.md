@@ -28,4 +28,4 @@ LANDING DIRECTION INDICATOR- A device which visually indicates the direction in 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -46,4 +46,4 @@ AIRMEN'S METEOROLOGICAL INFORMATION (AIRMET)- A concise description of an occurr
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

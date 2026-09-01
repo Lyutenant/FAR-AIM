@@ -24,4 +24,4 @@ CLEARWAY- An area beyond the takeoff runway under the control of airport authori
 
 ## References
 
-- 14 CFR part 1
+- [[Part 1|14 CFR part 1]]

@@ -24,5 +24,5 @@ MINIMUM OBSTRUCTION CLEARANCE ALTITUDE (MOCA)- The lowest published altitude in 
 
 ## References
 
-- 14 CFR part 91
-- 14 CFR part 95
+- [[Part 91|14 CFR part 91]]
+- [[Part 95|14 CFR part 95]]

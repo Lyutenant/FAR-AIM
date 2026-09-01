@@ -30,4 +30,4 @@ MARKER BEACON- An electronic navigation facility transmitting a 75 MHz vertical 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

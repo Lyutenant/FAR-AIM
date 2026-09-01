@@ -35,5 +35,5 @@ INSTRUMENT APPROACH PROCEDURE- A series of predetermined maneuvers for the order
 
 ## References
 
-- 14 CFR part 91
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[Part 91|14 CFR part 91]]
+- [[AIM]]

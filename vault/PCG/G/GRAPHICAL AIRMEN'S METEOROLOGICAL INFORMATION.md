@@ -46,4 +46,4 @@ GRAPHICAL AIRMEN'S METEOROLOGICAL INFORMATION- A graphical depiction of weather 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

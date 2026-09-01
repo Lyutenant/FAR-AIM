@@ -28,4 +28,4 @@ APPROACH CONTROL SERVICE- Air traffic control service provided by an approach co
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

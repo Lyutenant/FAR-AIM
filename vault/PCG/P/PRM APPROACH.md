@@ -24,4 +24,4 @@ PRM APPROACH- An instrument approach procedure titled ILS PRM, RNAV PRM, LDA PRM
 
 ## References
 
-- [[AIM (PCG)|AIM]]
+- [[AIM]]

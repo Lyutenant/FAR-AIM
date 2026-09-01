@@ -29,5 +29,5 @@ APPROACH CLEARANCE- Authorization by ATC for a pilot to conduct an instrument ap
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
-- 14 CFR part 91
+- [[AIM]]
+- [[Part 91|14 CFR part 91]]

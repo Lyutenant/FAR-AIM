@@ -36,4 +36,4 @@ TRAFFIC ADVISORIES- Advisories issued to alert pilots to other known or observed
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

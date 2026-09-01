@@ -31,4 +31,4 @@ MODE- The letter or number assigned to a specific pulse spacing of radio signals
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

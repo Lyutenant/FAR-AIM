@@ -29,5 +29,5 @@ TAXI- The movement of an airplane under its own power on the surface of an airpo
 
 ## References
 
-- 14 CFR section 135.100
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- 14 CFR section 135.100 — [[135.100|§ 135.100]]
+- [[AIM]]

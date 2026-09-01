@@ -29,4 +29,4 @@ AVIATION WEATHER SERVICE- A service provided by the National Weather Service (NW
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

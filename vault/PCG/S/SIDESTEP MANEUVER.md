@@ -24,4 +24,4 @@ SIDESTEP MANEUVER- A visual maneuver accomplished by a pilot at the completion o
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

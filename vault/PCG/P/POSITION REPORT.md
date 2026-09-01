@@ -24,4 +24,4 @@ POSITION REPORT- A report over a known location as transmitted by an aircraft to
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

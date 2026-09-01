@@ -24,6 +24,6 @@ MINIMUM EN ROUTE IFR ALTITUDE (MEA)- The lowest published altitude between radio
 
 ## References
 
-- 14 CFR part 91
-- 14 CFR part 95
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[Part 91|14 CFR part 91]]
+- [[Part 95|14 CFR part 95]]
+- [[AIM]]

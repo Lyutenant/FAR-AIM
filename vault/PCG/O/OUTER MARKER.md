@@ -29,4 +29,4 @@ OUTER MARKER- A marker beacon at or near the glideslope intercept altitude of an
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -24,4 +24,4 @@ LORAN- An electronic navigational system by which hyperbolic lines of position a
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

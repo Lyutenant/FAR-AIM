@@ -28,4 +28,4 @@ AERONAUTICAL BEACON- A visual NAVAID displaying flashes of white and/or colored 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

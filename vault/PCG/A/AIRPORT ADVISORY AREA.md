@@ -28,4 +28,4 @@ AIRPORT ADVISORY AREA- The area within ten miles of an airport without a control
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

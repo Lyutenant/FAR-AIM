@@ -24,4 +24,4 @@ SEGMENTED CIRCLE- A system of visual indicators designed to provide traffic patt
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

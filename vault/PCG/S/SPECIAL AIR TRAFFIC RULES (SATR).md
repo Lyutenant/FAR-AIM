@@ -24,4 +24,4 @@ SPECIAL AIR TRAFFIC RULES (SATR)- Rules that govern procedures for conducting fl
 
 ## References
 
-- [14 CFR part 93](https://www.ecfr.gov/current/title-14/part-93)
+- [[Part 93|14 CFR part 93]]

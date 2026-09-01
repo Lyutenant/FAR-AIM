@@ -157,6 +157,26 @@ vault/AIM/
   references and the FAA's own typos (`91.113b`) stay plain text. The FAR
   links are derived at render time from the official text, so the canonical
   AIM JSON and its hashes are unchanged.
+- **`## Glossary Terms`** (Phase 6, plan §12.2 Tier 2) closes every AIM
+  section, paragraph and appendix note whose official text uses
+  Pilot/Controller Glossary terms, listing them as `[[TERM|TERM]]` links in
+  term order. This is a lexical relationship, not an FAA citation, so it
+  never shares the Tier 1 `## Explicit Cross-References` list. Recognition
+  (`far_aim.links.glossary`) is deterministic and gated: multiword terms
+  match case-insensitively (`flight plan`), acronyms — a term's
+  parenthetical (`… (AFP)`) or an entry that is only a `See` reference
+  (`ATC`) — match in capitals only and at three letters or more, and
+  single-word defined entries (`AIRCRAFT`, `OVER`) never match unless the
+  committed gate allows them. The gate, `data/links/pcg-glossary-gate.json`
+  (human-maintained, plan §12.3), denies entries whose capitals still
+  collide with ordinary AIM usage (`CAT` is an approach category there,
+  `CENTER`/`CLEARANCE`/`SPEED` are phraseology) and allows single-word
+  aviation nouns (`TRANSPONDER`, `WAYPOINT`, `NOTAM`); every entry carries a
+  reason and must name a term the accepted edition defines. An alias two
+  terms would share goes to the term whose text is exactly the alias, else
+  is dropped; the longest alias wins at a position (`ADS-B` is never also
+  `ADS`). The FAR gets no glossary links: its vocabulary is defined by
+  14 CFR Part 1, and the PCG's ATC-oriented definitions can differ.
 - **Lists render flat** with the FAA edition's markers (`**a.**`, `**1.**`,
   `**(a)**`, `**(1)**`, `**[a]**`, `**[1]**`) derived from list level and
   position — the same decision as the CFR's flat paragraphs, for the same
@@ -227,9 +247,14 @@ vault/PCG/
   with `**a.**`-style markers, note boxes as callouts — then `## See Also`
   (glossary cross-references, wikilinked when the target term is in the
   corpus, plain text when the FAA's citation matches no term) and
-  `## References` (external documents; linked when the source carried a
-  URL — the AIM, eCFR parts). Bracketed `[ICAO]` tags display as `(ICAO)`
-  inside wikilinks, whose syntax reserves square brackets.
+  `## References` (external documents). Since Phase 6 a `Refer to` row
+  that names a FAR part or section, or the AIM itself, links the vault
+  note instead: `14 CFR part 91` → `[[Part 91|14 CFR part 91]]`, `14 CFR
+  part 1, §1.1` → the row text followed by `[[1.1|§ 1.1]], [[Part 1]]`, a
+  bare `AIM` → `[[AIM]]` (the AIM index note; the FAA URL is kept when
+  the AIM corpus is not built). Other documents (FAA Orders, ACs) stay
+  plain text or keep their source URL. Bracketed `[ICAO]` tags display as
+  `(ICAO)` inside wikilinks, whose syntax reserves square brackets.
 - `PCG.md` renders the index page's purpose section and edition summary,
   then every term as a link under its letter heading.
 - Cross-corpus effects: PCG stems join the global namespace, so a FAR/AIM

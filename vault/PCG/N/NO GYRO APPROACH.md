@@ -24,4 +24,4 @@ NO GYRO APPROACH- A radar approach/vector provided in case of a malfunctioning g
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -24,4 +24,4 @@ PILOT WEATHER REPORT- A report of meteorological phenomena encountered by aircra
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

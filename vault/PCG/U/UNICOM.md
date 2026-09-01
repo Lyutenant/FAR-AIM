@@ -28,4 +28,4 @@ UNICOM- A nongovernment communication facility which may provide airport informa
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

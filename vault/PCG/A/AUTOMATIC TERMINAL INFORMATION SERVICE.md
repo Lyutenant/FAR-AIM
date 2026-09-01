@@ -28,4 +28,4 @@ AUTOMATIC TERMINAL INFORMATION SERVICE- The continuous broadcast of recorded non
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -24,4 +24,4 @@ LOW APPROACH- An approach over an airport or runway following an instrument appr
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

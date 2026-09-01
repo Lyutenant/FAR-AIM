@@ -1314,6 +1314,8 @@ def test_full_title_vault_build(tmp_path, capsys):
     manifest.save(config.manifest_path)
     (config.normalized_dir).mkdir(parents=True)
     os.symlink(_NORMALIZED, config.normalized_dir / "ecfr")
+    config.links_dir.mkdir(parents=True)
+    os.symlink(_MANIFEST.parent.parent / "links" / "pcg-glossary-gate.json", config.pcg_gate_path)
     aim_state = manifest.sources["aim"]
     expected_total = 6772
     if aim_state.canonical_hash is not None:
@@ -1915,9 +1917,17 @@ def test_validate_rejects_altered_pcg_provenance(tmp_path, capsys, mock_upstream
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
 
 
+def _write_empty_gate(config: Config) -> None:
+    config.links_dir.mkdir(parents=True, exist_ok=True)
+    config.pcg_gate_path.write_text(
+        '{"deny": [], "allow_words": [], "allow_acronyms": []}\n', encoding="utf-8"
+    )
+
+
 def _build_full_fixture_vault(tmp_path, capsys, mock_upstream) -> Config:
     config = Config.load(tmp_path)
     SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)
     for argv in (
         ["fetch", "ecfr"], ["parse", "ecfr"],
         ["fetch", "aim"], ["parse", "aim"],
@@ -1926,6 +1936,20 @@ def _build_full_fixture_vault(tmp_path, capsys, mock_upstream) -> Config:
         assert main(["--root", str(tmp_path), *argv]) == EXIT_OK
     capsys.readouterr()
     return config
+
+
+def test_build_vault_requires_the_glossary_gate(tmp_path, capsys, mock_upstream):
+    config = _build_full_fixture_vault(tmp_path, capsys, mock_upstream)
+    config.pcg_gate_path.unlink()
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_ERROR
+    err = capsys.readouterr().err
+    assert "glossary gate" in err and "missing" in err
+    config.pcg_gate_path.write_text("{not json", encoding="utf-8")
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_ERROR
+    assert "cannot read glossary gate" in capsys.readouterr().err
+    _write_empty_gate(config)
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    capsys.readouterr()
 
 
 def test_build_vault_with_pcg_layer(tmp_path, capsys, mock_upstream):

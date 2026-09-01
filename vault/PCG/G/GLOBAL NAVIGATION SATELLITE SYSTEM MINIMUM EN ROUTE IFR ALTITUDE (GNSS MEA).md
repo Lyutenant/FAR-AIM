@@ -24,5 +24,5 @@ GLOBAL NAVIGATION SATELLITE SYSTEM MINIMUM EN ROUTE IFR ALTITUDE (GNSS MEA)- The
 
 ## References
 
-- [14 CFR part 91](https://www.ecfr.gov/current/title-14/part-91)
-- [14 CFR part 95](https://www.ecfr.gov/current/title-14/part-95)
+- [[Part 91|14 CFR part 91]]
+- [[Part 95|14 CFR part 95]]

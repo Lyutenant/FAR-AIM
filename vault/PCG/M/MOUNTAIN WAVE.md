@@ -24,4 +24,4 @@ MOUNTAIN WAVE– Mountain waves occur when air is being blown over a mountain ra
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

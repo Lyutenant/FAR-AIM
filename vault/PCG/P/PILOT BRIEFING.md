@@ -24,4 +24,4 @@ PILOT BRIEFING– The gathering, translation, interpretation, and summarization 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

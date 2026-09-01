@@ -30,4 +30,4 @@ PAN‐PAN- The international radio‐telephony urgency signal. When repeated thr
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

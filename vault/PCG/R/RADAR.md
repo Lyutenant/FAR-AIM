@@ -36,4 +36,4 @@ RADAR- A device that provides information on range, azimuth, and/or elevation of
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

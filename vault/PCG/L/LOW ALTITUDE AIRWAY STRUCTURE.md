@@ -28,4 +28,4 @@ LOW ALTITUDE AIRWAY STRUCTURE- The network of airways serving aircraft operation
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

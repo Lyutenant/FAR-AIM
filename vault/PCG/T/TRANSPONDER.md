@@ -29,4 +29,4 @@ TRANSPONDER- The airborne radar beacon receiver/transmitter portion of the Air T
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -28,4 +28,4 @@ CLEARED AS FILED- Means the aircraft is cleared to proceed in accordance with th
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

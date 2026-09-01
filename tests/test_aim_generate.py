@@ -766,3 +766,45 @@ def test_combined_plan_links_only_far_notes_that_exist(combined_plan):
     note = combined_plan[("AIM", "Chapter 04", "4-1-20.md")].decode()
     assert "|14 CFR §" not in note
     assert "[[Part " not in note
+
+
+# ---------------------------------------------------------------------------
+# Phase 6: AIM → PCG glossary terms
+# ---------------------------------------------------------------------------
+
+
+def test_glossary_terms_render_in_their_own_section(aim_layer, far_docs):
+    from far_aim.links import glossary
+
+    def term(tid: str, text: str, *blocks: dict) -> dict:
+        entry = {"type": "entry", "text": f"{text}-"}
+        return {"id": tid, "term": text, "letter": text[0], "content": [entry, *blocks]}
+
+    see = {"type": "reference", "kind": "see", "label": "See", "text": "COMMON…", "target": None}
+    defn = {"type": "text", "text": "x"}
+    pcg_docs = {
+        "letter-t": {
+            "terms": [
+                term("pcg-traffic-pattern", "TRAFFIC PATTERN", defn),
+                term("pcg-ctaf", "CTAF", see),
+                term("pcg-aircraft", "AIRCRAFT", defn),
+            ]
+        }
+    }
+    index = glossary.GlossaryIndex.build(pcg_docs, glossary.Gate())
+    targets = {
+        "pcg-traffic-pattern": ("TRAFFIC PATTERN", "TRAFFIC PATTERN"),
+        "pcg-ctaf": ("CTAF", "CTAF"),
+        "pcg-aircraft": ("AIRCRAFT", "AIRCRAFT"),
+    }
+    links = aim_notes.GlossaryLinks(index, targets)
+    para = _aim_paragraph(aim_layer, "4-1-9")  # traffic advisory practices: CTAF, traffic pattern
+    registry = build_registry(far_docs, aim_layer)
+    note = aim_notes.build_paragraph_note(para, [], registry.aim_targets, None, links)
+    tail = note.body.split("## Glossary Terms\n\n", 1)[1].strip().splitlines()
+    # Sorted by term; AIRCRAFT is a single defined word and stays gated out.
+    assert tail == ["- [[CTAF|CTAF]]", "- [[TRAFFIC PATTERN|TRAFFIC PATTERN]]"]
+    assert note.body.rstrip().endswith(tail[-1])  # the section closes the note
+    # Without a glossary the note is unchanged.
+    plain = aim_notes.build_paragraph_note(para, [], registry.aim_targets)
+    assert "## Glossary Terms" not in plain.body

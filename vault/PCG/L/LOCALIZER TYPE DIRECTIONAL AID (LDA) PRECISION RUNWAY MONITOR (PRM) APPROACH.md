@@ -28,4 +28,4 @@ LOCALIZER TYPE DIRECTIONAL AID (LDA) PRECISION RUNWAY MONITOR (PRM) APPROACH- An
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

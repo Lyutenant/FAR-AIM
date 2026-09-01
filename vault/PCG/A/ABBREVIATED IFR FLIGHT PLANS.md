@@ -28,4 +28,4 @@ ABBREVIATED IFR FLIGHT PLANS- An authorization by ATC requiring pilots to submit
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -28,4 +28,4 @@ CLIMB TO VFR- ATC authorization for an aircraft to climb to VFR conditions withi
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -24,4 +24,4 @@ SIMULTANEOUS OFFSET INSTRUMENT APPROACH (SOIA)- An instrument landing system com
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

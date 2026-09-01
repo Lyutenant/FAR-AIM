@@ -30,4 +30,4 @@ PRECISION APPROACH RADAR- Radar equipment in some ATC facilities operated by the
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

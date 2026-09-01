@@ -24,4 +24,4 @@ MINIMUM FUEL- Indicates that an aircraft's fuel supply has reached a state where
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

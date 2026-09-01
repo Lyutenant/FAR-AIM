@@ -33,4 +33,4 @@ TOWER- A terminal facility that uses air/ground communications, visual signaling
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

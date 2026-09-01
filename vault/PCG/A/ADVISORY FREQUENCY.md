@@ -30,4 +30,4 @@ ADVISORY FREQUENCY- The appropriate frequency to be used for Airport Advisory Se
 ## References
 
 - ADVISORY CIRCULAR NO. 90‐66
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -28,4 +28,4 @@ EN ROUTE AIR TRAFFIC CONTROL SERVICES- Air traffic control service provided airc
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

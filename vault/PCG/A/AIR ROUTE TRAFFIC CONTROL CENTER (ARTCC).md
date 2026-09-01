@@ -28,4 +28,4 @@ AIR ROUTE TRAFFIC CONTROL CENTER (ARTCC)- A facility established to provide air 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

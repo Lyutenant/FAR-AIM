@@ -24,4 +24,4 @@ RUNWAY PROFILE DESCENT- An instrument flight rules (IFR) air traffic control arr
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

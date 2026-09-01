@@ -27,4 +27,4 @@ AIR DEFENSE IDENTIFICATION ZONE (ADIZ)- An area of airspace over land or water i
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

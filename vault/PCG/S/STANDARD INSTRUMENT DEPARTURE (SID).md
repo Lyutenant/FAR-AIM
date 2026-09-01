@@ -29,4 +29,4 @@ STANDARD INSTRUMENT DEPARTURE (SID)- A preplanned instrument flight rule (IFR) a
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

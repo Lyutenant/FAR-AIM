@@ -28,4 +28,4 @@ DEPARTURE CONTROL- A function of an approach control facility providing air traf
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

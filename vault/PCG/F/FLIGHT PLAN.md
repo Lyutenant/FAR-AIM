@@ -29,4 +29,4 @@ FLIGHT PLAN- Specified information relating to the intended flight of an aircraf
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

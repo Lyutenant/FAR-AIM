@@ -24,4 +24,4 @@ HEIGHT ABOVE LANDING (HAL)- The height above a designated helicopter landing are
 
 ## References
 
-- 14 CFR part 97
+- [[Part 97|14 CFR part 97]]

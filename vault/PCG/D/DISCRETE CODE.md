@@ -28,4 +28,4 @@ DISCRETE CODE- As used in the Air Traffic Control Radar Beacon System (ATCRBS), 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -37,5 +37,5 @@ TERMINAL VFR RADAR SERVICE- A national program instituted to extend the terminal
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]
 - [[CHART SUPPLEMENT U.S|CHART SUPPLEMENT U.S.]]

@@ -24,4 +24,4 @@ ULTRALIGHT VEHICLE- A single-occupant aeronautical vehicle operated for sport or
 
 ## References
 
-- 14 CFR part 103
+- [[Part 103|14 CFR part 103]]

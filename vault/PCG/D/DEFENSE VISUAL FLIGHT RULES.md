@@ -28,5 +28,5 @@ DEFENSE VISUAL FLIGHT RULES- Rules applicable to flights within an ADIZ conducte
 
 ## References
 
-- 14 CFR part 91
-- 14 CFR part 99
+- [[Part 91|14 CFR part 91]]
+- [[Part 99|14 CFR part 99]]

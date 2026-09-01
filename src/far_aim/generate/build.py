@@ -24,6 +24,7 @@ from far_aim.config import Config
 from far_aim.generate import BuildError, aim_notes, naming, notes, pcg_notes
 from far_aim.generate.aim_markdown import collect_asset_names
 from far_aim.generate.frontmatter import emit_frontmatter, frontmatter_defect
+from far_aim.links import glossary
 from far_aim.models import aim as aim_model
 from far_aim.models import cfr as cfr_model
 from far_aim.models import pcg as pcg_model
@@ -73,10 +74,11 @@ class AimLayer:
 
 @dataclass(frozen=True)
 class PcgLayer:
-    """The verified canonical PCG layer."""
+    """The verified canonical PCG layer, plus the committed glossary gate."""
 
     docs: dict[str, dict]
     title_hash: str
+    gate: glossary.Gate = field(default_factory=glossary.Gate)
 
 
 def _iter_pcg_terms(docs: dict[str, dict]):
@@ -431,16 +433,21 @@ def plan_vault(
             sections=frozenset(registry.section_numbers),
             parts=frozenset(registry.part_numbers),
         )
+        glossary_links = None
+        if pcg is not None:
+            glossary_links = aim_notes.GlossaryLinks(
+                glossary.GlossaryIndex.build(pcg.docs, pcg.gate), registry.pcg_targets
+            )
         for kind, doc in _iter_aim_documents(aim.docs):
             aliases = registry.aliases[doc["id"]]
             if kind == "chapter":
                 add(aim_notes.build_chapter_note(doc, aliases))
             elif kind == "section":
-                add(aim_notes.build_section_note(doc, aliases, targets, far))
+                add(aim_notes.build_section_note(doc, aliases, targets, far, glossary_links))
             elif kind == "paragraph":
-                add(aim_notes.build_paragraph_note(doc, aliases, targets, far))
+                add(aim_notes.build_paragraph_note(doc, aliases, targets, far, glossary_links))
             else:
-                add(aim_notes.build_appendix_note(doc, aliases, targets, far))
+                add(aim_notes.build_appendix_note(doc, aliases, targets, far, glossary_links))
         add(aim_notes.build_aim_index(aim.docs, aim.title_hash))
         generated = {name: aim.assets[name] for name in sorted(registry.aim_assets)}
         for name, data in generated.items():
@@ -450,9 +457,16 @@ def plan_vault(
         )
 
     if pcg is not None:
+        refer_targets = pcg_notes.ReferTargets(
+            far=aim_notes.FarTargets(
+                sections=frozenset(registry.section_numbers),
+                parts=frozenset(registry.part_numbers),
+            ),
+            aim_index_stem=aim_notes.AIM_INDEX_STEM if aim is not None else None,
+        )
         for term_doc in _iter_pcg_terms(pcg.docs):
             aliases = registry.aliases[term_doc["id"]]
-            add(pcg_notes.build_term_note(term_doc, aliases, registry.pcg_targets))
+            add(pcg_notes.build_term_note(term_doc, aliases, registry.pcg_targets, refer_targets))
         add(pcg_notes.build_pcg_index(pcg.docs, pcg.title_hash))
 
     _verify_plan(plan, registry, docs, aim, pcg)

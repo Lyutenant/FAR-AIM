@@ -24,4 +24,4 @@ MINIMUM RECEPTION ALTITUDE (MRA)- The lowest altitude at which an intersection c
 
 ## References
 
-- 14 CFR part 95
+- [[Part 95|14 CFR part 95]]

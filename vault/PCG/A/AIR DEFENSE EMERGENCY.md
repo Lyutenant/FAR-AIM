@@ -24,4 +24,4 @@ AIR DEFENSE EMERGENCY- A military emergency condition declared by a designated a
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

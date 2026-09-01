@@ -24,4 +24,4 @@ PRECISION RUNWAY MONITOR (PRM) SYSTEM- Provides air traffic controllers monitori
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

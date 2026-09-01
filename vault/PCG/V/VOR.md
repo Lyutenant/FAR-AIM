@@ -28,4 +28,4 @@ VOR- A ground‐based electronic navigation aid transmitting very high frequency
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

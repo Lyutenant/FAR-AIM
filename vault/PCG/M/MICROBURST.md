@@ -24,4 +24,4 @@ MICROBURST- A small downburst with outbursts of damaging winds extending 2.5 mil
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

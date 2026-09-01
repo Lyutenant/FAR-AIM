@@ -30,4 +30,4 @@ WAKE TURBULENCE- A phenomenon that occurs when an aircraft develops lift and for
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

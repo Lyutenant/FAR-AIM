@@ -29,4 +29,4 @@ REPORTING POINT- A geographical location in relation to which the position of an
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

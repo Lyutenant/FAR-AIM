@@ -24,4 +24,4 @@ SURVEILLANCE APPROACH- An instrument approach wherein the air traffic controller
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

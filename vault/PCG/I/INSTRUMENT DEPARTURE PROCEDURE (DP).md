@@ -30,4 +30,4 @@ INSTRUMENT DEPARTURE PROCEDURE (DP)- A preplanned instrument flight rule (IFR) d
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

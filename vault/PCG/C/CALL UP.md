@@ -24,4 +24,4 @@ CALL UP- Initial voice contact between a facility and an aircraft, using the ide
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

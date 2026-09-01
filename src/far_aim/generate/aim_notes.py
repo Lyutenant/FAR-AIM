@@ -24,6 +24,7 @@ from far_aim.generate.frontmatter import Value
 from far_aim.generate.markdown import escape_md
 from far_aim.generate.notes import Note, link_display
 from far_aim.links import citations as cites
+from far_aim.links.glossary import GlossaryIndex
 
 AIM_DIR = "AIM"
 AIM_INDEX_STEM = "AIM"
@@ -46,6 +47,33 @@ class FarTargets:
 
     sections: frozenset[str] = field(default_factory=frozenset)
     parts: frozenset[str] = field(default_factory=frozenset)
+
+
+@dataclass(frozen=True)
+class GlossaryLinks:
+    """The compiled PCG matcher and the PCG note targets it links to."""
+
+    index: GlossaryIndex
+    targets: Targets
+
+
+def glossary_chunks(content: list[dict], glossary: GlossaryLinks | None) -> list[str]:
+    """``## Glossary Terms``: PCG terms the official text uses (plan §12.2).
+
+    A lexical, Tier 2 relationship, kept in its own section so it is never
+    mistaken for the FAA's explicit cross-references. Sorted by term.
+    """
+    if glossary is None:
+        return []
+    found = glossary.index.find(collect_text(content))
+    entries = sorted(
+        (glossary.targets[term_id] for term_id in found if term_id in glossary.targets),
+        key=lambda entry: (entry[1].casefold(), entry[0]),
+    )
+    if not entries:
+        return []
+    items = "\n".join(f"- [[{stem}|{link_display(display)}]]" for stem, display in entries)
+    return ["## Glossary Terms", items]
 
 
 def edition_text(source: dict) -> str:
@@ -163,7 +191,11 @@ def _edition_frontmatter(source: dict) -> list[tuple[str, Value]]:
 
 
 def build_paragraph_note(
-    para: dict, aliases: list[str], targets: Targets, far: FarTargets | None = None
+    para: dict,
+    aliases: list[str],
+    targets: Targets,
+    far: FarTargets | None = None,
+    glossary: GlossaryLinks | None = None,
 ) -> Note:
     source = para["source"]
     frontmatter: list[tuple[str, Value]] = [
@@ -191,6 +223,7 @@ def build_paragraph_note(
         _source_callout(source, source["url"]),
         *_official_text_chunks(para["content"], path_parts),
         *_xref_chunks(para, targets, far),
+        *glossary_chunks(para["content"], glossary),
     ]
     return Note(
         kind="aim",
@@ -201,7 +234,11 @@ def build_paragraph_note(
 
 
 def build_section_note(
-    sec: dict, aliases: list[str], targets: Targets, far: FarTargets | None = None
+    sec: dict,
+    aliases: list[str],
+    targets: Targets,
+    far: FarTargets | None = None,
+    glossary: GlossaryLinks | None = None,
 ) -> Note:
     source = sec["source"]
     display_number = section_number_display(sec)
@@ -237,6 +274,7 @@ def build_section_note(
         ]
         chunks.extend(["## Paragraphs", "\n".join(items)])
     chunks.extend(_xref_chunks(sec, targets, far))
+    chunks.extend(glossary_chunks(sec["content"], glossary))
     return Note(
         kind="aim_section",
         path_parts=path_parts,
@@ -287,7 +325,11 @@ def build_chapter_note(chapter: dict, aliases: list[str]) -> Note:
 
 
 def build_appendix_note(
-    apx: dict, aliases: list[str], targets: Targets, far: FarTargets | None = None
+    apx: dict,
+    aliases: list[str],
+    targets: Targets,
+    far: FarTargets | None = None,
+    glossary: GlossaryLinks | None = None,
 ) -> Note:
     source = apx["source"]
     frontmatter: list[tuple[str, Value]] = [
@@ -309,6 +351,7 @@ def build_appendix_note(
         _source_callout(source, source["url"]),
         *_official_text_chunks(apx["content"], path_parts),
         *_xref_chunks(apx, targets, far),
+        *glossary_chunks(apx["content"], glossary),
     ]
     return Note(
         kind="aim_appendix",

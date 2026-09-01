@@ -24,4 +24,4 @@ MINIMUM SAFE ALTITUDE WARNING (MSAW)- A function of the EAS and STARS computer t
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

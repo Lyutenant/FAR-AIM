@@ -24,4 +24,4 @@ IDENT- A request for a pilot to activate the aircraft transponder identification
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

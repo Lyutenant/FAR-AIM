@@ -28,4 +28,4 @@ INNER MARKER- A marker beacon used with an ILS (CAT II) precision approach locat
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

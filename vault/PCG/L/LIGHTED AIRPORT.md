@@ -28,4 +28,4 @@ LIGHTED AIRPORT- An airport where runway and obstruction lighting is available.
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

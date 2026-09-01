@@ -34,4 +34,4 @@ AIRCRAFT APPROACH CATEGORY- A grouping of aircraft based on a speed of 1.3 times
 
 ## References
 
-- 14 CFR part 97
+- [[Part 97|14 CFR part 97]]

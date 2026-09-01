@@ -28,4 +28,4 @@ SIMULTANEOUS ILS APPROACHES- An approach system permitting simultaneous ILS appr
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

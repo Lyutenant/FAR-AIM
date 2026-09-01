@@ -24,4 +24,4 @@ COMPOSITE FLIGHT PLAN- A flight plan which specifies VFR operation for one porti
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

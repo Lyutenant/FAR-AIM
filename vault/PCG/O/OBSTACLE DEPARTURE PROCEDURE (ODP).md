@@ -29,4 +29,4 @@ OBSTACLE DEPARTURE PROCEDURE (ODP)- A preplanned instrument flight rule (IFR) de
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -28,4 +28,4 @@ TACTICAL AIR NAVIGATION (TACAN)- An ultra‐high frequency electronic rho‐thet
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

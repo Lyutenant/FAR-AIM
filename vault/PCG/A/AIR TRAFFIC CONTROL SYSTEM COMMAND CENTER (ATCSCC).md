@@ -40,4 +40,4 @@ AIR TRAFFIC CONTROL SYSTEM COMMAND CENTER (ATCSCC)- An Air Traffic Tactical Oper
 
 ## References
 
-- 14 CFR part 93
+- [[Part 93|14 CFR part 93]]

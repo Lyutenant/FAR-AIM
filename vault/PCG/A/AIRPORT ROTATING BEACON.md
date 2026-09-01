@@ -30,4 +30,4 @@ AIRPORT ROTATING BEACON- A visual NAVAID operated at many airports. At civil air
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

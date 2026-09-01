@@ -24,4 +24,4 @@ LOCALIZER USABLE DISTANCE- The maximum distance from the localizer transmitter a
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

@@ -286,3 +286,57 @@ def test_sync_writes_pcg_tree_and_deletes_stale(tmp_path, combined_plan):
     note.write_text("# my own\n", encoding="utf-8")
     with pytest.raises(BuildError, match="curated note at generated path"):
         sync_vault(config, combined_plan)
+
+
+# ---------------------------------------------------------------------------
+# Phase 6: PCG "Refer to" rows link the FAR / AIM notes they name
+# ---------------------------------------------------------------------------
+
+
+def test_refer_rows_link_far_and_aim_notes(combined_plan):
+    note = combined_plan[("PCG", "T", "TRAFFIC PATTERN.md")].decode()
+    refs = note.split("## References\n\n", 1)[1].strip().splitlines()
+    assert refs == ["- [[Part 91|14 CFR part 91]]", "- [[AIM]]"]
+
+
+def test_refer_row_rendering_shapes():
+    from far_aim.generate import aim_notes
+    from far_aim.generate.pcg_notes import ReferTargets, _refer_links
+
+    far = aim_notes.FarTargets(sections=frozenset({"1.1", "135.100"}), parts=frozenset({"1", "91"}))
+    refer = ReferTargets(far=far, aim_index_stem="AIM")
+    assert _refer_links("14 CFR part 91", refer) == ["[[Part 91]]"]
+    assert _refer_links("14 CFR part 1, §1.1", refer) == ["[[1.1|§ 1.1]]", "[[Part 1]]"]
+    assert _refer_links("14 CFR section 135.100", refer) == ["[[135.100|§ 135.100]]"]
+    assert _refer_links("AIM", refer) == ["[[AIM]]"]
+    assert _refer_links("FAA Order JO 7110.65, Para 10-6-4, INFLIGHT CONTINGENCIES", refer) == []
+    # Without the AIM corpus, "AIM" stays the FAA link; no FAR corpus, no links.
+    assert _refer_links("AIM", ReferTargets(far=far)) == []
+    no_far = ReferTargets(far=aim_notes.FarTargets(), aim_index_stem="AIM")
+    assert _refer_links("14 CFR part 91", no_far) == []
+
+
+def test_refer_to_aim_prefers_the_publication_over_the_glossary_entry():
+    # PRM APPROACH's "Refer to AIM" row was resolved by the parser to the
+    # glossary's own AIM term; the publication index must still win.
+    from far_aim.generate import aim_notes
+    from far_aim.generate.pcg_notes import ReferTargets, _reference_sections
+
+    term_doc = {
+        "id": "pcg-prm-approach",
+        "term": "PRM APPROACH",
+        "content": [
+            {"type": "entry", "text": "PRM APPROACH-"},
+            {"type": "reference", "kind": "refer", "label": "Refer to", "text": "AIM",
+             "target": "pcg-aim", "source": {}},
+        ],
+    }
+    targets = {"pcg-aim": ("AIM (PCG)", "AIM")}
+    refer = ReferTargets(far=aim_notes.FarTargets(), aim_index_stem="AIM")
+    assert _reference_sections(term_doc, targets, refer) == ["## References", "- [[AIM]]"]
+    # Without the AIM corpus the glossary entry remains the best target.
+    no_aim = ReferTargets(far=aim_notes.FarTargets())
+    assert _reference_sections(term_doc, targets, no_aim) == [
+        "## References",
+        "- [[AIM (PCG)|AIM]]",
+    ]

@@ -24,4 +24,4 @@ OPERATIONS OVER PEOPLE (OOP)- Operations of small unmanned aircraft over people.
 
 ## References
 
-- [14 CFR part 107](https://www.ecfr.gov/current/title-14/part-107)
+- [[Part 107|14 CFR part 107]]

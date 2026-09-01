@@ -24,4 +24,4 @@ LAND AND HOLD SHORT OPERATIONS- Operations that include simultaneous takeoffs an
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

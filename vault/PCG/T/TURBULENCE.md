@@ -36,4 +36,4 @@ TURBULENCE- An atmospheric phenomenon that causes changes in aircraft altitude, 
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

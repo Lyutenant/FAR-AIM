@@ -30,4 +30,4 @@ AIRPORT MARKING AIDS- Markings used on runway and taxiway surfaces to identify a
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]

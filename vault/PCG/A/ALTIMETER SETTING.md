@@ -24,5 +24,5 @@ ALTIMETER SETTING- The barometric pressure reading used to adjust a pressure alt
 
 ## References
 
-- 14 CFR part 91
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[Part 91|14 CFR part 91]]
+- [[AIM]]

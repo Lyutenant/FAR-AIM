@@ -24,5 +24,5 @@ EMERGENCY LOCATOR TRANSMITTER (ELT)- A radio transmitter attached to the aircraf
 
 ## References
 
-- 14 CFR part 91
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[Part 91|14 CFR part 91]]
+- [[AIM]]

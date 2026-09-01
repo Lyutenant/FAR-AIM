@@ -24,4 +24,4 @@ DROP ZONE- Any pre-determined area upon which parachutists or objects land after
 
 ## References
 
-- 14 CFR §105.3, Definitions
+- 14 CFR §105.3, Definitions — [[105.3|§ 105.3]]

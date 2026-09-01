@@ -32,4 +32,4 @@ ADVISORY SERVICE- Advice and information provided by a facility to assist pilots
 
 ## References
 
-- [AIM](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/)
+- [[AIM]]
