@@ -222,6 +222,12 @@ def build_registry(
         registry, seen, notes.TITLE_INDEX_STEM, (notes.FAR_DIR, f"{notes.TITLE_INDEX_STEM}.md")
     )
     _add_stem(registry, seen, notes.SOURCE_STATUS_STEM, (f"{notes.SOURCE_STATUS_STEM}.md",))
+    _add_stem(registry, seen, notes.HOME_STEM, (f"{notes.HOME_STEM}.md",))
+    # Curated entry notes are link targets, not planned files: registering
+    # them lets generated notes link there and keeps their names out of the
+    # alias namespace (a heading alias equal to "Collections" must drop).
+    for stem, parts in notes.CURATED_ENTRIES:
+        _add_stem(registry, seen, stem, parts)
     if aim is not None:
         _register_aim(registry, seen, citation_aliases, heading_candidates, aim)
     if pcg is not None:
@@ -426,6 +432,7 @@ def plan_vault(
                 )
     add(notes.build_title_index(docs, version, title_hash))
     add(notes.build_source_status(sources))
+    add(notes.build_home(has_aim=aim is not None, has_pcg=pcg is not None))
 
     if aim is not None:
         targets = registry.aim_targets
@@ -530,7 +537,8 @@ def _verify_plan(
     pcg: PcgLayer | None = None,
 ) -> None:
     """Phase 3/4/5 exit-criteria gates, enforced before any write."""
-    expected = len(docs) + registry.section_count + registry.appendix_count + 2
+    # + title index, source status, and home
+    expected = len(docs) + registry.section_count + registry.appendix_count + 3
     if aim is not None:
         expected += registry.aim_note_count + len(registry.aim_assets) + 1  # + ledger
     if pcg is not None:
@@ -704,9 +712,10 @@ def sync_vault(config: Config, plan: dict[tuple[str, ...], bytes]) -> SyncStats:
             if root.is_dir()
             for path in sorted(root.rglob("*.md"))
         ]
-        status_path = vault / f"{notes.SOURCE_STATUS_STEM}.md"
-        if status_path.exists():
-            candidates.append(status_path)
+        for root_stem in (notes.SOURCE_STATUS_STEM, notes.HOME_STEM):
+            root_note = vault / f"{root_stem}.md"
+            if root_note.exists():
+                candidates.append(root_note)
         if assets_root.is_dir():
             candidates.extend(
                 p for p in sorted(assets_root.iterdir()) if p.is_file() and p.suffix != ".md"

@@ -1186,11 +1186,12 @@ def test_build_vault_generates_and_is_idempotent(tmp_path, capsys):
     capsys.readouterr()
     assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
     out = capsys.readouterr().out
-    assert "18 written" in out
+    assert "19 written" in out
     assert (config.vault_dir / "FAR" / "Part 091" / "91.155.md").exists()
     assert (config.vault_dir / "FAR" / "Part 091" / "Part 91.md").exists()
     assert (config.vault_dir / "FAR" / "Title 14.md").exists()
     assert (config.vault_dir / "Source Status.md").exists()
+    assert (config.vault_dir / "Home.md").exists()
 
     # Rebuild with unchanged sources: no writes, byte-identical tree (§32.10).
     first = _vault_bytes(config)
@@ -1254,7 +1255,7 @@ def test_build_vault_deletes_stale_generated_note(tmp_path, capsys):
 def test_validate_checks_vault(tmp_path, capsys):
     config = _built_vault(tmp_path, capsys)
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
-    assert "ok: vault matches canonical layer (18 notes)" in capsys.readouterr().out
+    assert "ok: vault matches canonical layer (19 notes)" in capsys.readouterr().out
 
     # A hand-edited generated note fails validation.
     note = config.vault_dir / "FAR" / "Part 091" / "91.155.md"
@@ -1317,7 +1318,7 @@ def test_full_title_vault_build(tmp_path, capsys):
     config.links_dir.mkdir(parents=True)
     os.symlink(_MANIFEST.parent.parent / "links" / "pcg-glossary-gate.json", config.pcg_gate_path)
     aim_state = manifest.sources["aim"]
-    expected_total = 6772
+    expected_total = 6773  # + Home.md since Phase 7
     if aim_state.canonical_hash is not None:
         # The AIM layer and its archived figures ride along (Phase 4).
         aim_raw = _NORMALIZED.parent.parent / "raw" / "aim"
@@ -1343,9 +1344,10 @@ def test_full_title_vault_build(tmp_path, capsys):
     assert len(part_folders) == 226
     # Every part has an index note (Phase 3 exit criterion).
     assert all(any(p.name.startswith("Part ") for p in d.glob("*.md")) for d in part_folders)
-    assert len(list(far.rglob("*.md"))) + 1 == 6772  # + Source Status.md at the root
+    assert len(list(far.rglob("*.md"))) + 2 == 6773  # + Source Status.md and Home.md at the root
     assert (far / "Title 14.md").exists()
     assert (config.vault_dir / "Source Status.md").exists()
+    assert (config.vault_dir / "Home.md").exists()
 
     # Double build is a no-op.
     assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
@@ -1354,6 +1356,42 @@ def test_full_title_vault_build(tmp_path, capsys):
     # And validate agrees byte-for-byte.
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
     assert f"vault matches canonical layer ({expected_total} notes)" in capsys.readouterr().out
+
+    # Phase 7 regression: the committed curated notes must not case-fold-
+    # collide with any generated stem or alias — a curated `Currency.md`
+    # would shadow § 221.50's "Currency" alias and make Obsidian
+    # navigation ambiguous (docs/vault.md naming guidance).
+    generated_names: set[str] = set()
+    for path in config.vault_dir.rglob("*.md"):
+        generated_names.add(path.stem.casefold())
+        generated_names.update(a.casefold() for a in _frontmatter_aliases(path))
+    for sub in ("Collections", "Topics", "Study"):
+        curated_dir = _REPO_ROOT / "vault" / sub
+        if not curated_dir.is_dir():
+            continue
+        for path in sorted(curated_dir.rglob("*.md")):
+            assert path.stem.casefold() not in generated_names, (
+                f"curated note {path.name} collides with a generated stem or alias"
+            )
+
+
+def _frontmatter_aliases(path) -> list[str]:
+    """Alias values from a generated note's frontmatter block."""
+    aliases: list[str] = []
+    in_block = False
+    with path.open(encoding="utf-8") as fh:
+        next(fh, None)  # opening ---
+        for raw in fh:
+            line = raw.rstrip("\n")
+            if line == "---":
+                break
+            if line == "aliases:":
+                in_block = True
+            elif in_block and line.startswith('  - "') and line.endswith('"'):
+                aliases.append(line[5:-1])
+            else:
+                in_block = False
+    return aliases
 
 
 def _aim_file_count(layer_dir) -> int:
@@ -1403,6 +1441,19 @@ def test_validate_ignores_curated_only_far_tree_before_first_build(tmp_path, cap
     capsys.readouterr()
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
     assert "no generated vault yet" in capsys.readouterr().out
+
+
+def test_validate_home_alone_counts_as_built_vault(tmp_path, capsys):
+    # A generated Home.md left behind after everything else was deleted is a
+    # damaged build that must fail the missing-note checks, not be mistaken
+    # for a never-built vault (Phase 7 regression).
+    import shutil
+
+    config = _built_vault(tmp_path, capsys)
+    shutil.rmtree(config.vault_dir / "FAR")
+    (config.vault_dir / "Source Status.md").unlink()
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
+    assert "missing generated note" in capsys.readouterr().err
 
 
 # ---------------------------------------------------------------------------

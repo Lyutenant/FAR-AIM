@@ -19,6 +19,19 @@ from far_aim.links import citations as cites
 FAR_DIR = "FAR"
 TITLE_INDEX_STEM = "Title 14"
 SOURCE_STATUS_STEM = "Source Status"
+HOME_STEM = "Home"
+
+# Curated entry notes (Phase 7): committed, user-editable notes the generator
+# links to but never writes. Their stems are registered as link targets so the
+# generated Home note may point at them; everything under their folders is
+# curated territory the sync never touches (it only owns FAR/AIM/PCG and the
+# root status/home notes). Renaming these files breaks Home's links — Obsidian
+# shows them unresolved — but never the build of the file itself.
+CURATED_ENTRIES = (
+    ("Collections", ("Collections", "Collections.md")),
+    ("Topics", ("Topics", "Topics.md")),
+    ("Study", ("Study", "Study.md")),
+)
 
 # Sections addressable by the eCFR point-in-time section URL; ranges and
 # part-local numbers fall back to the part URL.
@@ -460,4 +473,62 @@ def build_source_status(sources: dict[str, object]) -> Note:
             ("title", "Source Status"),
         ],
         body="\n\n".join(["# Source Status", table]) + "\n",
+    )
+
+
+def build_home(*, has_aim: bool, has_pcg: bool) -> Note:
+    """``vault/Home.md`` — the vault's entry point (plan §22 Phase 7).
+
+    Static navigation only: edition details live in ``Source Status`` so this
+    note never changes on a source update. Corpus links appear only for the
+    layers actually built (a FAR-only build must not emit broken links); the
+    curated entry links always verify because their stems are registered
+    unconditionally (:data:`CURATED_ENTRIES`).
+    """
+    sources = [f"- [[{TITLE_INDEX_STEM}|Title 14, Code of Federal Regulations (the FARs)]]"]
+    if has_aim:
+        sources.append("- [[AIM|Aeronautical Information Manual]]")
+    if has_pcg:
+        sources.append("- [[PCG|Pilot/Controller Glossary]]")
+    sources.append(f"- [[{SOURCE_STATUS_STEM}]] — the editions this vault is built from")
+
+    chunks = [
+        "# FAR/AIM Knowledge Vault",
+        "Reference notes generated from official U.S. aviation sources, plus a"
+        " curated study layer. Official wording is never altered; every"
+        " generated note records the source edition it came from.",
+        "## Sources",
+        "\n".join(sources),
+        "## Study layer",
+        "Curated notes live outside the generated trees and are never touched"
+        " by a rebuild:",
+        "\n".join(
+            [
+                "- [[Collections]] — study collections for a certificate or rating",
+                "- [[Topics]] — notes that gather everything on one concept across sources",
+                "- [[Study]] — freeform working notes",
+            ]
+        ),
+        "## Finding things",
+        "\n".join(
+            [
+                "- **Search** any citation (`91.155`, `AIM 4-1-9`) or heading — "
+                "citation forms and headings are note aliases.",
+                "- **Backlinks** on any note list every note that cites it — open a "
+                "glossary term or a section to see everything referring to it.",
+                "- Section notes end with their explicit cross-references; AIM notes "
+                "also list the glossary terms they use.",
+            ]
+        ),
+    ]
+    return Note(
+        kind="home",
+        path_parts=(f"{HOME_STEM}.md",),
+        frontmatter=[
+            ("id", "home"),
+            ("type", "home"),
+            ("generated", True),
+            ("title", "FAR/AIM Knowledge Vault"),
+        ],
+        body="\n\n".join(chunks) + "\n",
     )

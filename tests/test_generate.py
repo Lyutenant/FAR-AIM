@@ -426,6 +426,14 @@ def test_heading_alias_equal_to_stem_dropped():
     assert registry.aliases["cfr-14-1.1"] == ["§ 1.1", "14 CFR 1.1"]
 
 
+def test_heading_alias_equal_to_curated_entry_dropped():
+    # Curated entry stems (Home's link targets) are reserved in the alias
+    # namespace even though the generator never writes those files.
+    docs = {"1": _mini_part("1", [_mini_section("1", "1.1", "Collections.")])}
+    registry = build_registry(docs)
+    assert registry.aliases["cfr-14-1.1"] == ["§ 1.1", "14 CFR 1.1"]
+
+
 def test_duplicate_stem_fails():
     part = _mini_part(
         "1",
@@ -469,6 +477,7 @@ def slice_plan() -> dict[tuple[str, ...], bytes]:
         "Part 91.md",  # part index
         "Title 14.md",  # title index
         "Source Status.md",  # manifest-derived status note
+        "Home.md",  # vault entry point (FAR-only variant: no AIM/PCG links)
     ],
 )
 def test_golden_note(slice_plan, name):
@@ -482,10 +491,11 @@ def test_slice_plan_shape(slice_plan):
     paths = set(slice_plan)
     assert ("FAR", "Title 14.md") in paths
     assert ("Source Status.md",) in paths
+    assert ("Home.md",) in paths
     assert ("FAR", "Part 091", "Part 91.md") in paths
     assert ("FAR", "Part 091", "91.155.md") in paths
-    # 1 part index + 11 sections + 4 appendices + title + status
-    assert len(slice_plan) == 18
+    # 1 part index + 11 sections + 4 appendices + title + status + home
+    assert len(slice_plan) == 19
 
 
 def test_cross_reference_only_links_in_corpus(slice_plan):

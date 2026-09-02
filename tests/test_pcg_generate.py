@@ -183,6 +183,18 @@ def test_registry_targets_and_aliases(far_docs, aim_layer, pcg_layer):
     assert registry.stems["KNOWN TRAFFIC"] == ("PCG", "K", "KNOWN TRAFFIC.md")
 
 
+def test_home_note_links_every_built_layer(combined_plan):
+    # With all three layers present, Home links each corpus index plus the
+    # curated entry notes (registered stems, not planned files).
+    home = combined_plan[("Home.md",)].decode()
+    assert "[[Title 14|" in home
+    assert "[[AIM|Aeronautical Information Manual]]" in home
+    assert "[[PCG|Pilot/Controller Glossary]]" in home
+    for curated in ("[[Collections]]", "[[Topics]]", "[[Study]]"):
+        assert curated in home
+    assert ("Collections", "Collections.md") not in combined_plan
+
+
 def test_wikilinks_resolve_and_note_renders(combined_plan):
     note = combined_plan[("PCG", "N", "NDB.md")].decode()
     assert "[[NONDIRECTIONAL BEACON|NONDIRECTIONAL BEACON]]" in note

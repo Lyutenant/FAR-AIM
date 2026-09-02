@@ -100,6 +100,10 @@ SCHEMAS: dict[str, tuple[tuple[str, ...], frozenset[str]]] = {
         ("id", "type", "generated", "title"),
         frozenset({"id", "type", "generated", "title"}),
     ),
+    "home": (
+        ("id", "type", "generated", "title"),
+        frozenset({"id", "type", "generated", "title"}),
+    ),
     "aim": (_AIM_PARAGRAPH_KEYS, frozenset(_AIM_PARAGRAPH_KEYS) - {"aliases", "tags"}),
     "aim_section": (_AIM_SECTION_KEYS, frozenset(_AIM_SECTION_KEYS) - {"aliases", "tags"}),
     "aim_chapter": (_AIM_CHAPTER_KEYS, frozenset(_AIM_CHAPTER_KEYS) - {"aliases", "tags"}),

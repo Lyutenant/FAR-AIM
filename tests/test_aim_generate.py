@@ -436,9 +436,9 @@ def test_combined_plan_shape(combined_plan, aim_layer):
     assert ("AIM", "Appendices", "AIM Appendix 3.md") in paths
     for name, data in aim_layer.assets.items():
         assert combined_plan[("AIM", "assets", name)] == data
-    # FAR slice (18) + AIM: index, 2 chapters, 2 sections, 7 paragraphs,
-    # 2 appendices (14) + 5 assets + the asset ledger.
-    assert len(combined_plan) == 18 + 14 + 5 + 1
+    # FAR slice with home note (19) + AIM: index, 2 chapters, 2 sections,
+    # 7 paragraphs, 2 appendices (14) + 5 assets + the asset ledger.
+    assert len(combined_plan) == 19 + 14 + 5 + 1
     assert combined_plan[("AIM", "assets", ASSET_LEDGER)] == asset_ledger_bytes(aim_layer.assets)
 
 

@@ -1,4 +1,4 @@
-# Vault generation (Phases 3–4)
+# Vault generation (Phases 3–7)
 
 `far-aim build-vault` renders the verified canonical eCFR and AIM layers into
 the committed Obsidian vault at `vault/`. The full rules live in
@@ -9,8 +9,17 @@ and the known limitations.
 
 ```text
 vault/
+├── Home.md                   # generated entry point (Phase 7)
 ├── Source Status.md          # manifest-derived currency table
 ├── .obsidian/                # minimal committed config (workspace gitignored)
+├── Collections/              # curated (Phase 7): study collections
+│   ├── Collections.md
+│   └── Private Pilot/        # prototype collection (plan §23)
+├── Topics/                   # curated: one concept across all sources
+│   ├── Topics.md
+│   └── Cross-Country Flight.md
+├── Study/                    # curated: freeform user notes
+│   └── Study.md
 └── FAR/
     ├── Title 14.md           # chapters → subchapters → part links
     └── Part 091/             # folder digit-runs padded to 3 for sort order
@@ -33,7 +42,7 @@ vault/
 Frontmatter is hand-emitted YAML in a fixed key order with every string
 JSON-double-quoted (deterministic bytes; `91.155` and dates would otherwise
 be misread by YAML). Schema-checked per note kind (`regulation`,
-`appendix`, `index`, `status`) before anything is written. No volatile
+`appendix`, `index`, `status`, `home`) before anything is written. No volatile
 timestamps ever appear in notes (plan §32.10) — `retrieved_at` and
 `last_checked_at` live only in the manifest.
 
@@ -105,9 +114,9 @@ policy, frontmatter schemas) before any write. Sync then:
    leaving a mixed partial tree;
 4. deletes generated notes no longer produced (upstream removals) but keeps
    — with a warning — curated notes parked inside `vault/FAR/`;
-5. never touches anything outside `vault/FAR/`, `vault/AIM/` and
-   `vault/Source Status.md` (`.obsidian/`, `Topics/`, etc. are out of
-   bounds).
+5. never touches anything outside `vault/FAR/`, `vault/AIM/`, `vault/PCG/`
+   and the root `Source Status.md` / `Home.md` notes (`.obsidian/`,
+   `Collections/`, `Topics/`, `Study/`, etc. are out of bounds).
 
 `far-aim validate` re-renders the plan in memory and byte-compares it
 against the on-disk vault, making the zero-diff invariant a scripted check.
@@ -260,3 +269,44 @@ vault/PCG/
 - Cross-corpus effects: PCG stems join the global namespace, so a FAR/AIM
   heading alias that case-folds to a glossary term (e.g. "Wake Turbulence")
   is dropped by the existing global alias-uniqueness rule (plan §17.4).
+
+## Home and the curated layer (Phase 7)
+
+- `Home.md` is a generated root note (`type: home`): links to each built
+  corpus index, `Source Status`, and the three curated entry notes. It is
+  deliberately static — edition details stay in `Source Status` so a source
+  update never rewrites it. Corpus links render only for layers actually
+  built (a FAR-only build emits no `[[AIM]]`/`[[PCG]]` link).
+- The curated entry stems `Collections`, `Topics` and `Study`
+  (`generate.notes.CURATED_ENTRIES`) are registered as link targets even
+  though the generator never writes those files: generated notes may link
+  to them, and the global alias-uniqueness rule keeps generated aliases
+  from colliding with their names. Renaming one of these curated files
+  leaves Home with an unresolved link (Obsidian shows it greyed); it never
+  breaks a build.
+- Everything under `Collections/`, `Topics/` and `Study/` is curated:
+  committed to git, owned by humans, invisible to `build-vault` and
+  `validate`. Curated notes carry no `generated:` key and use frontmatter
+  `type: curated-index | collection | topic`. Naming guidance: pick stems
+  that do not case-fold-collide with generated stems or aliases (check
+  with Obsidian's quick switcher), and link generated notes by citation
+  stem with display text (`[[91.155|§ 91.155 — Basic VFR weather
+  minimums]]`). For the committed curated notes this is enforced by the
+  full-title build test, which is why two plan §23 page names deviate:
+  `Airspace Classes.md` (bare "Airspace" is AIM Chapter 3's alias) and
+  `Currency and Flight Review.md` ("Currency" is § 221.50's alias).
+- The prototype content is the plan §23 Private Pilot collection
+  (13 subject pages under `Collections/Private Pilot/`) plus the
+  `Topics/Cross-Country Flight.md` topic note. Curated pages link or
+  transclude authoritative notes; they never restate regulatory text.
+- Dataview (optional plugin): generated frontmatter is typed for it —
+  `part`/`section` on FAR notes, `chapter`/`section`/`paragraph` on AIM
+  notes, `term`/`letter` on PCG notes, plus `type`, `source` and tags
+  everywhere. Example:
+
+  ```dataview
+  TABLE citation, title
+  FROM "FAR"
+  WHERE part = 91 AND type = "regulation"
+  SORT section ASC
+  ```

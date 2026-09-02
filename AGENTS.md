@@ -137,5 +137,26 @@ FAR vocabulary is defined by 14 CFR Part 1 and PCG definitions can differ
 (`NIGHT`, `CEILING`, `AIR TAXI`); a FAR → Part 1 definitions layer is the
 FAR-side analogue if wanted later. Phase 6 exit criteria met (citation
 parser tested, high-confidence links resolve, no mass false positives).
-Next: Phase 7 (Obsidian quality layer). Do not start AI-enrichment work
-before Phase 9 (plan §31).
+Phase 7 (Obsidian quality layer) complete: generated `vault/Home.md`
+(kind `home`; corpus links rendered only for built layers) is the entry
+point, linking the corpus indexes, `Source Status`, and three curated
+entry notes whose stems (`Collections`, `Topics`, `Study` —
+`generate.notes.CURATED_ENTRIES`) are registered as link targets and
+reserved in the alias namespace though the generator never writes them.
+The curated layer is committed and generator-invisible (no `generated:`
+key; `type: curated-index | collection | topic`): `Collections/Private
+Pilot/` (13 subject pages per plan §23, links/display-text only — no
+restated regulatory text; two page names deviate from §23 because bare
+"Airspace"/"Currency" collide with generated aliases — the full-title
+test enforces curated-vs-generated name uniqueness) and
+`Topics/Cross-Country Flight.md` (the § 61.1(b) definition tiers plus
+the per-certificate experience rules built on them, student through
+ATP).
+Dataview needed no code: generated frontmatter was already typed;
+sample queries and the curated-naming guidance (avoid case-fold
+collisions with generated stems/aliases) are in docs/vault.md.
+`.obsidian/` core config was already committed; no CSS snippets added.
+Exit criterion met: a student pilot lands on Home and browses to
+definition + everything referencing it without knowing repo internals.
+Next: Phase 8 (automated maintenance GitHub Action). Do not start
+AI-enrichment work before Phase 9 (plan §31).

@@ -1651,13 +1651,16 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
     vault_aim = config.vault_dir / generate_aim_notes.AIM_DIR
     vault_pcg = config.vault_dir / generate_pcg_notes.PCG_DIR
     status_path = config.vault_dir / f"{generate_notes.SOURCE_STATUS_STEM}.md"
+    home_path = config.vault_dir / f"{generate_notes.HOME_STEM}.md"
     # A vault "exists" only if any generator-owned note does. Directory
     # presence alone proves nothing: `vault/FAR/` holding only curated notes
     # is a never-built vault (curated notes are ignored, not validated),
-    # while a generated Source Status.md with the FAR tree deleted is a
-    # damaged build that must fail the missing-note checks below, not pass
-    # as "nothing to check".
-    built = (status_path.exists() and generate_build.is_generated_note(status_path)) or any(
+    # while a generated Source Status.md or Home.md with the FAR tree
+    # deleted is a damaged build that must fail the missing-note checks
+    # below, not pass as "nothing to check".
+    built = any(
+        generate_build.is_generated_note(p) for p in (status_path, home_path)
+    ) or any(
         generate_build.is_generated_note(p)
         for root in (vault_far, vault_aim, vault_pcg)
         if root.is_dir()
@@ -1717,6 +1720,8 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
             on_disk.extend(sorted(root.rglob("*.md")))
     if status_path.exists():
         on_disk.append(status_path)
+    if home_path.exists():
+        on_disk.append(home_path)
     assets_root = vault_aim / generate_aim_notes.ASSETS_DIR
     ledger = generate_build.read_asset_ledger(assets_root / generate_build.ASSET_LEDGER)
     if assets_root.is_dir():
