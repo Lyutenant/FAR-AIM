@@ -158,5 +158,42 @@ collisions with generated stems/aliases) are in docs/vault.md.
 `.obsidian/` core config was already committed; no CSS snippets added.
 Exit criterion met: a student pilot lands on Home and browses to
 definition + everything referencing it without knowing repo internals.
-Next: Phase 8 (automated maintenance GitHub Action). Do not start
-AI-enrichment work before Phase 9 (plan §31).
+Phase 8 (automated maintenance) complete: `far-aim update` (formerly the
+Phase 8 stub) runs discovery with the `check --remote` guards (rollback /
+altered-pin / network failure ⇒ error, nothing touched), exits cleanly
+with zero writes when all sources are current AND the published output is
+consistent (no manifest timestamp churn; an update interrupted after
+per-source acceptance is detected — pending canonical_hash, a
+Source Status note that predates the manifest, a corpus index note
+pinning a different canonical_hash (unpublished same-version
+correction), or, whenever local
+canonical layers exist, a full read-only validation failure — and
+resumed, never stranded as a false "nothing to do"; a fresh layerless
+checkout of a validated commit is trusted as merged), and otherwise runs
+fetch×3 → parse×3 → diff → build-vault → validate,
+stopping at the first failure so defects block publication (plan
+§32.13); its summary reports per-source version transitions and whether
+canonical content changed (provenance-only eCFR issue bumps say
+"unchanged"). `--reverify` (CI's mode) re-runs the fetchers even when
+versions match, so an FAA content edit that keeps the edition label
+fails against the pinned raw_hash instead of going unnoticed; success or
+failure, pure last_checked_at drift is restored under the source lock so
+a run accepting no content stays byte-clean. `far-aim diff` (formerly
+the Phase 2 stub) is the structural-diff step: it re-plans the vault
+from the parsed layers and reports adds/rewrites/removals against the
+vault on disk, so upstream removals are explicit in the PR log before
+publication.
+`.github/workflows/upstream-sync.yml` runs `update --reverify` daily:
+no-change runs end green with a clean tree; downloaded raw AIM/PCG data
+is uploaded as an artifact when the run failed or accepted a real change
+(the ephemeral runner may hold the only copy; operator must archive
+durably, plan §6.2) but not for a clean re-verification's routine
+re-downloads (already archived at first acceptance); real changes re-run
+ruff + full pytest and open/update an `upstream-sync` PR
+(body: update summary + vault diff stat + full log) — never auto-merged
+(plan §32.7). FAA page edits without an edition bump fail the daily
+raw_hash re-verification by design (quarantine rides in the artifact);
+resolve locally with `fetch --force`. Docs: docs/maintenance.md. Exit
+criteria are pinned by the `test_update_*` tests in tests/test_cli.py.
+Next: Phase 9 (AI enrichment) — gated on plan §31; enrichment must stay
+separate from authoritative data (plan §32.12).

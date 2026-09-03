@@ -15,7 +15,7 @@ from far_aim.sources import pcg as pcg_src
 from tests.test_aim_source import FIXTURE_APPENDICES, FIXTURE_CHAPTERS, AimUpstream
 from tests.test_aim_source import VERSION as AIM_VERSION
 from tests.test_ecfr_source import FIXTURES as FIXTURES_DIR
-from tests.test_ecfr_source import ISSUE_DATE, Upstream
+from tests.test_ecfr_source import ISSUE_DATE, Upstream, titles_payload
 from tests.test_pcg_source import FIXTURE_LETTERS as PCG_LETTERS
 from tests.test_pcg_source import VERSION as PCG_VERSION
 from tests.test_pcg_source import PcgUpstream
@@ -81,8 +81,6 @@ def test_validate_invalid_manifest(tmp_path, capsys):
     "argv",
     [
         ["normalize"],
-        ["diff"],
-        ["update"],
     ],
 )
 def test_unimplemented_commands_exit_2(tmp_path, capsys, argv):
@@ -1454,6 +1452,408 @@ def test_validate_home_alone_counts_as_built_vault(tmp_path, capsys):
     (config.vault_dir / "Source Status.md").unlink()
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
     assert "missing generated note" in capsys.readouterr().err
+
+
+# ---------------------------------------------------------------------------
+# diff (Phase 8)
+# ---------------------------------------------------------------------------
+
+
+def test_diff_reports_structural_changes(tmp_path, capsys):
+    config = _built_vault(tmp_path, capsys)
+    assert main(["--root", str(tmp_path), "diff"]) == EXIT_OK
+    assert "diff: 0 to add, 0 to rewrite, 0 to remove" in capsys.readouterr().out
+
+    # A missing note is an add, a hand-damaged one a rewrite, and a parked
+    # generated note the plan no longer produces a remove — differences
+    # are a report, never an error.
+    victim = config.vault_dir / "FAR" / "Part 091" / "91.155.md"
+    stale = config.vault_dir / "FAR" / "Part 091" / "91.999.md"
+    stale.write_bytes(victim.read_bytes())
+    victim.unlink()
+    edited = config.vault_dir / "FAR" / "Part 091" / "91.175.md"
+    edited.write_bytes(edited.read_bytes() + b"\nedited\n")
+    assert main(["--root", str(tmp_path), "diff"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "add: FAR/Part 091/91.155.md" in out
+    assert "rewrite: FAR/Part 091/91.175.md" in out
+    assert "remove: FAR/Part 091/91.999.md" in out
+    assert "diff: 1 to add, 1 to rewrite, 1 to remove" in out
+
+    # Curated notes are invisible to the diff.
+    curated = config.vault_dir / "FAR" / "Part 091" / "My Notes.md"
+    curated.write_text("mine\n", encoding="utf-8")
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    capsys.readouterr()
+    assert main(["--root", str(tmp_path), "diff"]) == EXIT_OK
+    assert "diff: 0 to add, 0 to rewrite, 0 to remove" in capsys.readouterr().out
+
+
+def test_diff_requires_accepted_layer(tmp_path, capsys):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "diff"]) == EXIT_ERROR
+    assert "no accepted eCFR canonical layer" in capsys.readouterr().err
+
+
+# ---------------------------------------------------------------------------
+# update (Phase 8)
+# ---------------------------------------------------------------------------
+
+
+def test_update_from_empty_runs_full_pipeline_then_noops(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)
+
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    out = capsys.readouterr().out
+    for step in (
+        "fetch ecfr",
+        "fetch aim",
+        "fetch pcg",
+        "parse ecfr",
+        "diff",
+        "build-vault",
+        "validate",
+    ):
+        assert f"==> far-aim {step}" in out
+    # The structural diff ran against the pre-build (empty) vault.
+    assert "to add" in out and "0 to remove" in out
+    assert (config.vault_dir / "Home.md").exists()
+    assert (config.vault_dir / "AIM" / "AIM.md").exists()
+    assert (config.vault_dir / "PCG" / "PCG.md").exists()
+    assert f"ecfr_title_14: none → {ISSUE_DATE} (canonical content changed)" in out
+    assert f"aim: none → {AIM_VERSION} (canonical content changed)" in out
+    assert f"pcg: none → {PCG_VERSION} (canonical content changed)" in out
+
+    # No-change run: exits cleanly and touches nothing — not even the
+    # manifest's last_checked_at (Phase 8 exit criterion).
+    manifest_bytes = config.manifest_path.read_bytes()
+    vault_before = _vault_bytes(config)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "all sources up to date; nothing to do" in out
+    assert "==> far-aim" not in out
+    assert config.manifest_path.read_bytes() == manifest_bytes
+    assert _vault_bytes(config) == vault_before
+
+
+def test_update_version_bump_without_content_change(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    capsys.readouterr()
+
+    # Simulated change: a newer eCFR issue date serving identical XML.
+    mock_upstream.issue_date = "2026-09-15"
+    mock_upstream.titles = titles_payload("2026-09-15")
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert f"ecfr_title_14: {ISSUE_DATE} → 2026-09-15 (canonical content unchanged)" in out
+    assert f"aim: unchanged ({AIM_VERSION})" in out
+    assert f"pcg: unchanged ({PCG_VERSION})" in out
+    # Per-note provenance follows the accepted issue (the expected diff).
+    note = (config.vault_dir / "FAR" / "Part 001" / "1.1.md").read_text(encoding="utf-8")
+    assert 'source_version: "2026-09-15"' in note
+    state = SourceManifest.load(config.manifest_path).sources["ecfr_title_14"]
+    assert state.accepted_version == "2026-09-15"
+
+
+def test_update_fetch_failure_blocks_publication(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    capsys.readouterr()
+    vault_before = _vault_bytes(config)
+    manifest_bytes = config.manifest_path.read_bytes()
+
+    # A newer issue whose download fails validation must stop the pipeline
+    # and preserve the last known-good output (plan §32.13).
+    mock_upstream.issue_date = "2026-09-15"
+    mock_upstream.titles = titles_payload("2026-09-15")
+    mock_upstream.xml = b"not xml"
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_ERROR
+    err = capsys.readouterr().err
+    assert "update stopped at `far-aim fetch ecfr`" in err
+    assert _vault_bytes(config) == vault_before
+    assert SourceManifest.load(config.manifest_path).sources["ecfr_title_14"].raw_hash == (
+        SourceManifest.from_dict(json.loads(manifest_bytes)).sources["ecfr_title_14"].raw_hash
+    )
+
+
+def test_update_resumes_after_interrupted_parse(tmp_path, capsys, mock_upstream, monkeypatch):
+    # P1 regression: fetch accepts a new version before parse runs, so a
+    # parse failure must not let the next run see "versions all current"
+    # and no-op forever with a pending canonical layer.
+    import far_aim.cli as cli_module
+
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    capsys.readouterr()
+
+    mock_upstream.issue_date = "2026-09-15"
+    mock_upstream.titles = titles_payload("2026-09-15")
+    with monkeypatch.context() as patch:
+        patch.setattr(cli_module, "cmd_parse_ecfr", lambda _config, _parts: EXIT_ERROR)
+        assert main(["--root", str(tmp_path), "update"]) == EXIT_ERROR
+    err = capsys.readouterr().err
+    assert "update stopped at `far-aim parse ecfr`" in err
+    state = SourceManifest.load(config.manifest_path).sources["ecfr_title_14"]
+    assert state.accepted_version == "2026-09-15" and state.canonical_hash is None
+
+    # Upstream still matches the accepted versions, but the next run must
+    # resume the pipeline, not report "nothing to do".
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "canonical layer is pending for: ecfr_title_14" in out
+    assert "resuming the interrupted update" in out
+    assert "nothing to do" not in out
+    # The summary reports the publication this run completed — not
+    # "unchanged", even though the manifest showed 2026-09-15 from the start.
+    assert "ecfr_title_14: resumed publication of 2026-09-15" in out
+    assert f"aim: unchanged ({AIM_VERSION})" in out
+    note = (config.vault_dir / "FAR" / "Part 001" / "1.1.md").read_text(encoding="utf-8")
+    assert 'source_version: "2026-09-15"' in note
+
+    # And once resumed, the next run really is a no-op.
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    assert "all sources up to date; nothing to do" in capsys.readouterr().out
+
+
+def test_update_resumes_after_interrupted_build(tmp_path, capsys, mock_upstream, monkeypatch):
+    # Same interruption one step later: every layer parsed (all canonical
+    # hashes recorded) but the vault still shows the previous editions.
+    import far_aim.cli as cli_module
+
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    capsys.readouterr()
+
+    mock_upstream.issue_date = "2026-09-15"
+    mock_upstream.titles = titles_payload("2026-09-15")
+    with monkeypatch.context() as patch:
+        patch.setattr(cli_module, "cmd_build_vault", lambda _config: EXIT_ERROR)
+        assert main(["--root", str(tmp_path), "update"]) == EXIT_ERROR
+    assert "update stopped at `far-aim build-vault`" in capsys.readouterr().err
+
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "Source Status note predates the accepted sources" in out
+    assert "resuming the interrupted update" in out
+    status = (config.vault_dir / "Source Status.md").read_text(encoding="utf-8")
+    assert "2026-09-15" in status
+
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    assert "all sources up to date; nothing to do" in capsys.readouterr().out
+
+
+def test_update_resumes_when_vault_fails_validation(tmp_path, capsys, mock_upstream):
+    # With versions current and Source Status intact, damage elsewhere in
+    # the vault (a sync killed mid-write, a deleted generated note) must
+    # still be caught before the no-op path — the full read-only
+    # validation runs whenever the local canonical layers exist.
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    capsys.readouterr()
+
+    victim = config.vault_dir / "FAR" / "Part 001" / "1.1.md"
+    victim.unlink()
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    captured = capsys.readouterr()
+    assert "missing generated note" in captured.err
+    assert "the published output failed validation" in captured.out
+    assert "resuming the interrupted update" in captured.out
+    assert victim.exists()
+
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    assert "all sources up to date; nothing to do" in capsys.readouterr().out
+
+
+def test_update_noop_without_local_layers(tmp_path, capsys, mock_upstream):
+    # CI's daily case: a fresh checkout of a validated commit has no local
+    # raw or normalized layers (gitignored, reconstructible). That must
+    # stay a clean no-op — no resume, no refetch, no manifest churn.
+    import shutil
+
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    capsys.readouterr()
+
+    shutil.rmtree(config.normalized_dir)
+    shutil.rmtree(config.raw_dir)
+    manifest_bytes = config.manifest_path.read_bytes()
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    assert "all sources up to date; nothing to do" in capsys.readouterr().out
+    assert config.manifest_path.read_bytes() == manifest_bytes
+    assert not config.normalized_dir.exists() and not config.raw_dir.exists()
+
+
+def test_update_reverify_detects_same_version_content_change(tmp_path, capsys, mock_upstream):
+    # P1 regression: the FAA can edit content without bumping the edition.
+    # On a fresh runner (no local archive) --reverify re-downloads the
+    # accepted editions and must fail on a raw-hash mismatch instead of
+    # no-opping on version equality alone.
+    import shutil
+
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    capsys.readouterr()
+
+    shutil.rmtree(config.raw_dir)
+    mock_upstream.xml = mock_upstream.xml + b"<!-- silently edited upstream -->"
+    manifest_bytes = config.manifest_path.read_bytes()
+    assert main(["--root", str(tmp_path), "update", "--reverify"]) == EXIT_ERROR
+    err = capsys.readouterr().err
+    assert "returned different content" in err
+    assert "re-verification failed" in err
+    # A failed re-verification accepted nothing, so it must not dirty the
+    # manifest either (last_checked_at drift is restored on failure too).
+    assert config.manifest_path.read_bytes() == manifest_bytes
+    # Without --reverify the same state no-ops (versions match) — the flag
+    # is what buys the content check.
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    assert "all sources up to date; nothing to do" in capsys.readouterr().out
+
+
+def test_update_reverify_clean_match_stays_byte_clean(tmp_path, capsys, mock_upstream):
+    # CI's daily case with --reverify: content still matches the accepted
+    # editions, the archive is rebuilt locally, and the committed state —
+    # manifest included (last_checked_at restored) — stays byte-identical.
+    import shutil
+
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    capsys.readouterr()
+
+    shutil.rmtree(config.raw_dir)
+    shutil.rmtree(config.normalized_dir)
+    manifest_bytes = config.manifest_path.read_bytes()
+    vault_before = _vault_bytes(config)
+    assert main(["--root", str(tmp_path), "update", "--reverify"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "accepted editions re-verified against upstream content" in out
+    assert "all sources up to date; nothing to do" in out
+    assert config.manifest_path.read_bytes() == manifest_bytes
+    assert _vault_bytes(config) == vault_before
+    assert (config.raw_dir / "ecfr" / ISSUE_DATE / "title-14.xml").exists()
+
+
+def test_update_reverify_publishes_edition_accepted_mid_run(
+    tmp_path, capsys, mock_upstream, monkeypatch
+):
+    # The fetchers run their own discovery: an edition that moves upstream
+    # between update's discovery and the fetcher's is accepted during
+    # --reverify (canonical hash cleared). The run must then resume into
+    # publication from the reloaded manifest — not exit "nothing to do"
+    # with the vault behind the freshly accepted state.
+    import far_aim.cli as cli_module
+
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    capsys.readouterr()
+
+    real_fetch = cli_module.cmd_fetch_ecfr
+    bumped = False
+
+    def bumping_fetch(config_arg, *, force):
+        nonlocal bumped
+        if not bumped:
+            bumped = True
+            mock_upstream.issue_date = "2026-09-15"
+            mock_upstream.titles = titles_payload("2026-09-15")
+        return real_fetch(config_arg, force=force)
+
+    with monkeypatch.context() as patch:
+        patch.setattr(cli_module, "cmd_fetch_ecfr", bumping_fetch)
+        assert main(["--root", str(tmp_path), "update", "--reverify"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "canonical layer is pending for: ecfr_title_14" in out
+    assert "resuming the interrupted update" in out
+    assert "nothing to do" not in out
+    assert "ecfr_title_14: resumed publication of 2026-09-15" in out
+    note = (config.vault_dir / "FAR" / "Part 001" / "1.1.md").read_text(encoding="utf-8")
+    assert 'source_version: "2026-09-15"' in note
+
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    assert "all sources up to date; nothing to do" in capsys.readouterr().out
+
+
+def test_update_resumes_after_unpublished_same_version_correction(tmp_path, capsys, mock_upstream):
+    # A same-version correction (fetch --force + re-parse) moves only the
+    # manifest's canonical hash; if the run dies before build-vault and the
+    # local layers are gone, Source Status still matches and the pending
+    # probe sees a non-null hash — the corpus index note's pinned
+    # canonical_hash is what must catch the stale vault.
+    import shutil
+
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    capsys.readouterr()
+
+    manifest = SourceManifest.load(config.manifest_path)
+    manifest.sources["ecfr_title_14"].canonical_hash = "sha256:" + "ab" * 32
+    manifest.save(config.manifest_path)
+    shutil.rmtree(config.raw_dir)
+    shutil.rmtree(config.normalized_dir)
+
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "Title 14.md was built from a different canonical layer" in out
+    assert "resuming the interrupted update" in out
+    assert "nothing to do" not in out
+    # The pipeline reconciled manifest and vault (re-parse restored the
+    # true canonical hash for the accepted raw).
+    state = SourceManifest.load(config.manifest_path).sources["ecfr_title_14"]
+    title_index = (config.vault_dir / "FAR" / "Title 14.md").read_text(encoding="utf-8")
+    assert f'canonical_hash: "{state.canonical_hash}"' in title_index
+
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    assert "all sources up to date; nothing to do" in capsys.readouterr().out
+
+
+def test_update_rollback_guard_blocks_before_fetch(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    manifest = SourceManifest.default()
+    manifest.sources["ecfr_title_14"] = SourceState(accepted_version="2027-01-01")
+    manifest.save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_ERROR
+    assert "older than accepted 2027-01-01" in capsys.readouterr().err
+    assert mock_upstream.xml_requests == 0
+
+
+def test_update_upstream_failure_leaves_state_untouched(tmp_path, capsys, monkeypatch):
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(500)
+
+    monkeypatch.setattr(
+        ecfr, "make_client", lambda: httpx.Client(transport=httpx.MockTransport(handler))
+    )
+    monkeypatch.setattr(ecfr.time, "sleep", lambda _s: None)
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    manifest_bytes = config.manifest_path.read_bytes()
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_ERROR
+    assert "error" in capsys.readouterr().err
+    assert config.manifest_path.read_bytes() == manifest_bytes
 
 
 # ---------------------------------------------------------------------------

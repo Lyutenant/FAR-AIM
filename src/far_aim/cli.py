@@ -53,8 +53,6 @@ CORPORA = ("ecfr", "aim", "pcg")
 
 NOT_IMPLEMENTED_PHASE = {
     ("normalize", None): "Phase 2",
-    ("diff", None): "Phase 2",
-    ("update", None): "Phase 8",
 }
 
 
@@ -99,7 +97,16 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("validate", help="validate manifest and normalized data")
     sub.add_parser("diff", help="structural diff between accepted source versions")
     sub.add_parser("build-vault", help="generate the Obsidian vault from canonical data")
-    sub.add_parser("update", help="run the full check→fetch→parse→validate→diff→generate sequence")
+    update = sub.add_parser(
+        "update", help="run the full check→fetch→parse→validate→diff→generate sequence"
+    )
+    update.add_argument(
+        "--reverify",
+        action="store_true",
+        help="when versions already match upstream, re-run the fetchers so accepted "
+        "content is re-verified against the pinned raw hashes (used by CI, where the "
+        "FAA can edit pages without bumping the edition)",
+    )
     return parser
 
 
@@ -1676,33 +1683,10 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
             file=sys.stderr,
         )
         return EXIT_ERROR
-    docs = _load_verified_docs(config, state, ECFR_SPEC)
-    if isinstance(docs, str):
-        print(f"error: {docs}", file=sys.stderr)
+    planned = _plan_generated_vault(config, manifest, state)
+    if isinstance(planned, str):
+        print(f"error: {planned}", file=sys.stderr)
         return EXIT_ERROR
-    for pending in (
-        _aim_layer_pending_defect(config, manifest),
-        _pcg_layer_pending_defect(config, manifest),
-    ):
-        if pending is not None:
-            print(f"error: {pending}", file=sys.stderr)
-            return EXIT_ERROR
-    aim = _aim_layer(config, manifest)
-    if isinstance(aim, str):
-        print(f"error: {aim}", file=sys.stderr)
-        return EXIT_ERROR
-    pcg = _pcg_layer(config, manifest)
-    if isinstance(pcg, str):
-        print(f"error: {pcg}", file=sys.stderr)
-        return EXIT_ERROR
-    try:
-        plan = generate_build.plan_vault(
-            docs, state.accepted_version, state.canonical_hash, manifest.sources, aim, pcg
-        )
-    except BuildError as exc:
-        print(f"error: {exc}", file=sys.stderr)
-        return EXIT_ERROR
-    planned = {config.vault_dir.joinpath(*parts): data for parts, data in plan.items()}
     for path, data in sorted(planned.items()):
         if not path.exists():
             print(f"error: vault is missing generated note {path}", file=sys.stderr)
@@ -1714,37 +1698,158 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
                 file=sys.stderr,
             )
             return EXIT_ERROR
+    for path in _stale_generated_on_disk(config, planned):
+        print(
+            f"error: stale generated note {path} not produced by the "
+            "canonical layer; re-run `far-aim build-vault`",
+            file=sys.stderr,
+        )
+        return EXIT_ERROR
+    print(f"ok: vault matches canonical layer ({len(planned)} notes)")
+    return EXIT_OK
+
+
+def _plan_generated_vault(
+    config: Config, manifest: SourceManifest, state: SourceState
+) -> dict[Path, bytes] | str:
+    """The complete generated-vault plan as on-disk paths → bytes, or a defect.
+
+    Shared by ``validate`` and ``diff``: loads and verifies every canonical
+    layer, renders the whole plan in memory, and touches nothing.
+    """
+    docs = _load_verified_docs(config, state, ECFR_SPEC)
+    if isinstance(docs, str):
+        return docs
+    for pending in (
+        _aim_layer_pending_defect(config, manifest),
+        _pcg_layer_pending_defect(config, manifest),
+    ):
+        if pending is not None:
+            return pending
+    aim = _aim_layer(config, manifest)
+    if isinstance(aim, str):
+        return aim
+    pcg = _pcg_layer(config, manifest)
+    if isinstance(pcg, str):
+        return pcg
+    try:
+        plan = generate_build.plan_vault(
+            docs, state.accepted_version, state.canonical_hash, manifest.sources, aim, pcg
+        )
+    except BuildError as exc:
+        return str(exc)
+    return {config.vault_dir.joinpath(*parts): data for parts, data in plan.items()}
+
+
+def _stale_generated_on_disk(config: Config, planned: dict[Path, bytes]) -> list[Path]:
+    """Generator-owned files on disk that the plan no longer produces.
+
+    Curated material is never listed: notes prove generator ownership by
+    frontmatter, assets by the ledger (anything else in the assets
+    directory is curated and ignored).
+    """
+    vault_aim = config.vault_dir / generate_aim_notes.AIM_DIR
     on_disk: list[Path] = []
-    for root in (vault_far, vault_aim, vault_pcg):
+    corpus_dirs = (generate_notes.FAR_DIR, generate_aim_notes.AIM_DIR, generate_pcg_notes.PCG_DIR)
+    for root_name in corpus_dirs:
+        root = config.vault_dir / root_name
         if root.is_dir():
             on_disk.extend(sorted(root.rglob("*.md")))
-    if status_path.exists():
-        on_disk.append(status_path)
-    if home_path.exists():
-        on_disk.append(home_path)
+    for stem in (generate_notes.SOURCE_STATUS_STEM, generate_notes.HOME_STEM):
+        note = config.vault_dir / f"{stem}.md"
+        if note.exists():
+            on_disk.append(note)
     assets_root = vault_aim / generate_aim_notes.ASSETS_DIR
     ledger = generate_build.read_asset_ledger(assets_root / generate_build.ASSET_LEDGER)
     if assets_root.is_dir():
-        # Only assets the ledger attributes to the generator can be stale;
-        # anything else in the directory is curated and ignored here.
         on_disk.extend(
             p
             for p in sorted(assets_root.iterdir())
             if p.is_file() and p.suffix != ".md" and p.name in ledger
         )
-    for path in on_disk:
-        if path in planned:
-            continue
-        if (path.parent == assets_root and path.suffix != ".md") or (
-            generate_build.is_generated_note(path)
-        ):
-            print(
-                f"error: stale generated note {path} not produced by the "
-                "canonical layer; re-run `far-aim build-vault`",
-                file=sys.stderr,
-            )
-            return EXIT_ERROR
-    print(f"ok: vault matches canonical layer ({len(planned)} notes)")
+    return [
+        path
+        for path in on_disk
+        if path not in planned
+        and (
+            (path.parent == assets_root and path.suffix != ".md")
+            or generate_build.is_generated_note(path)
+        )
+    ]
+
+
+# ---------------------------------------------------------------------------
+# diff
+# ---------------------------------------------------------------------------
+
+
+def cmd_diff(config: Config) -> int:
+    """Structural diff: the on-disk generated vault vs a freshly planned one.
+
+    Run between ``parse`` and ``build-vault`` (as ``far-aim update`` does),
+    the vault on disk still reflects the previously accepted versions while
+    the plan reflects the newly parsed layers — so this reports, one line
+    per document (each category capped), exactly what the next build will
+    do: notes to **add** (new documents), **rewrite** (content or
+    provenance changes — a provenance-only issue bump rewrites every note
+    of a corpus, which the cap keeps bounded and the update summary's
+    "canonical content unchanged" explains), and **remove** (upstream
+    removals — the changes a reviewer must see before publication; plan
+    §32.7). Read-only; differences are reported, never an error.
+    """
+    path = config.manifest_path
+    if not path.exists():
+        print(f"error: source registry missing: {path}", file=sys.stderr)
+        return EXIT_ERROR
+    try:
+        with exclusive_lock(fetch_lock_path(config)):
+            return _diff_locked(config)
+    except FetchError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    except OSError as exc:
+        print(f"error: filesystem failure during diff: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+
+
+_DIFF_LIST_LIMIT = 50
+
+
+def _diff_locked(config: Config) -> int:
+    try:
+        manifest = SourceManifest.load(config.manifest_path)
+    except ManifestError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    state = manifest.sources[ecfr.SOURCE_NAME]
+    if state.accepted_version is None or state.canonical_hash is None:
+        print(
+            "error: no accepted eCFR canonical layer to diff against; run "
+            "`far-aim parse ecfr` first",
+            file=sys.stderr,
+        )
+        return EXIT_ERROR
+    planned = _plan_generated_vault(config, manifest, state)
+    if isinstance(planned, str):
+        print(f"error: {planned}", file=sys.stderr)
+        return EXIT_ERROR
+    to_add = sorted(p for p in planned if not p.exists())
+    to_rewrite = sorted(p for p in planned if p.exists() and p.read_bytes() != planned[p])
+    to_remove = _stale_generated_on_disk(config, planned)
+
+    def show(label: str, paths: list[Path]) -> None:
+        for p in paths[:_DIFF_LIST_LIMIT]:
+            print(f"  {label}: {p.relative_to(config.vault_dir)}")
+        if len(paths) > _DIFF_LIST_LIMIT:
+            print(f"  ... and {len(paths) - _DIFF_LIST_LIMIT} more to {label}")
+
+    show("add", to_add)
+    show("rewrite", to_rewrite)
+    show("remove", to_remove)
+    print(
+        f"diff: {len(to_add)} to add, {len(to_rewrite)} to rewrite, "
+        f"{len(to_remove)} to remove ({len(planned)} files planned)"
+    )
     return EXIT_OK
 
 
@@ -1831,6 +1936,323 @@ def _build_vault_locked(config: Config) -> int:
 
 
 # ---------------------------------------------------------------------------
+# update (Phase 8)
+# ---------------------------------------------------------------------------
+
+
+def _update_resume_reason(config: Config, manifest: SourceManifest) -> str | None:
+    """Why an up-to-date-looking manifest still needs the pipeline, if it does.
+
+    Fetch accepts each source before parse/build run (clearing the paired
+    ``canonical_hash``), so an ``update`` that died mid-pipeline leaves a
+    persisted signal: an accepted source whose canonical hash is missing
+    (parse never completed for the accepted raw), a ``Source Status.md``
+    that no longer byte-matches the manifest's accepted state (the vault
+    predates a version acceptance), or a corpus index note pinning a
+    different canonical hash than the manifest records (a same-version
+    correction was parsed but never published). None of these probes needs
+    the local canonical layers, so a fresh checkout of a validated
+    commit — CI's daily case — trips nothing.
+    """
+    pending = sorted(
+        name
+        for name, state in manifest.sources.items()
+        if state.accepted_version is not None and state.canonical_hash is None
+    )
+    if pending:
+        return f"the canonical layer is pending for: {', '.join(pending)}"
+    status = generate_notes.build_source_status(manifest.sources)
+    try:
+        expected = generate_build.assemble_note(status)
+    except BuildError as exc:
+        return f"the source-status note cannot be rendered ({exc})"
+    try:
+        on_disk = config.vault_dir.joinpath(*status.path_parts).read_bytes()
+    except OSError:
+        return "the vault has no generated Source Status note"
+    if on_disk != expected:
+        return "the vault's Source Status note predates the accepted sources"
+    # Source Status proves the vault followed version acceptances, but a
+    # same-version correction (`fetch --force` + re-parse) moves only
+    # hashes. Each corpus index note pins the canonical hash it was built
+    # from — compare those against the manifest so a correction that was
+    # parsed but never published still resumes.
+    for source_name, index_parts in (
+        (ecfr.SOURCE_NAME, (generate_notes.FAR_DIR, f"{generate_notes.TITLE_INDEX_STEM}.md")),
+        (
+            aim_source.SOURCE_NAME,
+            (generate_aim_notes.AIM_DIR, f"{generate_aim_notes.AIM_INDEX_STEM}.md"),
+        ),
+        (
+            pcg_source.SOURCE_NAME,
+            (generate_pcg_notes.PCG_DIR, f"{generate_pcg_notes.PCG_INDEX_STEM}.md"),
+        ),
+    ):
+        recorded = manifest.sources[source_name].canonical_hash
+        if recorded is None:
+            continue  # never parsed → no published corpus to compare
+        pinned = _note_canonical_hash(config.vault_dir.joinpath(*index_parts))
+        if pinned != recorded:
+            return (
+                f"the vault's {index_parts[-1]} was built from a different "
+                "canonical layer than the manifest records"
+            )
+    # When the local canonical layers are on disk, guard the rest of the
+    # vault with the full read-only validation (a sync killed mid-write, a
+    # deleted or hand-damaged generated note). A fresh checkout of a
+    # validated commit carries no local layers — they are gitignored and
+    # reconstructible — and cannot be re-verified here, so it is trusted
+    # as merged and the cheap probes above are the whole check.
+    if _normalized_layers_present(config) and cmd_validate(config) != EXIT_OK:
+        return "the published output failed validation"
+    return None
+
+
+def _note_canonical_hash(path: Path) -> str | None:
+    """The ``canonical_hash`` a generated note's frontmatter pins, if readable."""
+    prefix = 'canonical_hash: "'
+    try:
+        with path.open(encoding="utf-8") as fh:
+            if fh.readline().rstrip("\n") != "---":
+                return None
+            for _ in range(64):
+                line = fh.readline()
+                if not line or line.rstrip("\n") == "---":
+                    return None
+                stripped = line.rstrip("\n")
+                if stripped.startswith(prefix) and stripped.endswith('"'):
+                    return stripped[len(prefix) : -1]
+    except OSError:
+        return None
+    return None
+
+
+def _normalized_layers_present(config: Config) -> bool:
+    """True when any normalized canonical layer files exist locally."""
+    for spec in (ECFR_SPEC, AIM_SPEC, PCG_SPEC):
+        out_dir = spec.out_dir(config)
+        if out_dir.is_dir() and any(out_dir.glob(spec.file_glob)):
+            return True
+    return False
+
+
+def _manifest_without_volatile(manifest: SourceManifest) -> dict:
+    """The manifest's content with the volatile ``last_checked_at`` removed."""
+    data = manifest.to_dict()
+    for entry in data["sources"].values():  # type: ignore[union-attr]
+        if isinstance(entry, dict):
+            entry.pop("last_checked_at", None)
+    return data
+
+
+def _reverify_accepted_content(config: Config, path: Path) -> int:
+    """Re-run the fetchers so accepted content is re-verified (plan §25.5).
+
+    With versions matching upstream, discovery alone cannot notice the
+    documented FAA failure mode of editing pages without bumping the
+    edition. The fetchers can: with the local archive present they verify
+    it cheaply; without one (CI's fresh runner) they re-download and
+    compare the tree hash against the pinned ``raw_hash``, quarantining
+    and failing on any mismatch. Whether the run succeeds or fails, pure
+    ``last_checked_at`` drift is restored afterwards (under the source
+    lock) so a run that accepted no content leaves the manifest
+    byte-identical — any other manifest delta (e.g. backfilled provenance
+    pins, or a concurrent process's real acceptance) is kept, not
+    restored.
+    """
+    before_bytes = path.read_bytes()
+    code = EXIT_OK
+    for label, step in (
+        ("fetch ecfr", lambda: cmd_fetch_ecfr(config, force=False)),
+        ("fetch aim", lambda: cmd_fetch_aim(config, force=False)),
+        ("fetch pcg", lambda: cmd_fetch_pcg(config, force=False)),
+    ):
+        print(f"==> far-aim {label}")
+        code = step()
+        if code != EXIT_OK:
+            break
+    # Success or failure, drop pure last_checked_at drift: a run that
+    # accepted no content must leave the manifest byte-identical (a fetch
+    # that failed re-verification never saved, but an earlier source's
+    # clean check did bump its timestamp). The reload/compare/restore is a
+    # transaction under the shared source lock — a concurrent fetch may
+    # have accepted real state meanwhile, and the restore must never
+    # clobber it (any non-volatile delta is kept, not restored).
+    try:
+        with exclusive_lock(fetch_lock_path(config)):
+            before = SourceManifest.from_dict(json.loads(before_bytes))
+            after = SourceManifest.load(path)
+            if _manifest_without_volatile(before) == _manifest_without_volatile(after):
+                before.save(path)
+    except (FetchError, ManifestError, ValueError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    except OSError as exc:
+        print(f"error: filesystem failure during re-verification: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    if code != EXIT_OK:
+        print(
+            "error: re-verification failed: upstream content no longer matches an "
+            "accepted edition; investigate (any quarantined download is kept), then "
+            "re-accept deliberately with `far-aim fetch <source> --force`",
+            file=sys.stderr,
+        )
+        return code
+    print("update: accepted editions re-verified against upstream content")
+    return EXIT_OK
+
+
+def cmd_update(config: Config, *, reverify: bool = False) -> int:
+    """Check upstream and, when a source changed, run the full pipeline.
+
+    The automated-maintenance entry point (plan §22 Phase 8). Discovery and
+    the rollback/provenance-pin guards run first; when every source is
+    current *and* the published output is consistent with it, the command
+    exits without touching anything — no manifest timestamp churn — so a
+    scheduled no-change run leaves a clean tree. With ``reverify`` (CI's
+    mode) the fetchers re-verify accepted content against the pinned raw
+    hashes first — catching FAA edits that keep the edition label — while
+    a clean match still leaves the committed state byte-identical
+    (:func:`_reverify_accepted_content`). An earlier update that died
+    between per-source acceptance and publication is detected
+    (:func:`_update_resume_reason`) and resumed instead of stranded.
+    Otherwise every source is fetched (unchanged ones re-verify, or rebuild
+    the local raw cache in a fresh environment), every layer parsed, the
+    vault rebuilt and validated, stopping at the first failing step so a
+    fetch/parse/validation defect blocks publication and preserves the last
+    known-good output (plan §32.13). The summary reports each source's
+    version transition and whether canonical content actually changed — a
+    new eCFR issue date with no Title 14 amendments is provenance-only
+    (plan §32.6), though the vault still rewrites per-note provenance.
+    """
+    path = config.manifest_path
+    if not path.exists():
+        print(f"error: source registry missing: {path}", file=sys.stderr)
+        return EXIT_ERROR
+    try:
+        manifest = SourceManifest.load(path)
+    except ManifestError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+
+    with ecfr.make_client() as client:
+        try:
+            discovery = ecfr.discover_title14(client)
+            aim_discovery = aim_source.discover_aim(client)
+            pcg_discovery = pcg_source.discover_pcg(client)
+        except FetchError as exc:
+            # Network failure is not "source removed" (plan §25.3): report
+            # it and leave the last known-good corpus untouched.
+            print(f"error: {exc}", file=sys.stderr)
+            return EXIT_ERROR
+
+    code = max(
+        _report_ecfr_remote(manifest, discovery),
+        _report_aim_remote(manifest, aim_discovery),
+        _report_pcg_remote(manifest, pcg_discovery),
+    )
+    if code != EXIT_OK:
+        # Upstream rollback or altered provenance pins: never auto-resolved
+        # (the report says what to investigate; --force lives on fetch).
+        return code
+
+    latest = {
+        ecfr.SOURCE_NAME: discovery.latest_issue_date,
+        aim_source.SOURCE_NAME: aim_discovery.version,
+        pcg_source.SOURCE_NAME: pcg_discovery.version,
+    }
+    changed = [name for name, v in latest.items() if manifest.sources[name].accepted_version != v]
+    if not changed:
+        if reverify:
+            # Versions match, but the FAA can edit content without bumping
+            # the edition — re-verify against the pinned raw hashes.
+            code = _reverify_accepted_content(config, path)
+            if code != EXIT_OK:
+                return code
+            # The fetchers run their own discovery, so an edition that
+            # moved upstream between our discovery and theirs was just
+            # accepted — a kept, non-volatile manifest delta (its canonical
+            # hash is now pending). Decide what follows from the manifest
+            # as it stands, not the pre-fetch snapshot, so freshly accepted
+            # state resumes into publication below instead of exiting as
+            # "nothing to do" with the vault behind the manifest.
+            try:
+                manifest = SourceManifest.load(path)
+            except ManifestError as exc:
+                print(f"error: {exc}", file=sys.stderr)
+                return EXIT_ERROR
+        # An interrupted earlier run can leave every accepted version equal
+        # to upstream while the published output lags: fetch accepts each
+        # source *before* parse/build run, so dying mid-pipeline must not
+        # let the next run report "nothing to do" and strand the stale
+        # state forever. Persisted, layer-independent signals catch every
+        # such interruption; a fresh environment built from a merged
+        # (fully validated) manifest + vault triggers none of them.
+        reason = _update_resume_reason(config, manifest)
+        if reason is None:
+            print("update: all sources up to date; nothing to do")
+            return EXIT_OK
+        print(f"update: sources up to date but {reason}; resuming the interrupted update")
+
+    before = {
+        name: (state.accepted_version, state.canonical_hash)
+        for name, state in manifest.sources.items()
+    }
+    steps = [
+        ("fetch ecfr", lambda: cmd_fetch_ecfr(config, force=False)),
+        ("fetch aim", lambda: cmd_fetch_aim(config, force=False)),
+        ("fetch pcg", lambda: cmd_fetch_pcg(config, force=False)),
+        ("parse ecfr", lambda: cmd_parse_ecfr(config, None)),
+        ("parse aim", lambda: cmd_parse_aim(config)),
+        ("parse pcg", lambda: cmd_parse_pcg(config)),
+        # Structural diff before generation (plan §22 Phase 8): the vault
+        # on disk still shows the old versions, the layers the new — the
+        # report of adds/rewrites/removals lands in the update log the PR
+        # carries, so removals are explicit before publication.
+        ("diff", lambda: cmd_diff(config)),
+        ("build-vault", lambda: cmd_build_vault(config)),
+        ("validate", lambda: cmd_validate(config)),
+    ]
+    for label, step in steps:
+        print(f"==> far-aim {label}")
+        step_code = step()
+        if step_code != EXIT_OK:
+            print(
+                f"error: update stopped at `far-aim {label}`; the last known-good "
+                "output is preserved",
+                file=sys.stderr,
+            )
+            return step_code
+
+    try:
+        after = SourceManifest.load(path)
+    except ManifestError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    print("update summary:")
+    for name in sorted(after.sources):
+        old_version, old_hash = before[name]
+        state = after.sources[name]
+        if name in changed:
+            content = (
+                "canonical content unchanged"
+                if old_hash is not None and old_hash == state.canonical_hash
+                else "canonical content changed"
+            )
+            print(f"  {name}: {old_version or 'none'} → {state.accepted_version} ({content})")
+        elif (old_version, old_hash) != (state.accepted_version, state.canonical_hash):
+            # A resumed run completed publication of a version the
+            # interrupted run had already accepted: the manifest showed the
+            # new version from the start (so it is not in ``changed``), and
+            # the pre-interruption canonical hash is gone with it — report
+            # the publication without a content claim it cannot back.
+            print(f"  {name}: resumed publication of {state.accepted_version}")
+        else:
+            print(f"  {name}: unchanged ({state.accepted_version})")
+    return EXIT_OK
+
+
+# ---------------------------------------------------------------------------
 # entry point
 # ---------------------------------------------------------------------------
 
@@ -1859,6 +2281,10 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_parse_aim(config) if args.corpus == "aim" else cmd_parse_pcg(config)
     if args.command == "build-vault":
         return cmd_build_vault(config)
+    if args.command == "diff":
+        return cmd_diff(config)
+    if args.command == "update":
+        return cmd_update(config, reverify=args.reverify)
 
     corpus = getattr(args, "corpus", None)
     phase = NOT_IMPLEMENTED_PHASE[(args.command, corpus)]

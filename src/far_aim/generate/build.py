@@ -382,7 +382,8 @@ def _resolve_alias_collisions(
         registry.aliases[note_id] = aliases
 
 
-def _assemble(note: notes.Note) -> bytes:
+def assemble_note(note: notes.Note) -> bytes:
+    """Schema-check a note and render its exact on-disk bytes."""
     defect = frontmatter_defect(note.kind, note.frontmatter)
     if defect is not None:
         raise BuildError(f"{'/'.join(note.path_parts)}: frontmatter: {defect}")
@@ -411,7 +412,7 @@ def plan_vault(
     def add(note: notes.Note) -> None:
         if note.path_parts in plan:
             raise BuildError(f"duplicate note path {'/'.join(note.path_parts)}")
-        plan[note.path_parts] = _assemble(note)
+        plan[note.path_parts] = assemble_note(note)
 
     for part in sorted(docs, key=naming.part_sort_key):
         doc = docs[part]

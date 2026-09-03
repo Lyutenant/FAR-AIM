@@ -1,0 +1,148 @@
+# Automated maintenance (plan §22 Phase 8).
+#
+# Daily: `far-aim update` polls upstream and exits cleanly when every source
+# is current (no commit, no PR). When a source changed it fetches, parses,
+# rebuilds and validates — any failure stops the job before a PR is opened,
+# so a parser failure blocks publication and the committed vault stays at
+# the last known-good state (plan §32.13). Real changes become a pull
+# request for human review; nothing is ever auto-merged (plan §32.7).
+name: Upstream sync
+
+on:
+  schedule:
+    - cron: "17 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: upstream-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Everything runs through the project venv (AGENTS.md workflow rule).
+      - name: Install
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install -e ".[dev]"
+
+      # --reverify: on this fresh runner the fetchers re-download the
+      # accepted editions even when versions match and compare them against
+      # the pinned raw hashes, so an FAA content edit that keeps the
+      # edition label fails the run instead of going unnoticed (plan §25.5).
+      # A clean match leaves data/manifests and vault byte-identical.
+      - name: Update from upstream
+        id: update
+        run: |
+          set -o pipefail
+          .venv/bin/far-aim update --reverify |& tee update.log
+
+      # The FAA offers no point-in-time access, so a downloaded snapshot on
+      # this ephemeral runner may be the only copy of an edition (or of a
+      # quarantined mismatch worth investigating). Upload it when the run
+      # failed with downloads present, or when a real change was accepted.
+      # A clean --reverify no-change run also re-downloads the accepted
+      # editions, but those bytes hash-match snapshots archived when first
+      # accepted — uploading them daily would only duplicate storage, so it
+      # is skipped. Artifacts are the archival hand-off, not the archive:
+      # download and store them durably outside the repository before
+      # retention expires (plan §6.2). eCFR raw is reconstructible from its
+      # point-in-time API and is not uploaded.
+      - name: Check for downloaded raw snapshots
+        id: raw
+        if: ${{ !cancelled() }}
+        run: |
+          if [ -d data/raw/aim ] || [ -d data/raw/pcg ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Detect changes
+        id: detect
+        run: |
+          if [ -n "$(git status --porcelain -- data/manifests vault)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No upstream changes; exiting cleanly."
+          fi
+
+      # Runs when the update failed with downloads on disk (steps.detect is
+      # then skipped and its output empty) or when a real change landed —
+      # never for a clean re-verification's routine re-downloads.
+      - name: Stage raw snapshots for archival (plan §6.2)
+        if: >-
+          ${{ !cancelled() && steps.raw.outputs.present == 'true' &&
+              (steps.update.outcome == 'failure' || steps.detect.outputs.changed == 'true') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: faa-raw-snapshots-${{ github.run_id }}
+          path: |
+            data/raw/aim
+            data/raw/pcg
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: Gate — lint and full test suite
+        if: steps.detect.outputs.changed == 'true'
+        run: |
+          .venv/bin/ruff check src tests
+          .venv/bin/pytest
+
+      - name: Compose PR body
+        id: compose
+        if: steps.detect.outputs.changed == 'true'
+        run: |
+          echo "title=Upstream sync ($(date -u +%F))" >> "$GITHUB_OUTPUT"
+          {
+            echo "Automated upstream sync ($(date -u +%F))."
+            echo
+            echo '```text'
+            sed -n '/^update summary:/,$p' update.log
+            echo '```'
+            echo
+            echo "### Vault diff"
+            git add -A -- data/manifests vault
+            echo '```text'
+            git diff --cached --stat -- vault | tail -3
+            echo '```'
+            echo
+            echo "Raw AIM/PCG snapshots for this edition are attached to the"
+            echo "workflow run as an artifact — archive them durably outside"
+            echo "the repository before the artifact expires (plan §6.2)."
+            echo
+            echo '<details><summary>Full `far-aim update` log</summary>'
+            echo
+            echo '```text'
+            cat update.log
+            echo '```'
+            echo '</details>'
+          } > pr-body.md
+
+      - name: Open or update pull request
+        if: steps.detect.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: upstream-sync
+          title: ${{ steps.compose.outputs.title }}
+          commit-message: |
+            Upstream sync: accepted new source edition(s)
+
+            See the pull request body for the `far-aim update` summary.
+          body-path: pr-body.md
+          add-paths: |
+            data/manifests
+            vault
+          delete-branch: true
