@@ -201,19 +201,23 @@ def exclusive_lock(lock_path: Path) -> Iterator[None]:
         os.close(fd)  # releases the lock
 
 
-# The FAA site is fronted by Akamai, whose bot manager injects a pair of
-# script tags into HTML responses — a numeric token
-# (``<script >bazadebezolkohpepadr="…"</script>``) and a loader
-# (``<script src="https://www.faa.gov/akam/…" defer></script>``) — whose
-# values vary between edges and deployments, and which are absent for some
-# clients altogether. They are CDN instrumentation, not FAA content: left in
-# the archive they made the raw tree hash of an unchanged edition differ from
-# one download to the next, failing every re-verification (plan §32.6).
-# They are removed from HTML bodies before archiving and hashing; nothing
-# else in a page is touched.
+# The FAA site is fronted by Akamai, whose bot manager injects three
+# elements into HTML responses — a numeric token
+# (``<script >bazadebezolkohpepadr="…"</script>``), a loader
+# (``<script src="https://www.faa.gov/akam/…" defer></script>``) and a
+# ``<noscript>`` tracking pixel (``<img src="https://www.faa.gov/akam/…/
+# pixel_…?a=…">``) — whose values vary between edges and deployments, and
+# which are absent for some clients altogether. They are CDN
+# instrumentation, not FAA content: left in the archive they made the raw
+# tree hash of an unchanged edition differ from one download to the next,
+# failing every re-verification (plan §32.6). They are removed from HTML
+# bodies before archiving and hashing; nothing else in a page is touched.
 CDN_INJECTION_PATTERNS = (
     re.compile(rb'<script\s*>bazadebezolkohpepadr="[^"]*"</script>'),
     re.compile(rb'<script\b[^>]*\ssrc="https://www\.faa\.gov/akam/[^"]*"[^>]*></script>'),
+    re.compile(
+        rb'<noscript><img\b[^>]*\ssrc="https://www\.faa\.gov/akam/[^"]*"[^>]*></noscript>'
+    ),
 )
 
 

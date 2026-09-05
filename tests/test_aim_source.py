@@ -839,6 +839,9 @@ def _reinject(pages: dict[str, bytes], token: bytes, loader: bytes) -> dict[str,
             rb'bazadebezolkohpepadr="[^"]*"', b'bazadebezolkohpepadr="' + token + b'"', body
         )
         out[name] = re.sub(rb"/akam/13/[0-9a-f]+", b"/akam/13/" + loader, out[name])
+        out[name] = re.sub(
+            rb"pixel_[0-9a-f]+\?a=[A-Za-z0-9+/=]*", b"pixel_" + loader + b"?a=QQ==", out[name]
+        )
     return out
 
 
@@ -850,9 +853,7 @@ def test_cdn_script_injection_does_not_change_raw_hash(config, upstream):
     for name in FIXTURE_PAGES:
         archived = (snapshot / "pages" / name).read_bytes()
         assert b"bazadebezolkohpepadr" not in archived
-        assert not re.search(rb"<script[^>]*www\.faa\.gov/akam/", archived)
-        # The stable noscript tracking pixel is page content as served.
-        assert re.search(rb"<noscript><img src=\"https://www\.faa\.gov/akam/", archived)
+        assert b"www.faa.gov/akam/" not in archived  # scripts and the noscript pixel
     metadata = json.loads((snapshot / "metadata.json").read_text(encoding="utf-8"))
     assert metadata["files"]["pages/chap_4.html"]["bytes"] == len(
         strip_cdn_injection(upstream.pages["chap_4.html"])

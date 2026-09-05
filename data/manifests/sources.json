@@ -7,14 +7,14 @@
       "change": 3,
       "edition_label": "Basic with Change 1, 2 and 3",
       "effective_date": "2026-07-09",
-      "last_checked_at": "2026-09-05T21:47:21Z",
-      "raw_hash": "sha256:557036c84b0df7276f7d28f6ae440ad05511663d119ab3e097b4f2c02d12587d",
+      "last_checked_at": "2026-09-05T21:57:34Z",
+      "raw_hash": "sha256:e21d9b52679713e9e3bf79783cf3195bf0b793e4046306ccf38a977e081fab37",
       "source_url": "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/index.html"
     },
     "ecfr_title_14": {
       "accepted_version": "2026-09-03",
       "canonical_hash": "sha256:ac07400a0014f27af24f79a7046ab8f9a78d3cf2af4a0340e5bcb934802bf9c3",
-      "last_checked_at": "2026-09-05T21:47:21Z",
+      "last_checked_at": "2026-09-05T21:57:34Z",
       "raw_hash": "sha256:0ee5253f17cd38a4385a6b337273f5427941f377aa2a535e6e81c7851d3fb345"
     },
     "pcg": {
@@ -23,8 +23,8 @@
       "change": 3,
       "edition_label": "Basic with Change 1, 2 and 3",
       "effective_date": "2026-07-09",
-      "last_checked_at": "2026-09-05T21:47:21Z",
-      "raw_hash": "sha256:5f2ee8d12f46f6629ad6049e7eeff1c057002a6be6c25df2674d92e670a45c36",
+      "last_checked_at": "2026-09-05T21:57:34Z",
+      "raw_hash": "sha256:30f86f5628ce27e641d5848ca94ccff47c6b288726cbfe0c4d348f3520712da4",
       "source_url": "https://www.faa.gov/air_traffic/publications/atpubs/pcg_html/index.html"
     }
   }
