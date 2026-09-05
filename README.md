@@ -86,3 +86,17 @@ python3 -m venv .venv                 # requires Python 3.12+
 - `vault/` — generated Obsidian vault (`FAR/`, `AIM/` incl. figure assets, `PCG/`)
 - `plans/` — project specification
 - `docs/` — architecture and policy notes
+
+## License
+
+The pipeline code, tests, documentation, and the curated vault notes
+(`vault/Collections/`, `vault/Topics/`, `vault/Study/`, `vault/Home.md`) are
+released under the [MIT License](LICENSE).
+
+The generated notes under `vault/FAR/`, `vault/AIM/` and `vault/PCG/` reproduce
+the text and figures of the eCFR Title 14, the FAA Aeronautical Information
+Manual and the Pilot/Controller Glossary. These are works of the United States
+Government and are in the public domain (17 U.S.C. § 105); the MIT License
+does not apply to them and grants no rights over them. They are provided for
+reference only — the official publications remain the authoritative source,
+and `vault/Source Status.md` records which edition each note was built from.
