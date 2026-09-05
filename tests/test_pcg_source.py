@@ -12,6 +12,7 @@ httpx.MockTransport.
 from __future__ import annotations
 
 import json
+import re
 import shutil
 from collections import Counter
 from pathlib import Path
@@ -63,11 +64,13 @@ class PcgUpstream:
             name: (PCG_HTML / name).read_bytes() for name in FIXTURE_PAGES
         }
         self.requests: Counter[str] = Counter()
+        self.queries: dict[str, list[str]] = {}
         self.status_overrides: dict[str, int] = {}
 
     def handler(self, request: httpx.Request) -> httpx.Response:
         path = request.url.path
         self.requests[path] += 1
+        self.queries.setdefault(path, []).append(request.url.query.decode("ascii"))
         if path in self.status_overrides:
             return httpx.Response(self.status_overrides[path])
         if path == "/air_traffic/publications/":
@@ -390,3 +393,50 @@ def test_manifest_commit_failure_leaves_manifest_unchanged(config, upstream, mon
     result = fetch(config, upstream)
     assert result.downloaded
     assert SourceManifest.load(config.manifest_path).sources["pcg"].accepted_version == VERSION
+
+
+# ---------------------------------------------------------------------------
+# CDN neutralisation (shared with the AIM; see test_aim_source / test_sources_common)
+# ---------------------------------------------------------------------------
+
+_INJECTION = (
+    b'<script >bazadebezolkohpepadr="%b"</script>'
+    b'<script type="text/javascript" src="https://www.faa.gov/akam/13/%b"  defer></script>'
+)
+
+
+def _inject(pages: dict[str, bytes], token: bytes, loader: bytes) -> dict[str, bytes]:
+    out = {}
+    for name, body in pages.items():
+        assert body.count(b"</head>") == 1, name
+        out[name] = body.replace(b"</head>", _INJECTION % (token, loader) + b"</head>")
+    return out
+
+
+def test_cdn_script_injection_does_not_change_raw_hash(config, upstream):
+    clean = fetch(config, upstream)
+    snapshot = config.raw_dir / "pcg" / VERSION
+    shutil.rmtree(snapshot)
+    upstream.pages = _inject(upstream.pages, b"1577209189", b"5e024e09")
+    injected = fetch(config, upstream)
+    assert injected.downloaded and injected.raw_hash == clean.raw_hash
+    for name in FIXTURE_PAGES:
+        assert b"bazadebezolkohpepadr" not in (snapshot / "pages" / name).read_bytes()
+    shutil.rmtree(snapshot)
+    first_pair = _INJECTION % (b"1577209189", b"5e024e09")
+    upstream.pages = _inject(
+        {n: b.replace(first_pair, b"") for n, b in upstream.pages.items()},
+        b"1974812660",
+        b"75b53f27",
+    )
+    assert fetch(config, upstream).raw_hash == clean.raw_hash
+    assert not [p for p in (config.raw_dir / "pcg").iterdir() if ".mismatch-" in p.name]
+
+
+def test_corpus_requests_are_cache_busted(config, upstream):
+    fetch(config, upstream)
+    assert upstream.queries["/air_traffic/publications/"] == [""]
+    corpus = {p: q for p, q in upstream.queries.items() if p.startswith(upstream.PREFIX)}
+    assert len(corpus) == len(FIXTURE_PAGES)
+    nonces = {q for qs in corpus.values() for q in qs}
+    assert len(nonces) == 1 and re.fullmatch(r"far-aim-nocache=[0-9a-f]{16}", nonces.pop())

@@ -50,6 +50,8 @@ from far_aim.sources.common import (
     FetchError,
     RetryableError,
     Sleep,
+    cache_busted,
+    download_nonce,
     exclusive_lock,
     fetch_lock_path,
     fsync_dir,
@@ -60,6 +62,7 @@ from far_aim.sources.common import (
     retrying,
     sha256_of,
     sha256_of_bytes,
+    strip_cdn_injection,
     utc_now_iso,
     write_json_durable,
 )
@@ -550,8 +553,18 @@ def _download_corpus(
         if PAUSE_SECONDS:
             sleep(PAUSE_SECONDS)
 
-    index_bytes, _ = _get_bytes(
-        client, discovery.index_url, expect="html", sleep=sleep, what="PCG index page"
+    nonce = download_nonce()
+
+    def get(url: str, *, expect: str, what: str) -> bytes:
+        body, _ = _get_bytes(
+            client, cache_busted(url, nonce), expect=expect, sleep=sleep, what=what
+        )
+        return body
+
+    # CDN instrumentation is stripped and requests cache-busted exactly as
+    # for the AIM (see ``sources.aim`` / ``sources.common``).
+    index_bytes = strip_cdn_injection(
+        get(discovery.index_url, expect="html", what="PCG index page")
     )
     index_html = decode_page(index_bytes, "PCG index page")
     edition = index_edition(index_html)
@@ -574,7 +587,7 @@ def _download_corpus(
     term_count = 0
     for name in page_names:
         url = urljoin(discovery.index_url, name)
-        body, _ = _get_bytes(client, url, expect="html", sleep=sleep, what=f"PCG page {name}")
+        body = strip_cdn_injection(get(url, expect="html", what=f"PCG page {name}"))
         html = decode_page(body, f"PCG page {name}")
         defect = _page_defect(name, html)
         if defect is not None:

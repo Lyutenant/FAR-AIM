@@ -28,7 +28,11 @@ wording, stored and hashed on every part), the subtitle designator/heading
 (null today; Title 14 has no subtitle level, but a future `DIV2` rides
 into the model instead of being dropped), the chapter/subchapter context,
 part heading, `authority`, `source_note`,
-editorial notes, part-level `notes`/`cross_references`, and an ordered
+editorial notes, part-level `notes`/`cross_references` (each a
+`heading`/`text` pair; when the eCFR attaches a "Link to an amendment
+published at …" `XREF` to one — part 234's authority citation from the
+2026-09-03 issue — it is kept apart from the note's text as an
+`amendment_notes` list, present only in that case), and an ordered
 `children` list of subparts, subject groups, sections, and appendices —
 SFARs appear as appendices in eCFR markup and keep their document position.
 Subparts may carry their own `source_note`, `authority`, editorial notes,

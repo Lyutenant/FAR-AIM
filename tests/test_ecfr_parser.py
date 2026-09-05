@@ -20,6 +20,7 @@ from far_aim.parsers import ecfr as parser
 
 FIXTURES = Path(__file__).parent / "fixtures" / "ecfr"
 SLICE_PATH = FIXTURES / "part-91-slice.xml"
+PART_234_PATH = FIXTURES / "part-234-slice.xml"
 
 SOURCE = {
     "provider": "ecfr",
@@ -894,3 +895,29 @@ def test_missing_hierarchy_heading_fails_loudly():
     no_title_head = _MINI_TEMPLATE.format(body="").replace("<HEAD>Title 14</HEAD>", "")
     with pytest.raises(parser.ParseError, match="title division '14' has no heading"):
         parser.build_part_docs(ET.fromstring(no_title_head), SOURCE)
+
+
+# ---------------------------------------------------------------------------
+# Pending-amendment XREF inside an authority citation (issue 2026-09-03)
+# ---------------------------------------------------------------------------
+
+
+def test_authority_pending_amendment_link_kept_apart_from_authority_text():
+    """Part 234 (verbatim from the 2026-09-03 issue) attaches an XREF to its
+    AUTH element; it must parse, with the link stored as an amendment note
+    and the authority text itself unchanged."""
+    root = ET.parse(PART_234_PATH).getroot()
+    part = parser.build_part_docs(root, SOURCE, {"234"})["234"]
+    assert part["authority"]["heading"] == "Authority:"
+    assert part["authority"]["text"] == "49 U.S.C. 329, 41708, and 41709."
+    assert part["authority"]["amendment_notes"] == [
+        "Link to an amendment published at 91 FR 56592, Sept. 3, 2026."
+    ]
+
+
+def test_notes_without_pending_amendment_carry_no_amendment_key(part91):
+    # The key exists only when the source attaches an XREF, so the grammar
+    # extension leaves every other document's canonical hash untouched.
+    assert "amendment_notes" not in part91["authority"]
+    assert all("amendment_notes" not in n for n in part91["editorial_notes"])
+

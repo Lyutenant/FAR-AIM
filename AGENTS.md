@@ -193,7 +193,14 @@ ruff + full pytest and open/update an `upstream-sync` PR
 (body: update summary + vault diff stat + full log) — never auto-merged
 (plan §32.7). FAA page edits without an edition bump fail the daily
 raw_hash re-verification by design (quarantine rides in the artifact);
-resolve locally with `fetch --force`. Docs: docs/maintenance.md. Exit
+resolve locally with `fetch --force`. The first scheduled run
+(2026-09-05) exposed two CDN behaviours now neutralised in the AIM/PCG
+fetchers (`sources.common`): Akamai's per-download script injection is
+stripped from HTML before archiving/hashing (CDN instrumentation, not
+FAA content), and corpus requests carry a one-off cache-busting query so
+a snapshot reflects the FAA origin, not a mix of stale edge caches (the
+FAA had re-uploaded 101 AIM figures at higher resolution on 2026-08-18
+without an edition bump). Docs: docs/maintenance.md. Exit
 criteria are pinned by the `test_update_*` tests in tests/test_cli.py.
 Next: Phase 9 (AI enrichment) — gated on plan §31; enrichment must stay
 separate from authoritative data (plan §32.12).

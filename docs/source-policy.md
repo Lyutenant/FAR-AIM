@@ -40,7 +40,12 @@ Full specification: plan §5 (sources), §6 (acquisition), §26 (etiquette).
   — the index page plus one page per glossary letter; no figures), archived
   and tree-hashed the same way. `far-aim fetch aim` / `fetch pcg` print a
   reminder on every acceptance; the archive step itself is operational and
-  not automated here.
+  not automated here. HTML pages are archived as served except for the
+  Akamai bot-manager script pair the CDN injects with per-download values
+  (stripped before archiving/hashing — CDN instrumentation, not FAA
+  content), and every corpus request carries a one-off cache-busting query
+  so a snapshot reflects the FAA origin rather than a mix of stale edge
+  caches (docs/maintenance.md).
 
 ## HTTP etiquette
 

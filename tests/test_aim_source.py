@@ -11,6 +11,7 @@ the real filenames. All HTTP traffic goes through httpx.MockTransport.
 from __future__ import annotations
 
 import json
+import re
 import shutil
 from collections import Counter
 from pathlib import Path
@@ -23,7 +24,7 @@ from far_aim.config import Config
 from far_aim.manifest import SourceManifest, SourceState
 from far_aim.parsers import aim as aim_parser
 from far_aim.sources import aim, faa_publications
-from far_aim.sources.common import FetchError
+from far_aim.sources.common import FetchError, strip_cdn_injection
 
 FIXTURES = Path(__file__).parent / "fixtures" / "aim"
 AIM_HTML = FIXTURES / "aim_html"
@@ -73,11 +74,13 @@ class AimUpstream:
             path.name: path.read_bytes() for path in sorted((AIM_HTML / "images").iterdir())
         }
         self.requests: Counter[str] = Counter()
+        self.queries: dict[str, list[str]] = {}
         self.status_overrides: dict[str, int] = {}
 
     def handler(self, request: httpx.Request) -> httpx.Response:
         path = request.url.path
         self.requests[path] += 1
+        self.queries.setdefault(path, []).append(request.url.query.decode("ascii"))
         if path in self.status_overrides:
             return httpx.Response(self.status_overrides[path])
         if path == "/air_traffic/publications/":
@@ -352,7 +355,8 @@ def test_fetch_downloads_archives_and_updates_manifest(config, upstream):
     snapshot = config.raw_dir / "aim" / VERSION
     assert result.snapshot_dir == snapshot
     for name in FIXTURE_PAGES:
-        assert (snapshot / "pages" / name).read_bytes() == upstream.pages[name]
+        # Archived as served, minus the CDN's per-download script injection.
+        assert (snapshot / "pages" / name).read_bytes() == strip_cdn_injection(upstream.pages[name])
     for name, data in upstream.images.items():
         assert (snapshot / "figures" / name).read_bytes() == data
     metadata = json.loads((snapshot / "metadata.json").read_text(encoding="utf-8"))
@@ -818,3 +822,75 @@ def test_version_string_and_page_url():
     assert aim.page_url(INDEX_URL, "chap4_section_1.html", "4-1-9") == (
         "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap4_section_1.html#4-1-9"
     )
+
+
+# ---------------------------------------------------------------------------
+# CDN neutralisation (first scheduled upstream-sync run, 2026-09-05)
+# ---------------------------------------------------------------------------
+
+
+def _reinject(pages: dict[str, bytes], token: bytes, loader: bytes) -> dict[str, bytes]:
+    """The fixture pages carry the FAA site's Akamai script pair verbatim;
+    return them with different (per-download) values."""
+    out = {}
+    for name, body in pages.items():
+        assert b"bazadebezolkohpepadr" in body, name
+        out[name] = re.sub(
+            rb'bazadebezolkohpepadr="[^"]*"', b'bazadebezolkohpepadr="' + token + b'"', body
+        )
+        out[name] = re.sub(rb"/akam/13/[0-9a-f]+", b"/akam/13/" + loader, out[name])
+    return out
+
+
+def test_cdn_script_injection_does_not_change_raw_hash(config, upstream):
+    """A re-download whose only difference is the CDN's per-download script
+    values must verify against the pinned raw_hash, not be quarantined."""
+    first = fetch(config, upstream)
+    snapshot = config.raw_dir / "aim" / VERSION
+    for name in FIXTURE_PAGES:
+        archived = (snapshot / "pages" / name).read_bytes()
+        assert b"bazadebezolkohpepadr" not in archived
+        assert not re.search(rb"<script[^>]*www\.faa\.gov/akam/", archived)
+        # The stable noscript tracking pixel is page content as served.
+        assert re.search(rb"<noscript><img src=\"https://www\.faa\.gov/akam/", archived)
+    metadata = json.loads((snapshot / "metadata.json").read_text(encoding="utf-8"))
+    assert metadata["files"]["pages/chap_4.html"]["bytes"] == len(
+        strip_cdn_injection(upstream.pages["chap_4.html"])
+    )
+
+    shutil.rmtree(snapshot)
+    upstream.pages = _reinject(upstream.pages, b"1974812660", b"75b53f27")
+    second = fetch(config, upstream)
+    assert second.downloaded
+    assert second.raw_hash == first.raw_hash
+    assert not [p for p in (config.raw_dir / "aim").iterdir() if ".mismatch-" in p.name]
+
+    # Real content edits are still caught.
+    shutil.rmtree(snapshot)
+    upstream.pages["chap4_section_1.html"] = upstream.pages["chap4_section_1.html"].replace(
+        b"Centers are established", b"Centers are now established"
+    )
+    with pytest.raises(FetchError, match="different content"):
+        fetch(config, upstream)
+
+
+def test_corpus_requests_are_cache_busted_per_download(config, upstream):
+    fetch(config, upstream)
+    assert upstream.queries["/air_traffic/publications/"] == [""]
+    corpus = {p: q for p, q in upstream.queries.items() if p.startswith(upstream.PREFIX)}
+    assert len(corpus) == len(FIXTURE_PAGES) + len(upstream.images)
+    nonces = {q for qs in corpus.values() for q in qs}
+    assert len(nonces) == 1
+    (nonce,) = nonces
+    assert re.fullmatch(r"far-aim-nocache=[0-9a-f]{16}", nonce)
+    # Archived provenance keeps the canonical URL.
+    metadata = json.loads(
+        (config.raw_dir / "aim" / VERSION / "metadata.json").read_text(encoding="utf-8")
+    )
+    assert metadata["index_url"] == INDEX_URL
+
+    shutil.rmtree(config.raw_dir / "aim" / VERSION)
+    upstream.queries.clear()
+    fetch(config, upstream)
+    again = {q for p, qs in upstream.queries.items() if p.startswith(upstream.PREFIX) for q in qs}
+    assert again and again != nonces

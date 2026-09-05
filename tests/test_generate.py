@@ -762,3 +762,24 @@ def test_section_note_part_links_honour_other_title_ban():
     )
     note = build_section_note(sec, [], set(), {"15", "21"})
     assert _xrefs(note) == ["- [[Part 15]]"]
+
+
+def test_part_index_renders_authority_pending_amendment_link():
+    root = ET.parse(SLICE_PATH.with_name("part-234-slice.xml")).getroot()
+    docs = parser.build_part_docs(root, SOURCE, {"234"})
+    title_hash = cfr_model.canonical_hash(
+        {number: doc["canonical_hash"] for number, doc in docs.items()}
+    )
+    from far_aim.manifest import SourceManifest, SourceState
+
+    manifest = SourceManifest.default()
+    manifest.sources["ecfr_title_14"] = SourceState(
+        accepted_version="2026-09-03", canonical_hash=title_hash
+    )
+    plan = plan_vault(docs, "2026-09-03", title_hash, manifest.sources)
+    (key,) = [k for k in plan if k[-1] == "Part 234.md"]
+    body = plan[key].decode()
+    authority = body.index("**Authority:** 49 U.S.C. 329, 41708, and 41709.")
+    amendment = body.index("**Amendment notes:**\n\nLink to an amendment published at 91 FR 56592")
+    assert authority < amendment
+

@@ -99,6 +99,16 @@ def _labelled(label: str, text: str) -> str:
     return f"**{label}:** {escape_md(text)}"
 
 
+def _pending_amendment_chunks(note: dict | None) -> list[str]:
+    """The eCFR's "Link to an amendment published at …" pointers attached to
+    an authority/source/editorial note (present only when the source carries
+    one — see ``parsers.ecfr._parse_hed_pspace``)."""
+    entries = (note or {}).get("amendment_notes") or []
+    if not entries:
+        return []
+    return ["**Amendment notes:**", *(escape_md(entry) for entry in entries)]
+
+
 def _source_notes_chunks(
     authority: str | None,
     lists: list[tuple[str, list[str]]],
@@ -113,6 +123,7 @@ def _source_notes_chunks(
             chunks.extend(escape_md(entry) for entry in entries)
     for note in editorial_notes:
         chunks.append(f"**{escape_md(note['heading'])}** {escape_md(note['text'])}")
+        chunks.extend(_pending_amendment_chunks(note))
     return chunks
 
 
@@ -304,10 +315,13 @@ def _contents_chunks(part_doc: dict) -> list[str]:
                 chunks.append(heading)
                 if child["authority"]:
                     chunks.append(_labelled("Authority", child["authority"]["text"]))
+                    chunks.extend(_pending_amendment_chunks(child["authority"]))
                 if child["source_note"]:
                     chunks.append(_labelled("Source", child["source_note"]["text"]))
+                    chunks.extend(_pending_amendment_chunks(child["source_note"]))
                 for note in child["editorial_notes"]:
                     chunks.append(f"**{escape_md(note['heading'])}** {escape_md(note['text'])}")
+                    chunks.extend(_pending_amendment_chunks(note))
                 emit(child["children"])
             elif child.get("type") == "subject_group":
                 flush()
@@ -358,13 +372,17 @@ def build_part_index(part_doc: dict) -> Note:
     ]
     if part_doc["authority"]:
         chunks.append(_labelled("Authority", part_doc["authority"]["text"]))
+        chunks.extend(_pending_amendment_chunks(part_doc["authority"]))
     if part_doc["source_note"]:
         chunks.append(_labelled("Source", part_doc["source_note"]["text"]))
+        chunks.extend(_pending_amendment_chunks(part_doc["source_note"]))
     for note in part_doc["editorial_notes"]:
         chunks.append(f"**{escape_md(note['heading'])}** {escape_md(note['text'])}")
+        chunks.extend(_pending_amendment_chunks(note))
     chunks.extend(render_blocks(part_doc["notes"]))
     for xref in part_doc["cross_references"]:
         chunks.append(f"**{escape_md(xref['heading'])}** {escape_md(xref['text'])}")
+        chunks.extend(_pending_amendment_chunks(xref))
     if part_doc["reserved"]:
         chunks.append(escape_md("[Reserved]"))
     contents = _contents_chunks(part_doc)

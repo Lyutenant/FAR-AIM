@@ -859,18 +859,29 @@ def _parse_hed_pspace(elem: ET.Element, context: str) -> dict:
     """``HED`` + body pairs (AUTH, SOURCE, EDNOTE, EFFDNOT, CROSSREF).
 
     Bodies are usually ``PSPACE`` runs, but multi-item editorial notes
-    (part 21) and cross references use plain ``P`` elements.
+    (part 21) and cross references use plain ``P`` elements. The eCFR may
+    also attach an ``XREF`` ("Link to an amendment published at …", part
+    234's authority citation from the 2026-09-03 issue): a pending-amendment
+    pointer, kept apart from the note's own text as ``amendment_notes`` —
+    like a section's — and present only when the source carries one, so
+    every other document's canonical hash is untouched by the extension.
     """
     heading = None
     texts = []
+    amendment_notes: list[str] = []
     for child in elem:
         if child.tag == "HED":
             heading = _flatten(child)
         elif child.tag in ("PSPACE", "P"):
             texts.append(_flatten(child))
+        elif child.tag == "XREF":
+            amendment_notes.append(_flatten(child))
         else:
             raise ParseError(f"{context}: unexpected {child.tag!r} inside {elem.tag}")
-    return {"heading": heading, "text": " ".join(texts)}
+    note: dict = {"heading": heading, "text": " ".join(texts)}
+    if amendment_notes:
+        note["amendment_notes"] = amendment_notes
+    return note
 
 
 # ---------------------------------------------------------------------------

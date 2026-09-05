@@ -17,6 +17,12 @@ and ``metadata.json`` (per-file checksums). The manifest records a *tree
 hash* over all page and figure checksums as ``raw_hash``. The FAA offers no
 point-in-time access, so accepted snapshots must additionally be archived
 outside this repository (plan §6.2).
+
+Two CDN behaviours are neutralised at download time so that ``raw_hash``
+tracks FAA content only (``sources.common``): the Akamai bot-manager script
+pair injected into HTML responses is stripped before a page is archived or
+hashed, and every corpus request carries a one-off cache-busting query so
+the snapshot reflects the FAA origin rather than a mix of stale edge caches.
 """
 
 from __future__ import annotations
@@ -46,6 +52,8 @@ from far_aim.sources.common import (
     FetchError,
     RetryableError,
     Sleep,
+    cache_busted,
+    download_nonce,
     exclusive_lock,
     fetch_lock_path,
     fsync_dir,
@@ -56,6 +64,7 @@ from far_aim.sources.common import (
     retrying,
     sha256_of,
     sha256_of_bytes,
+    strip_cdn_injection,
     utc_now_iso,
     write_json_durable,
 )
@@ -653,8 +662,16 @@ def _download_corpus(
         if PAUSE_SECONDS:
             sleep(PAUSE_SECONDS)
 
-    index_bytes, _ = _get_bytes(
-        client, discovery.index_url, expect="html", sleep=sleep, what="AIM index page"
+    nonce = download_nonce()
+
+    def get(url: str, *, expect: str, what: str) -> bytes:
+        body, _ = _get_bytes(
+            client, cache_busted(url, nonce), expect=expect, sleep=sleep, what=what
+        )
+        return body
+
+    index_bytes = strip_cdn_injection(
+        get(discovery.index_url, expect="html", what="AIM index page")
     )
     index_html = decode_page(index_bytes, "AIM index page")
     edition = index_edition(index_html)
@@ -682,7 +699,7 @@ def _download_corpus(
     paragraph_count = 0
     for name in page_names:
         url = urljoin(discovery.index_url, name)
-        body, _ = _get_bytes(client, url, expect="html", sleep=sleep, what=f"AIM page {name}")
+        body = strip_cdn_injection(get(url, expect="html", what=f"AIM page {name}"))
         html = decode_page(body, f"AIM page {name}")
         defect = _page_defect(name, html)
         if defect is not None:
@@ -714,7 +731,7 @@ def _download_corpus(
             )
     for image in image_order:
         url = urljoin(discovery.index_url, f"images/{image}")
-        body, _ = _get_bytes(client, url, expect="image", sleep=sleep, what=f"AIM figure {image}")
+        body = get(url, expect="image", what=f"AIM figure {image}")
         store(f"{FIGURES_DIR}/{image}", body)
         pause()
     fsync_dir(pages_dir)

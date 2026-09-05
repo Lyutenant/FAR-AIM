@@ -16,6 +16,7 @@ import json
 import logging
 import os
 import re
+import secrets
 import tempfile
 from collections.abc import Callable, Iterator
 from datetime import UTC, date, datetime
@@ -198,6 +199,50 @@ def exclusive_lock(lock_path: Path) -> Iterator[None]:
         yield
     finally:
         os.close(fd)  # releases the lock
+
+
+# The FAA site is fronted by Akamai, whose bot manager injects a pair of
+# script tags into HTML responses — a numeric token
+# (``<script >bazadebezolkohpepadr="…"</script>``) and a loader
+# (``<script src="https://www.faa.gov/akam/…" defer></script>``) — whose
+# values vary between edges and deployments, and which are absent for some
+# clients altogether. They are CDN instrumentation, not FAA content: left in
+# the archive they made the raw tree hash of an unchanged edition differ from
+# one download to the next, failing every re-verification (plan §32.6).
+# They are removed from HTML bodies before archiving and hashing; nothing
+# else in a page is touched.
+CDN_INJECTION_PATTERNS = (
+    re.compile(rb'<script\s*>bazadebezolkohpepadr="[^"]*"</script>'),
+    re.compile(rb'<script\b[^>]*\ssrc="https://www\.faa\.gov/akam/[^"]*"[^>]*></script>'),
+)
+
+
+def strip_cdn_injection(body: bytes) -> bytes:
+    """``body`` without the Akamai bot-manager script tags (see above)."""
+    for pattern in CDN_INJECTION_PATTERNS:
+        body = pattern.sub(b"", body)
+    return body
+
+
+# Akamai edges cache FAA corpus files for weeks (observed max-age ≈ 25 days).
+# When the FAA replaces files without bumping the edition, edges serve a
+# mix of old and new copies until their caches expire, so two downloads
+# minutes apart disagree. Standard ``Cache-Control: no-cache`` request
+# headers do not make the edge revalidate; a query string the edge has not
+# seen does. Every corpus request in one download carries the same one-off
+# parameter, so the snapshot reflects the origin at that moment. Only the
+# request is decorated — archived provenance keeps the canonical URL.
+CACHE_BUST_PARAM = "far-aim-nocache"
+
+
+def download_nonce() -> str:
+    return secrets.token_hex(8)
+
+
+def cache_busted(url: str, nonce: str) -> str:
+    """``url`` with the one-off cache-busting query parameter appended."""
+    separator = "&" if "?" in url else "?"
+    return f"{url}{separator}{CACHE_BUST_PARAM}={nonce}"
 
 
 def sha256_of(path: Path) -> str:

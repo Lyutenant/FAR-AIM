@@ -98,7 +98,13 @@ def _render_heading(block: dict) -> list[str]:
 
 def _render_example(block: dict) -> list[str]:
     heading = block.get("heading")
-    return [_run_in(f"*{escape_md(heading)}*" if heading else "", escape_md(block["text"]))]
+    lines = [_run_in(f"*{escape_md(heading)}*" if heading else "", escape_md(block["text"]))]
+    if block.get("amendment_notes"):
+        # A pending-amendment XREF attached to the example (see
+        # ``parsers.ecfr._parse_hed_pspace``); never dropped.
+        lines.append("**Amendment notes:**")
+        lines.extend(escape_md(entry) for entry in block["amendment_notes"])
+    return lines
 
 
 def _render_image(block: dict) -> list[str]:

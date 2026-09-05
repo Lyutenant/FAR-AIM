@@ -77,14 +77,38 @@ changes into a pull request.
    the invariant-6 distinction between layout/provenance and content).
 
 Known failure mode worth expecting in CI: the FAA sometimes edits pages
-without bumping the edition. `--reverify` checks for exactly this on
-every scheduled run (not only when an unrelated version bump forces a
-re-fetch): the re-download mismatches the pinned `raw_hash`, is
-quarantined, and fails the run — by design (plan §25.5, §32.6/7). The
-quarantined tree rides along in the run's raw-snapshot artifact;
-investigate it, then re-accept deliberately with
-`far-aim fetch aim --force` (or `pcg`, `ecfr`) and commit the manifest
-change.
+or replaces figures without bumping the edition. `--reverify` checks for
+exactly this on every scheduled run (not only when an unrelated version
+bump forces a re-fetch): the re-download mismatches the pinned
+`raw_hash`, is quarantined, and fails the run — by design (plan §25.5,
+§32.6/7). The quarantined tree rides along in the run's raw-snapshot
+artifact; investigate it (`diff -rq` against the archived snapshot, then
+`far-aim parse` to see whether canonical content moved), then re-accept
+deliberately with `far-aim fetch aim --force` (or `pcg`, `ecfr`) and
+commit the manifest change.
+
+Two CDN behaviours that would otherwise trip this check on every run are
+neutralised by the AIM/PCG fetchers (`sources.common`), found when the
+first scheduled run (2026-09-05) failed:
+
+- **Injected scripts.** Akamai's bot manager adds a script pair with
+  per-download values (`bazadebezolkohpepadr="…"` and a
+  `https://www.faa.gov/akam/…` loader) to HTML responses, and omits it
+  for some clients entirely. It is CDN instrumentation, not FAA content,
+  and is stripped from HTML bodies before they are archived or hashed;
+  nothing else in a page is altered.
+- **Stale edge caches.** Edges cache corpus files for weeks, so after a
+  silent FAA replacement two downloads minutes apart can return
+  different mixes of old and new files (101 of 270 AIM figures were
+  re-uploaded at higher resolution on 2026-08-18 with no edition bump).
+  `Cache-Control: no-cache` does not make an edge revalidate; a query
+  string it has not seen does, so every corpus request in one download
+  carries the same one-off `far-aim-nocache=<nonce>` parameter and the
+  snapshot reflects the FAA origin at that moment. Archived provenance
+  keeps the canonical URLs.
+
+A raw-hash mismatch therefore now means the FAA itself changed
+something.
 
 ## The workflow
 

@@ -211,7 +211,9 @@ dropped figure) and download as an image, and data-informed floors apply
 2026-07-09 Change 3 edition has 66 pages, 432 paragraphs, 270 figures).
 Content-Length agreement and retries with backoff apply as for the eCFR. The
 snapshot (`pages/`, `figures/`, `metadata.json` with per-file checksums) is
-archived under `data/raw/aim/{effective-date}-change-{n}/`; the manifest
+archived under `data/raw/aim/{effective-date}-change-{n}/` (pages with
+the CDN's per-download Akamai script injection removed, so `raw_hash`
+tracks FAA content only — see docs/maintenance.md); the manifest
 `raw_hash` is a tree hash over all file checksums, and `verify_snapshot`
 re-checks every file (no missing, extra, or altered files; recorded sizes,
 byte total, page/figure/paragraph counts recomputed from the archived files
