@@ -5,7 +5,7 @@ citation: "14 CFR Part 375"
 title_number: 14
 part: 375
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:294d99c22599f1131c98a0165dc3ee985e41fa30ba5bc4e4b347429bfed849c9"
 generated: true
 title: "NAVIGATION OF FOREIGN CIVIL AIRCRAFT WITHIN THE UNITED STATES"
@@ -16,7 +16,7 @@ tags:
 # Part 375 — NAVIGATION OF FOREIGN CIVIL AIRCRAFT WITHIN THE UNITED STATES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-375)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-375)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER D—SPECIAL REGULATIONS
 

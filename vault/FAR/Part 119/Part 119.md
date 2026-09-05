@@ -5,7 +5,7 @@ citation: "14 CFR Part 119"
 title_number: 14
 part: 119
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:fa6a937f4fb77afda378eb3ff51a1ac5dcf69608dc297d36a1ce7d6fddd3e85b"
 generated: true
 title: "CERTIFICATION: AIR CARRIERS AND COMMERCIAL OPERATORS"
@@ -16,7 +16,7 @@ tags:
 # Part 119 — CERTIFICATION: AIR CARRIERS AND COMMERCIAL OPERATORS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-119)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-119)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER G—AIR CARRIERS AND OPERATORS FOR COMPENSATION OR HIRE: CERTIFICATION AND OPERATIONS
 

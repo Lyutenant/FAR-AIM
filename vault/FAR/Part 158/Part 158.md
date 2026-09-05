@@ -5,7 +5,7 @@ citation: "14 CFR Part 158"
 title_number: 14
 part: 158
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:6a5033a12925c7c3fe48e737a6fb6d50f947613a03c9cc5b6a96a7cb944529ba"
 generated: true
 title: "PASSENGER FACILITY CHARGES (PFC'S)"
@@ -16,7 +16,7 @@ tags:
 # Part 158 — PASSENGER FACILITY CHARGES (PFC'S)
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-158)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-158)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER I—AIRPORTS
 

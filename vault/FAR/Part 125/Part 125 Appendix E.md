@@ -6,7 +6,7 @@ title_number: 14
 part: 125
 appendix: "Appendix E"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:52375e30ed871f2f7d5dba31831b531d2e85d052abe4058b7308b97d89ac05a2"
 generated: true
 title: "Appendix E to Part 125—Airplane Flight Recorder Specifications"
@@ -20,7 +20,7 @@ tags:
 # Appendix E to Part 125—Airplane Flight Recorder Specifications
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-125)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-125)
 
 ## Official Text
 

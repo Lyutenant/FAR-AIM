@@ -5,7 +5,7 @@ citation: "14 CFR Part 323"
 title_number: 14
 part: 323
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:e47f2b4e676dc35f25e883b738fac22e8e9d0ec827fb3c14b2ab40148a9ab8d7"
 generated: true
 title: "TERMINATIONS, SUSPENSIONS, AND REDUCTIONS OF SERVICE"
@@ -16,7 +16,7 @@ tags:
 # Part 323 — TERMINATIONS, SUSPENSIONS, AND REDUCTIONS OF SERVICE
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-323)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-323)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER B—PROCEDURAL REGULATIONS
 

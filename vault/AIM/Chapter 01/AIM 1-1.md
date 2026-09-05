@@ -7,7 +7,7 @@ section: 1
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:d84c9303ff05af23fbd3208d547c1a47add4552f4372e4cb2c8fa44e04438a47"
+canonical_hash: "sha256:a46e63d7ff4d81911fd1d755a9e5bb86c45c836b4ade94ae7efa632f91f77992"
 generated: true
 title: "Navigation Aids"
 aliases:

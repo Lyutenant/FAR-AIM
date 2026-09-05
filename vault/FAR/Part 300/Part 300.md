@@ -5,7 +5,7 @@ citation: "14 CFR Part 300"
 title_number: 14
 part: 300
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:c5445eeaf1937e8228f6a237f55a3b00952c801223c276a554d08baae7d5d170"
 generated: true
 title: "RULES OF CONDUCT IN DOT PROCEEDINGS UNDER THIS CHAPTER"
@@ -16,7 +16,7 @@ tags:
 # Part 300 — RULES OF CONDUCT IN DOT PROCEEDINGS UNDER THIS CHAPTER
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-300)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-300)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER B—PROCEDURAL REGULATIONS
 

@@ -5,7 +5,7 @@ citation: "14 CFR Part 187"
 title_number: 14
 part: 187
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:7381e0cdb3358798800eab0c4ffc8eff781874e23b81153c47795da7e576c3d6"
 generated: true
 title: "FEES"
@@ -16,7 +16,7 @@ tags:
 # Part 187 — FEES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-187)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-187)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER K—ADMINISTRATIVE REGULATIONS
 

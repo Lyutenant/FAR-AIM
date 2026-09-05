@@ -7,7 +7,7 @@ section: 1
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:1602e2d18d523cdf12abb1d9cceeae35c1339e7d608fd32290ceccc36ae17e7c"
+canonical_hash: "sha256:eec9664a74ed0a845a0d1dfc540334e8926d317cda0eb9234a4e40c3f2d4ebd5"
 generated: true
 title: "Meteorology"
 aliases:

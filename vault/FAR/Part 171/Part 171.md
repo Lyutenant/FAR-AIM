@@ -5,7 +5,7 @@ citation: "14 CFR Part 171"
 title_number: 14
 part: 171
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:b36d837e56bd6703de51f91d05e44aaf7ff44d483c61a9bd621cb2ac60d4e5b5"
 generated: true
 title: "NON-FEDERAL NAVIGATION FACILITIES"
@@ -16,7 +16,7 @@ tags:
 # Part 171 — NON-FEDERAL NAVIGATION FACILITIES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-171)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-171)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER J—NAVIGATIONAL FACILITIES
 

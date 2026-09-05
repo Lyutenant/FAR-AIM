@@ -5,7 +5,7 @@ citation: "14 CFR Part 385"
 title_number: 14
 part: 385
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:344bcc0db7d35760a1b42980eb12c9a06ca29b56f377c9009a46558c05136ee8"
 generated: true
 title: "STAFF ASSIGNMENTS AND REVIEW OF ACTION UNDER ASSIGNMENTS"
@@ -16,7 +16,7 @@ tags:
 # Part 385 — STAFF ASSIGNMENTS AND REVIEW OF ACTION UNDER ASSIGNMENTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-385)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-385)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER E—ORGANIZATION
 

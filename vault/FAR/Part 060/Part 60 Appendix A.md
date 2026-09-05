@@ -6,7 +6,7 @@ title_number: 14
 part: 60
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:942a658facd3e9fb7d6417be37311d769f273f54c6568cebd81d42bfed1375ed"
 generated: true
 title: "Appendix A to Part 60—Qualification Performance Standards for Airplane Full Flight Simulators"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 60—Qualification Performance Standards for Airplane Full Flight Simulators
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-60)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-60)
 
 ## Official Text
 

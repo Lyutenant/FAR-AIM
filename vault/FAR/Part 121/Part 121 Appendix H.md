@@ -6,7 +6,7 @@ title_number: 14
 part: 121
 appendix: "Appendix H"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:d91fc81de56bed619f9f75b6e14e0b21adb42ebfaaa8a952f22dead2332e8321"
 generated: true
 title: "Appendix H to Part 121—Advanced Simulation"
@@ -20,7 +20,7 @@ tags:
 # Appendix H to Part 121—Advanced Simulation
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-121)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-121)
 
 ## Official Text
 

@@ -6,7 +6,7 @@ chapter: 1
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:854fd95b01c36afe296d6d5dcf2bff6dedeb2fa3cccfe38b15638e1dff4eb1eb"
+canonical_hash: "sha256:fc400ebe70ffac0a2b2c9a3508413b9b6c02394de12f03330bbdaced4f260fe8"
 generated: true
 title: "Air Navigation"
 aliases:

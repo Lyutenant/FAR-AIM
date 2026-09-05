@@ -5,7 +5,7 @@ citation: "14 CFR Part 249"
 title_number: 14
 part: 249
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:5eb6fb11607c79b0fb3ee91cee8da5bcfca87d834e7b4da3f7d38fb557f79aa0"
 generated: true
 title: "PRESERVATION OF AIR CARRIER RECORDS"
@@ -16,7 +16,7 @@ tags:
 # Part 249 — PRESERVATION OF AIR CARRIER RECORDS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-249)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-249)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

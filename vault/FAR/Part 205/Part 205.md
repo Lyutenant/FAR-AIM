@@ -5,7 +5,7 @@ citation: "14 CFR Part 205"
 title_number: 14
 part: 205
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:b0305e2719c07aa111c20e4dfc18254a4aa0802d0cc73bff6b9064484a7088e2"
 generated: true
 title: "AIRCRAFT ACCIDENT LIABILITY INSURANCE"
@@ -16,7 +16,7 @@ tags:
 # Part 205 — AIRCRAFT ACCIDENT LIABILITY INSURANCE
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-205)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-205)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

@@ -6,7 +6,7 @@ title_number: 14
 part: 36
 appendix: "Appendix G"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:3cc211b44ca5cd680c8911f0d82ea12fa994db27fbb4522e9dea147cc3b3aa8b"
 generated: true
 title: "Appendix G to Part 36—Takeoff Noise Requirements for Propeller-Driven Small Airplane and Propeller-Driven, Commuter Category Airplane Certification Tests on or After December 22, 1988"
@@ -20,7 +20,7 @@ tags:
 # Appendix G to Part 36—Takeoff Noise Requirements for Propeller-Driven Small Airplane and Propeller-Driven, Commuter Category Airplane Certification Tests on or After December 22, 1988
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-36)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-36)
 
 ## Official Text
 

@@ -6,7 +6,7 @@ title_number: 14
 part: 91
 appendix: "SFAR 104"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:7539217189d96eb3fba6b1cc90e1ea00d4ce9a55f83725581c724b94e7fce1bc"
 generated: true
 title: "Special Federal Aviation Regulation No. 104—Prohibition Against Certain Flights by Syrian Air Carriers to the United States"
@@ -20,7 +20,7 @@ tags:
 # Special Federal Aviation Regulation No. 104—Prohibition Against Certain Flights by Syrian Air Carriers to the United States
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-91)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-91)
 
 ## Official Text
 

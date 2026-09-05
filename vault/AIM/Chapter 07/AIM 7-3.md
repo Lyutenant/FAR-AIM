@@ -7,7 +7,7 @@ section: 3
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:43c9726e75d1a99dc0b9651507c469d119475489efbb454ac5238bede57da51b"
+canonical_hash: "sha256:7f8af86938e76530e6bfb926bb706a6722060a25d8fe1ce84d36519e00b1f90a"
 generated: true
 title: "Cold Temperature Barometric Altimeter Errors, Setting Procedures and Cold Temperature Airports (CTA)"
 aliases:

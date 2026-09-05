@@ -6,7 +6,7 @@ chapter: 4
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:153dbe90533f7994978405010f01ae76098f19e24ab9186ad96f8f928f50a56c"
+canonical_hash: "sha256:5a6200931d217c6301b727c7fb8554208ef6c6a440bfca8c8663c80c4d13e0f3"
 generated: true
 title: "Air Traffic Control"
 tags:

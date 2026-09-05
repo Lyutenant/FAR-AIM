@@ -5,7 +5,7 @@ citation: "14 CFR Part 291"
 title_number: 14
 part: 291
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:8a7de91f5f59b2b699adc171298b6bde6bfcc3fb6e8cf54a7e68fe6495b83581"
 generated: true
 title: "CARGO OPERATIONS IN INTERSTATE AIR TRANSPORTATION"
@@ -16,7 +16,7 @@ tags:
 # Part 291 — CARGO OPERATIONS IN INTERSTATE AIR TRANSPORTATION
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-291)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-291)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

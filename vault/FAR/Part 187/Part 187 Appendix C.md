@@ -6,7 +6,7 @@ title_number: 14
 part: 187
 appendix: "Appendix C"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:59e34e81a5da92969ef1c18ff6a1a82524033ddf4a989698cb452b1f156a3067"
 generated: true
 title: "Appendix C to Part 187—Fees for Production Certification-Related Services Performed Outside the United States"
@@ -20,7 +20,7 @@ tags:
 # Appendix C to Part 187—Fees for Production Certification-Related Services Performed Outside the United States
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-187)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-187)
 
 ## Official Text
 

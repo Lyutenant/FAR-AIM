@@ -6,7 +6,7 @@ title_number: 14
 part: 31
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:5c9734eb3f92bf1b5bf75dabf11b658dc4f26e327ed52df4fa7cb7e1a3858ba2"
 generated: true
 title: "Appendix A to Part 31—Instructions for Continued Airworthiness"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 31—Instructions for Continued Airworthiness
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-31)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-31)
 
 ## Official Text
 

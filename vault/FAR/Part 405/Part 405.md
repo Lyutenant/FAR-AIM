@@ -5,7 +5,7 @@ citation: "14 CFR Part 405"
 title_number: 14
 part: 405
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:7965f2aa77768ee005e391b2ab96a1e5bc19791e193dbca3048ac26794a54405"
 generated: true
 title: "COMPLIANCE AND ENFORCEMENT"
@@ -16,7 +16,7 @@ tags:
 # Part 405 — COMPLIANCE AND ENFORCEMENT
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-405)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-405)
 > CHAPTER III—COMMERCIAL SPACE TRANSPORTATION, FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER B—PROCEDURE
 

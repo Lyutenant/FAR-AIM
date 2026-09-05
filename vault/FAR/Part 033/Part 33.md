@@ -5,7 +5,7 @@ citation: "14 CFR Part 33"
 title_number: 14
 part: 33
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:6603526822a39622618b959231460f6d74d78edad0342c09beb180c8ab780efc"
 generated: true
 title: "AIRWORTHINESS STANDARDS: AIRCRAFT ENGINES"
@@ -16,7 +16,7 @@ tags:
 # Part 33 — AIRWORTHINESS STANDARDS: AIRCRAFT ENGINES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-33)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-33)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 

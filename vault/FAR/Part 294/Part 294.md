@@ -5,7 +5,7 @@ citation: "14 CFR Part 294"
 title_number: 14
 part: 294
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:91937f85b4cbf9ed98feda4990a07404c62a4f1f2abb256f01e93762ec38df87"
 generated: true
 title: "CANADIAN CHARTER AIR TAXI OPERATORS"
@@ -16,7 +16,7 @@ tags:
 # Part 294 — CANADIAN CHARTER AIR TAXI OPERATORS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-294)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-294)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

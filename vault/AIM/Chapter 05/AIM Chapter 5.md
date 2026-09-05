@@ -6,7 +6,7 @@ chapter: 5
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:3845968e5cdd127998a98f4c12bc59ac03880a796b3b75dc529683a9ee7594e5"
+canonical_hash: "sha256:e51e00dd8076c6321ba18491b568193881cdf27fd94f5e041df17a9f09017128"
 generated: true
 title: "Air Traffic Procedures"
 aliases:

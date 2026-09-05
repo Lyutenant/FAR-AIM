@@ -6,7 +6,7 @@ title_number: 14
 part: 121
 appendix: "Appendix F"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:171f2f2daec0de8418dc5d7ed079cc7a3ffa0eed07ec6224867c6ebfd2b0413e"
 generated: true
 title: "Appendix F to Part 121—Proficiency Check Requirements"
@@ -20,7 +20,7 @@ tags:
 # Appendix F to Part 121—Proficiency Check Requirements
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-121)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-121)
 
 ## Official Text
 

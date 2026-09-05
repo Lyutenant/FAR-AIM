@@ -6,7 +6,7 @@ title_number: 14
 part: 91
 appendix: "Appendix G"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:47e4008ec2bf3f457157c1a4d36c896267b6320b8050b4dbd6d070d5c92ddb78"
 generated: true
 title: "Appendix G to Part 91—Operations in Reduced Vertical Separation Minimum (RVSM) Airspace"
@@ -20,7 +20,7 @@ tags:
 # Appendix G to Part 91—Operations in Reduced Vertical Separation Minimum (RVSM) Airspace
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-91)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-91)
 
 ## Official Text
 

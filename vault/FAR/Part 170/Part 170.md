@@ -5,7 +5,7 @@ citation: "14 CFR Part 170"
 title_number: 14
 part: 170
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:3a9f29f1bf3022e497465b4c1bd5cbc246e1a365079d0853e88a9c9052b9e933"
 generated: true
 title: "ESTABLISHMENT AND DISCONTINUANCE CRITERIA FOR AIR TRAFFIC CONTROL SERVICES AND NAVIGATIONAL FACILITIES"
@@ -16,7 +16,7 @@ tags:
 # Part 170 — ESTABLISHMENT AND DISCONTINUANCE CRITERIA FOR AIR TRAFFIC CONTROL SERVICES AND NAVIGATIONAL FACILITIES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-170)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-170)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER J—NAVIGATIONAL FACILITIES
 

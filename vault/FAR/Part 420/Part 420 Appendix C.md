@@ -6,7 +6,7 @@ title_number: 14
 part: 420
 appendix: "Appendix C"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:6d42e10592ade82aef5cb0b7e75f33bb50d2e82be83bd8d2d44b7ce3e9257f26"
 generated: true
 title: "Appendix C to Part 420—Risk Analysis"
@@ -20,7 +20,7 @@ tags:
 # Appendix C to Part 420—Risk Analysis
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-420)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-420)
 
 ## Official Text
 

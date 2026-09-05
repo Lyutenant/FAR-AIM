@@ -5,7 +5,7 @@ citation: "14 CFR Part 221"
 title_number: 14
 part: 221
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:d682f84343c8769609b4e5686dbe130a3b6c61bb7be3329d65feec575a189e04"
 generated: true
 title: "TARIFFS"
@@ -16,7 +16,7 @@ tags:
 # Part 221 — TARIFFS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-221)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-221)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

@@ -6,7 +6,7 @@ title_number: 14
 part: 121
 appendix: "Appendix D"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:a9a8d57cd272042fb077811f134c72d8fcf08c091bd9d8669c6e0702b0751993"
 generated: true
 title: "Appendix D to Part 121—Criteria for Demonstration of Emergency Evacuation Procedures Under § 121.291"
@@ -20,7 +20,7 @@ tags:
 # Appendix D to Part 121—Criteria for Demonstration of Emergency Evacuation Procedures Under § 121.291
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-121)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-121)
 
 ## Official Text
 

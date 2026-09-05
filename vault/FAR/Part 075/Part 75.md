@@ -5,7 +5,7 @@ citation: "14 CFR Part 75"
 title_number: 14
 part: 75
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:065c968d74ada47740f0e18056b5c54079962a7b2a3b5d6f58965ea81bc1355a"
 generated: true
 title: "[RESERVED]"
@@ -16,7 +16,7 @@ tags:
 # Part 75 — \[RESERVED]
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-75)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-75)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER E—AIRSPACE
 

@@ -5,7 +5,7 @@ citation: "14 CFR Part 250"
 title_number: 14
 part: 250
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:aebcdc11f68437fcb91b3097c739f461b1967465b5bf1c638684242acdf99210"
 generated: true
 title: "OVERSALES"
@@ -16,7 +16,7 @@ tags:
 # Part 250 — OVERSALES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-250)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-250)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

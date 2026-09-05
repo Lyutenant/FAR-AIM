@@ -6,7 +6,7 @@ title_number: 14
 part: 36
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:090f0b910392fd0d812c11c517be0a71a6c54efc6881057c4618527681d38ae2"
 generated: true
 title: "Appendix A to Part 36—Aircraft Noise Measurement and Evaluation Under § 36.101"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 36—Aircraft Noise Measurement and Evaluation Under § 36.101
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-36)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-36)
 
 ## Official Text
 

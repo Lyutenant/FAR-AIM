@@ -6,7 +6,7 @@ title_number: 14
 part: 43
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:9c7f92dc3fd15b0afda68cf70e5b922fcd968aa0ccca32d76fd82ae6384c1e0a"
 generated: true
 title: "Appendix B to Part 43—Recording of Major Repairs and Major Alterations"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 43—Recording of Major Repairs and Major Alterations
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-43)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-43)
 
 ## Official Text
 

@@ -6,7 +6,7 @@ title_number: 14
 part: 63
 appendix: "Appendix C"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:bd1e2cb138f6c0da26352f6a9d24c16dea231b26faee2e6546d1c7589e8ad082"
 generated: true
 title: "Appendix C to Part 63—Flight Engineer Training Course Requirements"
@@ -20,7 +20,7 @@ tags:
 # Appendix C to Part 63—Flight Engineer Training Course Requirements
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-63)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-63)
 
 ## Official Text
 

@@ -5,7 +5,7 @@ citation: "14 CFR Part 213"
 title_number: 14
 part: 213
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:84413eba3c53a199f87175215577d8bf33e7939c7532ff53c5210099639a4531"
 generated: true
 title: "TERMS, CONDITIONS AND LIMITATIONS OF FOREIGN AIR CARRIER PERMITS"
@@ -16,7 +16,7 @@ tags:
 # Part 213 — TERMS, CONDITIONS AND LIMITATIONS OF FOREIGN AIR CARRIER PERMITS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-213)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-213)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

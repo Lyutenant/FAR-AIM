@@ -6,7 +6,7 @@ chapter: 11
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:c237cddf46329c1c0810c4d40501a6114da758731121bc9ba483f33ad7b0f2d5"
+canonical_hash: "sha256:0cd1a3ed13ff97fbeb0a9146dfd3e7ebe35f1d74e27dcd14927e8f32973677f5"
 generated: true
 title: "Unmanned Aircraft Systems (UAS)"
 aliases:

@@ -5,7 +5,7 @@ citation: "14 CFR Part 313"
 title_number: 14
 part: 313
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:7bc8f19f1c24f513f89e45a11c84354a11d0722c423af79651f386d2db860cc5"
 generated: true
 title: "IMPLEMENTATION OF THE ENERGY POLICY AND CONSERVATION ACT"
@@ -16,7 +16,7 @@ tags:
 # Part 313 — IMPLEMENTATION OF THE ENERGY POLICY AND CONSERVATION ACT
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-313)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-313)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER B—PROCEDURAL REGULATIONS
 

@@ -6,7 +6,7 @@ title_number: 14
 part: 420
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:4d18a0cc11bf5fec024c62e6f9ea262f8f1b7b838740f90fd48a6dcb8f34a920"
 generated: true
 title: "Appendix B to Part 420—Method for Defining a Flight Corridor"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 420—Method for Defining a Flight Corridor
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-420)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-420)
 
 ## Official Text
 

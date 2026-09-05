@@ -5,7 +5,7 @@ citation: "14 CFR Part 120"
 title_number: 14
 part: 120
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:ef0694de18ed4370980cdb94829eb33ea989f19bd0f69d44d1e72c387c14376b"
 generated: true
 title: "DRUG AND ALCOHOL TESTING PROGRAM"
@@ -16,7 +16,7 @@ tags:
 # Part 120 — DRUG AND ALCOHOL TESTING PROGRAM
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-120)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-120)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER G—AIR CARRIERS AND OPERATORS FOR COMPENSATION OR HIRE: CERTIFICATION AND OPERATIONS
 

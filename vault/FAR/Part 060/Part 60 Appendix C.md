@@ -6,7 +6,7 @@ title_number: 14
 part: 60
 appendix: "Appendix C"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:08c9995497f0882270ce811f2bbfd16c3de44f432c60a7e37108b3dd3289f40e"
 generated: true
 title: "Appendix C to Part 60—Qualification Performance Standards for Helicopter Full Flight Simulators"
@@ -20,7 +20,7 @@ tags:
 # Appendix C to Part 60—Qualification Performance Standards for Helicopter Full Flight Simulators
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-60)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-60)
 
 ## Official Text
 

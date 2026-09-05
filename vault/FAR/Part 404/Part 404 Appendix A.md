@@ -6,7 +6,7 @@ title_number: 14
 part: 404
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:0b45c01930b6bc340cfb989f97c175d3512030d9c695780d6a63c7ddcca72da9"
 generated: true
 title: "Appendix A to Part 404—Alternative Time Frames"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 404—Alternative Time Frames
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-404)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-404)
 
 ## Official Text
 

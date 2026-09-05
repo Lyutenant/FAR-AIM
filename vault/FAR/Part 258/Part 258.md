@@ -5,7 +5,7 @@ citation: "14 CFR Part 258"
 title_number: 14
 part: 258
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:5bba6ccdd1a6ae25a2add8ede30285d6f2edbf73bf8b68a170a486235341900f"
 generated: true
 title: "DISCLOSURE OF CHANGE-OF-GAUGE SERVICES"
@@ -16,7 +16,7 @@ tags:
 # Part 258 — DISCLOSURE OF CHANGE-OF-GAUGE SERVICES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-258)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-258)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

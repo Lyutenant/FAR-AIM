@@ -5,7 +5,7 @@ citation: "14 CFR Part 27"
 title_number: 14
 part: 27
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:7bb134b528f68a5e7173c9d42c16286e8c1e47bfd300d894bcc1d48e076673a0"
 generated: true
 title: "AIRWORTHINESS STANDARDS: NORMAL CATEGORY ROTORCRAFT"
@@ -16,7 +16,7 @@ tags:
 # Part 27 — AIRWORTHINESS STANDARDS: NORMAL CATEGORY ROTORCRAFT
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-27)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-27)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 

@@ -5,7 +5,7 @@ citation: "14 CFR Part 35"
 title_number: 14
 part: 35
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:47205b96280690102ee15f8d2fdf99d02e7dd019d304a212065cd6283b6b9c50"
 generated: true
 title: "AIRWORTHINESS STANDARDS: PROPELLERS"
@@ -16,7 +16,7 @@ tags:
 # Part 35 — AIRWORTHINESS STANDARDS: PROPELLERS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-35)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-35)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 

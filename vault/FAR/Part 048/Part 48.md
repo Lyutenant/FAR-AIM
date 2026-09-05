@@ -5,7 +5,7 @@ citation: "14 CFR Part 48"
 title_number: 14
 part: 48
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:42a2bca8699ded3dc9fc992fb226d5ca9ecd0167c368576ad94a480bd5dbf576"
 generated: true
 title: "REGISTRATION AND MARKING REQUIREMENTS FOR SMALL UNMANNED AIRCRAFT"
@@ -16,7 +16,7 @@ tags:
 # Part 48 — REGISTRATION AND MARKING REQUIREMENTS FOR SMALL UNMANNED AIRCRAFT
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-48)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-48)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 

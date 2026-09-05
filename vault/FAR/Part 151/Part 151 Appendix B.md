@@ -6,7 +6,7 @@ title_number: 14
 part: 151
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:903ccfc432e8d6773246b7881c007b958e30bcc5cb010e78607ff608745a3fdc"
 generated: true
 title: "Appendix B to Part 151"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 151
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-151)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-151)
 
 ## Official Text
 

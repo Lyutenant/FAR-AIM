@@ -5,7 +5,7 @@ citation: "14 CFR Part 383"
 title_number: 14
 part: 383
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:1c55228d2b75ee70aa9fbdd8d29a6acec23ae6e6d74d3192b003c2760f4991f7"
 generated: true
 title: "CIVIL PENALTIES"
@@ -16,7 +16,7 @@ tags:
 # Part 383 — CIVIL PENALTIES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-383)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-383)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER D—SPECIAL REGULATIONS
 

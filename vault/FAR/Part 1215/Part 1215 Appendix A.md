@@ -6,7 +6,7 @@ title_number: 14
 part: 1215
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:a759bf55660d92891007c9ecd4f9baf4633f43338ccad18e9f2a6c141544f903"
 generated: true
 title: "Appendix A to Part 1215—Estimated Service Rates in 1997 Dollars for TDRSS Standard Services (Based on NASA Escalation Estimate)"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 1215—Estimated Service Rates in 1997 Dollars for TDRSS Standard Services (Based on NASA Escalation Estimate)
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-1215)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-1215)
 
 ## Official Text
 

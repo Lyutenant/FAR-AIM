@@ -5,7 +5,7 @@ citation: "14 CFR Part 147"
 title_number: 14
 part: 147
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:278c61141bd66530c6841f8f37e99292c4696f425486dd28050106bf969203bf"
 generated: true
 title: "AVIATION MAINTENANCE TECHNICIAN SCHOOLS"
@@ -16,7 +16,7 @@ tags:
 # Part 147 — AVIATION MAINTENANCE TECHNICIAN SCHOOLS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-147)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-147)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER H—SCHOOLS AND OTHER CERTIFICATED AGENCIES
 

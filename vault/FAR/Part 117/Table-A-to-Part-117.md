@@ -6,7 +6,7 @@ title_number: 14
 part: 117
 appendix: "Table-A-to-Part-117"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:507254137a373ad522058ef4fe3a4aadbee55a5355e9ef621ef765dea2ae019a"
 generated: true
 title: "Table A to Part 117—Maximum Flight Time Limits for Unaugmented Operations Table"
@@ -20,7 +20,7 @@ tags:
 # Table A to Part 117—Maximum Flight Time Limits for Unaugmented Operations Table
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-117)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-117)
 
 ## Official Text
 

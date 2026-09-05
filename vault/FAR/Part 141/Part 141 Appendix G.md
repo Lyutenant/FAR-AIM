@@ -6,7 +6,7 @@ title_number: 14
 part: 141
 appendix: "Appendix G"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:72192340836906faf63d04d2d2cf1c2056b9eb9b06ca18a1affb6ec82ceecfed"
 generated: true
 title: "Appendix G to Part 141—Flight Instructor Instrument (For an Airplane, Helicopter, or Powered-Lift Instrument Instructor Rating, as Appropriate) Certification Course"
@@ -20,7 +20,7 @@ tags:
 # Appendix G to Part 141—Flight Instructor Instrument (For an Airplane, Helicopter, or Powered-Lift Instrument Instructor Rating, as Appropriate) Certification Course
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-141)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-141)
 
 ## Official Text
 

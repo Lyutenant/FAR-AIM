@@ -6,7 +6,7 @@ title_number: 14
 part: 141
 appendix: "Appendix M"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:5aab8d5972a11ae44eef4ce46c7bc985ae0ab2c67697cc91caf8de7ddd09ddda"
 generated: true
 title: "Appendix M to Part 141—Combined Private Pilot Certification and Instrument Rating Course"
@@ -20,7 +20,7 @@ tags:
 # Appendix M to Part 141—Combined Private Pilot Certification and Instrument Rating Course
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-141)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-141)
 
 ## Official Text
 

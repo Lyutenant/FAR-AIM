@@ -6,7 +6,7 @@ title_number: 14
 part: 117
 appendix: "Table-B-to-Part-117"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:cbe408e376282a590a030d0adabeb591e1fc0a8d0030f8b90eb7e168e1a8a430"
 generated: true
 title: "Table B to Part 117—Flight Duty Period: Unaugmented Operations"
@@ -20,7 +20,7 @@ tags:
 # Table B to Part 117—Flight Duty Period: Unaugmented Operations
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-117)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-117)
 
 ## Official Text
 

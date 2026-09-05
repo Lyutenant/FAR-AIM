@@ -5,7 +5,7 @@ citation: "14 CFR Part 36"
 title_number: 14
 part: 36
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:510000b866fea02f7f0fbe1b29732e734ac3f16a21d327fcf3c96e046745116f"
 generated: true
 title: "NOISE STANDARDS: AIRCRAFT TYPE AND AIRWORTHINESS CERTIFICATION"
@@ -16,7 +16,7 @@ tags:
 # Part 36 — NOISE STANDARDS: AIRCRAFT TYPE AND AIRWORTHINESS CERTIFICATION
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-36)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-36)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 

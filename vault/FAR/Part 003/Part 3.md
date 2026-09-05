@@ -5,7 +5,7 @@ citation: "14 CFR Part 3"
 title_number: 14
 part: 3
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:0ee6293e8999b4c91427dc38b748c49a9b0898ca8af87409eb83b1ef0ce1e5c0"
 generated: true
 title: "GENERAL REQUIREMENTS"
@@ -16,7 +16,7 @@ tags:
 # Part 3 — GENERAL REQUIREMENTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-3)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-3)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER A—DEFINITIONS AND GENERAL REQUIREMENTS
 

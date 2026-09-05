@@ -6,7 +6,7 @@ title_number: 14
 part: 25
 appendix: "Appendix I"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:c0c300b50372c6f1865c7a734b45fc6a32c1b14698d84f7efe4175e3b906832a"
 generated: true
 title: "Appendix I to Part 25—Installation of an Automatic Takeoff Thrust Control System (ATTCS)"
@@ -20,7 +20,7 @@ tags:
 # Appendix I to Part 25—Installation of an Automatic Takeoff Thrust Control System (ATTCS)
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-25)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-25)
 
 ## Official Text
 

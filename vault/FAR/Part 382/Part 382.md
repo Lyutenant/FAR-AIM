@@ -5,7 +5,7 @@ citation: "14 CFR Part 382"
 title_number: 14
 part: 382
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:274cd50e376b4dfcee5dd59a72dde923570e8243c083530a35064764840947f9"
 generated: true
 title: "NONDISCRIMINATION ON THE BASIS OF DISABILITY IN AIR TRAVEL"
@@ -16,7 +16,7 @@ tags:
 # Part 382 — NONDISCRIMINATION ON THE BASIS OF DISABILITY IN AIR TRAVEL
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-382)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-382)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER D—SPECIAL REGULATIONS
 

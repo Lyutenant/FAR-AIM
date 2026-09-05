@@ -6,7 +6,7 @@ title_number: 14
 part: 212
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:2387d4b4d7d0f7615e360a94cdf09ffc1d5ba2750d1f7bb96a38c28b3af36725"
 generated: true
 title: "Appendix B to Part 212—Certification of Compliance"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 212—Certification of Compliance
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-212)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-212)
 
 ## Official Text
 

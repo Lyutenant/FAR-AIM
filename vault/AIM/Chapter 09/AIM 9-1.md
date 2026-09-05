@@ -7,7 +7,7 @@ section: 1
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:e6afa04ec0b14374cfd65275bb54f1b8b019d918885107758eeedcf5c6e570d9"
+canonical_hash: "sha256:0837d6a56f509569b36911b87491845c004f14434a8285fadab3d1448586d972"
 generated: true
 title: "Types of Charts Available"
 aliases:

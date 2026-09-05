@@ -5,7 +5,7 @@ citation: "14 CFR Part 259"
 title_number: 14
 part: 259
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:091e459de203488c2c96499d41543198fca367124d360e0cc67ad64bca00644f"
 generated: true
 title: "ENHANCED PROTECTIONS FOR AIRLINE PASSENGERS"
@@ -16,7 +16,7 @@ tags:
 # Part 259 — ENHANCED PROTECTIONS FOR AIRLINE PASSENGERS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-259)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-259)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

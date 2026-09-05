@@ -5,7 +5,7 @@ citation: "14 CFR Part 293"
 title_number: 14
 part: 293
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:e51b434009789c3a294d08de5cf4881ae15a484bcd1f9cb53994882eec32541f"
 generated: true
 title: "INTERNATIONAL PASSENGER TRANSPORTATION"
@@ -16,7 +16,7 @@ tags:
 # Part 293 — INTERNATIONAL PASSENGER TRANSPORTATION
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-293)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-293)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

@@ -6,7 +6,7 @@ title_number: 14
 part: 1215
 appendix: "Appendix C"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:457e8e3b1fd42e53a23e406564c07db5bb75b6ca75ad8db465197cd2f79faa7e"
 generated: true
 title: "Appendix C to Part 1215—Typical User Activity Timeline"
@@ -20,7 +20,7 @@ tags:
 # Appendix C to Part 1215—Typical User Activity Timeline
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-1215)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-1215)
 
 ## Official Text
 

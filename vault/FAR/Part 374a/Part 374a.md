@@ -5,7 +5,7 @@ citation: "14 CFR Part 374a"
 title_number: 14
 part: "374a"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:db1893da8003ee0e9cadaa9c7348c650f950c4d6318c6f21fd2f4b4798c6e87e"
 generated: true
 title: "EXTENSION OF CREDIT BY AIRLINES TO FEDERAL POLITICAL CANDIDATES"
@@ -16,7 +16,7 @@ tags:
 # Part 374a — EXTENSION OF CREDIT BY AIRLINES TO FEDERAL POLITICAL CANDIDATES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-374a)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-374a)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER D—SPECIAL REGULATIONS
 

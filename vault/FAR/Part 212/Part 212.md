@@ -5,7 +5,7 @@ citation: "14 CFR Part 212"
 title_number: 14
 part: 212
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:b6e25f883cf44e1e63ecf5a7aac014ff0feff206e3afd1dcdea7b15743ee6bea"
 generated: true
 title: "CHARTER RULES FOR U.S. AND FOREIGN DIRECT AIR CARRIERS"
@@ -16,7 +16,7 @@ tags:
 # Part 212 — CHARTER RULES FOR U.S. AND FOREIGN DIRECT AIR CARRIERS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-212)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-212)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

@@ -6,7 +6,7 @@ title_number: 14
 part: 121
 appendix: "Appendix C"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:5b3602e11a517fead7746b3e2600412e8c828c4a389a2344b81c17c24ec6c3f6"
 generated: true
 title: "Appendix C to Part 121—C-46 Nontransport Category Airplanes"
@@ -20,7 +20,7 @@ tags:
 # Appendix C to Part 121—C-46 Nontransport Category Airplanes
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-121)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-121)
 
 ## Official Text
 

@@ -6,7 +6,7 @@ title_number: 14
 part: 291
 appendix: "Appendix-A-to-Subpart-E-of-Part-291"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:3c57a61fcca842757b395d945f5888344a34486694b4eaae228b8bd1b20a0e7f"
 generated: true
 title: "Appendix A to Subpart E of Part 291—Instructions to U.S. Air Carriers for Reporting Traffic and Capacity Data on Schedule T-100"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Subpart E of Part 291—Instructions to U.S. Air Carriers for Reporting Traffic and Capacity Data on Schedule T-100
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-291)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-291)
 
 ## Official Text
 

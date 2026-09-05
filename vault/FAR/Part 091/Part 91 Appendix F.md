@@ -6,7 +6,7 @@ title_number: 14
 part: 91
 appendix: "Appendix F"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:e1466c7e3f579f0c8c94c917eb71bb8f8d6decb7133fbdf1ca1efc0efdece848"
 generated: true
 title: "Appendix F to Part 91—Helicopter Flight Recorder Specifications"
@@ -20,7 +20,7 @@ tags:
 # Appendix F to Part 91—Helicopter Flight Recorder Specifications
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-91)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-91)
 
 ## Official Text
 

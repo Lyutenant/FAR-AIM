@@ -6,7 +6,7 @@ title_number: 14
 part: 382
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:6ba556dcc562936126470d9c712a3f89b422d1cee03cd9b5f16911562467dadc"
 generated: true
 title: "Appendix B to Part 382—Cross-Reference Table"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 382—Cross-Reference Table
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-382)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-382)
 
 ## Official Text
 

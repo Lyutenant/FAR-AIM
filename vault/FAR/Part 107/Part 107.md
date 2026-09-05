@@ -5,7 +5,7 @@ citation: "14 CFR Part 107"
 title_number: 14
 part: 107
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:4cab6ebcd436442d48a451a66bc89af5ca742875ede64b34ebd8610c880de0b2"
 generated: true
 title: "SMALL UNMANNED AIRCRAFT SYSTEMS"
@@ -16,7 +16,7 @@ tags:
 # Part 107 — SMALL UNMANNED AIRCRAFT SYSTEMS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-107)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-107)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER F—AIR TRAFFIC AND GENERAL OPERATING RULES
 

@@ -7,7 +7,7 @@ section: 3
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:2b3940c7b185ac27345fa7659629e443f5ea5ac9e8f238b7e2c6ddad17bd41b1"
+canonical_hash: "sha256:2b64927f6e2f5159a64a3df843e29112295ed1308414a9036a2a530884be3d71"
 generated: true
 title: "Airport Operations"
 aliases:

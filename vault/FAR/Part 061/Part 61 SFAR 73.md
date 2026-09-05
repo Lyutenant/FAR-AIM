@@ -6,7 +6,7 @@ title_number: 14
 part: 61
 appendix: "SFAR 73"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:5262b508d5fb93c7c72188021d1b2cb0c656b436060153a8b5a01f025630b944"
 generated: true
 title: "Special Federal Aviation Regulation No. 73—Robinson Helicopter Company, Robinson R-22/R-44 Special Training and Experience Requirements"
@@ -20,7 +20,7 @@ tags:
 # Special Federal Aviation Regulation No. 73—Robinson Helicopter Company, Robinson R-22/R-44 Special Training and Experience Requirements
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-61)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-61)
 
 ## Official Text
 

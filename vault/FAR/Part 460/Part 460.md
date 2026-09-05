@@ -5,7 +5,7 @@ citation: "14 CFR Part 460"
 title_number: 14
 part: 460
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:1995b5c41938bee53d4ce39fc1458ccd4d650d322e299b2abcf037b0721bd651"
 generated: true
 title: "HUMAN SPACE FLIGHT REQUIREMENTS"
@@ -16,7 +16,7 @@ tags:
 # Part 460 — HUMAN SPACE FLIGHT REQUIREMENTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-460)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-460)
 > CHAPTER III—COMMERCIAL SPACE TRANSPORTATION, FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—LICENSING
 

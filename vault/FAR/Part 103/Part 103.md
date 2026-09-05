@@ -5,7 +5,7 @@ citation: "14 CFR Part 103"
 title_number: 14
 part: 103
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:b19532078efb1f3b64a19c5afe6a41ccfc5a9a75891884cf7379dce42bf45d0e"
 generated: true
 title: "ULTRALIGHT VEHICLES"
@@ -16,7 +16,7 @@ tags:
 # Part 103 — ULTRALIGHT VEHICLES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-103)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-103)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER F—AIR TRAFFIC AND GENERAL OPERATING RULES
 

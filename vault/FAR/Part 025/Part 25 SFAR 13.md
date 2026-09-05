@@ -6,7 +6,7 @@ title_number: 14
 part: 25
 appendix: "SFAR 13"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:cd83286acbe5a091f386778bbd2c666e05737424e4e58295c5fe0b94bd65c8d6"
 generated: true
 title: "Special Federal Aviation Regulation No. 13"
@@ -20,7 +20,7 @@ tags:
 # Special Federal Aviation Regulation No. 13
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-25)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-25)
 
 ## Official Text
 

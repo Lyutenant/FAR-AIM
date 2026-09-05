@@ -5,7 +5,7 @@ citation: "14 CFR Part 17"
 title_number: 14
 part: 17
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:00e27b8796ee9a3b0943bad775a22c1cc17ed5e10b53404a50c2e6be4f7ed444"
 generated: true
 title: "PROCEDURES FOR PROTESTS AND CONTRACT DISPUTES"
@@ -16,7 +16,7 @@ tags:
 # Part 17 — PROCEDURES FOR PROTESTS AND CONTRACT DISPUTES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-17)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-17)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER B—PROCEDURAL RULES
 

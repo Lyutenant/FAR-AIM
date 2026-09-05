@@ -5,7 +5,7 @@ citation: "14 CFR Part 296"
 title_number: 14
 part: 296
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:13884393531deebcda6453400131d3466133c512788f03657783b885d49cafcf"
 generated: true
 title: "INDIRECT AIR TRANSPORTATION OF PROPERTY"
@@ -16,7 +16,7 @@ tags:
 # Part 296 — INDIRECT AIR TRANSPORTATION OF PROPERTY
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-296)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-296)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

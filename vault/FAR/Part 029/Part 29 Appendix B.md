@@ -6,7 +6,7 @@ title_number: 14
 part: 29
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:f514f728fe252436c2d0eee7c8f61c45af7b23b30cea21acde52d3876f6ba757"
 generated: true
 title: "Appendix B to Part 29—Airworthiness Criteria for Helicopter Instrument Flight"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 29—Airworthiness Criteria for Helicopter Instrument Flight
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-29)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-29)
 
 ## Official Text
 

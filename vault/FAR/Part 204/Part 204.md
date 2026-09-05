@@ -5,7 +5,7 @@ citation: "14 CFR Part 204"
 title_number: 14
 part: 204
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:42bcc6f5670cafcb090f54f11574f4f8d3cf2b13130069a8e955a91cd8540187"
 generated: true
 title: "DATA TO SUPPORT FITNESS DETERMINATIONS"
@@ -16,7 +16,7 @@ tags:
 # Part 204 — DATA TO SUPPORT FITNESS DETERMINATIONS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-204)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-204)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

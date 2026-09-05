@@ -5,7 +5,7 @@ citation: "14 CFR Part 251"
 title_number: 14
 part: 251
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:0f77f4ca8e0be0143ad519496b556dcbbbff4552380c1cd4ef47233cc3bc2da6"
 generated: true
 title: "CARRIAGE OF MUSICAL INSTRUMENTS"
@@ -16,7 +16,7 @@ tags:
 # Part 251 — CARRIAGE OF MUSICAL INSTRUMENTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-251)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-251)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

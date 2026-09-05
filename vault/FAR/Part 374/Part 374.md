@@ -5,7 +5,7 @@ citation: "14 CFR Part 374"
 title_number: 14
 part: 374
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:3be997bac4fc4a4df90292e143b4910bb6a6cf373c8d0193b86e46917775bb4a"
 generated: true
 title: "IMPLEMENTATION OF THE CONSUMER CREDIT PROTECTION ACT WITH RESPECT TO AIR CARRIERS AND FOREIGN AIR CARRIERS"
@@ -16,7 +16,7 @@ tags:
 # Part 374 — IMPLEMENTATION OF THE CONSUMER CREDIT PROTECTION ACT WITH RESPECT TO AIR CARRIERS AND FOREIGN AIR CARRIERS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-374)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-374)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER D—SPECIAL REGULATIONS
 

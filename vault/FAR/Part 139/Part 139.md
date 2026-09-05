@@ -5,7 +5,7 @@ citation: "14 CFR Part 139"
 title_number: 14
 part: 139
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:4d0cb656ce6f1947cbae5b2579411f3856f7caa24464ee03528439ae672785b7"
 generated: true
 title: "CERTIFICATION OF AIRPORTS"
@@ -16,7 +16,7 @@ tags:
 # Part 139 — CERTIFICATION OF AIRPORTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-139)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-139)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER G—AIR CARRIERS AND OPERATORS FOR COMPENSATION OR HIRE: CERTIFICATION AND OPERATIONS
 

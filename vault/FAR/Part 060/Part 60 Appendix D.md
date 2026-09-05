@@ -6,7 +6,7 @@ title_number: 14
 part: 60
 appendix: "Appendix D"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:fedf33b8b979bc14559784786d61edf00dde408648ff4ee91625c6dd468e4f50"
 generated: true
 title: "Appendix D to Part 60—Qualification Performance Standards for Helicopter Flight Training Devices"
@@ -20,7 +20,7 @@ tags:
 # Appendix D to Part 60—Qualification Performance Standards for Helicopter Flight Training Devices
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-60)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-60)
 
 ## Official Text
 

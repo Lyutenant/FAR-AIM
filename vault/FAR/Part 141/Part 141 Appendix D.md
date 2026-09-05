@@ -6,7 +6,7 @@ title_number: 14
 part: 141
 appendix: "Appendix D"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:cf0b2011c4914e4a237db9df7c3e707013da918c6268223dc14f15067787550e"
 generated: true
 title: "Appendix D to Part 141—Commercial Pilot Certification Course"
@@ -20,7 +20,7 @@ tags:
 # Appendix D to Part 141—Commercial Pilot Certification Course
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-141)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-141)
 
 ## Official Text
 

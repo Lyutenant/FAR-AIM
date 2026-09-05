@@ -6,7 +6,7 @@ title_number: 14
 part: 150
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:a484a31be9d4df5e6b1b1b3d176d36c8208e2a12ea860b094f96b1de52129aef"
 generated: true
 title: "Appendix B to Part 150—Noise Compatibility Programs"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 150—Noise Compatibility Programs
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-150)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-150)
 
 ## Official Text
 

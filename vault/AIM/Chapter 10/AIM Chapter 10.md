@@ -6,7 +6,7 @@ chapter: 10
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:b73b1147d8d322b90404c4cd2360f62d4c1ec636e67b204cde85691ce8b238bd"
+canonical_hash: "sha256:5966ad5d22869e4dd5f9288eab061711ddd0219128722835f86df949b4f1a30c"
 generated: true
 title: "Helicopter Operations"
 aliases:

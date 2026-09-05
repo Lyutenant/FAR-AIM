@@ -5,7 +5,7 @@ citation: "14 CFR Part 15"
 title_number: 14
 part: 15
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:256327bf9cfa0bc2d459e1ee5a01648fef0c718f8e7cdb3ecd79e7f1fe23fc6d"
 generated: true
 title: "ADMINISTRATIVE CLAIMS UNDER FEDERAL TORT CLAIMS ACT"
@@ -16,7 +16,7 @@ tags:
 # Part 15 — ADMINISTRATIVE CLAIMS UNDER FEDERAL TORT CLAIMS ACT
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-15)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-15)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER B—PROCEDURAL RULES
 

@@ -6,7 +6,7 @@ title_number: 14
 part: 141
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:3f96d8497677759deadd5d953635b7019027c3067b02b0260918c2d836f3522b"
 generated: true
 title: "Appendix B to Part 141—Private Pilot Certification Course"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 141—Private Pilot Certification Course
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-141)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-141)
 
 ## Official Text
 

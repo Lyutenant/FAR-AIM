@@ -5,7 +5,7 @@ citation: "14 CFR Part 110"
 title_number: 14
 part: 110
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:c673d1294eb19cfba9d2a6be3ab0d7aa54c0755134300269b1d14e76091dbe8a"
 generated: true
 title: "GENERAL REQUIREMENTS"
@@ -16,7 +16,7 @@ tags:
 # Part 110 — GENERAL REQUIREMENTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-110)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-110)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER G—AIR CARRIERS AND OPERATORS FOR COMPENSATION OR HIRE: CERTIFICATION AND OPERATIONS
 

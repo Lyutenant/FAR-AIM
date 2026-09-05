@@ -6,7 +6,7 @@ title_number: 14
 part: 43
 appendix: "Appendix D"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:e1fd091faa593b8f509029b8cf6c9e47fd9c83c92e75ae51ad828576228620b1"
 generated: true
 title: "Appendix D to Part 43—Scope and Detail of Items (as Applicable to the Particular Aircraft) To Be Included in Annual and 100-Hour Inspections"
@@ -20,7 +20,7 @@ tags:
 # Appendix D to Part 43—Scope and Detail of Items (as Applicable to the Particular Aircraft) To Be Included in Annual and 100-Hour Inspections
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-43)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-43)
 
 ## Official Text
 

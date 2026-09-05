@@ -7,7 +7,7 @@ section: 6
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:3fabaf69b1b6eef43af21287c05bd4acf8222b5d4122f7ab27af42e462eb692d"
+canonical_hash: "sha256:98f6b3031622846c38f434469ed62644d4e4ffce717b0ed14975a69903ed2d17"
 generated: true
 title: "Potential Flight Hazards"
 aliases:

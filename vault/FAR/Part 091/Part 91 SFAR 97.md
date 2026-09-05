@@ -6,7 +6,7 @@ title_number: 14
 part: 91
 appendix: "SFAR 97"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:dde0cdc2c5fae16c57575b20a375d45a1a20dab7d7256376be7faf26a20f263a"
 generated: true
 title: "Special Federal Aviation Regulation No. 97—Special Operating Rules for the Conduct of Instrument Flight Rules (IFR) Area Navigation (RNAV) Operations using Global Positioning Systems (GPS) in Alaska"
@@ -20,7 +20,7 @@ tags:
 # Special Federal Aviation Regulation No. 97—Special Operating Rules for the Conduct of Instrument Flight Rules (IFR) Area Navigation (RNAV) Operations using Global Positioning Systems (GPS) in Alaska
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-91)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-91)
 
 ## Official Text
 

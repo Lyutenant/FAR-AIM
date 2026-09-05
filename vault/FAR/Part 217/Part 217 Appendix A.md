@@ -6,7 +6,7 @@ title_number: 14
 part: 217
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:155eb0206cca50af61edf321815020a923b28433990a88ee61811452d376c92c"
 generated: true
 title: "Appendix A to Part 217—Instructions to Foreign Air Carriers for Reporting Traffic Data on Form 41 Schedule T-100(f)"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 217—Instructions to Foreign Air Carriers for Reporting Traffic Data on Form 41 Schedule T-100(f)
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-217)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-217)
 
 ## Official Text
 

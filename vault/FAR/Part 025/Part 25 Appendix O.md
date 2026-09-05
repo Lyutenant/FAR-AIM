@@ -6,7 +6,7 @@ title_number: 14
 part: 25
 appendix: "Appendix O"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:466416b6d9eb518a7e150282680a79e512babebf7eb96f34329c1f1549f9d178"
 generated: true
 title: "Appendix O to Part 25—Supercooled Large Drop Icing Conditions"
@@ -20,7 +20,7 @@ tags:
 # Appendix O to Part 25—Supercooled Large Drop Icing Conditions
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-25)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-25)
 
 ## Official Text
 

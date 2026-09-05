@@ -5,7 +5,7 @@ citation: "14 CFR Part 13"
 title_number: 14
 part: 13
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:4a38d4e292b467c7b6444c15f18e1709601df5bdb7a904250fd9eb86db4a6674"
 generated: true
 title: "INVESTIGATIVE AND ENFORCEMENT PROCEDURES"
@@ -16,7 +16,7 @@ tags:
 # Part 13 — INVESTIGATIVE AND ENFORCEMENT PROCEDURES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-13)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-13)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER B—PROCEDURAL RULES
 

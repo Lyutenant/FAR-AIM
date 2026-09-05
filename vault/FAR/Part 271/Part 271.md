@@ -5,7 +5,7 @@ citation: "14 CFR Part 271"
 title_number: 14
 part: 271
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:ee974a715fb965301ca3a515dbee181f7c9fd4c93a2a21a2a070d3fa0b3f4880"
 generated: true
 title: "GUIDELINES FOR SUBSIDIZING AIR CARRIERS PROVIDING ESSENTIAL AIR TRANSPORTATION"
@@ -16,7 +16,7 @@ tags:
 # Part 271 — GUIDELINES FOR SUBSIDIZING AIR CARRIERS PROVIDING ESSENTIAL AIR TRANSPORTATION
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-271)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-271)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

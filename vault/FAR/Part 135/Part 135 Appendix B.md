@@ -6,7 +6,7 @@ title_number: 14
 part: 135
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:59ed4cd948659c47d84d7ee67e1242dde58906fee73ca272adba71a39128fc1d"
 generated: true
 title: "Appendix B to Part 135—Airplane Flight Recorder Specifications"
@@ -20,7 +20,7 @@ tags:
 # Appendix B to Part 135—Airplane Flight Recorder Specifications
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-135)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-135)
 
 ## Official Text
 

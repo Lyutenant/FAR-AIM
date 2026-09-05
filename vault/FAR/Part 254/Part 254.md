@@ -5,7 +5,7 @@ citation: "14 CFR Part 254"
 title_number: 14
 part: 254
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:6b1ed67f1e7c80bbcd08bfe862e91650d9e2357fb481bad10101e395e15de580"
 generated: true
 title: "DOMESTIC BAGGAGE LIABILITY"
@@ -16,7 +16,7 @@ tags:
 # Part 254 — DOMESTIC BAGGAGE LIABILITY
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-254)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-254)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

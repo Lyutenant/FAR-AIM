@@ -6,7 +6,7 @@ title_number: 14
 part: 91
 appendix: "Appendix D"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:0a2a668332ef596ae3c1d0a25122e975490150e40380eb016afa1c841ae117fd"
 generated: true
 title: "Appendix D to Part 91—Airports/Locations: Special Operating Restrictions"
@@ -20,7 +20,7 @@ tags:
 # Appendix D to Part 91—Airports/Locations: Special Operating Restrictions
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-91)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-91)
 
 ## Official Text
 

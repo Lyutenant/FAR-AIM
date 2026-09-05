@@ -6,7 +6,7 @@ title_number: 14
 part: 25
 appendix: "Appendix K"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:f3a92e609d0f70adb3cf8b20806ab49d11cdc8a92ceee9f03ba7718650fd09e6"
 generated: true
 title: "Appendix K to Part 25—Extended Operations (ETOPS)"
@@ -20,7 +20,7 @@ tags:
 # Appendix K to Part 25—Extended Operations (ETOPS)
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-25)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-25)
 
 ## Official Text
 

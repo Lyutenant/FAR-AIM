@@ -5,7 +5,7 @@ citation: "14 CFR Part 260"
 title_number: 14
 part: 260
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:3e980c24528eeb46b5834a7fc206c281d6aaf8da24340722523404dcd88dcde1"
 generated: true
 title: "REFUNDS FOR AIRLINE FARE AND ANCILLARY SERVICE FEES"
@@ -16,7 +16,7 @@ tags:
 # Part 260 — REFUNDS FOR AIRLINE FARE AND ANCILLARY SERVICE FEES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-260)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-260)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

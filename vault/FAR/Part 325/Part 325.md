@@ -5,7 +5,7 @@ citation: "14 CFR Part 325"
 title_number: 14
 part: 325
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:6bb7d960328f49b4e02c9b6fb00dd0686f42b2003ccda22cecc3cd239e9336db"
 generated: true
 title: "ESSENTIAL AIR SERVICE PROCEDURES"
@@ -16,7 +16,7 @@ tags:
 # Part 325 — ESSENTIAL AIR SERVICE PROCEDURES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-325)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-325)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER B—PROCEDURAL REGULATIONS
 

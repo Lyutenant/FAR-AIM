@@ -6,7 +6,7 @@ title_number: 14
 part: 382
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:93b910ef7ffb8740fda3eff52c836ca6fe1ee66be6ede818dcb3e286fe28241b"
 generated: true
 title: "Appendix A to Part 382—Report of Disability-Related Complaint Data"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 382—Report of Disability-Related Complaint Data
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-382)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-382)
 
 ## Official Text
 

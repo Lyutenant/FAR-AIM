@@ -6,7 +6,7 @@ title_number: 14
 part: 63
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:762061b21410abd2a778e99bd4bffbe6c192ffeb2a14185394a15e1d8f6d80e1"
 generated: true
 title: "Appendix A to Part 63—Test Requirements for Flight Navigator Certificate"
@@ -20,7 +20,7 @@ tags:
 # Appendix A to Part 63—Test Requirements for Flight Navigator Certificate
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-63)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-63)
 
 ## Official Text
 

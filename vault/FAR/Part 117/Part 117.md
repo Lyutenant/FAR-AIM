@@ -5,7 +5,7 @@ citation: "14 CFR Part 117"
 title_number: 14
 part: 117
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:cb8c069319d2d96b539d17b421d3bc1b58cc0e6571f596bc25f9e85476a32186"
 generated: true
 title: "FLIGHT AND DUTY LIMITATIONS AND REST REQUIREMENTS: FLIGHTCREW MEMBERS"
@@ -16,7 +16,7 @@ tags:
 # Part 117 — FLIGHT AND DUTY LIMITATIONS AND REST REQUIREMENTS: FLIGHTCREW MEMBERS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-117)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-117)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER G—AIR CARRIERS AND OPERATORS FOR COMPENSATION OR HIRE: CERTIFICATION AND OPERATIONS
 

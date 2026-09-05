@@ -5,7 +5,7 @@ citation: "14 CFR Part 398"
 title_number: 14
 part: 398
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:b3a4be20820cb3023a4b55572432276ccd75ab31a8aa7434c12ddd5ea7482541"
 generated: true
 title: "GUIDELINES FOR INDIVIDUAL DETERMINATIONS OF BASIC ESSENTIAL AIR SERVICE"
@@ -16,7 +16,7 @@ tags:
 # Part 398 — GUIDELINES FOR INDIVIDUAL DETERMINATIONS OF BASIC ESSENTIAL AIR SERVICE
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-398)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-398)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER F—POLICY STATEMENTS
 

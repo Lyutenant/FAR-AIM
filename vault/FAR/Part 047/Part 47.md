@@ -5,7 +5,7 @@ citation: "14 CFR Part 47"
 title_number: 14
 part: 47
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:b86ec65fadf4b2108797bfc6ced36fae85ed54e75da7753a0f57202dee232c27"
 generated: true
 title: "AIRCRAFT REGISTRATION"
@@ -16,7 +16,7 @@ tags:
 # Part 47 — AIRCRAFT REGISTRATION
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-47)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-47)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 

@@ -7,7 +7,7 @@ section: 4
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:d68bc88b238ec5ca71a3c89784a0d704b79a31c35766d0c8fb95f364da982c61"
+canonical_hash: "sha256:2b5d6960b694887ab2fe0e346cba292d299aa90524c473e6ee8145a3bf8104cc"
 generated: true
 title: "Arrival Procedures"
 aliases:

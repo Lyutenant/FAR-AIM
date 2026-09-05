@@ -5,7 +5,7 @@ citation: "14 CFR Part 372"
 title_number: 14
 part: 372
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:651d91e39f03b873c4300cbcf892bee3c51b525539e77ef9e7239f0a8ff32bd2"
 generated: true
 title: "OVERSEAS MILITARY PERSONNEL CHARTERS"
@@ -16,7 +16,7 @@ tags:
 # Part 372 — OVERSEAS MILITARY PERSONNEL CHARTERS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-372)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-372)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER D—SPECIAL REGULATIONS
 

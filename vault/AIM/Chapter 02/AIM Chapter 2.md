@@ -6,7 +6,7 @@ chapter: 2
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:10792ed8b21c4c3d9e144ef638d759a3e90708bfd3e9e087d8a7ea570cbd6b77"
+canonical_hash: "sha256:8c951db509e99b29386fd2fdecf3d1e74e1c52761d75136d72833bee0914dca7"
 generated: true
 title: "Aeronautical Lighting and Other Airport Visual Aids"
 aliases:

@@ -5,7 +5,7 @@ citation: "14 CFR Part 43"
 title_number: 14
 part: 43
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:4d4ca16a7422d8b01cb652d1c21a3dfe1a8139b9795a243b9d30abb872942f4a"
 generated: true
 title: "MAINTENANCE, PREVENTIVE MAINTENANCE, REBUILDING, AND ALTERATION"
@@ -16,7 +16,7 @@ tags:
 # Part 43 — MAINTENANCE, PREVENTIVE MAINTENANCE, REBUILDING, AND ALTERATION
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-43)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-43)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 

@@ -6,7 +6,7 @@ title_number: 14
 part: 135
 appendix: "Appendix G"
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:6c392ed0f92da86090d0d4543e01029f14747b00975bf26384a3842677bb6ac5"
 generated: true
 title: "Appendix G to Part 135—Extended Operations (ETOPS)"
@@ -20,7 +20,7 @@ tags:
 # Appendix G to Part 135—Extended Operations (ETOPS)
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-135)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-135)
 
 ## Official Text
 

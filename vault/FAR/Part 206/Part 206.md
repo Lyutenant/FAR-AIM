@@ -5,7 +5,7 @@ citation: "14 CFR Part 206"
 title_number: 14
 part: 206
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:116a3103374fcf8679a59b8b239242bc56958a20f56092e4a18dadaadbef2b3a"
 generated: true
 title: "CERTIFICATES OF PUBLIC CONVENIENCE AND NECESSITY: SPECIAL AUTHORIZATIONS AND EXEMPTIONS"
@@ -16,7 +16,7 @@ tags:
 # Part 206 — CERTIFICATES OF PUBLIC CONVENIENCE AND NECESSITY: SPECIAL AUTHORIZATIONS AND EXEMPTIONS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-206)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-206)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 

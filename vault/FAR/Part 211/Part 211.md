@@ -5,7 +5,7 @@ citation: "14 CFR Part 211"
 title_number: 14
 part: 211
 source: "ecfr"
-source_version: "2026-08-24"
+source_version: "2026-09-03"
 canonical_hash: "sha256:80d1c0fe7e13c0bcb97c178060884ba23b3509754fb3e11bff768e22498f2b53"
 generated: true
 title: "APPLICATIONS FOR PERMITS TO FOREIGN AIR CARRIERS"
@@ -16,7 +16,7 @@ tags:
 # Part 211 — APPLICATIONS FOR PERMITS TO FOREIGN AIR CARRIERS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-08-24 — [view on eCFR](https://www.ecfr.gov/on/2026-08-24/title-14/part-211)
+> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-211)
 > CHAPTER II—OFFICE OF THE SECRETARY, DEPARTMENT OF TRANSPORTATION (AVIATION PROCEEDINGS)
 > SUBCHAPTER A—ECONOMIC REGULATIONS
 
