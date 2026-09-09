@@ -18,7 +18,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-from far_aim.generate import BuildError, naming
+from far_aim.generate import BuildError, enrich, naming
 from far_aim.generate.aim_markdown import asset_prefix_for, collect_text, render_aim_blocks
 from far_aim.generate.frontmatter import Value
 from far_aim.generate.markdown import escape_md
@@ -196,6 +196,9 @@ def build_paragraph_note(
     targets: Targets,
     far: FarTargets | None = None,
     glossary: GlossaryLinks | None = None,
+    *,
+    related: enrich.RelatedIndex | None = None,
+    related_targets: enrich.Targets | None = None,
 ) -> Note:
     source = para["source"]
     frontmatter: list[tuple[str, Value]] = [
@@ -218,12 +221,16 @@ def build_paragraph_note(
         naming.aim_chapter_folder(para["chapter"]),
         f"{naming.aim_paragraph_stem(para['paragraph'])}.md",
     )
+    xrefs = _xref_chunks(para, targets, far)
     chunks = [
         f"# AIM {para['paragraph']} — {escape_md(para['heading'])}",
         _source_callout(source, source["url"]),
         *_official_text_chunks(para["content"], path_parts),
-        *_xref_chunks(para, targets, far),
+        *xrefs,
         *glossary_chunks(para["content"], glossary),
+        *enrich.related_chunks(
+            para["id"], related, related_targets or {}, exclude=enrich.linked_stems(xrefs)
+        ),
     ]
     return Note(
         kind="aim",

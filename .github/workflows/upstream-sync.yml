@@ -2,7 +2,7 @@
 #
 # Daily: `far-aim update` polls upstream and exits cleanly when every source
 # is current (no commit, no PR). When a source changed it fetches, parses,
-# rebuilds and validates — any failure stops the job before a PR is opened,
+# re-derives the enrichment links, rebuilds and validates — any failure stops the job before a PR is opened,
 # so a parser failure blocks publication and the committed vault stays at
 # the last known-good state (plan §32.13). Real changes become a pull
 # request for human review; nothing is ever auto-merged (plan §32.7).
@@ -72,7 +72,7 @@ jobs:
       - name: Detect changes
         id: detect
         run: |
-          if [ -n "$(git status --porcelain -- data/manifests vault)" ]; then
+          if [ -n "$(git status --porcelain -- data/manifests data/enrichment vault)" ]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -114,7 +114,7 @@ jobs:
             echo '```'
             echo
             echo "### Vault diff"
-            git add -A -- data/manifests vault
+            git add -A -- data/manifests data/enrichment vault
             echo '```text'
             git diff --cached --stat -- vault | tail -3
             echo '```'
@@ -144,5 +144,6 @@ jobs:
           body-path: pr-body.md
           add-paths: |
             data/manifests
+            data/enrichment
             vault
           delete-branch: true

@@ -1,8 +1,8 @@
 """Command-line interface for the far-aim pipeline (plan §18).
 
-Implemented: `check`, `validate`, `fetch ecfr|aim`, `parse ecfr|aim`,
-`build-vault`. The remaining commands are registered stubs that exit with
-code 2 until their phase is implemented.
+Implemented: `check`, `validate`, `fetch ecfr|aim|pcg`, `parse ecfr|aim|pcg`,
+`enrich`, `diff`, `build-vault`, `update`. The remaining command is a
+registered stub that exits with code 2 until its phase is implemented.
 
 The normalized layer of every corpus is published, recovered and verified
 by the same code, parametrized by a :class:`LayerSpec` (directory name,
@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import contextlib
+import dataclasses
 import json
 import os
 import re
@@ -29,9 +30,12 @@ from far_aim.config import Config
 from far_aim.generate import BuildError
 from far_aim.generate import aim_notes as generate_aim_notes
 from far_aim.generate import build as generate_build
+from far_aim.generate import concept_notes as generate_concept_notes
 from far_aim.generate import notes as generate_notes
 from far_aim.generate import pcg_notes as generate_pcg_notes
-from far_aim.links import glossary
+from far_aim.generate.enrich import EnrichmentLayer
+from far_aim.links import glossary, semantic
+from far_aim.links.concepts import ConceptGraph
 from far_aim.log import setup_logging
 from far_aim.manifest import ManifestError, SourceManifest, SourceState
 from far_aim.models import aim as aim_model
@@ -95,10 +99,15 @@ def build_parser() -> argparse.ArgumentParser:
     )
     sub.add_parser("normalize", help="normalize parsed data into canonical JSON")
     sub.add_parser("validate", help="validate manifest and normalized data")
+    sub.add_parser(
+        "enrich",
+        help="derive the related-links layer (data/enrichment/related.json) from the "
+        "canonical FAR and AIM layers",
+    )
     sub.add_parser("diff", help="structural diff between accepted source versions")
     sub.add_parser("build-vault", help="generate the Obsidian vault from canonical data")
     update = sub.add_parser(
-        "update", help="run the full check→fetch→parse→validate→diff→generate sequence"
+        "update", help="run the full check→fetch→parse→enrich→diff→generate→validate sequence"
     )
     update.add_argument(
         "--reverify",
@@ -1645,6 +1654,182 @@ def _pcg_layer_pending_defect(config: Config, manifest: SourceManifest) -> str |
     )
 
 
+# ---------------------------------------------------------------------------
+# enrichment layer (Phase 9, plan §36)
+# ---------------------------------------------------------------------------
+
+_CURATED_ROOTS = ("Collections", "Topics", "Study")
+
+
+def _curated_notes(config: Config) -> dict[str, tuple[str, ...]]:
+    """stem → vault-relative path parts of every curated note on disk."""
+    out: dict[str, tuple[str, ...]] = {}
+    for root_name in _CURATED_ROOTS:
+        root = config.vault_dir / root_name
+        if not root.is_dir():
+            continue
+        for path in sorted(root.rglob("*.md")):
+            if generate_build.is_generated_note(path):
+                continue
+            out.setdefault(path.stem, path.relative_to(config.vault_dir).parts)
+    return out
+
+
+def _enrichment_layer(config: Config) -> EnrichmentLayer | str | None:
+    """The committed enrichment layer, a defect message, or None when absent.
+
+    ``data/enrichment/`` missing altogether means "no enrichment" — the
+    vault is built without concept notes or derived links (plan §36.1). A
+    present-but-broken file, or a related-links file without its review
+    overlay, is a defect: silently building without curated decisions is
+    exactly what §32.13 forbids. Staleness of ``related.json`` against the
+    accepted layers is checked where the hashes are known (``plan_vault``).
+    """
+    if not config.enrichment_dir.is_dir():
+        return None
+    concepts: ConceptGraph | None = None
+    related: semantic.RelatedIndex | None = None
+    try:
+        if config.concepts_path.exists():
+            concepts = ConceptGraph.load(config.concepts_path)
+        if config.related_path.exists():
+            raw = semantic.RelatedIndex.load(config.related_path)
+            review = semantic.Review.load(config.related_review_path)
+            related = dataclasses.replace(raw, units=review.apply(raw.units))
+    except BuildError as exc:
+        return str(exc)
+    if concepts is None and related is None:
+        return None
+    curated = _curated_notes(config) if concepts is not None else {}
+    return EnrichmentLayer(concepts=concepts, related=related, curated_notes=curated)
+
+
+def _vault_has_generated_concepts(config: Config) -> bool:
+    root = config.vault_dir / generate_concept_notes.CONCEPTS_DIR
+    if not root.is_dir():
+        return False
+    return any(generate_build.is_generated_note(p) for p in sorted(root.rglob("*.md")))
+
+
+def cmd_enrich(config: Config) -> int:
+    """Compute ``data/enrichment/related.json`` from the verified layers (plan §36.3).
+
+    Deterministic and idempotent: identical inputs produce identical bytes,
+    and the file is rewritten only when its content changes. The human
+    review overlay is validated (unknown ids fail; stale denials warn) but
+    never modified — except that a missing overlay is created empty, since
+    a first ``enrich`` has nothing to review yet.
+    """
+    path = config.manifest_path
+    if not path.exists():
+        print(f"error: source registry missing: {path}", file=sys.stderr)
+        return EXIT_ERROR
+    try:
+        with exclusive_lock(fetch_lock_path(config)):
+            return _enrich_locked(config)
+    except FetchError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    except OSError as exc:
+        print(f"error: filesystem failure during enrich: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+
+
+def _enrich_locked(config: Config) -> int:
+    try:
+        manifest = SourceManifest.load(config.manifest_path)
+    except ManifestError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    state = manifest.sources[ecfr.SOURCE_NAME]
+    if state.accepted_version is None or state.canonical_hash is None:
+        print(
+            "error: no accepted eCFR canonical layer; run `far-aim fetch ecfr` "
+            "and `far-aim parse ecfr` first",
+            file=sys.stderr,
+        )
+        return EXIT_ERROR
+    docs = _load_verified_docs(config, state, ECFR_SPEC)
+    if isinstance(docs, str):
+        print(f"error: {docs}", file=sys.stderr)
+        return EXIT_ERROR
+    aim_state = manifest.sources[aim_source.SOURCE_NAME]
+    aim_docs: dict[str, dict] | None = None
+    if aim_state.accepted_version is not None and aim_state.canonical_hash is not None:
+        loaded = _load_verified_docs(config, aim_state, AIM_SPEC)
+        if isinstance(loaded, str):
+            print(f"error: {loaded}", file=sys.stderr)
+            return EXIT_ERROR
+        aim_docs = loaded
+    elif aim_state.accepted_version is not None:
+        print(
+            f"error: the accepted AIM edition {aim_state.accepted_version} has not been "
+            "parsed yet; run `far-aim parse aim` first",
+            file=sys.stderr,
+        )
+        return EXIT_ERROR
+    else:
+        print("note: no accepted AIM canonical layer; deriving FAR-only related links.")
+
+    units = generate_build.collect_units(docs, aim_docs)
+    related = semantic.compute_related(units)
+    inputs = generate_build.related_inputs(state.canonical_hash, aim_state.canonical_hash)
+    data = semantic.related_bytes(inputs, related)
+
+    review_path = config.related_review_path
+    if not review_path.exists():
+        config.enrichment_dir.mkdir(parents=True, exist_ok=True)
+        generate_build.write_text_atomic(review_path, _EMPTY_REVIEW)
+        print(f"note: created empty review overlay {review_path}")
+    try:
+        review = semantic.Review.load(review_path)
+    except BuildError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    unknown = review.unknown_ids(unit.id for unit in units)
+    if unknown:
+        print(
+            f"error: review overlay {review_path} names unknown unit id(s): "
+            f"{', '.join(unknown)}",
+            file=sys.stderr,
+        )
+        return EXIT_ERROR
+    for unit_id, target in review.stale(related):
+        print(f"warning: review denial {unit_id} → {target} is stale (no longer suggested)")
+
+    links = sum(len(v) for v in related.values())
+    linked = sum(1 for v in related.values() if v)
+    target = config.related_path
+    if target.exists() and target.read_bytes() == data:
+        print(
+            f"ok: related links unchanged ({len(units)} units, {links} links from "
+            f"{linked} units; {semantic.PROVIDER_ID} v{semantic.PROVIDER_VERSION})"
+        )
+        return EXIT_OK
+    config.enrichment_dir.mkdir(parents=True, exist_ok=True)
+    generate_build.write_text_atomic(target, data)
+    print(
+        f"ok: related links written to {target} ({len(units)} units, {links} links from "
+        f"{linked} units; {semantic.PROVIDER_ID} v{semantic.PROVIDER_VERSION})"
+    )
+    return EXIT_OK
+
+
+_EMPTY_REVIEW = (
+    json.dumps(
+        {
+            "_comment": "Human review overlay for the derived related links (plan §36.3). "
+            "Each deny entry suppresses one suggestion: unit and target are canonical ids "
+            "(cfr-14-91.155, aim-3-1-4); reason is required.",
+            "deny": [],
+        },
+        indent=2,
+        ensure_ascii=False,
+    )
+    + "\n"
+).encode("utf-8")
+
+
 def _validate_vault(config: Config, manifest: SourceManifest) -> int:
     """Verify the generated vault byte-matches the canonical layers.
 
@@ -1657,6 +1842,7 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
     vault_far = config.vault_dir / generate_notes.FAR_DIR
     vault_aim = config.vault_dir / generate_aim_notes.AIM_DIR
     vault_pcg = config.vault_dir / generate_pcg_notes.PCG_DIR
+    vault_concepts = config.vault_dir / generate_concept_notes.CONCEPTS_DIR
     status_path = config.vault_dir / f"{generate_notes.SOURCE_STATUS_STEM}.md"
     home_path = config.vault_dir / f"{generate_notes.HOME_STEM}.md"
     # A vault "exists" only if any generator-owned note does. Directory
@@ -1669,7 +1855,7 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
         generate_build.is_generated_note(p) for p in (status_path, home_path)
     ) or any(
         generate_build.is_generated_note(p)
-        for root in (vault_far, vault_aim, vault_pcg)
+        for root in (vault_far, vault_aim, vault_pcg, vault_concepts)
         if root.is_dir()
         for p in sorted(root.rglob("*.md"))
     )
@@ -1732,9 +1918,18 @@ def _plan_generated_vault(
     pcg = _pcg_layer(config, manifest)
     if isinstance(pcg, str):
         return pcg
+    enrichment = _enrichment_layer(config)
+    if isinstance(enrichment, str):
+        return enrichment
     try:
         plan = generate_build.plan_vault(
-            docs, state.accepted_version, state.canonical_hash, manifest.sources, aim, pcg
+            docs,
+            state.accepted_version,
+            state.canonical_hash,
+            manifest.sources,
+            aim,
+            pcg,
+            enrichment,
         )
     except BuildError as exc:
         return str(exc)
@@ -1750,7 +1945,12 @@ def _stale_generated_on_disk(config: Config, planned: dict[Path, bytes]) -> list
     """
     vault_aim = config.vault_dir / generate_aim_notes.AIM_DIR
     on_disk: list[Path] = []
-    corpus_dirs = (generate_notes.FAR_DIR, generate_aim_notes.AIM_DIR, generate_pcg_notes.PCG_DIR)
+    corpus_dirs = (
+        generate_notes.FAR_DIR,
+        generate_aim_notes.AIM_DIR,
+        generate_pcg_notes.PCG_DIR,
+        generate_concept_notes.CONCEPTS_DIR,
+    )
     for root_name in corpus_dirs:
         root = config.vault_dir / root_name
         if root.is_dir():
@@ -1914,13 +2114,26 @@ def _build_vault_locked(config: Config) -> int:
     if isinstance(pcg, str):
         print(f"error: {pcg}", file=sys.stderr)
         return EXIT_ERROR
+    enrichment = _enrichment_layer(config)
+    if isinstance(enrichment, str):
+        print(f"error: {enrichment}", file=sys.stderr)
+        return EXIT_ERROR
     if aim is None:
         print("note: no accepted AIM canonical layer; the vault will not cover the AIM.")
     if pcg is None:
         print("note: no accepted PCG canonical layer; the vault will not cover the PCG.")
+    if enrichment is None:
+        print("note: no enrichment layer (data/enrichment); no concept notes or derived links.")
     try:
         stats = generate_build.build_vault(
-            config, state.accepted_version, state.canonical_hash, manifest.sources, docs, aim, pcg
+            config,
+            state.accepted_version,
+            state.canonical_hash,
+            manifest.sources,
+            docs,
+            aim,
+            pcg,
+            enrichment,
         )
     except BuildError as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -2205,6 +2418,10 @@ def cmd_update(config: Config, *, reverify: bool = False) -> int:
         ("parse ecfr", lambda: cmd_parse_ecfr(config, None)),
         ("parse aim", lambda: cmd_parse_aim(config)),
         ("parse pcg", lambda: cmd_parse_pcg(config)),
+        # Derived links are recomputed from the freshly parsed layers so a
+        # stale related.json never reaches the vault (plan §36.4); the
+        # vault diff in the PR is where the changed suggestions are reviewed.
+        ("enrich", lambda: cmd_enrich(config)),
         # Structural diff before generation (plan §22 Phase 8): the vault
         # on disk still shows the old versions, the layers the new — the
         # report of adds/rewrites/removals lands in the update log the PR
@@ -2281,6 +2498,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_parse_aim(config) if args.corpus == "aim" else cmd_parse_pcg(config)
     if args.command == "build-vault":
         return cmd_build_vault(config)
+    if args.command == "enrich":
+        return cmd_enrich(config)
     if args.command == "diff":
         return cmd_diff(config)
     if args.command == "update":

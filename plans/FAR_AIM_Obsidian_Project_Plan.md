@@ -1997,6 +1997,11 @@ Obsidian is the first frontend, not the architectural endpoint.
 
 # 31. Recommended Initial Agent Assignment
 
+> **Status (2026-09-08):** this section is historical. Phases 0 through 8 are
+> complete and the first assignment's acceptance criteria are met; the current
+> state of each phase is recorded in `AGENTS.md` ("Current status"). The next
+> open work is Phase 9 (§22), whose design is in §36.
+
 The AI coding agent should **start narrowly**.
 
 ## First assignment
@@ -2080,8 +2085,202 @@ The FAA publication page should be treated as the primary discovery/version page
 
 # 35. Suggested Immediate Next Step
 
+> **Status (2026-09-08):** historical — Phases 0–8 are done. See §36 for the
+> Phase 9 design.
+
 Give this document to the coding agent and instruct it to implement **Phase 0–2 only**.
 
 Do not begin with an end-to-end “convert the whole FAR/AIM” prompt.
 
 The highest-risk technical problem is trustworthy, deterministic ingestion. Once the eCFR canonical layer is correct, Markdown generation is comparatively straightforward; once the full canonical layer is correct, Obsidian, AI, search, and study features become downstream applications rather than fragile foundations.
+
+---
+
+# 36. Phase 9 Design — Enrichment Layer
+
+Added 2026-09-08, after Phases 0–8 shipped. This section is the design of
+record for Phase 9 (§22) and refines §12.3, §12.4 and §20.4 without changing
+them. Two features ship together, chosen because both add navigational value
+while staying fully separable from authoritative data (§32.12):
+
+1. **Concept graph** (Tier 3, §12.3) — a curated prerequisite graph of study
+   concepts, each pointing at the authoritative notes that define it.
+2. **Related sections** (Tier 4, §12.4) — machine-derived "related" links
+   between FAR sections and AIM paragraphs, produced by a deterministic
+   similarity provider.
+
+## 36.1 Placement and ownership
+
+```text
+data/enrichment/
+├── concepts.json          # committed, human-curated (Tier 3)
+├── related.json           # committed, machine-derived by `far-aim enrich` (Tier 4)
+└── related-review.json    # committed, human review overlay for Tier 4 (deny list)
+
+vault/
+├── Concepts/              # generated, generator-owned (like FAR/, AIM/, PCG/)
+│   ├── Concept Map.md     # generated index + prerequisite diagram
+│   └── <Concept Title>.md # one generated note per concept
+└── FAR/…, AIM/…           # authoritative notes gain one trailing derived section
+```
+
+- Everything enrichment-related lives under `data/enrichment/` and is
+  loaded by the generator exactly as the PCG glossary gate is: missing or
+  malformed curation fails the build loudly (§32.13); a *missing*
+  `related.json` simply means no derived links are rendered.
+- Authoritative canonical JSON (`data/normalized/`) is never touched by
+  enrichment. Deleting `data/enrichment/` and rebuilding yields a vault with
+  no enrichment and no other change — the separability test (§20.4).
+- `vault/Concepts/` is an owned root: stale generated concept notes are
+  pruned on rebuild, curated files parked inside are kept with a warning,
+  and `validate` byte-compares it like the other corpora.
+
+## 36.2 Concept graph (Tier 3)
+
+`concepts.json` is a list of concept records:
+
+```json
+{
+  "id": "vfr-weather-minimums",
+  "title": "VFR Weather Minimums",
+  "area": "Airspace and Weather",
+  "description": "One or two curator-written sentences. Never regulatory text.",
+  "prerequisites": ["airspace-classes"],
+  "far": ["91.155", "91.157", "Part 91"],
+  "aim": ["3-1-4", "AIM 3-2"],
+  "pcg": ["VISUAL FLIGHT RULES"],
+  "see_also": ["VFR Weather Minimums"]
+}
+```
+
+Rules, all enforced at build time:
+
+- `id` is a slug (`^[a-z0-9]+(-[a-z0-9]+)*$`), unique; `title` is the note
+  stem and joins the global stem/alias namespace (§17.4), so it must not
+  collide case-insensitively with any generated or curated name.
+- `prerequisites` name concept ids; the graph must be acyclic (a cycle is a
+  build error). "Builds on this" (reverse edges) is derived, never authored.
+- `far`, `aim`, `pcg` name existing generated stems (`91.155`, `Part 91`,
+  `3-1-4`, `AIM 3-2`, `VISUAL FLIGHT RULES`); a reference the accepted
+  editions do not define fails the build — a concept must never silently
+  point nowhere when an upstream edition drops a section.
+- `see_also` names any stem: generated, another concept's title, or a
+  curated note (`Collections/`, `Topics/`, `Study/`) that exists on disk.
+- `description` is the curator's own words — a study aid, visibly marked as
+  such in the note's callout. It is not, and must never quote as if it were,
+  official text (§32.1, §32.3).
+
+Rendering: `Concepts/<Title>.md` (`type: concept`, `generated: true`) with a
+"Curated concept" callout, the description, `## Prerequisites`,
+`## Builds on this`, `## Regulations`, `## AIM guidance`, `## Glossary`,
+`## See also`. `Concepts/Concept Map.md` groups concepts by area, lists the
+starting points (no prerequisites), a suggested study order (deterministic
+topological sort, ties by title) and a Mermaid prerequisite diagram
+(rendered natively by Obsidian). `Home.md` links the Concept Map when a
+graph is present. Authoritative notes are **not** modified by Tier 3 —
+Obsidian backlinks already surface "which concepts cite § 91.155".
+
+## 36.3 Related sections (Tier 4)
+
+### Provider
+
+The first provider is `lexical-tfidf` v1 in `far_aim.links.semantic`: pure
+Python, no dependencies, bit-for-bit deterministic across platforms:
+
+- Units: every FAR section (heading + official text, via
+  `citations.collect_text`) and every AIM paragraph (heading + text via
+  `aim_markdown.collect_text`). Appendices, chapter/section containers and
+  PCG terms are not units (definitions already have Tier 2 links; long
+  tabular appendices swamp similarity with boilerplate).
+- Tokens: ASCII lowercase, `[a-z][a-z0-9]{2,}`, a fixed English stopword
+  list, simple plural folding. Terms occurring in fewer than 2 units or in
+  more than 15 % of units are dropped (boilerplate such as "person",
+  "aircraft", "shall" never drives similarity).
+- Weights: `tf = 1 + ln(count)`, `idf = ln(N/df)`, L2-normalised; cosine
+  similarity via an inverted index accumulated in sorted term order.
+- Per unit, up to 5 FAR targets and 5 AIM targets with cosine ≥ 0.30,
+  scores rounded to 4 places; ranking by (score desc, id asc) so ties are
+  stable.
+
+Why not embeddings first: an embedding provider needs either a multi-GB
+local model stack or a paid API, neither of which can run inside the daily
+`upstream-sync` Action reproducibly. The record format below is
+provider-neutral (`provider.id`/`version` are recorded per file), so a
+committed embedding-provider output can replace or sit beside the lexical
+one later without changing the generator; that is the intended follow-up.
+
+### File
+
+`related.json` (committed, machine-written, one line per unit):
+
+```json
+{"schema": 1,
+ "provider": {"id": "lexical-tfidf", "version": 1},
+ "inputs": {"ecfr": "<eCFR title canonical_hash>", "aim": "<AIM canonical_hash>"},
+ "units": {"cfr-14-91.155": [{"target": "aim-3-1-4", "score": 0.6123}, …]}}
+```
+
+- `inputs` pins the canonical layers the file was computed from. The
+  generator refuses to render a `related.json` whose inputs do not match the
+  manifest ("stale; run `far-aim enrich`") — §32.13, never silently stale.
+- `related-review.json` is the human overlay: `{"deny": [{"unit": …,
+  "target": …, "reason": …}]}`. Denied pairs are dropped at render time.
+  A deny entry naming an unknown unit is an error; one whose pair no longer
+  surfaces is reported as a warning by `enrich` (suggestions drift with
+  content; a no-longer-needed denial is not a defect).
+
+### Rendering
+
+Each FAR section note and AIM paragraph note in the corpus ends with:
+
+```markdown
+## Related (derived)
+
+> [!info] Derived links
+> Suggested by lexical similarity (`lexical-tfidf` v1), not by an explicit
+> reference. Review in `data/enrichment/related-review.json`.
+
+- [[91.157|§ 91.157 — Special VFR weather minimums]]
+- [[3-1-4|AIM 3-1-4 — Basic VFR Weather Minimums]]
+```
+
+Explicit relationships outrank inferred ones (§32.11): a target already
+listed under `## Explicit Cross-References` of the same note is omitted from
+the derived list. Scores stay in JSON — they are reviewer metadata, and
+printing them would churn every note on tiny content edits.
+
+## 36.4 CLI and pipeline
+
+- `far-aim enrich` — computes `related.json` from the verified eCFR and AIM
+  layers (AIM optional), applies nothing from the review file except
+  validation, writes only when the bytes change (idempotent), reports unit
+  and link counts plus stale review entries. Runs under the source lock.
+- `build-vault`, `validate`, `diff` load the enrichment layer (concepts +
+  related + review + curated stems on disk) through one loader; all three
+  therefore agree byte-for-byte.
+- `update` runs `fetch×3 → parse×3 → enrich → diff → build-vault →
+  validate`, so an accepted upstream change always refreshes derived links
+  before publication and a stale `related.json` never reaches the vault.
+  The vault diff in the PR is how derived-link changes are reviewed.
+
+## 36.5 Invariants applied
+
+| Invariant | How Phase 9 honours it |
+|---|---|
+| §32.1, §32.3 | No enrichment output contains official text; concept descriptions are marked curated. |
+| §32.4 | `concepts.json`/`related.json` are canonical for the layer; notes are compiled output. |
+| §32.5 | `Concepts/` is generator-owned; curated files inside are kept, never overwritten. |
+| §32.10 | Provider is deterministic; `enrich` twice is a no-op; rebuilds are byte-stable. |
+| §32.11 | Explicit cross-references suppress duplicate derived links; sections are visually separate. |
+| §32.12 | Separate directory, separate note section, separate frontmatter type; delete-and-rebuild removes it cleanly. |
+| §32.13 | Stale inputs, unknown references, cycles and schema defects fail the build. |
+
+## 36.6 Exit criteria
+
+```text
+✓ `far-aim enrich` is deterministic and idempotent on the full corpus
+✓ A concept referencing a dropped section fails the build with a clear message
+✓ Deleting data/enrichment/ and rebuilding changes only enrichment output
+✓ validate byte-compares Concepts/ and the derived sections
+✓ Home → Concept Map → concept → regulation navigation works in Obsidian
+```

@@ -202,5 +202,25 @@ a snapshot reflects the FAA origin, not a mix of stale edge caches (the
 FAA had re-uploaded 101 AIM figures at higher resolution on 2026-08-18
 without an edition bump). Docs: docs/maintenance.md. Exit
 criteria are pinned by the `test_update_*` tests in tests/test_cli.py.
-Next: Phase 9 (AI enrichment) — gated on plan §31; enrichment must stay
-separate from authoritative data (plan §32.12).
+Phase 9 (enrichment; design of record plan §36, operator notes
+docs/enrichment.md) complete: everything lives under the committed
+`data/enrichment/` and is loaded like the glossary gate (malformed ⇒
+build error; directory absent ⇒ no enrichment, nothing else changes).
+Tier 3: `concepts.json` is a human-curated concept graph (46 Private
+Pilot concepts: prerequisites, the FAR/AIM/PCG stems that define each,
+curator descriptions that are never regulatory text); `build-vault`
+renders the generator-owned `vault/Concepts/` (one note per concept +
+`Concept Map.md` with study order and Mermaid prerequisite diagram),
+failing on unresolved references, cycles, or a title that collides with
+any stem or heading alias. Tier 4: `far-aim enrich` derives
+`related.json` (provider `lexical-tfidf` v1 in `links.semantic`:
+pure-Python TF-IDF cosine over FAR sections + AIM paragraphs, ≤5 per
+corpus, cosine ≥ 0.30, deterministic and idempotent, ~35 s) pinned to
+the canonical hashes it was computed from; a stale file fails the
+build; `related-review.json` is the human deny list. FAR section and
+AIM paragraph notes end with `## Related (derived)` (explicit
+cross-references are never repeated there, plan §32.11). `update` runs
+`enrich` between `parse` and `diff`; the sync workflow stages
+`data/enrichment` in its PR. Settled: an embedding provider is a
+documented follow-up (same file format, committed output) because the
+daily CI must rebuild the layer without models or keys.

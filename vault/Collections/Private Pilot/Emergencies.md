@@ -33,3 +33,10 @@ help, and the procedures when radios or navigation fail.
 - [[EMERGENCY]] · [[MAYDAY]] · [[PAN-PAN]]
 - [[TRANSPONDER CODES]]
 - [[SEARCH AND RESCUE]]
+
+## Concepts
+
+Prerequisite-ordered study notes on the [[Concept Map]]:
+
+- [[Emergencies and Deviations]]
+- [[Emergency Locator Transmitters and Search and Rescue]]

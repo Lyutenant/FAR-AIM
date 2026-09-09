@@ -24,3 +24,10 @@ privileges — with a certificate under Part 67, or under BasicMed.
 - [[8-1-1|AIM 8-1-1 — Fitness For Flight]]
 - [[AIM Chapter 8|AIM Chapter 8 — Medical Facts for Pilots]] — altitude, hyperventilation,
   carbon monoxide, illusions, vision
+
+## Concepts
+
+Prerequisite-ordered study notes on the [[Concept Map]]:
+
+- [[Medical Certification]]
+- [[Alcohol and Drugs]]

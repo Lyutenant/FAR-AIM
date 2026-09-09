@@ -24,3 +24,10 @@ and their limits, and solo cross-country authorization.
 - [[Cross-Country Flight]] — what counts as cross-country time, and the
   private-certificate experience requirements built on it
 - [[Medical and BasicMed]] — the medical a student pilot needs before solo
+
+## Concepts
+
+Prerequisite-ordered study notes on the [[Concept Map]]:
+
+- [[Student Pilot Privileges]]
+- [[Cross-Country Time]]

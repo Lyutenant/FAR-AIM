@@ -45,6 +45,24 @@ class Config:
         return self.links_dir / "pcg-glossary-gate.json"
 
     @property
+    def enrichment_dir(self) -> Path:
+        """Committed enrichment layer (plan §36): curated concept graph, the
+        machine-derived related-links file, and its human review overlay."""
+        return self.data_dir / "enrichment"
+
+    @property
+    def concepts_path(self) -> Path:
+        return self.enrichment_dir / "concepts.json"
+
+    @property
+    def related_path(self) -> Path:
+        return self.enrichment_dir / "related.json"
+
+    @property
+    def related_review_path(self) -> Path:
+        return self.enrichment_dir / "related-review.json"
+
+    @property
     def manifest_path(self) -> Path:
         return self.manifests_dir / "sources.json"
 

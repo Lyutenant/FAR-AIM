@@ -29,3 +29,10 @@ to do when something is not.
 
 - [[TRANSPONDER]]
 - [[EMERGENCY LOCATOR TRANSMITTER (ELT)]]
+
+## Concepts
+
+Prerequisite-ordered study notes on the [[Concept Map]]:
+
+- [[Required VFR Equipment]]
+- [[Transponders and ADS-B Out]]

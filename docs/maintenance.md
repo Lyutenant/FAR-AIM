@@ -54,8 +54,10 @@ changes into a pull request.
 4. **Full pipeline on change.** Otherwise it runs `fetch ecfr/aim/pcg`
    (unchanged sources re-verify their archive, or re-download and verify
    against the pinned `raw_hash` in a fresh environment), `parse` for all
-   three layers, `diff`, `build-vault`, then `validate` — stopping at the
-   first failing step. A fetch/parse/validation defect therefore blocks
+   three layers, `enrich` (re-derives `data/enrichment/related.json` from
+   the fresh layers so derived links never lag the content — plan §36.4,
+   docs/enrichment.md), `diff`, `build-vault`, then `validate` — stopping
+   at the first failing step. A fetch/parse/validation defect therefore blocks
    publication and the committed vault stays at the last known-good
    state (plan §32.13).
 5. **Structural diff before generation.** `far-aim diff` re-plans the

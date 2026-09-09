@@ -11,7 +11,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
-from far_aim.generate import BuildError, naming
+from far_aim.generate import BuildError, enrich, naming
 from far_aim.generate.frontmatter import Value
 from far_aim.generate.markdown import ECFR_BASE_URL, escape_md, render_blocks
 from far_aim.links import citations as cites
@@ -182,7 +182,13 @@ def _official_text_chunks(content: list[dict], *, reserved: bool) -> list[str]:
 
 
 def build_section_note(
-    sec: dict, aliases: list[str], known_sections: set[str], known_parts: set[str] | None = None
+    sec: dict,
+    aliases: list[str],
+    known_sections: set[str],
+    known_parts: set[str] | None = None,
+    *,
+    related: enrich.RelatedIndex | None = None,
+    related_targets: enrich.Targets | None = None,
 ) -> Note:
     part = sec["part"]
     section = sec["section"]
@@ -231,7 +237,14 @@ def build_section_note(
     )
     if source_notes:
         chunks.extend(["## Source Notes", *source_notes])
-    chunks.extend(_xref_chunks(sec["content"], known_sections, section, known_parts, sec["part"]))
+    xrefs = _xref_chunks(sec["content"], known_sections, section, known_parts, sec["part"])
+    chunks.extend(xrefs)
+    # Tier 4 last, visibly separate, and never repeating an explicit reference.
+    chunks.extend(
+        enrich.related_chunks(
+            sec["id"], related, related_targets or {}, exclude=enrich.linked_stems(xrefs)
+        )
+    )
 
     return Note(
         kind="regulation",
@@ -494,7 +507,7 @@ def build_source_status(sources: dict[str, object]) -> Note:
     )
 
 
-def build_home(*, has_aim: bool, has_pcg: bool) -> Note:
+def build_home(*, has_aim: bool, has_pcg: bool, has_concepts: bool = False) -> Note:
     """``vault/Home.md`` — the vault's entry point (plan §22 Phase 7).
 
     Static navigation only: edition details live in ``Source Status`` so this
@@ -509,6 +522,24 @@ def build_home(*, has_aim: bool, has_pcg: bool) -> Note:
     if has_pcg:
         sources.append("- [[PCG|Pilot/Controller Glossary]]")
     sources.append(f"- [[{SOURCE_STATUS_STEM}]] — the editions this vault is built from")
+    study = [
+        "- [[Collections]] — study collections for a certificate or rating",
+        "- [[Topics]] — notes that gather everything on one concept across sources",
+        "- [[Study]] — freeform working notes",
+    ]
+    finding = [
+        "- **Search** any citation (`91.155`, `AIM 4-1-9`) or heading — "
+        "citation forms and headings are note aliases.",
+        "- **Backlinks** on any note list every note that cites it — open a "
+        "glossary term or a section to see everything referring to it.",
+        "- Section notes end with their explicit cross-references; AIM notes "
+        "also list the glossary terms they use.",
+    ]
+    if has_concepts:
+        finding.append(
+            "- A trailing **Related (derived)** section, where present, holds "
+            "similarity-based suggestions — a study aid, not a cross-reference."
+        )
 
     chunks = [
         "# FAR/AIM Knowledge Vault",
@@ -518,26 +549,19 @@ def build_home(*, has_aim: bool, has_pcg: bool) -> Note:
         "## Sources",
         "\n".join(sources),
         "## Study layer",
+        *(
+            [
+                "The [[Concept Map]] lists study concepts, what each builds on, and a"
+                " suggested order; it is generated from the curated concept graph."
+            ]
+            if has_concepts
+            else []
+        ),
         "Curated notes live outside the generated trees and are never touched"
         " by a rebuild:",
-        "\n".join(
-            [
-                "- [[Collections]] — study collections for a certificate or rating",
-                "- [[Topics]] — notes that gather everything on one concept across sources",
-                "- [[Study]] — freeform working notes",
-            ]
-        ),
+        "\n".join(study),
         "## Finding things",
-        "\n".join(
-            [
-                "- **Search** any citation (`91.155`, `AIM 4-1-9`) or heading — "
-                "citation forms and headings are note aliases.",
-                "- **Backlinks** on any note list every note that cites it — open a "
-                "glossary term or a section to see everything referring to it.",
-                "- Section notes end with their explicit cross-references; AIM notes "
-                "also list the glossary terms they use.",
-            ]
-        ),
+        "\n".join(finding),
     ]
     return Note(
         kind="home",

@@ -45,6 +45,18 @@ paraphrased or AI-generated. Full specification:
   terms. The FAR deliberately gets no glossary links (its vocabulary is
   defined by 14 CFR Part 1).
 
+- **Phase 7** — Obsidian quality layer: generated `Home.md` entry point plus
+  the committed curated study layer (`Collections/Private Pilot/`, `Topics/`).
+- **Phase 8** — automated maintenance: `far-aim update` and the daily
+  `upstream-sync` Action that opens a reviewable PR on any upstream change.
+- **Phase 9** — enrichment (`far-aim enrich`, `build-vault`): a curated
+  concept graph (46 Private Pilot concepts with prerequisites, rendered
+  under `vault/Concepts/` with a Concept Map and Mermaid prerequisite
+  diagram) and deterministic "related" suggestions between FAR sections
+  and AIM paragraphs (pure-Python TF-IDF, ~24,100 links, human deny-list),
+  rendered as a clearly labelled `## Related (derived)` section. Fully
+  separable from the authoritative layers — see docs/enrichment.md.
+
 ## Operational notes
 
 - **FAA raw snapshots must be archived outside this repository** (plan §6.2:
@@ -73,8 +85,10 @@ python3 -m venv .venv                 # requires Python 3.12+
 .venv/bin/far-aim parse aim          # canonical JSON for the accepted AIM
 .venv/bin/far-aim fetch pcg          # fetch + archive current PCG HTML edition
 .venv/bin/far-aim parse pcg          # canonical JSON for the accepted PCG
-.venv/bin/far-aim build-vault        # render vault/FAR, vault/AIM and vault/PCG
+.venv/bin/far-aim enrich             # derive data/enrichment/related.json (Phase 9)
+.venv/bin/far-aim build-vault        # render vault/FAR, AIM, PCG and Concepts
 .venv/bin/far-aim validate           # verify manifest, canonical layers, vault
+.venv/bin/far-aim update             # the whole sequence, only when upstream changed
 ```
 
 ## Layout

@@ -357,3 +357,34 @@ are emitted only for notes that exist (`tests/test_aim_generate.py`,
 zero-broken-links and byte-idempotency checks cover them. Remaining
 categories land with their corresponding phases (change gates and the FAA
 change-note cross-check: Phase 8).
+
+## Current implementation status (Phase 9)
+
+The enrichment layer (plan §36, docs/enrichment.md) adds gates without
+loosening any existing one:
+
+- **Curation files fail closed.** `data/enrichment/concepts.json`,
+  `related.json` and `related-review.json` are shape-checked on load like
+  the glossary gate: an unknown key, a malformed record, a duplicate id or
+  title, a dangling prerequisite or a prerequisite cycle is a build error.
+  A `related.json` whose recorded inputs (canonical hashes) differ from the
+  accepted layers is rejected as stale, as is one naming a unit or target
+  the layers do not contain; a `related.json` without its review overlay is
+  an error rather than an unreviewed render.
+- **References must resolve.** Every FAR/AIM/PCG stem a concept names must
+  exist in the accepted editions, and every `see_also` must be a generated
+  stem, a concept, or a curated note on disk. Concept titles join the global
+  stem namespace and, additionally, may not equal any heading alias.
+- **Plan-level checks still apply.** Concept notes count toward the
+  expected file total, and every `[[link]]` they (and the derived sections)
+  emit must resolve — broken generated links remain impossible by
+  construction.
+- **Byte-comparison covers the layer.** `validate` re-renders the whole
+  vault including `Concepts/` and the `## Related (derived)` sections and
+  byte-compares it; stale generated concept notes on disk are reported.
+  `validate` does not recompute similarity — `far-aim enrich` is
+  deterministic and idempotent, and `far-aim update` reruns it on every
+  accepted change, so drift is caught daily.
+- **Separability is tested.** Removing `data/enrichment/` and rebuilding
+  prunes `Concepts/` and every derived section and leaves every other byte
+  of the vault unchanged (`tests/test_enrichment.py`, `tests/test_cli.py`).

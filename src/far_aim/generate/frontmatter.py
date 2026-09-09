@@ -92,6 +92,10 @@ _PCG_INDEX_KEYS = (
     "tags",
 )
 
+# Concept notes (plan §36.2): curated-content, generated-file study aids.
+_CONCEPT_KEYS = ("id", "type", "area", "generated", "title", "tags")
+_CONCEPT_INDEX_KEYS = ("id", "type", "generated", "title", "tags")
+
 SCHEMAS: dict[str, tuple[tuple[str, ...], frozenset[str]]] = {
     "regulation": (_REGULATION_KEYS, frozenset(_REGULATION_KEYS) - {"aliases", "tags"}),
     "appendix": (_APPENDIX_KEYS, frozenset(_APPENDIX_KEYS) - {"aliases", "tags"}),
@@ -111,6 +115,8 @@ SCHEMAS: dict[str, tuple[tuple[str, ...], frozenset[str]]] = {
     "aim_index": (_AIM_INDEX_KEYS, frozenset(_AIM_INDEX_KEYS) - {"tags"}),
     "pcg": (_PCG_TERM_KEYS, frozenset(_PCG_TERM_KEYS) - {"aliases", "tags"}),
     "pcg_index": (_PCG_INDEX_KEYS, frozenset(_PCG_INDEX_KEYS) - {"tags"}),
+    "concept": (_CONCEPT_KEYS, frozenset(_CONCEPT_KEYS) - {"tags"}),
+    "concept_index": (_CONCEPT_INDEX_KEYS, frozenset(_CONCEPT_INDEX_KEYS) - {"tags"}),
 }
 
 _KEY_TYPES: dict[str, type | tuple[type, ...]] = {
@@ -132,6 +138,7 @@ _KEY_TYPES: dict[str, type | tuple[type, ...]] = {
     "canonical_hash": str,
     "generated": bool,
     "title": str,
+    "area": str,
     "aliases": list,
     "tags": list,
 }

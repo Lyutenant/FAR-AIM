@@ -1,0 +1,4 @@
+{
+  "_comment": "Human review overlay for the derived related links (plan §36.3). Each deny entry suppresses one suggestion: unit and target are canonical ids (cfr-14-91.155, aim-3-1-4); reason is required. Denied pairs the provider no longer suggests are reported by `far-aim enrich` as stale (informational).",
+  "deny": []
+}

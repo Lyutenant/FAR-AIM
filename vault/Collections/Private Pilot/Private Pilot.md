@@ -13,6 +13,9 @@ private pilot (airplane, single-engine) works with most. Every page
 links to the generated authoritative notes — the official text lives
 there, and rebuilds never touch this folder.
 
+For the order in which these subjects build on one another, start at the
+[[Concept Map]].
+
 ## Certificates and training
 
 - [[Pilot Qualifications]] — eligibility, knowledge, proficiency, experience, privileges

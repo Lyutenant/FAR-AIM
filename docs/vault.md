@@ -299,6 +299,17 @@ vault/PCG/
   (13 subject pages under `Collections/Private Pilot/`) plus the
   `Topics/Cross-Country Flight.md` topic note. Curated pages link or
   transclude authoritative notes; they never restate regulatory text.
+- Enrichment (Phase 9, plan §36, docs/enrichment.md): `Concepts/` is a
+  fourth generator-owned tree, rendered from the committed
+  `data/enrichment/concepts.json` — one note per study concept (`type:
+  concept`, with `area`) and `Concept Map.md` (`type: concept-index`).
+  Concept titles are stems in the global namespace and additionally may
+  not equal any heading alias (a loud build error rather than a silently
+  dropped alias). FAR section and AIM paragraph notes may end with a
+  `## Related (derived)` section — Tier 4 similarity suggestions from
+  `data/enrichment/related.json`, filtered by `related-review.json`,
+  never repeating an explicit cross-reference. Removing `data/enrichment/`
+  and rebuilding removes both without touching anything else.
 - Dataview (optional plugin): generated frontmatter is typed for it —
   `part`/`section` on FAR notes, `chapter`/`section`/`paragraph` on AIM
   notes, `term`/`letter` on PCG notes, plus `type`, `source` and tags

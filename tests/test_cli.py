@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 
 import httpx
 import pytest
@@ -1332,6 +1333,19 @@ def test_full_title_vault_build(tmp_path, capsys):
             pytest.skip("manifest records a PCG layer that is not on disk")
         os.symlink(_NORMALIZED.parent / "pcg", config.normalized_dir / "pcg")
         expected_total += _pcg_file_count(_NORMALIZED.parent / "pcg")
+    enrichment_dir = _REPO_ROOT / "data" / "enrichment"
+    if enrichment_dir.is_dir():
+        # The committed enrichment layer rides along (Phase 9): concept
+        # notes are planned files; derived links only decorate existing ones.
+        # Curated notes are link targets for concepts, so they ride along too.
+        os.symlink(enrichment_dir, config.enrichment_dir)
+        for sub in ("Collections", "Topics", "Study"):
+            if (_REPO_ROOT / "vault" / sub).is_dir():
+                config.vault_dir.mkdir(parents=True, exist_ok=True)
+                os.symlink(_REPO_ROOT / "vault" / sub, config.vault_dir / sub)
+        if (enrichment_dir / "concepts.json").exists():
+            concepts = json.loads((enrichment_dir / "concepts.json").read_text(encoding="utf-8"))
+            expected_total += len(concepts["concepts"]) + 1  # + Concept Map
 
     assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
     out = capsys.readouterr().out
@@ -1361,6 +1375,8 @@ def test_full_title_vault_build(tmp_path, capsys):
     # navigation ambiguous (docs/vault.md naming guidance).
     generated_names: set[str] = set()
     for path in config.vault_dir.rglob("*.md"):
+        if path.relative_to(config.vault_dir).parts[0] in ("Collections", "Topics", "Study"):
+            continue  # the symlinked curated trees are what we compare against
         generated_names.add(path.stem.casefold())
         generated_names.update(a.casefold() for a in _frontmatter_aliases(path))
     for sub in ("Collections", "Topics", "Study"):
@@ -2471,3 +2487,162 @@ def test_build_vault_without_aim_layer_covers_far_only(tmp_path, capsys, mock_up
     assert "the vault will not cover the PCG" in out
     assert not (config.vault_dir / "AIM").exists()
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+
+
+# ---------------------------------------------------------------------------
+# enrich (Phase 9, plan §36)
+# ---------------------------------------------------------------------------
+
+
+def _fixture_concepts() -> dict:
+    return {
+        "schema": 1,
+        "concepts": [
+            {
+                "id": "vfr-minimums",
+                "title": "VFR Visibility Rules",
+                "area": "Weather",
+                "description": "Curator's words.",
+                "far": ["91.155", "Part 91"],
+            },
+            {
+                "id": "special-vfr",
+                "title": "Special VFR Clearances",
+                "area": "Weather",
+                "prerequisites": ["vfr-minimums"],
+                "far": ["91.157"],
+            },
+        ],
+    }
+
+
+def test_enrich_writes_related_links_and_is_idempotent(tmp_path, capsys):
+    config = _accepted_snapshot(tmp_path, SLICE_XML.read_bytes())
+    assert main(["--root", str(tmp_path), "enrich"]) == EXIT_ERROR
+    assert "no accepted eCFR canonical layer" in capsys.readouterr().err
+    assert main(["--root", str(tmp_path), "parse", "ecfr"]) == EXIT_OK
+    capsys.readouterr()
+
+    assert main(["--root", str(tmp_path), "enrich"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "no accepted AIM canonical layer; deriving FAR-only" in out
+    assert "created empty review overlay" in out
+    assert "related links written" in out and "11 units" in out
+    related = json.loads(config.related_path.read_text(encoding="utf-8"))
+    manifest = SourceManifest.load(config.manifest_path)
+    assert related["inputs"] == {"ecfr": manifest.sources["ecfr_title_14"].canonical_hash}
+    assert related["provider"] == {"id": "lexical-tfidf", "version": 1}
+    assert related["units"]["cfr-14-91.155"] == [{"target": "cfr-14-91.157", "score": 0.4671}]
+    review = json.loads(config.related_review_path.read_text(encoding="utf-8"))
+    assert review["deny"] == []
+    first = config.related_path.read_bytes()
+
+    assert main(["--root", str(tmp_path), "enrich"]) == EXIT_OK
+    assert "related links unchanged" in capsys.readouterr().out
+    assert config.related_path.read_bytes() == first
+
+    # Rendered: § 91.175's suggestion is a pure similarity link; § 91.155's
+    # sole suggestion is its explicit cross-reference and is not repeated.
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    capsys.readouterr()
+    far = config.vault_dir / "FAR" / "Part 091"
+    assert "## Related (derived)" in (far / "91.175.md").read_text(encoding="utf-8")
+    assert "## Related (derived)" not in (far / "91.155.md").read_text(encoding="utf-8")
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    assert "vault matches canonical layer (19 notes)" in capsys.readouterr().out
+
+
+def test_enrich_review_overlay_is_validated_and_applied(tmp_path, capsys):
+    config = _accepted_snapshot(tmp_path, SLICE_XML.read_bytes())
+    assert main(["--root", str(tmp_path), "parse", "ecfr"]) == EXIT_OK
+    config.enrichment_dir.mkdir(parents=True)
+    config.related_review_path.write_text(
+        json.dumps(
+            {
+                "deny": [
+                    {"unit": "cfr-14-91.175", "target": "cfr-14-91.227", "reason": "test"},
+                    {"unit": "cfr-14-91.3", "target": "cfr-14-91.999", "reason": "stale"},
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    assert main(["--root", str(tmp_path), "enrich"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "warning: review denial cfr-14-91.3 → cfr-14-91.999 is stale" in out
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    capsys.readouterr()
+    note = (config.vault_dir / "FAR" / "Part 091" / "91.175.md").read_text(encoding="utf-8")
+    assert "## Related (derived)" not in note  # its only suggestion was denied
+
+    config.related_review_path.write_text(
+        json.dumps({"deny": [{"unit": "cfr-14-nope", "target": "cfr-14-91.3", "reason": "x"}]}),
+        encoding="utf-8",
+    )
+    assert main(["--root", str(tmp_path), "enrich"]) == EXIT_ERROR
+    assert "unknown unit id(s): cfr-14-nope" in capsys.readouterr().err
+
+
+def test_build_vault_rejects_stale_related_links(tmp_path, capsys):
+    config = _accepted_snapshot(tmp_path, SLICE_XML.read_bytes())
+    assert main(["--root", str(tmp_path), "parse", "ecfr"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "enrich"]) == EXIT_OK
+    capsys.readouterr()
+    doc = json.loads(config.related_path.read_text(encoding="utf-8"))
+    doc["inputs"]["ecfr"] = "sha256:" + "0" * 64
+    config.related_path.write_text(json.dumps(doc), encoding="utf-8")
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_ERROR
+    err = capsys.readouterr().err
+    assert "related-links file is stale" in err and "far-aim enrich" in err
+    assert not (config.vault_dir / "FAR").exists()  # nothing written (plan §32.13)
+
+    config.related_review_path.unlink()
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_ERROR
+    assert "review file" in capsys.readouterr().err
+
+
+def test_build_vault_renders_concepts_and_removes_them_cleanly(tmp_path, capsys):
+    config = _accepted_snapshot(tmp_path, SLICE_XML.read_bytes())
+    assert main(["--root", str(tmp_path), "parse", "ecfr"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    capsys.readouterr()
+    before = _vault_bytes(config)
+
+    config.enrichment_dir.mkdir(parents=True)
+    config.concepts_path.write_text(json.dumps(_fixture_concepts()), encoding="utf-8")
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "22 notes" in out and "4 written" in out  # 3 concept files + Home
+    concepts = config.vault_dir / "Concepts"
+    assert sorted(p.name for p in concepts.iterdir()) == [
+        "Concept Map.md",
+        "Special VFR Clearances.md",
+        "VFR Visibility Rules.md",
+    ]
+    concept = (concepts / "VFR Visibility Rules.md").read_text(encoding="utf-8")
+    assert 'type: "concept"' in concept and "generated: true" in concept
+    assert "- [[91.155|§ 91.155 — Basic VFR weather minimums]]" in concept
+    home = (config.vault_dir / "Home.md").read_text(encoding="utf-8")
+    assert "[[Concept Map]]" in home
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    assert "(22 notes)" in capsys.readouterr().out
+
+    # A curated note parked inside Concepts/ survives; a reference to a
+    # section the slice lacks fails the build before anything is written.
+    (concepts / "My Notes.md").write_text("# mine\n", encoding="utf-8")
+    doc = _fixture_concepts()
+    doc["concepts"][0]["far"].append("61.109")
+    config.concepts_path.write_text(json.dumps(doc), encoding="utf-8")
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_ERROR
+    assert "references FAR note '61.109'" in capsys.readouterr().err
+    assert (concepts / "VFR Visibility Rules.md").exists()
+
+    # Separability (plan §32.12): remove the layer, rebuild — only the
+    # generated concept notes go, and the vault is byte-identical to before.
+    shutil.rmtree(config.enrichment_dir)
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "3 stale deleted" in out
+    assert (concepts / "My Notes.md").exists()
+    after = {p: b for p, b in _vault_bytes(config).items() if p.name != "My Notes.md"}
+    assert after == before

@@ -21,10 +21,13 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from far_aim.config import Config
-from far_aim.generate import BuildError, aim_notes, naming, notes, pcg_notes
+from far_aim.generate import BuildError, aim_notes, concept_notes, enrich, naming, notes, pcg_notes
 from far_aim.generate.aim_markdown import collect_asset_names
+from far_aim.generate.aim_markdown import collect_text as collect_aim_text
+from far_aim.generate.enrich import EnrichmentLayer
 from far_aim.generate.frontmatter import emit_frontmatter, frontmatter_defect
-from far_aim.links import glossary
+from far_aim.links import glossary, semantic
+from far_aim.links.citations import collect_text as collect_far_text
 from far_aim.models import aim as aim_model
 from far_aim.models import cfr as cfr_model
 from far_aim.models import pcg as pcg_model
@@ -54,6 +57,8 @@ class Registry:
     aliases: dict[str, list[str]] = field(default_factory=dict)
     section_count: int = 0
     appendix_count: int = 0
+    # FAR: section id → (stem, display) link targets (derived links, concepts).
+    far_targets: dict[str, tuple[str, str]] = field(default_factory=dict)
     # AIM: id → (stem, display) link targets, note count, asset filenames.
     aim_targets: dict[str, tuple[str, str]] = field(default_factory=dict)
     aim_note_count: int = 0
@@ -61,6 +66,10 @@ class Registry:
     # PCG: id → (stem, display) link targets and note count.
     pcg_targets: dict[str, tuple[str, str]] = field(default_factory=dict)
     pcg_note_count: int = 0
+    # Enrichment (plan §36): concept note count (incl. the Concept Map) and
+    # the curated stems on disk registered as link targets only.
+    concept_note_count: int = 0
+    curated_stems: set[str] = field(default_factory=set)
 
 
 @dataclass(frozen=True)
@@ -206,12 +215,16 @@ def _add_stem(
 
 
 def build_registry(
-    docs: dict[str, dict], aim: AimLayer | None = None, pcg: PcgLayer | None = None
+    docs: dict[str, dict],
+    aim: AimLayer | None = None,
+    pcg: PcgLayer | None = None,
+    enrichment: EnrichmentLayer | None = None,
 ) -> Registry:
     """Pass 1: stems, link targets, and alias candidates for every note.
 
     All corpora share one namespace: filename stems and aliases are checked
-    for uniqueness across FAR, AIM and PCG together (plan §17.4).
+    for uniqueness across FAR, AIM, PCG and the concept notes together
+    (plan §17.4). Curated notes on disk join as link targets only.
     """
     registry = Registry()
     seen: dict[str, str] = {}
@@ -228,6 +241,8 @@ def build_registry(
     # alias namespace (a heading alias equal to "Collections" must drop).
     for stem, parts in notes.CURATED_ENTRIES:
         _add_stem(registry, seen, stem, parts)
+    if enrichment is not None:
+        _register_enrichment(registry, seen, enrichment)
     if aim is not None:
         _register_aim(registry, seen, citation_aliases, heading_candidates, aim)
     if pcg is not None:
@@ -244,6 +259,7 @@ def build_registry(
                 stem = naming.section_stem(section)
                 _add_stem(registry, seen, stem, (notes.FAR_DIR, folder, f"{stem}.md"))
                 registry.section_numbers.add(section)
+                registry.far_targets[child["id"]] = (stem, notes.section_display(child))
                 cite: list[str] = []
                 marker = child["head_marker"]
                 if marker:
@@ -262,7 +278,47 @@ def build_registry(
                 heading_candidates[child["id"]] = notes.display_heading(child["heading"])
 
     _resolve_alias_collisions(registry, citation_aliases, heading_candidates)
+    if enrichment is not None and enrichment.concepts is not None:
+        # A concept title equal to a heading would silently strip that
+        # note's alias (stems win); make the collision loud instead.
+        headings = {h.casefold(): h for h in heading_candidates.values()}
+        for alias_list in registry.aliases.values():
+            headings.update((a.casefold(), a) for a in alias_list)
+        for concept in enrichment.concepts.concepts:
+            clash = headings.get(concept.title.casefold())
+            if clash is not None:
+                raise BuildError(
+                    f"concept title {concept.title!r} collides with the note heading or "
+                    f"alias {clash!r}; rename the concept in {concept_notes.CONCEPTS_SOURCE}"
+                )
     return registry
+
+
+def _register_enrichment(
+    registry: Registry, seen: dict[str, str], enrichment: EnrichmentLayer
+) -> None:
+    """Concept notes are planned files; curated notes on disk are link targets.
+
+    Curated stems are registered permissively: no naming-policy check (the
+    files are the user's, not the generator's) and a stem already taken by
+    a generated note is simply left to that note — the link resolves either
+    way, and the full-title test is where such collisions are reported.
+    """
+    for stem in sorted(enrichment.curated_notes):
+        folded = stem.casefold()
+        if folded in seen:
+            continue
+        seen[folded] = stem
+        registry.stems[stem] = enrichment.curated_notes[stem]
+        registry.curated_stems.add(stem)
+    if enrichment.concepts is None:
+        return
+    map_stem = concept_notes.CONCEPT_MAP_STEM
+    _add_stem(registry, seen, map_stem, (concept_notes.CONCEPTS_DIR, f"{map_stem}.md"))
+    registry.concept_note_count += 1
+    for concept in enrichment.concepts.concepts:
+        _add_stem(registry, seen, concept.title, concept_notes.concept_path(concept))
+        registry.concept_note_count += 1
 
 
 def _register_aim(
@@ -400,14 +456,17 @@ def plan_vault(
     sources: dict[str, object],
     aim: AimLayer | None = None,
     pcg: PcgLayer | None = None,
+    enrichment: EnrichmentLayer | None = None,
 ) -> dict[tuple[str, ...], bytes]:
     """Render the complete vault in memory and verify it (nothing written).
 
     The plan maps vault-relative path parts to bytes: Markdown notes plus,
     when an AIM layer is given, the archived figure assets it embeds.
     """
-    registry = build_registry(docs, aim, pcg)
+    registry = build_registry(docs, aim, pcg, enrichment)
     plan: dict[tuple[str, ...], bytes] = {}
+    related = _verified_related(enrichment, registry, title_hash, aim)
+    related_targets = {**registry.far_targets, **registry.aim_targets}
 
     def add(note: notes.Note) -> None:
         if note.path_parts in plan:
@@ -422,7 +481,12 @@ def plan_vault(
             if child["document_type"] == cfr_model.DOCUMENT_TYPE_SECTION:
                 add(
                     notes.build_section_note(
-                        child, aliases, registry.section_numbers, registry.part_numbers
+                        child,
+                        aliases,
+                        registry.section_numbers,
+                        registry.part_numbers,
+                        related=related,
+                        related_targets=related_targets,
                     )
                 )
             else:
@@ -433,7 +497,12 @@ def plan_vault(
                 )
     add(notes.build_title_index(docs, version, title_hash))
     add(notes.build_source_status(sources))
-    add(notes.build_home(has_aim=aim is not None, has_pcg=pcg is not None))
+    has_concepts = enrichment is not None and enrichment.concepts is not None
+    add(
+        notes.build_home(
+            has_aim=aim is not None, has_pcg=pcg is not None, has_concepts=has_concepts
+        )
+    )
 
     if aim is not None:
         targets = registry.aim_targets
@@ -453,7 +522,17 @@ def plan_vault(
             elif kind == "section":
                 add(aim_notes.build_section_note(doc, aliases, targets, far, glossary_links))
             elif kind == "paragraph":
-                add(aim_notes.build_paragraph_note(doc, aliases, targets, far, glossary_links))
+                add(
+                    aim_notes.build_paragraph_note(
+                        doc,
+                        aliases,
+                        targets,
+                        far,
+                        glossary_links,
+                        related=related,
+                        related_targets=related_targets,
+                    )
+                )
             else:
                 add(aim_notes.build_appendix_note(doc, aliases, targets, far, glossary_links))
         add(aim_notes.build_aim_index(aim.docs, aim.title_hash))
@@ -477,8 +556,86 @@ def plan_vault(
             add(pcg_notes.build_term_note(term_doc, aliases, registry.pcg_targets, refer_targets))
         add(pcg_notes.build_pcg_index(pcg.docs, pcg.title_hash))
 
+    if has_concepts:
+        assert enrichment is not None and enrichment.concepts is not None
+        graph = enrichment.concepts
+        concept_targets = concept_notes.ConceptTargets(
+            far={
+                **{stem: display for stem, display in registry.far_targets.values()},
+                **{naming.part_index_stem(part): naming.part_index_stem(part)
+                   for part in registry.part_numbers},
+            },
+            aim={
+                **{stem: display for stem, display in registry.aim_targets.values()},
+                **(
+                    {aim_notes.AIM_INDEX_STEM: "Aeronautical Information Manual"}
+                    if aim is not None
+                    else {}
+                ),
+            },
+            pcg={
+                **{stem: display for stem, display in registry.pcg_targets.values()},
+                **(
+                    {pcg_notes.PCG_INDEX_STEM: "Pilot/Controller Glossary"}
+                    if pcg is not None
+                    else {}
+                ),
+            },
+            all_stems=frozenset(registry.stems),
+        )
+        concept_notes.verify_targets(graph, concept_targets)
+        for concept in graph.concepts:
+            add(concept_notes.build_concept_note(concept, graph, concept_targets))
+        add(concept_notes.build_concept_map(graph))
+
     _verify_plan(plan, registry, docs, aim, pcg)
     return plan
+
+
+def _verified_related(
+    enrichment: EnrichmentLayer | None,
+    registry: Registry,
+    title_hash: str,
+    aim: AimLayer | None,
+) -> semantic.RelatedIndex | None:
+    """The related-links index, or None; stale or dangling files fail (§32.13)."""
+    if enrichment is None or enrichment.related is None:
+        return None
+    related = enrichment.related
+    expected = related_inputs(title_hash, aim.title_hash if aim is not None else None)
+    if related.inputs != expected:
+        raise BuildError(
+            "related-links file is stale: its inputs do not match the accepted canonical "
+            "layers; run `far-aim enrich`"
+        )
+    related.verify_ids([*registry.far_targets, *registry.aim_targets])
+    return related
+
+
+def related_inputs(title_hash: str, aim_hash: str | None) -> dict[str, str]:
+    """The provenance a ``related.json`` must carry to match these layers."""
+    inputs = {"ecfr": title_hash}
+    if aim_hash is not None:
+        inputs["aim"] = aim_hash
+    return inputs
+
+
+def collect_units(docs: dict[str, dict], aim_docs: dict[str, dict] | None) -> list[enrich.Unit]:
+    """Similarity units (plan §36.3): FAR sections, then AIM paragraphs."""
+    units: list[enrich.Unit] = []
+    for part in sorted(docs, key=naming.part_sort_key):
+        for child in _iter_documents(docs[part]):
+            if child["document_type"] != cfr_model.DOCUMENT_TYPE_SECTION:
+                continue
+            text = enrich.unit_text(child["heading"], list(collect_far_text(child["content"])))
+            units.append(enrich.Unit(child["id"], semantic.CORPUS_FAR, text))
+    if aim_docs is not None:
+        for kind, doc in _iter_aim_documents(aim_docs):
+            if kind != "paragraph":
+                continue
+            text = enrich.unit_text(doc["heading"], list(collect_aim_text(doc["content"])))
+            units.append(enrich.Unit(doc["id"], semantic.CORPUS_AIM, text))
+    return units
 
 
 def is_note_path(parts: tuple[str, ...]) -> bool:
@@ -544,6 +701,7 @@ def _verify_plan(
         expected += registry.aim_note_count + len(registry.aim_assets) + 1  # + ledger
     if pcg is not None:
         expected += registry.pcg_note_count
+    expected += registry.concept_note_count
     if len(plan) != expected:
         raise BuildError(f"planned {len(plan)} files, expected {expected}")
     parsed_sections = sum(ecfr_parser.count_sections(doc) for doc in docs.values())
@@ -689,7 +847,12 @@ def sync_vault(config: Config, plan: dict[tuple[str, ...], bytes]) -> SyncStats:
             )
 
     stats = SyncStats()
-    owned_roots = [vault / notes.FAR_DIR, vault / aim_notes.AIM_DIR, vault / pcg_notes.PCG_DIR]
+    owned_roots = [
+        vault / notes.FAR_DIR,
+        vault / aim_notes.AIM_DIR,
+        vault / pcg_notes.PCG_DIR,
+        vault / concept_notes.CONCEPTS_DIR,
+    ]
     vault.mkdir(parents=True, exist_ok=True)
     backup_root = Path(tempfile.mkdtemp(dir=vault, prefix=".sync-backup-"))
     # (action, live path, backup path or None) — replayed in reverse on failure.
@@ -776,7 +939,8 @@ def build_vault(
     docs: dict[str, dict],
     aim: AimLayer | None = None,
     pcg: PcgLayer | None = None,
+    enrichment: EnrichmentLayer | None = None,
 ) -> SyncStats:
     """Plan, verify, and sync the whole vault; raises BuildError on any defect."""
-    plan = plan_vault(docs, version, title_hash, sources, aim, pcg)
+    plan = plan_vault(docs, version, title_hash, sources, aim, pcg, enrichment)
     return sync_vault(config, plan)

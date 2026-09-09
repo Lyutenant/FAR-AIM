@@ -25,3 +25,10 @@ airworthy; the pilot in command decides whether it is airworthy for
 - [[Part 39|Part 39 — Airworthiness Directives]]
 - [[Part 43|Part 43 — Maintenance, Preventive Maintenance, Rebuilding, and Alteration]] —
   including what a pilot may perform as preventive maintenance
+
+## Concepts
+
+Prerequisite-ordered study notes on the [[Concept Map]]:
+
+- [[Airworthiness Responsibility]]
+- [[Aircraft Documents and Flight Manual]]

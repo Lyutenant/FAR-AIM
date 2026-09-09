@@ -29,3 +29,11 @@ certificate — the official text lives in the linked notes.
 ## Glossary
 
 - [[PILOT IN COMMAND]]
+
+## Concepts
+
+Prerequisite-ordered study notes on the [[Concept Map]]:
+
+- [[Pilot Certificates and Ratings]]
+- [[Private Pilot Eligibility and Privileges]]
+- [[Additional Aircraft Endorsements]]
