@@ -11,6 +11,8 @@ generated: true
 title: "WARNING AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WARNING AREA

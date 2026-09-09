@@ -11,6 +11,8 @@ generated: true
 title: "DRA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DRA

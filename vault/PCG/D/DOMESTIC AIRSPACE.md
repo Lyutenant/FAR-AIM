@@ -11,6 +11,8 @@ generated: true
 title: "DOMESTIC AIRSPACE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DOMESTIC AIRSPACE

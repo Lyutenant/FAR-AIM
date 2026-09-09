@@ -11,6 +11,8 @@ generated: true
 title: "MSA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MSA

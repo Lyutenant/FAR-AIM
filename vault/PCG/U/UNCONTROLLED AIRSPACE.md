@@ -11,6 +11,8 @@ generated: true
 title: "UNCONTROLLED AIRSPACE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UNCONTROLLED AIRSPACE

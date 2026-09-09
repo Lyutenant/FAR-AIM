@@ -11,6 +11,8 @@ generated: true
 title: "RADAR APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR APPROACH

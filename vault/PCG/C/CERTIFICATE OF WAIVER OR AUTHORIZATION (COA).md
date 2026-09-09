@@ -11,6 +11,8 @@ generated: true
 title: "CERTIFICATE OF WAIVER OR AUTHORIZATION (COA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CERTIFICATE OF WAIVER OR AUTHORIZATION (COA)

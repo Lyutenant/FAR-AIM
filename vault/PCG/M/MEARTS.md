@@ -11,6 +11,8 @@ generated: true
 title: "MEARTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MEARTS

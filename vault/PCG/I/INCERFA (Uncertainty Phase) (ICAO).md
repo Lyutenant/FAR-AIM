@@ -13,6 +13,8 @@ aliases:
   - "INCERFA (Uncertainty Phase) [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INCERFA (Uncertainty Phase) \[ICAO]

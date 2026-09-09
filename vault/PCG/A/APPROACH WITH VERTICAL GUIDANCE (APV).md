@@ -11,6 +11,8 @@ generated: true
 title: "APPROACH WITH VERTICAL GUIDANCE (APV)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROACH WITH VERTICAL GUIDANCE (APV)

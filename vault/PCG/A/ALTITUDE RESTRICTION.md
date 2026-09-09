@@ -11,6 +11,8 @@ generated: true
 title: "ALTITUDE RESTRICTION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALTITUDE RESTRICTION

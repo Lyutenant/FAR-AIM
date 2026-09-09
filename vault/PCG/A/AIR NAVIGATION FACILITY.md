@@ -11,6 +11,8 @@ generated: true
 title: "AIR NAVIGATION FACILITY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR NAVIGATION FACILITY

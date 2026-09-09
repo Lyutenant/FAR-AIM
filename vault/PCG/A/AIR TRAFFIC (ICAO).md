@@ -13,6 +13,8 @@ aliases:
   - "AIR TRAFFIC [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR TRAFFIC \[ICAO]

@@ -13,6 +13,8 @@ aliases:
   - "TOUCH‐AND‐GO LANDING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOUCH‐AND‐GO LANDING

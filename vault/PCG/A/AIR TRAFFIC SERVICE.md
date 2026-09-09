@@ -11,6 +11,8 @@ generated: true
 title: "AIR TRAFFIC SERVICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR TRAFFIC SERVICE
@@ -22,16 +24,16 @@ tags:
 
 AIR TRAFFIC SERVICE- A generic term meaning:
 
-**a.** Flight Information Service.
+- **a.** Flight Information Service.
 
-**b.** Alerting Service.
+- **b.** Alerting Service.
 
-**c.** Air Traffic Advisory Service.
+- **c.** Air Traffic Advisory Service.
 
-**d.** Air Traffic Control Service:
+- **d.** Air Traffic Control Service:
 
-**e.** Area Control Service,
+- **e.** Area Control Service,
 
-**f.** Approach Control Service, or
+- **f.** Approach Control Service, or
 
-**g.** Airport Control Service.
+- **g.** Airport Control Service.

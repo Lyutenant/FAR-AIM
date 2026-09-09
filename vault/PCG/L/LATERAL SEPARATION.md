@@ -11,6 +11,8 @@ generated: true
 title: "LATERAL SEPARATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LATERAL SEPARATION

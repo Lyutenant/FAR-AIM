@@ -13,6 +13,8 @@ aliases:
   - "MOVEMENT AREA [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MOVEMENT AREA \[ICAO]

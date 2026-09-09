@@ -13,6 +13,8 @@ aliases:
   - "INTEGRATED DEPARTURE/ARRIVAL CAPABILITY (IDAC)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INTEGRATED DEPARTURE/ARRIVAL CAPABILITY (IDAC)

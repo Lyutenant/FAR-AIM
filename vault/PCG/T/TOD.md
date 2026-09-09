@@ -11,6 +11,8 @@ generated: true
 title: "TOD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOD

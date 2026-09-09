@@ -14,6 +14,8 @@ aliases:
   - "Air Navigation and Obstruction Lighting"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 2, Section 2 — Air Navigation and Obstruction Lighting

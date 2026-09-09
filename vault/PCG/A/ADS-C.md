@@ -11,6 +11,8 @@ generated: true
 title: "ADS-C"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADS-C

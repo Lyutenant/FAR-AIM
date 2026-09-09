@@ -11,6 +11,8 @@ generated: true
 title: "PWS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PWS

@@ -11,6 +11,8 @@ generated: true
 title: "REROUTE IMPACT ASSESSMENT (RRIA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REROUTE IMPACT ASSESSMENT (RRIA)

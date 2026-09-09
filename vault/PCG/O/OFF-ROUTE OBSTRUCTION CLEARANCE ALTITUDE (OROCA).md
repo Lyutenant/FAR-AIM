@@ -11,6 +11,8 @@ generated: true
 title: "OFF-ROUTE OBSTRUCTION CLEARANCE ALTITUDE (OROCA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OFF-ROUTE OBSTRUCTION CLEARANCE ALTITUDE (OROCA)

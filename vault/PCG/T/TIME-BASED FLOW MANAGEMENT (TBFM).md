@@ -13,6 +13,8 @@ aliases:
   - "TIME‐BASED FLOW MANAGEMENT (TBFM)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TIME‐BASED FLOW MANAGEMENT (TBFM)

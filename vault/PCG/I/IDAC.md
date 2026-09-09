@@ -11,6 +11,8 @@ generated: true
 title: "IDAC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IDAC

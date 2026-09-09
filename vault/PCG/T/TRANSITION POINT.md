@@ -11,6 +11,8 @@ generated: true
 title: "TRANSITION POINT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSITION POINT

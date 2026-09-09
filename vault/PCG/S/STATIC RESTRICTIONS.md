@@ -11,6 +11,8 @@ generated: true
 title: "STATIC RESTRICTIONS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STATIC RESTRICTIONS

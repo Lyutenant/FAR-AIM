@@ -11,6 +11,8 @@ generated: true
 title: "ILS CATEGORIES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ILS CATEGORIES
@@ -22,8 +24,8 @@ tags:
 
 ILS CATEGORIES- 1. Category I. An ILS approach procedure which provides for approach to a height above touchdown of not less than 200 feet and with runway visual range of not less than 1,800 feet.- 2. Special Authorization Category I. An ILS approach procedure which provides for approach to a height above touchdown of not less than 150 feet and with runway visual range of not less than 1,400 feet, HUD to DH. 3. Category II. An ILS approach procedure which provides for approach to a height above touchdown of not less than 100 feet and with runway visual range of not less than 1,200 feet (with autoland or HUD to touchdown and noted on authorization, RVR 1,000 feet).- 4. Special Authorization Category II with Reduced Lighting. An ILS approach procedure which provides for approach to a height above touchdown of not less than 100 feet and with runway visual range of not less than 1,200 feet with autoland or HUD to touchdown and noted on authorization (no touchdown zone and centerline lighting are required).- 5. Category III:
 
-**a.** IIIA.-An ILS approach procedure which provides for approach without a decision height minimum and with runway visual range of not less than 700 feet.
+- **a.** IIIA.-An ILS approach procedure which provides for approach without a decision height minimum and with runway visual range of not less than 700 feet.
 
-**b.** IIIB.-An ILS approach procedure which provides for approach without a decision height minimum and with runway visual range of not less than 150 feet.
+- **b.** IIIB.-An ILS approach procedure which provides for approach without a decision height minimum and with runway visual range of not less than 150 feet.
 
-**c.** IIIC.-An ILS approach procedure which provides for approach without a decision height minimum and without runway visual range minimum.
+- **c.** IIIC.-An ILS approach procedure which provides for approach without a decision height minimum and without runway visual range minimum.

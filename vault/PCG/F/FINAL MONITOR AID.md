@@ -11,6 +11,8 @@ generated: true
 title: "FINAL MONITOR AID"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FINAL MONITOR AID

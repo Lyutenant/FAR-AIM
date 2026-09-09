@@ -11,6 +11,8 @@ generated: true
 title: "COLLABORATIVE TRAJECTORY OPTIONS PROGRAM (CTOP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COLLABORATIVE TRAJECTORY OPTIONS PROGRAM (CTOP)

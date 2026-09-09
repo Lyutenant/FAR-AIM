@@ -11,6 +11,8 @@ generated: true
 title: "ACL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ACL

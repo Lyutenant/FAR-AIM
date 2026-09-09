@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix H to Part 36—Noise Requirements For Helicopters Under Subpart H

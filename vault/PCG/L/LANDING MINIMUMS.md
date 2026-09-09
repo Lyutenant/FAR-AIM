@@ -11,6 +11,8 @@ generated: true
 title: "LANDING MINIMUMS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LANDING MINIMUMS
@@ -22,9 +24,9 @@ tags:
 
 LANDING MINIMUMS- The minimum visibility prescribed for landing a civil aircraft while using an instrument approach procedure. The minimum applies with other limitations set forth in 14 CFR part 91 with respect to the Minimum Descent Altitude (MDA) or Decision Height (DH) prescribed in the instrument approach procedures as follows:
 
-**a.** Straight‐in landing minimums. A statement of MDA and visibility, or DH and visibility, required for a straight‐in landing on a specified runway, or
+- **a.** Straight‐in landing minimums. A statement of MDA and visibility, or DH and visibility, required for a straight‐in landing on a specified runway, or
 
-**b.** Circling minimums. A statement of MDA and visibility required for the circle‐to‐land maneuver.
+- **b.** Circling minimums. A statement of MDA and visibility required for the circle‐to‐land maneuver.
 
 > [!note] Note:
 > Descent below the MDA or DH must meet the conditions stated in 14 CFR section 91.175.

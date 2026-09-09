@@ -11,6 +11,8 @@ generated: true
 title: "CARDINAL FLIGHT LEVELS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CARDINAL FLIGHT LEVELS

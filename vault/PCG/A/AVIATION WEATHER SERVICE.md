@@ -11,6 +11,8 @@ generated: true
 title: "AVIATION WEATHER SERVICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AVIATION WEATHER SERVICE

@@ -11,6 +11,8 @@ generated: true
 title: "UNMANNED AIRCRAFT (UA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UNMANNED AIRCRAFT (UA)

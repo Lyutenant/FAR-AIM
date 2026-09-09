@@ -11,6 +11,8 @@ generated: true
 title: "TORA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TORA

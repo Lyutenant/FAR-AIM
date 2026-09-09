@@ -11,6 +11,8 @@ generated: true
 title: "HOLDING PROCEDURE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOLDING PROCEDURE

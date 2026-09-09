@@ -11,6 +11,8 @@ generated: true
 title: "OVERHEAD MANEUVER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OVERHEAD MANEUVER
@@ -22,18 +24,18 @@ tags:
 
 OVERHEAD MANEUVER- A series of predetermined maneuvers prescribed for aircraft (often in formation) for entry into the visual flight rules (VFR) traffic pattern and to proceed to a landing. An overhead maneuver is not an instrument flight rules (IFR) approach procedure. An aircraft executing an overhead maneuver is considered VFR and the IFR flight plan is canceled when the aircraft reaches the “initial point” on the initial approach portion of the maneuver. The pattern usually specifies the following:
 
-**a.** The radio contact required of the pilot.
+- **a.** The radio contact required of the pilot.
 
-**b.** The speed to be maintained.
+- **b.** The speed to be maintained.
 
-**c.** An initial approach 3 to 5 miles in length.
+- **c.** An initial approach 3 to 5 miles in length.
 
-**d.** An elliptical pattern consisting of two 180 degree turns.
+- **d.** An elliptical pattern consisting of two 180 degree turns.
 
-**e.** A break point at which the first 180 degree turn is started.
+- **e.** A break point at which the first 180 degree turn is started.
 
-**f.** The direction of turns.
+- **f.** The direction of turns.
 
-**g.** Altitude (at least 500 feet above the conventional pattern).
+- **g.** Altitude (at least 500 feet above the conventional pattern).
 
-**h.** A “Roll‐out” on final approach not less than 1/4 mile from the landing threshold and not less than 300 feet above the ground.
+- **h.** A “Roll‐out” on final approach not less than 1/4 mile from the landing threshold and not less than 300 feet above the ground.

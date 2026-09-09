@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix D to Part 91—Airports/Locations: Special Operating Restrictions

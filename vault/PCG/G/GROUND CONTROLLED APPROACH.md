@@ -11,6 +11,8 @@ generated: true
 title: "GROUND CONTROLLED APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GROUND CONTROLLED APPROACH

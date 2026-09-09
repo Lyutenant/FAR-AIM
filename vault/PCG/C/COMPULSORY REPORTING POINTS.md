@@ -11,6 +11,8 @@ generated: true
 title: "COMPULSORY REPORTING POINTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COMPULSORY REPORTING POINTS

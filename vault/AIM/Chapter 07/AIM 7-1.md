@@ -14,6 +14,8 @@ aliases:
   - "Meteorology"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 7, Section 1 — Meteorology

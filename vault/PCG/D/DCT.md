@@ -11,6 +11,8 @@ generated: true
 title: "DCT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DCT

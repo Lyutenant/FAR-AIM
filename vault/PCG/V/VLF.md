@@ -11,6 +11,8 @@ generated: true
 title: "VLF"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VLF

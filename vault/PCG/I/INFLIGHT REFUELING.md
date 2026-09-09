@@ -11,6 +11,8 @@ generated: true
 title: "INFLIGHT REFUELING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INFLIGHT REFUELING

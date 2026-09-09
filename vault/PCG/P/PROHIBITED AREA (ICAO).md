@@ -13,6 +13,8 @@ aliases:
   - "PROHIBITED AREA [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROHIBITED AREA \[ICAO]

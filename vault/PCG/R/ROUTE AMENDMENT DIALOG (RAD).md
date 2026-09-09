@@ -11,6 +11,8 @@ generated: true
 title: "ROUTE AMENDMENT DIALOG (RAD)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ROUTE AMENDMENT DIALOG (RAD)

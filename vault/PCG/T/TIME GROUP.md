@@ -11,6 +11,8 @@ generated: true
 title: "TIME GROUP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TIME GROUP

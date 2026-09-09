@@ -11,6 +11,8 @@ generated: true
 title: "PLAN, EXECUTE, REVIEW, TRAIN, IMPROVE (PERTI)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PLAN, EXECUTE, REVIEW, TRAIN, IMPROVE (PERTI)

@@ -11,6 +11,8 @@ generated: true
 title: "EN ROUTE AUTOMATION SYSTEM (EAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EN ROUTE AUTOMATION SYSTEM (EAS)

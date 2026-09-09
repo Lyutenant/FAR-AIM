@@ -11,6 +11,8 @@ generated: true
 title: "PRECISION OBSTACLE FREE ZONE (POFZ)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PRECISION OBSTACLE FREE ZONE (POFZ)

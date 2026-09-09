@@ -11,6 +11,8 @@ generated: true
 title: "ARRIVAL CENTER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ARRIVAL CENTER

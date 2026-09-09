@@ -11,6 +11,8 @@ generated: true
 title: "CLOSED RUNWAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLOSED RUNWAY

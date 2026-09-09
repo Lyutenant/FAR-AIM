@@ -11,6 +11,8 @@ generated: true
 title: "AIRSPACE FLOW PROGRAM (AFP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRSPACE FLOW PROGRAM (AFP)

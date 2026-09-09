@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix A to Part 380—Public Charter Operator's Surety Bond Under Part 380 of the Regulations of the Department of Transportation (14 CFR PART 380)

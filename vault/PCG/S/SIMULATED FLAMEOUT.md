@@ -11,6 +11,8 @@ generated: true
 title: "SIMULATED FLAMEOUT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SIMULATED FLAMEOUT

@@ -11,6 +11,8 @@ generated: true
 title: "AIR TRAFFIC CONTROL SYSTEM COMMAND CENTER (ATCSCC)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR TRAFFIC CONTROL SYSTEM COMMAND CENTER (ATCSCC)
@@ -22,15 +24,15 @@ tags:
 
 AIR TRAFFIC CONTROL SYSTEM COMMAND CENTER (ATCSCC)- An Air Traffic Tactical Operations facility responsible for monitoring and managing the flow of air traffic throughout the NAS, producing a safe, orderly, and expeditious flow of traffic while minimizing delays. The following functions are located at the ATCSCC:
 
-**a.** Central Altitude Reservation Function (CARF). Responsible for coordinating, planning, and approving special user requirements under the Altitude Reservation (ALTRV) concept.
+- **a.** Central Altitude Reservation Function (CARF). Responsible for coordinating, planning, and approving special user requirements under the Altitude Reservation (ALTRV) concept.
 
-**a.** Airport Reservation Office (ARO). Monitors the operation and allocation of reservations for unscheduled operations at airports designated by the Administrator as High Density Airports. These airports are generally known as slot controlled airports. The ARO allocates reservations on a first come, first served basis determined by the time the request is received at the ARO.
+- **a.** Airport Reservation Office (ARO). Monitors the operation and allocation of reservations for unscheduled operations at airports designated by the Administrator as High Density Airports. These airports are generally known as slot controlled airports. The ARO allocates reservations on a first come, first served basis determined by the time the request is received at the ARO.
 
-**a.** U.S. Notice to Airmen (NOTAM) Office. Responsible for collecting, maintaining, and distributing NOTAMs for the U.S. civilian and military, as well as international aviation communities.
+- **a.** U.S. Notice to Airmen (NOTAM) Office. Responsible for collecting, maintaining, and distributing NOTAMs for the U.S. civilian and military, as well as international aviation communities.
 
-**a.** Weather Unit. Monitor all aspects of weather for the U.S. that might affect aviation including cloud cover, visibility, winds, precipitation, thunderstorms, icing, turbulence, and more. Provide forecasts based on observations and on discussions with meteorologists from various National Weather Service offices, FAA facilities, airlines, and private weather services.
+- **a.** Weather Unit. Monitor all aspects of weather for the U.S. that might affect aviation including cloud cover, visibility, winds, precipitation, thunderstorms, icing, turbulence, and more. Provide forecasts based on observations and on discussions with meteorologists from various National Weather Service offices, FAA facilities, airlines, and private weather services.
 
-**b.** Air Traffic Organization (ATO) Space Operations and Unmanned Aircraft System (UAS); the Office of Primary Responsibility (OPR) for all space and upper class E tactical operations in the National Airspace System (NAS).
+- **b.** Air Traffic Organization (ATO) Space Operations and Unmanned Aircraft System (UAS); the Office of Primary Responsibility (OPR) for all space and upper class E tactical operations in the National Airspace System (NAS).
 
 ## See Also
 

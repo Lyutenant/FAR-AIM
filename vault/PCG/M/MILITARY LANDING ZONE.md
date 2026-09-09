@@ -11,6 +11,8 @@ generated: true
 title: "MILITARY LANDING ZONE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MILITARY LANDING ZONE

@@ -11,6 +11,8 @@ generated: true
 title: "DATA BLOCK"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DATA BLOCK

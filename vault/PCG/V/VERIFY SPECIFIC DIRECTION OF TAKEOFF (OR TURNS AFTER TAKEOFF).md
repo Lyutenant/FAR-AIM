@@ -11,6 +11,8 @@ generated: true
 title: "VERIFY SPECIFIC DIRECTION OF TAKEOFF (OR TURNS AFTER TAKEOFF)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VERIFY SPECIFIC DIRECTION OF TAKEOFF (OR TURNS AFTER TAKEOFF)

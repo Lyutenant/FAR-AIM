@@ -11,6 +11,8 @@ generated: true
 title: "GENERAL AVIATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GENERAL AVIATION

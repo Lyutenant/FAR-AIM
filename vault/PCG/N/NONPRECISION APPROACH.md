@@ -11,6 +11,8 @@ generated: true
 title: "NONPRECISION APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NONPRECISION APPROACH

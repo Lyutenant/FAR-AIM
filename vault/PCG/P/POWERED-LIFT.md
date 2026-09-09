@@ -13,6 +13,8 @@ aliases:
   - "POWERED‐LIFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # POWERED‐LIFT

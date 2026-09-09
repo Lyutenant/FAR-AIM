@@ -11,6 +11,8 @@ generated: true
 title: "MANDATORY ALTITUDE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MANDATORY ALTITUDE

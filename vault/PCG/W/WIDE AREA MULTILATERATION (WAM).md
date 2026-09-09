@@ -11,6 +11,8 @@ generated: true
 title: "WIDE AREA MULTILATERATION (WAM)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WIDE AREA MULTILATERATION (WAM)

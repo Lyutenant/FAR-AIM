@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT LINE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT LINE

@@ -11,6 +11,8 @@ generated: true
 title: "TRAFFIC NO FACTOR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAFFIC NO FACTOR

@@ -13,6 +13,8 @@ aliases:
   - "ALERFA (Alert Phase) [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALERFA (Alert Phase) \[ICAO]

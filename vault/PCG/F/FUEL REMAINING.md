@@ -11,6 +11,8 @@ generated: true
 title: "FUEL REMAINING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FUEL REMAINING

@@ -11,6 +11,8 @@ generated: true
 title: "INSTRUMENT APPROACH PROCEDURE CHARTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INSTRUMENT APPROACH PROCEDURE CHARTS

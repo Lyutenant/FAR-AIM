@@ -11,6 +11,8 @@ generated: true
 title: "PREDICTIVE WIND SHEAR ALERT SYSTEM (PWS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PREDICTIVE WIND SHEAR ALERT SYSTEM (PWS)

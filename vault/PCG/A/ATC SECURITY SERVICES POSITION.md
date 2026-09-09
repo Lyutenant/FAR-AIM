@@ -11,6 +11,8 @@ generated: true
 title: "ATC SECURITY SERVICES POSITION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATC SECURITY SERVICES POSITION

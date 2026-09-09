@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix C to Part 121—C-46 Nontransport Category Airplanes

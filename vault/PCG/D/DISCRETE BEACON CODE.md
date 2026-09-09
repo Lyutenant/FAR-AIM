@@ -11,6 +11,8 @@ generated: true
 title: "DISCRETE BEACON CODE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DISCRETE BEACON CODE

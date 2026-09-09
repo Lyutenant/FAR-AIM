@@ -11,6 +11,8 @@ generated: true
 title: "AIRPORT MARKING AIDS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPORT MARKING AIDS
@@ -22,11 +24,11 @@ tags:
 
 AIRPORT MARKING AIDS- Markings used on runway and taxiway surfaces to identify a specific runway, a runway threshold, a centerline, a hold line, etc. A runway should be marked in accordance with its present usage such as:
 
-**a.**
+- **a.**
 
-**b.** Nonprecision instrument.
+- **b.** Nonprecision instrument.
 
-**c.** Precision instrument.
+- **c.** Precision instrument.
 
 ## References
 

@@ -13,6 +13,8 @@ aliases:
   - "AERODROME CONTROL TOWER [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AERODROME CONTROL TOWER \[ICAO]

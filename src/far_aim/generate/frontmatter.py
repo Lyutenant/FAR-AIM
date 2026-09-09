@@ -34,12 +34,17 @@ _REGULATION_KEYS = (
     "title",
     "aliases",
     "tags",
+    "cssclasses",
 )
 _APPENDIX_KEYS = tuple(key if key != "section" else "appendix" for key in _REGULATION_KEYS)
-_INDEX_KEYS = tuple(key for key in _REGULATION_KEYS if key != "section")
+# Index notes render no official text, so they carry no ``cssclasses``.
+_INDEX_KEYS = tuple(key for key in _REGULATION_KEYS if key not in ("section", "cssclasses"))
 
 # AIM notes (plan §10.2): edition provenance is the effective date plus
-# change number rather than an issue date.
+# change number rather than an issue date. ``cssclasses`` (Obsidian's own
+# property; see ``generate.hierarchy``) marks every note that renders
+# official text so the CSS snippet can scope its list styling; the chapter
+# note is a pure contents list and carries none.
 _AIM_PARAGRAPH_KEYS = (
     "id",
     "type",
@@ -55,13 +60,14 @@ _AIM_PARAGRAPH_KEYS = (
     "title",
     "aliases",
     "tags",
+    "cssclasses",
 )
 _AIM_SECTION_KEYS = tuple(key for key in _AIM_PARAGRAPH_KEYS if key != "paragraph")
-_AIM_CHAPTER_KEYS = tuple(key for key in _AIM_SECTION_KEYS if key != "section")
+_AIM_CHAPTER_KEYS = tuple(key for key in _AIM_SECTION_KEYS if key not in ("section", "cssclasses"))
 _AIM_APPENDIX_KEYS = tuple(
-    key if key != "chapter" else "appendix" for key in _AIM_CHAPTER_KEYS
+    key if key != "chapter" else "appendix" for key in _AIM_SECTION_KEYS if key != "section"
 )
-_AIM_INDEX_KEYS = tuple(key for key in _AIM_CHAPTER_KEYS if key not in ("chapter", "aliases"))
+_AIM_INDEX_KEYS = tuple(key for key in _AIM_APPENDIX_KEYS if key not in ("appendix", "aliases"))
 
 # PCG notes (plan §10.3): the term itself is the citation; edition
 # provenance mirrors the AIM (effective date + change number).
@@ -78,6 +84,7 @@ _PCG_TERM_KEYS = (
     "title",
     "aliases",
     "tags",
+    "cssclasses",
 )
 _PCG_INDEX_KEYS = (
     "id",
@@ -90,6 +97,7 @@ _PCG_INDEX_KEYS = (
     "generated",
     "title",
     "tags",
+    "cssclasses",
 )
 
 # Concept notes (plan §36.2): curated-content, generated-file study aids.
@@ -141,6 +149,7 @@ _KEY_TYPES: dict[str, type | tuple[type, ...]] = {
     "area": str,
     "aliases": list,
     "tags": list,
+    "cssclasses": list,
 }
 
 # AIM cites sections and appendices by number (plan §10.2), FAR by string.

@@ -11,6 +11,8 @@ generated: true
 title: "TOS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOS

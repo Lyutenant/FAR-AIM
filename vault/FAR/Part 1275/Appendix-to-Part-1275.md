@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix to Part 1275—Research Misconduct

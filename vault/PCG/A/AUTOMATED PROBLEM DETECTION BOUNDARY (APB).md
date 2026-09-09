@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATED PROBLEM DETECTION BOUNDARY (APB)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATED PROBLEM DETECTION BOUNDARY (APB)

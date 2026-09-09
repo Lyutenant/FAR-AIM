@@ -13,6 +13,8 @@ aliases:
   - "SEPARATION [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SEPARATION \[ICAO]

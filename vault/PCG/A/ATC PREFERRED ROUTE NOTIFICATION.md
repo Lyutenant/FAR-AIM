@@ -11,6 +11,8 @@ generated: true
 title: "ATC PREFERRED ROUTE NOTIFICATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATC PREFERRED ROUTE NOTIFICATION

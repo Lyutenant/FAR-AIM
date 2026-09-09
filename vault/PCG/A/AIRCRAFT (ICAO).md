@@ -13,6 +13,8 @@ aliases:
   - "AIRCRAFT [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRCRAFT \[ICAO]

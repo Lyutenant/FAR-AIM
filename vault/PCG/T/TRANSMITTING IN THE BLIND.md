@@ -11,6 +11,8 @@ generated: true
 title: "TRANSMITTING IN THE BLIND"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSMITTING IN THE BLIND

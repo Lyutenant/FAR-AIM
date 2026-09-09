@@ -11,6 +11,8 @@ generated: true
 title: "SEGMENTS OF AN INSTRUMENT APPROACH PROCEDURE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SEGMENTS OF AN INSTRUMENT APPROACH PROCEDURE
@@ -22,13 +24,13 @@ tags:
 
 SEGMENTS OF AN INSTRUMENT APPROACH PROCEDURE- An instrument approach procedure may have as many as four separate segments depending on how the approach procedure is structured.
 
-**a.** Initial Approach- The segment between the initial approach fix and the intermediate fix or the point where the aircraft is established on the intermediate course or final approach course.
+- **a.** Initial Approach- The segment between the initial approach fix and the intermediate fix or the point where the aircraft is established on the intermediate course or final approach course.
 
-**a.** Intermediate Approach- The segment between the intermediate fix or point and the final approach fix.
+- **a.** Intermediate Approach- The segment between the intermediate fix or point and the final approach fix.
 
-**a.** Final Approach- The segment between the final approach fix or point and the runway, airport, or missed approach point.
+- **a.** Final Approach- The segment between the final approach fix or point and the runway, airport, or missed approach point.
 
-**a.** Missed Approach- The segment between the missed approach point or the point of arrival at decision height and the missed approach fix at the prescribed altitude.
+- **a.** Missed Approach- The segment between the missed approach point or the point of arrival at decision height and the missed approach fix at the prescribed altitude.
 
 ## See Also
 

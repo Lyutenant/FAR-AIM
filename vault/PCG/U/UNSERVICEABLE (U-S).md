@@ -13,6 +13,8 @@ aliases:
   - "UNSERVICEABLE (U/S)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UNSERVICEABLE (U/S)

@@ -11,6 +11,8 @@ generated: true
 title: "TOWER TO TOWER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOWER TO TOWER

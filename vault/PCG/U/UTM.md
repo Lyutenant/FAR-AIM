@@ -11,6 +11,8 @@ generated: true
 title: "UTM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UTM

@@ -11,6 +11,8 @@ generated: true
 title: "CRUISE CLIMB"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CRUISE CLIMB

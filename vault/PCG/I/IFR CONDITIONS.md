@@ -11,6 +11,8 @@ generated: true
 title: "IFR CONDITIONS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IFR CONDITIONS

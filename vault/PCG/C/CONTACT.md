@@ -11,6 +11,8 @@ generated: true
 title: "CONTACT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONTACT
@@ -22,9 +24,9 @@ tags:
 
 CONTACT-
 
-**a.** Establish communication with (followed by the name of the facility and, if appropriate, the frequency to be used).
+- **a.** Establish communication with (followed by the name of the facility and, if appropriate, the frequency to be used).
 
-**b.** A flight condition wherein the pilot ascertains the attitude of his/her aircraft and navigates by visual reference to the surface.
+- **b.** A flight condition wherein the pilot ascertains the attitude of his/her aircraft and navigates by visual reference to the surface.
 
 ## See Also
 

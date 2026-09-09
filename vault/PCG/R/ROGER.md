@@ -11,6 +11,8 @@ generated: true
 title: "ROGER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ROGER

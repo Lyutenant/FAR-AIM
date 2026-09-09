@@ -11,6 +11,8 @@ generated: true
 title: "MOUNTAIN WAVE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MOUNTAIN WAVE

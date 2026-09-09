@@ -11,6 +11,8 @@ generated: true
 title: "CHA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CHA

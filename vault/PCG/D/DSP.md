@@ -11,6 +11,8 @@ generated: true
 title: "DSP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DSP

@@ -11,6 +11,8 @@ generated: true
 title: "MGOW"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MGOW

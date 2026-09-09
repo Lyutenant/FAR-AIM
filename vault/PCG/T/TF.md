@@ -11,6 +11,8 @@ generated: true
 title: "TF"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TF

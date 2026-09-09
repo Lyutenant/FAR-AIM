@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix K to Part 121—Performance Requirements for Certain Turbopropeller Powered Airplanes

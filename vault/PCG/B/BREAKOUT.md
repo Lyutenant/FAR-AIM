@@ -11,6 +11,8 @@ generated: true
 title: "BREAKOUT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BREAKOUT

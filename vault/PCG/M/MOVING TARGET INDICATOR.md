@@ -11,6 +11,8 @@ generated: true
 title: "MOVING TARGET INDICATOR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MOVING TARGET INDICATOR

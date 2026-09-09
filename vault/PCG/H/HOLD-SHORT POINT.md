@@ -13,6 +13,8 @@ aliases:
   - "HOLD‐SHORT POINT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOLD‐SHORT POINT

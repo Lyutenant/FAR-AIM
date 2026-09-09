@@ -11,6 +11,8 @@ generated: true
 title: "MANPADS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MANPADS

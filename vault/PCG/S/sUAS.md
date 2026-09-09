@@ -11,6 +11,8 @@ generated: true
 title: "sUAS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # sUAS

@@ -11,6 +11,8 @@ generated: true
 title: "SURFACE VIEWER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SURFACE VIEWER

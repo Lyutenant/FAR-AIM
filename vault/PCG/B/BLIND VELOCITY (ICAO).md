@@ -13,6 +13,8 @@ aliases:
   - "BLIND VELOCITY [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BLIND VELOCITY \[ICAO]

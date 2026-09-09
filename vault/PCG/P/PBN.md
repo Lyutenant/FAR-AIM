@@ -11,6 +11,8 @@ generated: true
 title: "PBN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PBN

@@ -11,6 +11,8 @@ generated: true
 title: "DIVERSE VECTOR AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DIVERSE VECTOR AREA

@@ -11,6 +11,8 @@ generated: true
 title: "LANDING ROLL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LANDING ROLL

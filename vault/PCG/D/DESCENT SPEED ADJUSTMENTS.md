@@ -11,6 +11,8 @@ generated: true
 title: "DESCENT SPEED ADJUSTMENTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DESCENT SPEED ADJUSTMENTS

@@ -11,6 +11,8 @@ generated: true
 title: "ALONG-TRACK DISTANCE (ATD)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALONG-TRACK DISTANCE (ATD)

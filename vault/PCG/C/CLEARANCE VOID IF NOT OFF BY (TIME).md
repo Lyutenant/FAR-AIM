@@ -11,6 +11,8 @@ generated: true
 title: "CLEARANCE VOID IF NOT OFF BY (TIME)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLEARANCE VOID IF NOT OFF BY (TIME)

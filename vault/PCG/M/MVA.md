@@ -11,6 +11,8 @@ generated: true
 title: "MVA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MVA

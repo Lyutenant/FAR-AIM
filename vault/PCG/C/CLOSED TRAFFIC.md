@@ -11,6 +11,8 @@ generated: true
 title: "CLOSED TRAFFIC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLOSED TRAFFIC

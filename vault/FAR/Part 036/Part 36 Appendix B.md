@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix B to Part 36—Noise Levels for Transport Category and Jet Airplanes Under § 36.103

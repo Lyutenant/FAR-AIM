@@ -11,6 +11,8 @@ generated: true
 title: "POSITION SYMBOL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # POSITION SYMBOL

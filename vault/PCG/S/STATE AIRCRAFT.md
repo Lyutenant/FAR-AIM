@@ -11,6 +11,8 @@ generated: true
 title: "STATE AIRCRAFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STATE AIRCRAFT

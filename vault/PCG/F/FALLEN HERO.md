@@ -11,6 +11,8 @@ generated: true
 title: "FALLEN HERO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FALLEN HERO

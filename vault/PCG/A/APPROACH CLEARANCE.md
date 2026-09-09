@@ -11,6 +11,8 @@ generated: true
 title: "APPROACH CLEARANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROACH CLEARANCE

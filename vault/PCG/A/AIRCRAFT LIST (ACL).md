@@ -11,6 +11,8 @@ generated: true
 title: "AIRCRAFT LIST (ACL)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRCRAFT LIST (ACL)

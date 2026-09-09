@@ -11,6 +11,8 @@ generated: true
 title: "PHOTO RECONNAISSANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PHOTO RECONNAISSANCE

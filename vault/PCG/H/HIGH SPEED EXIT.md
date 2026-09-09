@@ -11,6 +11,8 @@ generated: true
 title: "HIGH SPEED EXIT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HIGH SPEED EXIT

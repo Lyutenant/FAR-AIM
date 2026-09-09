@@ -11,6 +11,8 @@ generated: true
 title: "LONGITUDINAL SEPARATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LONGITUDINAL SEPARATION

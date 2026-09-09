@@ -11,6 +11,8 @@ generated: true
 title: "CROSS (FIX) AT (ALTITUDE)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CROSS (FIX) AT (ALTITUDE)

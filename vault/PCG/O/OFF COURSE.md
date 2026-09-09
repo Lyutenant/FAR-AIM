@@ -11,6 +11,8 @@ generated: true
 title: "OFF COURSE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OFF COURSE

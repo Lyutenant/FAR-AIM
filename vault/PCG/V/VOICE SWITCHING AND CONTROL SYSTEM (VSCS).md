@@ -11,6 +11,8 @@ generated: true
 title: "VOICE SWITCHING AND CONTROL SYSTEM (VSCS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VOICE SWITCHING AND CONTROL SYSTEM (VSCS)

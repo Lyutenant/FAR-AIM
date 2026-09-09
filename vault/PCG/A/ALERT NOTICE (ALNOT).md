@@ -11,6 +11,8 @@ generated: true
 title: "ALERT NOTICE (ALNOT)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALERT NOTICE (ALNOT)

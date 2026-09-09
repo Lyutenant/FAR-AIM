@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATED UNICOM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATED UNICOM

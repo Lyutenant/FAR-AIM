@@ -11,6 +11,8 @@ generated: true
 title: "QUADRANT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # QUADRANT

@@ -11,6 +11,8 @@ generated: true
 title: "AVAILABLE LANDING DISTANCE (ALD)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AVAILABLE LANDING DISTANCE (ALD)

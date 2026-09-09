@@ -11,6 +11,8 @@ generated: true
 title: "EXECUTE MISSED APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EXECUTE MISSED APPROACH

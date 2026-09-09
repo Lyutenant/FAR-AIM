@@ -11,6 +11,8 @@ generated: true
 title: "FLAMEOUT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLAMEOUT

@@ -11,6 +11,8 @@ generated: true
 title: "TRANSITIONAL HAZARD AREA (THA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSITIONAL HAZARD AREA (THA)

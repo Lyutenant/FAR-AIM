@@ -13,6 +13,8 @@ aliases:
   - "TOUCHDOWN ZONE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOUCHDOWN ZONE \[ICAO]

@@ -11,6 +11,8 @@ generated: true
 title: "MINIMA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMA

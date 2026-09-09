@@ -11,6 +11,8 @@ generated: true
 title: "DCL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DCL

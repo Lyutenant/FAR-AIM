@@ -11,6 +11,8 @@ generated: true
 title: "MINIMUM RECEPTION ALTITUDE (MRA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMUM RECEPTION ALTITUDE (MRA)

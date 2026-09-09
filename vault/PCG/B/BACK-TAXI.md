@@ -13,6 +13,8 @@ aliases:
   - "BACK‐TAXI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BACK‐TAXI

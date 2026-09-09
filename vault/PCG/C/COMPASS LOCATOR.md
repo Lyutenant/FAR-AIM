@@ -11,6 +11,8 @@ generated: true
 title: "COMPASS LOCATOR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COMPASS LOCATOR
@@ -22,9 +24,9 @@ tags:
 
 COMPASS LOCATOR- A low power, low or medium frequency (L/MF) radio beacon installed at the site of the outer or middle marker of an instrument landing system (ILS). It can be used for navigation at distances of approximately 15 miles or as authorized in the approach procedure.
 
-**a.** Outer Compass Locator (LOM)- A compass locator installed at the site of the outer marker of an instrument landing system.
+- **a.** Outer Compass Locator (LOM)- A compass locator installed at the site of the outer marker of an instrument landing system.
 
-**a.** Middle Compass Locator (LMM)- A compass locator installed at the site of the middle marker of an instrument landing system.
+- **a.** Middle Compass Locator (LMM)- A compass locator installed at the site of the middle marker of an instrument landing system.
 
 ## See Also
 

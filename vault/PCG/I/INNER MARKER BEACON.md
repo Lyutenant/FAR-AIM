@@ -11,6 +11,8 @@ generated: true
 title: "INNER MARKER BEACON"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INNER MARKER BEACON

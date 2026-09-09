@@ -11,6 +11,8 @@ generated: true
 title: "NONDIRECTIONAL BEACON"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NONDIRECTIONAL BEACON

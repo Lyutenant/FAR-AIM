@@ -13,6 +13,8 @@ aliases:
   - "DH [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DH \[ICAO]

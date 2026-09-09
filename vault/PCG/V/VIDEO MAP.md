@@ -11,6 +11,8 @@ generated: true
 title: "VIDEO MAP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VIDEO MAP

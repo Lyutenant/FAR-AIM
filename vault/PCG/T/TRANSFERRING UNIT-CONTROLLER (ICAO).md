@@ -13,6 +13,8 @@ aliases:
   - "TRANSFERRING UNIT/CONTROLLER [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSFERRING UNIT/CONTROLLER \[ICAO]

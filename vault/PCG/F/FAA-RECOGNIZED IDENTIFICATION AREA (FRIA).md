@@ -11,6 +11,8 @@ generated: true
 title: "FAA-RECOGNIZED IDENTIFICATION AREA (FRIA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FAA-RECOGNIZED IDENTIFICATION AREA (FRIA)

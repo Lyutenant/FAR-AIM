@@ -13,6 +13,8 @@ aliases:
   - "VISUAL APPROACH [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VISUAL APPROACH \[ICAO]

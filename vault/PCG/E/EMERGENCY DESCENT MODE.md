@@ -11,6 +11,8 @@ generated: true
 title: "EMERGENCY DESCENT MODE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EMERGENCY DESCENT MODE

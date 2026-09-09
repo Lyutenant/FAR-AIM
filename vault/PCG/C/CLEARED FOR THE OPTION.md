@@ -11,6 +11,8 @@ generated: true
 title: "CLEARED FOR THE OPTION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLEARED FOR THE OPTION

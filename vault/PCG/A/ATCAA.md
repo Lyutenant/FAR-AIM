@@ -11,6 +11,8 @@ generated: true
 title: "ATCAA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATCAA

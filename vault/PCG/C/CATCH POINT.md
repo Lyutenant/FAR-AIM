@@ -11,6 +11,8 @@ generated: true
 title: "CATCH POINT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CATCH POINT

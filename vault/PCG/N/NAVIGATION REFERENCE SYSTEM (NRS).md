@@ -11,6 +11,8 @@ generated: true
 title: "NAVIGATION REFERENCE SYSTEM (NRS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NAVIGATION REFERENCE SYSTEM (NRS)

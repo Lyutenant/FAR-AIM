@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT VISIBILITY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT VISIBILITY

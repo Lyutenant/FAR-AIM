@@ -11,6 +11,8 @@ generated: true
 title: "VERY HIGH FREQUENCY (VHF)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VERY HIGH FREQUENCY (VHF)

@@ -11,6 +11,8 @@ generated: true
 title: "CALL FOR RELEASE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CALL FOR RELEASE

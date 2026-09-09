@@ -11,6 +11,8 @@ generated: true
 title: "NUMEROUS TARGETS VICINITY (LOCATION)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NUMEROUS TARGETS VICINITY (LOCATION)

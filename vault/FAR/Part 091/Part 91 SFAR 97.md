@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Special Federal Aviation Regulation No. 97—Special Operating Rules for the Conduct of Instrument Flight Rules (IFR) Area Navigation (RNAV) Operations using Global Positioning Systems (GPS) in Alaska

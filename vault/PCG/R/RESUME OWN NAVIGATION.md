@@ -11,6 +11,8 @@ generated: true
 title: "RESUME OWN NAVIGATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RESUME OWN NAVIGATION

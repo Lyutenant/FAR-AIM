@@ -11,6 +11,8 @@ generated: true
 title: "HAVE NUMBERS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HAVE NUMBERS

@@ -11,6 +11,8 @@ generated: true
 title: "CT MESSAGE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CT MESSAGE

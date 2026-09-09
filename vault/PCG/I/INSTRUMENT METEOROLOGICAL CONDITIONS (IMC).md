@@ -11,6 +11,8 @@ generated: true
 title: "INSTRUMENT METEOROLOGICAL CONDITIONS (IMC)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INSTRUMENT METEOROLOGICAL CONDITIONS (IMC)

@@ -11,6 +11,8 @@ generated: true
 title: "LOCALIZER USABLE DISTANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LOCALIZER USABLE DISTANCE

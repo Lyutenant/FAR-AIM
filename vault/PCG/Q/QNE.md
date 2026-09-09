@@ -11,6 +11,8 @@ generated: true
 title: "QNE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # QNE

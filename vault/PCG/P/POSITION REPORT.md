@@ -11,6 +11,8 @@ generated: true
 title: "POSITION REPORT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # POSITION REPORT

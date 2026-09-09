@@ -11,6 +11,8 @@ generated: true
 title: "COMPLY WITH RESTRICTIONS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COMPLY WITH RESTRICTIONS

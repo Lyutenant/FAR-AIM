@@ -11,6 +11,8 @@ generated: true
 title: "FSDO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FSDO

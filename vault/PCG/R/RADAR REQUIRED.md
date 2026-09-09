@@ -11,6 +11,8 @@ generated: true
 title: "RADAR REQUIRED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR REQUIRED

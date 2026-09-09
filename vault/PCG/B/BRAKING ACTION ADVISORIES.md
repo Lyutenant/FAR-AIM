@@ -11,6 +11,8 @@ generated: true
 title: "BRAKING ACTION ADVISORIES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BRAKING ACTION ADVISORIES

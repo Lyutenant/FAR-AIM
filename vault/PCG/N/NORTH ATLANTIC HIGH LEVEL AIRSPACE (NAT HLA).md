@@ -11,6 +11,8 @@ generated: true
 title: "NORTH ATLANTIC HIGH LEVEL AIRSPACE (NAT HLA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NORTH ATLANTIC HIGH LEVEL AIRSPACE (NAT HLA)

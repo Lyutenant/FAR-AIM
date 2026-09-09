@@ -11,6 +11,8 @@ generated: true
 title: "VISUAL SEGMENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VISUAL SEGMENT

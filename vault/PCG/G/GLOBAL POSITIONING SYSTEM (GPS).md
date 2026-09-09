@@ -11,6 +11,8 @@ generated: true
 title: "GLOBAL POSITIONING SYSTEM (GPS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GLOBAL POSITIONING SYSTEM (GPS)

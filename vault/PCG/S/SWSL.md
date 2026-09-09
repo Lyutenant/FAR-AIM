@@ -11,6 +11,8 @@ generated: true
 title: "SWSL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SWSL

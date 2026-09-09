@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix B to Part 33—Certification Standard Atmospheric Concentrations of Rain and Hail

@@ -11,6 +11,8 @@ generated: true
 title: "BRAKING ACTION (GOOD, GOOD TO MEDIUM, MEDIUM, MEDIUM TO POOR, POOR, OR NIL)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BRAKING ACTION (GOOD, GOOD TO MEDIUM, MEDIUM, MEDIUM TO POOR, POOR, OR NIL)

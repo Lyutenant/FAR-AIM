@@ -11,6 +11,8 @@ generated: true
 title: "BVLOS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BVLOS

@@ -11,6 +11,8 @@ generated: true
 title: "TRANSFER OF COMMUNICATION (TOC)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSFER OF COMMUNICATION (TOC)

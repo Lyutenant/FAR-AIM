@@ -11,6 +11,8 @@ generated: true
 title: "MINIMUM SAFE ALTITUDE (MSA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMUM SAFE ALTITUDE (MSA)
@@ -22,13 +24,13 @@ tags:
 
 MINIMUM SAFE ALTITUDE (MSA)-
 
-**a.** The Minimum Safe Altitude (MSA) specified in 14 CFR part 91 for various aircraft operations.
+- **a.** The Minimum Safe Altitude (MSA) specified in 14 CFR part 91 for various aircraft operations.
 
-**b.** Altitudes depicted on approach charts or departure procedure (DP) graphic charts which provide at least 1,000 feet of obstacle clearance for emergency use. These altitudes will be identified as Minimum Safe Altitudes or Emergency Safe Altitudes and are established as follows:
+- **b.** Altitudes depicted on approach charts or departure procedure (DP) graphic charts which provide at least 1,000 feet of obstacle clearance for emergency use. These altitudes will be identified as Minimum Safe Altitudes or Emergency Safe Altitudes and are established as follows:
 
-**c.** Minimum Safe Altitude (MSA). Altitudes depicted on approach charts or on a DP graphic chart which provide at least 1,000 feet of obstacle clearance within a 25-mile radius of the navigation facility, waypoint, or airport reference point upon which the MSA is predicated. MSAs are for emergency use only and do not necessarily assure acceptable navigational signal coverage.
+- **c.** Minimum Safe Altitude (MSA). Altitudes depicted on approach charts or on a DP graphic chart which provide at least 1,000 feet of obstacle clearance within a 25-mile radius of the navigation facility, waypoint, or airport reference point upon which the MSA is predicated. MSAs are for emergency use only and do not necessarily assure acceptable navigational signal coverage.
 
-**1.** Emergency Safe Altitude (ESA). Altitudes depicted on approach charts which provide at least 1,000 feet of obstacle clearance in nonmountainous areas and 2,000 feet of obstacle clearance in designated mountainous areas within a 100-mile radius of the navigation facility or waypoint used as the ESA center. These altitudes are normally used only in military procedures and are identified on published procedures as “Emergency Safe Altitudes.”
+- **1.** Emergency Safe Altitude (ESA). Altitudes depicted on approach charts which provide at least 1,000 feet of obstacle clearance in nonmountainous areas and 2,000 feet of obstacle clearance in designated mountainous areas within a 100-mile radius of the navigation facility or waypoint used as the ESA center. These altitudes are normally used only in military procedures and are identified on published procedures as “Emergency Safe Altitudes.”
 
 ## See Also
 

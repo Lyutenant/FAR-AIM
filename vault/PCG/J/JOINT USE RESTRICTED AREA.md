@@ -11,6 +11,8 @@ generated: true
 title: "JOINT USE RESTRICTED AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # JOINT USE RESTRICTED AREA

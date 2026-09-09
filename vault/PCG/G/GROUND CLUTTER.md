@@ -11,6 +11,8 @@ generated: true
 title: "GROUND CLUTTER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GROUND CLUTTER

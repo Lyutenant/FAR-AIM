@@ -13,6 +13,8 @@ aliases:
   - "ATS ROUTE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATS ROUTE \[ICAO]

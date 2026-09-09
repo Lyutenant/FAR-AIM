@@ -12,6 +12,8 @@ generated: true
 title: "Two‐way Radio Communications Failure"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 6, Section 4 — Two‐way Radio Communications Failure

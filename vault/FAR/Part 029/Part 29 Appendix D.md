@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix D to Part 29—Criteria for Demonstration of Emergency Evacuation Procedures Under § 29.803

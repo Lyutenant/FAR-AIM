@@ -11,6 +11,8 @@ generated: true
 title: "VISUAL DESCENT POINT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VISUAL DESCENT POINT

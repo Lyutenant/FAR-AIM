@@ -11,6 +11,8 @@ generated: true
 title: "AIRBORNE REROUTE (ABRR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRBORNE REROUTE (ABRR)

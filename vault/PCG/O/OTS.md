@@ -11,6 +11,8 @@ generated: true
 title: "OTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OTS

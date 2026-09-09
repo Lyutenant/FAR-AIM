@@ -11,6 +11,8 @@ generated: true
 title: "RTR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RTR

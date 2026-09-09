@@ -11,6 +11,8 @@ generated: true
 title: "RC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RC

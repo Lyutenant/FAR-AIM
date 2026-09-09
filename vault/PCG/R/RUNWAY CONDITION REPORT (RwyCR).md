@@ -11,6 +11,8 @@ generated: true
 title: "RUNWAY CONDITION REPORT (RwyCR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RUNWAY CONDITION REPORT (RwyCR)

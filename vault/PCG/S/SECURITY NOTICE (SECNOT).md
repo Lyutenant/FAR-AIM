@@ -11,6 +11,8 @@ generated: true
 title: "SECURITY NOTICE (SECNOT)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SECURITY NOTICE (SECNOT)

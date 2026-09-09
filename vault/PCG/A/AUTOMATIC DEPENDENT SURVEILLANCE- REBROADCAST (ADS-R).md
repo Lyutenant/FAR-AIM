@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATIC DEPENDENT SURVEILLANCE- REBROADCAST (ADS-R)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATIC DEPENDENT SURVEILLANCE- REBROADCAST (ADS-R)

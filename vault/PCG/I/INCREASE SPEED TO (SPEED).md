@@ -11,6 +11,8 @@ generated: true
 title: "INCREASE SPEED TO (SPEED)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INCREASE SPEED TO (SPEED)

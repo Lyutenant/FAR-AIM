@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT STANDARDS DISTRICT OFFICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT STANDARDS DISTRICT OFFICE

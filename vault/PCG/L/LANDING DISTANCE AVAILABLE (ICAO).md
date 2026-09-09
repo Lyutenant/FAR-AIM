@@ -13,6 +13,8 @@ aliases:
   - "LANDING DISTANCE AVAILABLE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LANDING DISTANCE AVAILABLE \[ICAO]

@@ -11,6 +11,8 @@ generated: true
 title: "P TIME"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # P TIME

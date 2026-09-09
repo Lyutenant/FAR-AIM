@@ -11,6 +11,8 @@ generated: true
 title: "CONFORMANCE REGION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONFORMANCE REGION

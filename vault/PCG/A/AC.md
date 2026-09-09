@@ -11,6 +11,8 @@ generated: true
 title: "AC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AC

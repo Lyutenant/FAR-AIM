@@ -11,6 +11,8 @@ generated: true
 title: "RADAR NAVIGATIONAL GUIDANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR NAVIGATIONAL GUIDANCE

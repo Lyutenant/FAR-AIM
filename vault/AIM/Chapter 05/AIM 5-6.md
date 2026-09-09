@@ -14,6 +14,8 @@ aliases:
   - "National Security and Interception Procedures"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 5, Section 6 — National Security and Interception Procedures

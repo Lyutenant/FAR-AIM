@@ -11,6 +11,8 @@ generated: true
 title: "TRACEABLE PRESSURE STANDARD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRACEABLE PRESSURE STANDARD

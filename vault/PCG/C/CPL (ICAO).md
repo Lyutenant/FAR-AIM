@@ -13,6 +13,8 @@ aliases:
   - "CPL [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CPL \[ICAO]

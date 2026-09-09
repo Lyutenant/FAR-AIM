@@ -11,6 +11,8 @@ generated: true
 title: "CTAF"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CTAF

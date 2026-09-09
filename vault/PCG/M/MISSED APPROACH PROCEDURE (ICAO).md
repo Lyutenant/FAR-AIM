@@ -13,6 +13,8 @@ aliases:
   - "MISSED APPROACH PROCEDURE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MISSED APPROACH PROCEDURE \[ICAO]

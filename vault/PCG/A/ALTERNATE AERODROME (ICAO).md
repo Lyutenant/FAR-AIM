@@ -13,6 +13,8 @@ aliases:
   - "ALTERNATE AERODROME [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALTERNATE AERODROME \[ICAO]

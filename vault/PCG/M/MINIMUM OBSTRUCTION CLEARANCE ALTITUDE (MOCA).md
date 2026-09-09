@@ -11,6 +11,8 @@ generated: true
 title: "MINIMUM OBSTRUCTION CLEARANCE ALTITUDE (MOCA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMUM OBSTRUCTION CLEARANCE ALTITUDE (MOCA)

@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT TERMINATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT TERMINATION

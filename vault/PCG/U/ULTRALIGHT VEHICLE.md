@@ -11,6 +11,8 @@ generated: true
 title: "ULTRALIGHT VEHICLE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ULTRALIGHT VEHICLE

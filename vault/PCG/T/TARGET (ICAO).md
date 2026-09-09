@@ -13,6 +13,8 @@ aliases:
   - "TARGET [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TARGET \[ICAO]
@@ -24,6 +26,6 @@ tags:
 
 TARGET \[ICAO]- In radar:
 
-**a.** Generally, any discrete object which reflects or retransmits energy back to the radar equipment.
+- **a.** Generally, any discrete object which reflects or retransmits energy back to the radar equipment.
 
-**b.** Specifically, an object of radar search or surveillance.
+- **b.** Specifically, an object of radar search or surveillance.

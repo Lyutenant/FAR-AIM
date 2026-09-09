@@ -11,6 +11,8 @@ generated: true
 title: "WEATHER ADVISORY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WEATHER ADVISORY

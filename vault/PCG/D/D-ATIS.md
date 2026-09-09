@@ -11,6 +11,8 @@ generated: true
 title: "D-ATIS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # D-ATIS

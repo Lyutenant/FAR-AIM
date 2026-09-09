@@ -11,6 +11,8 @@ generated: true
 title: "DAIR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DAIR

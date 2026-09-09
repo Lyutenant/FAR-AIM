@@ -11,6 +11,8 @@ generated: true
 title: "NONMOVEMENT AREAS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NONMOVEMENT AREAS

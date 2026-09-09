@@ -11,6 +11,8 @@ generated: true
 title: "VMC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VMC

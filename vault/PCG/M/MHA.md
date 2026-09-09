@@ -11,6 +11,8 @@ generated: true
 title: "MHA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MHA

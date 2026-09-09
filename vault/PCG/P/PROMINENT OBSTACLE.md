@@ -11,6 +11,8 @@ generated: true
 title: "PROMINENT OBSTACLE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROMINENT OBSTACLE
@@ -22,11 +24,11 @@ tags:
 
 PROMINENT OBSTACLE– An obstacle that meets one or more of the following conditions:
 
-**a.** An obstacle which stands out beyond the adjacent surface of surrounding terrain and immediately projects a noticeable hazard to aircraft in flight.
+- **a.** An obstacle which stands out beyond the adjacent surface of surrounding terrain and immediately projects a noticeable hazard to aircraft in flight.
 
-**b.** An obstacle, not characterized as low and close in, whose height is no less than 300 feet above the departure end of takeoff runway (DER) elevation, is within 10 NM from the DER, and that penetrates that airport/heliport's diverse departure obstacle clearance surface (OCS).
+- **b.** An obstacle, not characterized as low and close in, whose height is no less than 300 feet above the departure end of takeoff runway (DER) elevation, is within 10 NM from the DER, and that penetrates that airport/heliport's diverse departure obstacle clearance surface (OCS).
 
-**c.** An obstacle beyond 10 NM from an airport/heliport that requires an obstacle departure procedure (ODP) to ensure obstacle avoidance.
+- **c.** An obstacle beyond 10 NM from an airport/heliport that requires an obstacle departure procedure (ODP) to ensure obstacle avoidance.
 
 ## See Also
 

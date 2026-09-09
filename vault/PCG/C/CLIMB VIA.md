@@ -11,6 +11,8 @@ generated: true
 title: "CLIMB VIA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLIMB VIA

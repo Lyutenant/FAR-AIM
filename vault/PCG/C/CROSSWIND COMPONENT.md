@@ -11,6 +11,8 @@ generated: true
 title: "CROSSWIND COMPONENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CROSSWIND COMPONENT

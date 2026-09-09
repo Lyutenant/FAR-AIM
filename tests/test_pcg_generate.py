@@ -203,6 +203,22 @@ def test_wikilinks_resolve_and_note_renders(combined_plan):
     assert "PURPOSE" in index
 
 
+def test_sub_lists_render_as_nested_items():
+    from far_aim.generate.pcg_notes import render_pcg_blocks
+
+    blocks = [
+        {"type": "entry", "text": "TERM- Means:"},
+        {"type": "list", "style": "a", "items": [{"text": "First."}, {"text": "Second\nline."}]},
+        {"type": "list", "style": "1", "items": [{"text": ""}]},
+    ]
+    assert render_pcg_blocks(blocks) == [
+        "TERM- Means:",
+        "- **a.** First.",
+        "- **b.** Second\\\n    line.",
+        "- **1.**",
+    ]
+
+
 def test_embedded_definition_link_renders_in_references():
     """A hyperlink embedded in the official definition stays usable: its
     verbatim text remains in the Official Text and the destination renders

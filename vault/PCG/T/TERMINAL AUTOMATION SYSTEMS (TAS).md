@@ -11,6 +11,8 @@ generated: true
 title: "TERMINAL AUTOMATION SYSTEMS (TAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TERMINAL AUTOMATION SYSTEMS (TAS)

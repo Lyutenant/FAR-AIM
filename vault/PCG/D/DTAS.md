@@ -11,6 +11,8 @@ generated: true
 title: "DTAS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DTAS

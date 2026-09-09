@@ -11,6 +11,8 @@ generated: true
 title: "RUNWAY GRADIENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RUNWAY GRADIENT

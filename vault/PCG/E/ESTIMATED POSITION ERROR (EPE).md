@@ -11,6 +11,8 @@ generated: true
 title: "ESTIMATED POSITION ERROR (EPE)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ESTIMATED POSITION ERROR (EPE)

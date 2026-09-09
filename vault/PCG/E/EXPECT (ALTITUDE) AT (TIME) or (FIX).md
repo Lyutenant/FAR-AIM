@@ -11,6 +11,8 @@ generated: true
 title: "EXPECT (ALTITUDE) AT (TIME) or (FIX)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EXPECT (ALTITUDE) AT (TIME) or (FIX)

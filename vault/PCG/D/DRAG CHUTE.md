@@ -11,6 +11,8 @@ generated: true
 title: "DRAG CHUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DRAG CHUTE

@@ -11,6 +11,8 @@ generated: true
 title: "CPDLC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CPDLC

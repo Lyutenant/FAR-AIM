@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix D to Part 420—Impact Dispersion Areas and Casualty Expectancy Estimate for an Unguided Suborbital Launch Vehicle

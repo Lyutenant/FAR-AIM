@@ -11,6 +11,8 @@ generated: true
 title: "AVIATION WATCH NOTIFICATION MESSAGE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AVIATION WATCH NOTIFICATION MESSAGE

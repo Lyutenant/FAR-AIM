@@ -11,6 +11,8 @@ generated: true
 title: "LOCALIZER PERFORMANCE WITH VERTICAL GUIDANCE (LPV)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LOCALIZER PERFORMANCE WITH VERTICAL GUIDANCE (LPV)

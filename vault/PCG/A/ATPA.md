@@ -11,6 +11,8 @@ generated: true
 title: "ATPA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATPA

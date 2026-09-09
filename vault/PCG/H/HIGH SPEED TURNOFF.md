@@ -11,6 +11,8 @@ generated: true
 title: "HIGH SPEED TURNOFF"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HIGH SPEED TURNOFF

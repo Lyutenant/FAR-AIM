@@ -11,6 +11,8 @@ generated: true
 title: "PT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PT

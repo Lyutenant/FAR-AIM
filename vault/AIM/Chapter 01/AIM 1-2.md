@@ -14,6 +14,8 @@ aliases:
   - "Performance-Based Navigation (PBN) and Area Navigation (RNAV)"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 1, Section 2 — Performance-Based Navigation (PBN) and Area Navigation (RNAV)

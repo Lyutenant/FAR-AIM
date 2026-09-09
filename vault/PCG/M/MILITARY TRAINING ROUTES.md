@@ -11,6 +11,8 @@ generated: true
 title: "MILITARY TRAINING ROUTES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MILITARY TRAINING ROUTES

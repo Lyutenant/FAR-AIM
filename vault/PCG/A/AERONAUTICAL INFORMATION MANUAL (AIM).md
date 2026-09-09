@@ -11,6 +11,8 @@ generated: true
 title: "AERONAUTICAL INFORMATION MANUAL (AIM)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AERONAUTICAL INFORMATION MANUAL (AIM)

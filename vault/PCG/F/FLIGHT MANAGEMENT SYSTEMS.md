@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT MANAGEMENT SYSTEMS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT MANAGEMENT SYSTEMS

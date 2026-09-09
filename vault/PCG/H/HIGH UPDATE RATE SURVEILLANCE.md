@@ -11,6 +11,8 @@ generated: true
 title: "HIGH UPDATE RATE SURVEILLANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HIGH UPDATE RATE SURVEILLANCE

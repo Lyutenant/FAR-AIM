@@ -11,6 +11,8 @@ generated: true
 title: "VTOL AIRCRAFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VTOL AIRCRAFT

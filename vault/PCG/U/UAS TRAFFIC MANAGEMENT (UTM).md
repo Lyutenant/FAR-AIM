@@ -11,6 +11,8 @@ generated: true
 title: "UAS TRAFFIC MANAGEMENT (UTM)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UAS TRAFFIC MANAGEMENT (UTM)

@@ -11,6 +11,8 @@ generated: true
 title: "UNFROZEN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UNFROZEN

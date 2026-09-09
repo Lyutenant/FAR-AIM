@@ -11,6 +11,8 @@ generated: true
 title: "FIS-B"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FIS-B

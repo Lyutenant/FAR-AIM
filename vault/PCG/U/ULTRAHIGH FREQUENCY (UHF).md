@@ -11,6 +11,8 @@ generated: true
 title: "ULTRAHIGH FREQUENCY (UHF)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ULTRAHIGH FREQUENCY (UHF)

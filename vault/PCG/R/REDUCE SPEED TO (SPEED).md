@@ -11,6 +11,8 @@ generated: true
 title: "REDUCE SPEED TO (SPEED)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REDUCE SPEED TO (SPEED)

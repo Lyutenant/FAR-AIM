@@ -11,6 +11,8 @@ generated: true
 title: "PTP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PTP

@@ -11,6 +11,8 @@ generated: true
 title: "AIRSTART"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRSTART

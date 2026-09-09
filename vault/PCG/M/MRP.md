@@ -11,6 +11,8 @@ generated: true
 title: "MRP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MRP

@@ -11,6 +11,8 @@ generated: true
 title: "TAKEOFF RUN AVAILABLE (TORA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TAKEOFF RUN AVAILABLE (TORA)

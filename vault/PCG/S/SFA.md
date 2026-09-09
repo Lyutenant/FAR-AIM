@@ -11,6 +11,8 @@ generated: true
 title: "SFA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SFA

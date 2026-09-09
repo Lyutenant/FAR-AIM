@@ -11,6 +11,8 @@ generated: true
 title: "METER REFERENCE POINT LIST (MRP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # METER REFERENCE POINT LIST (MRP)

@@ -11,6 +11,8 @@ generated: true
 title: "RAD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RAD

@@ -11,6 +11,8 @@ generated: true
 title: "RANDOM ALTITUDE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RANDOM ALTITUDE

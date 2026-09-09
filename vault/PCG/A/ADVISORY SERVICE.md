@@ -11,6 +11,8 @@ generated: true
 title: "ADVISORY SERVICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADVISORY SERVICE

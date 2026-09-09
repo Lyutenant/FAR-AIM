@@ -11,6 +11,8 @@ generated: true
 title: "RADIO BEACON"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADIO BEACON

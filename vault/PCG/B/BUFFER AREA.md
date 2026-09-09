@@ -11,6 +11,8 @@ generated: true
 title: "BUFFER AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BUFFER AREA

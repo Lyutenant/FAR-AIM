@@ -11,6 +11,8 @@ generated: true
 title: "MODEL AIRCRAFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MODEL AIRCRAFT

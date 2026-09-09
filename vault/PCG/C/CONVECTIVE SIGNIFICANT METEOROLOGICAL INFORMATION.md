@@ -11,6 +11,8 @@ generated: true
 title: "CONVECTIVE SIGNIFICANT METEOROLOGICAL INFORMATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONVECTIVE SIGNIFICANT METEOROLOGICAL INFORMATION

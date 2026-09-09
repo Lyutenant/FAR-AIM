@@ -13,6 +13,8 @@ aliases:
   - "TACAN‐ONLY AIRCRAFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TACAN‐ONLY AIRCRAFT

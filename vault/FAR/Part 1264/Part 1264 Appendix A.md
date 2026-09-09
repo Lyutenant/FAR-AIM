@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix A to Part 1264—Notice To Consent to the Chairperson, NASA Board of Contract Appeals (BCA), or Designee, as Presiding Officer

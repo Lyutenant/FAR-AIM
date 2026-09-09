@@ -13,6 +13,8 @@ aliases:
   - "MACH TECHNIQUE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MACH TECHNIQUE \[ICAO]

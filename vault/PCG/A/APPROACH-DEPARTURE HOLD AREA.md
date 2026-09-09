@@ -13,6 +13,8 @@ aliases:
   - "APPROACH/DEPARTURE HOLD AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROACH/DEPARTURE HOLD AREA

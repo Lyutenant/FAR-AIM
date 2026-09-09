@@ -11,6 +11,8 @@ generated: true
 title: "RMI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RMI

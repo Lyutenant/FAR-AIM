@@ -13,6 +13,8 @@ aliases:
   - "TOUCH‐AND‐GO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOUCH‐AND‐GO

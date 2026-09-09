@@ -11,6 +11,8 @@ generated: true
 title: "CERTIFIED TOWER RADAR DISPLAY (CTRD)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CERTIFIED TOWER RADAR DISPLAY (CTRD)

@@ -11,6 +11,8 @@ generated: true
 title: "NAVIGATIONAL AID"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NAVIGATIONAL AID

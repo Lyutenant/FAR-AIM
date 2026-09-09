@@ -11,6 +11,8 @@ generated: true
 title: "WEATHER RECONNAISSANCE AREA (WRA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WEATHER RECONNAISSANCE AREA (WRA)

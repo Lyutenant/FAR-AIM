@@ -11,6 +11,8 @@ generated: true
 title: "COPTER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COPTER

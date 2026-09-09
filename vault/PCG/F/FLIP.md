@@ -11,6 +11,8 @@ generated: true
 title: "FLIP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIP

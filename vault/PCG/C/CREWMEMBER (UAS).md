@@ -11,6 +11,8 @@ generated: true
 title: "CREWMEMBER (UAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CREWMEMBER (UAS)

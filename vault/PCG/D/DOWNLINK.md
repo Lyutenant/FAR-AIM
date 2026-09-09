@@ -11,6 +11,8 @@ generated: true
 title: "DOWNLINK"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DOWNLINK

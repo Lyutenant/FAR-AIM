@@ -11,6 +11,8 @@ generated: true
 title: "SLOW TAXI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SLOW TAXI

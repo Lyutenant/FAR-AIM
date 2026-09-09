@@ -11,6 +11,8 @@ generated: true
 title: "VERIFY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VERIFY

@@ -11,6 +11,8 @@ generated: true
 title: "ODP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ODP

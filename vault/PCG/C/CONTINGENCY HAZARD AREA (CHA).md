@@ -11,6 +11,8 @@ generated: true
 title: "CONTINGENCY HAZARD AREA (CHA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONTINGENCY HAZARD AREA (CHA)

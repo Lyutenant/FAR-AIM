@@ -13,6 +13,8 @@ aliases:
   - "SEGMENTS OF A SID/STAR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SEGMENTS OF A SID/STAR
@@ -24,12 +26,12 @@ tags:
 
 SEGMENTS OF A SID/STAR-
 
-**a.** En Route Transition- The segment(s) of a SID/STAR that connect to/from en route flight. Not all SIDs/STARs will contain an en route transition.
+- **a.** En Route Transition- The segment(s) of a SID/STAR that connect to/from en route flight. Not all SIDs/STARs will contain an en route transition.
 
-**b.** En Route Transition Waypoint- The NAVAID/fix/waypoint that defines the beginning of the SID/STAR en route transition.
+- **b.** En Route Transition Waypoint- The NAVAID/fix/waypoint that defines the beginning of the SID/STAR en route transition.
 
-**c.** Common Route- The segment(s) of a SID/STAR procedure that provides a single route serving an airport/runway or multiple airports/runways. The common route may consist of a single point. Not all conventional SIDs will contain a common route.
+- **c.** Common Route- The segment(s) of a SID/STAR procedure that provides a single route serving an airport/runway or multiple airports/runways. The common route may consist of a single point. Not all conventional SIDs will contain a common route.
 
-**d.** Runway Transition- The segment(s) of a SID/STAR between the common route/point and the runway(s). Not all SIDs/STARs will contain a runway transition.
+- **d.** Runway Transition- The segment(s) of a SID/STAR between the common route/point and the runway(s). Not all SIDs/STARs will contain a runway transition.
 
-**e.** Runway Transition Waypoint (RTW)- On a STAR, the NAVAID/fix/waypoint that defines the end of the common route or en route transition and the beginning of a runway transition (In the arrival route description found on the STAR chart, the last fix of the common route and the first fix of the runway transition(s)).
+- **e.** Runway Transition Waypoint (RTW)- On a STAR, the NAVAID/fix/waypoint that defines the end of the common route or en route transition and the beginning of a runway transition (In the arrival route description found on the STAR chart, the last fix of the common route and the first fix of the runway transition(s)).

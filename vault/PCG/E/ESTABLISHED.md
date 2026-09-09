@@ -11,6 +11,8 @@ generated: true
 title: "ESTABLISHED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ESTABLISHED

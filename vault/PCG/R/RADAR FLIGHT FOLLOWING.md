@@ -11,6 +11,8 @@ generated: true
 title: "RADAR FLIGHT FOLLOWING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR FLIGHT FOLLOWING

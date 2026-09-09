@@ -11,6 +11,8 @@ generated: true
 title: "PROGRESS REPORT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROGRESS REPORT

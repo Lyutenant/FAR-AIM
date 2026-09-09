@@ -11,6 +11,8 @@ generated: true
 title: "ATC ASSIGNED AIRSPACE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATC ASSIGNED AIRSPACE

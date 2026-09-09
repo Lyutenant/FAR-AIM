@@ -11,6 +11,8 @@ generated: true
 title: "PREARRANGED COORDINATION PROCEDURES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PREARRANGED COORDINATION PROCEDURES

@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Special Federal Aviation Regulation No. 88—Fuel Tank System Fault Tolerance Evaluation Requirements

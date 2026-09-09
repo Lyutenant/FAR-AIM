@@ -11,6 +11,8 @@ generated: true
 title: "CIRCLE TO RUNWAY (RUNWAY NUMBER)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CIRCLE TO RUNWAY (RUNWAY NUMBER)

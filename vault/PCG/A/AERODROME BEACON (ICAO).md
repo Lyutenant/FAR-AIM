@@ -13,6 +13,8 @@ aliases:
   - "AERODROME BEACON [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AERODROME BEACON \[ICAO]

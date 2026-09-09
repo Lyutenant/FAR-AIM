@@ -13,6 +13,8 @@ aliases:
   - "ATIS [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATIS \[ICAO]

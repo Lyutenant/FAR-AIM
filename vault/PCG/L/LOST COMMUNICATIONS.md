@@ -11,6 +11,8 @@ generated: true
 title: "LOST COMMUNICATIONS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LOST COMMUNICATIONS

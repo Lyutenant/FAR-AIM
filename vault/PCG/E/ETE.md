@@ -11,6 +11,8 @@ generated: true
 title: "ETE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ETE

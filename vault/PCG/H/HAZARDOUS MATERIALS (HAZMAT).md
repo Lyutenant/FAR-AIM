@@ -11,6 +11,8 @@ generated: true
 title: "HAZARDOUS MATERIALS (HAZMAT)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HAZARDOUS MATERIALS (HAZMAT)

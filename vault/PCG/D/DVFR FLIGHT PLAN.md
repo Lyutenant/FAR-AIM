@@ -11,6 +11,8 @@ generated: true
 title: "DVFR FLIGHT PLAN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DVFR FLIGHT PLAN

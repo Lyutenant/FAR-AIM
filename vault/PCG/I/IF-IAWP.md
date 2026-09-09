@@ -13,6 +13,8 @@ aliases:
   - "IF/IAWP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IF/IAWP

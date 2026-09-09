@@ -11,6 +11,8 @@ generated: true
 title: "SPECIAL INSTRUMENT APPROACH PROCEDURE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPECIAL INSTRUMENT APPROACH PROCEDURE

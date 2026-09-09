@@ -11,6 +11,8 @@ generated: true
 title: "ABORT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ABORT

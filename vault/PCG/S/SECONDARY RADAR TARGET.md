@@ -11,6 +11,8 @@ generated: true
 title: "SECONDARY RADAR TARGET"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SECONDARY RADAR TARGET

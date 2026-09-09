@@ -11,6 +11,8 @@ generated: true
 title: "TARGET"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TARGET

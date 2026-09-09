@@ -11,6 +11,8 @@ generated: true
 title: "RECONFORMANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RECONFORMANCE

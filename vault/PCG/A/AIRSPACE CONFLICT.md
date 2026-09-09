@@ -11,6 +11,8 @@ generated: true
 title: "AIRSPACE CONFLICT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRSPACE CONFLICT

@@ -11,6 +11,8 @@ generated: true
 title: "AIR ROUTE TRAFFIC CONTROL CENTER (ARTCC)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR ROUTE TRAFFIC CONTROL CENTER (ARTCC)

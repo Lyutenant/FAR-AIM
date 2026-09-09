@@ -11,6 +11,8 @@ generated: true
 title: "RUNWAY TRANSITION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RUNWAY TRANSITION

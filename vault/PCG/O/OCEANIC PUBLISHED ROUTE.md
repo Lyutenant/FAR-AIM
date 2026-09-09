@@ -11,6 +11,8 @@ generated: true
 title: "OCEANIC PUBLISHED ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OCEANIC PUBLISHED ROUTE

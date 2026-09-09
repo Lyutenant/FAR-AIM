@@ -11,6 +11,8 @@ generated: true
 title: "DOMESTIC NOTICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DOMESTIC NOTICE

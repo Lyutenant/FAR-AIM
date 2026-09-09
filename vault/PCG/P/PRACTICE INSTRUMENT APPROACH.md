@@ -11,6 +11,8 @@ generated: true
 title: "PRACTICE INSTRUMENT APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PRACTICE INSTRUMENT APPROACH

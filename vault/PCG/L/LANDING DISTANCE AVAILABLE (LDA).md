@@ -11,6 +11,8 @@ generated: true
 title: "LANDING DISTANCE AVAILABLE (LDA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LANDING DISTANCE AVAILABLE (LDA)

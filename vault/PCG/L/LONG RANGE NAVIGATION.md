@@ -11,6 +11,8 @@ generated: true
 title: "LONG RANGE NAVIGATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LONG RANGE NAVIGATION

@@ -11,6 +11,8 @@ generated: true
 title: "AFP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AFP

@@ -11,6 +11,8 @@ generated: true
 title: "CLEARED (Type of) APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLEARED (Type of) APPROACH

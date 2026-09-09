@@ -13,6 +13,8 @@ aliases:
   - "CONTROLLED AIRSPACE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONTROLLED AIRSPACE \[ICAO]

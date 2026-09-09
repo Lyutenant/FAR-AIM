@@ -11,6 +11,8 @@ generated: true
 title: "TRAFFIC MANAGEMENT UNIT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAFFIC MANAGEMENT UNIT

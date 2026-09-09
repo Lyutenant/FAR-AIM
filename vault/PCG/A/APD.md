@@ -11,6 +11,8 @@ generated: true
 title: "APD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APD

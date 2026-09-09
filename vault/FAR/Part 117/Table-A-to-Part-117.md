@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Table A to Part 117—Maximum Flight Time Limits for Unaugmented Operations Table

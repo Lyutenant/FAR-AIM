@@ -13,6 +13,8 @@ aliases:
   - "TAKEOFF DISTANCE AVAILABLE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TAKEOFF DISTANCE AVAILABLE \[ICAO]

@@ -11,6 +11,8 @@ generated: true
 title: "RADIO DETECTION AND RANGING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADIO DETECTION AND RANGING

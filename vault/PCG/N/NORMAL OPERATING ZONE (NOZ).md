@@ -11,6 +11,8 @@ generated: true
 title: "NORMAL OPERATING ZONE (NOZ)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NORMAL OPERATING ZONE (NOZ)

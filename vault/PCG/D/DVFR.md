@@ -11,6 +11,8 @@ generated: true
 title: "DVFR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DVFR

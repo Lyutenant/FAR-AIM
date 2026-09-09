@@ -14,6 +14,8 @@ aliases:
   - "Navigation Aids"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 1, Section 1 — Navigation Aids

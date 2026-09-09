@@ -11,6 +11,8 @@ generated: true
 title: "LANDING SEQUENCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LANDING SEQUENCE

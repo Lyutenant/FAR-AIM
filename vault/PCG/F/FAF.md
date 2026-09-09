@@ -11,6 +11,8 @@ generated: true
 title: "FAF"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FAF

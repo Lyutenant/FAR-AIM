@@ -11,6 +11,8 @@ generated: true
 title: "INNER MARKER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INNER MARKER

@@ -11,6 +11,8 @@ generated: true
 title: "WING TIP VORTICES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WING TIP VORTICES

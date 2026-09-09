@@ -11,6 +11,8 @@ generated: true
 title: "CHART SUPPLEMENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CHART SUPPLEMENT

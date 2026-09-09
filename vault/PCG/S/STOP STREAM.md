@@ -11,6 +11,8 @@ generated: true
 title: "STOP STREAM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STOP STREAM

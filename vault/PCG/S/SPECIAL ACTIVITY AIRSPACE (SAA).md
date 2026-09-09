@@ -11,6 +11,8 @@ generated: true
 title: "SPECIAL ACTIVITY AIRSPACE (SAA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPECIAL ACTIVITY AIRSPACE (SAA)

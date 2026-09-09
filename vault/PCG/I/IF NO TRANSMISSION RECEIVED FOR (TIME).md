@@ -11,6 +11,8 @@ generated: true
 title: "IF NO TRANSMISSION RECEIVED FOR (TIME)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IF NO TRANSMISSION RECEIVED FOR (TIME)

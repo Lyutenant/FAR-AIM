@@ -11,6 +11,8 @@ generated: true
 title: "LANDING AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LANDING AREA

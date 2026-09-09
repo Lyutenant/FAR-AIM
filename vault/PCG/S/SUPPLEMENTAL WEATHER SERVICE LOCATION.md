@@ -11,6 +11,8 @@ generated: true
 title: "SUPPLEMENTAL WEATHER SERVICE LOCATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SUPPLEMENTAL WEATHER SERVICE LOCATION

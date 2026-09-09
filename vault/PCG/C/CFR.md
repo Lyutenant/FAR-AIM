@@ -11,6 +11,8 @@ generated: true
 title: "CFR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CFR

@@ -11,6 +11,8 @@ generated: true
 title: "HAL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HAL

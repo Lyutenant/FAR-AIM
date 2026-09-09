@@ -13,6 +13,8 @@ aliases:
   - "APPROACH CONTROL SERVICE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROACH CONTROL SERVICE \[ICAO]

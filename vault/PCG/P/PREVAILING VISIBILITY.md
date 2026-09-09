@@ -11,6 +11,8 @@ generated: true
 title: "PREVAILING VISIBILITY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PREVAILING VISIBILITY

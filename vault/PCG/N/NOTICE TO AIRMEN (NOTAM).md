@@ -11,6 +11,8 @@ generated: true
 title: "NOTICE TO AIRMEN (NOTAM)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NOTICE TO AIRMEN (NOTAM)
@@ -22,9 +24,9 @@ tags:
 
 NOTICE TO AIRMEN (NOTAM)- A notice containing information (not known sufficiently in advance to publicize by other means) concerning the establishment, condition, or change in any component (facility, service, or procedure of, or hazard in the National Airspace System) the timely knowledge of which is essential to personnel concerned with flight operations.
 
-**a.** NOTAM (D)- A NOTAM given (in addition to local dissemination) distant dissemination beyond the area of responsibility of the Flight Service Station. These NOTAMs will be stored and available until canceled.
+- **a.** NOTAM (D)- A NOTAM given (in addition to local dissemination) distant dissemination beyond the area of responsibility of the Flight Service Station. These NOTAMs will be stored and available until canceled.
 
-**b.** FDC NOTAM- A NOTAM regulatory in nature, transmitted by USNOF and given system wide dissemination.
+- **b.** FDC NOTAM- A NOTAM regulatory in nature, transmitted by USNOF and given system wide dissemination.
 
 ## See Also
 

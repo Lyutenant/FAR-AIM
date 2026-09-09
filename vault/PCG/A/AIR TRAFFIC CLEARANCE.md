@@ -11,6 +11,8 @@ generated: true
 title: "AIR TRAFFIC CLEARANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR TRAFFIC CLEARANCE

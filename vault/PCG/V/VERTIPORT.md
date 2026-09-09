@@ -11,6 +11,8 @@ generated: true
 title: "VERTIPORT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VERTIPORT

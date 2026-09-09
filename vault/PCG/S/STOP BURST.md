@@ -11,6 +11,8 @@ generated: true
 title: "STOP BURST"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STOP BURST

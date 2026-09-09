@@ -13,6 +13,8 @@ aliases:
   - "FINAL APPROACH‐IFR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FINAL APPROACH‐IFR

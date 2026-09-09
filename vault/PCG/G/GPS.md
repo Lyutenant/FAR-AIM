@@ -11,6 +11,8 @@ generated: true
 title: "GPS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GPS

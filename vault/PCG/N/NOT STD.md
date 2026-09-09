@@ -11,6 +11,8 @@ generated: true
 title: "NOT STD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NOT STD

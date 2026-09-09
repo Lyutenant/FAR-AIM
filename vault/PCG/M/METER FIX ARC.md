@@ -11,6 +11,8 @@ generated: true
 title: "METER FIX ARC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # METER FIX ARC

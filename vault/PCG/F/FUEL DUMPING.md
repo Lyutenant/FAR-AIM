@@ -11,6 +11,8 @@ generated: true
 title: "FUEL DUMPING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FUEL DUMPING

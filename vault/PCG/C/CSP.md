@@ -11,6 +11,8 @@ generated: true
 title: "CSP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CSP

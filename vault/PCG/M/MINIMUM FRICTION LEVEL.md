@@ -11,6 +11,8 @@ generated: true
 title: "MINIMUM FRICTION LEVEL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMUM FRICTION LEVEL

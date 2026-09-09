@@ -11,6 +11,8 @@ generated: true
 title: "STANDARD INSTRUMENT DEPARTURE (SID)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STANDARD INSTRUMENT DEPARTURE (SID)

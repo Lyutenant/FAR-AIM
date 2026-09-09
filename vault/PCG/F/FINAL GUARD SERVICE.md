@@ -11,6 +11,8 @@ generated: true
 title: "FINAL GUARD SERVICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FINAL GUARD SERVICE

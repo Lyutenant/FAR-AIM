@@ -11,6 +11,8 @@ generated: true
 title: "RADAR BEACON"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR BEACON

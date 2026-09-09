@@ -11,6 +11,8 @@ generated: true
 title: "AIRPORT DEPARTURE RATE (ADR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPORT DEPARTURE RATE (ADR)

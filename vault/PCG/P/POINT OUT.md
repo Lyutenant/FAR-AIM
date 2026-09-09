@@ -11,6 +11,8 @@ generated: true
 title: "POINT OUT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # POINT OUT

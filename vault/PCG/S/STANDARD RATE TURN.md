@@ -11,6 +11,8 @@ generated: true
 title: "STANDARD RATE TURN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STANDARD RATE TURN

@@ -11,6 +11,8 @@ generated: true
 title: "COORDINATES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COORDINATES

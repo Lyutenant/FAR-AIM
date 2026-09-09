@@ -14,6 +14,8 @@ aliases:
   - "En Route Procedures"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 5, Section 3 — En Route Procedures

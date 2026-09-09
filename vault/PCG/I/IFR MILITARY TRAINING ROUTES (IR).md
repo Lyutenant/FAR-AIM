@@ -11,6 +11,8 @@ generated: true
 title: "IFR MILITARY TRAINING ROUTES (IR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IFR MILITARY TRAINING ROUTES (IR)

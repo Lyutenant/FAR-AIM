@@ -11,6 +11,8 @@ generated: true
 title: "AIR TRAFFIC SERVICE (ATS) ROUTES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR TRAFFIC SERVICE (ATS) ROUTES

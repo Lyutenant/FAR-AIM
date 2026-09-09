@@ -11,6 +11,8 @@ generated: true
 title: "SAME DIRECTION AIRCRAFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SAME DIRECTION AIRCRAFT
@@ -22,8 +24,8 @@ tags:
 
 SAME DIRECTION AIRCRAFT- Aircraft are operating in the same direction when:
 
-**a.** They are following the same track in the same direction; or
+- **a.** They are following the same track in the same direction; or
 
-**b.** Their tracks are parallel and the aircraft are flying in the same direction; or
+- **b.** Their tracks are parallel and the aircraft are flying in the same direction; or
 
-**c.** Their tracks intersect at an angle of less than 45 degrees.
+- **c.** Their tracks intersect at an angle of less than 45 degrees.

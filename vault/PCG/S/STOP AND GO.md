@@ -11,6 +11,8 @@ generated: true
 title: "STOP AND GO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STOP AND GO

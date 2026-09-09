@@ -11,6 +11,8 @@ generated: true
 title: "VISUAL CLIMB OVER AIRPORT (VCOA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VISUAL CLIMB OVER AIRPORT (VCOA)

@@ -11,6 +11,8 @@ generated: true
 title: "AIRPLANE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPLANE

@@ -13,6 +13,8 @@ aliases:
   - "TRACK [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRACK \[ICAO]

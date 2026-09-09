@@ -14,6 +14,8 @@ aliases:
   - "Airport Operations"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 4, Section 3 — Airport Operations

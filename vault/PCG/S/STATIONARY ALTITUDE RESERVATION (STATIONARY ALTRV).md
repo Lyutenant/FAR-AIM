@@ -11,6 +11,8 @@ generated: true
 title: "STATIONARY ALTITUDE RESERVATION (STATIONARY ALTRV)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STATIONARY ALTITUDE RESERVATION (STATIONARY ALTRV)

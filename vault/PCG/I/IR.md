@@ -11,6 +11,8 @@ generated: true
 title: "IR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IR

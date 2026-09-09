@@ -11,6 +11,8 @@ generated: true
 title: "OPEN LOOP CLEARANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OPEN LOOP CLEARANCE

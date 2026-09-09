@@ -11,6 +11,8 @@ generated: true
 title: "ADDITIONAL SERVICES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADDITIONAL SERVICES
@@ -22,21 +24,21 @@ tags:
 
 ADDITIONAL SERVICES- Advisory information provided by ATC which includes but is not limited to the following:
 
-**a.** Traffic advisories.
+- **a.** Traffic advisories.
 
-**b.** Vectors, when requested by the pilot, to assist aircraft receiving traffic advisories to avoid observed traffic.
+- **b.** Vectors, when requested by the pilot, to assist aircraft receiving traffic advisories to avoid observed traffic.
 
-**c.** Altitude deviation information of 300 feet or more from an assigned altitude as observed on a verified (reading correctly) automatic altitude readout (Mode C).
+- **c.** Altitude deviation information of 300 feet or more from an assigned altitude as observed on a verified (reading correctly) automatic altitude readout (Mode C).
 
-**d.** Advisories that traffic is no longer a factor.
+- **d.** Advisories that traffic is no longer a factor.
 
-**e.** Weather and chaff information.
+- **e.** Weather and chaff information.
 
-**f.** Weather assistance.
+- **f.** Weather assistance.
 
-**g.** Bird activity information.
+- **g.** Bird activity information.
 
-**h.** Holding pattern surveillance. Additional services are provided to the extent possible contingent only upon the controller's capability to fit them into the performance of higher priority duties and on the basis of limitations of the radar, volume of traffic, frequency congestion, and controller workload. The controller has complete discretion for determining if he/she is able to provide or continue to provide a service in a particular case. The controller's reason not to provide or continue to provide a service in a particular case is not subject to question by the pilot and need not be made known to him/her.
+- **h.** Holding pattern surveillance. Additional services are provided to the extent possible contingent only upon the controller's capability to fit them into the performance of higher priority duties and on the basis of limitations of the radar, volume of traffic, frequency congestion, and controller workload. The controller has complete discretion for determining if he/she is able to provide or continue to provide a service in a particular case. The controller's reason not to provide or continue to provide a service in a particular case is not subject to question by the pilot and need not be made known to him/her.
 
 ## See Also
 

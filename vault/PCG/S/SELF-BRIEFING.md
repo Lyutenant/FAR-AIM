@@ -13,6 +13,8 @@ aliases:
   - "SELF‐BRIEFING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SELF‐BRIEFING

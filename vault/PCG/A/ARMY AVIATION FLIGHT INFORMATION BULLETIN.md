@@ -11,6 +11,8 @@ generated: true
 title: "ARMY AVIATION FLIGHT INFORMATION BULLETIN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ARMY AVIATION FLIGHT INFORMATION BULLETIN

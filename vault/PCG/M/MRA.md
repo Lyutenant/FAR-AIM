@@ -11,6 +11,8 @@ generated: true
 title: "MRA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MRA

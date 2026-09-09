@@ -11,6 +11,8 @@ generated: true
 title: "MONITOR ALERT PARAMETER (MAP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MONITOR ALERT PARAMETER (MAP)

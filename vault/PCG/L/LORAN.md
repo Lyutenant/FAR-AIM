@@ -11,6 +11,8 @@ generated: true
 title: "LORAN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LORAN

@@ -11,6 +11,8 @@ generated: true
 title: "AIRWAY BEACON"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRWAY BEACON

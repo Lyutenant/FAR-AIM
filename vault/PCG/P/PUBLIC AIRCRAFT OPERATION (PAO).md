@@ -11,6 +11,8 @@ generated: true
 title: "PUBLIC AIRCRAFT OPERATION (PAO)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PUBLIC AIRCRAFT OPERATION (PAO)

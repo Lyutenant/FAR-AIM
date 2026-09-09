@@ -11,6 +11,8 @@ generated: true
 title: "CCF"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CCF

@@ -11,6 +11,8 @@ generated: true
 title: "IFR DEPARTURE PROCEDURE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IFR DEPARTURE PROCEDURE

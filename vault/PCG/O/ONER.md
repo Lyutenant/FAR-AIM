@@ -11,6 +11,8 @@ generated: true
 title: "ONER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ONER

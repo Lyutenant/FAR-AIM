@@ -13,6 +13,8 @@ aliases:
   - "REMOTE TRANSMITTER/RECEIVER (RTR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REMOTE TRANSMITTER/RECEIVER (RTR)

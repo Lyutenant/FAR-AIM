@@ -11,6 +11,8 @@ generated: true
 title: "SEA LANE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SEA LANE

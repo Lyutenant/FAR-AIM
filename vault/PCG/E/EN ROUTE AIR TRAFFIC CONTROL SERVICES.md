@@ -11,6 +11,8 @@ generated: true
 title: "EN ROUTE AIR TRAFFIC CONTROL SERVICES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EN ROUTE AIR TRAFFIC CONTROL SERVICES

@@ -13,6 +13,8 @@ aliases:
   - "REMOTE CENTER AIR/GROUND FACILITY (RCAG)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REMOTE CENTER AIR/GROUND FACILITY (RCAG)

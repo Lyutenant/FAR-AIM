@@ -11,6 +11,8 @@ generated: true
 title: "ATC CLEARS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATC CLEARS

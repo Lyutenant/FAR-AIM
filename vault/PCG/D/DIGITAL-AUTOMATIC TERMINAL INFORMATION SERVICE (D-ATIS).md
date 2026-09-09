@@ -13,6 +13,8 @@ aliases:
   - "DIGITAL‐AUTOMATIC TERMINAL INFORMATION SERVICE (D‐ATIS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DIGITAL‐AUTOMATIC TERMINAL INFORMATION SERVICE (D‐ATIS)

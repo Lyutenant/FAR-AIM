@@ -11,6 +11,8 @@ generated: true
 title: "RADAR CONTACT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR CONTACT
@@ -22,9 +24,9 @@ tags:
 
 RADAR CONTACT-
 
-**a.** Used by ATC to inform an aircraft that it is identified using an approved ATC surveillance source on an air traffic controller's display and that radar flight following will be provided until radar service is terminated. Radar service may also be provided within the limits of necessity and capability. When a pilot is informed of “radar contact,” he/she automatically discontinues reporting over compulsory reporting points.
+- **a.** Used by ATC to inform an aircraft that it is identified using an approved ATC surveillance source on an air traffic controller's display and that radar flight following will be provided until radar service is terminated. Radar service may also be provided within the limits of necessity and capability. When a pilot is informed of “radar contact,” he/she automatically discontinues reporting over compulsory reporting points.
 
-**a.** The term used to inform the controller that the aircraft is identified and approval is granted for the aircraft to enter the receiving controllers airspace.
+- **a.** The term used to inform the controller that the aircraft is identified and approval is granted for the aircraft to enter the receiving controllers airspace.
 
 ## See Also
 

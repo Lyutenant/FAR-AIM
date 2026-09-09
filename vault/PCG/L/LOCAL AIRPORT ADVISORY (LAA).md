@@ -11,6 +11,8 @@ generated: true
 title: "LOCAL AIRPORT ADVISORY (LAA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LOCAL AIRPORT ADVISORY (LAA)

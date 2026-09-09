@@ -11,6 +11,8 @@ generated: true
 title: "PAR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PAR

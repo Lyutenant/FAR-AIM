@@ -11,6 +11,8 @@ generated: true
 title: "COA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COA

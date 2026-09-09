@@ -11,6 +11,8 @@ generated: true
 title: "DISTANCE MEASURING EQUIPMENT (DME)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DISTANCE MEASURING EQUIPMENT (DME)

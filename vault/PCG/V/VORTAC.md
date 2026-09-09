@@ -11,6 +11,8 @@ generated: true
 title: "VORTAC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VORTAC

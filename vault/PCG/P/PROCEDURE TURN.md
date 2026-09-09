@@ -11,6 +11,8 @@ generated: true
 title: "PROCEDURE TURN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROCEDURE TURN

@@ -11,6 +11,8 @@ generated: true
 title: "OUTER COMPASS LOCATOR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OUTER COMPASS LOCATOR

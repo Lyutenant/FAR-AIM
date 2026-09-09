@@ -14,6 +14,8 @@ aliases:
   - "Aircraft Rescue and Fire Fighting Communications"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 6, Section 5 — Aircraft Rescue and Fire Fighting Communications

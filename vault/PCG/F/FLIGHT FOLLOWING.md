@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT FOLLOWING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT FOLLOWING

@@ -13,6 +13,8 @@ aliases:
   - "STRAIGHT‐IN LANDING MINIMUMS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STRAIGHT‐IN LANDING MINIMUMS

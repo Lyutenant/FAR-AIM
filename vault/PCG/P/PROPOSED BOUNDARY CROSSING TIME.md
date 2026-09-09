@@ -11,6 +11,8 @@ generated: true
 title: "PROPOSED BOUNDARY CROSSING TIME"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROPOSED BOUNDARY CROSSING TIME

@@ -11,6 +11,8 @@ generated: true
 title: "SEE AND AVOID"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SEE AND AVOID

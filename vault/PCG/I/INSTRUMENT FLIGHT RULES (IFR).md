@@ -11,6 +11,8 @@ generated: true
 title: "INSTRUMENT FLIGHT RULES (IFR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INSTRUMENT FLIGHT RULES (IFR)

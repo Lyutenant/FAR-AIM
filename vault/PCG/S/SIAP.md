@@ -11,6 +11,8 @@ generated: true
 title: "SIAP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SIAP

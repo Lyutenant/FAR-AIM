@@ -11,6 +11,8 @@ generated: true
 title: "FRICTION MEASUREMENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FRICTION MEASUREMENT

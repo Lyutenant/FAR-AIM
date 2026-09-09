@@ -11,6 +11,8 @@ generated: true
 title: "CORRECTION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CORRECTION

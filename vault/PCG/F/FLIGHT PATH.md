@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT PATH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT PATH

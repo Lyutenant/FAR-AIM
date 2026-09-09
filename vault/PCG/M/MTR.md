@@ -11,6 +11,8 @@ generated: true
 title: "MTR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MTR

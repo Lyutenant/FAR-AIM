@@ -13,6 +13,8 @@ title: "Special Federal Aviation Regulation No. 50-2"
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Special Federal Aviation Regulation No. 50-2

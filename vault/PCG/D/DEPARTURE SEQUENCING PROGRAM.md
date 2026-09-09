@@ -11,6 +11,8 @@ generated: true
 title: "DEPARTURE SEQUENCING PROGRAM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DEPARTURE SEQUENCING PROGRAM

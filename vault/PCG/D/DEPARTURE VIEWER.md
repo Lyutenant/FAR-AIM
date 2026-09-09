@@ -11,6 +11,8 @@ generated: true
 title: "DEPARTURE VIEWER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DEPARTURE VIEWER

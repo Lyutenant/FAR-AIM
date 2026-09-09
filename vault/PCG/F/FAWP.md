@@ -11,6 +11,8 @@ generated: true
 title: "FAWP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FAWP

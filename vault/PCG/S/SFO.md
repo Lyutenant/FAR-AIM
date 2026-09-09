@@ -11,6 +11,8 @@ generated: true
 title: "SFO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SFO

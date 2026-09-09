@@ -13,6 +13,8 @@ aliases:
   - "AUTOMATIC DEPENDENT SURVEILLANCE-BROADCAST (ADS‐B)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATIC DEPENDENT SURVEILLANCE-BROADCAST (ADS‐B)

@@ -11,6 +11,8 @@ generated: true
 title: "NAVSPEC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NAVSPEC

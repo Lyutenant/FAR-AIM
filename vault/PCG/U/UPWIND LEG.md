@@ -11,6 +11,8 @@ generated: true
 title: "UPWIND LEG"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UPWIND LEG

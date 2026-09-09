@@ -11,6 +11,8 @@ generated: true
 title: "AIRPORT ROTATING BEACON"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPORT ROTATING BEACON

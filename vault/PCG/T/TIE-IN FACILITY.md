@@ -11,6 +11,8 @@ generated: true
 title: "TIE-IN FACILITY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TIE-IN FACILITY

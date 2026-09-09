@@ -13,6 +13,8 @@ aliases:
   - "STRAIGHT‐IN APPROACH IFR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STRAIGHT‐IN APPROACH IFR

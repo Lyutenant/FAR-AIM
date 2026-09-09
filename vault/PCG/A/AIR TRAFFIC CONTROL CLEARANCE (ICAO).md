@@ -13,6 +13,8 @@ aliases:
   - "AIR TRAFFIC CONTROL CLEARANCE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR TRAFFIC CONTROL CLEARANCE \[ICAO]

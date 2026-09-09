@@ -11,6 +11,8 @@ generated: true
 title: "PROTECTED AIRSPACE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROTECTED AIRSPACE

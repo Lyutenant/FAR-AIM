@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix G to Part 141—Flight Instructor Instrument (For an Airplane, Helicopter, or Powered-Lift Instrument Instructor Rating, as Appropriate) Certification Course

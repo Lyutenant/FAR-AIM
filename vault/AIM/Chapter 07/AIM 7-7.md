@@ -14,6 +14,8 @@ aliases:
   - "Safety, Accident, and Hazard Reports"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 7, Section 7 — Safety, Accident, and Hazard Reports

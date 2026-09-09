@@ -11,6 +11,8 @@ generated: true
 title: "GRAPHICAL AIRMEN'S METEOROLOGICAL INFORMATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GRAPHICAL AIRMEN'S METEOROLOGICAL INFORMATION
@@ -22,19 +24,19 @@ tags:
 
 GRAPHICAL AIRMEN'S METEOROLOGICAL INFORMATION- A graphical depiction of weather that may be hazardous to aircraft, but are less severe than SIGMETs. G-AIRMETS are issued 3 hours apart for a period of up to 12 hours into the future for the lower 48 states and coastal waters. The weather hazards depicted can be:
 
-**a.** Moderate turbulence
+- **a.** Moderate turbulence
 
-**b.** Low‐level windshear
+- **b.** Low‐level windshear
 
-**c.** Strong surface winds greater than 30 knots
+- **c.** Strong surface winds greater than 30 knots
 
-**d.** Moderate icing
+- **d.** Moderate icing
 
-**e.** Freezing level
+- **e.** Freezing level
 
-**f.** Mountain obscuration
+- **f.** Mountain obscuration
 
-**g.** IFR
+- **g.** IFR
 
 ## See Also
 

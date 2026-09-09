@@ -11,6 +11,8 @@ generated: true
 title: "CHASE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CHASE

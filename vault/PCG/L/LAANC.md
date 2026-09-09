@@ -11,6 +11,8 @@ generated: true
 title: "LAANC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LAANC

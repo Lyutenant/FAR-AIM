@@ -11,6 +11,8 @@ generated: true
 title: "SIMULTANEOUS ILS APPROACHES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SIMULTANEOUS ILS APPROACHES

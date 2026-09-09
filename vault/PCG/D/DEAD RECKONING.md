@@ -11,6 +11,8 @@ generated: true
 title: "DEAD RECKONING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DEAD RECKONING

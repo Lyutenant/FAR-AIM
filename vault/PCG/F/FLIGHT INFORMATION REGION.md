@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT INFORMATION REGION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT INFORMATION REGION
@@ -22,6 +24,6 @@ tags:
 
 FLIGHT INFORMATION REGION- An airspace of defined dimensions within which Flight Information Service and Alerting Service are provided.
 
-**a.** Flight Information Service. A service provided for the purpose of giving advice and information useful for the safe and efficient conduct of flights.
+- **a.** Flight Information Service. A service provided for the purpose of giving advice and information useful for the safe and efficient conduct of flights.
 
-**b.** Alerting Service. A service provided to notify appropriate organizations regarding aircraft in need of search and rescue aid and to assist such organizations as required.
+- **b.** Alerting Service. A service provided to notify appropriate organizations regarding aircraft in need of search and rescue aid and to assist such organizations as required.

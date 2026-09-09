@@ -11,6 +11,8 @@ generated: true
 title: "TRAFFIC INFORMATION SERVICE-BROADCAST (TIS-B)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAFFIC INFORMATION SERVICE-BROADCAST (TIS-B)

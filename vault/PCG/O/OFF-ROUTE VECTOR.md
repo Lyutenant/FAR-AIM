@@ -13,6 +13,8 @@ aliases:
   - "OFF‐ROUTE VECTOR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OFF‐ROUTE VECTOR

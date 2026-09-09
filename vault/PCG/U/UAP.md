@@ -11,6 +11,8 @@ generated: true
 title: "UAP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UAP

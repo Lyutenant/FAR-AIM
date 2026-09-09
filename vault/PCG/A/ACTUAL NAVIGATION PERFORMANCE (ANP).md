@@ -11,6 +11,8 @@ generated: true
 title: "ACTUAL NAVIGATION PERFORMANCE (ANP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ACTUAL NAVIGATION PERFORMANCE (ANP)

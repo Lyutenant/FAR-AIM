@@ -11,6 +11,8 @@ generated: true
 title: "CMNPS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CMNPS

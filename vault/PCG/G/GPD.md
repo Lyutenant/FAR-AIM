@@ -11,6 +11,8 @@ generated: true
 title: "GPD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GPD

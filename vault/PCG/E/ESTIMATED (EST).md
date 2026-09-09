@@ -11,6 +11,8 @@ generated: true
 title: "ESTIMATED (EST)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ESTIMATED (EST)

@@ -11,6 +11,8 @@ generated: true
 title: "Q ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Q ROUTE

@@ -11,6 +11,8 @@ generated: true
 title: "ALTIMETER SETTING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALTIMETER SETTING

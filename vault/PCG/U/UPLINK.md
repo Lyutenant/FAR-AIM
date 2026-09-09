@@ -11,6 +11,8 @@ generated: true
 title: "UPLINK"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UPLINK

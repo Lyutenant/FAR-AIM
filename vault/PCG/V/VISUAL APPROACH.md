@@ -11,6 +11,8 @@ generated: true
 title: "VISUAL APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VISUAL APPROACH

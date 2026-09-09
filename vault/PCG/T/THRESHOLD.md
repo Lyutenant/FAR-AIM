@@ -11,6 +11,8 @@ generated: true
 title: "THRESHOLD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # THRESHOLD

@@ -11,6 +11,8 @@ generated: true
 title: "TOUCHDOWN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOUCHDOWN
@@ -22,9 +24,9 @@ tags:
 
 TOUCHDOWN-
 
-**a.** The point at which an aircraft first makes contact with the landing surface.
+- **a.** The point at which an aircraft first makes contact with the landing surface.
 
-**b.** Concerning a precision radar approach (PAR), it is the point where the glide path intercepts the landing surface.
+- **b.** Concerning a precision radar approach (PAR), it is the point where the glide path intercepts the landing surface.
 
 ## See Also
 

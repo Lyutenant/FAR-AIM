@@ -13,6 +13,8 @@ aliases:
   - "INITIAL APPROACH SEGMENT [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INITIAL APPROACH SEGMENT \[ICAO]

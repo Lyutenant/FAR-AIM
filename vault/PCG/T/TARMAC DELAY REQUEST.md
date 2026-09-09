@@ -11,6 +11,8 @@ generated: true
 title: "TARMAC DELAY REQUEST"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TARMAC DELAY REQUEST

@@ -11,6 +11,8 @@ generated: true
 title: "MAYDAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MAYDAY

@@ -11,6 +11,8 @@ generated: true
 title: "TERMINAL DATA LINK SYSTEM (TDLS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TERMINAL DATA LINK SYSTEM (TDLS)

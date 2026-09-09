@@ -11,6 +11,8 @@ generated: true
 title: "COMMUNITY-BASED ORGANIZATION (CBO)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COMMUNITY-BASED ORGANIZATION (CBO)

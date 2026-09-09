@@ -11,6 +11,8 @@ generated: true
 title: "TCH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TCH

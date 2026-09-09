@@ -11,6 +11,8 @@ generated: true
 title: "DoD FLIP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DoD FLIP

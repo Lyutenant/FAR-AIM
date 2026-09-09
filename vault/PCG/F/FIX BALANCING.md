@@ -11,6 +11,8 @@ generated: true
 title: "FIX BALANCING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FIX BALANCING

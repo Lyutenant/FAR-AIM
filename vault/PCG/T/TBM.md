@@ -11,6 +11,8 @@ generated: true
 title: "TBM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TBM

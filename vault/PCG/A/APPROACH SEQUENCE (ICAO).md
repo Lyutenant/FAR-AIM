@@ -13,6 +13,8 @@ aliases:
   - "APPROACH SEQUENCE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROACH SEQUENCE \[ICAO]

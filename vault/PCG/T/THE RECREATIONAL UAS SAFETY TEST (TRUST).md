@@ -11,6 +11,8 @@ generated: true
 title: "THE RECREATIONAL UAS SAFETY TEST (TRUST)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # THE RECREATIONAL UAS SAFETY TEST (TRUST)

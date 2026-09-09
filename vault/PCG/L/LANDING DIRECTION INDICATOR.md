@@ -11,6 +11,8 @@ generated: true
 title: "LANDING DIRECTION INDICATOR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LANDING DIRECTION INDICATOR

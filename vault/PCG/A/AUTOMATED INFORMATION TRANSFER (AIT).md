@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATED INFORMATION TRANSFER (AIT)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATED INFORMATION TRANSFER (AIT)

@@ -11,6 +11,8 @@ generated: true
 title: "INTERNATIONAL NOTICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INTERNATIONAL NOTICE

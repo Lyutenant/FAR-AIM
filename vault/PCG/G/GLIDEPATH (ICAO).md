@@ -13,6 +13,8 @@ aliases:
   - "GLIDEPATH [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GLIDEPATH \[ICAO]

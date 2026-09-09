@@ -11,6 +11,8 @@ generated: true
 title: "DEPARTURE CENTER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DEPARTURE CENTER

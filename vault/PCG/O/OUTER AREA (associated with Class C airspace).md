@@ -11,6 +11,8 @@ generated: true
 title: "OUTER AREA (associated with Class C airspace)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OUTER AREA (associated with Class C airspace)

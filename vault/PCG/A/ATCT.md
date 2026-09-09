@@ -11,6 +11,8 @@ generated: true
 title: "ATCT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATCT

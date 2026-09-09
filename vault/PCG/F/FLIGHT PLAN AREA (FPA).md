@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT PLAN AREA (FPA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT PLAN AREA (FPA)

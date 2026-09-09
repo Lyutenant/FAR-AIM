@@ -11,6 +11,8 @@ generated: true
 title: "FIRST PERSON VIEW"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FIRST PERSON VIEW

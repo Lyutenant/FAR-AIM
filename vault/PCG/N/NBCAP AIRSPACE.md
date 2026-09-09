@@ -11,6 +11,8 @@ generated: true
 title: "NBCAP AIRSPACE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NBCAP AIRSPACE

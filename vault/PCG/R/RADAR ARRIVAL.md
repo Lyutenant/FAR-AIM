@@ -11,6 +11,8 @@ generated: true
 title: "RADAR ARRIVAL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR ARRIVAL

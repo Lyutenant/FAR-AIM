@@ -11,6 +11,8 @@ generated: true
 title: "SAFETY LOGIC SYSTEM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SAFETY LOGIC SYSTEM

@@ -11,6 +11,8 @@ generated: true
 title: "BROADCAST"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BROADCAST

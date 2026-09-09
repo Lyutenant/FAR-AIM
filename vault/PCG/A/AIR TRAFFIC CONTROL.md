@@ -11,6 +11,8 @@ generated: true
 title: "AIR TRAFFIC CONTROL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR TRAFFIC CONTROL

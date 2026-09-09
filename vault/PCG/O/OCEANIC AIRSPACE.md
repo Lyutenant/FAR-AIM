@@ -11,6 +11,8 @@ generated: true
 title: "OCEANIC AIRSPACE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OCEANIC AIRSPACE

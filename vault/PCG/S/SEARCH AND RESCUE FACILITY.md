@@ -11,6 +11,8 @@ generated: true
 title: "SEARCH AND RESCUE FACILITY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SEARCH AND RESCUE FACILITY

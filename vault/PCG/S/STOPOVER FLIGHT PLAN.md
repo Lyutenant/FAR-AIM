@@ -11,6 +11,8 @@ generated: true
 title: "STOPOVER FLIGHT PLAN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STOPOVER FLIGHT PLAN

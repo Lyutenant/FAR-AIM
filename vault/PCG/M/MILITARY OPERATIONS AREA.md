@@ -11,6 +11,8 @@ generated: true
 title: "MILITARY OPERATIONS AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MILITARY OPERATIONS AREA

@@ -11,6 +11,8 @@ generated: true
 title: "TRAJECTORY OPTIONS SET (TOS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAJECTORY OPTIONS SET (TOS)

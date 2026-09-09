@@ -11,6 +11,8 @@ generated: true
 title: "AIRPORT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPORT

@@ -11,6 +11,8 @@ generated: true
 title: "DESIGNATED COMMON TRAFFIC ADVISORY FREQUENCY (CTAF) AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DESIGNATED COMMON TRAFFIC ADVISORY FREQUENCY (CTAF) AREA

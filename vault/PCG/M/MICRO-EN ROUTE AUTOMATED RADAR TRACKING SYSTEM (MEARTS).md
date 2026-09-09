@@ -13,6 +13,8 @@ aliases:
   - "MICRO‐EN ROUTE AUTOMATED RADAR TRACKING SYSTEM (MEARTS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MICRO‐EN ROUTE AUTOMATED RADAR TRACKING SYSTEM (MEARTS)

@@ -11,6 +11,8 @@ generated: true
 title: "CODES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CODES

@@ -11,6 +11,8 @@ generated: true
 title: "AIRPORT RESERVATION OFFICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPORT RESERVATION OFFICE

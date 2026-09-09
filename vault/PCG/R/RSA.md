@@ -11,6 +11,8 @@ generated: true
 title: "RSA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RSA

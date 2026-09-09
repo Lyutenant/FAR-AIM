@@ -11,6 +11,8 @@ generated: true
 title: "ALTERNATE AIRPORT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALTERNATE AIRPORT

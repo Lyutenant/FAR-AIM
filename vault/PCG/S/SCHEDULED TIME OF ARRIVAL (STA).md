@@ -11,6 +11,8 @@ generated: true
 title: "SCHEDULED TIME OF ARRIVAL (STA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SCHEDULED TIME OF ARRIVAL (STA)

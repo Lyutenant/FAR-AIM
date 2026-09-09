@@ -11,6 +11,8 @@ generated: true
 title: "FMA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FMA

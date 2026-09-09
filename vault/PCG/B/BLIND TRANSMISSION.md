@@ -11,6 +11,8 @@ generated: true
 title: "BLIND TRANSMISSION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BLIND TRANSMISSION

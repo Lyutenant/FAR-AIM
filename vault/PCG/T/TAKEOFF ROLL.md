@@ -11,6 +11,8 @@ generated: true
 title: "TAKEOFF ROLL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TAKEOFF ROLL

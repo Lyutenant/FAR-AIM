@@ -11,6 +11,8 @@ generated: true
 title: "TRANSFERRING FACILITY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSFERRING FACILITY

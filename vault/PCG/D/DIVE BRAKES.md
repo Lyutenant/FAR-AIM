@@ -11,6 +11,8 @@ generated: true
 title: "DIVE BRAKES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DIVE BRAKES

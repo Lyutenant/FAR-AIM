@@ -14,6 +14,8 @@ aliases:
   - "Airport Lighting Aids"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 2, Section 1 — Airport Lighting Aids

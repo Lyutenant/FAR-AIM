@@ -13,6 +13,8 @@ aliases:
   - "DECISION ALTITUDE/DECISION HEIGHT [ICAO Annex 6]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DECISION ALTITUDE/DECISION HEIGHT \[ICAO Annex 6]

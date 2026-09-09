@@ -11,6 +11,8 @@ generated: true
 title: "CLEARED APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLEARED APPROACH

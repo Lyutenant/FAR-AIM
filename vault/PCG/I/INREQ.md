@@ -11,6 +11,8 @@ generated: true
 title: "INREQ"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INREQ

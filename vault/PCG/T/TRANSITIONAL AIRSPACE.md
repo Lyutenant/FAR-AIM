@@ -11,6 +11,8 @@ generated: true
 title: "TRANSITIONAL AIRSPACE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSITIONAL AIRSPACE

@@ -11,6 +11,8 @@ generated: true
 title: "LAND-BASED AIR DEFENSE IDENTIFICATION ZONE (ADIZ)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LAND-BASED AIR DEFENSE IDENTIFICATION ZONE (ADIZ)

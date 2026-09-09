@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATIC FLIGHT INFORMATION SERVICE (AFIS) - ALASKA FSSs ONLY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATIC FLIGHT INFORMATION SERVICE (AFIS) - ALASKA FSSs ONLY

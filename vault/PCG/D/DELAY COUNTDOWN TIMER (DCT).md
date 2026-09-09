@@ -11,6 +11,8 @@ generated: true
 title: "DELAY COUNTDOWN TIMER (DCT)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DELAY COUNTDOWN TIMER (DCT)

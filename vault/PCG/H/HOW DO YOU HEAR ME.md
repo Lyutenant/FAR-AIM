@@ -13,6 +13,8 @@ aliases:
   - "HOW DO YOU HEAR ME?"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOW DO YOU HEAR ME?

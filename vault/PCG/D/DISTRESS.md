@@ -11,6 +11,8 @@ generated: true
 title: "DISTRESS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DISTRESS

@@ -11,6 +11,8 @@ generated: true
 title: "VFR MILITARY TRAINING ROUTES (VR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VFR MILITARY TRAINING ROUTES (VR)

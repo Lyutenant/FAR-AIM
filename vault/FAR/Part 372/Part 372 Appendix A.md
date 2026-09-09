@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix A to Part 372—Overseas Military Personnel Charter Operator's Surety Bond Under Part 372 of the Regulations of the Department of Transportation (14 CFR Part 372)

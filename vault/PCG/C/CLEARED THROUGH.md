@@ -11,6 +11,8 @@ generated: true
 title: "CLEARED THROUGH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLEARED THROUGH

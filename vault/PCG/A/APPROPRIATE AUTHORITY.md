@@ -11,6 +11,8 @@ generated: true
 title: "APPROPRIATE AUTHORITY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROPRIATE AUTHORITY
@@ -22,6 +24,6 @@ tags:
 
 APPROPRIATE AUTHORITY-
 
-**a.** Regarding flight over the high seas: the relevant authority is the State of Registry.
+- **a.** Regarding flight over the high seas: the relevant authority is the State of Registry.
 
-**b.** Regarding flight over other than the high seas: the relevant authority is the State having sovereignty over the territory being overflown.
+- **b.** Regarding flight over other than the high seas: the relevant authority is the State having sovereignty over the territory being overflown.

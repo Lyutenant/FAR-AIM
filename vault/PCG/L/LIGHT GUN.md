@@ -11,6 +11,8 @@ generated: true
 title: "LIGHT GUN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LIGHT GUN

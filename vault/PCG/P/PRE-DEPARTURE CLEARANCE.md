@@ -11,6 +11,8 @@ generated: true
 title: "PRE-DEPARTURE CLEARANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PRE-DEPARTURE CLEARANCE

@@ -11,6 +11,8 @@ generated: true
 title: "PILOT BRIEFING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PILOT BRIEFING

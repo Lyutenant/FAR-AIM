@@ -11,6 +11,8 @@ generated: true
 title: "ASLAR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ASLAR

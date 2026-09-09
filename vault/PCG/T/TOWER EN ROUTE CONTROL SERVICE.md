@@ -11,6 +11,8 @@ generated: true
 title: "TOWER EN ROUTE CONTROL SERVICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOWER EN ROUTE CONTROL SERVICE

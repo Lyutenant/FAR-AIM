@@ -11,6 +11,8 @@ generated: true
 title: "ATC SECURITY TRACKING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATC SECURITY TRACKING

@@ -11,6 +11,8 @@ generated: true
 title: "DISCRETE CODE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DISCRETE CODE

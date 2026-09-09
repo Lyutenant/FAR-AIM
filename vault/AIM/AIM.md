@@ -10,6 +10,8 @@ generated: true
 title: "Aeronautical Information Manual"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Aeronautical Information Manual

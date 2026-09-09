@@ -13,6 +13,8 @@ aliases:
   - "GNSS [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GNSS \[ICAO]

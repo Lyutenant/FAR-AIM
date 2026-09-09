@@ -11,6 +11,8 @@ generated: true
 title: "INITIAL APPROACH SEGMENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INITIAL APPROACH SEGMENT

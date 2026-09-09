@@ -11,6 +11,8 @@ generated: true
 title: "QUICK LOOK"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # QUICK LOOK

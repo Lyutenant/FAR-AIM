@@ -11,6 +11,8 @@ generated: true
 title: "POSITIVE CONTROL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # POSITIVE CONTROL

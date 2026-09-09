@@ -11,6 +11,8 @@ generated: true
 title: "LOW FREQUENCY (LF)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LOW FREQUENCY (LF)

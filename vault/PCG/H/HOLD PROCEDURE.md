@@ -11,6 +11,8 @@ generated: true
 title: "HOLD PROCEDURE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOLD PROCEDURE

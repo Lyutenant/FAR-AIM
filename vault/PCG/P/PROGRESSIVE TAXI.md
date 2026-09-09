@@ -11,6 +11,8 @@ generated: true
 title: "PROGRESSIVE TAXI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROGRESSIVE TAXI

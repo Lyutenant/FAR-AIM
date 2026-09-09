@@ -11,6 +11,8 @@ generated: true
 title: "RUNWAY CENTERLINE LIGHTING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RUNWAY CENTERLINE LIGHTING

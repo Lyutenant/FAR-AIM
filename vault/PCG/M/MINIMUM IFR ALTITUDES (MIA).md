@@ -11,6 +11,8 @@ generated: true
 title: "MINIMUM IFR ALTITUDES (MIA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMUM IFR ALTITUDES (MIA)
@@ -22,11 +24,11 @@ tags:
 
 MINIMUM IFR ALTITUDES (MIA)- Minimum altitudes for IFR operations as prescribed in 14 CFR part 91. These altitudes are published on aeronautical charts and prescribed in 14 CFR part 95 for airways and routes, and in 14 CFR part 97 for standard instrument approach procedures. If no applicable minimum altitude is prescribed in 14 CFR part 95 or 14 CFR part 97, the following minimum IFR altitude applies:
 
-**a.** In designated mountainous areas, 2,000 feet above the highest obstacle within a horizontal distance of 4 nautical miles from the course to be flown; or
+- **a.** In designated mountainous areas, 2,000 feet above the highest obstacle within a horizontal distance of 4 nautical miles from the course to be flown; or
 
-**b.** Other than mountainous areas, 1,000 feet above the highest obstacle within a horizontal distance of 4 nautical miles from the course to be flown; or
+- **b.** Other than mountainous areas, 1,000 feet above the highest obstacle within a horizontal distance of 4 nautical miles from the course to be flown; or
 
-**c.** As otherwise authorized by the Administrator or assigned by ATC.
+- **c.** As otherwise authorized by the Administrator or assigned by ATC.
 
 ## See Also
 

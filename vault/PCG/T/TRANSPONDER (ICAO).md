@@ -13,6 +13,8 @@ aliases:
   - "TRANSPONDER [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSPONDER \[ICAO]

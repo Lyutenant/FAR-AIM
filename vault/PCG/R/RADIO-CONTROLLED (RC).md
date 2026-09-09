@@ -11,6 +11,8 @@ generated: true
 title: "RADIO-CONTROLLED (RC)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADIO-CONTROLLED (RC)

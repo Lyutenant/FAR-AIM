@@ -11,6 +11,8 @@ generated: true
 title: "SINGLE FREQUENCY APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SINGLE FREQUENCY APPROACH

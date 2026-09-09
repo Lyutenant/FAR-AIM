@@ -11,6 +11,8 @@ generated: true
 title: "STRATEGIC PLANNING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STRATEGIC PLANNING

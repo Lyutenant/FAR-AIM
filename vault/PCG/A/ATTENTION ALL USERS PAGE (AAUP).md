@@ -11,6 +11,8 @@ generated: true
 title: "ATTENTION ALL USERS PAGE (AAUP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATTENTION ALL USERS PAGE (AAUP)

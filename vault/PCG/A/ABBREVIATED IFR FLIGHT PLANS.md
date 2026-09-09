@@ -11,6 +11,8 @@ generated: true
 title: "ABBREVIATED IFR FLIGHT PLANS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ABBREVIATED IFR FLIGHT PLANS

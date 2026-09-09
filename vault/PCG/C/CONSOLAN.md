@@ -11,6 +11,8 @@ generated: true
 title: "CONSOLAN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONSOLAN

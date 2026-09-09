@@ -11,6 +11,8 @@ generated: true
 title: "DESIRED TRACK"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DESIRED TRACK

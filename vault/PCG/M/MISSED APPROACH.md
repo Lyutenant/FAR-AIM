@@ -11,6 +11,8 @@ generated: true
 title: "MISSED APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MISSED APPROACH
@@ -22,11 +24,11 @@ tags:
 
 MISSED APPROACH-
 
-**a.** A maneuver conducted by a pilot when an instrument approach cannot be completed to a landing. The route of flight and altitude are shown on instrument approach procedure charts. A pilot executing a missed approach prior to the Missed Approach Point (MAP) must continue along the final approach to the MAP.
+- **a.** A maneuver conducted by a pilot when an instrument approach cannot be completed to a landing. The route of flight and altitude are shown on instrument approach procedure charts. A pilot executing a missed approach prior to the Missed Approach Point (MAP) must continue along the final approach to the MAP.
 
-**b.** A term used by the pilot to inform ATC that he/she is executing the missed approach.
+- **b.** A term used by the pilot to inform ATC that he/she is executing the missed approach.
 
-**c.** At locations where ATC radar service is provided, the pilot should conform to radar vectors when provided by ATC in lieu of the published missed approach procedure.
+- **c.** At locations where ATC radar service is provided, the pilot should conform to radar vectors when provided by ATC in lieu of the published missed approach procedure.
 
 ## See Also
 

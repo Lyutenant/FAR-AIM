@@ -11,6 +11,8 @@ generated: true
 title: "CHAFF"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CHAFF

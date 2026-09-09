@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix I to Part 25—Installation of an Automatic Takeoff Thrust Control System (ATTCS)

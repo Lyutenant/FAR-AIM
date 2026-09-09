@@ -11,6 +11,8 @@ generated: true
 title: "SLDI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SLDI

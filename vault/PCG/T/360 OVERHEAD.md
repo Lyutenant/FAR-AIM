@@ -11,6 +11,8 @@ generated: true
 title: "360 OVERHEAD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # 360 OVERHEAD

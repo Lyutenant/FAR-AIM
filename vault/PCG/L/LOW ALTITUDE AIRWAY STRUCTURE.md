@@ -11,6 +11,8 @@ generated: true
 title: "LOW ALTITUDE AIRWAY STRUCTURE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LOW ALTITUDE AIRWAY STRUCTURE

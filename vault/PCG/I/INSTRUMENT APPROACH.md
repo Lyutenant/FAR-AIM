@@ -11,6 +11,8 @@ generated: true
 title: "INSTRUMENT APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INSTRUMENT APPROACH

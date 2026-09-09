@@ -11,6 +11,8 @@ generated: true
 title: "CLEAR AIR TURBULENCE (CAT)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLEAR AIR TURBULENCE (CAT)

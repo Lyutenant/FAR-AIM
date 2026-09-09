@@ -11,6 +11,8 @@ generated: true
 title: "OM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OM

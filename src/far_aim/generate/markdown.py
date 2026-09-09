@@ -2,11 +2,15 @@
 
 Official wording is reproduced exactly; the only transformations are
 deterministic formatting ones (escaping, labels bolded, block layout).
-Paragraph hierarchy renders *flat* — each paragraph is its own Markdown
-paragraph led by its bold CFR label, children following in order — because
-depth-5 nesting containing tables and extracts breaks inside Markdown list
-indentation (4-space continuation text becomes a code block), and printed
-CFR is read flat via its ``(a)(1)(i)`` labels anyway.
+Paragraph hierarchy renders as **nested Markdown list items**: each
+paragraph is a ``- `` item led by its bold CFR label, and its children —
+nested paragraphs, continuation text, tables, extracts, notes, graphics —
+are rendered first and indented under it (``generate.hierarchy``). Nesting
+reaches six levels in Title 14 and composes safely at every depth because
+indentation is relative to the parent item, never absolute; the earlier
+flat rendering existed only to dodge an absolute-indent code-block hazard.
+Presentation (indent width, guides, hidden bullets) is the CSS snippet's
+job; the Markdown itself is a plain nested list.
 
 Every block type must have a renderer: an unknown type raises instead of
 being dropped (plan §32.2).
@@ -17,17 +21,19 @@ from __future__ import annotations
 import re
 
 from far_aim.generate import BuildError
+from far_aim.generate.hierarchy import list_item
 
 ECFR_BASE_URL = "https://www.ecfr.gov"
 
 # Characters that could turn official text into unintended markup anywhere
-# in a line; line-leading forms (#, >, list markers, ordered-list numbers)
-# are escaped separately. $ is included because Obsidian treats paired
-# dollar signs as inline-math delimiters — two currency amounts in one
-# paragraph would otherwise render the span between them as math.
+# in a line; line-leading forms (#, >, list markers, ordered-list numbers —
+# both ``1.`` and ``1)`` open an ordered list) are escaped separately. $ is
+# included because Obsidian treats paired dollar signs as inline-math
+# delimiters — two currency amounts in one paragraph would otherwise render
+# the span between them as math.
 _INLINE_ESCAPE_RE = re.compile(r"[\\`*_\[<$]")
 _LEADING_ESCAPE_RE = re.compile(r"^([#>+-])", re.MULTILINE)
-_LEADING_ORDERED_RE = re.compile(r"^([0-9]+)\.", re.MULTILINE)
+_LEADING_ORDERED_RE = re.compile(r"^([0-9]+)([.)])", re.MULTILINE)
 
 _HEADING_PREFIX = {1: "###", 2: "####", 3: "#####", 5: "######"}
 
@@ -36,7 +42,7 @@ def escape_md(text: str) -> str:
     """Escape Markdown syntax; the rendered wording stays exactly the source's."""
     escaped = _INLINE_ESCAPE_RE.sub(r"\\\g<0>", text)
     escaped = _LEADING_ESCAPE_RE.sub(r"\\\1", escaped)
-    return _LEADING_ORDERED_RE.sub(r"\1\\.", escaped)
+    return _LEADING_ORDERED_RE.sub(r"\1\\\2", escaped)
 
 
 def html_escape(text: str) -> str:
@@ -68,16 +74,17 @@ def _render_paragraph(block: dict) -> list[str]:
         f"*{escape_md(subject)}*" if subject else "",
         escape_md(text) if text else "",
     )
-    chunks = [head] if head else []
-    chunks.extend(render_blocks(block.get("children") or []))
-    return chunks
+    children = render_blocks(block.get("children") or [])
+    if not head:
+        # Nothing to head an item with (never seen in Title 14): the children
+        # take this level themselves rather than hanging off an empty item.
+        return children
+    return [list_item(head, children)]
 
 
 def _render_definition(block: dict) -> list[str]:
     head = _run_in(f"*{escape_md(block['term'])}*", escape_md(block["text"]))
-    chunks = [head]
-    chunks.extend(render_blocks(block.get("children") or []))
-    return chunks
+    return [list_item(head, render_blocks(block.get("children") or []))]
 
 
 def _render_text(block: dict) -> list[str]:

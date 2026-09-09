@@ -11,6 +11,8 @@ generated: true
 title: "IAP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IAP

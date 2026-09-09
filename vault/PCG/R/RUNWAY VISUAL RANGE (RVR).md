@@ -11,6 +11,8 @@ generated: true
 title: "RUNWAY VISUAL RANGE (RVR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RUNWAY VISUAL RANGE (RVR)

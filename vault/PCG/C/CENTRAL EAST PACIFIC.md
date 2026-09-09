@@ -11,6 +11,8 @@ generated: true
 title: "CENTRAL EAST PACIFIC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CENTRAL EAST PACIFIC

@@ -11,6 +11,8 @@ generated: true
 title: "FEEDER FIX"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FEEDER FIX

@@ -13,6 +13,8 @@ aliases:
   - "RELEASE TIME [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RELEASE TIME \[ICAO]

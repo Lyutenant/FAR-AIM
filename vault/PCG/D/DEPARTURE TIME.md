@@ -11,6 +11,8 @@ generated: true
 title: "DEPARTURE TIME"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DEPARTURE TIME

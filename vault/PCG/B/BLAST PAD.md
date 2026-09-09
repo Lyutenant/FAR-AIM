@@ -11,6 +11,8 @@ generated: true
 title: "BLAST PAD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BLAST PAD

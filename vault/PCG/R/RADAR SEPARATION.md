@@ -11,6 +11,8 @@ generated: true
 title: "RADAR SEPARATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR SEPARATION

@@ -13,6 +13,8 @@ aliases:
   - "POINT‐TO‐POINT (PTP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # POINT‐TO‐POINT (PTP)

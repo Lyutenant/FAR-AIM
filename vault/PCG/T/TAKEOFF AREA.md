@@ -11,6 +11,8 @@ generated: true
 title: "TAKEOFF AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TAKEOFF AREA

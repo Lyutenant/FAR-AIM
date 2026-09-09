@@ -11,6 +11,8 @@ generated: true
 title: "SAA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SAA

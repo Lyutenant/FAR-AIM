@@ -13,6 +13,8 @@ aliases:
   - "SINGLE‐PILOTED AIRCRAFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SINGLE‐PILOTED AIRCRAFT

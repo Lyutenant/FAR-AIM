@@ -11,6 +11,8 @@ generated: true
 title: "FINAL APPROACH POINT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FINAL APPROACH POINT

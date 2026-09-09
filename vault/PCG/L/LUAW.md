@@ -11,6 +11,8 @@ generated: true
 title: "LUAW"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LUAW

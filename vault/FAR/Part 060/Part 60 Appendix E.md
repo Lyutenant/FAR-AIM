@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix E to Part 60—Qualification Performance Standards for Quality Management Systems for Flight Simulation Training Devices

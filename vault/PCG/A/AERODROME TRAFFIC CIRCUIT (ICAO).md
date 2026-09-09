@@ -13,6 +13,8 @@ aliases:
   - "AERODROME TRAFFIC CIRCUIT [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AERODROME TRAFFIC CIRCUIT \[ICAO]

@@ -11,6 +11,8 @@ generated: true
 title: "COMMON POINT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COMMON POINT

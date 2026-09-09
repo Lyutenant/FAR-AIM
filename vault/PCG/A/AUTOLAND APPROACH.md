@@ -11,6 +11,8 @@ generated: true
 title: "AUTOLAND APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOLAND APPROACH

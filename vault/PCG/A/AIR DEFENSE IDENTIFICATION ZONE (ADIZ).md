@@ -11,6 +11,8 @@ generated: true
 title: "AIR DEFENSE IDENTIFICATION ZONE (ADIZ)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR DEFENSE IDENTIFICATION ZONE (ADIZ)

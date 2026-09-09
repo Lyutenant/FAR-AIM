@@ -11,6 +11,8 @@ generated: true
 title: "SECTOR LIST DROP INTERVAL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SECTOR LIST DROP INTERVAL

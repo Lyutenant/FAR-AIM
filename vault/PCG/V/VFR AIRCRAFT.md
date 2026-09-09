@@ -11,6 +11,8 @@ generated: true
 title: "VFR AIRCRAFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VFR AIRCRAFT

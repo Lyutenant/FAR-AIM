@@ -11,6 +11,8 @@ generated: true
 title: "PUBLISHED ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PUBLISHED ROUTE

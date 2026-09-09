@@ -11,6 +11,8 @@ generated: true
 title: "TVOR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TVOR

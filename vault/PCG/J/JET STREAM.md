@@ -11,6 +11,8 @@ generated: true
 title: "JET STREAM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # JET STREAM

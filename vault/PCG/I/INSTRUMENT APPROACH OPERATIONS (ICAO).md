@@ -13,6 +13,8 @@ aliases:
   - "INSTRUMENT APPROACH OPERATIONS [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INSTRUMENT APPROACH OPERATIONS \[ICAO]
@@ -24,9 +26,9 @@ tags:
 
 INSTRUMENT APPROACH OPERATIONS \[ICAO]- An approach and landing using instruments for navigation guidance based on an instrument approach procedure. There are two methods for executing instrument approach operations:
 
-**a.** A two-dimensional (2D) instrument approach operation, using lateral navigation guidance only; and
+- **a.** A two-dimensional (2D) instrument approach operation, using lateral navigation guidance only; and
 
-**b.** A three-dimensional (3D) instrument approach operation, using both lateral and vertical navigation guidance.
+- **b.** A three-dimensional (3D) instrument approach operation, using both lateral and vertical navigation guidance.
 
 > [!note] Note:
 > Lateral and vertical navigation guidance refers to the guidance provided either by:\

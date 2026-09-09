@@ -11,6 +11,8 @@ generated: true
 title: "GLIDEPATH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GLIDEPATH

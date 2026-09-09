@@ -11,6 +11,8 @@ generated: true
 title: "B4UFLY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # B4UFLY

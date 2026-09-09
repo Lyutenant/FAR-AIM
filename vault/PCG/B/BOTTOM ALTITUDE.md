@@ -11,6 +11,8 @@ generated: true
 title: "BOTTOM ALTITUDE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BOTTOM ALTITUDE

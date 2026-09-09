@@ -13,6 +13,8 @@ aliases:
   - "BROADCAST [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BROADCAST \[ICAO]

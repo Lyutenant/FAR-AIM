@@ -13,6 +13,8 @@ aliases:
   - "APPROPRIATE ATS AUTHORITY [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROPRIATE ATS AUTHORITY \[ICAO]

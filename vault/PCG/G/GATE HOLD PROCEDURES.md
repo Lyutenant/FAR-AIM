@@ -11,6 +11,8 @@ generated: true
 title: "GATE HOLD PROCEDURES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GATE HOLD PROCEDURES

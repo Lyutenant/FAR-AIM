@@ -11,6 +11,8 @@ generated: true
 title: "OUTER MARKER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OUTER MARKER

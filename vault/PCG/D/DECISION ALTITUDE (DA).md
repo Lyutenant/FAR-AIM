@@ -11,6 +11,8 @@ generated: true
 title: "DECISION ALTITUDE (DA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DECISION ALTITUDE (DA)

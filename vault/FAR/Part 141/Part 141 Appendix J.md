@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix J to Part 141—Aircraft Type Rating Course, For Other Than an Airline Transport Pilot Certificate

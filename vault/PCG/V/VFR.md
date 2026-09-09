@@ -11,6 +11,8 @@ generated: true
 title: "VFR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VFR

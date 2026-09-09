@@ -11,6 +11,8 @@ generated: true
 title: "GO AHEAD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GO AHEAD

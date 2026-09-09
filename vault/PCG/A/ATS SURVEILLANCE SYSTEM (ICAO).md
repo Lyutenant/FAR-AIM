@@ -13,6 +13,8 @@ aliases:
   - "ATS SURVEILLANCE SYSTEM [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATS SURVEILLANCE SYSTEM \[ICAO]

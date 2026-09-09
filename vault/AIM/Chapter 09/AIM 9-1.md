@@ -14,6 +14,8 @@ aliases:
   - "Types of Charts Available"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 9, Section 1 — Types of Charts Available

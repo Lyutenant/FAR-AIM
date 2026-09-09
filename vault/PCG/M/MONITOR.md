@@ -11,6 +11,8 @@ generated: true
 title: "MONITOR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MONITOR

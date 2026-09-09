@@ -11,6 +11,8 @@ generated: true
 title: "CRITICAL ENGINE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CRITICAL ENGINE

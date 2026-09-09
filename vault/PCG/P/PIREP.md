@@ -11,6 +11,8 @@ generated: true
 title: "PIREP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PIREP

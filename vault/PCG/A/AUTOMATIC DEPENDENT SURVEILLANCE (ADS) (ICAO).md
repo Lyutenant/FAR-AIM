@@ -13,6 +13,8 @@ aliases:
   - "AUTOMATIC DEPENDENT SURVEILLANCE (ADS) [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATIC DEPENDENT SURVEILLANCE (ADS) \[ICAO]

@@ -11,6 +11,8 @@ generated: true
 title: "APPROACH GATE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROACH GATE

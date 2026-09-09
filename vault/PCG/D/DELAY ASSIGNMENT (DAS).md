@@ -11,6 +11,8 @@ generated: true
 title: "DELAY ASSIGNMENT (DAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DELAY ASSIGNMENT (DAS)

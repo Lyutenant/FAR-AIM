@@ -11,6 +11,8 @@ generated: true
 title: "OPERATIONAL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OPERATIONAL

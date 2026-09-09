@@ -11,6 +11,8 @@ generated: true
 title: "HEIGHT ABOVE LANDING (HAL)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HEIGHT ABOVE LANDING (HAL)

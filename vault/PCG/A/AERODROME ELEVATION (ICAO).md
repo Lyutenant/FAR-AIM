@@ -13,6 +13,8 @@ aliases:
   - "AERODROME ELEVATION [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AERODROME ELEVATION \[ICAO]

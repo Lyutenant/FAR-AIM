@@ -11,6 +11,8 @@ generated: true
 title: "POLAR TRACK STRUCTURE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # POLAR TRACK STRUCTURE

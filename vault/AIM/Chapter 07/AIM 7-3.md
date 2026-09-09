@@ -14,6 +14,8 @@ aliases:
   - "Cold Temperature Barometric Altimeter Errors, Setting Procedures and Cold Temperature Airports (CTA)"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 7, Section 3 — Cold Temperature Barometric Altimeter Errors, Setting Procedures and Cold Temperature Airports (CTA)

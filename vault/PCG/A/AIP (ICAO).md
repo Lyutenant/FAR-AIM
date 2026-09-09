@@ -13,6 +13,8 @@ aliases:
   - "AIP [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIP \[ICAO]

@@ -11,6 +11,8 @@ generated: true
 title: "COOPERATIVE SURVEILLANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COOPERATIVE SURVEILLANCE

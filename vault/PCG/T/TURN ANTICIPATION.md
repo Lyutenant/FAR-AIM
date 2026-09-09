@@ -11,6 +11,8 @@ generated: true
 title: "TURN ANTICIPATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TURN ANTICIPATION

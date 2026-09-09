@@ -13,6 +13,8 @@ aliases:
   - "AIR TRAFFIC CONTROL SERVICE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR TRAFFIC CONTROL SERVICE \[ICAO]
@@ -24,10 +26,10 @@ tags:
 
 AIR TRAFFIC CONTROL SERVICE \[ICAO]- A service provided for the purpose of:
 
-**a.** Preventing collisions:
+- **a.** Preventing collisions:
 
-**b.** Between aircraft; and
+- **b.** Between aircraft; and
 
-**c.** On the maneuvering area between aircraft and obstructions.
+- **c.** On the maneuvering area between aircraft and obstructions.
 
-**d.** Expediting and maintaining an orderly flow of air traffic.
+- **d.** Expediting and maintaining an orderly flow of air traffic.

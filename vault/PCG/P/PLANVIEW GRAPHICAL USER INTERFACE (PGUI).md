@@ -11,6 +11,8 @@ generated: true
 title: "PLANVIEW GRAPHICAL USER INTERFACE (PGUI)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PLANVIEW GRAPHICAL USER INTERFACE (PGUI)

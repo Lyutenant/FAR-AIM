@@ -11,6 +11,8 @@ generated: true
 title: "VERY LOW FREQUENCY (VLF)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VERY LOW FREQUENCY (VLF)

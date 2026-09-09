@@ -11,6 +11,8 @@ generated: true
 title: "INSTRUMENT RUNWAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INSTRUMENT RUNWAY

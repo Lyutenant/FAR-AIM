@@ -13,6 +13,8 @@ aliases:
   - "PAN‐PAN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PAN‐PAN

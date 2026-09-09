@@ -11,6 +11,8 @@ generated: true
 title: "GO AROUND"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GO AROUND

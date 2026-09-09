@@ -11,6 +11,8 @@ generated: true
 title: "AIRSPEED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRSPEED
@@ -22,9 +24,9 @@ tags:
 
 AIRSPEED- The speed of an aircraft relative to its surrounding air mass. The unqualified term “airspeed” means one of the following:
 
-**a.** Indicated Airspeed- The speed shown on the aircraft airspeed indicator. This is the speed used in pilot/controller communications under the general term “airspeed.”
+- **a.** Indicated Airspeed- The speed shown on the aircraft airspeed indicator. This is the speed used in pilot/controller communications under the general term “airspeed.”
 
-**a.** True Airspeed- The airspeed of an aircraft relative to undisturbed air. Used primarily in flight planning and en route portion of flight. When used in pilot/controller communications, it is referred to as “true airspeed” and not shortened to “airspeed.”
+- **a.** True Airspeed- The airspeed of an aircraft relative to undisturbed air. Used primarily in flight planning and en route portion of flight. When used in pilot/controller communications, it is referred to as “true airspeed” and not shortened to “airspeed.”
 
 ## References
 

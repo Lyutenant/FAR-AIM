@@ -11,6 +11,8 @@ generated: true
 title: "NAVIGABLE AIRSPACE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NAVIGABLE AIRSPACE

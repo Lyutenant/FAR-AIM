@@ -11,6 +11,8 @@ generated: true
 title: "AIRMEN'S METEOROLOGICAL INFORMATION (AIRMET)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRMEN'S METEOROLOGICAL INFORMATION (AIRMET)
@@ -22,19 +24,19 @@ tags:
 
 AIRMEN'S METEOROLOGICAL INFORMATION (AIRMET)- A concise description of an occurrence or expected occurrence of specified en route weather phenomena that may affect the safety of aircraft operations, but at intensities lower than those that require the issuance of a SIGMET. An AIRMET may be issued when any of the following weather phenomena are occurring or expected to occur:
 
-**a.** Moderate turbulence
+- **a.** Moderate turbulence
 
-**b.** Low-level windshear
+- **b.** Low-level windshear
 
-**c.** Strong surface winds greater than 30 knots
+- **c.** Strong surface winds greater than 30 knots
 
-**d.** Moderate icing
+- **d.** Moderate icing
 
-**e.** Freezing level
+- **e.** Freezing level
 
-**f.** Mountain obscuration
+- **f.** Mountain obscuration
 
-**g.** IFR
+- **g.** IFR
 
 ## See Also
 

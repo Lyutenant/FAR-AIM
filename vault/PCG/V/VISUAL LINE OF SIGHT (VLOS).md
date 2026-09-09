@@ -11,6 +11,8 @@ generated: true
 title: "VISUAL LINE OF SIGHT (VLOS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VISUAL LINE OF SIGHT (VLOS)

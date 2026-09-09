@@ -11,6 +11,8 @@ generated: true
 title: "ADVISE INTENTIONS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADVISE INTENTIONS

@@ -11,6 +11,8 @@ generated: true
 title: "ATC ADVISES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATC ADVISES

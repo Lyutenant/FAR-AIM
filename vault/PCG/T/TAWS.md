@@ -11,6 +11,8 @@ generated: true
 title: "TAWS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TAWS

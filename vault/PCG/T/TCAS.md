@@ -11,6 +11,8 @@ generated: true
 title: "TCAS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TCAS

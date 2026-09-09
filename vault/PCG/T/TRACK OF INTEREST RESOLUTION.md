@@ -11,6 +11,8 @@ generated: true
 title: "TRACK OF INTEREST RESOLUTION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRACK OF INTEREST RESOLUTION

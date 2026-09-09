@@ -11,6 +11,8 @@ generated: true
 title: "NON-COOPERATIVE SURVEILLANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NON-COOPERATIVE SURVEILLANCE

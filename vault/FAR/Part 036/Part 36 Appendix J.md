@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix J to Part 36—Alternative Noise Certification Procedure for Helicopters Under Subpart H Having a Maximum Certificated Takeoff Weight of Not More Than 7,000 Pounds

@@ -11,6 +11,8 @@ generated: true
 title: "APPROACH RUNWAY VERIFICATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROACH RUNWAY VERIFICATION

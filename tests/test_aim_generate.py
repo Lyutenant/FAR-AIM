@@ -126,7 +126,7 @@ def _text(text: str) -> dict:
     return {"type": "text", "text": text}
 
 
-def test_render_flat_list_with_nested_levels_and_note():
+def test_render_nested_list_with_levels_and_note():
     blocks = [
         {
             "type": "list",
@@ -165,12 +165,11 @@ def test_render_flat_list_with_nested_levels_and_note():
         }
     ]
     assert render_aim_blocks(blocks) == [
-        "**a.** First item",
-        "**1.** Sub 1",
-        "**2.** Sub 2",
-        "> [!note] NOTE-\n> Careful.",
-        "**b.**",
-        "> [!example] EXAMPLE-",
+        "- **a.** First item\n\n"
+        "    - **1.** Sub 1\n\n"
+        "    - **2.** Sub 2\n\n"
+        "        > [!note] NOTE-\n        > Careful.",
+        "- **b.**\n\n    > [!example] EXAMPLE-",
     ]
 
 
@@ -202,7 +201,7 @@ def test_source_breaks_render_as_hard_breaks():
     ]
     assert render_aim_blocks(blocks) == [
         "FAA Order JO 7210.3, Para 4-2-2, Pilot Education.\\\nFAA Order 1600.69.",
-        "**a.** first\\\nsecond",
+        "- **a.** first\\\n    second",
     ]
 
 
@@ -276,7 +275,8 @@ def test_render_html_table_for_spans_and_nested_blocks():
     assert render_aim_blocks([table]) == [
         "<table>\n<thead>\n<tr><th colspan=\"2\"><p>A</p></th></tr>\n</thead>\n<tbody>\n"
         "<tr><td><p>one</p><p>two</p></td>"
-        "<td><p><b>a.</b> x</p><p><b>b.</b> y</p><p><b>NOTE-</b></p><p>n</p></td></tr>\n"
+        "<td><ul><li><p><b>a.</b> x</p></li><li><p><b>b.</b> y</p></li></ul>"
+        "<p><b>NOTE-</b></p><p>n</p></td></tr>\n"
         "</tbody>\n</table>"
     ]
 

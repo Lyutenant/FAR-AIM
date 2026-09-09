@@ -11,6 +11,8 @@ generated: true
 title: "SIGMET"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SIGMET

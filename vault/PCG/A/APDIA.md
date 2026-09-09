@@ -11,6 +11,8 @@ generated: true
 title: "APDIA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APDIA

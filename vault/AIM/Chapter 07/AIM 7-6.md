@@ -14,6 +14,8 @@ aliases:
   - "Potential Flight Hazards"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 7, Section 6 — Potential Flight Hazards

@@ -11,6 +11,8 @@ generated: true
 title: "MICROBURST"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MICROBURST

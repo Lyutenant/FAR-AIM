@@ -11,6 +11,8 @@ generated: true
 title: "FIX"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FIX

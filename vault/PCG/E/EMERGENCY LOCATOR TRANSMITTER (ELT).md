@@ -11,6 +11,8 @@ generated: true
 title: "EMERGENCY LOCATOR TRANSMITTER (ELT)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EMERGENCY LOCATOR TRANSMITTER (ELT)

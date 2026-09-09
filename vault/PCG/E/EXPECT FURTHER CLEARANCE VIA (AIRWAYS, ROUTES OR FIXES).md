@@ -11,6 +11,8 @@ generated: true
 title: "EXPECT FURTHER CLEARANCE VIA (AIRWAYS, ROUTES OR FIXES)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EXPECT FURTHER CLEARANCE VIA (AIRWAYS, ROUTES OR FIXES)

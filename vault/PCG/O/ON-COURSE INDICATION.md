@@ -13,6 +13,8 @@ aliases:
   - "ON‐COURSE INDICATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ON‐COURSE INDICATION

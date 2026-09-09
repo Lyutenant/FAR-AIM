@@ -11,6 +11,8 @@ generated: true
 title: "CTRD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CTRD

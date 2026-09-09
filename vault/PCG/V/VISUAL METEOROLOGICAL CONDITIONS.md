@@ -11,6 +11,8 @@ generated: true
 title: "VISUAL METEOROLOGICAL CONDITIONS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VISUAL METEOROLOGICAL CONDITIONS

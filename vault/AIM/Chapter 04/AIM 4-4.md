@@ -14,6 +14,8 @@ aliases:
   - "ATC Clearances and Aircraft Separation"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 4, Section 4 — ATC Clearances and Aircraft Separation

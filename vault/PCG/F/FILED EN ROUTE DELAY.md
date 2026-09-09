@@ -11,6 +11,8 @@ generated: true
 title: "FILED EN ROUTE DELAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FILED EN ROUTE DELAY
@@ -22,8 +24,8 @@ tags:
 
 FILED EN ROUTE DELAY- Any of the following preplanned delays at points/areas along the route of flight which require special flight plan filing and handling techniques.
 
-**a.** Terminal Area Delay. A delay within a terminal area for touch‐and‐go, low approach, or other terminal area activity.
+- **a.** Terminal Area Delay. A delay within a terminal area for touch‐and‐go, low approach, or other terminal area activity.
 
-**b.** Special Use Airspace Delay. A delay within a Military Operations Area, Restricted Area, Warning Area, or ATC Assigned Airspace.
+- **b.** Special Use Airspace Delay. A delay within a Military Operations Area, Restricted Area, Warning Area, or ATC Assigned Airspace.
 
-**c.** Aerial Refueling Delay. A delay within an Aerial Refueling Track or Anchor.
+- **c.** Aerial Refueling Delay. A delay within an Aerial Refueling Track or Anchor.

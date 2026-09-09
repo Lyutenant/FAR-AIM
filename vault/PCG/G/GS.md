@@ -11,6 +11,8 @@ generated: true
 title: "GS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GS

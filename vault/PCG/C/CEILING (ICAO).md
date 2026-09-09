@@ -13,6 +13,8 @@ aliases:
   - "CEILING [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CEILING \[ICAO]

@@ -13,6 +13,8 @@ aliases:
   - "CIRCLE‐TO‐LAND MANEUVER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CIRCLE‐TO‐LAND MANEUVER

@@ -11,6 +11,8 @@ generated: true
 title: "REMOTE PILOT IN COMMAND (RPIC)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REMOTE PILOT IN COMMAND (RPIC)

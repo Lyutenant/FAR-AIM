@@ -11,6 +11,8 @@ generated: true
 title: "ARRESTING SYSTEM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ARRESTING SYSTEM

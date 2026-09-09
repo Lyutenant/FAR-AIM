@@ -13,6 +13,8 @@ aliases:
   - "TAKEOFF RUN AVAILABLE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TAKEOFF RUN AVAILABLE \[ICAO]

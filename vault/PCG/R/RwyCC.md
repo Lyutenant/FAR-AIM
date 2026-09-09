@@ -11,6 +11,8 @@ generated: true
 title: "RwyCC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RwyCC

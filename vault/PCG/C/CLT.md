@@ -11,6 +11,8 @@ generated: true
 title: "CLT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLT

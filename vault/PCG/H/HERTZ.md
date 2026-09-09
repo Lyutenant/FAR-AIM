@@ -11,6 +11,8 @@ generated: true
 title: "HERTZ"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HERTZ

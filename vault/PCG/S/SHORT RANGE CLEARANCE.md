@@ -11,6 +11,8 @@ generated: true
 title: "SHORT RANGE CLEARANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SHORT RANGE CLEARANCE

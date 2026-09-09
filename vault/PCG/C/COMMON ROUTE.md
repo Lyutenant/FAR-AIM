@@ -11,6 +11,8 @@ generated: true
 title: "COMMON ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COMMON ROUTE

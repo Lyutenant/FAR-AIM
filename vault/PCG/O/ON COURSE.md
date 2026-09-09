@@ -11,6 +11,8 @@ generated: true
 title: "ON COURSE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ON COURSE
@@ -22,9 +24,9 @@ tags:
 
 ON COURSE-
 
-**a.** Used to indicate that an aircraft is established on the route centerline.
+- **a.** Used to indicate that an aircraft is established on the route centerline.
 
-**b.** Used by ATC to advise a pilot making a radar approach that his/her aircraft is lined up on the final approach course.
+- **b.** Used by ATC to advise a pilot making a radar approach that his/her aircraft is lined up on the final approach course.
 
 ## See Also
 

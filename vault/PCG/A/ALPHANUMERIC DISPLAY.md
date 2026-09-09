@@ -11,6 +11,8 @@ generated: true
 title: "ALPHANUMERIC DISPLAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALPHANUMERIC DISPLAY

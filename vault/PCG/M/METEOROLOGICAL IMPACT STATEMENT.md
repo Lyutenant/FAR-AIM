@@ -11,6 +11,8 @@ generated: true
 title: "METEOROLOGICAL IMPACT STATEMENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # METEOROLOGICAL IMPACT STATEMENT

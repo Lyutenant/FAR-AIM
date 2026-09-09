@@ -11,6 +11,8 @@ generated: true
 title: "CEP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CEP

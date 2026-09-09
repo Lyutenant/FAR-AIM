@@ -11,6 +11,8 @@ generated: true
 title: "SPECIAL FLIGHT RULES AREA (SFRA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPECIAL FLIGHT RULES AREA (SFRA)

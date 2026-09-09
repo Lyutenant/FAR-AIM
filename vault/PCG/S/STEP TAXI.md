@@ -11,6 +11,8 @@ generated: true
 title: "STEP TAXI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STEP TAXI

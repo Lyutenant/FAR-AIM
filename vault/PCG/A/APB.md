@@ -11,6 +11,8 @@ generated: true
 title: "APB"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APB

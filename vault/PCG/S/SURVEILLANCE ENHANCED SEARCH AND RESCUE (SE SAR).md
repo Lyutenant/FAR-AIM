@@ -11,6 +11,8 @@ generated: true
 title: "SURVEILLANCE ENHANCED SEARCH AND RESCUE (SE SAR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SURVEILLANCE ENHANCED SEARCH AND RESCUE (SE SAR)

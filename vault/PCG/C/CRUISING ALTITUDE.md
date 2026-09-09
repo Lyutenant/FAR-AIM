@@ -11,6 +11,8 @@ generated: true
 title: "CRUISING ALTITUDE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CRUISING ALTITUDE

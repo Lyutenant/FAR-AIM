@@ -13,6 +13,8 @@ aliases:
   - "FUSION [STARS]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FUSION \[STARS]

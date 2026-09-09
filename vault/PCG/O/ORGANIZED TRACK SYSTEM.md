@@ -11,6 +11,8 @@ generated: true
 title: "ORGANIZED TRACK SYSTEM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ORGANIZED TRACK SYSTEM

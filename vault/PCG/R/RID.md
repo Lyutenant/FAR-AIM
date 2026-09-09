@@ -11,6 +11,8 @@ generated: true
 title: "RID"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RID

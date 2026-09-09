@@ -11,6 +11,8 @@ generated: true
 title: "OCEANIC TRANSITION ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OCEANIC TRANSITION ROUTE

@@ -11,6 +11,8 @@ generated: true
 title: "TOP ALTITUDE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOP ALTITUDE

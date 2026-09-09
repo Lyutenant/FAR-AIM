@@ -11,6 +11,8 @@ generated: true
 title: "LINE UP AND WAIT (LUAW)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LINE UP AND WAIT (LUAW)

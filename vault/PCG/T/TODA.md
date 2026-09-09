@@ -11,6 +11,8 @@ generated: true
 title: "TODA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TODA

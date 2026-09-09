@@ -11,6 +11,8 @@ generated: true
 title: "STANDARD TERMINAL AUTOMATION REPLACEMENT SYSTEM (STARS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STANDARD TERMINAL AUTOMATION REPLACEMENT SYSTEM (STARS)

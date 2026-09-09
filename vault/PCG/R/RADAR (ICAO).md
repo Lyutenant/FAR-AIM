@@ -13,6 +13,8 @@ aliases:
   - "RADAR [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR \[ICAO]
@@ -24,6 +26,6 @@ tags:
 
 RADAR \[ICAO]- A radio detection device which provides information on range, azimuth and/or elevation of objects.
 
-**a.** Primary Radar- Radar system which uses reflected radio signals.
+- **a.** Primary Radar- Radar system which uses reflected radio signals.
 
-**b.** Secondary Radar- Radar system wherein a radio signal transmitted from a radar station initiates the transmission of a radio signal from another station.
+- **b.** Secondary Radar- Radar system wherein a radio signal transmitted from a radar station initiates the transmission of a radio signal from another station.

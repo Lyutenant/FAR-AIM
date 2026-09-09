@@ -11,6 +11,8 @@ generated: true
 title: "AFFIRMATIVE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AFFIRMATIVE

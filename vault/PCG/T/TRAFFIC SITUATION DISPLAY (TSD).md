@@ -11,6 +11,8 @@ generated: true
 title: "TRAFFIC SITUATION DISPLAY (TSD)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAFFIC SITUATION DISPLAY (TSD)

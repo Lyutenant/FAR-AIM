@@ -11,6 +11,8 @@ generated: true
 title: "TOI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOI

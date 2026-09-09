@@ -13,6 +13,8 @@ aliases:
   - "PRECISION APPROACH RADAR [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PRECISION APPROACH RADAR \[ICAO]

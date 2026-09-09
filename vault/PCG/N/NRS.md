@@ -11,6 +11,8 @@ generated: true
 title: "NRS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NRS

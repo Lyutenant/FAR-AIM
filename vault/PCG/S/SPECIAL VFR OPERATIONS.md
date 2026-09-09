@@ -11,6 +11,8 @@ generated: true
 title: "SPECIAL VFR OPERATIONS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPECIAL VFR OPERATIONS

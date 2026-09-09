@@ -11,6 +11,8 @@ generated: true
 title: "DIRECTLY BEHIND"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DIRECTLY BEHIND

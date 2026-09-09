@@ -13,6 +13,8 @@ aliases:
   - "REPORTING POINT [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REPORTING POINT \[ICAO]

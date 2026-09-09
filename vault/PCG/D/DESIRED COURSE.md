@@ -11,6 +11,8 @@ generated: true
 title: "DESIRED COURSE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DESIRED COURSE
@@ -22,6 +24,6 @@ tags:
 
 DESIRED COURSE-
 
-**a.** True- A predetermined desired course direction to be followed (measured in degrees from true north).
+- **a.** True- A predetermined desired course direction to be followed (measured in degrees from true north).
 
-**b.** Magnetic- A predetermined desired course direction to be followed (measured in degrees from local magnetic north).
+- **b.** Magnetic- A predetermined desired course direction to be followed (measured in degrees from local magnetic north).

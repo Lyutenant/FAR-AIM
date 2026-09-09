@@ -11,6 +11,8 @@ generated: true
 title: "VCOA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VCOA

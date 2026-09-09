@@ -11,6 +11,8 @@ generated: true
 title: "AIRCRAFT CLASSES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRCRAFT CLASSES
@@ -22,13 +24,13 @@ tags:
 
 AIRCRAFT CLASSES- For the purposes of Wake Turbulence Separation Minima, ATC classifies aircraft as Super, Heavy, Large, and Small as follows:
 
-**a.** Super- The Airbus A-380-800 (A388) is classified as a super aircraft. A super aircraft is a Category A for terminal wake turbulence separation purposes.
+- **a.** Super- The Airbus A-380-800 (A388) is classified as a super aircraft. A super aircraft is a Category A for terminal wake turbulence separation purposes.
 
-**b.** Heavy- Aircraft capable of takeoff weights of 300,000 pounds or more whether or not they are operating at this weight during a particular phase of flight. Heavy aircraft are Category B, C, or D for terminal wake turbulence separation purposes.
+- **b.** Heavy- Aircraft capable of takeoff weights of 300,000 pounds or more whether or not they are operating at this weight during a particular phase of flight. Heavy aircraft are Category B, C, or D for terminal wake turbulence separation purposes.
 
-**c.** Large- Aircraft of more than 41,000 pounds, maximum certificated takeoff weight, up to but not including 300,000 pounds. Large aircraft are Category F and G for terminal wake turbulence separation purposes.
+- **c.** Large- Aircraft of more than 41,000 pounds, maximum certificated takeoff weight, up to but not including 300,000 pounds. Large aircraft are Category F and G for terminal wake turbulence separation purposes.
 
-**d.** Small- Aircraft of 41,000 pounds or less maximum certificated takeoff weight. Small aircraft are Category H and I for terminal wake turbulence separation purposes.
+- **d.** Small- Aircraft of 41,000 pounds or less maximum certificated takeoff weight. Small aircraft are Category H and I for terminal wake turbulence separation purposes.
 
 ## References
 

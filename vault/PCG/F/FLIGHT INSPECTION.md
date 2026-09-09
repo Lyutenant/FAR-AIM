@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT INSPECTION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT INSPECTION

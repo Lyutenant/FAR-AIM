@@ -11,6 +11,8 @@ generated: true
 title: "DEFENSE VISUAL FLIGHT RULES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DEFENSE VISUAL FLIGHT RULES

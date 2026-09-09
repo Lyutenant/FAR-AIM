@@ -11,6 +11,8 @@ generated: true
 title: "MODE C INTRUDER ALERT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MODE C INTRUDER ALERT

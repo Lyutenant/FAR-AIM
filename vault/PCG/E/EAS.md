@@ -11,6 +11,8 @@ generated: true
 title: "EAS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EAS

@@ -11,6 +11,8 @@ generated: true
 title: "LDA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LDA

@@ -11,6 +11,8 @@ generated: true
 title: "NO GYRO APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NO GYRO APPROACH

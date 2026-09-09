@@ -13,6 +13,8 @@ aliases:
   - "OFFSHORE/CONTROL AIRSPACE AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OFFSHORE/CONTROL AIRSPACE AREA

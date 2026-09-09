@@ -11,6 +11,8 @@ generated: true
 title: "MTI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MTI

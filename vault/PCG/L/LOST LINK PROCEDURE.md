@@ -11,6 +11,8 @@ generated: true
 title: "LOST LINK PROCEDURE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LOST LINK PROCEDURE

@@ -13,6 +13,8 @@ aliases:
   - "TOUCHDOWN [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOUCHDOWN \[ICAO]

@@ -11,6 +11,8 @@ generated: true
 title: "UASFM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UASFM

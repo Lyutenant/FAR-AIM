@@ -11,6 +11,8 @@ generated: true
 title: "COMBINED CONTROL FACILITY (CCF)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COMBINED CONTROL FACILITY (CCF)

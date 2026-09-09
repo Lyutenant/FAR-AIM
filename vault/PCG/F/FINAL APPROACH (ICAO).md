@@ -13,6 +13,8 @@ aliases:
   - "FINAL APPROACH [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FINAL APPROACH \[ICAO]
@@ -24,10 +26,10 @@ tags:
 
 FINAL APPROACH \[ICAO]- That part of an instrument approach procedure which commences at the specified final approach fix or point, or where such a fix or point is not specified.
 
-**a.** At the end of the last procedure turn, base turn or inbound turn of a racetrack procedure, if specified; or
+- **a.** At the end of the last procedure turn, base turn or inbound turn of a racetrack procedure, if specified; or
 
-**b.** At the point of interception of the last track specified in the approach procedure; and ends at a point in the vicinity of an aerodrome from which:
+- **b.** At the point of interception of the last track specified in the approach procedure; and ends at a point in the vicinity of an aerodrome from which:
 
-**c.** A landing can be made; or
+- **c.** A landing can be made; or
 
-**d.** A missed approach procedure is initiated.
+- **d.** A missed approach procedure is initiated.

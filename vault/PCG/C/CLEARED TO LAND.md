@@ -11,6 +11,8 @@ generated: true
 title: "CLEARED TO LAND"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLEARED TO LAND

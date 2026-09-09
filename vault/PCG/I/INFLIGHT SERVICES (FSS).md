@@ -13,6 +13,8 @@ aliases:
   - "INFLIGHT SERVICES [FSS]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INFLIGHT SERVICES \[FSS]

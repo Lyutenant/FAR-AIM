@@ -11,6 +11,8 @@ generated: true
 title: "JET ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # JET ROUTE

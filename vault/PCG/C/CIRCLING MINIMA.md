@@ -11,6 +11,8 @@ generated: true
 title: "CIRCLING MINIMA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CIRCLING MINIMA

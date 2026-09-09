@@ -11,6 +11,8 @@ generated: true
 title: "TAKEOFF DISTANCE AVAILABLE (TODA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TAKEOFF DISTANCE AVAILABLE (TODA)

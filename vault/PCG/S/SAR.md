@@ -11,6 +11,8 @@ generated: true
 title: "SAR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SAR

@@ -13,6 +13,8 @@ aliases:
   - "FLIGHT LEVEL [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT LEVEL \[ICAO]

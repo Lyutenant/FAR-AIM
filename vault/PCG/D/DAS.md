@@ -11,6 +11,8 @@ generated: true
 title: "DAS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DAS

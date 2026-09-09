@@ -13,6 +13,8 @@ aliases:
   - "SPECIAL VFR FLIGHT [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPECIAL VFR FLIGHT \[ICAO]

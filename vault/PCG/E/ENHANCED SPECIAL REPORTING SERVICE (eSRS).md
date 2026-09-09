@@ -11,6 +11,8 @@ generated: true
 title: "ENHANCED SPECIAL REPORTING SERVICE (eSRS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ENHANCED SPECIAL REPORTING SERVICE (eSRS)

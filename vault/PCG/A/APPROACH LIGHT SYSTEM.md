@@ -11,6 +11,8 @@ generated: true
 title: "APPROACH LIGHT SYSTEM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROACH LIGHT SYSTEM

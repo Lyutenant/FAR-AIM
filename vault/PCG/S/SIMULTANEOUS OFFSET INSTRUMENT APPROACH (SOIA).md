@@ -11,6 +11,8 @@ generated: true
 title: "SIMULTANEOUS OFFSET INSTRUMENT APPROACH (SOIA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SIMULTANEOUS OFFSET INSTRUMENT APPROACH (SOIA)

@@ -13,6 +13,8 @@ aliases:
   - "STAGING/QUEUING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STAGING/QUEUING

@@ -11,6 +11,8 @@ generated: true
 title: "DP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DP

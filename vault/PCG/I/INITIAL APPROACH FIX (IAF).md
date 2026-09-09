@@ -11,6 +11,8 @@ generated: true
 title: "INITIAL APPROACH FIX (IAF)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INITIAL APPROACH FIX (IAF)

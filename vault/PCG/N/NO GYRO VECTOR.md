@@ -11,6 +11,8 @@ generated: true
 title: "NO GYRO VECTOR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NO GYRO VECTOR

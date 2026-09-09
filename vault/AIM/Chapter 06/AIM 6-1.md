@@ -12,6 +12,8 @@ generated: true
 title: "General"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 6, Section 1 — General

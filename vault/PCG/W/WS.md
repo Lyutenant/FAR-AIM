@@ -11,6 +11,8 @@ generated: true
 title: "WS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WS

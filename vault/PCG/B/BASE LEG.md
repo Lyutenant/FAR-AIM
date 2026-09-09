@@ -11,6 +11,8 @@ generated: true
 title: "BASE LEG"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BASE LEG

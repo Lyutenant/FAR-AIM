@@ -14,6 +14,8 @@ aliases:
   - "Distress and Urgency Procedures"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 6, Section 3 — Distress and Urgency Procedures

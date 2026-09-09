@@ -11,6 +11,8 @@ generated: true
 title: "AIT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIT

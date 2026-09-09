@@ -11,6 +11,8 @@ generated: true
 title: "ACROBATIC FLIGHT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ACROBATIC FLIGHT

@@ -11,6 +11,8 @@ generated: true
 title: "OUTER FIX TIME"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OUTER FIX TIME

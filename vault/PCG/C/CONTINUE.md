@@ -11,6 +11,8 @@ generated: true
 title: "CONTINUE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONTINUE

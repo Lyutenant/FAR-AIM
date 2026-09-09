@@ -11,6 +11,8 @@ generated: true
 title: "TMI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TMI

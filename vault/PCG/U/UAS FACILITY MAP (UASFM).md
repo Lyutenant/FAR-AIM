@@ -11,6 +11,8 @@ generated: true
 title: "UAS FACILITY MAP (UASFM)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UAS FACILITY MAP (UASFM)

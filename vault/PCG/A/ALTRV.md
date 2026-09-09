@@ -11,6 +11,8 @@ generated: true
 title: "ALTRV"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALTRV

@@ -11,6 +11,8 @@ generated: true
 title: "SAW"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SAW

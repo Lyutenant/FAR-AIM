@@ -11,6 +11,8 @@ generated: true
 title: "CIRCLING APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CIRCLING APPROACH

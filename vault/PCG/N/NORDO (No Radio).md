@@ -11,6 +11,8 @@ generated: true
 title: "NORDO (No Radio)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NORDO (No Radio)

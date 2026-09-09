@@ -13,6 +13,8 @@ aliases:
   - "NAVIGATION SPECIFICATION [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NAVIGATION SPECIFICATION \[ICAO]
@@ -24,9 +26,9 @@ tags:
 
 NAVIGATION SPECIFICATION \[ICAO]- A set of aircraft and flight crew requirements needed to support performance-based navigation operations within a defined airspace. There are two kinds of navigation specifications:
 
-**a.** RNP specification. A navigation specification based on area navigation that includes the requirement for performance monitoring and alerting, designated by the prefix RNP; e.g., RNP 4, RNP APCH.
+- **a.** RNP specification. A navigation specification based on area navigation that includes the requirement for performance monitoring and alerting, designated by the prefix RNP; e.g., RNP 4, RNP APCH.
 
-**b.** RNAV specification. A navigation specification based on area navigation that does not include the requirement for performance monitoring and alerting, designated by the prefix RNAV; e.g., RNAV 5, RNAV 1.
+- **b.** RNAV specification. A navigation specification based on area navigation that does not include the requirement for performance monitoring and alerting, designated by the prefix RNAV; e.g., RNAV 5, RNAV 1.
 
 > [!note] Note:
 > The Performance-based Navigation Manual (Doc 9613), Volume II contains detailed guidance on navigation specifications.

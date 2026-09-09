@@ -12,6 +12,8 @@ generated: true
 title: "Wake Turbulence"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 7, Section 4 — Wake Turbulence

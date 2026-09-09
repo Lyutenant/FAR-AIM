@@ -11,6 +11,8 @@ generated: true
 title: "OTR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OTR

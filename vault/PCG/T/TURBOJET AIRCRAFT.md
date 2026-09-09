@@ -11,6 +11,8 @@ generated: true
 title: "TURBOJET AIRCRAFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TURBOJET AIRCRAFT

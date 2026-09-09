@@ -11,6 +11,8 @@ generated: true
 title: "FLYAWAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLYAWAY

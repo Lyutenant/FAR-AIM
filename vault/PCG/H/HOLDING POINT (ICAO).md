@@ -13,6 +13,8 @@ aliases:
   - "HOLDING POINT [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOLDING POINT \[ICAO]

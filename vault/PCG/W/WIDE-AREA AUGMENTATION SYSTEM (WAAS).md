@@ -13,6 +13,8 @@ aliases:
   - "WIDE‐AREA AUGMENTATION SYSTEM (WAAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WIDE‐AREA AUGMENTATION SYSTEM (WAAS)

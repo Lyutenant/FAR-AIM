@@ -11,6 +11,8 @@ generated: true
 title: "SPEED SEGMENTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPEED SEGMENTS

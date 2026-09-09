@@ -11,6 +11,8 @@ generated: true
 title: "PRIOR PERMISSION REQUIRED (PPR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PRIOR PERMISSION REQUIRED (PPR)

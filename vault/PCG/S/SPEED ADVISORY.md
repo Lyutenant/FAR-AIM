@@ -11,6 +11,8 @@ generated: true
 title: "SPEED ADVISORY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPEED ADVISORY

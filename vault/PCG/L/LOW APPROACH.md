@@ -11,6 +11,8 @@ generated: true
 title: "LOW APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LOW APPROACH

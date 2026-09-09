@@ -11,6 +11,8 @@ generated: true
 title: "VR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VR

@@ -13,6 +13,8 @@ aliases:
   - "FREEZE/FROZEN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FREEZE/FROZEN

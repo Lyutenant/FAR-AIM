@@ -11,6 +11,8 @@ generated: true
 title: "STATIONARY AIRSPACE RESERVATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STATIONARY AIRSPACE RESERVATION

@@ -11,6 +11,8 @@ generated: true
 title: "RCR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RCR

@@ -11,6 +11,8 @@ generated: true
 title: "MULTICOM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MULTICOM

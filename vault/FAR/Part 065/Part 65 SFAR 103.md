@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Special Federal Aviation Regulation No. 103—Process for Requesting Waiver of Mandatory Separation Age for a Federal Aviation Administration Air Traffic Control Specialist In Flight Service Stations, Enroute or Terminal Facilities, and the David J. Hurley Air Traffic Control System Command Center

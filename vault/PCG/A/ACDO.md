@@ -11,6 +11,8 @@ generated: true
 title: "ACDO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ACDO

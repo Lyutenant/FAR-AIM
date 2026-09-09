@@ -11,6 +11,8 @@ generated: true
 title: "TRANSFER OF CONTROL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSFER OF CONTROL

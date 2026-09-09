@@ -13,6 +13,8 @@ aliases:
   - "SIGMET INFORMATION [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SIGMET INFORMATION \[ICAO]

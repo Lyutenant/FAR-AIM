@@ -11,6 +11,8 @@ generated: true
 title: "PILOT IN COMMAND"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PILOT IN COMMAND

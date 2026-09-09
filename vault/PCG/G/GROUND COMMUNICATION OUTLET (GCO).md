@@ -11,6 +11,8 @@ generated: true
 title: "GROUND COMMUNICATION OUTLET (GCO)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GROUND COMMUNICATION OUTLET (GCO)

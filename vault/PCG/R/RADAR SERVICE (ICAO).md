@@ -13,6 +13,8 @@ aliases:
   - "RADAR SERVICE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR SERVICE \[ICAO]
@@ -24,6 +26,6 @@ tags:
 
 RADAR SERVICE \[ICAO]- Term used to indicate a service provided directly by means of radar.
 
-**a.** Monitoring- The use of radar for the purpose of providing aircraft with information and advice relative to significant deviations from nominal flight path.
+- **a.** Monitoring- The use of radar for the purpose of providing aircraft with information and advice relative to significant deviations from nominal flight path.
 
-**b.** Separation- The separation used when aircraft position information is derived from radar sources.
+- **b.** Separation- The separation used when aircraft position information is derived from radar sources.

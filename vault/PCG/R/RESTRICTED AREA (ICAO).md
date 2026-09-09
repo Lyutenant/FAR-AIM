@@ -13,6 +13,8 @@ aliases:
   - "RESTRICTED AREA [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RESTRICTED AREA \[ICAO]

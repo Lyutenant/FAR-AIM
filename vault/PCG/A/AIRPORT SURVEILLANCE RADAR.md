@@ -11,6 +11,8 @@ generated: true
 title: "AIRPORT SURVEILLANCE RADAR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPORT SURVEILLANCE RADAR

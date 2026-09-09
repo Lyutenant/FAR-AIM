@@ -11,6 +11,8 @@ generated: true
 title: "OOP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OOP

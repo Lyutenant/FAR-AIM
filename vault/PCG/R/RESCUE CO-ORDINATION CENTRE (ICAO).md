@@ -13,6 +13,8 @@ aliases:
   - "RESCUE CO‐ORDINATION CENTRE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RESCUE CO‐ORDINATION CENTRE \[ICAO]

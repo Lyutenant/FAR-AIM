@@ -11,6 +11,8 @@ generated: true
 title: "STEPDOWN FIX"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STEPDOWN FIX

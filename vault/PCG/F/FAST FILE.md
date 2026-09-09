@@ -11,6 +11,8 @@ generated: true
 title: "FAST FILE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FAST FILE

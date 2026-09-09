@@ -11,6 +11,8 @@ generated: true
 title: "HELIPAD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HELIPAD

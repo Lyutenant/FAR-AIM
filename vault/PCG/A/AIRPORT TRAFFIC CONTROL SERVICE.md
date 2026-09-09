@@ -11,6 +11,8 @@ generated: true
 title: "AIRPORT TRAFFIC CONTROL SERVICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPORT TRAFFIC CONTROL SERVICE

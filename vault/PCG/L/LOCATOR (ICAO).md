@@ -13,6 +13,8 @@ aliases:
   - "LOCATOR [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LOCATOR \[ICAO]

@@ -11,6 +11,8 @@ generated: true
 title: "RADAR ADVISORY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR ADVISORY

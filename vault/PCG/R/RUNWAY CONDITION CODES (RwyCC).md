@@ -11,6 +11,8 @@ generated: true
 title: "RUNWAY CONDITION CODES (RwyCC)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RUNWAY CONDITION CODES (RwyCC)

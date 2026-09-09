@@ -11,6 +11,8 @@ generated: true
 title: "STEP TURN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STEP TURN

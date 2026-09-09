@@ -11,6 +11,8 @@ generated: true
 title: "HOLD FOR RELEASE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOLD FOR RELEASE

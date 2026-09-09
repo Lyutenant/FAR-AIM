@@ -11,6 +11,8 @@ generated: true
 title: "STOP BUZZER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STOP BUZZER

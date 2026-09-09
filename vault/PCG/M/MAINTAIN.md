@@ -11,6 +11,8 @@ generated: true
 title: "MAINTAIN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MAINTAIN
@@ -22,6 +24,6 @@ tags:
 
 MAINTAIN-
 
-**a.** Concerning altitude/flight level, the term means to remain at the altitude/flight level specified. The phrase “climb and” or “descend and” normally precedes “maintain” and the altitude assignment; e.g., “descend and maintain 5,000.”
+- **a.** Concerning altitude/flight level, the term means to remain at the altitude/flight level specified. The phrase “climb and” or “descend and” normally precedes “maintain” and the altitude assignment; e.g., “descend and maintain 5,000.”
 
-**b.** Concerning other ATC instructions, the term is used in its literal sense; e.g., maintain VFR.
+- **b.** Concerning other ATC instructions, the term is used in its literal sense; e.g., maintain VFR.

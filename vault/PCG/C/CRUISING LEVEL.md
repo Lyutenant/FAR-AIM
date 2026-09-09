@@ -11,6 +11,8 @@ generated: true
 title: "CRUISING LEVEL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CRUISING LEVEL

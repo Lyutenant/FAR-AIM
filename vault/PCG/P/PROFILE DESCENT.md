@@ -11,6 +11,8 @@ generated: true
 title: "PROFILE DESCENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROFILE DESCENT

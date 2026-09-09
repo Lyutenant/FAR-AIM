@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix C to Part 60—Qualification Performance Standards for Helicopter Full Flight Simulators

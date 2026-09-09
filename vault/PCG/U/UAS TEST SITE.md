@@ -11,6 +11,8 @@ generated: true
 title: "UAS TEST SITE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UAS TEST SITE

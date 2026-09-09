@@ -13,6 +13,8 @@ aliases:
   - "MODE (SSR MODE) [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MODE (SSR MODE) \[ICAO]

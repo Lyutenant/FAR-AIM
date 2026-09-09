@@ -11,6 +11,8 @@ generated: true
 title: "FREEZE SPEED PARAMETER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FREEZE SPEED PARAMETER

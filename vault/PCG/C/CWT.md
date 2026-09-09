@@ -11,6 +11,8 @@ generated: true
 title: "CWT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CWT

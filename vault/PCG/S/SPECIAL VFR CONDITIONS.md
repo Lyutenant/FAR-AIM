@@ -11,6 +11,8 @@ generated: true
 title: "SPECIAL VFR CONDITIONS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPECIAL VFR CONDITIONS

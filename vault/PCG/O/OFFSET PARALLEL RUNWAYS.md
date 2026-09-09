@@ -11,6 +11,8 @@ generated: true
 title: "OFFSET PARALLEL RUNWAYS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OFFSET PARALLEL RUNWAYS

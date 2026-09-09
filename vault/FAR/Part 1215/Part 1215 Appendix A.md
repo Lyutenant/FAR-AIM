@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix A to Part 1215—Estimated Service Rates in 1997 Dollars for TDRSS Standard Services (Based on NASA Escalation Estimate)

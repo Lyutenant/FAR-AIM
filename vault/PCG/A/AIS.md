@@ -11,6 +11,8 @@ generated: true
 title: "AIS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIS

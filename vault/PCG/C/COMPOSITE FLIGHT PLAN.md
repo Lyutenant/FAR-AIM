@@ -11,6 +11,8 @@ generated: true
 title: "COMPOSITE FLIGHT PLAN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COMPOSITE FLIGHT PLAN

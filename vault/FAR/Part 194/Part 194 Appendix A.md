@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix A to Part 194—Minimum Requirements for a Pilot Training Program in a Powered-Lift Originally Type Certificated or Seeking Type Certification With One Set of Controls and a Single Pilot Station

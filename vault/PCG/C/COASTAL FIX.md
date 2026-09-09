@@ -11,6 +11,8 @@ generated: true
 title: "COASTAL FIX"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COASTAL FIX

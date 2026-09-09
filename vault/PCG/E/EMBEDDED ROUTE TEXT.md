@@ -11,6 +11,8 @@ generated: true
 title: "EMBEDDED ROUTE TEXT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EMBEDDED ROUTE TEXT

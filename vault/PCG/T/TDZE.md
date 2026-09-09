@@ -11,6 +11,8 @@ generated: true
 title: "TDZE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TDZE

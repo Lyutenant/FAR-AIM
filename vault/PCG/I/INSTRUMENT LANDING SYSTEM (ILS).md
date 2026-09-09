@@ -11,6 +11,8 @@ generated: true
 title: "INSTRUMENT LANDING SYSTEM (ILS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INSTRUMENT LANDING SYSTEM (ILS)
@@ -22,15 +24,15 @@ tags:
 
 INSTRUMENT LANDING SYSTEM (ILS)- A precision instrument approach system which normally consists of the following electronic components and visual aids:
 
-**a.**
+- **a.**
 
-**a.**
+- **a.**
 
-**a.** Outer Marker.
+- **a.** Outer Marker.
 
-**a.** Middle Marker.
+- **a.** Middle Marker.
 
-**a.** Approach Lights.
+- **a.** Approach Lights.
 
 ## See Also
 

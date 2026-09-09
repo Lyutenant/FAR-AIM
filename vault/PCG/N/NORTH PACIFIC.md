@@ -11,6 +11,8 @@ generated: true
 title: "NORTH PACIFIC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NORTH PACIFIC

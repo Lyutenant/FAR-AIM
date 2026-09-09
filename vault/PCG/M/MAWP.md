@@ -11,6 +11,8 @@ generated: true
 title: "MAWP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MAWP

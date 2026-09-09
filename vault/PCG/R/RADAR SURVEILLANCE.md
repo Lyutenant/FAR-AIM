@@ -11,6 +11,8 @@ generated: true
 title: "RADAR SURVEILLANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR SURVEILLANCE

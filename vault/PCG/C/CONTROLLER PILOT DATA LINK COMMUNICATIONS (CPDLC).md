@@ -11,6 +11,8 @@ generated: true
 title: "CONTROLLER PILOT DATA LINK COMMUNICATIONS (CPDLC)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONTROLLER PILOT DATA LINK COMMUNICATIONS (CPDLC)

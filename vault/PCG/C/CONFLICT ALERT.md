@@ -11,6 +11,8 @@ generated: true
 title: "CONFLICT ALERT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONFLICT ALERT

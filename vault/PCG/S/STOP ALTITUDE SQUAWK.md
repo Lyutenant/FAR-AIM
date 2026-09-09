@@ -11,6 +11,8 @@ generated: true
 title: "STOP ALTITUDE SQUAWK"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STOP ALTITUDE SQUAWK

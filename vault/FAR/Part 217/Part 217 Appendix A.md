@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix A to Part 217—Instructions to Foreign Air Carriers for Reporting Traffic Data on Form 41 Schedule T-100(f)

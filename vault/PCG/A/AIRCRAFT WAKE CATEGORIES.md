@@ -11,6 +11,8 @@ generated: true
 title: "AIRCRAFT WAKE CATEGORIES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRCRAFT WAKE CATEGORIES
@@ -22,15 +24,15 @@ tags:
 
 AIRCRAFT WAKE CATEGORIES- For the purposes of Terminal Wake Turbulence Separation Minima, ATC classifies aircraft as Category A through Category I as follows:
 
-**a.** CATEGORY A. The Airbus A-380-800 (A388) is classified as a super aircraft.
+- **a.** CATEGORY A. The Airbus A-380-800 (A388) is classified as a super aircraft.
 
-**b.** CATEGORY B, C, and D. Aircraft capable of takeoff weights of 300,000 pounds or more whether or not they are operating at this weight during a particular phase of flight. These are categorized as heavy aircraft.
+- **b.** CATEGORY B, C, and D. Aircraft capable of takeoff weights of 300,000 pounds or more whether or not they are operating at this weight during a particular phase of flight. These are categorized as heavy aircraft.
 
-**c.** CATEGORY E. All B757 aircraft.
+- **c.** CATEGORY E. All B757 aircraft.
 
-**d.** CATEGORY F, and G. Aircraft weighing 41,000 pounds or more maximum certificated takeoff weight, up to but not including 300,000 pounds.
+- **d.** CATEGORY F, and G. Aircraft weighing 41,000 pounds or more maximum certificated takeoff weight, up to but not including 300,000 pounds.
 
-**e.** CATEGORY H and I. Aircraft of less than 41,000 pounds maximum certificated takeoff weight.
+- **e.** CATEGORY H and I. Aircraft of less than 41,000 pounds maximum certificated takeoff weight.
 
 ## References
 

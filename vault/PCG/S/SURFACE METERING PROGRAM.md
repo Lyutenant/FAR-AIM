@@ -11,6 +11,8 @@ generated: true
 title: "SURFACE METERING PROGRAM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SURFACE METERING PROGRAM

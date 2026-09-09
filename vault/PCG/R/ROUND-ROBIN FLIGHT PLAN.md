@@ -11,6 +11,8 @@ generated: true
 title: "ROUND-ROBIN FLIGHT PLAN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ROUND-ROBIN FLIGHT PLAN

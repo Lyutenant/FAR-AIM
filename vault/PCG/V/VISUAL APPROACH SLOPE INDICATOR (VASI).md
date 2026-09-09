@@ -11,6 +11,8 @@ generated: true
 title: "VISUAL APPROACH SLOPE INDICATOR (VASI)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VISUAL APPROACH SLOPE INDICATOR (VASI)

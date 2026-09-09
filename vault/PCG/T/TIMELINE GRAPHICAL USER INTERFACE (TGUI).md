@@ -11,6 +11,8 @@ generated: true
 title: "TIMELINE GRAPHICAL USER INTERFACE (TGUI)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TIMELINE GRAPHICAL USER INTERFACE (TGUI)

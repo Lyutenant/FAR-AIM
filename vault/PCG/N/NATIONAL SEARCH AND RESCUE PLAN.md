@@ -11,6 +11,8 @@ generated: true
 title: "NATIONAL SEARCH AND RESCUE PLAN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NATIONAL SEARCH AND RESCUE PLAN

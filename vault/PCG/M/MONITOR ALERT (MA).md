@@ -11,6 +11,8 @@ generated: true
 title: "MONITOR ALERT (MA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MONITOR ALERT (MA)

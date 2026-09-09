@@ -11,6 +11,8 @@ generated: true
 title: "LAA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LAA

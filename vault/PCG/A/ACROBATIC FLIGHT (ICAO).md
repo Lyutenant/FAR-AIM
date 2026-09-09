@@ -13,6 +13,8 @@ aliases:
   - "ACROBATIC FLIGHT [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ACROBATIC FLIGHT \[ICAO]

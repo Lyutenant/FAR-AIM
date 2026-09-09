@@ -13,6 +13,8 @@ aliases:
   - "DATA LINK AUTOMATIC TERMINAL INFORMATION SERVICE (D-ATIS) [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DATA LINK AUTOMATIC TERMINAL INFORMATION SERVICE (D-ATIS) \[ICAO]

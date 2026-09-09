@@ -11,6 +11,8 @@ generated: true
 title: "SUNSET AND SUNRISE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SUNSET AND SUNRISE

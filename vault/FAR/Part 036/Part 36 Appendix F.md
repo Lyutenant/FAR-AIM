@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix F to Part 36—Flyover Noise Requirements for Propeller-Driven Small Airplane and Propeller-Driven, Commuter Category Airplane Certification Tests Prior to December 22, 1988

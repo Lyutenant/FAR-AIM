@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATIC DIRECTION FINDER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATIC DIRECTION FINDER

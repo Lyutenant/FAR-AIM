@@ -11,6 +11,8 @@ generated: true
 title: "APPROACH CONTROL SERVICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROACH CONTROL SERVICE

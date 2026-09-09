@@ -11,6 +11,8 @@ generated: true
 title: "NATIONAL AIRSPACE SYSTEM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NATIONAL AIRSPACE SYSTEM

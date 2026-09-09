@@ -11,6 +11,8 @@ generated: true
 title: "REDUCED VERTICAL SEPARATION MINIMUM (RVSM) AIRSPACE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REDUCED VERTICAL SEPARATION MINIMUM (RVSM) AIRSPACE

@@ -11,6 +11,8 @@ generated: true
 title: "HELIPORT REFERENCE POINT (HRP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HELIPORT REFERENCE POINT (HRP)

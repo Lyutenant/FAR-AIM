@@ -11,6 +11,8 @@ generated: true
 title: "TMPA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TMPA

@@ -11,6 +11,8 @@ generated: true
 title: "JAMMING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # JAMMING

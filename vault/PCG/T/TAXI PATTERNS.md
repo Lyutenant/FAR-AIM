@@ -11,6 +11,8 @@ generated: true
 title: "TAXI PATTERNS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TAXI PATTERNS

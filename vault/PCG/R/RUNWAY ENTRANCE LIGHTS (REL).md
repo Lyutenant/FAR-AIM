@@ -11,6 +11,8 @@ generated: true
 title: "RUNWAY ENTRANCE LIGHTS (REL)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RUNWAY ENTRANCE LIGHTS (REL)

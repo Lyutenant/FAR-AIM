@@ -11,6 +11,8 @@ generated: true
 title: "GROUND BASED AUGMENTATION SYSTEM (GBAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GROUND BASED AUGMENTATION SYSTEM (GBAS)

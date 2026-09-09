@@ -11,6 +11,8 @@ generated: true
 title: "NATIONAL FLIGHT DATA DIGEST (NFDD)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NATIONAL FLIGHT DATA DIGEST (NFDD)

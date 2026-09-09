@@ -13,6 +13,8 @@ aliases:
   - "RADAR CLUTTER [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR CLUTTER \[ICAO]

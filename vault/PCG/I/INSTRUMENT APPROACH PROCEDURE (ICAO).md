@@ -13,6 +13,8 @@ aliases:
   - "INSTRUMENT APPROACH PROCEDURE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INSTRUMENT APPROACH PROCEDURE \[ICAO]

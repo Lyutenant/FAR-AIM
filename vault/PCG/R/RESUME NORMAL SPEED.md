@@ -11,6 +11,8 @@ generated: true
 title: "RESUME NORMAL SPEED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RESUME NORMAL SPEED

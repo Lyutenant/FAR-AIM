@@ -11,6 +11,8 @@ generated: true
 title: "EN ROUTE DECISION SUPPORT TOOL (EDST)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EN ROUTE DECISION SUPPORT TOOL (EDST)

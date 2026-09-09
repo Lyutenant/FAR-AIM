@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix N to Part 25—Fuel Tank Flammability Exposure and Reliability Analysis

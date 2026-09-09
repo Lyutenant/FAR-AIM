@@ -11,6 +11,8 @@ generated: true
 title: "TERMINAL SEQUENCING AND SPACING (TSAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TERMINAL SEQUENCING AND SPACING (TSAS)

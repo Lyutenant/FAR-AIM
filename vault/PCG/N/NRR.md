@@ -11,6 +11,8 @@ generated: true
 title: "NRR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NRR

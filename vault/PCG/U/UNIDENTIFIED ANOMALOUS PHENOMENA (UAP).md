@@ -11,6 +11,8 @@ generated: true
 title: "UNIDENTIFIED ANOMALOUS PHENOMENA (UAP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UNIDENTIFIED ANOMALOUS PHENOMENA (UAP)

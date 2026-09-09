@@ -13,6 +13,8 @@ aliases:
   - "AERODROME CONTROL SERVICE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AERODROME CONTROL SERVICE \[ICAO]

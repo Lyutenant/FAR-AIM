@@ -11,6 +11,8 @@ generated: true
 title: "ROLLOUT RVR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ROLLOUT RVR

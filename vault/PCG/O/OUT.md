@@ -11,6 +11,8 @@ generated: true
 title: "OUT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OUT

@@ -11,6 +11,8 @@ generated: true
 title: "MINIMUMS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMUMS

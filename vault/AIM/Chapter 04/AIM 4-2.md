@@ -14,6 +14,8 @@ aliases:
   - "Radio Communications Phraseology and Techniques"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 4, Section 2 — Radio Communications Phraseology and Techniques

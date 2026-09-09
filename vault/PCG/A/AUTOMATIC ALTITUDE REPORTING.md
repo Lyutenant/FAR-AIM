@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATIC ALTITUDE REPORTING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATIC ALTITUDE REPORTING

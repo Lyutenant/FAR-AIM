@@ -11,6 +11,8 @@ generated: true
 title: "RECEIVER AUTONOMOUS INTEGRITY MONITORING (RAIM)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RECEIVER AUTONOMOUS INTEGRITY MONITORING (RAIM)

@@ -11,6 +11,8 @@ generated: true
 title: "AIRPORT REFERENCE POINT (ARP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPORT REFERENCE POINT (ARP)

@@ -13,6 +13,8 @@ aliases:
   - "NONCOMMON ROUTE/PORTION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NONCOMMON ROUTE/PORTION

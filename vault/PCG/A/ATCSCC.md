@@ -11,6 +11,8 @@ generated: true
 title: "ATCSCC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATCSCC

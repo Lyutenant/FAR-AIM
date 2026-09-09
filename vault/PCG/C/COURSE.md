@@ -11,6 +11,8 @@ generated: true
 title: "COURSE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COURSE
@@ -22,9 +24,9 @@ tags:
 
 COURSE-
 
-**a.** The intended direction of flight in the horizontal plane measured in degrees from north.
+- **a.** The intended direction of flight in the horizontal plane measured in degrees from north.
 
-**b.** The ILS localizer signal pattern usually specified as the front course or the back course.
+- **b.** The ILS localizer signal pattern usually specified as the front course or the back course.
 
 ## See Also
 

@@ -11,6 +11,8 @@ generated: true
 title: "ARO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ARO

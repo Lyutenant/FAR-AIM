@@ -11,6 +11,8 @@ generated: true
 title: "CROSSWIND"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CROSSWIND
@@ -22,9 +24,9 @@ tags:
 
 CROSSWIND-
 
-**a.** When used concerning the traffic pattern, the word means “crosswind leg.”
+- **a.** When used concerning the traffic pattern, the word means “crosswind leg.”
 
-**a.** When used concerning wind conditions, the word means a wind not parallel to the runway or the path of an aircraft.
+- **a.** When used concerning wind conditions, the word means a wind not parallel to the runway or the path of an aircraft.
 
 ## See Also
 

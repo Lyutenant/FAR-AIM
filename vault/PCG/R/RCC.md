@@ -11,6 +11,8 @@ generated: true
 title: "RCC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RCC

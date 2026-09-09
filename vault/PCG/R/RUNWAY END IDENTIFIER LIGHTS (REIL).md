@@ -11,6 +11,8 @@ generated: true
 title: "RUNWAY END IDENTIFIER LIGHTS (REIL)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RUNWAY END IDENTIFIER LIGHTS (REIL)

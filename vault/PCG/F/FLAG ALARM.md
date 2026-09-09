@@ -11,6 +11,8 @@ generated: true
 title: "FLAG ALARM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLAG ALARM

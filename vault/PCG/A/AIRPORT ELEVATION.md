@@ -11,6 +11,8 @@ generated: true
 title: "AIRPORT ELEVATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPORT ELEVATION

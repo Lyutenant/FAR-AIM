@@ -11,6 +11,8 @@ generated: true
 title: "REMOTE IDENTIFICATION (RID)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REMOTE IDENTIFICATION (RID)

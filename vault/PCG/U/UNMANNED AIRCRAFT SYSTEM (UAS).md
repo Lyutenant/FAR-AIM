@@ -11,6 +11,8 @@ generated: true
 title: "UNMANNED AIRCRAFT SYSTEM (UAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UNMANNED AIRCRAFT SYSTEM (UAS)

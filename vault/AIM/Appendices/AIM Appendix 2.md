@@ -13,6 +13,8 @@ aliases:
   - "Volcanic Activity Reporting Form (VAR)"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Appendix 2 — Volcanic Activity Reporting Form (VAR)

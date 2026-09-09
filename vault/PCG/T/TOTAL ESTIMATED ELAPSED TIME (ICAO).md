@@ -13,6 +13,8 @@ aliases:
   - "TOTAL ESTIMATED ELAPSED TIME [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOTAL ESTIMATED ELAPSED TIME \[ICAO]

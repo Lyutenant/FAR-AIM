@@ -11,6 +11,8 @@ generated: true
 title: "HEIGHT ABOVE TOUCHDOWN (HAT)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HEIGHT ABOVE TOUCHDOWN (HAT)

@@ -11,6 +11,8 @@ generated: true
 title: "OBSTACLE FREE ZONE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OBSTACLE FREE ZONE
@@ -22,15 +24,15 @@ tags:
 
 OBSTACLE FREE ZONE- The OFZ is a three-dimensional volume of airspace which protects the transition of aircraft to and from the runway. The OFZ clearing standard precludes taxiing and parked airplanes and object penetrations, except for frangible NAVAID locations that are fixed by function. Additionally, vehicles, equipment, and personnel may be authorized by air traffic control to enter the area using the provisions of FAA Order JO 7110.65, paragraph 3-1-5, Vehicles/Equipment/Personnel Near/On Runways. The runway OFZ and when applicable, the inner‐approach OFZ, and the inner‐transitional OFZ, comprise the OFZ.
 
-**a.** Runway OFZ. The runway OFZ is a defined volume of airspace centered above the runway. The runway OFZ is the airspace above a surface whose elevation at any point is the same as the elevation of the nearest point on the runway centerline. The runway OFZ extends 200 feet beyond each end of the runway. The width is as follows:
+- **a.** Runway OFZ. The runway OFZ is a defined volume of airspace centered above the runway. The runway OFZ is the airspace above a surface whose elevation at any point is the same as the elevation of the nearest point on the runway centerline. The runway OFZ extends 200 feet beyond each end of the runway. The width is as follows:
 
-**b.** For runways serving large airplanes, the greater of:
+- **b.** For runways serving large airplanes, the greater of:
 
 (a) 400 feet, or
 
 (b) 180 feet, plus the wingspan of the most demanding airplane, plus 20 feet per 1,000 feet of airport elevation.
 
-**1.** For runways serving only small airplanes:
+- **1.** For runways serving only small airplanes:
 
 (a) 300 feet for precision instrument runways.
 
@@ -38,9 +40,9 @@ OBSTACLE FREE ZONE- The OFZ is a three-dimensional volume of airspace which prot
 
 (c) 120 feet for other runways serving small airplanes with approach speeds of less than 50 knots.
 
-**a.** Inner‐approach OFZ. The inner‐approach OFZ is a defined volume of airspace centered on the approach area. The inner‐approach OFZ applies only to runways with an approach lighting system. The inner‐approach OFZ begins 200 feet from the runway threshold at the same elevation as the runway threshold and extends 200 feet beyond the last light unit in the approach lighting system. The width of the inner‐approach OFZ is the same as the runway OFZ and rises at a slope of 50 (horizontal) to 1 (vertical) from the beginning.
+- **a.** Inner‐approach OFZ. The inner‐approach OFZ is a defined volume of airspace centered on the approach area. The inner‐approach OFZ applies only to runways with an approach lighting system. The inner‐approach OFZ begins 200 feet from the runway threshold at the same elevation as the runway threshold and extends 200 feet beyond the last light unit in the approach lighting system. The width of the inner‐approach OFZ is the same as the runway OFZ and rises at a slope of 50 (horizontal) to 1 (vertical) from the beginning.
 
-**b.** Inner‐transitional OFZ. The inner transitional surface OFZ is a defined volume of airspace along the sides of the runway and inner‐approach OFZ and applies only to precision instrument runways. The inner‐transitional surface OFZ slopes 3 (horizontal) to 1 (vertical) out from the edges of the runway OFZ and inner‐approach OFZ to a height of 150 feet above the established airport elevation.
+- **b.** Inner‐transitional OFZ. The inner transitional surface OFZ is a defined volume of airspace along the sides of the runway and inner‐approach OFZ and applies only to precision instrument runways. The inner‐transitional surface OFZ slopes 3 (horizontal) to 1 (vertical) out from the edges of the runway OFZ and inner‐approach OFZ to a height of 150 feet above the established airport elevation.
 
 ## References
 

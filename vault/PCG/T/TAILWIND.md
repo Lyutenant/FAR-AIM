@@ -11,6 +11,8 @@ generated: true
 title: "TAILWIND"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TAILWIND

@@ -11,6 +11,8 @@ generated: true
 title: "MAP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MAP

@@ -11,6 +11,8 @@ generated: true
 title: "SQUAWK (Mode, Code, Function)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SQUAWK (Mode, Code, Function)

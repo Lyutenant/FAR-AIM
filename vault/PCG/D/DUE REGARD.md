@@ -11,6 +11,8 @@ generated: true
 title: "DUE REGARD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DUE REGARD

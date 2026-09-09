@@ -11,6 +11,8 @@ generated: true
 title: "CONNECTION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONNECTION

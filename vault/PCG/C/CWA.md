@@ -11,6 +11,8 @@ generated: true
 title: "CWA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CWA

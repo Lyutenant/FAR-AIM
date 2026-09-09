@@ -11,6 +11,8 @@ generated: true
 title: "RADAR ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR ROUTE

@@ -11,6 +11,8 @@ generated: true
 title: "ROUTE ACTION NOTIFICATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ROUTE ACTION NOTIFICATION

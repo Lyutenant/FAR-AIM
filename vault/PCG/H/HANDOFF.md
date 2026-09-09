@@ -11,6 +11,8 @@ generated: true
 title: "HANDOFF"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HANDOFF

@@ -11,6 +11,8 @@ generated: true
 title: "MINIMUM FUEL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMUM FUEL

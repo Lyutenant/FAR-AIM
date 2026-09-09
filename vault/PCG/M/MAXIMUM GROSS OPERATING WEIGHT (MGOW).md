@@ -11,6 +11,8 @@ generated: true
 title: "MAXIMUM GROSS OPERATING WEIGHT (MGOW)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MAXIMUM GROSS OPERATING WEIGHT (MGOW)

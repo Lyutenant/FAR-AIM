@@ -11,6 +11,8 @@ generated: true
 title: "IMMEDIATELY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IMMEDIATELY

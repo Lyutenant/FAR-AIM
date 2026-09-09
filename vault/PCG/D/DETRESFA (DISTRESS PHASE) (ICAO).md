@@ -13,6 +13,8 @@ aliases:
   - "DETRESFA (DISTRESS PHASE) [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DETRESFA (DISTRESS PHASE) \[ICAO]

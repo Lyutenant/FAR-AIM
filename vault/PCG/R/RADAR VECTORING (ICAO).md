@@ -13,6 +13,8 @@ aliases:
   - "RADAR VECTORING [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR VECTORING \[ICAO]

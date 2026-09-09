@@ -11,6 +11,8 @@ generated: true
 title: "FSPD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FSPD

@@ -11,6 +11,8 @@ generated: true
 title: "ADVISORY CIRCULAR (AC)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADVISORY CIRCULAR (AC)

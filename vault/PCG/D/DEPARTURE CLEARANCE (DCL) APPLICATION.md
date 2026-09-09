@@ -11,6 +11,8 @@ generated: true
 title: "DEPARTURE CLEARANCE (DCL) APPLICATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DEPARTURE CLEARANCE (DCL) APPLICATION

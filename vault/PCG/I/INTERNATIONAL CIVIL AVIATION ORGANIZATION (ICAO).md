@@ -13,6 +13,8 @@ aliases:
   - "INTERNATIONAL CIVIL AVIATION ORGANIZATION [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INTERNATIONAL CIVIL AVIATION ORGANIZATION \[ICAO]

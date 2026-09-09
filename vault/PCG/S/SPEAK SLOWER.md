@@ -11,6 +11,8 @@ generated: true
 title: "SPEAK SLOWER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPEAK SLOWER

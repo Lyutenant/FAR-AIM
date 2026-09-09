@@ -11,6 +11,8 @@ generated: true
 title: "UNABLE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UNABLE

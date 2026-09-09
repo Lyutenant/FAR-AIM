@@ -11,6 +11,8 @@ generated: true
 title: "ENHANCED FLIGHT VISION SYSTEM (EFVS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ENHANCED FLIGHT VISION SYSTEM (EFVS)

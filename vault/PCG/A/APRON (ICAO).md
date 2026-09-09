@@ -13,6 +13,8 @@ aliases:
   - "APRON [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APRON \[ICAO]

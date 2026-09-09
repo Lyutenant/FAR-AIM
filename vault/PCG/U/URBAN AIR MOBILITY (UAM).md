@@ -11,6 +11,8 @@ generated: true
 title: "URBAN AIR MOBILITY (UAM)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # URBAN AIR MOBILITY (UAM)

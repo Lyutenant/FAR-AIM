@@ -11,6 +11,8 @@ generated: true
 title: "RADAR IDENTIFICATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR IDENTIFICATION

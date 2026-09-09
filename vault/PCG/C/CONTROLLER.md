@@ -11,6 +11,8 @@ generated: true
 title: "CONTROLLER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONTROLLER

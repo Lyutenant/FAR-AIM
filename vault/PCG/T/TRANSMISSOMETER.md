@@ -11,6 +11,8 @@ generated: true
 title: "TRANSMISSOMETER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSMISSOMETER

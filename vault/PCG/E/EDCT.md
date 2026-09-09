@@ -11,6 +11,8 @@ generated: true
 title: "EDCT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EDCT

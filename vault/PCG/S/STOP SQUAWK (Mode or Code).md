@@ -11,6 +11,8 @@ generated: true
 title: "STOP SQUAWK (Mode or Code)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STOP SQUAWK (Mode or Code)

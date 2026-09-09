@@ -11,6 +11,8 @@ generated: true
 title: "CENTER'S AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CENTER'S AREA

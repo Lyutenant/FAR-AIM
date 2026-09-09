@@ -11,6 +11,8 @@ generated: true
 title: "TWO‐WAY RADIO COMMUNICATIONS FAILURE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TWO‐WAY RADIO COMMUNICATIONS FAILURE

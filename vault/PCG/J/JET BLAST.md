@@ -11,6 +11,8 @@ generated: true
 title: "JET BLAST"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # JET BLAST

@@ -11,6 +11,8 @@ generated: true
 title: "DIVERSION (DVRSN)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DIVERSION (DVRSN)

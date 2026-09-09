@@ -11,6 +11,8 @@ generated: true
 title: "GEO MAP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GEO MAP

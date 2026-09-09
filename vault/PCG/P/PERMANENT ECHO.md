@@ -11,6 +11,8 @@ generated: true
 title: "PERMANENT ECHO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PERMANENT ECHO

@@ -11,6 +11,8 @@ generated: true
 title: "OBSTRUCTION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OBSTRUCTION

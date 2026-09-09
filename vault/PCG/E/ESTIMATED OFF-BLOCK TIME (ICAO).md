@@ -13,6 +13,8 @@ aliases:
   - "ESTIMATED OFF‐BLOCK TIME [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ESTIMATED OFF‐BLOCK TIME \[ICAO]

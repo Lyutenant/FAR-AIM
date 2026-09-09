@@ -11,6 +11,8 @@ generated: true
 title: "CARDINAL ALTITUDES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CARDINAL ALTITUDES

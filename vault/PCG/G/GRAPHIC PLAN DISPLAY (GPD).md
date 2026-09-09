@@ -11,6 +11,8 @@ generated: true
 title: "GRAPHIC PLAN DISPLAY (GPD)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GRAPHIC PLAN DISPLAY (GPD)

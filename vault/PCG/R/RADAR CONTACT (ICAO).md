@@ -13,6 +13,8 @@ aliases:
   - "RADAR CONTACT [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR CONTACT \[ICAO]

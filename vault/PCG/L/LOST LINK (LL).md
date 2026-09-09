@@ -11,6 +11,8 @@ generated: true
 title: "LOST LINK (LL)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LOST LINK (LL)
@@ -22,6 +24,6 @@ tags:
 
 LOST LINK (LL)- An interruption or loss of the control link, or when the pilot is unable to effect control of the aircraft and, as a result, the UA will perform a predictable or planned maneuver. Loss of command and control link between the Control Station and the aircraft. There are two types of links:
 
-**a.** An uplink which transmits command instructions to the aircraft, and
+- **a.** An uplink which transmits command instructions to the aircraft, and
 
-**b.** A downlink which transmits the status of the aircraft and provides situational awareness to the pilot.
+- **b.** A downlink which transmits the status of the aircraft and provides situational awareness to the pilot.

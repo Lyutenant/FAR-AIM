@@ -14,6 +14,8 @@ aliases:
   - "Arrival Procedures"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 5, Section 4 — Arrival Procedures

@@ -11,6 +11,8 @@ generated: true
 title: "ADLY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADLY

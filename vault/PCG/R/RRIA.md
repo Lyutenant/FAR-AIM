@@ -11,6 +11,8 @@ generated: true
 title: "RRIA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RRIA

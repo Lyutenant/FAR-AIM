@@ -11,6 +11,8 @@ generated: true
 title: "DROP ZONE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DROP ZONE

@@ -11,6 +11,8 @@ generated: true
 title: "PARALLEL OFFSET ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PARALLEL OFFSET ROUTE

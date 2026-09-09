@@ -11,6 +11,8 @@ generated: true
 title: "DME"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DME

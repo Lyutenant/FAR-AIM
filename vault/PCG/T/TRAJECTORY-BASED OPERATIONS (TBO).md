@@ -11,6 +11,8 @@ generated: true
 title: "TRAJECTORY-BASED OPERATIONS (TBO)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAJECTORY-BASED OPERATIONS (TBO)

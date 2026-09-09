@@ -11,6 +11,8 @@ generated: true
 title: "STAR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STAR

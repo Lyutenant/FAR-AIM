@@ -11,6 +11,8 @@ generated: true
 title: "IFR LANDING MINIMUMS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IFR LANDING MINIMUMS

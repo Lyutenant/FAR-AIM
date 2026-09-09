@@ -11,6 +11,8 @@ generated: true
 title: "NORTH AMERICAN ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NORTH AMERICAN ROUTE
@@ -22,10 +24,10 @@ tags:
 
 NORTH AMERICAN ROUTE- A numerically coded route preplanned over existing airway and route systems to and from specific coastal fixes serving the North Atlantic. North American Routes consist of the following:
 
-**a.** Common Route/Portion. That segment of a North American Route between the inland navigation facility and the coastal fix.
+- **a.** Common Route/Portion. That segment of a North American Route between the inland navigation facility and the coastal fix.
 
-**b.** Noncommon Route/Portion. That segment of a North American Route between the inland navigation facility and a designated North American terminal.
+- **b.** Noncommon Route/Portion. That segment of a North American Route between the inland navigation facility and a designated North American terminal.
 
-**c.** Inland Navigation Facility. A navigation aid on a North American Route at which the common route and/or the noncommon route begins or ends.
+- **c.** Inland Navigation Facility. A navigation aid on a North American Route at which the common route and/or the noncommon route begins or ends.
 
-**d.** Coastal Fix. A navigation aid or intersection where an aircraft transitions between the domestic route structure and the oceanic route structure.
+- **d.** Coastal Fix. A navigation aid or intersection where an aircraft transitions between the domestic route structure and the oceanic route structure.

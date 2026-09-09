@@ -11,6 +11,8 @@ generated: true
 title: "HOMING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOMING

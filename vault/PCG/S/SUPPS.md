@@ -11,6 +11,8 @@ generated: true
 title: "SUPPS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SUPPS

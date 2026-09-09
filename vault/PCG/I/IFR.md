@@ -11,6 +11,8 @@ generated: true
 title: "IFR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IFR

@@ -11,6 +11,8 @@ generated: true
 title: "GROUND STOP (GS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GROUND STOP (GS)

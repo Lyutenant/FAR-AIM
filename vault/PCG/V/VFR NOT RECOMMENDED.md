@@ -11,6 +11,8 @@ generated: true
 title: "VFR NOT RECOMMENDED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VFR NOT RECOMMENDED

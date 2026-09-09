@@ -11,6 +11,8 @@ generated: true
 title: "RESCUE COORDINATION CENTER (RCC)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RESCUE COORDINATION CENTER (RCC)

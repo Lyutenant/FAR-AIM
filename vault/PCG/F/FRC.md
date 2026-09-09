@@ -11,6 +11,8 @@ generated: true
 title: "FRC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FRC

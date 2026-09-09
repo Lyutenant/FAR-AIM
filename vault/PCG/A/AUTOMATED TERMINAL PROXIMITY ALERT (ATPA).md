@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATED TERMINAL PROXIMITY ALERT (ATPA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATED TERMINAL PROXIMITY ALERT (ATPA)

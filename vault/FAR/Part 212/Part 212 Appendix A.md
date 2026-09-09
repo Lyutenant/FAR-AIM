@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix A to Part 212—Certificated or Foreign Air Carrier's Surety Bond Under Part 212 of the Regulations of the Department of Transportation (14 CFR Part 212)

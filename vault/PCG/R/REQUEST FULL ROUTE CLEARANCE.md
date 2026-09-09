@@ -11,6 +11,8 @@ generated: true
 title: "REQUEST FULL ROUTE CLEARANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REQUEST FULL ROUTE CLEARANCE

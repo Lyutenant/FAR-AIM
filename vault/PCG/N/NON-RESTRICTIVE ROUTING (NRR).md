@@ -11,6 +11,8 @@ generated: true
 title: "NON-RESTRICTIVE ROUTING (NRR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NON-RESTRICTIVE ROUTING (NRR)

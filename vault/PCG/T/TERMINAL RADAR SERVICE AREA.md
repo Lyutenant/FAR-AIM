@@ -11,6 +11,8 @@ generated: true
 title: "TERMINAL RADAR SERVICE AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TERMINAL RADAR SERVICE AREA

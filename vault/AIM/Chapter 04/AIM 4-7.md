@@ -14,6 +14,8 @@ aliases:
   - "Operational Policy/Procedures for the Gulf of America 50 NM Lateral Separation Initiative"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 4, Section 7 — Operational Policy/Procedures for the Gulf of America 50 NM Lateral Separation Initiative

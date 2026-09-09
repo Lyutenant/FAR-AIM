@@ -11,6 +11,8 @@ generated: true
 title: "NFDD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NFDD

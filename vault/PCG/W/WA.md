@@ -11,6 +11,8 @@ generated: true
 title: "WA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WA

@@ -11,6 +11,8 @@ generated: true
 title: "CONTROLLED TIME OF ARRIVAL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONTROLLED TIME OF ARRIVAL

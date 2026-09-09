@@ -11,6 +11,8 @@ generated: true
 title: "RADAR APPROACH CONTROL FACILITY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR APPROACH CONTROL FACILITY
@@ -22,19 +24,19 @@ tags:
 
 RADAR APPROACH CONTROL FACILITY- A terminal ATC facility that uses radar and nonradar capabilities to provide approach control services to aircraft arriving, departing, or transiting airspace controlled by the facility.
 
-**a.** Provides radar ATC services to aircraft operating in the vicinity of one or more civil and/or military airports in a terminal area. The facility may provide services of a ground controlled approach (GCA); i.e., ASR and PAR approaches. A radar approach control facility may be operated by FAA, USAF, US Army, USN, USMC, or jointly by FAA and a military service. Specific facility nomenclatures are used for administrative purposes only and are related to the physical location of the facility and the operating service generally as follows:
+- **a.** Provides radar ATC services to aircraft operating in the vicinity of one or more civil and/or military airports in a terminal area. The facility may provide services of a ground controlled approach (GCA); i.e., ASR and PAR approaches. A radar approach control facility may be operated by FAA, USAF, US Army, USN, USMC, or jointly by FAA and a military service. Specific facility nomenclatures are used for administrative purposes only and are related to the physical location of the facility and the operating service generally as follows:
 
-**b.** Army Radar Approach Control (ARAC)\
-(US Army).
+- **b.** Army Radar Approach Control (ARAC)\
+    (US Army).
 
-**c.** Radar Air Traffic Control Facility (RATCF) (USN/FAA and USMC/FAA).
+- **c.** Radar Air Traffic Control Facility (RATCF) (USN/FAA and USMC/FAA).
 
-**d.** Radar Approach Control (RAPCON)\
-(USAF/FAA, USN/FAA, and USMC/FAA).
+- **d.** Radar Approach Control (RAPCON)\
+    (USAF/FAA, USN/FAA, and USMC/FAA).
 
-**e.** Terminal Radar Approach Control (TRACON) (FAA).
+- **e.** Terminal Radar Approach Control (TRACON) (FAA).
 
-**f.** Airport Traffic Control Tower (ATCT) (FAA). (Only those towers delegated approach control authority.)
+- **f.** Airport Traffic Control Tower (ATCT) (FAA). (Only those towers delegated approach control authority.)
 
 ## See Also
 

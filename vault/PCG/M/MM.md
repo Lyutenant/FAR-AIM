@@ -11,6 +11,8 @@ generated: true
 title: "MM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MM

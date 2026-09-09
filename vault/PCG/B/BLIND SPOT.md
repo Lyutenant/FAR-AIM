@@ -11,6 +11,8 @@ generated: true
 title: "BLIND SPOT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BLIND SPOT

@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATIC DEPENDENT SURVEILLANCE-BROADCAST OUT (ADS-B Out)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATIC DEPENDENT SURVEILLANCE-BROADCAST OUT (ADS-B Out)

@@ -11,6 +11,8 @@ generated: true
 title: "LIGHT-SPORT AIRCRAFT (LSA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LIGHT-SPORT AIRCRAFT (LSA)

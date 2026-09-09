@@ -11,6 +11,8 @@ generated: true
 title: "PARALLEL ILS APPROACHES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PARALLEL ILS APPROACHES

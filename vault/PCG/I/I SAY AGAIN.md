@@ -11,6 +11,8 @@ generated: true
 title: "I SAY AGAIN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # I SAY AGAIN

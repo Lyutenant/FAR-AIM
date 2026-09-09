@@ -11,6 +11,8 @@ generated: true
 title: "RADIAL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADIAL

@@ -11,6 +11,8 @@ generated: true
 title: "EMERGENCY AUTOLAND SYSTEM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EMERGENCY AUTOLAND SYSTEM

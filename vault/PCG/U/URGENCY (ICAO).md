@@ -13,6 +13,8 @@ aliases:
   - "URGENCY [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # URGENCY \[ICAO]

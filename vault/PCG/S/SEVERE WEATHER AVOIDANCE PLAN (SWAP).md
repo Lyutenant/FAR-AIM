@@ -11,6 +11,8 @@ generated: true
 title: "SEVERE WEATHER AVOIDANCE PLAN (SWAP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SEVERE WEATHER AVOIDANCE PLAN (SWAP)

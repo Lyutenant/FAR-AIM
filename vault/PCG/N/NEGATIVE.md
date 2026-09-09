@@ -11,6 +11,8 @@ generated: true
 title: "NEGATIVE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NEGATIVE

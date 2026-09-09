@@ -11,6 +11,8 @@ generated: true
 title: "ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ROUTE

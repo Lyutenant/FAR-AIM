@@ -11,6 +11,8 @@ generated: true
 title: "ALNOT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALNOT

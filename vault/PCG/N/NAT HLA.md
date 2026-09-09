@@ -11,6 +11,8 @@ generated: true
 title: "NAT HLA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NAT HLA

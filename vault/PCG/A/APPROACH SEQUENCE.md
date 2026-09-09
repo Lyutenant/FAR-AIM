@@ -11,6 +11,8 @@ generated: true
 title: "APPROACH SEQUENCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROACH SEQUENCE

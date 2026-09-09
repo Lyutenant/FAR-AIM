@@ -11,6 +11,8 @@ generated: true
 title: "REMOTE COMMUNICATIONS OUTLET (RCO)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REMOTE COMMUNICATIONS OUTLET (RCO)

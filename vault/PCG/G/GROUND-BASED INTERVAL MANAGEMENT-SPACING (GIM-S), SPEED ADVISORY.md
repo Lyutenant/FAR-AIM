@@ -11,6 +11,8 @@ generated: true
 title: "GROUND-BASED INTERVAL MANAGEMENT-SPACING (GIM-S), SPEED ADVISORY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GROUND-BASED INTERVAL MANAGEMENT-SPACING (GIM-S), SPEED ADVISORY

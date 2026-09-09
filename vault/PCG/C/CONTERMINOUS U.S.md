@@ -13,6 +13,8 @@ aliases:
   - "CONTERMINOUS U.S."
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONTERMINOUS U.S.

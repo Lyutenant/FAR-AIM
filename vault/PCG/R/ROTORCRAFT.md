@@ -11,6 +11,8 @@ generated: true
 title: "ROTORCRAFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ROTORCRAFT

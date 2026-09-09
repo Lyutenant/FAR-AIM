@@ -11,6 +11,8 @@ generated: true
 title: "COORDINATION FIX"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COORDINATION FIX

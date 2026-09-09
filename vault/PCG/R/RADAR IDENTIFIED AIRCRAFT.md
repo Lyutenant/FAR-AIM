@@ -11,6 +11,8 @@ generated: true
 title: "RADAR IDENTIFIED AIRCRAFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR IDENTIFIED AIRCRAFT

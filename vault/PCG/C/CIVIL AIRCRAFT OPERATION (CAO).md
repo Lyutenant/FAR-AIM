@@ -11,6 +11,8 @@ generated: true
 title: "CIVIL AIRCRAFT OPERATION (CAO)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CIVIL AIRCRAFT OPERATION (CAO)

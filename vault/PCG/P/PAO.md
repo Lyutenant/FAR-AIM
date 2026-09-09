@@ -11,6 +11,8 @@ generated: true
 title: "PAO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PAO

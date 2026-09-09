@@ -13,6 +13,8 @@ aliases:
   - "HOLD‐SHORT POSITION SIGNS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOLD‐SHORT POSITION SIGNS

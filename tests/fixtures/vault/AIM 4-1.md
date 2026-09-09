@@ -14,6 +14,8 @@ aliases:
   - "Services Available to Pilots"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 4, Section 1 — Services Available to Pilots

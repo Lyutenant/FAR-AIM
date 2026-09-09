@@ -11,6 +11,8 @@ generated: true
 title: "STEREO ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STEREO ROUTE

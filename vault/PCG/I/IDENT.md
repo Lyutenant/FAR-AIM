@@ -11,6 +11,8 @@ generated: true
 title: "IDENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IDENT

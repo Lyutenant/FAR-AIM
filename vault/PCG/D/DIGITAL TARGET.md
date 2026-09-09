@@ -11,6 +11,8 @@ generated: true
 title: "DIGITAL TARGET"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DIGITAL TARGET

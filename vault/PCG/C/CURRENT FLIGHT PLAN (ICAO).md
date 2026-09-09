@@ -13,6 +13,8 @@ aliases:
   - "CURRENT FLIGHT PLAN [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CURRENT FLIGHT PLAN \[ICAO]

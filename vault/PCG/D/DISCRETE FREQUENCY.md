@@ -11,6 +11,8 @@ generated: true
 title: "DISCRETE FREQUENCY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DISCRETE FREQUENCY

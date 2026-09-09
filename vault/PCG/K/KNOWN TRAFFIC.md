@@ -11,6 +11,8 @@ generated: true
 title: "KNOWN TRAFFIC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # KNOWN TRAFFIC

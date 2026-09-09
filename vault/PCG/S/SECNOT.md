@@ -11,6 +11,8 @@ generated: true
 title: "SECNOT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SECNOT

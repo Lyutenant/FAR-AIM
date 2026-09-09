@@ -13,6 +13,8 @@ aliases:
   - "AERONAUTICAL INFORMATION PUBLICATION (AIP) [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AERONAUTICAL INFORMATION PUBLICATION (AIP) \[ICAO]

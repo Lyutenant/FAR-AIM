@@ -11,6 +11,8 @@ generated: true
 title: "RADAR ENVIRONMENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR ENVIRONMENT

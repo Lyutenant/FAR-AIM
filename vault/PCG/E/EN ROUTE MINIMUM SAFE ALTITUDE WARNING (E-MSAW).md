@@ -11,6 +11,8 @@ generated: true
 title: "EN ROUTE MINIMUM SAFE ALTITUDE WARNING (E-MSAW)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EN ROUTE MINIMUM SAFE ALTITUDE WARNING (E-MSAW)

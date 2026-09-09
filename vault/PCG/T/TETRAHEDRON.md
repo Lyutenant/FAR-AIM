@@ -11,6 +11,8 @@ generated: true
 title: "TETRAHEDRON"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TETRAHEDRON

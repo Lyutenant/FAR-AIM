@@ -11,6 +11,8 @@ generated: true
 title: "TACTICAL AIR NAVIGATION (TACAN)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TACTICAL AIR NAVIGATION (TACAN)

@@ -11,6 +11,8 @@ generated: true
 title: "APRON"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APRON

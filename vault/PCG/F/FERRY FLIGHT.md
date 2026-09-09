@@ -11,6 +11,8 @@ generated: true
 title: "FERRY FLIGHT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FERRY FLIGHT
@@ -22,8 +24,8 @@ tags:
 
 FERRY FLIGHT- A flight for the purpose of:
 
-**a.** Returning an aircraft to base.
+- **a.** Returning an aircraft to base.
 
-**b.** Delivering an aircraft from one location to another.
+- **b.** Delivering an aircraft from one location to another.
 
-**c.** Moving an aircraft to and from a maintenance base. Ferry flights, under certain conditions, may be conducted under terms of a special flight permit.
+- **c.** Moving an aircraft to and from a maintenance base. Ferry flights, under certain conditions, may be conducted under terms of a special flight permit.

@@ -11,6 +11,8 @@ generated: true
 title: "CVFP APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CVFP APPROACH

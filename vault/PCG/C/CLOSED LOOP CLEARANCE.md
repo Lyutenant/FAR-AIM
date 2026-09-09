@@ -11,6 +11,8 @@ generated: true
 title: "CLOSED LOOP CLEARANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLOSED LOOP CLEARANCE

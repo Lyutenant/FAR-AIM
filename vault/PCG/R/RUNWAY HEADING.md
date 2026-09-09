@@ -11,6 +11,8 @@ generated: true
 title: "RUNWAY HEADING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RUNWAY HEADING

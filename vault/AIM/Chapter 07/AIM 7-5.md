@@ -14,6 +14,8 @@ aliases:
   - "Bird Hazards and Flight Over National Refuges, Parks, and Forests"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 7, Section 5 — Bird Hazards and Flight Over National Refuges, Parks, and Forests

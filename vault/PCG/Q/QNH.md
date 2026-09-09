@@ -11,6 +11,8 @@ generated: true
 title: "QNH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # QNH

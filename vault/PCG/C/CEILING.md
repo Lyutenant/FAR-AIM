@@ -11,6 +11,8 @@ generated: true
 title: "CEILING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CEILING

@@ -13,6 +13,8 @@ aliases:
   - "LANDING AREA [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LANDING AREA \[ICAO]

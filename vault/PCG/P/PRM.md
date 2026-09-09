@@ -11,6 +11,8 @@ generated: true
 title: "PRM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PRM

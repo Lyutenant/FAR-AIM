@@ -11,6 +11,8 @@ generated: true
 title: "SWAP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SWAP

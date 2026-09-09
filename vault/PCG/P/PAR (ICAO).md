@@ -13,6 +13,8 @@ aliases:
   - "PAR [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PAR \[ICAO]

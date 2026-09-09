@@ -11,6 +11,8 @@ generated: true
 title: "WHEN ABLE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WHEN ABLE
@@ -22,8 +24,8 @@ tags:
 
 WHEN ABLE-
 
-**a.** In conjunction with ATC instructions, gives the pilot the latitude to delay compliance until a condition or event has been reconciled. Unlike “pilot discretion,” when instructions are prefaced “when able,” the pilot is expected to seek the first opportunity to comply.
+- **a.** In conjunction with ATC instructions, gives the pilot the latitude to delay compliance until a condition or event has been reconciled. Unlike “pilot discretion,” when instructions are prefaced “when able,” the pilot is expected to seek the first opportunity to comply.
 
-**b.** In conjunction with a weather deviation clearance, requires the pilot to determine when he/she is clear of weather, then execute ATC instructions.
+- **b.** In conjunction with a weather deviation clearance, requires the pilot to determine when he/she is clear of weather, then execute ATC instructions.
 
-**c.** Once a maneuver has been initiated, the pilot is expected to continue until the specifications of the instructions have been met. “When able,” should not be used when expeditious compliance is required.
+- **c.** Once a maneuver has been initiated, the pilot is expected to continue until the specifications of the instructions have been met. “When able,” should not be used when expeditious compliance is required.

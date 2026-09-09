@@ -11,6 +11,8 @@ generated: true
 title: "CLIMB TO VFR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLIMB TO VFR

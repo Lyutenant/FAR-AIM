@@ -11,6 +11,8 @@ generated: true
 title: "VISUAL HOLDING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VISUAL HOLDING

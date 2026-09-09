@@ -11,6 +11,8 @@ generated: true
 title: "TARGET SYMBOL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TARGET SYMBOL

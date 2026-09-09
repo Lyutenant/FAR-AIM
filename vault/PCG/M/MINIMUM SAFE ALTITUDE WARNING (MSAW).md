@@ -11,6 +11,8 @@ generated: true
 title: "MINIMUM SAFE ALTITUDE WARNING (MSAW)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMUM SAFE ALTITUDE WARNING (MSAW)

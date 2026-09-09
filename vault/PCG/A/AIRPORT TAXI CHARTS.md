@@ -11,6 +11,8 @@ generated: true
 title: "AIRPORT TAXI CHARTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPORT TAXI CHARTS

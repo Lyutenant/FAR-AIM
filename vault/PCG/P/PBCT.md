@@ -11,6 +11,8 @@ generated: true
 title: "PBCT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PBCT

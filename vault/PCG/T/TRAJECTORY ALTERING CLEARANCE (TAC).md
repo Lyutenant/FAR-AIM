@@ -11,6 +11,8 @@ generated: true
 title: "TRAJECTORY ALTERING CLEARANCE (TAC)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAJECTORY ALTERING CLEARANCE (TAC)

@@ -11,6 +11,8 @@ generated: true
 title: "CONDITIONS NOT MONITORED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONDITIONS NOT MONITORED

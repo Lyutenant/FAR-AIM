@@ -11,6 +11,8 @@ generated: true
 title: "BLIND SPEED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BLIND SPEED

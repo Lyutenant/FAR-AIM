@@ -11,6 +11,8 @@ generated: true
 title: "TRAFFIC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAFFIC
@@ -22,12 +24,12 @@ tags:
 
 TRAFFIC-
 
-**a.** A term used by a controller to transfer radar identification of an aircraft to another controller for the purpose of coordinating separation action. Traffic is normally issued:
+- **a.** A term used by a controller to transfer radar identification of an aircraft to another controller for the purpose of coordinating separation action. Traffic is normally issued:
 
-**b.** In response to a handoff or point out,
+- **b.** In response to a handoff or point out,
 
-**c.** In anticipation of a handoff or point out, or
+- **c.** In anticipation of a handoff or point out, or
 
-**d.** In conjunction with a request for control of an aircraft.
+- **d.** In conjunction with a request for control of an aircraft.
 
-**e.** A term used by ATC to refer to one or more aircraft.
+- **e.** A term used by ATC to refer to one or more aircraft.

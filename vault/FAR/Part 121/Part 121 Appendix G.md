@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix G to Part 121—Doppler Radar and Inertial Navigation System (INS): Request for Evaluation; Equipment and Equipment Installation; Training Program; Equipment Accuracy and Reliability; Evaluation Program

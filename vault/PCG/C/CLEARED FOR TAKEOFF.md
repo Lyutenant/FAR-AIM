@@ -11,6 +11,8 @@ generated: true
 title: "CLEARED FOR TAKEOFF"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLEARED FOR TAKEOFF

@@ -11,6 +11,8 @@ generated: true
 title: "DEFENSE AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DEFENSE AREA

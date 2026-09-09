@@ -11,6 +11,8 @@ generated: true
 title: "GROUND SPEED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GROUND SPEED

@@ -11,6 +11,8 @@ generated: true
 title: "GROSS NAVIGATION ERROR (GNE)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GROSS NAVIGATION ERROR (GNE)

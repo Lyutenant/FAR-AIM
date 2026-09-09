@@ -11,6 +11,8 @@ generated: true
 title: "RADIO ALTIMETER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADIO ALTIMETER

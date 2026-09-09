@@ -11,6 +11,8 @@ generated: true
 title: "PREFERRED IFR ROUTES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PREFERRED IFR ROUTES

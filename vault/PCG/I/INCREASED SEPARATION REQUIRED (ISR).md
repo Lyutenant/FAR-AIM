@@ -11,6 +11,8 @@ generated: true
 title: "INCREASED SEPARATION REQUIRED (ISR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INCREASED SEPARATION REQUIRED (ISR)

@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix G to Part 91—Operations in Reduced Vertical Separation Minimum (RVSM) Airspace

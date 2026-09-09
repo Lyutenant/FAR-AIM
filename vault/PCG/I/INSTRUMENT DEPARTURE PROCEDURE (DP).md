@@ -11,6 +11,8 @@ generated: true
 title: "INSTRUMENT DEPARTURE PROCEDURE (DP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INSTRUMENT DEPARTURE PROCEDURE (DP)

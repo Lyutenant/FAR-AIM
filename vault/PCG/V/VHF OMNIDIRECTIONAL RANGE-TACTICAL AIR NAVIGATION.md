@@ -13,6 +13,8 @@ aliases:
   - "VHF OMNIDIRECTIONAL RANGE/TACTICAL AIR NAVIGATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VHF OMNIDIRECTIONAL RANGE/TACTICAL AIR NAVIGATION

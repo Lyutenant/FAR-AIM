@@ -11,6 +11,8 @@ generated: true
 title: "RNAV VISUAL FLIGHT PROCEDURE (RVFP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RNAV VISUAL FLIGHT PROCEDURE (RVFP)

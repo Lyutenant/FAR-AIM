@@ -11,6 +11,8 @@ generated: true
 title: "ESTABLISHED ON RNP (EoR) CONCEPT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ESTABLISHED ON RNP (EoR) CONCEPT

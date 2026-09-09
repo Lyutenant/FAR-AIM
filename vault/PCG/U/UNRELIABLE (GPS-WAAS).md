@@ -13,6 +13,8 @@ aliases:
   - "UNRELIABLE (GPS/WAAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UNRELIABLE (GPS/WAAS)

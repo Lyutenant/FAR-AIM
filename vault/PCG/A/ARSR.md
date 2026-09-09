@@ -11,6 +11,8 @@ generated: true
 title: "ARSR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ARSR

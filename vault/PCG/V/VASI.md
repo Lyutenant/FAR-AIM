@@ -11,6 +11,8 @@ generated: true
 title: "VASI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VASI

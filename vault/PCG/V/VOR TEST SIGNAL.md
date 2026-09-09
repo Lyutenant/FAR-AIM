@@ -11,6 +11,8 @@ generated: true
 title: "VOR TEST SIGNAL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VOR TEST SIGNAL

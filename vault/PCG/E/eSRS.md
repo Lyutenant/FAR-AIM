@@ -11,6 +11,8 @@ generated: true
 title: "eSRS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # eSRS

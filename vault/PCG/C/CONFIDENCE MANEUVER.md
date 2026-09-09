@@ -11,6 +11,8 @@ generated: true
 title: "CONFIDENCE MANEUVER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONFIDENCE MANEUVER

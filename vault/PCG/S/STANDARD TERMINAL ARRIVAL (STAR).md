@@ -11,6 +11,8 @@ generated: true
 title: "STANDARD TERMINAL ARRIVAL (STAR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STANDARD TERMINAL ARRIVAL (STAR)

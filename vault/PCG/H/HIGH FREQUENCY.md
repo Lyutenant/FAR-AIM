@@ -11,6 +11,8 @@ generated: true
 title: "HIGH FREQUENCY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HIGH FREQUENCY

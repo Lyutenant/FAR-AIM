@@ -11,6 +11,8 @@ generated: true
 title: "LAST ASSIGNED ALTITUDE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LAST ASSIGNED ALTITUDE

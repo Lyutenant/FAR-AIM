@@ -11,6 +11,8 @@ generated: true
 title: "IMC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IMC

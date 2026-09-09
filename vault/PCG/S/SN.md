@@ -11,6 +11,8 @@ generated: true
 title: "SN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SN

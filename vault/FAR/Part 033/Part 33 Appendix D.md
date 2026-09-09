@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix D to Part 33—Mixed Phase and Ice Crystal Icing Envelope (Deep Convective Clouds)

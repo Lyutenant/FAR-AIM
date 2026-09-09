@@ -11,6 +11,8 @@ generated: true
 title: "ROUTE SEGMENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ROUTE SEGMENT

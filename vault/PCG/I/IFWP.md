@@ -11,6 +11,8 @@ generated: true
 title: "IFWP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IFWP

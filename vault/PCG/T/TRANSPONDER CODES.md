@@ -11,6 +11,8 @@ generated: true
 title: "TRANSPONDER CODES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSPONDER CODES

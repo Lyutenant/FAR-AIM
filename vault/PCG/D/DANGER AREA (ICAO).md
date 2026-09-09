@@ -13,6 +13,8 @@ aliases:
   - "DANGER AREA [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DANGER AREA \[ICAO]

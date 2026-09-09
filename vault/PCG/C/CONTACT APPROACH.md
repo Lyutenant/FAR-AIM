@@ -11,6 +11,8 @@ generated: true
 title: "CONTACT APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONTACT APPROACH

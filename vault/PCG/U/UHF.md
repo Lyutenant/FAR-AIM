@@ -11,6 +11,8 @@ generated: true
 title: "UHF"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UHF

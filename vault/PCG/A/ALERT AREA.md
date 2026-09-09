@@ -11,6 +11,8 @@ generated: true
 title: "ALERT AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALERT AREA

@@ -11,6 +11,8 @@ generated: true
 title: "STOL AIRCRAFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STOL AIRCRAFT

@@ -11,6 +11,8 @@ generated: true
 title: "SECTIONAL AERONAUTICAL CHARTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SECTIONAL AERONAUTICAL CHARTS

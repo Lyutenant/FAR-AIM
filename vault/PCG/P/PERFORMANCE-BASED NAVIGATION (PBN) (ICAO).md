@@ -13,6 +13,8 @@ aliases:
   - "PERFORMANCE-BASED NAVIGATION (PBN) [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PERFORMANCE-BASED NAVIGATION (PBN) \[ICAO]

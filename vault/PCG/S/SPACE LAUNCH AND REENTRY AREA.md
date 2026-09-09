@@ -11,6 +11,8 @@ generated: true
 title: "SPACE LAUNCH AND REENTRY AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPACE LAUNCH AND REENTRY AREA

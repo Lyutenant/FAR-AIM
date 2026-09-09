@@ -11,6 +11,8 @@ generated: true
 title: "VDP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VDP

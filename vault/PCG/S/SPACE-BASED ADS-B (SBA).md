@@ -11,6 +11,8 @@ generated: true
 title: "SPACE-BASED ADS-B (SBA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPACE-BASED ADS-B (SBA)

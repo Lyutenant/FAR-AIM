@@ -11,6 +11,8 @@ generated: true
 title: "MIA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MIA

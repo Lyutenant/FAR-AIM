@@ -11,6 +11,8 @@ generated: true
 title: "DIGITAL TERMINAL AUTOMATION SYSTEM (DTAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DIGITAL TERMINAL AUTOMATION SYSTEM (DTAS)

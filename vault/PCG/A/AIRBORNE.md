@@ -11,6 +11,8 @@ generated: true
 title: "AIRBORNE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRBORNE

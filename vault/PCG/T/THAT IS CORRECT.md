@@ -11,6 +11,8 @@ generated: true
 title: "THAT IS CORRECT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # THAT IS CORRECT

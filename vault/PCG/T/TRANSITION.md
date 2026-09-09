@@ -11,6 +11,8 @@ generated: true
 title: "TRANSITION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSITION

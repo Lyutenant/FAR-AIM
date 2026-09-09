@@ -13,6 +13,8 @@ aliases:
   - "GENERAL AVIATION [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GENERAL AVIATION \[ICAO]

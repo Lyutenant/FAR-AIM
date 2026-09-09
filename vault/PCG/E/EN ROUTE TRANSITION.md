@@ -11,6 +11,8 @@ generated: true
 title: "EN ROUTE TRANSITION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EN ROUTE TRANSITION

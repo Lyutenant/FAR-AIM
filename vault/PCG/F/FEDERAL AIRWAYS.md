@@ -11,6 +11,8 @@ generated: true
 title: "FEDERAL AIRWAYS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FEDERAL AIRWAYS

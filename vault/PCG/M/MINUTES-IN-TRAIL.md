@@ -13,6 +13,8 @@ aliases:
   - "MINUTES‐IN‐TRAIL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINUTES‐IN‐TRAIL

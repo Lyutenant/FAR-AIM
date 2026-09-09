@@ -11,6 +11,8 @@ generated: true
 title: "SYSTEM STRATEGIC NAVIGATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SYSTEM STRATEGIC NAVIGATION

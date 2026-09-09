@@ -11,6 +11,8 @@ generated: true
 title: "NO TRANSGRESSION ZONE (NTZ)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NO TRANSGRESSION ZONE (NTZ)

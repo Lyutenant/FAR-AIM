@@ -11,6 +11,8 @@ generated: true
 title: "SEVERE WEATHER FORECAST ALERTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SEVERE WEATHER FORECAST ALERTS

@@ -11,6 +11,8 @@ generated: true
 title: "CHARTED VISUAL FLIGHT PROCEDURE APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CHARTED VISUAL FLIGHT PROCEDURE APPROACH

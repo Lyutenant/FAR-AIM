@@ -11,6 +11,8 @@ generated: true
 title: "READ BACK"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # READ BACK

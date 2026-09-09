@@ -11,6 +11,8 @@ generated: true
 title: "GLIDESLOPE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GLIDESLOPE
@@ -22,11 +24,11 @@ tags:
 
 GLIDESLOPE- Provides vertical guidance for aircraft during approach and landing. The glideslope/glidepath is based on the following:
 
-**a.** Electronic components emitting signals which provide vertical guidance by reference to airborne instruments during instrument approaches such as ILS; or,
+- **a.** Electronic components emitting signals which provide vertical guidance by reference to airborne instruments during instrument approaches such as ILS; or,
 
-**b.** Visual ground aids, such as VASI, which provide vertical guidance for a VFR approach or for the visual portion of an instrument approach and landing.
+- **b.** Visual ground aids, such as VASI, which provide vertical guidance for a VFR approach or for the visual portion of an instrument approach and landing.
 
-**c.** Used by ATC to inform an aircraft making a PAR approach of its vertical position (elevation) relative to the descent profile.
+- **c.** Used by ATC to inform an aircraft making a PAR approach of its vertical position (elevation) relative to the descent profile.
 
 ## See Also
 

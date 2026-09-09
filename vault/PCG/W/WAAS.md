@@ -11,6 +11,8 @@ generated: true
 title: "WAAS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WAAS

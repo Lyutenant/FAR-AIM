@@ -11,6 +11,8 @@ generated: true
 title: "AERODROME"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AERODROME

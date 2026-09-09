@@ -11,6 +11,8 @@ generated: true
 title: "OPTION APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OPTION APPROACH

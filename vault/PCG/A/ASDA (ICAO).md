@@ -13,6 +13,8 @@ aliases:
   - "ASDA [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ASDA \[ICAO]

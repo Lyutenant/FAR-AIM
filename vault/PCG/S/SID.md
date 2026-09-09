@@ -11,6 +11,8 @@ generated: true
 title: "SID"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SID

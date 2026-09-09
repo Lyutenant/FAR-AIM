@@ -11,6 +11,8 @@ generated: true
 title: "HOVER CHECK"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOVER CHECK

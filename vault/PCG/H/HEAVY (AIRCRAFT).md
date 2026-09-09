@@ -11,6 +11,8 @@ generated: true
 title: "HEAVY (AIRCRAFT)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HEAVY (AIRCRAFT)

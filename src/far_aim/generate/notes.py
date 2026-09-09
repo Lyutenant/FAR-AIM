@@ -13,6 +13,7 @@ from dataclasses import dataclass
 
 from far_aim.generate import BuildError, enrich, naming
 from far_aim.generate.frontmatter import Value
+from far_aim.generate.hierarchy import TEXT_CSS_CLASS
 from far_aim.generate.markdown import ECFR_BASE_URL, escape_md, render_blocks
 from far_aim.links import citations as cites
 
@@ -219,6 +220,7 @@ def build_section_note(
     if aliases:
         frontmatter.append(("aliases", aliases))
     frontmatter.append(("tags", ["far", "regulation"]))
+    frontmatter.append(("cssclasses", [TEXT_CSS_CLASS]))
 
     head = f"{marker} {section}" if marker else section
     chunks = [
@@ -279,6 +281,7 @@ def build_appendix_note(
     if aliases:
         frontmatter.append(("aliases", aliases))
     frontmatter.append(("tags", ["far", "regulation"]))
+    frontmatter.append(("cssclasses", [TEXT_CSS_CLASS]))
 
     chunks = [
         f"# {escape_md(apx['heading'])}",

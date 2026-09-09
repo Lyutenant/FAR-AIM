@@ -11,6 +11,8 @@ generated: true
 title: "WEATHER RADAR PRECIPITATION INTENSITY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WEATHER RADAR PRECIPITATION INTENSITY
@@ -22,10 +24,10 @@ tags:
 
 WEATHER RADAR PRECIPITATION INTENSITY- Existing radar systems cannot detect turbulence, however, there is a direct correlation between turbulence intensity and precipitation intensity. Controllers must issue all precipitation displayed on their user display systems. When precipitation intensity is not available, controllers will report intensity as UNKNOWN. When precipitation intensity levels are available, they will be described as follows:
 
-**a.** LIGHT (\< 26 dBZ)
+- **a.** LIGHT (\< 26 dBZ)
 
-**b.** MODERATE (26 to 40 dBZ)
+- **b.** MODERATE (26 to 40 dBZ)
 
-**c.** HEAVY (> 40 to 50 dBZ)
+- **c.** HEAVY (> 40 to 50 dBZ)
 
-**d.** EXTREME (> 50 dBZ)
+- **d.** EXTREME (> 50 dBZ)

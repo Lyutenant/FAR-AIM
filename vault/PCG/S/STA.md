@@ -11,6 +11,8 @@ generated: true
 title: "STA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STA

@@ -11,6 +11,8 @@ generated: true
 title: "FUEL VENTING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FUEL VENTING

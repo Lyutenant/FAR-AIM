@@ -11,6 +11,8 @@ generated: true
 title: "RPIC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RPIC

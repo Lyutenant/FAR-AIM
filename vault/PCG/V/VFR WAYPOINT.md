@@ -11,6 +11,8 @@ generated: true
 title: "VFR WAYPOINT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VFR WAYPOINT

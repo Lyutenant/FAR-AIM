@@ -11,6 +11,8 @@ generated: true
 title: "HEIGHT ABOVE AIRPORT (HAA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HEIGHT ABOVE AIRPORT (HAA)

@@ -11,6 +11,8 @@ generated: true
 title: "LF"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LF

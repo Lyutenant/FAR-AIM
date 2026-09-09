@@ -11,6 +11,8 @@ generated: true
 title: "AERONAUTICAL INFORMATION SERVICES (AIS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AERONAUTICAL INFORMATION SERVICES (AIS)

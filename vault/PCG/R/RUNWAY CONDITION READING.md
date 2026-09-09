@@ -11,6 +11,8 @@ generated: true
 title: "RUNWAY CONDITION READING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RUNWAY CONDITION READING

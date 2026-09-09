@@ -11,6 +11,8 @@ generated: true
 title: "REPORT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REPORT

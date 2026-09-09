@@ -11,6 +11,8 @@ generated: true
 title: "PLANS DISPLAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PLANS DISPLAY

@@ -11,6 +11,8 @@ generated: true
 title: "FLY HEADING (DEGREES)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLY HEADING (DEGREES)

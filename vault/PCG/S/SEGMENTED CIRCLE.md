@@ -11,6 +11,8 @@ generated: true
 title: "SEGMENTED CIRCLE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SEGMENTED CIRCLE

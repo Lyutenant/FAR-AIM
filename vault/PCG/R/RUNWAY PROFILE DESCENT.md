@@ -11,6 +11,8 @@ generated: true
 title: "RUNWAY PROFILE DESCENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RUNWAY PROFILE DESCENT

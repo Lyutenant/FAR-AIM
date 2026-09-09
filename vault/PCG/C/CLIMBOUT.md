@@ -11,6 +11,8 @@ generated: true
 title: "CLIMBOUT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLIMBOUT

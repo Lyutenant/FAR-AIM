@@ -11,6 +11,8 @@ generated: true
 title: "CONFLICT RESOLUTION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONFLICT RESOLUTION

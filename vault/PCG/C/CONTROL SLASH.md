@@ -11,6 +11,8 @@ generated: true
 title: "CONTROL SLASH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONTROL SLASH

@@ -11,6 +11,8 @@ generated: true
 title: "RwyCR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RwyCR

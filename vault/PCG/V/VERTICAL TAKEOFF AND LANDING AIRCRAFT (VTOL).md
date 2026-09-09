@@ -11,6 +11,8 @@ generated: true
 title: "VERTICAL TAKEOFF AND LANDING AIRCRAFT (VTOL)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VERTICAL TAKEOFF AND LANDING AIRCRAFT (VTOL)

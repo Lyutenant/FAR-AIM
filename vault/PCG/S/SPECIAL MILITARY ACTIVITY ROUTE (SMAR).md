@@ -11,6 +11,8 @@ generated: true
 title: "SPECIAL MILITARY ACTIVITY ROUTE (SMAR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPECIAL MILITARY ACTIVITY ROUTE (SMAR)

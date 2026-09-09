@@ -11,6 +11,8 @@ generated: true
 title: "AIM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM

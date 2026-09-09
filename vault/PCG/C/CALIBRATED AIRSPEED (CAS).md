@@ -11,6 +11,8 @@ generated: true
 title: "CALIBRATED AIRSPEED (CAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CALIBRATED AIRSPEED (CAS)

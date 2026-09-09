@@ -11,6 +11,8 @@ generated: true
 title: "METER REFERENCE ELEMENT (MRE)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # METER REFERENCE ELEMENT (MRE)

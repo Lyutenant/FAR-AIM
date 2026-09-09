@@ -11,6 +11,8 @@ generated: true
 title: "VSCS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VSCS

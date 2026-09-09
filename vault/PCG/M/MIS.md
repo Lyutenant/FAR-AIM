@@ -11,6 +11,8 @@ generated: true
 title: "MIS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MIS

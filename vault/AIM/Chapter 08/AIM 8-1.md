@@ -12,6 +12,8 @@ generated: true
 title: "Fitness for Flight"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 8, Section 1 — Fitness for Flight

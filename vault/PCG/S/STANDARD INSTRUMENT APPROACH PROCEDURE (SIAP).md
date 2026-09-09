@@ -11,6 +11,8 @@ generated: true
 title: "STANDARD INSTRUMENT APPROACH PROCEDURE (SIAP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STANDARD INSTRUMENT APPROACH PROCEDURE (SIAP)

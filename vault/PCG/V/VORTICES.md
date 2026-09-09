@@ -11,6 +11,8 @@ generated: true
 title: "VORTICES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VORTICES

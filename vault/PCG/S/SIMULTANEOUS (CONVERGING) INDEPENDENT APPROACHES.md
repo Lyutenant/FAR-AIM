@@ -11,6 +11,8 @@ generated: true
 title: "SIMULTANEOUS (CONVERGING) INDEPENDENT APPROACHES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SIMULTANEOUS (CONVERGING) INDEPENDENT APPROACHES

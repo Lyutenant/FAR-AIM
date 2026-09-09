@@ -11,6 +11,8 @@ generated: true
 title: "TDLS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TDLS

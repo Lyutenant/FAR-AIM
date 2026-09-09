@@ -11,6 +11,8 @@ generated: true
 title: "MISSED APPROACH SEGMENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MISSED APPROACH SEGMENT

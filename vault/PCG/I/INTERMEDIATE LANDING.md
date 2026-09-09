@@ -11,6 +11,8 @@ generated: true
 title: "INTERMEDIATE LANDING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INTERMEDIATE LANDING

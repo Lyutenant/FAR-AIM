@@ -11,6 +11,8 @@ generated: true
 title: "TRUST"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRUST

@@ -11,6 +11,8 @@ generated: true
 title: "ACTIVE RUNWAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ACTIVE RUNWAY

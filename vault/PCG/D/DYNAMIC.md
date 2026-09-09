@@ -11,6 +11,8 @@ generated: true
 title: "DYNAMIC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DYNAMIC

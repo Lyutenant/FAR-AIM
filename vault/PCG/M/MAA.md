@@ -11,6 +11,8 @@ generated: true
 title: "MAA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MAA

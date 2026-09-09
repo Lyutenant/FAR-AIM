@@ -11,6 +11,8 @@ generated: true
 title: "FUEL SIPHONING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FUEL SIPHONING

@@ -13,6 +13,8 @@ aliases:
   - "PRE‐FLIGHT PILOT BRIEFING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PRE‐FLIGHT PILOT BRIEFING

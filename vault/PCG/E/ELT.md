@@ -11,6 +11,8 @@ generated: true
 title: "ELT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ELT

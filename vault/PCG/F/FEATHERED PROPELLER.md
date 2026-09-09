@@ -11,6 +11,8 @@ generated: true
 title: "FEATHERED PROPELLER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FEATHERED PROPELLER

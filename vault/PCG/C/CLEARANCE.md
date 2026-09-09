@@ -11,6 +11,8 @@ generated: true
 title: "CLEARANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLEARANCE

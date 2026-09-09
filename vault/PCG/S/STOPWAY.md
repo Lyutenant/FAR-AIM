@@ -11,6 +11,8 @@ generated: true
 title: "STOPWAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STOPWAY

@@ -11,6 +11,8 @@ generated: true
 title: "RCAG"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RCAG

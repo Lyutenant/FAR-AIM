@@ -11,6 +11,8 @@ generated: true
 title: "TORCHING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TORCHING

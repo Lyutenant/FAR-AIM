@@ -13,6 +13,8 @@ aliases:
   - "COUPLED SCHEDULING (CS)/ EXTENDED METERING (XM)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COUPLED SCHEDULING (CS)/ EXTENDED METERING (XM)

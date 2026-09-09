@@ -11,6 +11,8 @@ generated: true
 title: "SURVEILLANCE APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SURVEILLANCE APPROACH

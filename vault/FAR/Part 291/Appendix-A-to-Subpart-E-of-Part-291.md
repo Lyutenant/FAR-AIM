@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix A to Subpart E of Part 291—Instructions to U.S. Air Carriers for Reporting Traffic and Capacity Data on Schedule T-100

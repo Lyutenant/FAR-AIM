@@ -11,6 +11,8 @@ generated: true
 title: "SPEED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPEED

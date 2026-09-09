@@ -11,6 +11,8 @@ generated: true
 title: "HOT SPOT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOT SPOT

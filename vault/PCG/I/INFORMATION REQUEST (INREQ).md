@@ -11,6 +11,8 @@ generated: true
 title: "INFORMATION REQUEST (INREQ)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INFORMATION REQUEST (INREQ)

@@ -11,6 +11,8 @@ generated: true
 title: "NONPRECISION APPROACH PROCEDURE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NONPRECISION APPROACH PROCEDURE

@@ -11,6 +11,8 @@ generated: true
 title: "RADAR TRAFFIC INFORMATION SERVICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR TRAFFIC INFORMATION SERVICE

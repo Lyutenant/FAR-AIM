@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATED EMERGENCY DESCENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATED EMERGENCY DESCENT

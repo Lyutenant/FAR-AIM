@@ -11,6 +11,8 @@ generated: true
 title: "ASDE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ASDE

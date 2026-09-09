@@ -11,6 +11,8 @@ generated: true
 title: "PRECISION RUNWAY MONITOR (PRM) SYSTEM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PRECISION RUNWAY MONITOR (PRM) SYSTEM

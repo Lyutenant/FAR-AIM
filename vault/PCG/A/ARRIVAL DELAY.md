@@ -11,6 +11,8 @@ generated: true
 title: "ARRIVAL DELAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ARRIVAL DELAY

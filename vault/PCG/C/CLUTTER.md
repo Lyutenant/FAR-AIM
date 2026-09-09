@@ -11,6 +11,8 @@ generated: true
 title: "CLUTTER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLUTTER

@@ -11,6 +11,8 @@ generated: true
 title: "SUSPICIOUS UAS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SUSPICIOUS UAS

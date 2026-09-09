@@ -11,6 +11,8 @@ generated: true
 title: "REIL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REIL

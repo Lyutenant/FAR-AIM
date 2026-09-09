@@ -11,6 +11,8 @@ generated: true
 title: "APPROPRIATE TERRAIN CLEARANCE MINIMUM ALTITUDE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROPRIATE TERRAIN CLEARANCE MINIMUM ALTITUDE

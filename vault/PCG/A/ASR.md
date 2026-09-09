@@ -11,6 +11,8 @@ generated: true
 title: "ASR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ASR

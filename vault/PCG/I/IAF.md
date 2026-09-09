@@ -11,6 +11,8 @@ generated: true
 title: "IAF"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IAF

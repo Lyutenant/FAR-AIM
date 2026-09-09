@@ -13,6 +13,8 @@ aliases:
   - "P‐ACP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # P‐ACP

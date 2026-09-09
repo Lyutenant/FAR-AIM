@@ -13,6 +13,8 @@ aliases:
   - "CRUISING LEVEL [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CRUISING LEVEL \[ICAO]

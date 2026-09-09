@@ -11,6 +11,8 @@ generated: true
 title: "INERTIAL NAVIGATION SYSTEM (INS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INERTIAL NAVIGATION SYSTEM (INS)

@@ -13,6 +13,8 @@ aliases:
   - "TIME‐BASED MANAGEMENT (TBM)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TIME‐BASED MANAGEMENT (TBM)

@@ -11,6 +11,8 @@ generated: true
 title: "MIDDLE MARKER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MIDDLE MARKER

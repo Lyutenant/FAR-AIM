@@ -11,6 +11,8 @@ generated: true
 title: "COUPLED APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COUPLED APPROACH

@@ -11,6 +11,8 @@ generated: true
 title: "CHOP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CHOP
@@ -22,9 +24,9 @@ tags:
 
 CHOP- A form of turbulence.
 
-**a.** Light Chop– Turbulence that causes slight, rapid and somewhat rhythmic bumpiness without appreciable changes in altitude or attitude.
+- **a.** Light Chop– Turbulence that causes slight, rapid and somewhat rhythmic bumpiness without appreciable changes in altitude or attitude.
 
-**b.** Moderate Chop– Turbulence similar to Light Chop but of greater intensity. It causes rapid bumps or jolts without appreciable changes in aircraft altitude or attitude.
+- **b.** Moderate Chop– Turbulence similar to Light Chop but of greater intensity. It causes rapid bumps or jolts without appreciable changes in aircraft altitude or attitude.
 
 ## See Also
 

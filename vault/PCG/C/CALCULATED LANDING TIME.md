@@ -11,6 +11,8 @@ generated: true
 title: "CALCULATED LANDING TIME"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CALCULATED LANDING TIME

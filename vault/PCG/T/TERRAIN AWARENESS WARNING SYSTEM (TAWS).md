@@ -11,6 +11,8 @@ generated: true
 title: "TERRAIN AWARENESS WARNING SYSTEM (TAWS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TERRAIN AWARENESS WARNING SYSTEM (TAWS)

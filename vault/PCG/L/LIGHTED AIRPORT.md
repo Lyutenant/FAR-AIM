@@ -11,6 +11,8 @@ generated: true
 title: "LIGHTED AIRPORT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LIGHTED AIRPORT

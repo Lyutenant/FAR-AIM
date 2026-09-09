@@ -11,6 +11,8 @@ generated: true
 title: "TRANSFERRING CONTROLLER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSFERRING CONTROLLER

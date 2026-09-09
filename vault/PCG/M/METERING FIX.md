@@ -11,6 +11,8 @@ generated: true
 title: "METERING FIX"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # METERING FIX

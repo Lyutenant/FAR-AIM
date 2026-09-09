@@ -11,6 +11,8 @@ generated: true
 title: "TIS-B"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TIS-B

@@ -11,6 +11,8 @@ generated: true
 title: "VERY HIGH FREQUENCY OMNIDIRECTIONAL RANGE STATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VERY HIGH FREQUENCY OMNIDIRECTIONAL RANGE STATION

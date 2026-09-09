@@ -11,6 +11,8 @@ generated: true
 title: "TAXI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TAXI

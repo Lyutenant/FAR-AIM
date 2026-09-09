@@ -11,6 +11,8 @@ generated: true
 title: "SHF"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SHF

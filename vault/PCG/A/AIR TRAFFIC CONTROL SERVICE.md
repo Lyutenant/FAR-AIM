@@ -11,6 +11,8 @@ generated: true
 title: "AIR TRAFFIC CONTROL SERVICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR TRAFFIC CONTROL SERVICE

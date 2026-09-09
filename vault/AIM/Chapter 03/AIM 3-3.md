@@ -12,6 +12,8 @@ generated: true
 title: "Class G Airspace"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 3, Section 3 — Class G Airspace

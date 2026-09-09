@@ -11,6 +11,8 @@ generated: true
 title: "OBSTACLE DEPARTURE PROCEDURE (ODP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OBSTACLE DEPARTURE PROCEDURE (ODP)

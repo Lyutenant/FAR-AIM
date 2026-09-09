@@ -13,6 +13,8 @@ aliases:
   - "OPERATIONS SPECIFICATIONS [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OPERATIONS SPECIFICATIONS \[ICAO]

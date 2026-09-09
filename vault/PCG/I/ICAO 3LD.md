@@ -11,6 +11,8 @@ generated: true
 title: "ICAO 3LD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ICAO 3LD

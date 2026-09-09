@@ -13,6 +13,8 @@ aliases:
   - "ARRIVAL/DEPARTURE WINDOW (ADW)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ARRIVAL/DEPARTURE WINDOW (ADW)

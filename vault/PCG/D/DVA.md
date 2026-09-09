@@ -11,6 +11,8 @@ generated: true
 title: "DVA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DVA

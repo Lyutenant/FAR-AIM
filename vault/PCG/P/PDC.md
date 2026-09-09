@@ -11,6 +11,8 @@ generated: true
 title: "PDC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PDC

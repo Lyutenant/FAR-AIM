@@ -13,6 +13,8 @@ aliases:
   - "AUTOMATIC TERMINAL INFORMATION SERVICE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATIC TERMINAL INFORMATION SERVICE \[ICAO]

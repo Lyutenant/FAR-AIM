@@ -11,6 +11,8 @@ generated: true
 title: "ADW"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADW

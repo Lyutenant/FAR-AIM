@@ -10,6 +10,8 @@ generated: true
 title: "Pilot/Controller Glossary"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Pilot/Controller Glossary
@@ -19,13 +21,13 @@ tags:
 
 PURPOSE
 
-**a.** This Glossary was compiled to promote a common understanding of the terms used in the Air Traffic Control system. It includes those terms which are intended for pilot/controller communications.
+- **a.** This Glossary was compiled to promote a common understanding of the terms used in the Air Traffic Control system. It includes those terms which are intended for pilot/controller communications.
 
-**b.** Because of the international nature of flying, terms used in the Lexicon, published by the International Civil Aviation Organization (ICAO), are included when they differ from FAA definitions. These terms are followed by "\[ICAO]." For the reader's convenience, there are also cross references to related terms in other parts of the Glossary and to other documents, such as the Code of Federal Regulations (CFR) and the Aeronautical Information Manual (AIM).
+- **b.** Because of the international nature of flying, terms used in the Lexicon, published by the International Civil Aviation Organization (ICAO), are included when they differ from FAA definitions. These terms are followed by "\[ICAO]." For the reader's convenience, there are also cross references to related terms in other parts of the Glossary and to other documents, such as the Code of Federal Regulations (CFR) and the Aeronautical Information Manual (AIM).
 
-**c.** Terms used in this glossary that apply to flight service station (FSS) roles are included when they differ from air traffic control functions. These terms are followed by "\[FSS]."
+- **c.** Terms used in this glossary that apply to flight service station (FSS) roles are included when they differ from air traffic control functions. These terms are followed by "\[FSS]."
 
-**d.** This Glossary will be revised, as necessary, to maintain a common understanding of the system.
+- **d.** This Glossary will be revised, as necessary, to maintain a common understanding of the system.
 
 Effective: 7/9/26
 

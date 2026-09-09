@@ -11,6 +11,8 @@ generated: true
 title: "TSAS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TSAS

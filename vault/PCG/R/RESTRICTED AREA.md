@@ -11,6 +11,8 @@ generated: true
 title: "RESTRICTED AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RESTRICTED AREA

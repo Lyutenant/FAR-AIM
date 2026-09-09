@@ -11,6 +11,8 @@ generated: true
 title: "GDP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GDP

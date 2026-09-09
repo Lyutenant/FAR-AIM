@@ -11,6 +11,8 @@ generated: true
 title: "ADIZ"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADIZ

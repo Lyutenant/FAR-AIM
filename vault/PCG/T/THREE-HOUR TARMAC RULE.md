@@ -13,6 +13,8 @@ aliases:
   - "THREE‐HOUR TARMAC RULE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # THREE‐HOUR TARMAC RULE

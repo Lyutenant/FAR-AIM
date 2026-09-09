@@ -11,6 +11,8 @@ generated: true
 title: "MOVING AIRSPACE RESERVATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MOVING AIRSPACE RESERVATION

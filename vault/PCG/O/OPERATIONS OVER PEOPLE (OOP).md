@@ -11,6 +11,8 @@ generated: true
 title: "OPERATIONS OVER PEOPLE (OOP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OPERATIONS OVER PEOPLE (OOP)

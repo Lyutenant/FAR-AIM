@@ -11,6 +11,8 @@ generated: true
 title: "PILOT WEATHER REPORT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PILOT WEATHER REPORT

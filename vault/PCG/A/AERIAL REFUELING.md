@@ -11,6 +11,8 @@ generated: true
 title: "AERIAL REFUELING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AERIAL REFUELING

@@ -13,6 +13,8 @@ aliases:
   - "INSTRUMENT FLIGHT RULES [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INSTRUMENT FLIGHT RULES \[ICAO]

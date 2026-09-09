@@ -11,6 +11,8 @@ generated: true
 title: "PRECIPITATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PRECIPITATION

@@ -13,6 +13,8 @@ aliases:
   - "PROCEDURAL CONTROL [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROCEDURAL CONTROL \[ICAO]

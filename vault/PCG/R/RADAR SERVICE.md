@@ -11,6 +11,8 @@ generated: true
 title: "RADAR SERVICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR SERVICE
@@ -22,11 +24,11 @@ tags:
 
 RADAR SERVICE- A term which encompasses one or more of the following services based on the use of radar which can be provided by a controller to a pilot of a radar identified aircraft.
 
-**a.** Radar Monitoring- The radar flight-following of aircraft, whose primary navigation is being performed by the pilot, to observe and note deviations from its authorized flight path, airway, or route. When being applied specifically to radar monitoring of instrument approaches; i.e., with precision approach radar (PAR) or radar monitoring of simultaneous ILS,RNAV and GLS approaches, it includes advice and instructions whenever an aircraft nears or exceeds the prescribed PAR safety limit or simultaneous ILS RNAV and GLS no transgression zone.
+- **a.** Radar Monitoring- The radar flight-following of aircraft, whose primary navigation is being performed by the pilot, to observe and note deviations from its authorized flight path, airway, or route. When being applied specifically to radar monitoring of instrument approaches; i.e., with precision approach radar (PAR) or radar monitoring of simultaneous ILS,RNAV and GLS approaches, it includes advice and instructions whenever an aircraft nears or exceeds the prescribed PAR safety limit or simultaneous ILS RNAV and GLS no transgression zone.
 
-**a.** Radar Navigational Guidance- Vectoring aircraft to provide course guidance.
+- **a.** Radar Navigational Guidance- Vectoring aircraft to provide course guidance.
 
-**b.** Radar Separation- Radar spacing of aircraft in accordance with established minima.
+- **b.** Radar Separation- Radar spacing of aircraft in accordance with established minima.
 
 ## See Also
 

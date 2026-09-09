@@ -11,6 +11,8 @@ generated: true
 title: "MULTIPLE RUNWAYS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MULTIPLE RUNWAYS

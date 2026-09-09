@@ -13,6 +13,8 @@ aliases:
   - "AERONAUTICAL CHART [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AERONAUTICAL CHART \[ICAO]

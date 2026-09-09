@@ -13,6 +13,8 @@ aliases:
   - "AUTOMATED MUTUAL‐ASSISTANCE VESSEL RESCUE SYSTEM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATED MUTUAL‐ASSISTANCE VESSEL RESCUE SYSTEM

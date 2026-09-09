@@ -11,6 +11,8 @@ generated: true
 title: "CIRCLING MANEUVER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CIRCLING MANEUVER

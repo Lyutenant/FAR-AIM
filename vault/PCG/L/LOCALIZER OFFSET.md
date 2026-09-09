@@ -11,6 +11,8 @@ generated: true
 title: "LOCALIZER OFFSET"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LOCALIZER OFFSET

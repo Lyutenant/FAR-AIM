@@ -11,6 +11,8 @@ generated: true
 title: "MOCA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MOCA

@@ -13,6 +13,8 @@ aliases:
   - "TRAFFIC ALERT (aircraft call sign), TURN (left/right) IMMEDIATELY, (climb/descend) AND MAINTAIN (altitude)."
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAFFIC ALERT (aircraft call sign), TURN (left/right) IMMEDIATELY, (climb/descend) AND MAINTAIN (altitude).

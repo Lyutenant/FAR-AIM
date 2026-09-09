@@ -11,6 +11,8 @@ generated: true
 title: "RUNWAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RUNWAY

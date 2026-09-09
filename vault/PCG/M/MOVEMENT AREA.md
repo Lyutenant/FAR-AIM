@@ -11,6 +11,8 @@ generated: true
 title: "MOVEMENT AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MOVEMENT AREA

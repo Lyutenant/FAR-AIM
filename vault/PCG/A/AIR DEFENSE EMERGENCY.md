@@ -11,6 +11,8 @@ generated: true
 title: "AIR DEFENSE EMERGENCY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR DEFENSE EMERGENCY

@@ -11,6 +11,8 @@ generated: true
 title: "DECODER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DECODER

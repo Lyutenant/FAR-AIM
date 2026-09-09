@@ -13,6 +13,8 @@ aliases:
   - "Abbreviations/Acronyms"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Appendix 3 — Abbreviations/Acronyms

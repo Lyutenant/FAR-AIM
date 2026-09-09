@@ -11,6 +11,8 @@ generated: true
 title: "ARTCC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ARTCC

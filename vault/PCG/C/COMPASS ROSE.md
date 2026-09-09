@@ -11,6 +11,8 @@ generated: true
 title: "COMPASS ROSE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COMPASS ROSE

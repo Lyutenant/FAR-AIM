@@ -11,6 +11,8 @@ generated: true
 title: "TACAN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TACAN

@@ -11,6 +11,8 @@ generated: true
 title: "PROTECTED SEGMENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROTECTED SEGMENT

@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix F to Part 60—Definitions and Abbreviations for Flight Simulation Training Devices

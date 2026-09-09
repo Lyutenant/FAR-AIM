@@ -13,6 +13,8 @@ aliases:
   - "Bird/Other Wildlife Strike Report"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Appendix 1 — Bird/Other Wildlife Strike Report

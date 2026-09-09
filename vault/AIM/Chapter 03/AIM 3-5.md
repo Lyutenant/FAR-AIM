@@ -14,6 +14,8 @@ aliases:
   - "Other Airspace Areas"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 3, Section 5 — Other Airspace Areas

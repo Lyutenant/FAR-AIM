@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT INFORMATION SERVICE-BROADCAST (FIS-B)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT INFORMATION SERVICE-BROADCAST (FIS-B)

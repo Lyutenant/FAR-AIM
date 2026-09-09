@@ -11,6 +11,8 @@ generated: true
 title: "TURBOPROP AIRCRAFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TURBOPROP AIRCRAFT

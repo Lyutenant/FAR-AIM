@@ -11,6 +11,8 @@ generated: true
 title: "RESOLUTION ADVISORY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RESOLUTION ADVISORY

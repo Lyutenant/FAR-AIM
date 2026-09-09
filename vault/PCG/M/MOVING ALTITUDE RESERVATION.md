@@ -11,6 +11,8 @@ generated: true
 title: "MOVING ALTITUDE RESERVATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MOVING ALTITUDE RESERVATION

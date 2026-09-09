@@ -21,8 +21,8 @@ wording stays verbatim in the Official Text (the renderers never rewrite
 official wording into links, and Markdown escaping defeats bare-URL
 autolinking), so the References entry is what keeps the authoritative
 destination clickable. Notes/sub-lists mirror the AIM renderer's
-decisions (flat marker-led lists, callout boxes titled with the verbatim
-label).
+decisions (marker-led nested list items via ``generate.hierarchy``,
+callout boxes titled with the verbatim label).
 """
 
 from __future__ import annotations
@@ -33,6 +33,7 @@ from dataclasses import dataclass
 from far_aim.generate import BuildError, naming
 from far_aim.generate.aim_markdown import text_md
 from far_aim.generate.frontmatter import Value
+from far_aim.generate.hierarchy import TEXT_CSS_CLASS, list_item
 from far_aim.generate.markdown import escape_md
 from far_aim.generate.notes import Note, link_display
 from far_aim.links import citations as cites
@@ -107,7 +108,7 @@ def render_pcg_blocks(blocks: list[dict]) -> list[str]:
             for index, item in enumerate(block["items"]):
                 marker = f"**{_list_marker(block['style'], index)}**"
                 text = text_md(item["text"])
-                chunks.append(f"{marker} {text}" if text else marker)
+                chunks.append(list_item(f"{marker} {text}" if text else marker, []))
         elif kind == "note":
             chunks.append(_note_callout(block))
         elif kind == "reference":
@@ -223,6 +224,7 @@ def build_term_note(
     if aliases:
         frontmatter.append(("aliases", aliases))
     frontmatter.append(("tags", ["pcg"]))
+    frontmatter.append(("cssclasses", [TEXT_CSS_CLASS]))
     body_chunks = render_pcg_blocks(term_doc["content"])
     chunks = [
         f"# {escape_md(term)}",
@@ -256,6 +258,7 @@ def build_pcg_index(docs: dict[str, dict], title_hash: str) -> Note:
         ("generated", True),
         ("title", publication["title"]),
         ("tags", ["pcg"]),
+        ("cssclasses", [TEXT_CSS_CLASS]),
     ]
     chunks = [
         f"# {escape_md(publication['title'])}",

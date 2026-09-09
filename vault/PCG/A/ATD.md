@@ -11,6 +11,8 @@ generated: true
 title: "ATD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATD

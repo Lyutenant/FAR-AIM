@@ -11,6 +11,8 @@ generated: true
 title: "ADVISORY FREQUENCY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADVISORY FREQUENCY

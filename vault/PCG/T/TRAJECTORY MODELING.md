@@ -11,6 +11,8 @@ generated: true
 title: "TRAJECTORY MODELING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAJECTORY MODELING

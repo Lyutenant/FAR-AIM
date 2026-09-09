@@ -11,6 +11,8 @@ generated: true
 title: "RCO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RCO

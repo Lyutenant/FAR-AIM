@@ -13,6 +13,8 @@ aliases:
   - "MOSAIC/MULTI-SENSOR MODE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MOSAIC/MULTI-SENSOR MODE

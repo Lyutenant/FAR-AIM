@@ -11,6 +11,8 @@ generated: true
 title: "VISUAL OBSERVER (VO)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VISUAL OBSERVER (VO)

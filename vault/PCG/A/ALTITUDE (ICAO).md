@@ -13,6 +13,8 @@ aliases:
   - "ALTITUDE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALTITUDE \[ICAO]

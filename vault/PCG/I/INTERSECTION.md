@@ -11,6 +11,8 @@ generated: true
 title: "INTERSECTION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INTERSECTION
@@ -22,6 +24,6 @@ tags:
 
 INTERSECTION-
 
-**a.** A point defined by any combination of courses, radials, or bearings of two or more navigational aids.
+- **a.** A point defined by any combination of courses, radials, or bearings of two or more navigational aids.
 
-**b.** Used to describe the point where two runways, a runway and a taxiway, or two taxiways cross or meet.
+- **b.** Used to describe the point where two runways, a runway and a taxiway, or two taxiways cross or meet.

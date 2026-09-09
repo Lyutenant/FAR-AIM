@@ -11,6 +11,8 @@ generated: true
 title: "APPROPRIATE OBSTACLE CLEARANCE MINIMUM ALTITUDE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROPRIATE OBSTACLE CLEARANCE MINIMUM ALTITUDE

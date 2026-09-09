@@ -1,0 +1,69 @@
+/* FAR/AIM vault — regulatory hierarchy presentation (Reading View).
+ *
+ * The generator emits official text as nested Markdown lists: one item per
+ * CFR paragraph / AIM list item, its children nested beneath it. This
+ * snippet only styles that structure; it never changes wording, links or
+ * anchors. It applies solely to notes whose frontmatter carries
+ * `cssclasses: [far-aim-text]` (every generated FAR, AIM and PCG note that
+ * renders official text), so curated notes keep Obsidian's default lists.
+ *
+ * Adjust the look by editing the custom properties below, or override them
+ * from a second snippet that loads after this one:
+ *   --far-aim-indent       horizontal step per nesting level
+ *   --far-aim-guide-width  thickness of the vertical guide line (0 = none)
+ *   --far-aim-guide-color  colour of the guide line
+ *   --far-aim-item-gap     vertical breathing room around each item
+ *
+ * Disable the snippet (Settings → Appearance → CSS snippets) and the same
+ * notes render as ordinary nested bulleted lists.
+ */
+
+.markdown-preview-view.far-aim-text {
+  --far-aim-indent: 1.6em;
+  --far-aim-guide-width: 1px;
+  --far-aim-guide-color: var(--background-modifier-border);
+  --far-aim-item-gap: 0.2em;
+}
+
+/* The official label (**(a)**, **1.**) is the marker: hide Obsidian's bullet.
+ * Plain link lists (Explicit Cross-References, Glossary Terms, indexes) have
+ * a link as the item's direct child and keep their bullets. */
+.markdown-preview-view.far-aim-text li:not(:has(> a)) > .list-bullet {
+  display: none;
+}
+
+/* Top-level paragraphs sit flush with the body text. */
+.markdown-preview-view.far-aim-text ul > li:not(:has(> a)) {
+  margin-inline-start: 0;
+  padding-top: var(--far-aim-item-gap);
+  padding-bottom: var(--far-aim-item-gap);
+}
+
+/* Each nested level steps in by --far-aim-indent; the guide line runs down
+ * the parent's text edge for the whole extent of its children. */
+.markdown-preview-view.far-aim-text ul ul {
+  margin-inline-start: 0;
+  padding-inline-start: 0;
+  border-inline-start: var(--far-aim-guide-width) solid var(--far-aim-guide-color);
+}
+.markdown-preview-view.far-aim-text ul ul > li {
+  margin-inline-start: var(--far-aim-indent);
+}
+
+/* Obsidian's fold handle (hover, items with children) stays reachable. */
+.markdown-preview-view.far-aim-text li > .list-collapse-indicator {
+  margin-inline-start: -1.5em;
+}
+
+/* Lists inside raw-HTML tables (AIM) follow the same rules. */
+.markdown-preview-view.far-aim-text table ul {
+  list-style: none;
+  margin-inline-start: 0;
+  padding-inline-start: 0;
+}
+.markdown-preview-view.far-aim-text table ul > li {
+  margin-inline-start: 0;
+}
+.markdown-preview-view.far-aim-text table ul ul > li {
+  margin-inline-start: var(--far-aim-indent);
+}

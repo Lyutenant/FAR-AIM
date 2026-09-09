@@ -13,6 +13,8 @@ aliases:
   - "HOLD‐IN‐LIEU OF PROCEDURE TURN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOLD‐IN‐LIEU OF PROCEDURE TURN

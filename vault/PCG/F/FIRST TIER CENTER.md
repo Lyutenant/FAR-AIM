@@ -11,6 +11,8 @@ generated: true
 title: "FIRST TIER CENTER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FIRST TIER CENTER

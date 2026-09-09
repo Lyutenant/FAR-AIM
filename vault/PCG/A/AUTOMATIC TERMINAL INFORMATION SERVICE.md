@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATIC TERMINAL INFORMATION SERVICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATIC TERMINAL INFORMATION SERVICE

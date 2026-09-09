@@ -11,6 +11,8 @@ generated: true
 title: "ADAR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADAR

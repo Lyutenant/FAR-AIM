@@ -11,6 +11,8 @@ generated: true
 title: "RADIO MAGNETIC INDICATOR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADIO MAGNETIC INDICATOR

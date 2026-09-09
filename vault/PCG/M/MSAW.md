@@ -11,6 +11,8 @@ generated: true
 title: "MSAW"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MSAW

@@ -11,6 +11,8 @@ generated: true
 title: "VERTICAL SEPARATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VERTICAL SEPARATION

@@ -11,6 +11,8 @@ generated: true
 title: "ALTITUDE RESTRICTIONS ARE CANCELED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALTITUDE RESTRICTIONS ARE CANCELED

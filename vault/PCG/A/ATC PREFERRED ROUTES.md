@@ -11,6 +11,8 @@ generated: true
 title: "ATC PREFERRED ROUTES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATC PREFERRED ROUTES

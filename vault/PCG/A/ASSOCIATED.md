@@ -11,6 +11,8 @@ generated: true
 title: "ASSOCIATED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ASSOCIATED

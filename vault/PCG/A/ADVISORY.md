@@ -11,6 +11,8 @@ generated: true
 title: "ADVISORY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADVISORY

@@ -11,6 +11,8 @@ generated: true
 title: "ETA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ETA

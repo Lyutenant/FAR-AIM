@@ -11,6 +11,8 @@ generated: true
 title: "OBSTACLE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OBSTACLE

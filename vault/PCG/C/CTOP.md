@@ -11,6 +11,8 @@ generated: true
 title: "CTOP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CTOP

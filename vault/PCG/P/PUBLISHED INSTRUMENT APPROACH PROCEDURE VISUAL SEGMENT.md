@@ -11,6 +11,8 @@ generated: true
 title: "PUBLISHED INSTRUMENT APPROACH PROCEDURE VISUAL SEGMENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PUBLISHED INSTRUMENT APPROACH PROCEDURE VISUAL SEGMENT

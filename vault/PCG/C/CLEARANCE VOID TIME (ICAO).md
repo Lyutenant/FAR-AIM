@@ -13,6 +13,8 @@ aliases:
   - "CLEARANCE VOID TIME [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLEARANCE VOID TIME \[ICAO]

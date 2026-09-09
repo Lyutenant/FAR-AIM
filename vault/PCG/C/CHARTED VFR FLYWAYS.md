@@ -11,6 +11,8 @@ generated: true
 title: "CHARTED VFR FLYWAYS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CHARTED VFR FLYWAYS

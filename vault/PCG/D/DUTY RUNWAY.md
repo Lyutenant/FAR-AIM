@@ -11,6 +11,8 @@ generated: true
 title: "DUTY RUNWAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DUTY RUNWAY

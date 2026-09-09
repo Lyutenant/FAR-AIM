@@ -11,6 +11,8 @@ generated: true
 title: "PROPELLER (PROP) WASH (PROP BLAST)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROPELLER (PROP) WASH (PROP BLAST)

@@ -13,6 +13,8 @@ aliases:
   - "NIGHT [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NIGHT \[ICAO]

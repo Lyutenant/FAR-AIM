@@ -11,6 +11,8 @@ generated: true
 title: "ADR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADR

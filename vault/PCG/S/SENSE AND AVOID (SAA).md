@@ -11,6 +11,8 @@ generated: true
 title: "SENSE AND AVOID (SAA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SENSE AND AVOID (SAA)

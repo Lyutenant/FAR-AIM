@@ -14,6 +14,8 @@ aliases:
   - "Surveillance Systems"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 4, Section 5 — Surveillance Systems

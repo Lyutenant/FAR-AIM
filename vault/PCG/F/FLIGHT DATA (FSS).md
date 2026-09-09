@@ -13,6 +13,8 @@ aliases:
   - "FLIGHT DATA [FSS]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT DATA \[FSS]

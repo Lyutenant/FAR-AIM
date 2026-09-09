@@ -11,6 +11,8 @@ generated: true
 title: "DEPARTURE CONTROL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DEPARTURE CONTROL

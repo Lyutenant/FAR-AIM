@@ -11,6 +11,8 @@ generated: true
 title: "ESTIMATED TIME OF ARRIVAL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ESTIMATED TIME OF ARRIVAL

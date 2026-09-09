@@ -11,6 +11,8 @@ generated: true
 title: "INTEGRITY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INTEGRITY

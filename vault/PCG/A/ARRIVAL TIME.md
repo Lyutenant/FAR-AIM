@@ -11,6 +11,8 @@ generated: true
 title: "ARRIVAL TIME"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ARRIVAL TIME

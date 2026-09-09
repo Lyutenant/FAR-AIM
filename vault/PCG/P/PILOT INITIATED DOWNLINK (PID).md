@@ -11,6 +11,8 @@ generated: true
 title: "PILOT INITIATED DOWNLINK (PID)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PILOT INITIATED DOWNLINK (PID)

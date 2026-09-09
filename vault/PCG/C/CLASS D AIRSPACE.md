@@ -11,6 +11,8 @@ generated: true
 title: "CLASS D AIRSPACE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLASS D AIRSPACE

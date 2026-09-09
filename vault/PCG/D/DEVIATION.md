@@ -11,6 +11,8 @@ generated: true
 title: "DEVIATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DEVIATION
@@ -22,6 +24,6 @@ tags:
 
 DEVIATION-
 
-**a.** A departure from a current clearance, such as an off course maneuver to avoid weather or turbulence.
+- **a.** A departure from a current clearance, such as an off course maneuver to avoid weather or turbulence.
 
-**b.** Where specifically authorized in the CFRs and requested by the pilot, ATC may permit pilots to deviate from certain regulations.
+- **b.** Where specifically authorized in the CFRs and requested by the pilot, ATC may permit pilots to deviate from certain regulations.

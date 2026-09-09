@@ -13,6 +13,8 @@ aliases:
   - "LOCALIZER COURSE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LOCALIZER COURSE \[ICAO]

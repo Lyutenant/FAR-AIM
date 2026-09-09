@@ -11,6 +11,8 @@ generated: true
 title: "SPECIAL EMERGENCY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPECIAL EMERGENCY

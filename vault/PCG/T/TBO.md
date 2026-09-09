@@ -11,6 +11,8 @@ generated: true
 title: "TBO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TBO

@@ -11,6 +11,8 @@ generated: true
 title: "NATIONAL SECURITY AREA (NSA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NATIONAL SECURITY AREA (NSA)

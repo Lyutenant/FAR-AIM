@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix D to Part 43—Scope and Detail of Items (as Applicable to the Particular Aircraft) To Be Included in Annual and 100-Hour Inspections

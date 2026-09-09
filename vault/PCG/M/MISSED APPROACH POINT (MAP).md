@@ -11,6 +11,8 @@ generated: true
 title: "MISSED APPROACH POINT (MAP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MISSED APPROACH POINT (MAP)

@@ -11,6 +11,8 @@ generated: true
 title: "CONFORMANCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONFORMANCE

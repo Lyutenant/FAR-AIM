@@ -11,6 +11,8 @@ generated: true
 title: "SGI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SGI

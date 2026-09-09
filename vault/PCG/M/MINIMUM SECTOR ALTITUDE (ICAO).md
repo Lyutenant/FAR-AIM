@@ -13,6 +13,8 @@ aliases:
   - "MINIMUM SECTOR ALTITUDE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMUM SECTOR ALTITUDE \[ICAO]

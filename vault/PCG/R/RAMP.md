@@ -11,6 +11,8 @@ generated: true
 title: "RAMP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RAMP

@@ -11,6 +11,8 @@ generated: true
 title: "SURFACE AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SURFACE AREA

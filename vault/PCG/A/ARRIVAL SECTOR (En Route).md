@@ -11,6 +11,8 @@ generated: true
 title: "ARRIVAL SECTOR (En Route)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ARRIVAL SECTOR (En Route)

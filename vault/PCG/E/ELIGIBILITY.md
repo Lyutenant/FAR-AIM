@@ -11,6 +11,8 @@ generated: true
 title: "ELIGIBILITY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ELIGIBILITY

@@ -11,6 +11,8 @@ generated: true
 title: "TOP OF DESCENT (TOD)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOP OF DESCENT (TOD)

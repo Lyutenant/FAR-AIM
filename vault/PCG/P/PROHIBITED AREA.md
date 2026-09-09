@@ -11,6 +11,8 @@ generated: true
 title: "PROHIBITED AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROHIBITED AREA

@@ -11,6 +11,8 @@ generated: true
 title: "INLAND NAVIGATION FACILITY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INLAND NAVIGATION FACILITY

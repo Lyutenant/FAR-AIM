@@ -11,6 +11,8 @@ generated: true
 title: "MINIMUM DESCENT ALTITUDE (MDA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMUM DESCENT ALTITUDE (MDA)

@@ -11,6 +11,8 @@ generated: true
 title: "AIRPORT ARRIVAL RATE (AAR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPORT ARRIVAL RATE (AAR)

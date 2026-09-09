@@ -11,6 +11,8 @@ generated: true
 title: "TRAFFIC MANAGEMENT PROGRAM ALERT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAFFIC MANAGEMENT PROGRAM ALERT

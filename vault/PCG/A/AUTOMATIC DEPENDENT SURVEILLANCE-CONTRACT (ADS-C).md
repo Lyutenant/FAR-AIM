@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATIC DEPENDENT SURVEILLANCE-CONTRACT (ADS-C)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATIC DEPENDENT SURVEILLANCE-CONTRACT (ADS-C)

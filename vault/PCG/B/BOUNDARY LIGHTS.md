@@ -11,6 +11,8 @@ generated: true
 title: "BOUNDARY LIGHTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BOUNDARY LIGHTS

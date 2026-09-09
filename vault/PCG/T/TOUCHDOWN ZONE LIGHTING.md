@@ -11,6 +11,8 @@ generated: true
 title: "TOUCHDOWN ZONE LIGHTING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOUCHDOWN ZONE LIGHTING

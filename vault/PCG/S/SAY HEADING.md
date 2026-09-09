@@ -11,6 +11,8 @@ generated: true
 title: "SAY HEADING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SAY HEADING

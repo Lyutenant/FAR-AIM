@@ -11,6 +11,8 @@ generated: true
 title: "ESTIMATED TIME EN ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ESTIMATED TIME EN ROUTE

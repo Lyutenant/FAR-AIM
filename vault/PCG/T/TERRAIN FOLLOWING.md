@@ -11,6 +11,8 @@ generated: true
 title: "TERRAIN FOLLOWING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TERRAIN FOLLOWING

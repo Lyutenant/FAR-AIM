@@ -11,6 +11,8 @@ generated: true
 title: "TEMPORARY FLIGHT RESTRICTION (TFR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TEMPORARY FLIGHT RESTRICTION (TFR)

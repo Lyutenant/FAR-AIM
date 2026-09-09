@@ -11,6 +11,8 @@ generated: true
 title: "REMOTE AIRPORT INFORMATION SERVICE (RAIS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REMOTE AIRPORT INFORMATION SERVICE (RAIS)

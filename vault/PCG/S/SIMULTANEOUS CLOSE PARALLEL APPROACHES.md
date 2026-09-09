@@ -11,6 +11,8 @@ generated: true
 title: "SIMULTANEOUS CLOSE PARALLEL APPROACHES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SIMULTANEOUS CLOSE PARALLEL APPROACHES

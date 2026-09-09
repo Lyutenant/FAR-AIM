@@ -11,6 +11,8 @@ generated: true
 title: "LAND AND HOLD SHORT OPERATIONS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LAND AND HOLD SHORT OPERATIONS

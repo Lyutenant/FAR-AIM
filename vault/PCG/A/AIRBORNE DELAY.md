@@ -11,6 +11,8 @@ generated: true
 title: "AIRBORNE DELAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRBORNE DELAY

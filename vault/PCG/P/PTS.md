@@ -11,6 +11,8 @@ generated: true
 title: "PTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PTS

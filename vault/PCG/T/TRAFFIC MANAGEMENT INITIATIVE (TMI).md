@@ -11,6 +11,8 @@ generated: true
 title: "TRAFFIC MANAGEMENT INITIATIVE (TMI)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAFFIC MANAGEMENT INITIATIVE (TMI)

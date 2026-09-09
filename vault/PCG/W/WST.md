@@ -11,6 +11,8 @@ generated: true
 title: "WST"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WST

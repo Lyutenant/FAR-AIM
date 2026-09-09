@@ -11,6 +11,8 @@ generated: true
 title: "DEBRIS RESPONSE AREA (DRA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DEBRIS RESPONSE AREA (DRA)

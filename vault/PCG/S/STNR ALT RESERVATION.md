@@ -11,6 +11,8 @@ generated: true
 title: "STNR ALT RESERVATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STNR ALT RESERVATION

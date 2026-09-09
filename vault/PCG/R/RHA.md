@@ -11,6 +11,8 @@ generated: true
 title: "RHA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RHA

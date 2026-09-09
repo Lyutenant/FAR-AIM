@@ -11,6 +11,8 @@ generated: true
 title: "ICAO Three-Letter Designator (3LD)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ICAO Three-Letter Designator (3LD)

@@ -11,6 +11,8 @@ generated: true
 title: "INTERNATIONAL AIRPORT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INTERNATIONAL AIRPORT
@@ -22,11 +24,11 @@ tags:
 
 INTERNATIONAL AIRPORT- Relating to international flight, it means:
 
-**a.** An airport of entry which has been designated by the Secretary of Treasury or Commissioner of Customs as an international airport for customs service.
+- **a.** An airport of entry which has been designated by the Secretary of Treasury or Commissioner of Customs as an international airport for customs service.
 
-**b.** A landing rights airport at which specific permission to land must be obtained from customs authorities in advance of contemplated use.
+- **b.** A landing rights airport at which specific permission to land must be obtained from customs authorities in advance of contemplated use.
 
-**c.** Airports designated under the Convention on International Civil Aviation as an airport for use by international commercial air transport and/or international general aviation.
+- **c.** Airports designated under the Convention on International Civil Aviation as an airport for use by international commercial air transport and/or international general aviation.
 
 ## See Also
 

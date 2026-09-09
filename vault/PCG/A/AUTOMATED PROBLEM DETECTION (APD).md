@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATED PROBLEM DETECTION (APD)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATED PROBLEM DETECTION (APD)

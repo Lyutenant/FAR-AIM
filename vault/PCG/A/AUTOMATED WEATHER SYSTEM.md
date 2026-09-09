@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATED WEATHER SYSTEM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATED WEATHER SYSTEM

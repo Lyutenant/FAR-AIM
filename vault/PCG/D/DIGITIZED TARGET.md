@@ -11,6 +11,8 @@ generated: true
 title: "DIGITIZED TARGET"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DIGITIZED TARGET

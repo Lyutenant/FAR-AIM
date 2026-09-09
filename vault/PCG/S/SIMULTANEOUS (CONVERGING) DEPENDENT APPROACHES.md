@@ -11,6 +11,8 @@ generated: true
 title: "SIMULTANEOUS (CONVERGING) DEPENDENT APPROACHES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SIMULTANEOUS (CONVERGING) DEPENDENT APPROACHES

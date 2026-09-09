@@ -11,6 +11,8 @@ generated: true
 title: "CLEARED AS FILED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLEARED AS FILED

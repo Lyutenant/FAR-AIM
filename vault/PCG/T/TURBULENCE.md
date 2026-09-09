@@ -11,6 +11,8 @@ generated: true
 title: "TURBULENCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TURBULENCE
@@ -22,13 +24,13 @@ tags:
 
 TURBULENCE- An atmospheric phenomenon that causes changes in aircraft altitude, attitude, and or airspeed with aircraft reaction depending on intensity. Pilots report turbulence intensity according to aircraft's reaction as follows:
 
-**a.** Light - Causes slight, erratic changes in altitude and or attitude (pitch, roll, or yaw).
+- **a.** Light - Causes slight, erratic changes in altitude and or attitude (pitch, roll, or yaw).
 
-**b.** Moderate- Similar to Light but of greater intensity. Changes in altitude and or attitude occur but the aircraft remains in positive control at all times. It usually causes variations in indicated airspeed.
+- **b.** Moderate- Similar to Light but of greater intensity. Changes in altitude and or attitude occur but the aircraft remains in positive control at all times. It usually causes variations in indicated airspeed.
 
-**c.** Severe- Causes large, abrupt changes in altitude and or attitude. It usually causes large variations in indicated airspeed. Aircraft may be momentarily out of control.
+- **c.** Severe- Causes large, abrupt changes in altitude and or attitude. It usually causes large variations in indicated airspeed. Aircraft may be momentarily out of control.
 
-**d.** Extreme- The aircraft is violently tossed about and is practically impossible to control. It may cause structural damage.
+- **d.** Extreme- The aircraft is violently tossed about and is practically impossible to control. It may cause structural damage.
 
 ## See Also
 

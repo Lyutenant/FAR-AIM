@@ -11,6 +11,8 @@ generated: true
 title: "TRAFFIC NO LONGER OBSERVED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAFFIC NO LONGER OBSERVED

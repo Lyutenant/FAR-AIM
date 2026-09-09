@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATED PROBLEM DETECTION INHIBITED AREA (APDIA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATED PROBLEM DETECTION INHIBITED AREA (APDIA)

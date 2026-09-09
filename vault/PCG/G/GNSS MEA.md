@@ -11,6 +11,8 @@ generated: true
 title: "GNSS MEA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GNSS MEA

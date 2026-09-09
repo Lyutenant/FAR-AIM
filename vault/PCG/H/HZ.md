@@ -11,6 +11,8 @@ generated: true
 title: "HZ"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HZ

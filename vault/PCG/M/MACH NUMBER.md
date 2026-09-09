@@ -11,6 +11,8 @@ generated: true
 title: "MACH NUMBER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MACH NUMBER

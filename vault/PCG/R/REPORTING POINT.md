@@ -11,6 +11,8 @@ generated: true
 title: "REPORTING POINT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REPORTING POINT

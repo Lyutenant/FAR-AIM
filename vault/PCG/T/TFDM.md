@@ -11,6 +11,8 @@ generated: true
 title: "TFDM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TFDM

@@ -11,6 +11,8 @@ generated: true
 title: "TAKEOFF HOLD LIGHTS (THL)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TAKEOFF HOLD LIGHTS (THL)

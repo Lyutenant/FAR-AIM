@@ -11,6 +11,8 @@ generated: true
 title: "MINIMUM VECTORING ALTITUDE (MVA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMUM VECTORING ALTITUDE (MVA)

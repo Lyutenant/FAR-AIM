@@ -12,6 +12,8 @@ generated: true
 title: "Special Use Airspace"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 3, Section 4 — Special Use Airspace

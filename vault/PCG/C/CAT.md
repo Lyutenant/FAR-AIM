@@ -11,6 +11,8 @@ generated: true
 title: "CAT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CAT

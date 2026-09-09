@@ -11,6 +11,8 @@ generated: true
 title: "EXPECT DEPARTURE CLEARANCE TIME (EDCT)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EXPECT DEPARTURE CLEARANCE TIME (EDCT)

@@ -11,6 +11,8 @@ generated: true
 title: "FREEZE HORIZON"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FREEZE HORIZON

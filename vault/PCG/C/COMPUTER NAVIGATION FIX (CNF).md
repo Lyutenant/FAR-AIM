@@ -11,6 +11,8 @@ generated: true
 title: "COMPUTER NAVIGATION FIX (CNF)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COMPUTER NAVIGATION FIX (CNF)

@@ -14,6 +14,8 @@ aliases:
   - "Explanation of Changes"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 0, Section 1 — Explanation of Changes

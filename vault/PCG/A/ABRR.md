@@ -11,6 +11,8 @@ generated: true
 title: "ABRR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ABRR

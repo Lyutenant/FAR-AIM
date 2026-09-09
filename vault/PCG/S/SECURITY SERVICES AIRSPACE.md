@@ -11,6 +11,8 @@ generated: true
 title: "SECURITY SERVICES AIRSPACE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SECURITY SERVICES AIRSPACE

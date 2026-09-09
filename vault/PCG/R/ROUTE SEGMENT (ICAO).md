@@ -13,6 +13,8 @@ aliases:
   - "ROUTE SEGMENT [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ROUTE SEGMENT \[ICAO]

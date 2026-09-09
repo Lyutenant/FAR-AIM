@@ -11,6 +11,8 @@ generated: true
 title: "PROCEDURE TURN INBOUND"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROCEDURE TURN INBOUND

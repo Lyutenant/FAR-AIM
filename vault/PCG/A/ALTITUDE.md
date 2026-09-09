@@ -11,6 +11,8 @@ generated: true
 title: "ALTITUDE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALTITUDE
@@ -22,11 +24,11 @@ tags:
 
 ALTITUDE- The height of a level, point, or object measured in feet Above Ground Level (AGL) or from Mean Sea Level (MSL).
 
-**a.** MSL Altitude- Altitude expressed in feet measured from mean sea level.
+- **a.** MSL Altitude- Altitude expressed in feet measured from mean sea level.
 
-**b.** AGL Altitude- Altitude expressed in feet measured above ground level.
+- **b.** AGL Altitude- Altitude expressed in feet measured above ground level.
 
-**c.** Indicated Altitude- The altitude as shown by an altimeter. On a pressure or barometric altimeter it is altitude as shown uncorrected for instrument error and uncompensated for variation from standard atmospheric conditions.
+- **c.** Indicated Altitude- The altitude as shown by an altimeter. On a pressure or barometric altimeter it is altitude as shown uncorrected for instrument error and uncompensated for variation from standard atmospheric conditions.
 
 ## See Also
 

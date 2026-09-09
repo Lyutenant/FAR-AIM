@@ -11,6 +11,8 @@ generated: true
 title: "RAIS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RAIS

@@ -11,6 +11,8 @@ generated: true
 title: "OPPOSITE DIRECTION AIRCRAFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OPPOSITE DIRECTION AIRCRAFT
@@ -22,8 +24,8 @@ tags:
 
 OPPOSITE DIRECTION AIRCRAFT- Aircraft are operating in opposite directions when:
 
-**a.** They are following the same track in reciprocal directions; or
+- **a.** They are following the same track in reciprocal directions; or
 
-**b.** Their tracks are parallel and the aircraft are flying in reciprocal directions; or
+- **b.** Their tracks are parallel and the aircraft are flying in reciprocal directions; or
 
-**c.** Their tracks intersect at an angle of more than 135°.
+- **c.** Their tracks intersect at an angle of more than 135°.

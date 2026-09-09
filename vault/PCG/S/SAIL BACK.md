@@ -11,6 +11,8 @@ generated: true
 title: "SAIL BACK"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SAIL BACK

@@ -11,6 +11,8 @@ generated: true
 title: "LOW ALTITUDE ALERT, CHECK YOUR ALTITUDE IMMEDIATELY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LOW ALTITUDE ALERT, CHECK YOUR ALTITUDE IMMEDIATELY

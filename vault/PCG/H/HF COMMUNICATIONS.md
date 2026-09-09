@@ -11,6 +11,8 @@ generated: true
 title: "HF COMMUNICATIONS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HF COMMUNICATIONS

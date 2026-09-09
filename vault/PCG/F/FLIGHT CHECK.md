@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT CHECK"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT CHECK

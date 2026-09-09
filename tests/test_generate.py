@@ -113,6 +113,7 @@ def _regulation_items():
         ("title", "Basic VFR weather minimums"),
         ("aliases", ["§ 91.155"]),
         ("tags", ["far", "regulation"]),
+        ("cssclasses", ["far-aim-text"]),
     ]
 
 
@@ -153,6 +154,17 @@ def test_frontmatter_schema_rejects_out_of_order():
     assert frontmatter_defect("regulation", items) == "keys out of schema order"
 
 
+def test_frontmatter_cssclasses_only_on_official_text_kinds():
+    # Every kind that renders official text must carry the class; a kind
+    # that never does must not (the snippet would restyle its link lists).
+    items = _regulation_items()
+    assert "cssclasses" in frontmatter_defect("regulation", items[:-1])
+    index_items = [(k, v) for k, v in items if k not in ("section", "cssclasses")]
+    index_items = [("type", "index") if k == "type" else (k, v) for k, v in index_items]
+    assert frontmatter_defect("index", index_items) is None
+    assert "not allowed" in frontmatter_defect("index", [*index_items, items[-1]])
+
+
 def test_frontmatter_schema_rejects_empty_list():
     items = [(k, []) if k == "aliases" else (k, v) for k, v in _regulation_items()]
     assert "empty list" in frontmatter_defect("regulation", items)
@@ -169,10 +181,11 @@ def test_escape_md_reserved_and_syntax():
     assert escape_md("# not a heading") == "\\# not a heading"
     assert escape_md("- not a list") == "\\- not a list"
     assert escape_md("1. not ordered") == "1\\. not ordered"
+    assert escape_md("1) not ordered") == "1\\) not ordered"
     assert escape_md("100 feet") == "100 feet"
 
 
-def test_paragraph_renders_flat_with_label_and_subject():
+def test_paragraph_renders_nested_list_with_label_and_subject():
     blocks = [
         {
             "type": "paragraph",
@@ -192,22 +205,22 @@ def test_paragraph_renders_flat_with_label_and_subject():
             ],
         }
     ]
+    # One chunk per top-level paragraph; the child is a nested list item.
     assert render_blocks(blocks) == [
-        "**(a)** *Applicability.* This section applies.",
-        "**(1)** To everyone.",
+        "- **(a)** *Applicability.* This section applies.\n\n    - **(1)** To everyone.",
     ]
 
 
 def test_paragraph_null_label():
     blocks = [{"type": "paragraph", "label": None, "designator": None, "subject": None,
                "text": "Run-in text.", "children": []}]
-    assert render_blocks(blocks) == ["Run-in text."]
+    assert render_blocks(blocks) == ["- Run-in text."]
 
 
 def test_definition_renders_term_italic():
     blocks = [{"type": "definition", "term": "Administrator", "text": "means the FAA.",
                "children": []}]
-    assert render_blocks(blocks) == ["*Administrator* means the FAA."]
+    assert render_blocks(blocks) == ["- *Administrator* means the FAA."]
 
 
 def test_text_styles():

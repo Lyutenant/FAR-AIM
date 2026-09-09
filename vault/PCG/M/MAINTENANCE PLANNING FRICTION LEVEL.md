@@ -11,6 +11,8 @@ generated: true
 title: "MAINTENANCE PLANNING FRICTION LEVEL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MAINTENANCE PLANNING FRICTION LEVEL

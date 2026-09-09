@@ -11,6 +11,8 @@ generated: true
 title: "ADS-B"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADS-B

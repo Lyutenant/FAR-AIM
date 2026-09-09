@@ -11,6 +11,8 @@ generated: true
 title: "NORTH AMERICAN ROUTE PROGRAM (NRP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NORTH AMERICAN ROUTE PROGRAM (NRP)

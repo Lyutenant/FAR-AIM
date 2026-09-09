@@ -11,6 +11,8 @@ generated: true
 title: "PRIMARY RADAR TARGET"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PRIMARY RADAR TARGET

@@ -11,6 +11,8 @@ generated: true
 title: "EST"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EST

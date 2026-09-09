@@ -11,6 +11,8 @@ generated: true
 title: "TRAFFIC INFORMATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAFFIC INFORMATION

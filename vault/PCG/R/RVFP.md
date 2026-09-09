@@ -11,6 +11,8 @@ generated: true
 title: "RVFP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RVFP

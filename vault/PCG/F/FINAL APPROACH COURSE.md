@@ -11,6 +11,8 @@ generated: true
 title: "FINAL APPROACH COURSE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FINAL APPROACH COURSE

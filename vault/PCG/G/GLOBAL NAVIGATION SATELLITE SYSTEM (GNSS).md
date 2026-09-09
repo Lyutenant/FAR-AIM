@@ -11,6 +11,8 @@ generated: true
 title: "GLOBAL NAVIGATION SATELLITE SYSTEM (GNSS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GLOBAL NAVIGATION SATELLITE SYSTEM (GNSS)

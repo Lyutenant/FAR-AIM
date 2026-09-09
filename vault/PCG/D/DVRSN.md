@@ -11,6 +11,8 @@ generated: true
 title: "DVRSN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DVRSN

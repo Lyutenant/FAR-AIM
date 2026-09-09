@@ -11,6 +11,8 @@ generated: true
 title: "AIR ROUTE SURVEILLANCE RADAR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR ROUTE SURVEILLANCE RADAR

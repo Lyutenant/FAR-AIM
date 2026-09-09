@@ -11,6 +11,8 @@ generated: true
 title: "RNAV"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RNAV

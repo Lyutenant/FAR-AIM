@@ -11,6 +11,8 @@ generated: true
 title: "MINIMUM EN ROUTE IFR ALTITUDE (MEA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMUM EN ROUTE IFR ALTITUDE (MEA)

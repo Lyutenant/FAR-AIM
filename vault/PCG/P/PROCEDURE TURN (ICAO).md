@@ -13,6 +13,8 @@ aliases:
   - "PROCEDURE TURN [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROCEDURE TURN \[ICAO]

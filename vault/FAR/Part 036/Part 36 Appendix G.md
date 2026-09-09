@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Appendix G to Part 36—Takeoff Noise Requirements for Propeller-Driven Small Airplane and Propeller-Driven, Commuter Category Airplane Certification Tests on or After December 22, 1988

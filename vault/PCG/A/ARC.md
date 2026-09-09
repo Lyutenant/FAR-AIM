@@ -11,6 +11,8 @@ generated: true
 title: "ARC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ARC

@@ -11,6 +11,8 @@ generated: true
 title: "IRREGULAR SURFACE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IRREGULAR SURFACE

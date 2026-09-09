@@ -11,6 +11,8 @@ generated: true
 title: "OPERATOR (UAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OPERATOR (UAS)

@@ -11,6 +11,8 @@ generated: true
 title: "GLIDEPATH INTERCEPT ALTITUDE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GLIDEPATH INTERCEPT ALTITUDE

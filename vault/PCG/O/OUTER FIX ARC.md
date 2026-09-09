@@ -11,6 +11,8 @@ generated: true
 title: "OUTER FIX ARC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OUTER FIX ARC

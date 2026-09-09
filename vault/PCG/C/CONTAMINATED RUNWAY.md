@@ -11,6 +11,8 @@ generated: true
 title: "CONTAMINATED RUNWAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONTAMINATED RUNWAY

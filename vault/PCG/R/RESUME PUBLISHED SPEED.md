@@ -11,6 +11,8 @@ generated: true
 title: "RESUME PUBLISHED SPEED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RESUME PUBLISHED SPEED

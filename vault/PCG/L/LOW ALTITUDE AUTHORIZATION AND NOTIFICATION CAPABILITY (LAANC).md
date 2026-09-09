@@ -11,6 +11,8 @@ generated: true
 title: "LOW ALTITUDE AUTHORIZATION AND NOTIFICATION CAPABILITY (LAANC)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LOW ALTITUDE AUTHORIZATION AND NOTIFICATION CAPABILITY (LAANC)

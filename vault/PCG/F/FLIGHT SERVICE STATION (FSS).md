@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT SERVICE STATION (FSS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT SERVICE STATION (FSS)

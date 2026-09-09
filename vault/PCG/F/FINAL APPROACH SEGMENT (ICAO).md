@@ -13,6 +13,8 @@ aliases:
   - "FINAL APPROACH SEGMENT [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FINAL APPROACH SEGMENT \[ICAO]

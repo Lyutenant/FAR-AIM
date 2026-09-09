@@ -11,6 +11,8 @@ generated: true
 title: "DECISION HEIGHT (DH)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DECISION HEIGHT (DH)

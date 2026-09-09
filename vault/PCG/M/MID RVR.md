@@ -11,6 +11,8 @@ generated: true
 title: "MID RVR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MID RVR

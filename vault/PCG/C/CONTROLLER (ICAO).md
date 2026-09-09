@@ -13,6 +13,8 @@ aliases:
   - "CONTROLLER [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONTROLLER \[ICAO]

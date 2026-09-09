@@ -11,6 +11,8 @@ generated: true
 title: "PILOT'S DISCRETION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PILOT'S DISCRETION

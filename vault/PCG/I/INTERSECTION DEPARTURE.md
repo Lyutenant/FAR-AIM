@@ -11,6 +11,8 @@ generated: true
 title: "INTERSECTION DEPARTURE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INTERSECTION DEPARTURE

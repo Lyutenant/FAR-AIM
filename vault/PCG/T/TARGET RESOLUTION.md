@@ -11,6 +11,8 @@ generated: true
 title: "TARGET RESOLUTION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TARGET RESOLUTION
@@ -22,11 +24,11 @@ tags:
 
 TARGET RESOLUTION- A process to ensure that correlated radar targets do not touch. Target resolution must be applied as follows:
 
-**a.** Between the edges of two primary targets or the edges of the ASR‐9/11 primary target symbol.
+- **a.** Between the edges of two primary targets or the edges of the ASR‐9/11 primary target symbol.
 
-**b.** Between the end of the beacon control slash and the edge of a primary target.
+- **b.** Between the end of the beacon control slash and the edge of a primary target.
 
-**c.** Between the ends of two beacon control slashes.
+- **c.** Between the ends of two beacon control slashes.
 
 > [!note] Note 1:
 > Mandatory traffic advisories and safety alerts must be issued when this procedure is used.

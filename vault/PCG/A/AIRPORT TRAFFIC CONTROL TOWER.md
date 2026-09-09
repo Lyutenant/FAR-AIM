@@ -11,6 +11,8 @@ generated: true
 title: "AIRPORT TRAFFIC CONTROL TOWER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPORT TRAFFIC CONTROL TOWER

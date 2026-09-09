@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT RECORDER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT RECORDER

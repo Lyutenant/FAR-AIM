@@ -11,6 +11,8 @@ generated: true
 title: "PGUI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PGUI

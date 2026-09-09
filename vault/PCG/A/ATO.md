@@ -11,6 +11,8 @@ generated: true
 title: "ATO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATO

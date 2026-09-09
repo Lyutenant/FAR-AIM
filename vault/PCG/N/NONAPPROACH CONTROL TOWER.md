@@ -11,6 +11,8 @@ generated: true
 title: "NONAPPROACH CONTROL TOWER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NONAPPROACH CONTROL TOWER

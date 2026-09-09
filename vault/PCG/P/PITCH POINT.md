@@ -11,6 +11,8 @@ generated: true
 title: "PITCH POINT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PITCH POINT

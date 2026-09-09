@@ -11,6 +11,8 @@ generated: true
 title: "CTA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CTA

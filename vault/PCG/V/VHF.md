@@ -11,6 +11,8 @@ generated: true
 title: "VHF"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VHF

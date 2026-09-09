@@ -11,6 +11,8 @@ generated: true
 title: "AIRPORT SURFACE DETECTION EQUIPMENT (ASDE)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPORT SURFACE DETECTION EQUIPMENT (ASDE)
@@ -22,8 +24,8 @@ tags:
 
 AIRPORT SURFACE DETECTION EQUIPMENT (ASDE)- Surveillance equipment specifically designed to detect aircraft, vehicular traffic, and other objects, on the surface of an airport, and to present the image on a tower display. Used to augment visual observation by tower personnel of aircraft and/or vehicular movements on runways and taxiways. There are three ASDE systems deployed in the NAS:
 
-**a.** ASDE-3- a Surface Movement Radar.
+- **a.** ASDE-3- a Surface Movement Radar.
 
-**b.** ASDE-X- a system that uses an X-band Surface Movement Radar, multilateration, and ADS-B.
+- **b.** ASDE-X- a system that uses an X-band Surface Movement Radar, multilateration, and ADS-B.
 
-**c.** Airport Surface Surveillance Capability (ASSC)- A system that uses Surface Movement Radar, multilateration, and ADS-B.
+- **c.** Airport Surface Surveillance Capability (ASSC)- A system that uses Surface Movement Radar, multilateration, and ADS-B.

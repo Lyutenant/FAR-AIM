@@ -11,6 +11,8 @@ generated: true
 title: "WAKE TURBULENCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WAKE TURBULENCE

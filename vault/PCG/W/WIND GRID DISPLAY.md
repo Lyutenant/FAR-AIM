@@ -11,6 +11,8 @@ generated: true
 title: "WIND GRID DISPLAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WIND GRID DISPLAY

@@ -11,6 +11,8 @@ generated: true
 title: "CENTER WEATHER ADVISORY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CENTER WEATHER ADVISORY

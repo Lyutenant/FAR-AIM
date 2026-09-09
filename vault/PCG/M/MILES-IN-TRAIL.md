@@ -13,6 +13,8 @@ aliases:
   - "MILES‐IN‐TRAIL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MILES‐IN‐TRAIL

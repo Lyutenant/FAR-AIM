@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATIC CARRIER LANDING SYSTEM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATIC CARRIER LANDING SYSTEM

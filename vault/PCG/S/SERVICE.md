@@ -11,6 +11,8 @@ generated: true
 title: "SERVICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SERVICE

@@ -14,6 +14,8 @@ aliases:
   - "Emergency Services Available to Pilots"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 6, Section 2 — Emergency Services Available to Pilots

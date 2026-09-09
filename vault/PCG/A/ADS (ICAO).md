@@ -13,6 +13,8 @@ aliases:
   - "ADS [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADS \[ICAO]

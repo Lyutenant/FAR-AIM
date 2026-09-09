@@ -11,6 +11,8 @@ generated: true
 title: "BLAST FENCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BLAST FENCE

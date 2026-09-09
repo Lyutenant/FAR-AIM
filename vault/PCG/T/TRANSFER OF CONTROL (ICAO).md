@@ -13,6 +13,8 @@ aliases:
   - "TRANSFER OF CONTROL [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSFER OF CONTROL \[ICAO]

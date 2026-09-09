@@ -11,6 +11,8 @@ generated: true
 title: "SPECIAL AIR TRAFFIC RULES (SATR)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPECIAL AIR TRAFFIC RULES (SATR)

@@ -11,6 +11,8 @@ generated: true
 title: "EN ROUTE LOW ALTITUDE CHARTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EN ROUTE LOW ALTITUDE CHARTS

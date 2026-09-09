@@ -11,6 +11,8 @@ generated: true
 title: "TRAJECTORY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAJECTORY

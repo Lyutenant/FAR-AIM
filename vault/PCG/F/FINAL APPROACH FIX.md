@@ -11,6 +11,8 @@ generated: true
 title: "FINAL APPROACH FIX"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FINAL APPROACH FIX

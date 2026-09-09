@@ -11,6 +11,8 @@ generated: true
 title: "HIGH FREQUENCY COMMUNICATIONS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HIGH FREQUENCY COMMUNICATIONS

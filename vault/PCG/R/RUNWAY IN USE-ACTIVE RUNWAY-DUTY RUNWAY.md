@@ -13,6 +13,8 @@ aliases:
   - "RUNWAY IN USE/ACTIVE RUNWAY/DUTY RUNWAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RUNWAY IN USE/ACTIVE RUNWAY/DUTY RUNWAY

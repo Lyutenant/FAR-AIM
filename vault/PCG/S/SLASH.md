@@ -11,6 +11,8 @@ generated: true
 title: "SLASH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SLASH

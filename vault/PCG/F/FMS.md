@@ -11,6 +11,8 @@ generated: true
 title: "FMS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FMS

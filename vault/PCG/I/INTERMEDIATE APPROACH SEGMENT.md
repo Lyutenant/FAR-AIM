@@ -11,6 +11,8 @@ generated: true
 title: "INTERMEDIATE APPROACH SEGMENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INTERMEDIATE APPROACH SEGMENT

@@ -11,6 +11,8 @@ generated: true
 title: "GROUND DELAY PROGRAM (GDP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GROUND DELAY PROGRAM (GDP)

@@ -11,6 +11,8 @@ generated: true
 title: "URGENCY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # URGENCY

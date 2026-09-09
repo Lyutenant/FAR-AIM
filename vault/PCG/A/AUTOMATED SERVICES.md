@@ -11,6 +11,8 @@ generated: true
 title: "AUTOMATED SERVICES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AUTOMATED SERVICES

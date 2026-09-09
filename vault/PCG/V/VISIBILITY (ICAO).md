@@ -13,6 +13,8 @@ aliases:
   - "VISIBILITY [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VISIBILITY \[ICAO]
@@ -24,8 +26,8 @@ tags:
 
 VISIBILITY \[ICAO]- The ability, as determined by atmospheric conditions and expressed in units of distance, to see and identify prominent unlighted objects by day and prominent lighted objects by night.
 
-**a.** Flight Visibility- The visibility forward from the cockpit of an aircraft in flight.
+- **a.** Flight Visibility- The visibility forward from the cockpit of an aircraft in flight.
 
-**b.** Ground Visibility- The visibility at an aerodrome as reported by an accredited observer.
+- **b.** Ground Visibility- The visibility at an aerodrome as reported by an accredited observer.
 
-**c.** Runway Visual Range \[RVR]- The range over which the pilot of an aircraft on the centerline of a runway can see the runway surface markings or the lights delineating the runway or identifying its centerline.
+- **c.** Runway Visual Range \[RVR]- The range over which the pilot of an aircraft on the centerline of a runway can see the runway surface markings or the lights delineating the runway or identifying its centerline.

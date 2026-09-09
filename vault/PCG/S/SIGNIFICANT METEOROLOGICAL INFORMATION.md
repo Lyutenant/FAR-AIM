@@ -11,6 +11,8 @@ generated: true
 title: "SIGNIFICANT METEOROLOGICAL INFORMATION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SIGNIFICANT METEOROLOGICAL INFORMATION

@@ -11,6 +11,8 @@ generated: true
 title: "VOT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VOT

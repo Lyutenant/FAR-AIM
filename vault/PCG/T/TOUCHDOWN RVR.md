@@ -11,6 +11,8 @@ generated: true
 title: "TOUCHDOWN RVR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOUCHDOWN RVR

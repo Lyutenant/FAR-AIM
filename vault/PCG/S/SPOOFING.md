@@ -11,6 +11,8 @@ generated: true
 title: "SPOOFING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPOOFING

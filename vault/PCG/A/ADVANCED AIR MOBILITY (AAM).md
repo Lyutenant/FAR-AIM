@@ -11,6 +11,8 @@ generated: true
 title: "ADVANCED AIR MOBILITY (AAM)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ADVANCED AIR MOBILITY (AAM)

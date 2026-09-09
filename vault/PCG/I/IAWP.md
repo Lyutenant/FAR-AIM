@@ -11,6 +11,8 @@ generated: true
 title: "IAWP"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IAWP

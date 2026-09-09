@@ -11,6 +11,8 @@ generated: true
 title: "STAND BY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STAND BY

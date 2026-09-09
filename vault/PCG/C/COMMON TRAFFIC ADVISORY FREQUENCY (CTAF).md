@@ -11,6 +11,8 @@ generated: true
 title: "COMMON TRAFFIC ADVISORY FREQUENCY (CTAF)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COMMON TRAFFIC ADVISORY FREQUENCY (CTAF)

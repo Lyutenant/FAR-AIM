@@ -11,6 +11,8 @@ generated: true
 title: "ALERTING SERVICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALERTING SERVICE

@@ -14,6 +14,8 @@ aliases:
   - "Airport Marking Aids and Signs"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 2, Section 3 — Airport Marking Aids and Signs

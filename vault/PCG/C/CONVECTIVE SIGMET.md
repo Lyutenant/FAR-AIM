@@ -11,6 +11,8 @@ generated: true
 title: "CONVECTIVE SIGMET"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONVECTIVE SIGMET

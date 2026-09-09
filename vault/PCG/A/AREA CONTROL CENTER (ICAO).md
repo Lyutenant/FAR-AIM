@@ -13,6 +13,8 @@ aliases:
   - "AREA CONTROL CENTER [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AREA CONTROL CENTER \[ICAO]

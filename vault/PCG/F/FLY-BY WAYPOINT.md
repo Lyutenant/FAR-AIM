@@ -13,6 +13,8 @@ aliases:
   - "FLY‐BY WAYPOINT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLY‐BY WAYPOINT

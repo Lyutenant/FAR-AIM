@@ -155,7 +155,18 @@ ATP).
 Dataview needed no code: generated frontmatter was already typed;
 sample queries and the curated-naming guidance (avoid case-fold
 collisions with generated stems/aliases) are in docs/vault.md.
-`.obsidian/` core config was already committed; no CSS snippets added.
+`.obsidian/` core config was already committed. Hierarchy presentation
+(2026-09-08): official text renders as **nested Markdown list items**
+(`generate.hierarchy.list_item`; one `- ` item per CFR paragraph / AIM
+or PCG list item, children indented four spaces, relative never absolute,
+six levels deep) instead of the earlier flat marker-led paragraphs; the
+committed snippet `vault/.obsidian/snippets/far-aim-hierarchy.css`
+(enabled in `appearance.json`, scoped by the frontmatter property
+`cssclasses: [far-aim-text]` that every official-text note kind carries)
+hides bullets, indents per level and draws guide lines in Reading View.
+Settled: presentation lives only in CSS (regeneration never needed to
+retune it); FAR appendices stay flat because the parser keeps them as
+flat block lists; `.obsidian/` remains curated, never generator-written.
 Exit criterion met: a student pilot lands on Home and browses to
 definition + everything referencing it without knowing repo internals.
 Phase 8 (automated maintenance) complete: `far-aim update` (formerly the

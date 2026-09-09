@@ -12,6 +12,8 @@ generated: true
 title: "Controlled Airspace"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 3, Section 2 — Controlled Airspace

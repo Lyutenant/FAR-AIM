@@ -11,6 +11,8 @@ generated: true
 title: "RELEASE TIME"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RELEASE TIME

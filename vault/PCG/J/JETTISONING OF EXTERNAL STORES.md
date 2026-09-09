@@ -11,6 +11,8 @@ generated: true
 title: "JETTISONING OF EXTERNAL STORES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # JETTISONING OF EXTERNAL STORES

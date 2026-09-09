@@ -11,6 +11,8 @@ generated: true
 title: "AIR TRAFFIC ORGANIZATION (ATO)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR TRAFFIC ORGANIZATION (ATO)

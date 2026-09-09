@@ -11,6 +11,8 @@ generated: true
 title: "FLAG"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLAG
@@ -22,6 +24,6 @@ tags:
 
 FLAG- A warning device incorporated in certain airborne navigation and flight instruments indicating that:
 
-**a.** Instruments are inoperative or otherwise not operating satisfactorily, or
+- **a.** Instruments are inoperative or otherwise not operating satisfactorily, or
 
-**b.** Signal strength or quality of the received signal falls below acceptable values.
+- **b.** Signal strength or quality of the received signal falls below acceptable values.

@@ -11,6 +11,8 @@ generated: true
 title: "COLD TEMPERATURE CORRECTION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COLD TEMPERATURE CORRECTION

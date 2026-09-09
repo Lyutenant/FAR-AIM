@@ -13,6 +13,8 @@ aliases:
   - "NOTAM [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NOTAM \[ICAO]
@@ -24,6 +26,6 @@ tags:
 
 NOTAM \[ICAO]- A notice containing information concerning the establishment, condition or change in any aeronautical facility, service, procedure or hazard, the timely knowledge of which is essential to personnel concerned with flight operations.
 
-**a.** I Distribution- Distribution by means of telecommunication.
+- **a.** I Distribution- Distribution by means of telecommunication.
 
-**b.** II Distribution- Distribution by means other than telecommunications.
+- **b.** II Distribution- Distribution by means other than telecommunications.

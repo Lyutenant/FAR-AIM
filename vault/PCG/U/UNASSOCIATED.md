@@ -11,6 +11,8 @@ generated: true
 title: "UNASSOCIATED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UNASSOCIATED

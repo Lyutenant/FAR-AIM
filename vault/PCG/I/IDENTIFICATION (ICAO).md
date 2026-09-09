@@ -13,6 +13,8 @@ aliases:
   - "IDENTIFICATION [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IDENTIFICATION \[ICAO]

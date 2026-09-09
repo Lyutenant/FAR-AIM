@@ -13,6 +13,8 @@ aliases:
   - "PROCEDURAL SEPARATION [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PROCEDURAL SEPARATION \[ICAO]

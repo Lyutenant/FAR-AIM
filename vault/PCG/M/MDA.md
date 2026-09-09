@@ -11,6 +11,8 @@ generated: true
 title: "MDA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MDA

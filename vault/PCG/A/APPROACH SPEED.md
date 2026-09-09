@@ -11,6 +11,8 @@ generated: true
 title: "APPROACH SPEED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # APPROACH SPEED

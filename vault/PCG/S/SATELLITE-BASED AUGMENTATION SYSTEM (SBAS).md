@@ -11,6 +11,8 @@ generated: true
 title: "SATELLITE-BASED AUGMENTATION SYSTEM (SBAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SATELLITE-BASED AUGMENTATION SYSTEM (SBAS)

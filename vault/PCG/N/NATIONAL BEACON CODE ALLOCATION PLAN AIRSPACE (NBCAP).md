@@ -11,6 +11,8 @@ generated: true
 title: "NATIONAL BEACON CODE ALLOCATION PLAN AIRSPACE (NBCAP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NATIONAL BEACON CODE ALLOCATION PLAN AIRSPACE (NBCAP)

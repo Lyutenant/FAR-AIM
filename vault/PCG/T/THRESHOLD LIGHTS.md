@@ -11,6 +11,8 @@ generated: true
 title: "THRESHOLD LIGHTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # THRESHOLD LIGHTS

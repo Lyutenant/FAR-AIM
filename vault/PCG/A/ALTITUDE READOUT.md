@@ -11,6 +11,8 @@ generated: true
 title: "ALTITUDE READOUT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALTITUDE READOUT

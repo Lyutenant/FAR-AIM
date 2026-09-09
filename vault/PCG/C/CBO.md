@@ -11,6 +11,8 @@ generated: true
 title: "CBO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CBO

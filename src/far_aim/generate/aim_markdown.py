@@ -3,7 +3,10 @@
 Official wording is reproduced exactly; the only transformations are
 deterministic formatting ones. Design mirrors the FAR renderer:
 
-- **Lists render flat**, each item its own paragraph led by its bold marker.
+- **Lists render as nested Markdown list items** (``generate.hierarchy``):
+  each item is a ``- `` item led by its bold marker, with the item's
+  remaining blocks — nested lists, callouts, figures, tables — indented
+  under it, so the six-level hierarchy is real list nesting in Obsidian.
   Markers follow the FAA HTML edition's six-level convention (``a.`` ``1.``
   ``(a)`` ``(1)`` ``[a]`` ``[1]``) and are derived from list level and item
   position — in the source they are CSS-generated, never text. The HTML
@@ -13,15 +16,16 @@ deterministic formatting ones. Design mirrors the FAR renderer:
   stylesheet: AIM 4-1-20 refers to the fifth item of a ``type="i"``
   level-three list as "(e) above", not "(v)". ``html_type`` is therefore
   preserved in canonical JSON for losslessness but deliberately ignored
-  here. Nesting reaches depth six and items contain tables, figures, and
-  callouts, which break inside Markdown list indentation; the printed AIM
-  is read flat via its markers anyway.
+  here. ``level`` chooses the marker glyph only; indentation comes from the
+  block tree itself, relative to the enclosing item, so a list inside a
+  NOTE box nests inside the callout rather than at an absolute offset.
 - **Boxes** (NOTE-, EXAMPLE-, REFERENCE-, PHRASEOLOGY-) become Obsidian
   callouts titled with the box's verbatim label.
 - **Figures** embed the archived asset (``![[file]]``) beneath a caption
   line; bare images (form reproductions) embed the same way.
 - **Tables** render as pipe tables when every cell is a single line of text
-  (single header row, no spans) and as inline HTML otherwise.
+  (single header row, no spans) and as inline HTML otherwise; a list inside
+  an HTML cell is a nested ``<ul>`` whose items carry the same bold markers.
 
 Every block type must have a renderer; an unknown type raises (plan §32.2).
 """
@@ -31,6 +35,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from far_aim.generate import BuildError
+from far_aim.generate.hierarchy import list_item
 from far_aim.generate.markdown import escape_md, html_escape
 
 CALLOUT_KINDS = {
@@ -106,15 +111,16 @@ def _render_list(block: dict, asset_prefix: str) -> list[str]:
     level = block["level"]
     for index, item in enumerate(block["items"]):
         # The marker sits inside ``**…**`` so it can never open a Markdown
-        # list; left unescaped, ``1.`` stays readable in the source.
+        # list of its own; left unescaped, ``1.`` stays readable in the source.
         marker = f"**{list_marker(level, index)}**"
         blocks = item["blocks"]
         if blocks and blocks[0]["type"] == "text":
-            chunks.append(f"{marker} {text_md(blocks[0]['text'])}")
-            chunks.extend(render_aim_blocks(blocks[1:], asset_prefix))
+            head = f"{marker} {text_md(blocks[0]['text'])}"
+            rest = blocks[1:]
         else:
-            chunks.append(marker)
-            chunks.extend(render_aim_blocks(blocks, asset_prefix))
+            head = marker
+            rest = blocks
+        chunks.append(list_item(head, render_aim_blocks(rest, asset_prefix)))
     return chunks
 
 
@@ -229,13 +235,19 @@ def _html_attr(value: str) -> str:
 
 
 def _html_blocks(blocks: list[dict], asset_prefix: str) -> str:
-    """Cell content as HTML: text paragraphs, flat marker-led lists, boxes."""
+    """Cell content as HTML: text paragraphs, nested marker-led lists, boxes.
+
+    Lists become real ``<ul>`` nesting (the same structure the Markdown
+    renderer produces) with the bold marker leading each ``<li>``, so the
+    CSS snippet styles them like the surrounding note.
+    """
     parts: list[str] = []
     for block in blocks:
         kind = block["type"]
         if kind == "text":
             parts.append(f"<p>{_html_inline(block['text'])}</p>")
         elif kind == "list":
+            items = []
             for index, item in enumerate(block["items"]):
                 marker = html_escape(list_marker(block["level"], index))
                 inner = _html_blocks(item["blocks"], asset_prefix)
@@ -243,7 +255,8 @@ def _html_blocks(blocks: list[dict], asset_prefix: str) -> str:
                     inner = f"<p><b>{marker}</b> " + inner[len("<p>") :]
                 else:
                     inner = f"<p><b>{marker}</b></p>{inner}"
-                parts.append(inner)
+                items.append(f"<li>{inner}</li>")
+            parts.append(f"<ul>{''.join(items)}</ul>")
         elif kind == "note":
             inner = _html_blocks(block["blocks"], asset_prefix)
             parts.append(f"<p><b>{html_escape(block['title'])}</b></p>{inner}")

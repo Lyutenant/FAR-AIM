@@ -11,6 +11,8 @@ generated: true
 title: "RECEIVING FACILITY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RECEIVING FACILITY

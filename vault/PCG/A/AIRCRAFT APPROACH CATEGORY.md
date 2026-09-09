@@ -11,6 +11,8 @@ generated: true
 title: "AIRCRAFT APPROACH CATEGORY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRCRAFT APPROACH CATEGORY
@@ -22,15 +24,15 @@ tags:
 
 AIRCRAFT APPROACH CATEGORY- A grouping of aircraft based on a speed of 1.3 times the stall speed in the landing configuration at maximum gross landing weight. An aircraft must fit in only one category. If it is necessary to maneuver at speeds in excess of the upper limit of a speed range for a category, the minimums for the category for that speed must be used. For example, an aircraft which falls in Category A, but is circling to land at a speed in excess of 91 knots, must use the approach Category B minimums when circling to land. The categories are as follows:
 
-**a.** Category A- Speed less than 91 knots.
+- **a.** Category A- Speed less than 91 knots.
 
-**b.** Category B- Speed 91 knots or more but less than 121 knots.
+- **b.** Category B- Speed 91 knots or more but less than 121 knots.
 
-**c.** Category C- Speed 121 knots or more but less than 141 knots.
+- **c.** Category C- Speed 121 knots or more but less than 141 knots.
 
-**d.** Category D- Speed 141 knots or more but less than 166 knots.
+- **d.** Category D- Speed 141 knots or more but less than 166 knots.
 
-**e.** Category E- Speed 166 knots or more.
+- **e.** Category E- Speed 166 knots or more.
 
 ## References
 

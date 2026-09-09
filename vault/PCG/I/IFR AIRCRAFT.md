@@ -11,6 +11,8 @@ generated: true
 title: "IFR AIRCRAFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IFR AIRCRAFT

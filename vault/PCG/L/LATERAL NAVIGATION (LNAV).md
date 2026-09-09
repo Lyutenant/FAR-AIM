@@ -11,6 +11,8 @@ generated: true
 title: "LATERAL NAVIGATION (LNAV)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LATERAL NAVIGATION (LNAV)

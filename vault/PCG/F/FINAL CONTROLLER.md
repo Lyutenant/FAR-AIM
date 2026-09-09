@@ -11,6 +11,8 @@ generated: true
 title: "FINAL CONTROLLER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FINAL CONTROLLER

@@ -13,6 +13,8 @@ aliases:
   - "CHART SUPPLEMENT U.S."
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CHART SUPPLEMENT U.S.

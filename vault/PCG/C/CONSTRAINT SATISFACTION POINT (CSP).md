@@ -11,6 +11,8 @@ generated: true
 title: "CONSTRAINT SATISFACTION POINT (CSP)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONSTRAINT SATISFACTION POINT (CSP)

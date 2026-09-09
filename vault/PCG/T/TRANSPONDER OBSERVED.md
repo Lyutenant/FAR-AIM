@@ -11,6 +11,8 @@ generated: true
 title: "TRANSPONDER OBSERVED"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRANSPONDER OBSERVED

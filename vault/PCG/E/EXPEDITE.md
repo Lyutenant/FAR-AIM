@@ -11,6 +11,8 @@ generated: true
 title: "EXPEDITE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EXPEDITE

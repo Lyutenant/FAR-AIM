@@ -11,6 +11,8 @@ generated: true
 title: "SMALL UNMANNED AIRCRAFT SYSTEM (sUAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SMALL UNMANNED AIRCRAFT SYSTEM (sUAS)

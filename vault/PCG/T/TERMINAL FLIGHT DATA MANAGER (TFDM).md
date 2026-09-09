@@ -11,6 +11,8 @@ generated: true
 title: "TERMINAL FLIGHT DATA MANAGER (TFDM)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TERMINAL FLIGHT DATA MANAGER (TFDM)

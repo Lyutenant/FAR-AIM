@@ -11,6 +11,8 @@ generated: true
 title: "MRE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MRE

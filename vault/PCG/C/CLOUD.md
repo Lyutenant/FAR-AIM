@@ -11,6 +11,8 @@ generated: true
 title: "CLOUD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLOUD

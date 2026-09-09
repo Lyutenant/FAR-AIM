@@ -11,6 +11,8 @@ generated: true
 title: "INTERMEDIATE FIX"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INTERMEDIATE FIX

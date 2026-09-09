@@ -13,6 +13,8 @@ aliases:
   - "ACCELERATE‐STOP DISTANCE AVAILABLE [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ACCELERATE‐STOP DISTANCE AVAILABLE \[ICAO]

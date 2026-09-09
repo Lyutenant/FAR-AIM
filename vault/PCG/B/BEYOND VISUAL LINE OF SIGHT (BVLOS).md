@@ -11,6 +11,8 @@ generated: true
 title: "BEYOND VISUAL LINE OF SIGHT (BVLOS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BEYOND VISUAL LINE OF SIGHT (BVLOS)

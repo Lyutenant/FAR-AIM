@@ -11,6 +11,8 @@ generated: true
 title: "SUBSTITUTE ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SUBSTITUTE ROUTE
@@ -22,8 +24,8 @@ tags:
 
 SUBSTITUTE ROUTE- A route assigned to pilots when any part of an airway or route is unusable because of NAVAID status. These routes consist of:
 
-**a.** Substitute routes which are shown on U.S. Government charts.
+- **a.** Substitute routes which are shown on U.S. Government charts.
 
-**b.** Routes defined by ATC as specific NAVAID radials or courses.
+- **b.** Routes defined by ATC as specific NAVAID radials or courses.
 
-**c.** Routes defined by ATC as direct to or between NAVAIDs.
+- **c.** Routes defined by ATC as direct to or between NAVAIDs.

@@ -11,6 +11,8 @@ generated: true
 title: "FILED FLIGHT PLAN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FILED FLIGHT PLAN

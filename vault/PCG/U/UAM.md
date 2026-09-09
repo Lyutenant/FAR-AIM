@@ -11,6 +11,8 @@ generated: true
 title: "UAM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UAM

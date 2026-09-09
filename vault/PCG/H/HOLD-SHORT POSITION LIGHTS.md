@@ -13,6 +13,8 @@ aliases:
   - "HOLD‐SHORT POSITION LIGHTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOLD‐SHORT POSITION LIGHTS

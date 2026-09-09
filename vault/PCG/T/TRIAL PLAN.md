@@ -11,6 +11,8 @@ generated: true
 title: "TRIAL PLAN"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRIAL PLAN

@@ -21,6 +21,7 @@ from dataclasses import dataclass, field
 from far_aim.generate import BuildError, enrich, naming
 from far_aim.generate.aim_markdown import asset_prefix_for, collect_text, render_aim_blocks
 from far_aim.generate.frontmatter import Value
+from far_aim.generate.hierarchy import TEXT_CSS_CLASS
 from far_aim.generate.markdown import escape_md
 from far_aim.generate.notes import Note, link_display
 from far_aim.links import citations as cites
@@ -216,6 +217,7 @@ def build_paragraph_note(
     if aliases:
         frontmatter.append(("aliases", aliases))
     frontmatter.append(("tags", ["aim"]))
+    frontmatter.append(("cssclasses", [TEXT_CSS_CLASS]))
     path_parts = (
         AIM_DIR,
         naming.aim_chapter_folder(para["chapter"]),
@@ -263,6 +265,7 @@ def build_section_note(
     if aliases:
         frontmatter.append(("aliases", aliases))
     frontmatter.append(("tags", ["aim"]))
+    frontmatter.append(("cssclasses", [TEXT_CSS_CLASS]))
     path_parts = (
         AIM_DIR,
         naming.aim_chapter_folder(sec["chapter"]),
@@ -352,6 +355,7 @@ def build_appendix_note(
     if aliases:
         frontmatter.append(("aliases", aliases))
     frontmatter.append(("tags", ["aim"]))
+    frontmatter.append(("cssclasses", [TEXT_CSS_CLASS]))
     path_parts = (AIM_DIR, APPENDICES_DIR, f"{naming.aim_appendix_stem(apx['appendix'])}.md")
     chunks = [
         f"# AIM Appendix {apx['appendix']} — {escape_md(apx['heading'])}",
@@ -394,6 +398,7 @@ def build_aim_index(docs: dict[str, dict], title_hash: str) -> Note:
         ("generated", True),
         ("title", publication["title"]),
         ("tags", ["aim"]),
+        ("cssclasses", [TEXT_CSS_CLASS]),
     ]
     chunks = [
         f"# {escape_md(publication['title'])}",

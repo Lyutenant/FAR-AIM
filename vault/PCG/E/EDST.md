@@ -11,6 +11,8 @@ generated: true
 title: "EDST"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EDST

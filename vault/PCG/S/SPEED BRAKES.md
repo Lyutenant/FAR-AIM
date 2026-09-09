@@ -11,6 +11,8 @@ generated: true
 title: "SPEED BRAKES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPEED BRAKES

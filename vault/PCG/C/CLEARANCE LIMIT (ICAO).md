@@ -13,6 +13,8 @@ aliases:
   - "CLEARANCE LIMIT [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLEARANCE LIMIT \[ICAO]

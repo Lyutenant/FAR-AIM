@@ -11,6 +11,8 @@ generated: true
 title: "RECREATIONAL FLYER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RECREATIONAL FLYER

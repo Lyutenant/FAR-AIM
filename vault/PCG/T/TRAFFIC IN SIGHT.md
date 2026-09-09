@@ -11,6 +11,8 @@ generated: true
 title: "TRAFFIC IN SIGHT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAFFIC IN SIGHT

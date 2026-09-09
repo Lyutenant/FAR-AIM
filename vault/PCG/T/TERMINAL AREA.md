@@ -11,6 +11,8 @@ generated: true
 title: "TERMINAL AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TERMINAL AREA

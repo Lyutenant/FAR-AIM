@@ -11,6 +11,8 @@ generated: true
 title: "HOVER TAXI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOVER TAXI

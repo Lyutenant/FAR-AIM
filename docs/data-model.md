@@ -47,7 +47,8 @@ typed blocks. Sections numbered locally within their part (part 241's
 (`cfr_appendix`, `cfr-14-part-91-appendix-A` / `…-sfar-50-2` /
 `…-appendixes-B-C`) holds a flat block list — appendix material does not
 follow the section paragraph-label grammar, so labels stay inline in the
-text.
+text (and the vault therefore renders appendices as flat paragraphs while
+sections render as nested list items, docs/vault.md).
 
 Block types: `paragraph` (label + optional italic run-in `subject` + text +
 nested `children`; a label-less paragraph opening with a period-terminated

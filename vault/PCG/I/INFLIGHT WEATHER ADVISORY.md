@@ -11,6 +11,8 @@ generated: true
 title: "INFLIGHT WEATHER ADVISORY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # INFLIGHT WEATHER ADVISORY

@@ -11,6 +11,8 @@ generated: true
 title: "TRAFFIC ALERT AND COLLISION AVOIDANCE SYSTEM (TCAS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAFFIC ALERT AND COLLISION AVOIDANCE SYSTEM (TCAS)

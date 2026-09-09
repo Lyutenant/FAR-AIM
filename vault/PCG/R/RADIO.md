@@ -11,6 +11,8 @@ generated: true
 title: "RADIO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADIO
@@ -22,6 +24,6 @@ tags:
 
 RADIO-
 
-**a.** A device used for communication.
+- **a.** A device used for communication.
 
-**b.** Used to refer to a flight service station; e.g., “Seattle Radio” is used to call Seattle FSS.
+- **b.** Used to refer to a flight service station; e.g., “Seattle Radio” is used to call Seattle FSS.

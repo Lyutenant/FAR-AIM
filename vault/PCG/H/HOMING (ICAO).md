@@ -13,6 +13,8 @@ aliases:
   - "HOMING [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOMING \[ICAO]

@@ -11,6 +11,8 @@ generated: true
 title: "PDRR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PDRR

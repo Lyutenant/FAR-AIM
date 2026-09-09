@@ -11,6 +11,8 @@ generated: true
 title: "ATC REQUESTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATC REQUESTS

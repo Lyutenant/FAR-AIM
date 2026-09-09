@@ -11,6 +11,8 @@ generated: true
 title: "DESCEND VIA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DESCEND VIA

@@ -11,6 +11,8 @@ generated: true
 title: "CLEARWAY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLEARWAY

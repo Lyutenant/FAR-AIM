@@ -11,6 +11,8 @@ generated: true
 title: "PARALLEL RUNWAYS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PARALLEL RUNWAYS

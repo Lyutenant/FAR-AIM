@@ -11,6 +11,8 @@ generated: true
 title: "WORDS TWICE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WORDS TWICE
@@ -22,6 +24,6 @@ tags:
 
 WORDS TWICE-
 
-**a.** As a request: “Communication is difficult. Please say every phrase twice.”
+- **a.** As a request: “Communication is difficult. Please say every phrase twice.”
 
-**b.** As information: “Since communications are difficult, every phrase in this message will be spoken twice.”
+- **b.** As information: “Since communications are difficult, every phrase in this message will be spoken twice.”

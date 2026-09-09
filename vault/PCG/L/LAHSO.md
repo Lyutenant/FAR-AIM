@@ -11,6 +11,8 @@ generated: true
 title: "LAHSO"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # LAHSO

@@ -11,6 +11,8 @@ generated: true
 title: "EN ROUTE TRANSITION WAYPOINT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # EN ROUTE TRANSITION WAYPOINT

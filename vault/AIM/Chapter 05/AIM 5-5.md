@@ -14,6 +14,8 @@ aliases:
   - "Pilot/Controller Roles and Responsibilities"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 5, Section 5 — Pilot/Controller Roles and Responsibilities

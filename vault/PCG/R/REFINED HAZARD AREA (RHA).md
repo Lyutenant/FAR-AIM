@@ -11,6 +11,8 @@ generated: true
 title: "REFINED HAZARD AREA (RHA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REFINED HAZARD AREA (RHA)

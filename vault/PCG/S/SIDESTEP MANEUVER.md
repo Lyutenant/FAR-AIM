@@ -11,6 +11,8 @@ generated: true
 title: "SIDESTEP MANEUVER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SIDESTEP MANEUVER

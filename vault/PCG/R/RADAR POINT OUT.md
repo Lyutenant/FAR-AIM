@@ -11,6 +11,8 @@ generated: true
 title: "RADAR POINT OUT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR POINT OUT

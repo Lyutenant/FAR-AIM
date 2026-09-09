@@ -11,6 +11,8 @@ generated: true
 title: "RANDOM ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RANDOM ROUTE

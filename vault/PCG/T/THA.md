@@ -11,6 +11,8 @@ generated: true
 title: "THA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # THA

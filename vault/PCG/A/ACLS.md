@@ -11,6 +11,8 @@ generated: true
 title: "ACLS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ACLS

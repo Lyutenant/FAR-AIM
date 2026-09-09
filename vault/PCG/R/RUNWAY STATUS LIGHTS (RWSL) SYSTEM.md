@@ -11,6 +11,8 @@ generated: true
 title: "RUNWAY STATUS LIGHTS (RWSL) SYSTEM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RUNWAY STATUS LIGHTS (RWSL) SYSTEM

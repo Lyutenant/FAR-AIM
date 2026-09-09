@@ -57,11 +57,21 @@ is dropped globally whenever two notes would share it (plan §17.4; e.g.
 
 ## Rendering decisions
 
-- **Paragraph hierarchy renders flat.** Each paragraph is its own Markdown
-  paragraph led by its bold label (`**(a)** *Subject.* text…`), children
-  following in order. Nesting reaches depth 5 and contains tables and
-  extracts, which break inside Markdown list indentation; printed CFR is
-  read flat via its labels anyway.
+- **Paragraph hierarchy renders as nested list items.** Each paragraph is
+  a `- ` item led by its bold label (`- **(a)** *Subject.* text…`); its
+  children — nested paragraphs, continuation text, tables, extracts,
+  notes, graphics — are rendered first and indented four spaces under it
+  (`generate.hierarchy.list_item`). Title 14 nests six levels deep
+  (§ 91.107, § 161.305) and every level is real Markdown list nesting, so
+  Obsidian's Reading View indents it, the CSS snippet styles it, and the
+  reader can fold a paragraph's sub-paragraphs. Indentation is relative
+  to the enclosing item, never absolute, which is what keeps a table or
+  callout at depth five inside its item rather than turning into an
+  indented code block. See *Presentation* below for the snippet.
+  Appendices are the exception: the parser keeps them as flat block lists
+  (their labelling does not follow the section grammar, see
+  docs/data-model.md), so their `(a)`/`(1)` labels stay inline in plain
+  paragraphs.
 - **Official wording is verbatim**, subject only to Markdown escaping;
   unknown block types fail the build rather than being dropped.
 - **Tables** render as pipe tables when safe (single header row, no
@@ -186,10 +196,13 @@ vault/AIM/
   is dropped; the longest alias wins at a position (`ADS-B` is never also
   `ADS`). The FAR gets no glossary links: its vocabulary is defined by
   14 CFR Part 1, and the PCG's ATC-oriented definitions can differ.
-- **Lists render flat** with the FAA edition's markers (`**a.**`, `**1.**`,
-  `**(a)**`, `**(1)**`, `**[a]**`, `**[1]**`) derived from list level and
-  position — the same decision as the CFR's flat paragraphs, for the same
-  reason (six-deep nesting containing tables, figures and callouts). The
+- **Lists render as nested list items** with the FAA edition's markers
+  (`**a.**`, `**1.**`, `**(a)**`, `**(1)**`, `**[a]**`, `**[1]**`) derived
+  from list level and position, each item's remaining blocks (nested
+  lists, callouts, figures, tables) indented under it — the same
+  `generate.hierarchy` composition as the CFR's paragraphs, six levels
+  deep. `level` picks the marker glyph only; nesting comes from the block
+  tree, so a list inside a NOTE- box nests inside the callout. The
   `type="a"`/`type="i"` attributes on many source `<ol>` elements are
   ignored on purpose: the edition's stylesheet overrides them, and the
   official text agrees with the stylesheet (AIM 4-1-20 cites the fifth
@@ -217,8 +230,8 @@ vault/AIM/
   with a warning — the same contract as curated notes.
 - **Tables** render as pipe tables when every cell is one line of text or a
   single image (embeds work inside cells) with a single header row and no
-  spans, and as inline HTML otherwise (nested lists and boxes are flattened
-  to marker-led `<p>` runs; image cells use `<img src="../assets/…">`, a
+  spans, and as inline HTML otherwise (lists inside a cell are nested
+  `<ul>` items led by their bold markers, boxes marker-led `<p>` runs; image cells use `<img src="../assets/…">`, a
   path relative to the note's own directory — TBL 7-1-10 is the one such
   table).
 - Figures add ~54 MB of PNG/SVG to the committed vault for the current
@@ -252,8 +265,8 @@ vault/PCG/
   AIM index note's stem; `[[AIM]]` stays unambiguous).
 - Note body: H1 (the verbatim term), the Source callout naming the edition
   and linking the term's own FAA page anchor, `## Official Text` — the
-  full entry paragraph(s) verbatim (term, dash and all), sub-lists flat
-  with `**a.**`-style markers, note boxes as callouts — then `## See Also`
+  full entry paragraph(s) verbatim (term, dash and all), sub-lists as
+  `- **a.**`-style list items, note boxes as callouts — then `## See Also`
   (glossary cross-references, wikilinked when the target term is in the
   corpus, plain text when the FAA's citation matches no term) and
   `## References` (external documents). Since Phase 6 a `Refer to` row
@@ -321,3 +334,55 @@ vault/PCG/
   WHERE part = 91 AND type = "regulation"
   SORT section ASC
   ```
+
+## Presentation: the hierarchy snippet
+
+Structure and presentation are separate layers. The generator only decides
+*what* the hierarchy is — nested Markdown list items, one per CFR paragraph
+or AIM/PCG list item, children indented four spaces under their parent
+(`src/far_aim/generate/hierarchy.py`). How deep each level indents, whether
+guide lines are drawn, and whether Obsidian's bullets show are decided by a
+CSS snippet, so the look can be changed without regenerating a single note.
+
+- **Snippet**: `vault/.obsidian/snippets/far-aim-hierarchy.css`, enabled
+  in `vault/.obsidian/appearance.json` (`enabledCssSnippets`). Both are
+  curated config, committed to git and never written by `build-vault`;
+  `tests/test_vault_config.py` checks they stay present and consistent.
+  A fresh clone opened in Obsidian has it active; if Obsidian shows it
+  off, toggle it under Settings → Appearance → CSS snippets.
+- **Scope**: every generated note that renders official text (FAR
+  sections and appendices, AIM paragraphs, sections, appendices and the
+  AIM index, PCG terms and the PCG index) carries the frontmatter
+  property `cssclasses: ["far-aim-text"]` — Obsidian's own mechanism for
+  per-note CSS classes (`generate.hierarchy.TEXT_CSS_CLASS`, enforced by
+  the frontmatter schema). Curated notes, part/title indexes, AIM chapter
+  contents, Home, Source Status and the Concepts tree carry no class and
+  keep Obsidian's default list styling.
+- **What it does** in Reading View: hides the bullet on hierarchy items
+  (the bold official label `**(a)**` / `**1.**` *is* the marker) while
+  keeping bullets on plain link lists (Explicit Cross-References, Glossary
+  Terms, Related, See Also — items whose direct child is a link); indents
+  each nested level by a fixed step; draws a thin vertical guide down the
+  parent's text edge for the extent of its children; keeps Obsidian's
+  hover fold handle, so a paragraph's sub-paragraphs can be collapsed.
+- **Adjusting it**: edit the custom properties at the top of the snippet
+  (or override them from a second snippet loaded after it):
+
+  ```css
+  .markdown-preview-view.far-aim-text {
+    --far-aim-indent: 1.6em;        /* horizontal step per level */
+    --far-aim-guide-width: 1px;     /* 0 removes the guide lines */
+    --far-aim-guide-color: var(--background-modifier-border);
+    --far-aim-item-gap: 0.2em;      /* vertical space around each item */
+  }
+  ```
+
+- **Without the snippet** the same notes render as ordinary nested
+  bulleted lists — still indented per level (Obsidian's default
+  `--list-indent`), just with bullets in front of the labels. Live Preview
+  always shows that native form; the snippet targets Reading View, which
+  is how a reference vault is read. GitHub renders the committed Markdown
+  the same native way.
+- **Not covered**: FAR appendices (flat block lists in canonical JSON, see
+  *Rendering decisions*) and per-paragraph anchors — nested items would
+  accept `^block-id` suffixes, but none are generated today.

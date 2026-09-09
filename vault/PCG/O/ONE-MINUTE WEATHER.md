@@ -13,6 +13,8 @@ aliases:
   - "ONE‐MINUTE WEATHER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ONE‐MINUTE WEATHER

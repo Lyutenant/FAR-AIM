@@ -11,6 +11,8 @@ generated: true
 title: "OFT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OFT

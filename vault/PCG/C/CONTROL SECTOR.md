@@ -11,6 +11,8 @@ generated: true
 title: "CONTROL SECTOR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CONTROL SECTOR

@@ -11,6 +11,8 @@ generated: true
 title: "HELIPORT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HELIPORT

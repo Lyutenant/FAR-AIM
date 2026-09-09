@@ -11,6 +11,8 @@ generated: true
 title: "SIMULTANEOUS (PARALLEL) DEPENDENT APPROACHES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SIMULTANEOUS (PARALLEL) DEPENDENT APPROACHES

@@ -11,6 +11,8 @@ generated: true
 title: "IFR TAKEOFF MINIMUMS AND DEPARTURE PROCEDURES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IFR TAKEOFF MINIMUMS AND DEPARTURE PROCEDURES

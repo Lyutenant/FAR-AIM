@@ -11,6 +11,8 @@ generated: true
 title: "GROUND VISIBILITY"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # GROUND VISIBILITY

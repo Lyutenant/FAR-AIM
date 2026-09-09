@@ -11,6 +11,8 @@ generated: true
 title: "CHART SUPPLEMENT ALASKA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CHART SUPPLEMENT ALASKA

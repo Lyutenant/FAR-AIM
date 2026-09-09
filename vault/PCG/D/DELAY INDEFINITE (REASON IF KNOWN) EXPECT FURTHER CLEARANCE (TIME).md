@@ -11,6 +11,8 @@ generated: true
 title: "DELAY INDEFINITE (REASON IF KNOWN) EXPECT FURTHER CLEARANCE (TIME)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DELAY INDEFINITE (REASON IF KNOWN) EXPECT FURTHER CLEARANCE (TIME)

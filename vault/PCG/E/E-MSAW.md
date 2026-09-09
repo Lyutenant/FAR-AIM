@@ -13,6 +13,8 @@ aliases:
   - "E‐MSAW"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # E‐MSAW

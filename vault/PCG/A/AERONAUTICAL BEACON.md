@@ -11,6 +11,8 @@ generated: true
 title: "AERONAUTICAL BEACON"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AERONAUTICAL BEACON

@@ -11,6 +11,8 @@ generated: true
 title: "ABEAM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ABEAM

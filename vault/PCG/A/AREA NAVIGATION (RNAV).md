@@ -11,6 +11,8 @@ generated: true
 title: "AREA NAVIGATION (RNAV)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AREA NAVIGATION (RNAV)

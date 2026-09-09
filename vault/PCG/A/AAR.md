@@ -11,6 +11,8 @@ generated: true
 title: "AAR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AAR

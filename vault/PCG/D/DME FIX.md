@@ -11,6 +11,8 @@ generated: true
 title: "DME FIX"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DME FIX

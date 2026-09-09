@@ -11,6 +11,8 @@ generated: true
 title: "SINGLE DIRECTION ROUTES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SINGLE DIRECTION ROUTES

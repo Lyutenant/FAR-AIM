@@ -11,6 +11,8 @@ generated: true
 title: "MINIMUM HOLDING ALTITUDE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMUM HOLDING ALTITUDE

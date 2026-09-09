@@ -11,6 +11,8 @@ generated: true
 title: "CLEARANCE LIMIT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLEARANCE LIMIT

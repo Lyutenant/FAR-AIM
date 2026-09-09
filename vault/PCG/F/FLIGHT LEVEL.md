@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT LEVEL"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT LEVEL

@@ -11,6 +11,8 @@ generated: true
 title: "ATC SURVEILLANCE SOURCE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ATC SURVEILLANCE SOURCE
@@ -22,11 +24,11 @@ tags:
 
 ATC SURVEILLANCE SOURCE– Used by ATC for establishing identification, control and separation using a target depicted on an air traffic control facility's video display that has met the relevant safety standards for operational use and received from one, or a combination, of the following surveillance sources:
 
-**a.** Radar (See RADAR.)
+- **a.** Radar (See RADAR.)
 
-**b.** ADS‐B (See AUTOMATIC DEPENDENT SURVEILLANCE-BROADCAST.)
+- **b.** ADS‐B (See AUTOMATIC DEPENDENT SURVEILLANCE-BROADCAST.)
 
-**c.** WAM (See WIDE AREA MULTILATERATION.)
+- **c.** WAM (See WIDE AREA MULTILATERATION.)
 
 ## See Also
 

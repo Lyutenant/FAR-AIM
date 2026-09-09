@@ -11,6 +11,8 @@ generated: true
 title: "WAYPOINT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WAYPOINT

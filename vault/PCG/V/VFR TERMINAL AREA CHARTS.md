@@ -11,6 +11,8 @@ generated: true
 title: "VFR TERMINAL AREA CHARTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VFR TERMINAL AREA CHARTS

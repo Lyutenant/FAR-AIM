@@ -11,6 +11,8 @@ generated: true
 title: "AIR TAXI"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIR TAXI

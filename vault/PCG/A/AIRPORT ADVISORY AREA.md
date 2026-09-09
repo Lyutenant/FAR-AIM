@@ -11,6 +11,8 @@ generated: true
 title: "AIRPORT ADVISORY AREA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIRPORT ADVISORY AREA

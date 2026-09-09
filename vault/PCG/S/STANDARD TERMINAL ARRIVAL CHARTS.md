@@ -11,6 +11,8 @@ generated: true
 title: "STANDARD TERMINAL ARRIVAL CHARTS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # STANDARD TERMINAL ARRIVAL CHARTS

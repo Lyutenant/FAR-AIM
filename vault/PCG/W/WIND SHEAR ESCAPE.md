@@ -11,6 +11,8 @@ generated: true
 title: "WIND SHEAR ESCAPE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # WIND SHEAR ESCAPE

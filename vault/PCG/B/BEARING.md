@@ -11,6 +11,8 @@ generated: true
 title: "BEARING"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # BEARING

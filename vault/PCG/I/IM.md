@@ -11,6 +11,8 @@ generated: true
 title: "IM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # IM

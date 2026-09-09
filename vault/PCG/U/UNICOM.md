@@ -11,6 +11,8 @@ generated: true
 title: "UNICOM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # UNICOM

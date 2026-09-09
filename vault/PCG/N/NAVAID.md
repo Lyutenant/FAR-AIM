@@ -11,6 +11,8 @@ generated: true
 title: "NAVAID"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # NAVAID

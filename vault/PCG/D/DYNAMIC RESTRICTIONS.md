@@ -11,6 +11,8 @@ generated: true
 title: "DYNAMIC RESTRICTIONS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DYNAMIC RESTRICTIONS

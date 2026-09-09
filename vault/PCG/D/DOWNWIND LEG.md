@@ -11,6 +11,8 @@ generated: true
 title: "DOWNWIND LEG"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DOWNWIND LEG

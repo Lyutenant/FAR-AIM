@@ -11,6 +11,8 @@ generated: true
 title: "FUSED TARGET"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FUSED TARGET

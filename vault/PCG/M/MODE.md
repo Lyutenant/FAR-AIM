@@ -11,6 +11,8 @@ generated: true
 title: "MODE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MODE

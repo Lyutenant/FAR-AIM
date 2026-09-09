@@ -11,6 +11,8 @@ generated: true
 title: "ALERT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALERT

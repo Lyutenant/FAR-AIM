@@ -11,6 +11,8 @@ generated: true
 title: "TRAFFIC ADVISORIES"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRAFFIC ADVISORIES
@@ -22,11 +24,11 @@ tags:
 
 TRAFFIC ADVISORIES- Advisories issued to alert pilots to other known or observed air traffic which may be in such proximity to the position or intended route of flight of their aircraft to warrant their attention. Such advisories may be based on:
 
-**a.** Visual observation.
+- **a.** Visual observation.
 
-**b.** Observation of radar identified and nonidentified aircraft targets on an ATC radar display, or
+- **b.** Observation of radar identified and nonidentified aircraft targets on an ATC radar display, or
 
-**c.** Verbal reports from pilots or other facilities.
+- **c.** Verbal reports from pilots or other facilities.
 
 > [!note] Note 1:
 > The word “traffic” followed by additional information, if known, is used to provide such advisories; e.g., “Traffic, 2 o'clock, one zero miles, southbound, eight thousand.”

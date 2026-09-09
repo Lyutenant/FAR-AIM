@@ -11,6 +11,8 @@ generated: true
 title: "FEEDER ROUTE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FEEDER ROUTE

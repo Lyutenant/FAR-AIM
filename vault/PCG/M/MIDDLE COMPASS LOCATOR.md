@@ -11,6 +11,8 @@ generated: true
 title: "MIDDLE COMPASS LOCATOR"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MIDDLE COMPASS LOCATOR

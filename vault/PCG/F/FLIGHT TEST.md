@@ -11,6 +11,8 @@ generated: true
 title: "FLIGHT TEST"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT TEST
@@ -22,6 +24,6 @@ tags:
 
 FLIGHT TEST- A flight for the purpose of:
 
-**a.** Investigating the operation/flight characteristics of an aircraft or aircraft component.
+- **a.** Investigating the operation/flight characteristics of an aircraft or aircraft component.
 
-**b.** Evaluating an applicant for a pilot certificate or rating.
+- **b.** Evaluating an applicant for a pilot certificate or rating.

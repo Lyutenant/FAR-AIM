@@ -11,6 +11,8 @@ generated: true
 title: "MARKER BEACON"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MARKER BEACON

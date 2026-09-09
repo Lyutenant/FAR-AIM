@@ -11,6 +11,8 @@ generated: true
 title: "HOLDING FIX"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # HOLDING FIX

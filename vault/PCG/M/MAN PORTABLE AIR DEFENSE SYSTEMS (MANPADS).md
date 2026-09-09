@@ -11,6 +11,8 @@ generated: true
 title: "MAN PORTABLE AIR DEFENSE SYSTEMS (MANPADS)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MAN PORTABLE AIR DEFENSE SYSTEMS (MANPADS)

@@ -11,6 +11,8 @@ generated: true
 title: "MAXIMUM AUTHORIZED ALTITUDE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MAXIMUM AUTHORIZED ALTITUDE

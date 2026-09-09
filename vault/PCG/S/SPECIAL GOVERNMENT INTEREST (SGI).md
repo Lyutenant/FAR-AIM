@@ -11,6 +11,8 @@ generated: true
 title: "SPECIAL GOVERNMENT INTEREST (SGI)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPECIAL GOVERNMENT INTEREST (SGI)

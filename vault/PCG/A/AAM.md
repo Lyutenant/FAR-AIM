@@ -11,6 +11,8 @@ generated: true
 title: "AAM"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AAM

@@ -11,6 +11,8 @@ generated: true
 title: "VERTICAL NAVIGATION (VNAV)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # VERTICAL NAVIGATION (VNAV)

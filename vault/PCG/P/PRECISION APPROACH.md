@@ -11,6 +11,8 @@ generated: true
 title: "PRECISION APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # PRECISION APPROACH

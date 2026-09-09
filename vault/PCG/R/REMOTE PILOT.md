@@ -11,6 +11,8 @@ generated: true
 title: "REMOTE PILOT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # REMOTE PILOT

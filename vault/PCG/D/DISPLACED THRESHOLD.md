@@ -11,6 +11,8 @@ generated: true
 title: "DISPLACED THRESHOLD"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # DISPLACED THRESHOLD

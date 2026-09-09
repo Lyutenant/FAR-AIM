@@ -15,6 +15,8 @@ aliases:
 tags:
   - "far"
   - "regulation"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # Special Federal Aviation Regulation No. 73—Robinson Helicopter Company, Robinson R-22/R-44 Special Training and Experience Requirements

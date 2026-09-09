@@ -11,6 +11,8 @@ generated: true
 title: "FLY VISUAL TO AIRPORT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLY VISUAL TO AIRPORT

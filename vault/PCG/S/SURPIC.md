@@ -11,6 +11,8 @@ generated: true
 title: "SURPIC"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SURPIC

@@ -11,6 +11,8 @@ generated: true
 title: "TOWER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TOWER

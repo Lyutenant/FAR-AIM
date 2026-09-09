@@ -11,6 +11,8 @@ generated: true
 title: "TAS"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TAS

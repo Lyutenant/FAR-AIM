@@ -11,6 +11,8 @@ generated: true
 title: "MINIMUM CROSSING ALTITUDE (MCA)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MINIMUM CROSSING ALTITUDE (MCA)

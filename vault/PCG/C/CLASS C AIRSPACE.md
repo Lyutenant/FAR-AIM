@@ -11,6 +11,8 @@ generated: true
 title: "CLASS C AIRSPACE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # CLASS C AIRSPACE

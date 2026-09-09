@@ -11,6 +11,8 @@ generated: true
 title: "OCEANIC ERROR REPORT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OCEANIC ERROR REPORT

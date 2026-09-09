@@ -11,6 +11,8 @@ generated: true
 title: "ALTITUDE RESERVATION (ALTRV)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ALTITUDE RESERVATION (ALTRV)

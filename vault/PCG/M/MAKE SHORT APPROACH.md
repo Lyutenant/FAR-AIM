@@ -11,6 +11,8 @@ generated: true
 title: "MAKE SHORT APPROACH"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # MAKE SHORT APPROACH

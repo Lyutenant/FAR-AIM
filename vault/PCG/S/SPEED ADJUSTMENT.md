@@ -11,6 +11,8 @@ generated: true
 title: "SPEED ADJUSTMENT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SPEED ADJUSTMENT
@@ -22,6 +24,6 @@ tags:
 
 SPEED ADJUSTMENT- An ATC procedure used to request pilots to adjust aircraft speed to a specific value for the purpose of providing desired spacing. Pilots are expected to maintain a speed of plus or minus 10 knots or 0.02 Mach number of the specified speed. Examples of speed adjustments are:
 
-**a.** “Increase/reduce speed to Mach point (number).”
+- **a.** “Increase/reduce speed to Mach point (number).”
 
-**b.** “Increase/reduce speed to (speed in knots)” or “Increase/reduce speed (number of knots) knots.”
+- **b.** “Increase/reduce speed to (speed in knots)” or “Increase/reduce speed (number of knots) knots.”

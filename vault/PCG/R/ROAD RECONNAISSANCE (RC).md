@@ -11,6 +11,8 @@ generated: true
 title: "ROAD RECONNAISSANCE (RC)"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # ROAD RECONNAISSANCE (RC)

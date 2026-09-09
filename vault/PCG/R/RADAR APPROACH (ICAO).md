@@ -13,6 +13,8 @@ aliases:
   - "RADAR APPROACH [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # RADAR APPROACH \[ICAO]

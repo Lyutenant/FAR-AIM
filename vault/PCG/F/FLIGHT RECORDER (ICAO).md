@@ -13,6 +13,8 @@ aliases:
   - "FLIGHT RECORDER [ICAO]"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # FLIGHT RECORDER \[ICAO]

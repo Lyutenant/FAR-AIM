@@ -11,6 +11,8 @@ generated: true
 title: "COMMON PORTION"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # COMMON PORTION

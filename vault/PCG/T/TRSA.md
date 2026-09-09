@@ -11,6 +11,8 @@ generated: true
 title: "TRSA"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # TRSA

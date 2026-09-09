@@ -14,6 +14,8 @@ aliases:
   - "Barometric Altimeter Errors and Setting Procedures"
 tags:
   - "aim"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # AIM Chapter 7, Section 2 — Barometric Altimeter Errors and Setting Procedures

@@ -11,6 +11,8 @@ generated: true
 title: "JUMP ZONE"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # JUMP ZONE

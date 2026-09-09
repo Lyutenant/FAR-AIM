@@ -11,6 +11,8 @@ generated: true
 title: "SIGNIFICANT POINT"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # SIGNIFICANT POINT

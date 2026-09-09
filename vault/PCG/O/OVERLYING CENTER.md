@@ -11,6 +11,8 @@ generated: true
 title: "OVERLYING CENTER"
 tags:
   - "pcg"
+cssclasses:
+  - "far-aim-text"
 ---
 
 # OVERLYING CENTER
