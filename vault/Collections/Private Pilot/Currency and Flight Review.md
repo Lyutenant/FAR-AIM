@@ -23,6 +23,11 @@ and whether you may carry passengers, today.
   § 61.57(b) and from the position-light rule in
   [[91.209|§ 91.209 — Aircraft lights]]
 
+## See also
+
+- [[Night Flying]] — the three night windows side by side, plus night
+  training and equipment
+
 ## Glossary
 
 - [[NIGHT]] — note the PCG/ATC usage is not the Part 1 definition

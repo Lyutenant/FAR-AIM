@@ -57,6 +57,14 @@ paraphrased or AI-generated. Full specification:
   rendered as a clearly labelled `## Related (derived)` section. Fully
   separable from the authoritative layers — see docs/enrichment.md.
 
+## Using the vault
+
+Open `vault/` as an Obsidian vault and start at `Home.md`: it explains what
+each folder holds (generated `FAR/`, `AIM/`, `PCG/`, `Concepts/` versus the
+curated `Collections/`, `Topics/`, `Study/`), where to start studying, how
+to read a note, how to search by citation or heading, and how to write your
+own notes without them being overwritten by a rebuild.
+
 ## Operational notes
 
 - **FAA raw snapshots must be archived outside this repository** (plan §6.2:

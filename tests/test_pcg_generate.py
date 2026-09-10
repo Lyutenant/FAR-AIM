@@ -193,6 +193,14 @@ def test_home_note_links_every_built_layer(combined_plan):
     for curated in ("[[Collections]]", "[[Topics]]", "[[Study]]"):
         assert curated in home
     assert ("Collections", "Collections.md") not in combined_plan
+    # Home is also the reader's guide: every generated tree and curated
+    # folder is described, and the note anatomy names the sections a
+    # three-layer build renders (Glossary Terms exist only with AIM + PCG).
+    for section in ("## What is here", "## Reading a note", "## Writing your own notes"):
+        assert section in home
+    for described in ("`FAR/`", "`AIM/`", "`PCG/`", "**Glossary Terms**", "**See Also**"):
+        assert described in home
+    assert "`Concepts/`" not in home  # no enrichment in this plan
 
 
 def test_wikilinks_resolve_and_note_renders(combined_plan):
@@ -355,8 +363,14 @@ def test_refer_to_aim_prefers_the_publication_over_the_glossary_entry():
         "term": "PRM APPROACH",
         "content": [
             {"type": "entry", "text": "PRM APPROACH-"},
-            {"type": "reference", "kind": "refer", "label": "Refer to", "text": "AIM",
-             "target": "pcg-aim", "source": {}},
+            {
+                "type": "reference",
+                "kind": "refer",
+                "label": "Refer to",
+                "text": "AIM",
+                "target": "pcg-aim",
+                "source": {},
+            },
         ],
     }
     targets = {"pcg-aim": ("AIM (PCG)", "AIM")}

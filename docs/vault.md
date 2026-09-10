@@ -286,10 +286,17 @@ vault/PCG/
 ## Home and the curated layer (Phase 7)
 
 - `Home.md` is a generated root note (`type: home`): links to each built
-  corpus index, `Source Status`, and the three curated entry notes. It is
-  deliberately static — edition details stay in `Source Status` so a source
-  update never rewrites it. Corpus links render only for layers actually
-  built (a FAR-only build emits no `[[AIM]]`/`[[PCG]]` link).
+  corpus index, `Source Status`, and the three curated entry notes, plus
+  the reader's guide — what each generated tree and curated folder is
+  for, where to start, the anatomy of an official-text note, how to
+  search, and how to write curated notes. It is the one place the vault
+  explains itself, and it is generated so it cannot drift from the
+  generator. It is deliberately static — edition details stay in
+  `Source Status` so a source update never rewrites it. Corpus links
+  and the prose describing a layer render only for layers actually
+  built (a FAR-only build emits no `[[AIM]]`/`[[PCG]]` link and does not
+  describe AIM, PCG or Concepts notes); `tests/fixtures/vault/Home.md`
+  is the FAR-only golden copy.
 - The curated entry stems `Collections`, `Topics` and `Study`
   (`generate.notes.CURATED_ENTRIES`) are registered as link targets even
   though the generator never writes those files: generated notes may link
@@ -309,8 +316,13 @@ vault/PCG/
   `Airspace Classes.md` (bare "Airspace" is AIM Chapter 3's alias) and
   `Currency and Flight Review.md` ("Currency" is § 221.50's alias).
 - The prototype content is the plan §23 Private Pilot collection
-  (13 subject pages under `Collections/Private Pilot/`) plus the
-  `Topics/Cross-Country Flight.md` topic note. Curated pages link or
+  (21 subject pages under `Collections/Private Pilot/`: the 13 of §23
+  plus eight added on 2026-09-09 after a gap check against a Part 141
+  ground syllabus — regulations and definitions, operating rules and conduct,
+  logbooks and documents, airport operations, weather products, navigation
+  and charts, night flying, hazards; the index carries a ground-lesson map)
+  plus the `Topics/Cross-Country Flight.md` topic note. Every concept note
+  is now linked from at least one collection page. Curated pages link or
   transclude authoritative notes; they never restate regulatory text.
 - Enrichment (Phase 9, plan §36, docs/enrichment.md): `Concepts/` is a
   fourth generator-owned tree, rendered from the committed

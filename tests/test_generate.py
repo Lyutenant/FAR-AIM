@@ -56,8 +56,7 @@ def test_appendix_stems_all_shapes():
     assert naming.appendix_stem("13", "cfr-14-part-13-appendixes-B-C") == "Part 13 Appendixes B-C"
     # Fallback slugs are self-describing and become the stem verbatim.
     assert (
-        naming.appendix_stem("117", "cfr-14-part-117-Table-A-to-Part-117")
-        == "Table-A-to-Part-117"
+        naming.appendix_stem("117", "cfr-14-part-117-Table-A-to-Part-117") == "Table-A-to-Part-117"
     )
     assert (
         naming.appendix_stem("93", "cfr-14-part-93-Appendix-A-to-Subpart-U-of-Part-93")
@@ -212,14 +211,23 @@ def test_paragraph_renders_nested_list_with_label_and_subject():
 
 
 def test_paragraph_null_label():
-    blocks = [{"type": "paragraph", "label": None, "designator": None, "subject": None,
-               "text": "Run-in text.", "children": []}]
+    blocks = [
+        {
+            "type": "paragraph",
+            "label": None,
+            "designator": None,
+            "subject": None,
+            "text": "Run-in text.",
+            "children": [],
+        }
+    ]
     assert render_blocks(blocks) == ["- Run-in text."]
 
 
 def test_definition_renders_term_italic():
-    blocks = [{"type": "definition", "term": "Administrator", "text": "means the FAA.",
-               "children": []}]
+    blocks = [
+        {"type": "definition", "term": "Administrator", "text": "means the FAA.", "children": []}
+    ]
     assert render_blocks(blocks) == ["- *Administrator* means the FAA."]
 
 
@@ -500,6 +508,23 @@ def test_golden_note(slice_plan, name):
     assert match[0] == expected
 
 
+def test_home_far_only_describes_only_built_layers(slice_plan):
+    # The guide prose is layer-conditional like the links: a FAR-only build
+    # must not describe AIM/PCG/Concepts notes it did not render.
+    home = slice_plan[("Home.md",)].decode()
+    assert "`FAR/`" in home and "## Reading a note" in home
+    for absent in (
+        "`AIM/`",
+        "`PCG/`",
+        "`Concepts/`",
+        "[[Concept Map]]",
+        "**Glossary Terms**",
+        "**See Also**",
+        "**Related (derived)**",
+    ):
+        assert absent not in home
+
+
 def test_slice_plan_shape(slice_plan):
     paths = set(slice_plan)
     assert ("FAR", "Title 14.md") in paths
@@ -530,7 +555,7 @@ def test_no_volatile_timestamps_in_notes(slice_plan):
 # ---------------------------------------------------------------------------
 
 
-_GENERATED_NOTE = b"---\nid: \"x\"\ngenerated: true\n---\n\n# X\n"
+_GENERATED_NOTE = b'---\nid: "x"\ngenerated: true\n---\n\n# X\n'
 
 
 def _plan_one(*parts: str, data: bytes = _GENERATED_NOTE) -> dict[tuple[str, ...], bytes]:
@@ -651,8 +676,11 @@ def test_other_title_attribution_bans_cross_reference():
 
     sec = _mini_section("152", "152.111", "Nondiscrimination.")
     sec["content"] = [
-        {"type": "text", "style": "paragraph",
-         "text": "Discrimination is prohibited under § 21.7 of the Regulations."},
+        {
+            "type": "text",
+            "style": "paragraph",
+            "text": "Discrimination is prohibited under § 21.7 of the Regulations.",
+        },
         {"type": "text", "style": "paragraph", "text": "(49 CFR 21.7)."},
     ]
     note = build_section_note(sec, [], {"21.7", "152.111"})
@@ -665,16 +693,16 @@ def test_sync_failure_rolls_back_to_previous_vault(tmp_path, monkeypatch):
 
     config = Config.load(tmp_path)
     old = {
-        ("FAR", "Part 001", "1.1.md"): b"---\nid: \"a\"\ngenerated: true\n---\n\n# old 1.1\n",
-        ("FAR", "Part 001", "1.3.md"): b"---\nid: \"b\"\ngenerated: true\n---\n\n# old 1.3\n",
+        ("FAR", "Part 001", "1.1.md"): b'---\nid: "a"\ngenerated: true\n---\n\n# old 1.1\n',
+        ("FAR", "Part 001", "1.3.md"): b'---\nid: "b"\ngenerated: true\n---\n\n# old 1.3\n',
     }
     sync_vault(config, old)
     before = {p: p.read_bytes() for p in sorted(config.vault_dir.rglob("*.md"))}
 
     new = {
-        ("FAR", "Part 001", "1.1.md"): b"---\nid: \"a\"\ngenerated: true\n---\n\n# new 1.1\n",
-        ("FAR", "Part 001", "1.3.md"): b"---\nid: \"b\"\ngenerated: true\n---\n\n# new 1.3\n",
-        ("FAR", "Part 002", "2.1.md"): b"---\nid: \"c\"\ngenerated: true\n---\n\n# new 2.1\n",
+        ("FAR", "Part 001", "1.1.md"): b'---\nid: "a"\ngenerated: true\n---\n\n# new 1.1\n',
+        ("FAR", "Part 001", "1.3.md"): b'---\nid: "b"\ngenerated: true\n---\n\n# new 1.3\n',
+        ("FAR", "Part 002", "2.1.md"): b'---\nid: "c"\ngenerated: true\n---\n\n# new 2.1\n',
     }
     real_write = build_mod.write_text_atomic
     calls = {"n": 0}
@@ -795,4 +823,3 @@ def test_part_index_renders_authority_pending_amendment_link():
     authority = body.index("**Authority:** 49 U.S.C. 329, 41708, and 41709.")
     amendment = body.index("**Amendment notes:**\n\nLink to an amendment published at 91 FR 56592")
     assert authority < amendment
-

@@ -18,6 +18,9 @@ and their limits, and solo cross-country authorization.
 - [[61.89|§ 61.89 — General limitations]]
 - [[61.93|§ 61.93 — Solo cross-country flight requirements]]
 - [[61.95|§ 61.95 — Operations in Class B airspace and at airports located within Class B airspace]]
+- [[61.51|§ 61.51 — Pilot logbooks]] — a student must carry the logbook
+  with its endorsements on solo cross-country flights; see [[Logbooks and Documents]]
+- [[61.3|§ 61.3 — Requirement for certificates, ratings, privileges, and authorizations]]
 
 ## See also
 

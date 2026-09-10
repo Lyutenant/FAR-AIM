@@ -23,7 +23,14 @@ speed and altitude rules that keep aircraft apart.
 ## AIM guidance
 
 - [[8-1-8|AIM 8-1-8 — Judgment Aspects of Collision Avoidance]]
+- [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]]
+- [[4-4-14|AIM 4-4-14 — Visual Separation]]
+- [[7-6-3|AIM 7-6-3 — VFR in Congested Areas]]
 - [[4-3-5|AIM 4-3-5 — Unexpected Maneuvers in the Airport Traffic Pattern]]
+
+## Glossary
+
+- [[SEE AND AVOID]] · [[TRAFFIC ADVISORIES]]
 
 ## Concepts
 
