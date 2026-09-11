@@ -220,3 +220,17 @@ The approach reference flight path must be calculated using the following:
 - [[36.6|§ 36.6]]
 - [[36.7|§ 36.7]]
 - [[36.1581|§ 36.1581]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.2#^def-apu|APU]] (§ 1.2)
+- [[1.2#^def-icao|ICAO]] (§ 1.2)
+- [[1.1#^def-indicated-airspeed|Indicated airspeed]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)
+- [[1.1#^def-reference-landing-speed|Reference landing speed]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)
+- [[1.1#^def-takeoff-power|Takeoff power]] (§ 1.1)
+- [[1.1#^def-takeoff-thrust|Takeoff thrust]] (§ 1.1)

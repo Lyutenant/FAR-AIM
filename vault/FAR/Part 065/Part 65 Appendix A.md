@@ -529,3 +529,19 @@ B. Applied Dispatching.
 **Citations:**
 
 \[Docket FAA-1998-4553, 64 FR 68925, Dec. 8, 1999, as amended by Docket FAA-2016-6142, Amdt. 65-58, 83 FR 30281, June 27, 2018]
+
+## Defined Terms
+
+- [[1.1#^def-air-traffic-control|Air traffic control]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.2#^def-atc|ATC]] (§ 1.2)
+- [[1.1#^def-flight-plan|Flight plan]] (§ 1.1)
+- [[1.1#^def-instrument-approach-procedure-iap|Instrument approach procedure (IAP)]] (§ 1.1)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.2#^def-mel|MEL]] (§ 1.2)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-operational-control|Operational control]] (§ 1.1)
+- [[1.1#^def-pilot-in-command|Pilot in command]] (§ 1.1)
+- [[1.1#^def-precision-approach-procedure|Precision approach procedure]] (§ 1.1)

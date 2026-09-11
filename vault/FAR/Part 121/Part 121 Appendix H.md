@@ -81,3 +81,17 @@ c. The practical test requirements of § 61.153(h) of this chapter, except the v
 - [[121.434|§ 121.434]]
 - [[121.439|§ 121.439]]
 - [[121.440|§ 121.440]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-efvs-operation|EFVS operation]] (§ 1.1)
+- [[1.2#^def-ffs|FFS]] (§ 1.2)
+- [[1.1#^def-flightcrew-member|Flightcrew member]] (§ 1.1)
+- [[1.1#^def-night|Night]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-pilot-in-command|Pilot in command]] (§ 1.1)
+- [[1.1#^def-second-in-command|Second in command]] (§ 1.1)

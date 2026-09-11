@@ -87,3 +87,14 @@ cssclasses:
 ## Explicit Cross-References
 
 - [[125.327|§ 125.327]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-crewmember|Crewmember]] (§ 1.1)
+- [[1.1#^def-night|Night]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[110.2#^def-passenger-carrying-operation|Passenger-carrying operation]] (§ 110.2)
+- [[1.1#^def-person|Person]] (§ 1.1)

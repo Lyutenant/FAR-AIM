@@ -385,3 +385,19 @@ A38.6.5.4 Fuel efficiency metric value.
 - [[38.7|§ 38.7]]
 - [[38.13|§ 38.13]]
 - [[38.15|§ 38.15]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.2#^def-icao|ICAO]] (§ 1.2)
+- [[1.1#^def-mach-number|Mach number]] (§ 1.1)
+- [[38.3#^def-maximum-takeoff-mass-mtom|Maximum takeoff mass (MTOM)]] (§ 38.3)
+- [[38.3#^def-performance-model|Performance model]] (§ 38.3)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)
+- [[38.3#^def-reference-geometric-factor-rgf|Reference geometric factor (RGF)]] (§ 38.3)
+- [[38.3#^def-specific-air-range-sar|Specific air range (SAR)]] (§ 38.3)
+- [[1.1#^def-standard-atmosphere|Standard atmosphere]] (§ 1.1)
+- [[1.2#^def-tas|TAS]] (§ 1.2)
+- [[1.1#^def-true-airspeed|True airspeed]] (§ 1.1)

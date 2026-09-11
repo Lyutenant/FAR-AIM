@@ -67,3 +67,15 @@ cssclasses:
 (2) Ellipsoidal screening. Ellipsoidal screening utilizes an impact exclusion ellipsoid of revolution centered on the orbiting object's center-of-mass to determine any conjunction. An operator must provide input in the UVW coordinate system in kilometers. The operator must provide delta-U measured in the radial-track direction, delta-V measured in the in-track direction, and delta-W measured in the cross-track direction; or
 
 (3) Probability of Collision. Collision probability is calculated using position and velocity information with covariance in position.
+
+## Defined Terms
+
+- [[401.7#^def-disposal|Disposal]] (§ 401.7)
+- [[401.7#^def-launch|Launch]] (§ 401.7)
+- [[401.7#^def-launch-site|Launch site]] (§ 401.7)
+- [[401.7#^def-launch-vehicle|Launch vehicle]] (§ 401.7)
+- [[401.7#^def-liftoff|Liftoff]] (§ 401.7)
+- [[401.7#^def-operator|Operator]] (§ 401.7)
+- [[401.7#^def-payload|Payload]] (§ 401.7)
+- [[401.7#^def-person|Person]] (§ 401.7)
+- [[401.7#^def-reentry-window|Reentry window]] (§ 401.7)

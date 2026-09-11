@@ -53,3 +53,8 @@ There is set forth below an itemization of typical eligible and ineligible items
 ## Explicit Cross-References
 
 - [[151.89|§ 151.89]]
+
+## Defined Terms
+
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)

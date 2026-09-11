@@ -26,7 +26,7 @@ from far_aim.generate.aim_markdown import collect_asset_names
 from far_aim.generate.aim_markdown import collect_text as collect_aim_text
 from far_aim.generate.enrich import EnrichmentLayer
 from far_aim.generate.frontmatter import emit_frontmatter, frontmatter_defect
-from far_aim.links import glossary, semantic
+from far_aim.links import definitions, glossary, semantic
 from far_aim.links.citations import collect_text as collect_far_text
 from far_aim.models import aim as aim_model
 from far_aim.models import cfr as cfr_model
@@ -36,6 +36,7 @@ from far_aim.parsers import ecfr as ecfr_parser
 from far_aim.parsers import pcg as pcg_parser
 
 _WIKILINK_TARGET_RE = re.compile(r"\[\[([^\]|#]+)")
+_WIKILINK_BLOCK_RE = re.compile(r"\[\[([^\]|#]+)#\^([A-Za-z0-9-]+)")
 _GENERATED_MARKER = "generated: true"
 # Binary assets carry no frontmatter, so generator ownership is recorded in
 # a ledger inside the assets directory: filename → sha256 of the bytes the
@@ -457,16 +458,21 @@ def plan_vault(
     aim: AimLayer | None = None,
     pcg: PcgLayer | None = None,
     enrichment: EnrichmentLayer | None = None,
+    definitions_gate: definitions.DefinitionsGate | None = None,
 ) -> dict[tuple[str, ...], bytes]:
     """Render the complete vault in memory and verify it (nothing written).
 
     The plan maps vault-relative path parts to bytes: Markdown notes plus,
     when an AIM layer is given, the archived figure assets it embeds.
+    ``definitions_gate`` curates the FAR defined-term links; it is used only
+    when ``docs`` hold a definitions source (an empty gate otherwise stands
+    in, for partial builds and tests).
     """
     registry = build_registry(docs, aim, pcg, enrichment)
     plan: dict[tuple[str, ...], bytes] = {}
     related = _verified_related(enrichment, registry, title_hash, aim)
     related_targets = {**registry.far_targets, **registry.aim_targets}
+    definition_links = definitions.DefinitionLinks.build(docs, definitions_gate)
 
     def add(note: notes.Note) -> None:
         if note.path_parts in plan:
@@ -485,6 +491,9 @@ def plan_vault(
                         aliases,
                         registry.section_numbers,
                         registry.part_numbers,
+                        definitions_index=(
+                            definition_links.index_for(child, doc) if definition_links else None
+                        ),
                         related=related,
                         related_targets=related_targets,
                     )
@@ -492,7 +501,13 @@ def plan_vault(
             else:
                 add(
                     notes.build_appendix_note(
-                        child, aliases, registry.section_numbers, registry.part_numbers
+                        child,
+                        aliases,
+                        registry.section_numbers,
+                        registry.part_numbers,
+                        definitions_index=(
+                            definition_links.index_for(child, doc) if definition_links else None
+                        ),
                     )
                 )
     add(notes.build_title_index(docs, version, title_hash))
@@ -500,7 +515,10 @@ def plan_vault(
     has_concepts = enrichment is not None and enrichment.concepts is not None
     add(
         notes.build_home(
-            has_aim=aim is not None, has_pcg=pcg is not None, has_concepts=has_concepts
+            has_aim=aim is not None,
+            has_pcg=pcg is not None,
+            has_concepts=has_concepts,
+            has_definitions=definition_links is not None,
         )
     )
 
@@ -724,13 +742,21 @@ def _verify_plan(
             raise BuildError(
                 f"walked {walked} PCG terms but the canonical layer holds {parsed}"
             )
-    for parts, data in plan.items():
-        if not is_note_path(parts):
-            continue
-        body = data.decode("utf-8")
+    bodies = {
+        parts: data.decode("utf-8") for parts, data in plan.items() if is_note_path(parts)
+    }
+    for parts, body in bodies.items():
         for target in _WIKILINK_TARGET_RE.findall(body):
             if target not in registry.stems:
                 raise BuildError(f"{'/'.join(parts)}: broken generated link [[{target}]]")
+        # A block link must land on a block id the target note actually
+        # carries (``… ^def-night`` at a line end), zero broken by construction.
+        for target, block_id in _WIKILINK_BLOCK_RE.findall(body):
+            target_body = bodies.get(registry.stems[target], "")
+            if f" ^{block_id}\n" not in target_body + "\n":
+                raise BuildError(
+                    f"{'/'.join(parts)}: broken generated block link [[{target}#^{block_id}]]"
+                )
 
 
 @dataclass
@@ -940,7 +966,10 @@ def build_vault(
     aim: AimLayer | None = None,
     pcg: PcgLayer | None = None,
     enrichment: EnrichmentLayer | None = None,
+    definitions_gate: definitions.DefinitionsGate | None = None,
 ) -> SyncStats:
     """Plan, verify, and sync the whole vault; raises BuildError on any defect."""
-    plan = plan_vault(docs, version, title_hash, sources, aim, pcg, enrichment)
+    plan = plan_vault(
+        docs, version, title_hash, sources, aim, pcg, enrichment, definitions_gate
+    )
     return sync_vault(config, plan)

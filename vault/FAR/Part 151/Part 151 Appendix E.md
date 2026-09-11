@@ -62,3 +62,7 @@ There is set forth below an itemization of typical eligible and ineligible items
 
 - [[151.77|§ 151.77]]
 - [[151.83|§ 151.83]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)

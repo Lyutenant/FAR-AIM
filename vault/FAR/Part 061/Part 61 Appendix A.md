@@ -79,3 +79,19 @@ cssclasses:
 ## Explicit Cross-References
 
 - [[61.14|§ 61.14]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-airship|Airship]] (§ 1.1)
+- [[1.1#^def-balloon|Balloon]] (§ 1.1)
+- [[1.1#^def-glider|Glider]] (§ 1.1)
+- [[1.1#^def-gyroplane|Gyroplane]] (§ 1.1)
+- [[1.1#^def-helicopter|Helicopter]] (§ 1.1)
+- [[1.1#^def-powered-parachute|Powered parachute]] (§ 1.1)
+- [[1.1#^def-powered-lift|Powered-lift]] (§ 1.1)
+- [[61.1#^def-practical-test|Practical test]] (§ 61.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)
+- [[1.1#^def-rotorcraft|Rotorcraft]] (§ 1.1)
+- [[1.1#^def-weight-shift-control-aircraft|Weight-shift-control aircraft]] (§ 1.1)

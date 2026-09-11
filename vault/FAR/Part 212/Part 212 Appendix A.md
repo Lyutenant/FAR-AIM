@@ -62,3 +62,9 @@ Bonding or surety company must be listed in Best's Insurance Reports (Fire and C
 
 - [[212.8|§ 212.8]]
 - [[Part 372]]
+
+## Defined Terms
+
+- [[212.2#^def-certificated-air-carrier|Certificated air carrier]] (§ 212.2)
+- [[212.2#^def-charter-flight|Charter flight]] (§ 212.2)
+- [[212.2#^def-foreign-air-carrier|Foreign air carrier]] (§ 212.2)

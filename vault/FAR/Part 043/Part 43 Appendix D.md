@@ -123,3 +123,10 @@ cssclasses:
 (4) Antenna including trailing antenna—for poor condition, insecure mounting, and improper operation.
 
 (j) Each person performing an annual or 100-hour inspection shall inspect (where applicable) each installed miscellaneous item that is not otherwise covered by this listing for improper installation and improper operation.
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-aircraft-engine|Aircraft engine]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)

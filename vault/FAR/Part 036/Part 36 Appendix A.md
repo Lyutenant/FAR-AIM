@@ -1019,3 +1019,21 @@ A36.9.4.4.1 A source noise adjustment, Δ3, must be determined using the methods
 - [[36.6|§ 36.6]]
 - [[36.101|§ 36.101]]
 - [[36.803|§ 36.803]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.2#^def-apu|APU]] (§ 1.2)
+- [[1.1#^def-brake-horsepower|Brake horsepower]] (§ 1.1)
+- [[1.1#^def-flight-level|Flight level]] (§ 1.1)
+- [[1.2#^def-icao|ICAO]] (§ 1.2)
+- [[1.2#^def-ils|ILS]] (§ 1.2)
+- [[1.1#^def-indicated-airspeed|Indicated airspeed]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)
+- [[1.1#^def-takeoff-thrust|Takeoff thrust]] (§ 1.1)
+- [[1.1#^def-true-airspeed|True airspeed]] (§ 1.1)

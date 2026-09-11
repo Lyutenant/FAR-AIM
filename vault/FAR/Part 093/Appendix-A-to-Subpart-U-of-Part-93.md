@@ -58,3 +58,13 @@ LAmax(G) = 77 + 10log(# PAX seats/2) dB for certifications obtained under 14 CFR
 
 - [[93.301|§ 93.301]]
 - [[Part 36]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[93.303#^def-gcnp-quiet-aircraft-technology-designation|GCNP quiet aircraft technology designation]] (§ 93.303)
+- [[1.1#^def-helicopter|Helicopter]] (§ 1.1)
+- [[93.303#^def-number-of-passenger-seats|Number of passenger seats]] (§ 93.303)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)

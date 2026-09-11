@@ -162,3 +162,19 @@ cssclasses:
 
 - [[61.56|§ 61.56]]
 - [[61.57|§ 61.57]]
+
+## Defined Terms
+
+- [[61.1#^def-aeronautical-experience|Aeronautical experience]] (§ 61.1)
+- [[1.1#^def-autorotation|Autorotation]] (§ 1.1)
+- [[61.1#^def-examiner|Examiner]] (§ 61.1)
+- [[1.1#^def-flight-time|Flight time]] (§ 1.1)
+- [[61.1#^def-flight-training|Flight training]] (§ 61.1)
+- [[61.1#^def-ground-training|Ground training]] (§ 61.1)
+- [[1.1#^def-helicopter|Helicopter]] (§ 1.1)
+- [[61.1#^def-passenger|Passenger]] (§ 61.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-pilot-in-command|Pilot in command]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)
+- [[1.1#^def-rotorcraft|Rotorcraft]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)

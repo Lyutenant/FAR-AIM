@@ -241,3 +241,31 @@ Nk = population in Ak
 **Citations:**
 
 \[Doc. No. FAA-1999-5833, 65 FR 62861, Oct. 19, 2000, as amended by Amdt. 420-2, 71 FR 51972, Aug. 31, 2006; Docket No. FAA-2014-0418, Amdt. No. 420-7, 81 FR 47027, July 20, 2016]
+
+## Defined Terms
+
+- [[401.7#^def-casualty|Casualty]] (§ 401.7)
+- [[401.7#^def-casualty-area|Casualty area]] (§ 401.7)
+- [[401.7#^def-downrange|Downrange]] (§ 401.7)
+- [[420.5#^def-downrange-area|Downrange area]] (§ 420.5)
+- [[420.5#^def-effective-casualty-area-ac|Effective casualty area (Ac)]] (§ 420.5)
+- [[401.7#^def-expected-casualty|Expected casualty]] (§ 401.7)
+- [[401.7#^def-expendable-launch-vehicle|Expendable launch vehicle]] (§ 401.7)
+- [[420.5#^def-flight-azimuth|Flight azimuth]] (§ 420.5)
+- [[420.5#^def-flight-corridor|Flight corridor]] (§ 420.5)
+- [[420.5#^def-guided-suborbital-launch-vehicle|Guided suborbital launch vehicle]] (§ 420.5)
+- [[420.5#^def-impact-dispersion-area|Impact dispersion area]] (§ 420.5)
+- [[420.5#^def-impact-dispersion-radius-ri|Impact dispersion radius (Ri)]] (§ 420.5)
+- [[420.5#^def-instantaneous-impact-point-iip|Instantaneous impact point (IIP)]] (§ 420.5)
+- [[401.7#^def-launch|Launch]] (§ 401.7)
+- [[420.5#^def-launch-point|Launch point]] (§ 420.5)
+- [[401.7#^def-launch-site|Launch site]] (§ 401.7)
+- [[401.7#^def-launch-vehicle|Launch vehicle]] (§ 401.7)
+- [[420.5#^def-nominal|Nominal]] (§ 420.5)
+- [[401.7#^def-orbital-insertion|Orbital insertion]] (§ 401.7)
+- [[420.5#^def-overflight-dwell-time|Overflight dwell time]] (§ 420.5)
+- [[420.5#^def-populated-area|Populated area]] (§ 420.5)
+- [[420.5#^def-population-density|Population density]] (§ 420.5)
+- [[420.5#^def-position-data|Position data]] (§ 420.5)
+- [[401.7#^def-risk|Risk]] (§ 401.7)
+- [[420.5#^def-trajectory|Trajectory]] (§ 420.5)

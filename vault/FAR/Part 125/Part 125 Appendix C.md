@@ -37,3 +37,7 @@ If certification with ice protection provisions is desired, compliance with the 
 ## Explicit Cross-References
 
 - [[Part 25]]
+
+## Defined Terms
+
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)

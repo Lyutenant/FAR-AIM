@@ -233,3 +233,20 @@ An operator is authorized to conduct flight in airspace in which RVSM is applied
 - [[91.706|§ 91.706]]
 - [[Part 121]]
 - [[Part 135]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-air-traffic-control|Air traffic control]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.2#^def-atc|ATC]] (§ 1.2)
+- [[1.1#^def-flight-plan|Flight plan]] (§ 1.1)
+- [[1.2#^def-icao|ICAO]] (§ 1.2)
+- [[1.1#^def-mach-number|Mach number]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)
+- [[1.2#^def-tcas|TCAS]] (§ 1.2)
+- [[1.1#^def-tcas-ii|TCAS II]] (§ 1.1)
+- [[1.2#^def-tso|TSO]] (§ 1.2)

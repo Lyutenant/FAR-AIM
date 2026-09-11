@@ -35,3 +35,7 @@ B. ADR encompasses a number of processes and techniques for resolving protests o
 (2) Neutral Evaluation. At any stage during the ADR process, as the parties may agree, the neutral or compensated neutral will provide a candid assessment and opinion of the strengths and weaknesses of the parties” positions as to the facts and law, so as to facilitate further discussion and resolution.
 
 (3) Binding Arbitration. The ODRA, after consultation with the United States Department of Justice in accordance with the provisions of the Administrative Disputes Resolution Act offers true binding arbitration in cases within its jurisdiction. The ODRA's Guidance for the Use of Binding Arbitration may be found on its website at: http://www.faa.gov/go/odra.
+
+## Defined Terms
+
+- [[1.1#^def-united-states|United States]] (§ 1.1)

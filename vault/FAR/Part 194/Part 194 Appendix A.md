@@ -206,3 +206,23 @@ This section sets forth the maneuvers and procedures required for flights requir
 - [[194.233|§ 194.233]]
 - [[194.235|§ 194.235]]
 - [[Part 61]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-air-traffic-control|Air traffic control]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[194.103#^def-aviation-safety-inspector|Aviation Safety Inspector]] (§ 194.103)
+- [[1.2#^def-ffs|FFS]] (§ 1.2)
+- [[1.1#^def-flight-plan|Flight plan]] (§ 1.1)
+- [[1.1#^def-flight-time|Flight time]] (§ 1.1)
+- [[1.1#^def-flight-training-device-ftd|Flight training device (FTD)]] (§ 1.1)
+- [[1.1#^def-full-flight-simulator-ffs|Full flight simulator (FFS)]] (§ 1.1)
+- [[194.103#^def-instructor-pilot|Instructor pilot]] (§ 194.103)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-pilot-in-command|Pilot in command]] (§ 1.1)
+- [[1.1#^def-powered-lift|Powered-lift]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)
+- [[1.1#^def-traffic-pattern|Traffic pattern]] (§ 1.1)

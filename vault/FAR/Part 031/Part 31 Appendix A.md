@@ -77,3 +77,11 @@ The Instructions for Continued Airworthiness must contain a section titled Airwo
 - [[31.82|§ 31.82]]
 - [[43.16|§ 43.16]]
 - [[91.403|§ 91.403]]
+
+## Defined Terms
+
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-balloon|Balloon]] (§ 1.1)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.1#^def-preventive-maintenance|Preventive maintenance]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)

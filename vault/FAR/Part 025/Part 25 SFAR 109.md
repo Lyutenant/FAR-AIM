@@ -218,3 +218,12 @@ cssclasses:
 - [[91.533|§ 91.533]]
 - [[Part 21]]
 - [[Part 119]]
+
+## Defined Terms
+
+- [[1.2#^def-afm|AFM]] (§ 1.2)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-flammable|Flammable]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)

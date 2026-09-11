@@ -51,3 +51,8 @@ Appendix L lists regulations in this part that require compliance with standards
 - [[25.857|§ 25.857]]
 - [[121.312|§ 121.312]]
 - [[121.314|§ 121.314]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)

@@ -94,3 +94,11 @@ cssclasses:
 **Citations:**
 
 \[Docket 25530, 53 FR 26147, July 11, 1988; 53 FR 30906, Aug. 16, 1988]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.2#^def-dme|DME]] (§ 1.2)
+- [[1.2#^def-tcas|TCAS]] (§ 1.2)
+- [[1.2#^def-tso|TSO]] (§ 1.2)

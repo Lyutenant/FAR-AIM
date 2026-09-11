@@ -1,0 +1,33 @@
+{
+  "_comment": "Human-maintained gate for FAR defined-term links (plan §12.2/§12.3, §37; rules in far_aim/links/definitions.py). Terms are verbatim term text as the definitions section prints it (trailing punctuation included). deny: never link this definition — from every source that defines the text, or, with \"section\", only from that definitions section (e.g. {\"term\": \"Airport\", \"section\": \"139.5\"}). Every entry needs a reason; an entry naming a term no source of the accepted eCFR issue defines fails the build.",
+  "deny": [
+    {
+      "term": "FAA",
+      "reason": "Appears on nearly every page ('FAA Form', 'FAA-approved'); the § 1.2 expansion is not what those uses turn on."
+    },
+    {
+      "term": "Instrument",
+      "reason": "§ 1.1 defines a cockpit device; the text mostly says 'instrument rating', 'instrument approach', 'instrument runway', which are not that device. Multiword § 1.1 terms such as 'Instrument approach procedure (IAP)' still link."
+    },
+    {
+      "term": "Type:",
+      "reason": "Beyond the § 1.1 airman/aircraft senses the text says 'type certificate', 'type design', 'type of operation'; the word alone cannot tell them apart."
+    },
+    {
+      "term": "Class:",
+      "reason": "Beyond the § 1.1 airman/aircraft senses the text says 'Class B airspace' and 'class of airspace'."
+    },
+    {
+      "term": "Category:",
+      "reason": "Beyond the § 1.1 airman/aircraft senses the text says 'transport category', 'approach category' and 'Category II'."
+    },
+    {
+      "term": "Category A,",
+      "reason": "§ 1.1's Category A is a rotorcraft certification category; Parts 97 and 135 use 'Category A' for an approach category."
+    },
+    {
+      "term": "Category B,",
+      "reason": "§ 1.1's Category B is a rotorcraft certification category; Part 97 uses 'Category B' for an approach category."
+    }
+  ]
+}

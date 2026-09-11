@@ -142,3 +142,7 @@ This appendix specifies the HIRF environments and equipment HIRF test levels for
 ## Explicit Cross-References
 
 - [[29.1317|§ 29.1317]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)

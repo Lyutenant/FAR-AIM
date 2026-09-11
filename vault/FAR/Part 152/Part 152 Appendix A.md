@@ -131,3 +131,19 @@ A sponsor who is required to include in a construction contract the labor provis
 **Citations:**
 
 \[Docket 19430, 45 FR 34793, May 22, 1980]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[152.3#^def-airport|Airport]] (§ 152.3)
+- [[152.3#^def-airport-development|Airport development]] (§ 152.3)
+- [[152.3#^def-airport-hazard|Airport hazard]] (§ 152.3)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[152.3#^def-project|Project]] (§ 152.3)
+- [[152.3#^def-project-costs|Project costs]] (§ 152.3)
+- [[152.3#^def-public-agency|Public agency]] (§ 152.3)
+- [[1.1#^def-show|Show]] (§ 1.1)
+- [[152.3#^def-sponsor|Sponsor]] (§ 152.3)
+- [[152.3#^def-state|State]] (§ 152.3)
+- [[1.1#^def-united-states|United States]] (§ 1.1)

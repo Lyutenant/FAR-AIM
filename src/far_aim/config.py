@@ -45,6 +45,10 @@ class Config:
         return self.links_dir / "pcg-glossary-gate.json"
 
     @property
+    def part1_gate_path(self) -> Path:
+        return self.links_dir / "part1-definitions-gate.json"
+
+    @property
     def enrichment_dir(self) -> Path:
         """Committed enrichment layer (plan §36): curated concept graph, the
         machine-derived related-links file, and its human review overlay."""

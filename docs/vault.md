@@ -195,7 +195,59 @@ vault/AIM/
   terms would share goes to the term whose text is exactly the alias, else
   is dropped; the longest alias wins at a position (`ADS-B` is never also
   `ADS`). The FAR gets no glossary links: its vocabulary is defined by
-  14 CFR Part 1, and the PCG's ATC-oriented definitions can differ.
+  14 CFR Part 1, and the PCG's ATC-oriented definitions can differ — FAR
+  notes list their **Defined Terms** instead (next bullet).
+- **`## Defined Terms`** (plan §12.2 Tier 2, design §37) closes every FAR
+  section and appendix note whose official text uses a term defined *for
+  it*, listing the terms in term order as block links that land on the
+  definition itself and name the section that defines it:
+  `[[1.1#^def-night|Night]] (§ 1.1)`, `[[61.1#^def-cross-country-time|Cross-country time]] (§ 61.1)`.
+  **Sources and scope** are derived from the text (`far_aim.links.definitions`):
+  a section holding `definition` blocks is a source when its heading names
+  definitions or its lead-in states a scope, and the scope is the
+  narrowest `this chapter` / `this subchapter` / `this part` / `this
+  subpart` in the text introducing its first definition — § 1.1 and § 1.2
+  speak for Chapter I, § 110.2 for subchapter G, § 61.1 for Part 61,
+  § 91.851 for Part 91 subpart I; without a phrase, subpart A or no subpart
+  means the part (§ 5.3, § 121.7), any other subpart itself. A section
+  scoped to `this section` (§ 91.227, § 121.590) defines terms for itself
+  alone and is skipped. Chapters II, III and V get their own sources the
+  same way (§ 401.7 for Chapter III). A note lists terms from every source
+  covering it except itself, and a source never lists a wider definition
+  of a term it defines (§ 139.5 does not link § 1.1's *Airport*). **The
+  narrower scope wins** at an alias two sources define — § 139.5's
+  *Airport* over § 1.1's throughout Part 139, exactly § 1.1's "unless the
+  context requires otherwise"; within one scope an alias goes to the
+  definition whose label *is* the alias (`RNAV` is § 1.2's, not the
+  parenthetical of § 1.1's *Area navigation (RNAV)*), else it is dropped.
+  To make block links possible every `definition` block the FAR renderer
+  emits ends with an Obsidian block id derived from its term (`^def-night`;
+  markup Reading View hides, never wording), unique per note; § 1.1's
+  twice-italicized *Synthetic vision* is told apart by the words before
+  its verb (`^def-synthetic-vision-system`) and an unresolved duplicate is
+  numbered and never linked. **Recognition**: a label is the term minus
+  trailing punctuation (`Approved,` → `Approved`); a label with a
+  parenthetical also yields the CFR's `Term (ABBR)` forms (`Decision
+  altitude`, `ATS route`, `NDB`/`ADF`); aliases without lowercase letters
+  are abbreviations and match in capitals only, at three or more
+  characters (`IFR`, `TCAS II`; `DA` and `V1` never); every other alias is
+  a phrase matching case-insensitively, singular or plural (§ 1.3(a):
+  "words importing the singular include the plural" — `airports`,
+  `categories`). Unlike PCG entries, single defined words match (`night`,
+  `person`, `operate`): a definitions section is its scope's controlled
+  vocabulary. The longest alias wins at a position (`IFR conditions` is
+  not also `IFR`). **The gate**, `data/links/part1-definitions-gate.json`
+  (human-maintained, plan §12.3, deny-only), removes terms whose everyday
+  regulatory usage outruns the definition — `Instrument` (mostly
+  "instrument rating"), `Type:`/`Class:`/`Category:` (also airspace and
+  operation categories), `Category A,`/`Category B,` (approach categories
+  in Parts 97/135) and `FAA` (on every page); an entry names the verbatim
+  term and optionally one source `section` (else every source defining
+  that text), carries a reason, and must name a term some source defines.
+  Derived at render time; the canonical JSON is unchanged. Full build: 97
+  sources (3 chapter-wide, 1 subchapter, 70 part, 23 subpart) holding
+  1,467 definitions; 19,784 links from 4,594 notes, 13,203 of them into
+  § 1.1.
 - **Lists render as nested list items** with the FAA edition's markers
   (`**a.**`, `**1.**`, `**(a)**`, `**(1)**`, `**[a]**`, `**[1]**`) derived
   from list level and position, each item's remaining blocks (nested
@@ -373,7 +425,8 @@ CSS snippet, so the look can be changed without regenerating a single note.
 - **What it does** in Reading View: hides the bullet on hierarchy items
   (the bold official label `**(a)**` / `**1.**` *is* the marker) while
   keeping bullets on plain link lists (Explicit Cross-References, Glossary
-  Terms, Related, See Also — items whose direct child is a link); indents
+  Terms, Defined Terms, Related, See Also — items whose direct child is a
+  link); indents
   each nested level by a fixed step; draws a thin vertical guide down the
   parent's text edge for the extent of its children; keeps Obsidian's
   hover fold handle, so a paragraph's sub-paragraphs can be collapsed.

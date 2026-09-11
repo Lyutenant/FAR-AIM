@@ -31,3 +31,8 @@ cssclasses:
 | 0000-0459 | 8 |
 | 0500-1959 | 9 |
 | 2000-2359 | 8 |
+
+## Defined Terms
+
+- [[117.3#^def-acclimated|Acclimated]] (§ 117.3)
+- [[1.1#^def-flight-time|Flight time]] (§ 1.1)

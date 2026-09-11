@@ -134,3 +134,12 @@ Each light must be armed or turned on during taxiing, takeoff, and landing. In s
 - [[25.812|§ 25.812]]
 - [[25.813|§ 25.813]]
 - [[125.189|§ 125.189]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-ceiling|Ceiling]] (§ 1.1)
+- [[1.1#^def-crewmember|Crewmember]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)

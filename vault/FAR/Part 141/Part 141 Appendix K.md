@@ -164,3 +164,17 @@ cssclasses:
 - [[Part 91]]
 - [[Part 133]]
 - [[Part 137]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-flight-training-device-ftd|Flight training device (FTD)]] (§ 1.1)
+- [[1.2#^def-fstd|FSTD]] (§ 1.2)
+- [[1.1#^def-full-flight-simulator-ffs|Full flight simulator (FFS)]] (§ 1.1)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-pilot-in-command|Pilot in command]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)
+- [[1.1#^def-rotorcraft|Rotorcraft]] (§ 1.1)

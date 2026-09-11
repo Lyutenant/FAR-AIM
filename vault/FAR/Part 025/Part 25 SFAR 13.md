@@ -64,3 +64,11 @@ This regulation supersedes Special Civil Air Regulation SR-398 and shall remain 
 **Citations:**
 
 \[19 FR 5039, Aug. 11, 1954. Redesignated at 29 FR 19099, Dec. 30, 1964]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)

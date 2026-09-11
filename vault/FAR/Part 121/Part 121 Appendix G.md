@@ -147,3 +147,16 @@ After successful completion of evaluation demonstrations, FAA approval is indica
 ## Explicit Cross-References
 
 - [[121.405|§ 121.405]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-crewmember|Crewmember]] (§ 1.1)
+- [[1.2#^def-dme|DME]] (§ 1.2)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.2#^def-ndb-adf|NDB (ADF)]] (§ 1.2)
+- [[1.1#^def-show|Show]] (§ 1.1)
+- [[1.2#^def-vor|VOR]] (§ 1.2)

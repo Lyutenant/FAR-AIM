@@ -213,3 +213,13 @@ K7.13 The value of VCON used for noise certification must be included in the app
 ## Explicit Cross-References
 
 - [[36.1|§ 36.1]]
+
+## Defined Terms
+
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-external-load|External load]] (§ 1.1)
+- [[36.1#^def-nacelle-angle|Nacelle angle]] (§ 36.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-takeoff-power|Takeoff power]] (§ 1.1)
+- [[36.1#^def-tiltrotor|Tiltrotor]] (§ 36.1)
+- [[36.1#^def-vtol-conversion-mode|VTOL/Conversion mode]] (§ 36.1)

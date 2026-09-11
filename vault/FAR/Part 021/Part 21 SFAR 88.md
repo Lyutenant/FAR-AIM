@@ -60,3 +60,9 @@ cssclasses:
 
 - [[25.901|§ 25.901]]
 - [[25.981|§ 25.981]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)

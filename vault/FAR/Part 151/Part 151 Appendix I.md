@@ -98,3 +98,9 @@ cssclasses:
 ## Explicit Cross-References
 
 - [[151.72|§ 151.72]]
+
+## Defined Terms
+
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.2#^def-tso|TSO]] (§ 1.2)

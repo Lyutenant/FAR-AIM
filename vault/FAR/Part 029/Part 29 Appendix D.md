@@ -85,3 +85,13 @@ cssclasses:
 ## Explicit Cross-References
 
 - [[29.807|§ 29.807]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-crewmember|Crewmember]] (§ 1.1)
+- [[1.1#^def-night|Night]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-rotorcraft|Rotorcraft]] (§ 1.1)

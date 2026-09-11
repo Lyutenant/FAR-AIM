@@ -44,3 +44,10 @@ cssclasses:
 <tr><td>2300-2359</td><td>10</td><td>10</td><td>10</td><td>9</td><td>9</td><td>9</td><td>9</td></tr>
 </tbody>
 </table>
+
+## Defined Terms
+
+- [[117.3#^def-acclimated|Acclimated]] (§ 117.3)
+- [[117.3#^def-flight-duty-period-fdp|Flight duty period (FDP)]] (§ 117.3)
+- [[117.3#^def-lineholder|Lineholder]] (§ 117.3)
+- [[117.3#^def-scheduled|Scheduled]] (§ 117.3)

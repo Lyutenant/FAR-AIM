@@ -157,3 +157,14 @@ IX. Rotorcraft Flight Manual. A Rotorcraft Flight Manual or Rotorcraft Flight Ma
 - [[29.1381|§ 29.1381]]
 - [[29.1431|§ 29.1431]]
 - [[29.1433|§ 29.1433]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-helicopter|Helicopter]] (§ 1.1)
+- [[1.2#^def-ifr|IFR]] (§ 1.2)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-rotorcraft|Rotorcraft]] (§ 1.1)
+- [[1.2#^def-vle|VLE]] (§ 1.2)
+- [[1.2#^def-vne|VNE]] (§ 1.2)

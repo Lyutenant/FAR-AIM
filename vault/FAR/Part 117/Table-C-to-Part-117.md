@@ -40,3 +40,10 @@ cssclasses:
 <tr><td>1700-2359</td><td>15</td><td>17</td><td>14</td><td>15.5</td><td>13</td><td>13.5</td></tr>
 </tbody>
 </table>
+
+## Defined Terms
+
+- [[117.3#^def-acclimated|Acclimated]] (§ 117.3)
+- [[117.3#^def-flight-duty-period-fdp|Flight duty period (FDP)]] (§ 117.3)
+- [[117.3#^def-rest-facility|Rest facility]] (§ 117.3)
+- [[117.3#^def-scheduled|Scheduled]] (§ 117.3)

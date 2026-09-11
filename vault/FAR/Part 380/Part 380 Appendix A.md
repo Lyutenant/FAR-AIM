@@ -73,3 +73,9 @@ Bonding or surety company must be listed in Best's Insurance Reports (Fire and C
 ## Explicit Cross-References
 
 - [[380.34|§ 380.34]]
+
+## Defined Terms
+
+- [[380.2#^def-charter-flight|Charter flight]] (§ 380.2)
+- [[380.2#^def-public-charter|Public Charter]] (§ 380.2)
+- [[380.2#^def-public-charter-operator|Public Charter operator]] (§ 380.2)

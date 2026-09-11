@@ -87,3 +87,13 @@ The following test criteria and procedures must be used for showing compliance w
 - [[25.803|§ 25.803]]
 - [[121.291|§ 121.291]]
 - [[121.571|§ 121.571]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-crewmember|Crewmember]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)

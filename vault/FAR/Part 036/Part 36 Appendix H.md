@@ -566,3 +566,18 @@ Compliance with this part of this appendix must be shown with noise levels measu
 - [[36.801|§ 36.801]]
 - [[36.803|§ 36.803]]
 - [[36.805|§ 36.805]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-aircraft-engine|Aircraft engine]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-helicopter|Helicopter]] (§ 1.1)
+- [[1.1#^def-indicated-airspeed|Indicated airspeed]] (§ 1.1)
+- [[1.1#^def-mach-number|Mach number]] (§ 1.1)
+- [[1.1#^def-rotorcraft|Rotorcraft]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)
+- [[1.1#^def-takeoff-power|Takeoff power]] (§ 1.1)
+- [[1.1#^def-true-airspeed|True airspeed]] (§ 1.1)
+- [[1.2#^def-vne|VNE]] (§ 1.2)

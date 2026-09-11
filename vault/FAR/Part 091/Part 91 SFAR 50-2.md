@@ -107,3 +107,18 @@ Section 9. Termination date. Section 1. Applicability, Section 4, Flight-free zo
 **Citations:**
 
 \[66 FR 1003, Jan. 4, 2001, as amended at 66 FR 16584, Mar. 26, 2001; 72 FR 9846, Mar. 6, 2007; Docket FAA-2018-0119, Amdt. 91-350, 83 FR 9171, Mar. 5, 2018]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.2#^def-atc|ATC]] (§ 1.2)
+- [[1.1#^def-flight-plan|Flight plan]] (§ 1.1)
+- [[1.2#^def-ifr|IFR]] (§ 1.2)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.2#^def-msl|MSL]] (§ 1.2)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.2#^def-vfr|VFR]] (§ 1.2)
+- [[1.2#^def-vortac|VORTAC]] (§ 1.2)

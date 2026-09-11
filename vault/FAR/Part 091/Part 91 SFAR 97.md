@@ -107,3 +107,24 @@ This Special Federal Aviation Regulation will remain in effect until rescinded.
 - [[Part 125]]
 - [[Part 129]]
 - [[Part 135]]
+
+## Defined Terms
+
+- [[1.1#^def-air-traffic|Air traffic]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-area-navigation-rnav|Area navigation (RNAV)]] (§ 1.1)
+- [[1.1#^def-area-navigation-rnav-route|Area navigation (RNAV) route]] (§ 1.1)
+- [[1.1#^def-crewmember|Crewmember]] (§ 1.1)
+- [[1.2#^def-ifr|IFR]] (§ 1.2)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.2#^def-mca|MCA]] (§ 1.2)
+- [[1.2#^def-mea|MEA]] (§ 1.2)
+- [[1.2#^def-msl|MSL]] (§ 1.2)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-operational-control|Operational control]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.2#^def-rnav|RNAV]] (§ 1.2)
+- [[1.1#^def-route-segment|Route segment]] (§ 1.1)
+- [[1.2#^def-tso|TSO]] (§ 1.2)
+- [[1.1#^def-united-states|United States]] (§ 1.1)
+- [[1.2#^def-vor|VOR]] (§ 1.2)

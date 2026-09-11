@@ -258,3 +258,16 @@ The following data must be used when conducting a flammability exposure analysis
 - [[25.5|§ 25.5]]
 - [[25.981|§ 25.981]]
 - [[Part 1]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-flammable|Flammable]] (§ 1.1)
+- [[1.1#^def-flight-time|Flight time]] (§ 1.1)
+- [[1.1#^def-mach-number|Mach number]] (§ 1.1)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)
+- [[1.1#^def-standard-atmosphere|Standard atmosphere]] (§ 1.1)

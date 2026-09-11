@@ -117,3 +117,11 @@ b = leave usage (total leave hours divided by total hours available for work.
 **Citations:**
 
 \[Amdt. 187-5, 60 FR 19631, Apr. 19, 1995]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)
+- [[1.1#^def-united-states|United States]] (§ 1.1)

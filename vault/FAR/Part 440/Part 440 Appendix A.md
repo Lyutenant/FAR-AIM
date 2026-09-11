@@ -212,3 +212,27 @@ C. Maximum number of Government personnel and individuals not involved in permit
 
 - [[440.3|§ 440.3]]
 - [[440.7|§ 440.7]]
+
+## Defined Terms
+
+- [[401.7#^def-casualty-area|Casualty area]] (§ 401.7)
+- [[401.7#^def-contingency-abort|Contingency abort]] (§ 401.7)
+- [[401.7#^def-countdown|Countdown]] (§ 401.7)
+- [[401.7#^def-crossrange|Crossrange]] (§ 401.7)
+- [[401.7#^def-downrange|Downrange]] (§ 401.7)
+- [[401.7#^def-experimental-permit|Experimental permit]] (§ 401.7)
+- [[401.7#^def-flight-safety-system|Flight safety system]] (§ 401.7)
+- [[401.7#^def-hazardous-materials|Hazardous materials]] (§ 401.7)
+- [[401.7#^def-launch|Launch]] (§ 401.7)
+- [[401.7#^def-launch-site|Launch site]] (§ 401.7)
+- [[401.7#^def-launch-vehicle|Launch vehicle]] (§ 401.7)
+- [[401.7#^def-launch-window|Launch window]] (§ 401.7)
+- [[401.7#^def-nominal|Nominal]] (§ 401.7)
+- [[401.7#^def-orbital-insertion|Orbital insertion]] (§ 401.7)
+- [[401.7#^def-payload|Payload]] (§ 401.7)
+- [[401.7#^def-person|Person]] (§ 401.7)
+- [[401.7#^def-reentry-site|Reentry site]] (§ 401.7)
+- [[401.7#^def-reentry-vehicle|Reentry vehicle]] (§ 401.7)
+- [[401.7#^def-reentry-window|Reentry window]] (§ 401.7)
+- [[401.7#^def-risk|Risk]] (§ 401.7)
+- [[401.7#^def-sigma|Sigma]] (§ 401.7)

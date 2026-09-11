@@ -153,3 +153,15 @@ An uncorrected error in computation (including reading instruments and books) wh
 **Citations:**
 
 \[Docket 1179, 27 FR 7970, Aug. 10, 1962, as amended by Docket FAA-2017-0733, Amdt. 63-39, 82 FR 34398, July 25, 2017]
+
+## Defined Terms
+
+- [[1.1#^def-air-carrier|Air carrier]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-alternate-airport|Alternate airport]] (§ 1.1)
+- [[1.1#^def-flight-level|Flight level]] (§ 1.1)
+- [[1.1#^def-flight-plan|Flight plan]] (§ 1.1)
+- [[1.1#^def-flight-time|Flight time]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-pilot-in-command|Pilot in command]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)

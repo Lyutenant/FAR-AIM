@@ -91,3 +91,13 @@ cssclasses:
 - [[25.21|§ 25.21]]
 - [[25.143|§ 25.143]]
 - [[25.207|§ 25.207]]
+
+## Defined Terms
+
+- [[1.1#^def-airframe|Airframe]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-critical-engine|Critical engine]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)
+- [[1.2#^def-vef|VEF]] (§ 1.2)
+- [[1.2#^def-vfto|VFTO]] (§ 1.2)

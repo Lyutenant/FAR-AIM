@@ -69,3 +69,9 @@ cssclasses:
 **Citations:**
 
 \[Docket 25530, 53 FR 26154, July 11, 1988; 53 FR 30906, Aug. 16, 1988; Amdt. 135-113, 73 FR 12571, Mar. 7, 2008; 73 FR 15281, Mar. 21, 2008; Amdt. 135-121, 75 FR 17047, Apr. 5, 2010]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-main-rotor|Main rotor]] (§ 1.1)
+- [[1.2#^def-tso|TSO]] (§ 1.2)

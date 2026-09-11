@@ -576,3 +576,16 @@ Effective length of runway required when effective length is determined in accor
 - [[121.283|§ 121.283]]
 - [[121.287|§ 121.287]]
 - [[121.315|§ 121.315]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-alternate-airport|Alternate airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-brake-horsepower|Brake horsepower]] (§ 1.1)
+- [[1.1#^def-fireproof|Fireproof]] (§ 1.1)
+- [[1.1#^def-flame-resistant|Flame resistant]] (§ 1.1)
+- [[1.1#^def-flammable|Flammable]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)

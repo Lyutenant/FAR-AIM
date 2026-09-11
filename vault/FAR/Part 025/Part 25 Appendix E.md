@@ -101,3 +101,10 @@ The Administrator may grant performance credit for the use of standby power on t
 **Citations:**
 
 \[Amdt. 25-6, 30 FR 8468, July 2, 1965]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-rocket|Rocket]] (§ 1.1)

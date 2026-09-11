@@ -277,3 +277,29 @@ where: DISP(Hap) = 0.05
 ## Explicit Cross-References
 
 - [[420.19|§ 420.19]]
+
+## Defined Terms
+
+- [[401.7#^def-crossrange|Crossrange]] (§ 401.7)
+- [[420.5#^def-debris-dispersion-radius|Debris dispersion radius]] (§ 420.5)
+- [[401.7#^def-downrange|Downrange]] (§ 401.7)
+- [[420.5#^def-downrange-area|Downrange area]] (§ 420.5)
+- [[420.5#^def-flight-azimuth|Flight azimuth]] (§ 420.5)
+- [[420.5#^def-flight-corridor|Flight corridor]] (§ 420.5)
+- [[420.5#^def-guided-suborbital-launch-vehicle|Guided suborbital launch vehicle]] (§ 420.5)
+- [[420.5#^def-impact-dispersion-area|Impact dispersion area]] (§ 420.5)
+- [[420.5#^def-impact-dispersion-radius-ri|Impact dispersion radius (Ri)]] (§ 420.5)
+- [[420.5#^def-impact-range|Impact range]] (§ 420.5)
+- [[420.5#^def-impact-range-factor|Impact range factor]] (§ 420.5)
+- [[401.7#^def-launch|Launch]] (§ 401.7)
+- [[420.5#^def-launch-area|Launch area]] (§ 420.5)
+- [[420.5#^def-launch-point|Launch point]] (§ 420.5)
+- [[401.7#^def-launch-site|Launch site]] (§ 401.7)
+- [[401.7#^def-launch-vehicle|Launch vehicle]] (§ 401.7)
+- [[420.5#^def-nominal|Nominal]] (§ 420.5)
+- [[420.5#^def-overflight-exclusion-zone|Overflight exclusion zone]] (§ 420.5)
+- [[420.5#^def-populated-area|Populated area]] (§ 420.5)
+- [[401.7#^def-public|Public]] (§ 401.7)
+- [[401.7#^def-risk|Risk]] (§ 401.7)
+- [[420.5#^def-trajectory|Trajectory]] (§ 420.5)
+- [[401.7#^def-uprange|Uprange]] (§ 401.7)

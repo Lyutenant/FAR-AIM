@@ -71,3 +71,10 @@ There is set forth below an itemization of typical eligible and ineligible items
 ## Explicit Cross-References
 
 - [[151.73|§ 151.73]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.2#^def-als|ALS]] (§ 1.2)
+- [[1.1#^def-approved|Approved]] (§ 1.1)

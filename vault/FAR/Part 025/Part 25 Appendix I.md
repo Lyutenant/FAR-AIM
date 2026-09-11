@@ -97,3 +97,10 @@ In addition to the requirements of § 25.1305:
 - [[25.777|§ 25.777]]
 - [[25.1141|§ 25.1141]]
 - [[25.1305|§ 25.1305]]
+
+## Defined Terms
+
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-takeoff-thrust|Takeoff thrust]] (§ 1.1)

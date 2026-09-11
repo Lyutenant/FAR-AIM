@@ -156,3 +156,20 @@ cssclasses:
 ## Explicit Cross-References
 
 - [[135.152|§ 135.152]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.2#^def-apu|APU]] (§ 1.2)
+- [[1.1#^def-calibrated-airspeed|Calibrated airspeed]] (§ 1.1)
+- [[1.1#^def-decision-height-dh|Decision height (DH)]] (§ 1.1)
+- [[1.2#^def-dme|DME]] (§ 1.2)
+- [[1.2#^def-ils|ILS]] (§ 1.2)
+- [[1.1#^def-indicated-airspeed|Indicated airspeed]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)
+- [[1.2#^def-tcas|TCAS]] (§ 1.2)
+- [[1.2#^def-tso|TSO]] (§ 1.2)
+- [[1.2#^def-vor|VOR]] (§ 1.2)

@@ -72,3 +72,9 @@ cssclasses:
 **Citations:**
 
 \[Docket 25530, 53 FR 26152, July 11, 1988; 53 FR 30906, Aug. 16, 1988, as amended by Amdt. 135-69, 62 FR 38397, July 17, 1997]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-indicated-airspeed|Indicated airspeed]] (§ 1.1)
+- [[1.2#^def-tso|TSO]] (§ 1.2)

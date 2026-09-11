@@ -165,3 +165,15 @@ X. Electrical and electronic system lightning protection. For regulations concer
 - [[29.1431|§ 29.1431]]
 - [[29.1433|§ 29.1433]]
 - [[Part 29]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-crewmember|Crewmember]] (§ 1.1)
+- [[1.1#^def-helicopter|Helicopter]] (§ 1.1)
+- [[1.2#^def-ifr|IFR]] (§ 1.2)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-rotorcraft|Rotorcraft]] (§ 1.1)
+- [[1.2#^def-vle|VLE]] (§ 1.2)
+- [[1.2#^def-vne|VNE]] (§ 1.2)

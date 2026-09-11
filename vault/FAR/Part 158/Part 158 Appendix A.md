@@ -81,3 +81,21 @@ B. Public agency certification. The public agency hereby assures and certifies, 
 **Citations:**
 
 \[Docket 26385, 56 FR 24278, May 29, 1991, as amended by Amdt. 158-2, 65 FR 34543, May 30, 2000; Amdt. 158-4, 72 FR 28851, May 23, 2007]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-air-carrier|Air carrier]] (§ 1.1)
+- [[158.3#^def-airport|Airport]] (§ 158.3)
+- [[158.3#^def-airport-layout-plan-alp|Airport layout plan (ALP)]] (§ 158.3)
+- [[158.3#^def-airport-revenue|Airport revenue]] (§ 158.3)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[158.3#^def-exclusive-long-term-lease-or-use-agreement|Exclusive long-term lease or use agreement]] (§ 158.3)
+- [[1.1#^def-foreign-air-carrier|Foreign air carrier]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[158.3#^def-pfc|PFC]] (§ 158.3)
+- [[158.3#^def-project|Project]] (§ 158.3)
+- [[158.3#^def-public-agency|Public agency]] (§ 158.3)
+- [[158.3#^def-state|State]] (§ 158.3)
+- [[1.1#^def-united-states|United States]] (§ 1.1)

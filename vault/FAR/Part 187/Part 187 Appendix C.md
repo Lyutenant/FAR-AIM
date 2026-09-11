@@ -81,3 +81,13 @@ O = other agency costs related to each activity including overhead.
 **Citations:**
 
 \[Docket 28967, 62 FR 55703, Oct. 27, 1997]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-aircraft-engine|Aircraft engine]] (§ 1.1)
+- [[1.1#^def-appliance|Appliance]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)
+- [[1.1#^def-united-states|United States]] (§ 1.1)

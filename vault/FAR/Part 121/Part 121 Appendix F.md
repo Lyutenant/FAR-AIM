@@ -154,3 +154,23 @@ W = May be waived for both PIC and SIC, except during a proficiency check conduc
 - [[121.420|§ 121.420]]
 - [[121.426|§ 121.426]]
 - [[121.441|§ 121.441]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.2#^def-atc|ATC]] (§ 1.2)
+- [[1.1#^def-ceiling|Ceiling]] (§ 1.1)
+- [[1.2#^def-efvs|EFVS]] (§ 1.2)
+- [[1.1#^def-efvs-operation|EFVS operation]] (§ 1.1)
+- [[1.2#^def-ffs|FFS]] (§ 1.2)
+- [[1.1#^def-flightcrew-member|Flightcrew member]] (§ 1.1)
+- [[1.2#^def-ftd|FTD]] (§ 1.2)
+- [[1.2#^def-ils|ILS]] (§ 1.2)
+- [[1.1#^def-nonprecision-approach-procedure|Nonprecision approach procedure]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-pilot-in-command|Pilot in command]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)
+- [[1.1#^def-second-in-command|Second in command]] (§ 1.1)

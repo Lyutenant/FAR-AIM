@@ -14,9 +14,10 @@ regulatory material; on failure, preserve the last known-good output.
 3. **Text integrity** — the parser/generator must not lose or invent
    authoritative text; exact-paragraph fixture tests for representative
    sections.
-4. **Link integrity** — generated wikilinks resolve; no duplicate IDs, no
-   filename collisions; alias uniqueness enforced **globally** across all
-   corpora.
+4. **Link integrity** — generated wikilinks resolve, and a generated block
+   link (`[[1.1#^def-night]]`, the FAR → Part 1 defined-term links) lands
+   on a block id its target note carries; no duplicate IDs, no filename
+   collisions; alias uniqueness enforced **globally** across all corpora.
 5. **Change integrity** — guardrails against mass changes (e.g., >X% of AIM
    disappearing, thousands of sections changing on a "tiny" update, empty
    parser output). AIM renumbering cascades are classified as moves, not

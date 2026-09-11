@@ -273,3 +273,20 @@ cssclasses:
 - [[21.24|§ 21.24]]
 - [[Part 61]]
 - [[Part 91]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-aircraft-engine|Aircraft engine]] (§ 1.1)
+- [[1.1#^def-airframe|Airframe]] (§ 1.1)
+- [[1.1#^def-appliance|Appliance]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-balloon|Balloon]] (§ 1.1)
+- [[1.2#^def-dme|DME]] (§ 1.2)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.1#^def-major-alteration|Major alteration]] (§ 1.1)
+- [[1.1#^def-major-repair|Major repair]] (§ 1.1)
+- [[1.1#^def-preventive-maintenance|Preventive maintenance]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)

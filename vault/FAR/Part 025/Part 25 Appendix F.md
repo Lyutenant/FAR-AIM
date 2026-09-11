@@ -683,3 +683,12 @@ Ensure that the horizontal centerline of the burner cone is also offset 1 inch b
 - [[25.853|§ 25.853]]
 - [[25.855|§ 25.855]]
 - [[25.857|§ 25.857]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-ceiling|Ceiling]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)

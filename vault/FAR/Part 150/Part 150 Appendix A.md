@@ -265,3 +265,22 @@ The requisite integral may be approximated with sufficient accuracy by integrati
 ## Explicit Cross-References
 
 - [[150.11|§ 150.11]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[150.7#^def-airport|Airport]] (§ 150.7)
+- [[150.7#^def-airport-noise-compatibility-program|Airport noise compatibility program]] (§ 150.7)
+- [[150.7#^def-airport-operator|Airport Operator]] (§ 150.7)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[150.7#^def-average-sound-level|Average sound level]] (§ 150.7)
+- [[150.7#^def-compatible-land-use|Compatible land use]] (§ 150.7)
+- [[150.7#^def-day-night-average-sound-level|Day-night average sound level]] (§ 150.7)
+- [[1.1#^def-helicopter|Helicopter]] (§ 1.1)
+- [[1.1#^def-heliport|Heliport]] (§ 1.1)
+- [[1.1#^def-night|Night]] (§ 1.1)
+- [[150.7#^def-noise-exposure-map|Noise exposure map]] (§ 150.7)
+- [[150.7#^def-noise-level-reduction|Noise level reduction]] (§ 150.7)
+- [[150.7#^def-noncompatible-land-use|Noncompatible land use]] (§ 150.7)
+- [[150.7#^def-sound-exposure-level|Sound exposure level]] (§ 150.7)
+- [[150.7#^def-yearly-day-night-average-sound-level|Yearly day-night average sound level]] (§ 150.7)

@@ -424,3 +424,34 @@ WAT Weight, Altitude, Temperature.
 - [[Part 135]]
 - [[Part 141]]
 - [[Part 142]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.2#^def-afm|AFM]] (§ 1.2)
+- [[1.2#^def-agl|AGL]] (§ 1.2)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-appliance|Appliance]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-calibrated-airspeed|Calibrated airspeed]] (§ 1.1)
+- [[1.1#^def-crewmember|Crewmember]] (§ 1.1)
+- [[1.1#^def-critical-engine|Critical engine]] (§ 1.1)
+- [[1.2#^def-ffs|FFS]] (§ 1.2)
+- [[1.1#^def-flight-simulation-training-device-fstd|Flight simulation training device (FSTD)]] (§ 1.1)
+- [[1.1#^def-flight-training-device-ftd|Flight training device (FTD)]] (§ 1.1)
+- [[1.2#^def-fstd|FSTD]] (§ 1.2)
+- [[1.2#^def-ftd|FTD]] (§ 1.2)
+- [[1.1#^def-full-flight-simulator-ffs|Full flight simulator (FFS)]] (§ 1.1)
+- [[1.1#^def-helicopter|Helicopter]] (§ 1.1)
+- [[1.2#^def-icao|ICAO]] (§ 1.2)
+- [[1.2#^def-ils|ILS]] (§ 1.2)
+- [[1.1#^def-instrument-approach-procedure-iap|Instrument approach procedure (IAP)]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)
+- [[1.2#^def-reil|REIL]] (§ 1.2)
+- [[1.2#^def-rvr|RVR]] (§ 1.2)
+- [[1.1#^def-takeoff-safety-speed|Takeoff safety speed]] (§ 1.1)

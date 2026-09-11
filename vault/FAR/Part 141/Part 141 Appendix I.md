@@ -519,3 +519,24 @@ cssclasses:
 - [[61.100|§ 61.100]]
 - [[61.111|§ 61.111]]
 - [[61.129|§ 61.129]]
+
+## Defined Terms
+
+- [[1.1#^def-air-traffic-control|Air traffic control]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-airship|Airship]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-balloon|Balloon]] (§ 1.1)
+- [[1.1#^def-flight-training-device-ftd|Flight training device (FTD)]] (§ 1.1)
+- [[1.1#^def-glider|Glider]] (§ 1.1)
+- [[1.1#^def-gyroplane|Gyroplane]] (§ 1.1)
+- [[1.1#^def-helicopter|Helicopter]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-powered-lift|Powered-lift]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)
+- [[1.1#^def-rotorcraft|Rotorcraft]] (§ 1.1)
+- [[1.1#^def-traffic-pattern|Traffic pattern]] (§ 1.1)

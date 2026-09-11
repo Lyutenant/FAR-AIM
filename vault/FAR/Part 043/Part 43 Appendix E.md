@@ -142,3 +142,12 @@ Each person performing the altimeter system tests and inspections required by §
 - [[43.9|§ 43.9]]
 - [[91.411|§ 91.411]]
 - [[Part 25]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airframe|Airframe]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.2#^def-atc|ATC]] (§ 1.2)
+- [[1.1#^def-person|Person]] (§ 1.1)

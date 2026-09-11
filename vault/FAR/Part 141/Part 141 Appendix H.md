@@ -63,3 +63,8 @@ cssclasses:
 (f) A student who satisfactorily completed 2 years of study on the principles of education at a college or university may be credited with 10 hours of the training required in paragraph (a)(1) of this section.
 
 3\. Stage checks and end-of-course tests. Each student enrolled in a ground instructor course must satisfactorily accomplish the stage checks and end-of-course tests, in accordance with the school's approved training course, consisting of the approved knowledge areas in paragraph (b), (c), (d), and (e) of section No. 2 of this appendix appropriate to the ground instructor rating for which the course applies.
+
+## Defined Terms
+
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)

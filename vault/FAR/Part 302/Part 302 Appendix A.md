@@ -698,3 +698,9 @@ Appendix A shows the subjects covered by part 302 and the section numbers used b
 - [[302.722|§ 302.722]]
 - [[302.723|§ 302.723]]
 - [[302.724|§ 302.724]]
+
+## Defined Terms
+
+- [[302.2#^def-administrative-law-judge|Administrative law judge]] (§ 302.2)
+- [[302.2#^def-dot-decisionmaker|DOT Decisionmaker]] (§ 302.2)
+- [[302.2#^def-party|Party]] (§ 302.2)

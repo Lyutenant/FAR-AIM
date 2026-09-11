@@ -103,3 +103,9 @@ xii. Sections 23.1581 through 23.1589 Airplane flight manual and approved manual
 - [[Part 21]]
 - [[Part 23]]
 - [[Part 135]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)

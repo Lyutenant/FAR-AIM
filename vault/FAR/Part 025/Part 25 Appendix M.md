@@ -87,3 +87,12 @@ The effects of airplane component failures on FRM reliability must be assessed o
 ## Explicit Cross-References
 
 - [[Part 26]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-flammable|Flammable]] (§ 1.1)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)

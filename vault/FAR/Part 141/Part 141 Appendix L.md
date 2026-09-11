@@ -41,3 +41,10 @@ cssclasses:
 (b) An adequate number of total aeronautical knowledge training hours appropriate to the aircraft rating and pilot certificate level for which the course applies.
 
 4\. Stage checks and end-of-course tests. Each person enrolled in a pilot ground school course must satisfactorily accomplish the stage checks and end-of-course tests, in accordance with the school's approved training course, consisting of the approved areas of operation that are appropriate to the operating privileges or authorization that graduation from the course will permit and for which the course applies.
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)

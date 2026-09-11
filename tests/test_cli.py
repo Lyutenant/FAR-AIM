@@ -1316,6 +1316,9 @@ def test_full_title_vault_build(tmp_path, capsys):
     os.symlink(_NORMALIZED, config.normalized_dir / "ecfr")
     config.links_dir.mkdir(parents=True)
     os.symlink(_MANIFEST.parent.parent / "links" / "pcg-glossary-gate.json", config.pcg_gate_path)
+    os.symlink(
+        _MANIFEST.parent.parent / "links" / "part1-definitions-gate.json", config.part1_gate_path
+    )
     aim_state = manifest.sources["aim"]
     expected_total = 6773  # + Home.md since Phase 7
     if aim_state.canonical_hash is not None:
@@ -2129,6 +2132,7 @@ def test_parse_aim_fails_closed_on_grammar_change(tmp_path, capsys, mock_upstrea
 def _build_fixture_vault(tmp_path, capsys, mock_upstream) -> Config:
     config = Config.load(tmp_path)
     SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)  # the fixture's Part 1 holds § 1.1, so a build needs the gate
     for argv in (["fetch", "ecfr"], ["parse", "ecfr"], ["fetch", "aim"], ["parse", "aim"]):
         assert main(["--root", str(tmp_path), *argv]) == EXIT_OK
     capsys.readouterr()
@@ -2385,10 +2389,12 @@ def test_validate_rejects_altered_pcg_provenance(tmp_path, capsys, mock_upstream
 
 
 def _write_empty_gate(config: Config) -> None:
+    """Empty PCG glossary and Part 1 definitions gates (both required by a build)."""
     config.links_dir.mkdir(parents=True, exist_ok=True)
     config.pcg_gate_path.write_text(
         '{"deny": [], "allow_words": [], "allow_acronyms": []}\n', encoding="utf-8"
     )
+    config.part1_gate_path.write_text('{"deny": []}\n', encoding="utf-8")
 
 
 def _build_full_fixture_vault(tmp_path, capsys, mock_upstream) -> Config:
@@ -2478,6 +2484,7 @@ def test_build_refuses_to_drop_pcg_notes_while_new_edition_unparsed(
 def test_build_vault_without_aim_layer_covers_far_only(tmp_path, capsys, mock_upstream):
     config = Config.load(tmp_path)
     SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)
     for argv in (["fetch", "ecfr"], ["parse", "ecfr"]):
         assert main(["--root", str(tmp_path), *argv]) == EXIT_OK
     capsys.readouterr()

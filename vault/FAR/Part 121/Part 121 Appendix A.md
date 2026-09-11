@@ -130,3 +130,9 @@ At least one approved automated external defibrillator, legally marketed in the 
 ## Explicit Cross-References
 
 - [[121.803|§ 121.803]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-united-states|United States]] (§ 1.1)

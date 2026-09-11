@@ -245,3 +245,23 @@ G135.2.9 Delayed compliance date for all airplanes. A certificate holder need no
 - [[135.415|§ 135.415]]
 - [[135.417|§ 135.417]]
 - [[Part 145]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airframe|Airframe]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-alternate-airport|Alternate airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.2#^def-apu|APU]] (§ 1.2)
+- [[1.2#^def-cmp|CMP]] (§ 1.2)
+- [[1.1#^def-configuration-maintenance-and-procedures-cmp-document|Configuration, Maintenance, and Procedures (CMP) document]] (§ 1.1)
+- [[1.2#^def-etops|ETOPS]] (§ 1.2)
+- [[1.1#^def-etops-significant-system|ETOPS Significant System]] (§ 1.1)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-pilot-in-command|Pilot in command]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)
+- [[1.1#^def-united-states|United States]] (§ 1.1)

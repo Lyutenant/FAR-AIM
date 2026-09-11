@@ -41,3 +41,11 @@ cssclasses:
 **Citations:**
 
 \[Docket FAA-2004-17763, 69 FR 31719, June 4, 2004, as amended by Docket FAA-2018-0119, Amdt. 91-350, 83 FR 9171, Mar. 5, 2018]
+
+## Defined Terms
+
+- [[1.1#^def-air-carrier|Air carrier]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-pilot-in-command|Pilot in command]] (§ 1.1)
+- [[1.1#^def-united-states|United States]] (§ 1.1)

@@ -519,6 +519,7 @@ def test_home_far_only_describes_only_built_layers(slice_plan):
         "`Concepts/`",
         "[[Concept Map]]",
         "**Glossary Terms**",
+        "**Defined Terms**",  # the slice has no Part 1
         "**See Also**",
         "**Related (derived)**",
     ):
@@ -823,3 +824,156 @@ def test_part_index_renders_authority_pending_amendment_link():
     authority = body.index("**Authority:** 49 U.S.C. 329, 41708, and 41709.")
     amendment = body.index("**Amendment notes:**\n\nLink to an amendment published at 91 FR 56592")
     assert authority < amendment
+
+
+# ---------------------------------------------------------------------------
+# FAR → Part 1 defined-term links (plan §12.2 Tier 2, §37)
+# ---------------------------------------------------------------------------
+
+
+def _definition(term: str, text: str) -> dict:
+    return {"type": "definition", "term": term, "text": text, "children": []}
+
+
+def _paragraph(label: str, text: str) -> dict:
+    return {
+        "type": "paragraph",
+        "label": label,
+        "designator": label.strip("()"),
+        "subject": None,
+        "text": text,
+        "children": [],
+    }
+
+
+def _definitions_docs() -> dict[str, dict]:
+    sec_1_1 = _mini_section("1", "1.1", "General definitions.")
+    sec_1_1["content"] = [
+        {"type": "text", "style": "plain", "text": "As used in this chapter:"},
+        _definition("Night", "means the time between the end of evening civil twilight."),
+        _definition("Person", "means an individual, firm, partnership, or corporation."),
+        _definition("Type:", "means a specific make and basic model of aircraft."),
+    ]
+    sec_1_2 = _mini_section("1", "1.2", "Abbreviations and symbols.")
+    sec_1_2["content"] = [
+        {"type": "text", "style": "plain", "text": "In this chapter:"},
+        _definition("IFR", "means instrument flight rules."),
+    ]
+    sec_91_1 = _mini_section("91", "91.1", "Applicability and definitions.")
+    sec_91_1["content"] = [
+        _paragraph("(a)", "This part prescribes rules; under IFR too."),
+        {
+            **_paragraph("(b)", "For the purpose of this part:"),
+            "children": [_definition("Night", "means one hour after sunset.")],
+        },
+    ]
+    sec_91 = _mini_section("91", "91.155", "Basic VFR weather minimums.")
+    sec_91["content"] = [
+        _paragraph("(a)", "No person may operate an aircraft at night under IFR."),
+        _paragraph("(b)", "Persons of this type need not; the Night is young."),
+    ]
+    sec_401 = _mini_section("401", "401.5", "Definitions.")
+    sec_401["chapter"] = "III"
+    sec_401["content"] = [_paragraph("(a)", "A person may launch at night under IFR.")]
+    part_401 = _mini_part("401", [sec_401])
+    part_401["chapter"] = "III"
+    return {
+        "1": _mini_part("1", [sec_1_1, sec_1_2]),
+        "91": _mini_part("91", [sec_91_1, sec_91]),
+        "401": part_401,
+    }
+
+
+def _plan(docs: dict[str, dict], **kwargs) -> dict[tuple[str, ...], bytes]:
+    from far_aim.manifest import SourceManifest, SourceState
+
+    manifest = SourceManifest.default()
+    manifest.sources["ecfr_title_14"] = SourceState(
+        accepted_version="2026-08-19", canonical_hash="sha256:0"
+    )
+    return plan_vault(docs, "2026-08-19", "sha256:0", manifest.sources, **kwargs)
+
+
+def test_section_note_lists_part_1_defined_terms_as_block_links():
+    plan = _plan(_definitions_docs())
+    note = plan[("FAR", "Part 091", "91.155.md")].decode()
+    body = note.split("## Defined Terms", 1)[1]
+    # Sorted by term; plurals resolve (``Persons``); the deny-less gate
+    # links ``Type`` too; abbreviations link to § 1.2; the part's own
+    # ``Night`` (§ 91.1, "for the purpose of this part") overrides § 1.1's.
+    assert body.split("\n\n")[1].strip() == (
+        "- [[1.2#^def-ifr|IFR]] (§ 1.2)\n"
+        "- [[91.1#^def-night|Night]] (§ 91.1)\n"
+        "- [[1.1#^def-person|Person]] (§ 1.1)\n"
+        "- [[1.1#^def-type|Type]] (§ 1.1)"
+    )
+    assert note.index("## Defined Terms") > note.index("## Official Text")
+
+
+def test_definition_sources_carry_block_ids_and_never_list_their_own_terms():
+    plan = _plan(_definitions_docs())
+    note = plan[("FAR", "Part 001", "1.1.md")].decode()
+    assert (
+        "- *Night* means the time between the end of evening civil twilight. ^def-night\n"
+        in note
+    )
+    assert "- *Type:* means a specific make and basic model of aircraft. ^def-type\n" in note
+    assert "## Defined Terms" not in note  # nothing else defines terms for Part 1
+    assert "## Defined Terms" not in plan[("FAR", "Part 001", "1.2.md")].decode()
+    # A part-local source lists the chapter-wide terms it uses, not its own.
+    note = plan[("FAR", "Part 091", "91.1.md")].decode()
+    assert "- *Night* means one hour after sunset. ^def-night\n" in note
+    assert note.split("## Defined Terms", 1)[1].strip() == "- [[1.2#^def-ifr|IFR]] (§ 1.2)"
+
+
+def test_defined_terms_stay_within_chapter_one():
+    plan = _plan(_definitions_docs())
+    assert "## Defined Terms" not in plan[("FAR", "Part 401", "401.5.md")].decode()
+
+
+def test_definitions_gate_denies_a_term_for_every_note():
+    from far_aim.links import definitions
+
+    gate = definitions.DefinitionsGate({("Type:", None): "ambiguous"})
+    plan = _plan(_definitions_docs(), definitions_gate=gate)
+    note = plan[("FAR", "Part 091", "91.155.md")].decode()
+    assert "def-type" not in note
+    assert "- [[1.1#^def-person|Person]] (§ 1.1)" in note
+    # Denying the part's override restores the chapter-wide definition.
+    gate = definitions.DefinitionsGate({("Night", "91.1"): "use § 1.1"})
+    note = _plan(_definitions_docs(), definitions_gate=gate)[("FAR", "Part 091", "91.155.md")]
+    assert "- [[1.1#^def-night|Night]] (§ 1.1)" in note.decode()
+    with pytest.raises(BuildError, match="unknown term"):
+        _plan(
+            _definitions_docs(),
+            definitions_gate=definitions.DefinitionsGate({("Nope", None): "x"}),
+        )
+
+
+def test_every_far_definition_gets_a_block_id_even_outside_part_1():
+    docs = _definitions_docs()
+    sec = docs["91"]["children"][1]
+    sec["content"].append(_definition("Solo flight", "means flight with one occupant."))
+    plan = _plan(docs)
+    note = plan[("FAR", "Part 091", "91.155.md")].decode()
+    assert "- *Solo flight* means flight with one occupant. ^def-solo-flight\n" in note
+
+
+def test_home_describes_defined_terms_only_when_a_source_is_built():
+    with_sources = _plan(_definitions_docs())[("Home.md",)].decode()
+    assert "**Defined Terms**" in with_sources
+    docs = _definitions_docs()
+    del docs["1"]
+    docs["91"]["children"] = docs["91"]["children"][1:]  # drop § 91.1, the last source
+    assert "**Defined Terms**" not in _plan(docs)[("Home.md",)].decode()
+
+
+def test_verify_plan_rejects_a_block_link_without_its_anchor():
+    from far_aim.generate.build import _verify_plan
+
+    docs = _definitions_docs()
+    plan = _plan(docs)
+    path = ("FAR", "Part 091", "91.155.md")
+    plan[path] = plan[path].replace(b"[[91.1#^def-night|", b"[[91.1#^def-nope|")
+    with pytest.raises(BuildError, match=r"broken generated block link \[\[91.1#\^def-nope\]\]"):
+        _verify_plan(plan, build_registry(docs), docs, None)

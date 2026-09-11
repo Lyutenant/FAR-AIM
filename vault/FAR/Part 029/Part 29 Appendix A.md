@@ -85,3 +85,13 @@ The Instructions for Continued Airworthiness must contain a section titled Airwo
 - [[29.1529|§ 29.1529]]
 - [[43.16|§ 43.16]]
 - [[91.403|§ 91.403]]
+
+## Defined Terms
+
+- [[1.1#^def-appliance|Appliance]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-preventive-maintenance|Preventive maintenance]] (§ 1.1)
+- [[1.1#^def-rotorcraft|Rotorcraft]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)

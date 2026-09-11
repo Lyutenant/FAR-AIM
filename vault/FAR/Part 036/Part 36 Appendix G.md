@@ -273,3 +273,18 @@ where PR and PT are the test and reference engine powers respectively obtained f
 - [[36.1|§ 36.1]]
 - [[36.6|§ 36.6]]
 - [[36.501|§ 36.501]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-flight-time|Flight time]] (§ 1.1)
+- [[1.1#^def-indicated-airspeed|Indicated airspeed]] (§ 1.1)
+- [[1.1#^def-mach-number|Mach number]] (§ 1.1)
+- [[1.1#^def-manifold-pressure|Manifold pressure]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)
+- [[1.1#^def-takeoff-power|Takeoff power]] (§ 1.1)

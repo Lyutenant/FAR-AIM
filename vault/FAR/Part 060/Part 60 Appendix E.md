@@ -202,3 +202,17 @@ j. The FAA does not mandate a specific QMS program format, but an acceptable QMS
 - [[60.25|§ 60.25]]
 - [[60.27|§ 60.27]]
 - [[60.31|§ 60.31]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-crewmember|Crewmember]] (§ 1.1)
+- [[1.2#^def-ffs|FFS]] (§ 1.2)
+- [[1.2#^def-fstd|FSTD]] (§ 1.2)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-preventive-maintenance|Preventive maintenance]] (§ 1.1)

@@ -338,3 +338,23 @@ An applicant for ETOPS type design approval using the Early ETOPS method must co
 - [[25.1535|§ 25.1535]]
 - [[33.71|§ 33.71]]
 - [[33.201|§ 33.201]]
+
+## Defined Terms
+
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.2#^def-apu|APU]] (§ 1.2)
+- [[1.2#^def-cmp|CMP]] (§ 1.2)
+- [[1.1#^def-configuration-maintenance-and-procedures-cmp-document|Configuration, Maintenance, and Procedures (CMP) document]] (§ 1.1)
+- [[1.1#^def-early-etops|Early ETOPS]] (§ 1.1)
+- [[1.2#^def-etops|ETOPS]] (§ 1.2)
+- [[1.1#^def-etops-significant-system|ETOPS Significant System]] (§ 1.1)
+- [[1.1#^def-extended-operations-etops|Extended Operations (ETOPS)]] (§ 1.1)
+- [[1.1#^def-flight-time|Flight time]] (§ 1.1)
+- [[1.2#^def-ifsd|IFSD]] (§ 1.2)
+- [[1.1#^def-in-flight-shutdown-ifsd|In-flight shutdown (IFSD)]] (§ 1.1)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.1#^def-major-alteration|Major alteration]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)

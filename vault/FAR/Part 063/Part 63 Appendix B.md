@@ -187,3 +187,16 @@ The approved course operator may contract or obtain written agreements with airc
 
 - [[Part 91]]
 - [[Part 121]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-armed-forces|Armed Forces]] (§ 1.1)
+- [[1.1#^def-flight-plan|Flight plan]] (§ 1.1)
+- [[1.1#^def-flight-time|Flight time]] (§ 1.1)
+- [[1.2#^def-icao|ICAO]] (§ 1.2)
+- [[1.1#^def-night|Night]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-pilotage|Pilotage]] (§ 1.1)

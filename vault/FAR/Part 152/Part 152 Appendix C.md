@@ -119,3 +119,18 @@ c. The appropriate FAA office has agreed to the issuance of a notice to proceed 
 ## Explicit Cross-References
 
 - [[152.7|§ 152.7]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[152.3#^def-airport|Airport]] (§ 152.3)
+- [[152.3#^def-airport-development|Airport development]] (§ 152.3)
+- [[152.3#^def-airport-hazard|Airport hazard]] (§ 152.3)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[152.3#^def-force-account|Force account]] (§ 152.3)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[152.3#^def-project|Project]] (§ 152.3)
+- [[152.3#^def-public-agency|Public agency]] (§ 152.3)
+- [[152.3#^def-sponsor|Sponsor]] (§ 152.3)
+- [[152.3#^def-state|State]] (§ 152.3)
+- [[1.1#^def-united-states|United States]] (§ 1.1)

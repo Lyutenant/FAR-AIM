@@ -242,3 +242,27 @@ Section III. Approvals for operations whose airplane routes are planned to trave
 - [[121.162|§ 121.162]]
 - [[121.374|§ 121.374]]
 - [[121.633|§ 121.633]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-air-traffic|Air traffic]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[110.2#^def-all-cargo-operation|All-cargo operation]] (§ 110.2)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.2#^def-apu|APU]] (§ 1.2)
+- [[1.1#^def-crewmember|Crewmember]] (§ 1.1)
+- [[1.2#^def-etops|ETOPS]] (§ 1.2)
+- [[121.7#^def-etops-alternate-airport|ETOPS Alternate Airport]] (§ 121.7)
+- [[1.1#^def-etops-significant-system|ETOPS Significant System]] (§ 1.1)
+- [[1.2#^def-ifsd|IFSD]] (§ 1.2)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[121.7#^def-maximum-diversion-time|Maximum Diversion Time]] (§ 121.7)
+- [[1.2#^def-mel|MEL]] (§ 1.2)
+- [[1.2#^def-nopac|NOPAC]] (§ 1.2)
+- [[121.7#^def-north-pacific-area-of-operation|North Pacific Area of Operation]] (§ 121.7)
+- [[121.7#^def-north-polar-area|North Polar Area]] (§ 121.7)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[121.7#^def-south-polar-area|South Polar Area]] (§ 121.7)

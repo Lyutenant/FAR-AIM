@@ -93,3 +93,8 @@ Title
 **Citations:**
 
 \[Doc. No. DOT-OST-2014-0140, 84 FR 15941, Apr. 16, 2019]
+
+## Defined Terms
+
+- [[380.2#^def-public-charter|Public Charter]] (§ 380.2)
+- [[380.2#^def-public-charter-operator|Public Charter operator]] (§ 380.2)

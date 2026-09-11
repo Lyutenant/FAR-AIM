@@ -16,6 +16,7 @@ from far_aim.generate.frontmatter import Value
 from far_aim.generate.hierarchy import TEXT_CSS_CLASS
 from far_aim.generate.markdown import ECFR_BASE_URL, escape_md, render_blocks
 from far_aim.links import citations as cites
+from far_aim.links import definitions
 
 FAR_DIR = "FAR"
 TITLE_INDEX_STEM = "Title 14"
@@ -174,12 +175,49 @@ def _official_text_chunks(content: list[dict], *, reserved: bool) -> list[str]:
     wording (plan §32.1/§32.3); its note simply carries no Official Text
     section.
     """
-    chunks = render_blocks(content)
+    # Every definition carries a block id so notes can link the definition
+    # itself (``[[1.1#^def-night]]``), whether or not it is a link target.
+    chunks = render_blocks(content, definitions.block_ids(content))
     if chunks:
         return ["## Official Text", *chunks]
     if reserved:
         return ["## Official Text", escape_md("[Reserved]")]
     return []
+
+
+def _defined_terms_chunks(doc: dict, index: definitions.DefinitionIndex | None) -> list[str]:
+    """``## Defined Terms``: the definitions in force for this document that
+    its official text uses (plan §12.2, §37).
+
+    A lexical, Tier 2 relationship in its own section — never among the
+    FAA's explicit cross-references. ``index`` is the compiled sources
+    covering the document (``DefinitionLinks.index_for``). Sorted by term;
+    each link lands on the definition's own block and names the section
+    that defines it, so a part-local override reads as such.
+    """
+    if index is None:
+        return []
+    found = index.find(cites.collect_text(doc["content"]))
+    # A definitions section never lists a wider definition of a term it
+    # defines itself (§ 139.5's *Airport* is the one in force there).
+    own = {
+        label.casefold()
+        for label in definitions.definition_labels(
+            list(definitions.iter_definitions(doc["content"]))
+        )
+    }
+    targets = sorted(
+        (index.targets[key] for key in found if index.targets[key].label.casefold() not in own),
+        key=lambda t: (t.label.casefold(), naming.natural_key(t.section), t.block_id),
+    )
+    if not targets:
+        return []
+    items = "\n".join(
+        f"- [[{naming.section_stem(t.section)}#^{t.block_id}|{link_display(t.label)}]]"
+        f" (§ {t.section})"
+        for t in targets
+    )
+    return [definitions.SECTION_HEADING, items]
 
 
 def build_section_note(
@@ -188,6 +226,7 @@ def build_section_note(
     known_sections: set[str],
     known_parts: set[str] | None = None,
     *,
+    definitions_index: definitions.DefinitionIndex | None = None,
     related: enrich.RelatedIndex | None = None,
     related_targets: enrich.Targets | None = None,
 ) -> Note:
@@ -241,6 +280,7 @@ def build_section_note(
         chunks.extend(["## Source Notes", *source_notes])
     xrefs = _xref_chunks(sec["content"], known_sections, section, known_parts, sec["part"])
     chunks.extend(xrefs)
+    chunks.extend(_defined_terms_chunks(sec, definitions_index))
     # Tier 4 last, visibly separate, and never repeating an explicit reference.
     chunks.extend(
         enrich.related_chunks(
@@ -257,7 +297,12 @@ def build_section_note(
 
 
 def build_appendix_note(
-    apx: dict, aliases: list[str], known_sections: set[str], known_parts: set[str] | None = None
+    apx: dict,
+    aliases: list[str],
+    known_sections: set[str],
+    known_parts: set[str] | None = None,
+    *,
+    definitions_index: definitions.DefinitionIndex | None = None,
 ) -> Note:
     part = apx["part"]
     version = apx["source"]["source_version"]
@@ -296,6 +341,7 @@ def build_appendix_note(
     if source_notes:
         chunks.extend(["## Source Notes", *source_notes])
     chunks.extend(_xref_chunks(apx["content"], known_sections, None, known_parts, apx["part"]))
+    chunks.extend(_defined_terms_chunks(apx, definitions_index))
 
     return Note(
         kind="appendix",
@@ -510,7 +556,9 @@ def build_source_status(sources: dict[str, object]) -> Note:
     )
 
 
-def build_home(*, has_aim: bool, has_pcg: bool, has_concepts: bool = False) -> Note:
+def build_home(
+    *, has_aim: bool, has_pcg: bool, has_concepts: bool = False, has_definitions: bool = False
+) -> Note:
     """``vault/Home.md`` — the vault's entry point and reader's guide (plan §22 Phase 7).
 
     Static navigation and orientation only: edition details live in ``Source
@@ -577,6 +625,15 @@ def build_home(*, has_aim: bool, has_pcg: bool, has_concepts: bool = False) -> N
             else ""
         ),
     ]
+    if has_definitions:
+        anatomy.append(
+            "- **Defined Terms** (FAR notes only) — the definitions in force "
+            "for the section that its text uses: 14 CFR Part 1's chapter-wide "
+            "terms and abbreviations, and the part's or subpart's own "
+            "definitions section where it has one (a part's definition "
+            "outranks Part 1's). Each is linked to the definition itself and "
+            "names the section that defines it."
+        )
     if has_aim and has_pcg:
         anatomy.append(
             "- **Glossary Terms** (AIM notes only) — the glossary terms the "

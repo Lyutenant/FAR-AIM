@@ -93,3 +93,17 @@ Repair station name) (Certificate No.)
 - [[43.7|§ 43.7]]
 - [[43.17|§ 43.17]]
 - [[91.417|§ 91.417]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-aircraft-engine|Aircraft engine]] (§ 1.1)
+- [[1.1#^def-airframe|Airframe]] (§ 1.1)
+- [[1.1#^def-appliance|Appliance]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.1#^def-major-alteration|Major alteration]] (§ 1.1)
+- [[1.1#^def-major-repair|Major repair]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)

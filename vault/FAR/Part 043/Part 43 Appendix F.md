@@ -97,3 +97,10 @@ The ATC transponder tests required by § 91.413 of this chapter may be conducted
 
 - [[43.9|§ 43.9]]
 - [[91.413|§ 91.413]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.2#^def-atc|ATC]] (§ 1.2)
+- [[1.1#^def-operate|Operate]] (§ 1.1)

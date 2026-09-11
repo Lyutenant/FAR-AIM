@@ -44,6 +44,7 @@ Every regulation and AIM paragraph note has the same shape, top to bottom:
 - A **Source** callout naming the edition and linking the official page, so every note can be checked against its origin.
 - The **official text**, verbatim, as a nested list that mirrors the paragraph hierarchy. Headings are display-only; wording is never altered.
 - **Explicit Cross-References** — the sections and parts the text itself cites, linked when the target note exists. Glossary terms list their own See/Refer references under **See Also** instead.
+- **Defined Terms** (FAR notes only) — the definitions in force for the section that its text uses: 14 CFR Part 1's chapter-wide terms and abbreviations, and the part's or subpart's own definitions section where it has one (a part's definition outranks Part 1's). Each is linked to the definition itself and names the section that defines it.
 - **Glossary Terms** (AIM notes only) — the glossary terms the paragraph uses. FAR notes carry none, because the regulation defines its own vocabulary in Part 1 and glossary definitions can differ.
 - **Related (derived)** — similarity-based suggestions between regulations and AIM paragraphs. A study aid, never a citation: the text does not refer to these notes.
 

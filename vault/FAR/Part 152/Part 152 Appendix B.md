@@ -169,3 +169,15 @@ AC/5340-22—Maintenance Guide for Determining Degradation and Cleaning of Cente
 **Citations:**
 
 \[Docket 19430, 45 FR 34795, May 22, 1980]
+
+## Defined Terms
+
+- [[1.1#^def-air-carrier|Air carrier]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[152.3#^def-airport|Airport]] (§ 152.3)
+- [[152.3#^def-airport-development|Airport development]] (§ 152.3)
+- [[152.3#^def-airport-hazard|Airport hazard]] (§ 152.3)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[152.3#^def-general-aviation-airport|General aviation airport]] (§ 152.3)
+- [[1.1#^def-heliport|Heliport]] (§ 1.1)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)

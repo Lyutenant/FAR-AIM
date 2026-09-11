@@ -241,3 +241,29 @@ cross-references are never repeated there, plan §32.11). `update` runs
 `data/enrichment` in its PR. Settled: an embedding provider is a
 documented follow-up (same file format, committed output) because the
 daily CI must rebuild the layer without models or keys.
+FAR defined-term links (2026-09-10; design plan §37, rules docs/vault.md):
+every FAR section/appendix note ends with `## Defined Terms` — the
+definitions in force for it that its text uses, as block links onto the
+definition itself naming the defining section
+(`[[1.1#^def-night|Night]] (§ 1.1)`, `[[61.1#^def-cross-country-time|…]]
+(§ 61.1)`). Sources and scope are derived from the text
+(`far_aim.links.definitions`): a section with definition blocks whose
+heading or lead-in says so, scoped by the narrowest `this chapter /
+subchapter / part / subpart` phrase introducing its first definition
+(§ 1.1/§ 1.2 → Chapter I, § 110.2 → subchapter G, § 61.1 → Part 61,
+§ 91.851 → subpart I; no phrase ⇒ subpart A/none = part, else subpart;
+`this section` ⇒ skipped); a note lists every covering source but itself,
+a source never lists a wider definition of its own term, and the narrower
+scope wins a shared alias (§ 139.5's Airport over § 1.1's in Part 139).
+Recognition: labels minus trailing punctuation; `Term (ABBR)` forms;
+abbreviations capitals-only ≥3 chars; phrases case-insensitive with
+§ 1.3 plural tolerance; single defined words *do* match, unlike PCG
+entries. Gate: committed deny-only
+`data/links/part1-definitions-gate.json` (entries name a verbatim term,
+optionally one source `section`; `Instrument`, `Type:`/`Class:`/
+`Category:`, `Category A,`/`Category B,`, `FAA`; stale entries fail the
+build). Full build: 97 sources / 1,467 definitions; 19,784 links from
+4,594 notes. Every FAR `definition` block carries a `^def-<slug>` block
+id, unique per note; `_verify_plan` rejects a generated block link
+without its anchor. Settled: sources list no own terms; self-scoped
+definitions sections are skipped, not guessed.

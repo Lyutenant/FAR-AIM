@@ -209,3 +209,13 @@ Sec. F36.203 Validity of results.
 - [[36.1|§ 36.1]]
 - [[36.6|§ 36.6]]
 - [[36.501|§ 36.501]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-flight-time|Flight time]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)

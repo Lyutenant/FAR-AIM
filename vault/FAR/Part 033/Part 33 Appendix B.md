@@ -141,3 +141,7 @@ Figure B1, Table B1, Table B2, Table B3, and Table B4 specify the atmospheric co
 ## Explicit Cross-References
 
 - [[33.78|§ 33.78]]
+
+## Defined Terms
+
+- [[1.1#^def-show|Show]] (§ 1.1)

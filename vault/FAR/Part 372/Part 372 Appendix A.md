@@ -81,3 +81,13 @@ Only corporations may qualify to act as surety and they must meet the requiremen
 ## Explicit Cross-References
 
 - [[372.24|§ 372.24]]
+
+## Defined Terms
+
+- [[372.2#^def-charter|Charter]] (§ 372.2)
+- [[372.2#^def-charter-operator|Charter operator]] (§ 372.2)
+- [[372.2#^def-charter-participant|Charter participant]] (§ 372.2)
+- [[372.2#^def-charter-price|Charter price]] (§ 372.2)
+- [[372.2#^def-overseas-military-personnel-charter|Overseas military personnel charter]] (§ 372.2)
+- [[372.2#^def-overseas-military-personnel-charter-operator|Overseas military personnel charter operator]] (§ 372.2)
+- [[372.2#^def-person|Person]] (§ 372.2)

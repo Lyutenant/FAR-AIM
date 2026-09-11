@@ -69,3 +69,10 @@ J. Contract termination; debarment. A breach of paragraphs A through I of this p
 ## Explicit Cross-References
 
 - [[151.53|§ 151.53]]
+
+## Defined Terms
+
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)
+- [[1.1#^def-united-states|United States]] (§ 1.1)

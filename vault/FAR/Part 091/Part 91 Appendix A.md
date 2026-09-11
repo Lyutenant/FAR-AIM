@@ -193,3 +193,19 @@ The instruments and equipment listed in this section must be installed in each a
 - [[43.9|§ 43.9]]
 - [[91.205|§ 91.205]]
 - [[Part 43]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-category-ii-operations|Category II operations]] (§ 1.1)
+- [[1.1#^def-category-iii-operations|Category III operations]] (§ 1.1)
+- [[1.1#^def-decision-height-dh|Decision height (DH)]] (§ 1.1)
+- [[1.2#^def-ils|ILS]] (§ 1.2)
+- [[1.1#^def-indicated-airspeed|Indicated airspeed]] (§ 1.1)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)

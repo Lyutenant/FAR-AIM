@@ -1394,3 +1394,29 @@ Figure B4I Sample MQTG Index of Effective FTD Directives
 - [[Part 135]]
 - [[Part 141]]
 - [[Part 142]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.2#^def-afm|AFM]] (§ 1.2)
+- [[1.2#^def-agl|AGL]] (§ 1.2)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airframe|Airframe]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-crewmember|Crewmember]] (§ 1.1)
+- [[1.1#^def-final-approach-fix-faf|Final approach fix (FAF)]] (§ 1.1)
+- [[1.1#^def-flight-simulation-training-device-fstd|Flight simulation training device (FSTD)]] (§ 1.1)
+- [[1.1#^def-flight-training-device-ftd|Flight training device (FTD)]] (§ 1.1)
+- [[1.1#^def-flightcrew-member|Flightcrew member]] (§ 1.1)
+- [[1.2#^def-fstd|FSTD]] (§ 1.2)
+- [[1.2#^def-ftd|FTD]] (§ 1.2)
+- [[1.2#^def-icao|ICAO]] (§ 1.2)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.1#^def-manifold-pressure|Manifold pressure]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)

@@ -133,3 +133,17 @@ Based upon the airport noise exposure and noncompatible land uses identified in 
 - [[150.21|§ 150.21]]
 - [[150.23|§ 150.23]]
 - [[150.35|§ 150.35]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-air-transportation|Air transportation]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[150.7#^def-airport|Airport]] (§ 150.7)
+- [[150.7#^def-airport-operator|Airport Operator]] (§ 150.7)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[150.7#^def-compatible-land-use|Compatible land use]] (§ 150.7)
+- [[1.1#^def-night|Night]] (§ 1.1)
+- [[150.7#^def-noise-exposure-map|Noise exposure map]] (§ 150.7)
+- [[150.7#^def-noncompatible-land-use|Noncompatible land use]] (§ 150.7)
+- [[1.1#^def-person|Person]] (§ 1.1)

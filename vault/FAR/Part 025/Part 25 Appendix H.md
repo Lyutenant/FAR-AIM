@@ -140,3 +140,15 @@ H25.5 Electrical Wiring Interconnection System (EWIS) Instructions for Continued
 - [[91.403|§ 91.403]]
 - [[Part 21]]
 - [[Part 26]]
+
+## Defined Terms
+
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-appliance|Appliance]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.2#^def-ewis|EWIS]] (§ 1.2)
+- [[1.1#^def-maintenance|Maintenance]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-preventive-maintenance|Preventive maintenance]] (§ 1.1)
+- [[1.1#^def-propeller|Propeller]] (§ 1.1)
+- [[1.1#^def-show|Show]] (§ 1.1)

@@ -185,3 +185,27 @@ Nk = population in Ak
 **Citations:**
 
 \[Docket No. FAA-1999-5833, 65 FR 62861, Oct. 19, 2000, as amended by Docket No. FAA-2014-0418, Amdt. No. 420-7, 81 FR 47027, July 20, 2016]
+
+## Defined Terms
+
+- [[401.7#^def-casualty|Casualty]] (§ 401.7)
+- [[401.7#^def-casualty-area|Casualty area]] (§ 401.7)
+- [[401.7#^def-downrange|Downrange]] (§ 401.7)
+- [[420.5#^def-effective-casualty-area-ac|Effective casualty area (Ac)]] (§ 420.5)
+- [[401.7#^def-expected-casualty|Expected casualty]] (§ 401.7)
+- [[420.5#^def-flight-azimuth|Flight azimuth]] (§ 420.5)
+- [[420.5#^def-impact-dispersion-area|Impact dispersion area]] (§ 420.5)
+- [[420.5#^def-impact-dispersion-factor|Impact dispersion factor]] (§ 420.5)
+- [[420.5#^def-impact-dispersion-radius-ri|Impact dispersion radius (Ri)]] (§ 420.5)
+- [[420.5#^def-impact-range|Impact range]] (§ 420.5)
+- [[420.5#^def-impact-range-factor|Impact range factor]] (§ 420.5)
+- [[401.7#^def-launch|Launch]] (§ 401.7)
+- [[420.5#^def-launch-point|Launch point]] (§ 420.5)
+- [[401.7#^def-launch-site|Launch site]] (§ 401.7)
+- [[401.7#^def-launch-vehicle|Launch vehicle]] (§ 401.7)
+- [[420.5#^def-overflight-exclusion-zone|Overflight exclusion zone]] (§ 420.5)
+- [[420.5#^def-populated-area|Populated area]] (§ 420.5)
+- [[420.5#^def-population-density|Population density]] (§ 420.5)
+- [[401.7#^def-public|Public]] (§ 401.7)
+- [[401.7#^def-risk|Risk]] (§ 401.7)
+- [[401.7#^def-unguided-suborbital-launch-vehicle|Unguided suborbital launch vehicle]] (§ 401.7)

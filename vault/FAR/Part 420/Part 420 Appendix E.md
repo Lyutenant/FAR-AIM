@@ -321,3 +321,17 @@ cssclasses:
 **Citations:**
 
 \[Doc. No. FAA-2011-0105, 77 FR 55116, Sept. 7, 2012]
+
+## Defined Terms
+
+- [[420.5#^def-energetic-liquid|Energetic liquid]] (§ 420.5)
+- [[420.5#^def-explosive|Explosive]] (§ 420.5)
+- [[420.5#^def-intraline-distance|Intraline distance]] (§ 420.5)
+- [[401.7#^def-launch|Launch]] (§ 401.7)
+- [[401.7#^def-launch-site|Launch site]] (§ 401.7)
+- [[420.5#^def-liquid-propellant|Liquid propellant]] (§ 420.5)
+- [[420.5#^def-net-explosive-weight-new|Net explosive weight (NEW)]] (§ 420.5)
+- [[401.7#^def-operator|Operator]] (§ 401.7)
+- [[420.5#^def-public-area|Public area]] (§ 420.5)
+- [[420.5#^def-public-traffic-route|Public traffic route]] (§ 420.5)
+- [[420.5#^def-public-traffic-route-distance|Public traffic route distance]] (§ 420.5)

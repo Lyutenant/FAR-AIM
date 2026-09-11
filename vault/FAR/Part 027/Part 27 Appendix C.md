@@ -132,3 +132,9 @@ C27.2 Applicable part 29 sections. The following sections of part 29 of this cha
 ## Explicit Cross-References
 
 - [[Part 29]]
+
+## Defined Terms
+
+- [[1.1#^def-heliport|Heliport]] (§ 1.1)
+- [[1.2#^def-oei|OEI]] (§ 1.2)
+- [[1.1#^def-rotorcraft|Rotorcraft]] (§ 1.1)

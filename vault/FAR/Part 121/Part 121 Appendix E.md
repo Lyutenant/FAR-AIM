@@ -152,3 +152,22 @@ C = Flight engineer (FE) to SIC conversion training
 - [[121.424|§ 121.424]]
 - [[121.426|§ 121.426]]
 - [[121.434|§ 121.434]]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.2#^def-atc|ATC]] (§ 1.2)
+- [[1.1#^def-ceiling|Ceiling]] (§ 1.1)
+- [[1.2#^def-ffs|FFS]] (§ 1.2)
+- [[1.2#^def-fstd|FSTD]] (§ 1.2)
+- [[1.2#^def-ftd|FTD]] (§ 1.2)
+- [[1.1#^def-full-flight-simulator-ffs|Full flight simulator (FFS)]] (§ 1.1)
+- [[1.2#^def-ils|ILS]] (§ 1.2)
+- [[1.1#^def-night|Night]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-pilot-in-command|Pilot in command]] (§ 1.1)
+- [[1.1#^def-second-in-command|Second in command]] (§ 1.1)

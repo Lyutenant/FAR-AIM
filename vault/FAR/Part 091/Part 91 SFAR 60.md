@@ -60,3 +60,17 @@ c. Implement, at any airport, traffic management procedures, that may include re
 
 - [[91.139|§ 91.139]]
 - [[Part 93]]
+
+## Defined Terms
+
+- [[1.1#^def-air-carrier|Air carrier]] (§ 1.1)
+- [[1.1#^def-air-traffic|Air traffic]] (§ 1.1)
+- [[1.1#^def-air-traffic-control|Air traffic control]] (§ 1.1)
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-commercial-operator|Commercial operator]] (§ 1.1)
+- [[1.1#^def-controlled-airspace|Controlled airspace]] (§ 1.1)
+- [[1.2#^def-ifr|IFR]] (§ 1.2)
+- [[1.1#^def-operate|Operate]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.2#^def-vfr|VFR]] (§ 1.2)

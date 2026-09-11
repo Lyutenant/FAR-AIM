@@ -115,3 +115,9 @@ c. Action to separate you from your covered position becomes effective on the la
 **Citations:**
 
 \[Docket FAA-2004-17334, 70 FR 1636, Jan. 7, 2005, as amended by Amdt. 65-55, 76 FR 12, Jan. 3, 2011]
+
+## Defined Terms
+
+- [[1.1#^def-administrator|Administrator]] (§ 1.1)
+- [[1.1#^def-air-traffic|Air traffic]] (§ 1.1)
+- [[1.1#^def-air-traffic-control|Air traffic control]] (§ 1.1)

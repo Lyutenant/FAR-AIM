@@ -75,3 +75,12 @@ Criteria for determining minimum flight crew. The following are considered by th
 ## Explicit Cross-References
 
 - [[25.1523|§ 25.1523]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-aircraft-engine|Aircraft engine]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-crewmember|Crewmember]] (§ 1.1)
+- [[1.1#^def-ifr-conditions|IFR conditions]] (§ 1.1)
+- [[1.1#^def-operate|Operate]] (§ 1.1)

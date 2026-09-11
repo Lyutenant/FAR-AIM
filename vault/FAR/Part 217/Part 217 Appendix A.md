@@ -316,3 +316,9 @@ Wet-lease agreements, and similar arrangements.
 **Citations:**
 
 \[Doc. No. DOT-OST-2014-0140, 84 FR 15926, Apr. 16, 2019]
+
+## Defined Terms
+
+- [[217.1#^def-foreign-air-carrier|Foreign Air Carrier]] (§ 217.1)
+- [[217.1#^def-revenue-passenger|Revenue passenger]] (§ 217.1)
+- [[217.1#^def-wet-lease-agreement|Wet-Lease Agreement]] (§ 217.1)

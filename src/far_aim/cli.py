@@ -1621,6 +1621,19 @@ def _pcg_layer(config: Config, manifest: SourceManifest) -> generate_build.PcgLa
     return generate_build.PcgLayer(docs=docs, title_hash=state.canonical_hash, gate=gate)
 
 
+def _definitions_gate(
+    config: Config, docs: dict[str, dict]
+) -> generate_build.definitions.DefinitionsGate | str | None:
+    """The committed FAR definitions gate, required whenever the canonical
+    layer holds a definitions source (§ 1.1, § 61.1 …); None otherwise."""
+    if not generate_build.definitions.discover_sources(docs):
+        return None
+    try:
+        return generate_build.definitions.DefinitionsGate.load(config.part1_gate_path)
+    except BuildError as exc:
+        return str(exc)
+
+
 def _vault_has_generated_pcg(config: Config) -> bool:
     """True when generator-owned PCG notes are on disk."""
     vault_pcg = config.vault_dir / generate_pcg_notes.PCG_DIR
@@ -1921,6 +1934,9 @@ def _plan_generated_vault(
     enrichment = _enrichment_layer(config)
     if isinstance(enrichment, str):
         return enrichment
+    definitions_gate = _definitions_gate(config, docs)
+    if isinstance(definitions_gate, str):
+        return definitions_gate
     try:
         plan = generate_build.plan_vault(
             docs,
@@ -1930,6 +1946,7 @@ def _plan_generated_vault(
             aim,
             pcg,
             enrichment,
+            definitions_gate,
         )
     except BuildError as exc:
         return str(exc)
@@ -2124,6 +2141,10 @@ def _build_vault_locked(config: Config) -> int:
         print("note: no accepted PCG canonical layer; the vault will not cover the PCG.")
     if enrichment is None:
         print("note: no enrichment layer (data/enrichment); no concept notes or derived links.")
+    definitions_gate = _definitions_gate(config, docs)
+    if isinstance(definitions_gate, str):
+        print(f"error: {definitions_gate}", file=sys.stderr)
+        return EXIT_ERROR
     try:
         stats = generate_build.build_vault(
             config,
@@ -2134,6 +2155,7 @@ def _build_vault_locked(config: Config) -> int:
             aim,
             pcg,
             enrichment,
+            definitions_gate,
         )
     except BuildError as exc:
         print(f"error: {exc}", file=sys.stderr)

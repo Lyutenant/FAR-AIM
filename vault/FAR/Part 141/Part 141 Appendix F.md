@@ -281,3 +281,20 @@ cssclasses:
 ## Explicit Cross-References
 
 - [[141.41|§ 141.41]]
+
+## Defined Terms
+
+- [[1.1#^def-aircraft|Aircraft]] (§ 1.1)
+- [[1.1#^def-airplane|Airplane]] (§ 1.1)
+- [[1.1#^def-airport|Airport]] (§ 1.1)
+- [[1.1#^def-approved|Approved]] (§ 1.1)
+- [[1.1#^def-flight-training-device-ftd|Flight training device (FTD)]] (§ 1.1)
+- [[1.1#^def-full-flight-simulator-ffs|Full flight simulator (FFS)]] (§ 1.1)
+- [[1.1#^def-glider|Glider]] (§ 1.1)
+- [[1.1#^def-gyroplane|Gyroplane]] (§ 1.1)
+- [[1.1#^def-helicopter|Helicopter]] (§ 1.1)
+- [[1.1#^def-heliport|Heliport]] (§ 1.1)
+- [[1.1#^def-person|Person]] (§ 1.1)
+- [[1.1#^def-powered-lift|Powered-lift]] (§ 1.1)
+- [[1.1#^def-rating|Rating]] (§ 1.1)
+- [[1.1#^def-rotorcraft|Rotorcraft]] (§ 1.1)
