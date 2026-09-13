@@ -35,6 +35,9 @@ from pathlib import Path
 from far_aim.generate import aim_notes as generate_aim_notes
 from far_aim.generate import notes as generate_notes
 from far_aim.generate import pcg_notes as generate_pcg_notes
+from far_aim.models import cfr as cfr_model
+from far_aim.sources import ecfr as ecfr_source
+from far_aim.sources.common import sha256_of
 
 FAR = "FAR"
 AIM = "AIM"
@@ -415,15 +418,17 @@ def mass_change_defects(
 ) -> list[str]:
     """Threshold and provenance-only-edition defects for one corpus.
 
-    ``announced`` — paths of content-changed notes an announcement source
-    explains; when given, only the *unannounced* changes count.
+    ``announced`` — paths of content-changed or removed notes an
+    announcement source explains; when given, only the *unannounced*
+    changes and removals count.
     """
     defects: list[str] = []
+    prefix = "unannounced " if announced is not None else ""
     counted = [r for r in ledger.content_changed if announced is None or r.path not in announced]
-    label = "unannounced content-changed" if announced is not None else "content-changed"
+    removed = [r for r in ledger.removed if announced is None or r.path not in announced]
     for name, count, threshold in (
-        ("removed", len(ledger.removed), thresholds.removed),
-        (label, len(counted), thresholds.content_changed),
+        (f"{prefix}removed", len(removed), thresholds.removed),
+        (f"{prefix}content-changed", len(counted), thresholds.content_changed),
         ("added", len(ledger.added), thresholds.added),
     ):
         if threshold.exceeded(count, ledger.published):
@@ -683,6 +688,172 @@ def _listed(items) -> str:
 
 
 # ---------------------------------------------------------------------------
+# FAR — eCFR amendment index (plan §38.4)
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class AmendmentIndex:
+    """What the eCFR says changed between two issue dates, as stable ids."""
+
+    since: str
+    until: str
+    amended: frozenset[str]  # stable ids with a new version in the window
+    removed: frozenset[str]  # stable ids the eCFR reports removed
+
+    @property
+    def announced(self) -> frozenset[str]:
+        return self.amended | self.removed
+
+
+def _entry_stable_id(entry: dict) -> str:
+    """The stable id (``models.cfr``) an amendment-index entry names."""
+    part, identifier = entry["part"], entry["identifier"]
+    if entry["type"] == "appendix":
+        return cfr_model.appendix_id(ecfr_source.TITLE_NUMBER, part, identifier)
+    return cfr_model.section_id(ecfr_source.TITLE_NUMBER, part, identifier)
+
+
+def read_amendment_index(path: Path) -> AmendmentIndex | str:
+    """Load one archived ``versions-since-<date>.json``; a defect string if malformed."""
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        return f"amendment index {path} is unreadable: {exc}"
+    entries = data.get("content_versions") if isinstance(data, dict) else None
+    since, until = (data.get(k) if isinstance(data, dict) else None for k in ("since", "until"))
+    if not isinstance(entries, list) or not isinstance(since, str) or not isinstance(until, str):
+        return f"amendment index {path} has no since/until/content_versions"
+    amended: set[str] = set()
+    removed: set[str] = set()
+    for entry in entries:
+        if not isinstance(entry, dict) or not all(
+            isinstance(entry.get(k), str) for k in ("identifier", "type", "part")
+        ):
+            return f"amendment index {path} holds a malformed entry: {entry!r}"
+        stable = _entry_stable_id(entry)
+        (removed if entry.get("removed") is True else amended).add(stable)
+    return AmendmentIndex(
+        since=since, until=until, amended=frozenset(amended), removed=frozenset(removed)
+    )
+
+
+MAX_INDEX_HOPS = 12
+
+
+def amendment_chain(raw_dir: Path, before: str, after: str) -> AmendmentIndex | None | str:
+    """The archived amendment indexes joining the published issue to the new one.
+
+    Each accepted eCFR snapshot archives the index covering the previously
+    accepted issue → itself (``metadata.json`` records the file and its
+    checksum). Normally one hop suffices; several accepted-but-unpublished
+    issues (a gate that tripped on consecutive days, resolved locally) are
+    walked back hop by hop, the latest verdict per id winning. None when
+    the chain does not reach ``before`` — the vault predates what the local
+    cache can explain — and a defect string when an archived file does not
+    match its recorded checksum (never silently ignored).
+    """
+    hops: list[AmendmentIndex] = []
+    current = after
+    for _ in range(MAX_INDEX_HOPS):
+        record = ecfr_source.recorded_amendment_index(
+            raw_dir / "ecfr" / current / "metadata.json"
+        )
+        if record is None:
+            return None
+        path = raw_dir / "ecfr" / current / record["file"]
+        try:
+            actual = sha256_of(path)
+        except OSError:
+            return None
+        if actual != record["sha256"]:
+            return f"archived amendment index {path} does not match its recorded checksum"
+        index = read_amendment_index(path)
+        if isinstance(index, str):
+            return index
+        hops.append(index)
+        if index.since == before:
+            break
+        if index.since >= current:
+            return None
+        current = index.since
+    else:
+        return None
+    verdict: dict[str, bool] = {}  # stable id → removed?
+    for index in reversed(hops):  # chronological order; the latest hop wins
+        for stable in index.amended:
+            verdict[stable] = False
+        for stable in index.removed:
+            verdict[stable] = True
+    return AmendmentIndex(
+        since=before,
+        until=after,
+        amended=frozenset(k for k, gone in verdict.items() if not gone),
+        removed=frozenset(k for k, gone in verdict.items() if gone),
+    )
+
+
+def _stable_id(record: NoteRecord) -> str:
+    value = record.frontmatter.get("id")
+    return value if isinstance(value, str) else ""
+
+
+def cross_check_far(index: AmendmentIndex, ledger: Ledger) -> CrossCheck:
+    """Verdicts F1, F2 and F4 of plan §38.4 (F3 is the threshold on unexplained changes)."""
+    result = CrossCheck()
+    after_ids = {_stable_id(r) for r in ledger.after_records()}
+    gone_ids = {_stable_id(r) for r in ledger.removed} | {
+        _stable_id(m.before) for m in ledger.moved
+    }
+    changed_ids = (
+        {_stable_id(r) for r in ledger.content_changed}
+        | {_stable_id(r) for r in ledger.added}
+        | {_stable_id(m.after) for m in ledger.moved}
+        | gone_ids
+    )
+    missing = sorted(s for s in index.announced if s not in after_ids and s not in gone_ids)
+    if missing:
+        result.defects.append(
+            "FAR: the eCFR amendment index names content the parsed layer does not have "
+            f"and never had: {_listed(missing)} (plan §32.2)"
+        )
+    if index.announced and not (index.announced & changed_ids):
+        result.defects.append(
+            f"FAR: none of the {len(index.announced):,} documents the eCFR amendment index "
+            f"names ({index.since} → {index.until}) shows a canonical change — the full-title "
+            "XML lags the amendment index"
+        )
+    quiet = sorted(s for s in index.announced if s not in changed_ids)
+    still_present = sorted(s for s in index.removed if s in after_ids)
+    result.explained = {
+        r.path
+        for r in (*ledger.content_changed, *ledger.removed)
+        if _stable_id(r) in index.announced
+    }
+    unexplained = [r for r in ledger.content_changed if _stable_id(r) not in index.announced]
+    unexplained_removed = [r for r in ledger.removed if _stable_id(r) not in index.announced]
+    result.report.append(
+        f"  eCFR amendment index ({index.since} → {index.until}): "
+        f"{len(index.amended):,} amended, {len(index.removed):,} removed"
+    )
+    result.report.append(
+        "  announced but unchanged: " + (_listed(quiet) if quiet else "none")
+    )
+    if still_present:
+        result.report.append(f"  announced removed but still present: {_listed(still_present)}")
+    result.report.append(
+        f"  content changes not in the amendment index: {len(unexplained):,}"
+        + (f" ({_listed(r.citation for r in unexplained)})" if unexplained else "")
+    )
+    if unexplained_removed:
+        result.report.append(
+            f"  removals not in the amendment index: {len(unexplained_removed):,} "
+            f"({_listed(r.citation for r in unexplained_removed)})"
+        )
+    return result
+
+
+# ---------------------------------------------------------------------------
 # Evaluation
 # ---------------------------------------------------------------------------
 
@@ -702,9 +873,15 @@ def evaluate(
     ledgers: dict[str, Ledger],
     *,
     aim_docs: dict[str, dict] | None,
+    far_index: AmendmentIndex | None | str = None,
     thresholds: dict[str, CorpusThresholds] | None = None,
 ) -> GateReport:
-    """Run every gate over the ledgers (plan §38.3–§38.4)."""
+    """Run every gate over the ledgers (plan §38.3–§38.4).
+
+    ``far_index`` — the eCFR amendment index joining the published FAR issue
+    to the planned one (:func:`amendment_chain`): None when none is
+    archived, a defect string when the archive is corrupt.
+    """
     thresholds = THRESHOLDS if thresholds is None else thresholds
     report = GateReport()
     for corpus in CORPORA:
@@ -728,6 +905,19 @@ def evaluate(
             continue
 
         explained: set[Path] | None = None
+        if corpus == FAR and ledger.edition_changed:
+            if isinstance(far_index, str):
+                report.change_note.append(f"FAR: {far_index}")
+            elif far_index is None:
+                report.lines.append(
+                    f"  eCFR amendment index: none archived for {ledger.edition_before} → "
+                    f"{ledger.edition_after}; thresholds count every change"
+                )
+            else:
+                outcome = cross_check_far(far_index, ledger)
+                report.lines.extend(outcome.report)
+                report.change_note.extend(outcome.defects)
+                explained = outcome.explained
         if corpus == AIM and ledger.edition_changed:
             section = find_aim_change_note_section(aim_docs or {})
             if section is None:

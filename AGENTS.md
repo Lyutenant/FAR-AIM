@@ -285,6 +285,12 @@ content threshold counts. Overrides: `--accept-mass-change`,
 `--accept-change-note-mismatch` (on `diff` and `update`, resolved locally
 like a raw-hash mismatch); an empty planned corpus is never accepted.
 The vault is the "before" side by design (CI has no local canonical
-layers); increment 2 of §38 (eCFR amendment-index archival + FAR
-cross-check) is not built yet, so FAR thresholds count every content
-change for now.
+layers). Increment 2 (2026-09-13): `fetch ecfr` archives the versioner's
+amendment index for accepted → new issue (`versions-since-<date>.json`,
+checksummed in `metadata.json`; index failure fails the fetch) and `diff`
+cross-checks it on a FAR edition transition — an entry the layer never
+had, or an index none of whose documents changed (XML lagging the
+index), fails; announced but unchanged / unannounced changes are
+reported, and FAR thresholds count only unannounced changes and
+removals, so a large announced rule passes while unexplained churn
+trips. Locally accepted-but-unpublished issues chain their indexes.

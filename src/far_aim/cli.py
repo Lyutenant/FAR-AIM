@@ -2144,7 +2144,16 @@ def _change_gates(
 ) -> int:
     """Print the change ledger and decide the gates (plan §38.3–§38.5)."""
     ledgers = changes.build_ledgers(config.vault_dir, plan.files)
-    report = changes.evaluate(ledgers, aim_docs=plan.aim_docs)
+    far_index: changes.AmendmentIndex | None | str = None
+    far = ledgers.get(changes.FAR)
+    if far is not None and far.edition_changed:
+        # The eCFR's own amendment index, archived by `fetch ecfr` beside
+        # each accepted snapshot (plan §38.4) — read from the raw cache,
+        # never fetched here.
+        far_index = changes.amendment_chain(
+            config.raw_dir, str(far.edition_before), str(far.edition_after)
+        )
+    report = changes.evaluate(ledgers, aim_docs=plan.aim_docs, far_index=far_index)
     for line in report.lines:
         print(line)
     for corpus, totals in report.summaries.items():

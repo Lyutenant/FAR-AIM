@@ -2761,8 +2761,11 @@ def test_update_mass_removal_trips_the_gate_and_the_override_publishes(
     captured = capsys.readouterr()
     assert "content-changed 0   provenance-only 1   added 0   removed 2   moved 0" in captured.out
     assert "remove: FAR/Part 001/1.2.md" in captured.out
+    # The archived amendment index (empty here) explains none of the removals.
+    assert "  eCFR amendment index (2026-08-19 → 2026-09-15): 0 amended, 0 removed" in captured.out
+    assert "  removals not in the amendment index: 2 (14 CFR § 1.2, 14 CFR § 1.3)" in captured.out
     assert (
-        "error: change gate: FAR: 2 removed notes, above 2 = max(floor 1, 50% of 3); "
+        "error: change gate: FAR: 2 unannounced removed notes, above 2 = max(floor 1, 50% of 3); "
         "review the ledger above and re-run with --accept-mass-change" in captured.err
     )
     assert "update stopped at `far-aim diff`" in captured.err
@@ -2777,7 +2780,7 @@ def test_update_mass_removal_trips_the_gate_and_the_override_publishes(
 
     assert main(["--root", str(tmp_path), "update", "--accept-mass-change"]) == EXIT_OK
     out = capsys.readouterr().out
-    assert "accepted (--accept-mass-change): FAR: 2 removed notes" in out
+    assert "accepted (--accept-mass-change): FAR: 2 unannounced removed notes" in out
     assert "FAR changes: content-changed 0, provenance-only 1, added 0, removed 2, moved 0" in out
     assert not (config.vault_dir / "FAR" / "Part 001" / "1.2.md").exists()
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
@@ -2937,3 +2940,116 @@ def test_diff_empty_corpus_is_never_accepted(tmp_path, capsys, mock_upstream, mo
     captured = capsys.readouterr()
     assert "error: change gate: PCG:" in captured.err
     assert "an empty parse is never published" in captured.err
+
+
+def _amendment(identifier: str, *, removed: bool = False, issue_date: str = "2026-09-15") -> dict:
+    return {
+        "date": issue_date,
+        "amendment_date": issue_date,
+        "issue_date": issue_date,
+        "identifier": identifier,
+        "name": f"§ {identifier}",
+        "part": "1",
+        "substantive": True,
+        "removed": removed,
+        "subpart": None,
+        "title": "14",
+        "type": "section",
+    }
+
+
+def _xml_without(xml: bytes, *numbers: str) -> bytes:
+    for number in numbers:
+        start = xml.index(f'<DIV8 N="{number}"'.encode())
+        end = xml.index(b"</DIV8>", start) + len(b"</DIV8>\n")
+        xml = xml[:start] + xml[end:]
+    return xml
+
+
+def test_update_announced_mass_removal_passes_the_gate(
+    tmp_path, capsys, mock_upstream, monkeypatch
+):
+    config = _updated_root(tmp_path, capsys, mock_upstream)
+    monkeypatch.setattr(ecfr, "MIN_SECTION_COUNT", 1)
+    monkeypatch.setitem(changes.THRESHOLDS, changes.FAR, TINY_THRESHOLDS)
+    # The eCFR's own amendment index says both sections were removed.
+    mock_upstream.versions = [_amendment("1.2", removed=True), _amendment("1.3", removed=True)]
+    _bump_ecfr(mock_upstream, _xml_without(mock_upstream.xml, "1.2", "1.3"))
+
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert (config.raw_dir / "ecfr" / "2026-09-15" / f"versions-since-{ISSUE_DATE}.json").exists()
+    assert "  eCFR amendment index (2026-08-19 → 2026-09-15): 0 amended, 2 removed" in out
+    assert "  announced but unchanged: none" in out
+    assert "  content changes not in the amendment index: 0\n" in out
+    assert "removals not in the amendment index" not in out
+    assert "FAR changes: content-changed 0, provenance-only 1, added 0, removed 2, moved 0" in out
+    assert "accepted (" not in out
+    assert not (config.vault_dir / "FAR" / "Part 001" / "1.2.md").exists()
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+
+
+def test_update_amendment_index_naming_unparsed_content_fails(tmp_path, capsys, mock_upstream):
+    config = _updated_root(tmp_path, capsys, mock_upstream)
+    vault_before = _vault_bytes(config)
+    mock_upstream.versions = [_amendment("1.9")]  # the fixture never had § 1.9
+    _bump_ecfr(mock_upstream, mock_upstream.xml)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_ERROR
+    captured = capsys.readouterr()
+    assert (
+        "the eCFR amendment index names content the parsed layer does not have and never "
+        "had: cfr-14-1.9 (plan §32.2)" in captured.err
+    )
+    assert "update stopped at `far-aim diff`" in captured.err
+    assert _vault_bytes(config) == vault_before
+
+
+def test_update_full_title_lagging_the_amendment_index_fails(tmp_path, capsys, mock_upstream):
+    config = _updated_root(tmp_path, capsys, mock_upstream)
+    vault_before = _vault_bytes(config)
+    # The index says § 1.2 was amended, but the full-title XML is byte-identical.
+    mock_upstream.versions = [_amendment("1.2")]
+    _bump_ecfr(mock_upstream, mock_upstream.xml)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_ERROR
+    captured = capsys.readouterr()
+    assert "  announced but unchanged: cfr-14-1.2" in captured.out
+    assert (
+        "none of the 1 documents the eCFR amendment index names (2026-08-19 → 2026-09-15) "
+        "shows a canonical change — the full-title XML lags the amendment index" in captured.err
+    )
+    assert _vault_bytes(config) == vault_before
+    # After review the override publishes the provenance-only issue.
+    assert main(["--root", str(tmp_path), "update", "--accept-change-note-mismatch"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "accepted (--accept-change-note-mismatch): FAR: none of the 1 documents" in out
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+
+
+def test_update_amendment_chain_spans_a_gated_issue(tmp_path, capsys, mock_upstream, monkeypatch):
+    """Two issues accepted locally before one publication: the indexes chain."""
+    config = _updated_root(tmp_path, capsys, mock_upstream)
+    monkeypatch.setattr(ecfr, "MIN_SECTION_COUNT", 1)
+    strict = changes.CorpusThresholds(
+        changes.Threshold(0.0, 0), changes.Threshold(0.5, 1), changes.Threshold(0.5, 1)
+    )
+    monkeypatch.setitem(changes.THRESHOLDS, changes.FAR, strict)
+    # Issue 1: § 1.3 amended as announced, but § 1.2 vanishes unannounced —
+    # any unannounced removal trips the (strict) gate.
+    xml_1 = _xml_without(mock_upstream.xml, "1.2").replace(
+        b"Rules of construction.</HEAD>", b"Rules of construction (amended).</HEAD>"
+    )
+    mock_upstream.versions = [_amendment("1.3", issue_date="2026-09-10")]
+    _bump_ecfr(mock_upstream, xml_1, issue_date="2026-09-10")
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_ERROR
+    assert "1 unannounced removed notes" in capsys.readouterr().err
+    # Issue 2 arrives before anyone resolved issue 1: it announces the removal.
+    mock_upstream.versions.append(_amendment("1.2", removed=True, issue_date="2026-09-15"))
+    _bump_ecfr(mock_upstream, xml_1, issue_date="2026-09-15")
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "changes (FAR, vs published 2026-08-19): 3 notes → 2 planned" in out
+    assert "  eCFR amendment index (2026-08-19 → 2026-09-15): 1 amended, 1 removed" in out
+    assert "content-changed 1   provenance-only 1   added 0   removed 1   moved 0" in out
+    assert "accepted (" not in out
+    assert (config.raw_dir / "ecfr" / "2026-09-15" / "versions-since-2026-09-10.json").exists()
+    assert (config.raw_dir / "ecfr" / "2026-09-10" / f"versions-since-{ISSUE_DATE}.json").exists()

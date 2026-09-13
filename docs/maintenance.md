@@ -145,7 +145,10 @@ something.
   re-run locally with `far-aim update --accept-mass-change` and/or
   `--accept-change-note-mismatch`, then push. The next daily run compares
   against the newly published vault and is clean. An empty planned corpus
-  is never accepted.
+  is never accepted. For the FAR, `fetch ecfr` archives the eCFR's own
+  amendment index beside each accepted snapshot, so a large *announced*
+  rule passes the thresholds and only unexplained churn trips them; the
+  run log's `eCFR amendment index (…)` lines show what the index named.
 - **Raw snapshot archival (plan §6.2):** the AIM/PCG downloads in
   `data/raw` are uploaded as a workflow artifact when the run **failed**
   with downloads on disk (a quarantined mismatch, or a new edition whose

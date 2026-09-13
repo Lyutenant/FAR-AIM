@@ -80,6 +80,140 @@ EXPECTED_ROOT_TAG = "ECFR"
 _OPTIONAL_DATES = ("latest_amended_on", "up_to_date_as_of")
 
 
+def amendment_index_url(since: str, until: str, page: int = 1) -> str:
+    """The versioner's amendment index for Title 14 between two issue dates.
+
+    The API accepts ``issue_date[gte]``/``[lte]`` (not ``gt``) and pages at a
+    fixed server-side size via ``page``; entries dated ``since`` itself are
+    already part of that issue's full-title XML and are dropped client-side.
+    """
+    return (
+        f"{ECFR_BASE_URL}/api/versioner/v1/versions/title-{TITLE_NUMBER}.json"
+        f"?issue_date%5Bgte%5D={since}&issue_date%5Blte%5D={until}&page={page}"
+    )
+
+
+AMENDMENT_INDEX_TYPES = frozenset({"section", "appendix"})
+_AMENDMENT_ENTRY_KEYS = ("identifier", "type", "part", "removed", "issue_date")
+MAX_AMENDMENT_PAGES = 50
+
+
+def amendment_index_filename(since: str) -> str:
+    return f"versions-since-{since}.json"
+
+
+def download_amendment_index(
+    client: httpx.Client, since: str, until: str, *, sleep: Sleep | None = None
+) -> dict:
+    """Every Title 14 section/appendix version issued after ``since`` up to ``until``.
+
+    Plan §38.4: the eCFR's own statement of what changed between two issue
+    dates, archived with the snapshot so the FAR change gate can tell an
+    announced amendment from unexplained churn. Paginated; each entry is
+    validated (identifier, type, part, removed flag, issue date) and the
+    latest version of an identifier wins when it was amended more than once
+    in the window. Fails closed on any malformed page.
+    """
+    if sleep is None:
+        sleep = time.sleep
+    entries: dict[tuple[str, str, str], dict] = {}
+    page = 1
+    while True:
+        url = amendment_index_url(since, until, page)
+
+        def attempt(url: str = url) -> object:
+            try:
+                response = client.get(url)
+            except TRANSIENT_HTTP_ERRORS as exc:
+                raise RetryableError(str(exc)) from exc
+            except httpx.HTTPError as exc:
+                raise FetchError(f"HTTP client error fetching {url}: {exc}") from exc
+            if response.status_code in RETRYABLE_STATUS:
+                raise retryable_status(response)
+            if response.status_code != 200:
+                raise FetchError(f"eCFR versions endpoint returned HTTP {response.status_code}")
+            try:
+                return response.json()
+            except ValueError as exc:
+                raise FetchError(f"eCFR versions endpoint returned invalid JSON: {exc}") from exc
+
+        payload = retrying(attempt, what=f"eCFR amendment index page {page}", sleep=sleep)
+        versions = payload.get("content_versions") if isinstance(payload, dict) else None
+        meta = payload.get("meta") if isinstance(payload, dict) else None
+        if not isinstance(versions, list) or not isinstance(meta, dict):
+            raise FetchError(
+                f"eCFR versions endpoint response has no 'content_versions' list / 'meta' "
+                f"({url})"
+            )
+        for entry in versions:
+            if not isinstance(entry, dict) or any(k not in entry for k in _AMENDMENT_ENTRY_KEYS):
+                raise FetchError(f"malformed eCFR amendment entry {entry!r} ({url})")
+            identifier, kind, part = entry["identifier"], entry["type"], entry["part"]
+            removed, issue_date = entry["removed"], entry["issue_date"]
+            if (
+                not isinstance(identifier, str)
+                or kind not in AMENDMENT_INDEX_TYPES
+                or not isinstance(part, str)
+                or not isinstance(removed, bool)
+                or not is_calendar_date(issue_date)
+            ):
+                raise FetchError(f"malformed eCFR amendment entry {entry!r} ({url})")
+            if not (since < issue_date <= until):
+                continue
+            key = (kind, part, identifier)
+            if key not in entries or entries[key]["issue_date"] < issue_date:
+                entries[key] = {
+                    "identifier": identifier,
+                    "type": kind,
+                    "part": part,
+                    "removed": removed,
+                    "issue_date": issue_date,
+                    "name": entry.get("name") if isinstance(entry.get("name"), str) else None,
+                }
+        try:
+            total_pages = int(meta.get("total_pages", 1))
+        except (TypeError, ValueError) as exc:
+            raise FetchError(
+                f"eCFR versions endpoint meta.total_pages is unreadable ({url})"
+            ) from exc
+        if page >= total_pages:
+            break
+        page += 1
+        if page > MAX_AMENDMENT_PAGES:
+            raise FetchError(
+                f"eCFR amendment index {since} → {until} exceeds {MAX_AMENDMENT_PAGES} pages; "
+                "refusing to loop"
+            )
+    return {
+        "provider": "ecfr",
+        "title_number": TITLE_NUMBER,
+        "since": since,
+        "until": until,
+        "url": amendment_index_url(since, until),
+        "content_versions": [entries[key] for key in sorted(entries)],
+    }
+
+
+def _write_json_atomic(path: Path, payload: dict) -> str:
+    """Write ``payload`` durably at ``path``; returns the file's sha256 checksum."""
+    data = (json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False) + "\n").encode(
+        "utf-8"
+    )
+    fd, tmp_name = tempfile.mkstemp(dir=path.parent, prefix=path.name + ".", suffix=".tmp")
+    tmp_path = Path(tmp_name)
+    try:
+        with os.fdopen(fd, "wb") as fh:
+            fh.write(data)
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(tmp_path, path)
+    except BaseException:
+        tmp_path.unlink(missing_ok=True)
+        raise
+    fsync_dir(path.parent)
+    return f"sha256:{hashlib.sha256(data).hexdigest()}"
+
+
 def full_title14_url(version: str) -> str:
     return f"{ECFR_BASE_URL}/api/versioner/v1/full/{version}/title-{TITLE_NUMBER}.xml"
 
@@ -262,6 +396,26 @@ _METADATA_KEYS = frozenset(
         "up_to_date_as_of",
     }
 )
+# Added with plan §38 increment 2; snapshots archived before it carry no key,
+# which reads as "no index recorded" rather than as damaged metadata.
+_OPTIONAL_METADATA_KEYS = frozenset({"amendment_index"})
+
+
+def amendment_index_record(value: object) -> dict | None:
+    """``metadata.json``'s ``amendment_index`` if well-formed, else None.
+
+    ``{"since": <issue date>, "file": <name>, "sha256": <checksum>}`` names the
+    archived amendment index covering ``since`` → this snapshot; ``null``
+    means none exists (a first acceptance, or a same-version correction).
+    """
+    if not isinstance(value, dict) or set(value) != {"since", "file", "sha256"}:
+        return None
+    since, file, sha = value["since"], value["file"], value["sha256"]
+    if not (is_calendar_date(since) and file == amendment_index_filename(since)):
+        return None
+    if not (isinstance(sha, str) and sha.startswith("sha256:") and len(sha) == 71):
+        return None
+    return {"since": since, "file": file, "sha256": sha}
 
 
 def metadata_intact(
@@ -276,7 +430,7 @@ def metadata_intact(
         data = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return False
-    if not isinstance(data, dict) or set(data) != _METADATA_KEYS:
+    if not isinstance(data, dict) or set(data) - _OPTIONAL_METADATA_KEYS != _METADATA_KEYS:
         return False
     retrieved_at = data.get("retrieved_at")
     section_count = data.get("section_count")
@@ -293,7 +447,20 @@ def metadata_intact(
         and not isinstance(section_count, bool)
         and section_count >= MIN_SECTION_COUNT
         and all(data.get(k) is None or is_calendar_date(data.get(k)) for k in _OPTIONAL_DATES)
+        and (
+            data.get("amendment_index") is None
+            or amendment_index_record(data.get("amendment_index")) is not None
+        )
     )
+
+
+def recorded_amendment_index(path: Path) -> dict | None:
+    """The amendment-index record an existing metadata.json carries, if any."""
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return amendment_index_record(data.get("amendment_index")) if isinstance(data, dict) else None
 
 
 def _write_metadata(
@@ -306,6 +473,7 @@ def _write_metadata(
     byte_count: int,
     section_count: int,
     discovery: TitleDiscovery,
+    amendment_index: dict | None,
 ) -> None:
     metadata = {
         "provider": "ecfr",
@@ -318,6 +486,7 @@ def _write_metadata(
         "section_count": section_count,
         "latest_amended_on": discovery.latest_amended_on,
         "up_to_date_as_of": discovery.up_to_date_as_of,
+        "amendment_index": amendment_index,
     }
     fd, tmp_name = tempfile.mkstemp(dir=path.parent, prefix=path.name + ".", suffix=".tmp")
     tmp_path = Path(tmp_name)
@@ -518,6 +687,9 @@ def _fetch_title14_locked(
                     byte_count=xml_path.stat().st_size,
                     section_count=section_count,
                     discovery=discovery,
+                    # Offline here: keep a well-formed record of the archived
+                    # index (the file itself is verified when the gate reads it).
+                    amendment_index=recorded_amendment_index(metadata_path),
                 )
                 log.info("eCFR Title 14 %s: regenerated missing/stale metadata.json", version)
             log.info("eCFR Title 14 %s already accepted; cached snapshot verified", version)
@@ -562,6 +734,23 @@ def _fetch_title14_locked(
                     "Investigate, then re-run with --force to accept the new content."
                 )
 
+            # The eCFR's own amendment index for the accepted → new window
+            # (plan §38.4) is archived beside the XML before anything is
+            # accepted; a same-version correction or a first acceptance has
+            # no window. An index failure fails the fetch like an XML one —
+            # the gate must never run without the announcement it expects.
+            amendment_index: dict | None = None
+            if state.accepted_version is not None and state.accepted_version < version:
+                since = state.accepted_version
+                log.info("downloading eCFR amendment index %s → %s", since, version)
+                index = download_amendment_index(client, since, version, sleep=sleep)
+                index_path = snapshot_dir / amendment_index_filename(since)
+                amendment_index = {
+                    "since": since,
+                    "file": index_path.name,
+                    "sha256": _write_json_atomic(index_path, index),
+                }
+
             # Acceptance order: the manifest commit is last, so it never
             # records a snapshot that is not durably archived, and every
             # interrupted state self-heals on the next fetch without looping
@@ -584,6 +773,7 @@ def _fetch_title14_locked(
                 byte_count=byte_count,
                 section_count=section_count,
                 discovery=discovery,
+                amendment_index=amendment_index,
             )
             previous_hash = state.raw_hash if state.accepted_version == version else None
             try:

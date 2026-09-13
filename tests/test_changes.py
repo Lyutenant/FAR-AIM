@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
@@ -11,6 +12,7 @@ from far_aim.changes import (
     AIM,
     FAR,
     PCG,
+    AmendmentIndex,
     ChangeNote,
     CorpusThresholds,
     Ledger,
@@ -19,6 +21,7 @@ from far_aim.changes import (
     Threshold,
 )
 from far_aim.parsers import aim as aim_parser
+from far_aim.sources.common import sha256_of
 
 AIM_HTML = Path(__file__).parent / "fixtures" / "aim" / "aim_html"
 
@@ -202,7 +205,10 @@ def test_mass_change_defects_count_only_unannounced_when_announced_given():
     ledger.removed = [_rec("r1"), _rec("r2"), _rec("r3")]
     ledger.added = [_rec("n1"), _rec("n2"), _rec("n3")]
     defects = changes.mass_change_defects(ledger, TINY, announced=announced)
-    assert [d.split(",")[0] for d in defects] == ["FAR: 3 removed notes", "FAR: 3 added notes"]
+    assert [d.split(",")[0] for d in defects] == [
+        "FAR: 3 unannounced removed notes",
+        "FAR: 3 added notes",
+    ]
 
 
 def test_content_free_edition_trips_for_aim_and_pcg_but_not_far():
@@ -367,3 +373,184 @@ def test_evaluate_empty_output_is_fatal_and_skips_the_other_gates():
     ledger.planned = 0
     report = changes.evaluate({PCG: ledger}, aim_docs=None, thresholds={PCG: TINY})
     assert len(report.fatal) == 1 and report.mass == []
+
+
+# ---------------------------------------------------------------------------
+# FAR — eCFR amendment index
+# ---------------------------------------------------------------------------
+
+
+def _entry(identifier: str, *, kind: str = "section", part: str = "91", removed: bool = False):
+    return {
+        "identifier": identifier,
+        "type": kind,
+        "part": part,
+        "removed": removed,
+        "issue_date": "2026-09-15",
+    }
+
+
+def _index_file(path: Path, since: str, until: str, entries: list[dict]) -> str:
+    payload = {"since": since, "until": until, "content_versions": entries}
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    return sha256_of(path)
+
+
+def _snapshot(raw_dir: Path, version: str, since: str | None, entries: list[dict]) -> None:
+    snapshot = raw_dir / "ecfr" / version
+    snapshot.mkdir(parents=True, exist_ok=True)
+    record = None
+    if since is not None:
+        name = f"versions-since-{since}.json"
+        sha = _index_file(snapshot / name, since, version, entries)
+        record = {"since": since, "file": name, "sha256": sha}
+    (snapshot / "metadata.json").write_text(
+        json.dumps({"amendment_index": record}), encoding="utf-8"
+    )
+
+
+def test_read_amendment_index_maps_entries_to_stable_ids(tmp_path):
+    path = tmp_path / "versions-since-2026-09-03.json"
+    _index_file(
+        path,
+        "2026-09-03",
+        "2026-09-15",
+        [
+            _entry("91.155"),
+            _entry("61.118-61.120", part="61"),
+            _entry("2-5", part="241"),
+            _entry("Appendix A to Part 91", kind="appendix"),
+            _entry("Special Federal Aviation Regulation No. 50-2", kind="appendix"),
+            _entry("Table A to Part 117", kind="appendix", part="117"),
+            _entry("1216.102", part="1216", removed=True),
+        ],
+    )
+    index = changes.read_amendment_index(path)
+    assert isinstance(index, AmendmentIndex)
+    assert index.amended == {
+        "cfr-14-91.155",
+        "cfr-14-61.118-61.120",
+        "cfr-14-241-2-5",
+        "cfr-14-part-91-appendix-A",
+        "cfr-14-part-91-sfar-50-2",
+        "cfr-14-part-117-Table-A-to-Part-117",
+    }
+    assert index.removed == {"cfr-14-1216.102"}
+    path.write_text('{"since": "a"}', encoding="utf-8")
+    assert "no since/until/content_versions" in changes.read_amendment_index(path)
+    path.write_text('{"since": "a", "until": "b", "content_versions": [{"identifier": 1}]}')
+    assert "malformed entry" in changes.read_amendment_index(path)
+
+
+def test_amendment_chain_walks_back_to_the_published_issue(tmp_path):
+    raw = tmp_path / "raw"
+    _snapshot(raw, "2026-09-03", None, [])
+    _snapshot(raw, "2026-09-10", "2026-09-03", [_entry("91.155"), _entry("91.3", removed=True)])
+    _snapshot(raw, "2026-09-15", "2026-09-10", [_entry("91.3"), _entry("91.7")])
+    # One hop.
+    one = changes.amendment_chain(raw, "2026-09-10", "2026-09-15")
+    assert isinstance(one, AmendmentIndex)
+    assert (one.since, one.until) == ("2026-09-10", "2026-09-15")
+    assert one.amended == {"cfr-14-91.3", "cfr-14-91.7"} and one.removed == frozenset()
+    # Two hops: § 91.3 was removed then re-added — the latest verdict wins.
+    two = changes.amendment_chain(raw, "2026-09-03", "2026-09-15")
+    assert isinstance(two, AmendmentIndex)
+    assert two.amended == {"cfr-14-91.155", "cfr-14-91.3", "cfr-14-91.7"}
+    assert two.removed == frozenset()
+    # The chain cannot reach an issue no snapshot explains.
+    assert changes.amendment_chain(raw, "2026-08-01", "2026-09-15") is None
+    assert changes.amendment_chain(raw, "2026-09-03", "2026-09-03") is None
+    # A corrupt archive is a defect, never silently ignored.
+    (raw / "ecfr" / "2026-09-15" / "versions-since-2026-09-10.json").write_text("{}")
+    defect = changes.amendment_chain(raw, "2026-09-10", "2026-09-15")
+    assert isinstance(defect, str) and "does not match its recorded checksum" in defect
+
+
+def _far_rec(section: str, **fm) -> NoteRecord:
+    return _rec(
+        f"§ {section}", "regulation", id=f"cfr-14-{section}", section=section, part=91, **fm
+    )
+
+
+def _far_ledger(**lists) -> Ledger:
+    return _ledger(
+        FAR,
+        10,
+        index_before={"source_version": "2026-09-03"},
+        index_after={"source_version": "2026-09-15"},
+        **lists,
+    )
+
+
+def test_cross_check_far_verdicts():
+    index = AmendmentIndex(
+        "2026-09-03",
+        "2026-09-15",
+        amended=frozenset({"cfr-14-91.155", "cfr-14-91.3"}),
+        removed=frozenset({"cfr-14-91.7"}),
+    )
+    # F1: the index names content the layer never had.
+    outcome = changes.cross_check_far(index, _far_ledger(content_changed=[_far_rec("91.155")]))
+    assert [d.split(":")[1].strip()[:44] for d in outcome.defects] == [
+        "the eCFR amendment index names content the p"
+    ]
+    assert "cfr-14-91.3, cfr-14-91.7" in outcome.defects[0]
+    # F2: nothing announced changed → the XML lags the index.
+    outcome = changes.cross_check_far(
+        index, _far_ledger(unchanged=[_far_rec("91.155"), _far_rec("91.3"), _far_rec("91.7")])
+    )
+    assert any("XML lags the amendment index" in d for d in outcome.defects)
+    # Clean: amended sections changed, the removed one is gone, plus one unexplained edit.
+    outcome = changes.cross_check_far(
+        index,
+        _far_ledger(
+            content_changed=[_far_rec("91.155"), _far_rec("91.9")],
+            removed=[_far_rec("91.7"), _far_rec("91.11")],
+            unchanged=[_far_rec("91.3")],
+        ),
+    )
+    assert outcome.defects == []
+    assert outcome.explained == {Path("/v/§ 91.155"), Path("/v/§ 91.7")}
+    assert outcome.report == [
+        "  eCFR amendment index (2026-09-03 → 2026-09-15): 2 amended, 1 removed",
+        "  announced but unchanged: cfr-14-91.3",
+        "  content changes not in the amendment index: 1 (§ 91.9)",
+        "  removals not in the amendment index: 1 (§ 91.11)",
+    ]
+    # An announced removal that is still present is reported, not fatal.
+    outcome = changes.cross_check_far(
+        index, _far_ledger(content_changed=[_far_rec("91.155"), _far_rec("91.3"), _far_rec("91.7")])
+    )
+    assert outcome.defects == []
+    assert "  announced removed but still present: cfr-14-91.7" in outcome.report
+
+
+def test_mass_change_counts_only_unannounced_removals_when_explained():
+    ledger = _ledger(FAR, 4, removed=[_rec("a"), _rec("b"), _rec("c")])
+    assert changes.mass_change_defects(ledger, TINY) == [
+        "FAR: 3 removed notes, above 2 = max(floor 1, 50% of 4)"
+    ]
+    assert changes.mass_change_defects(ledger, TINY, announced={Path("/v/a")}) == []
+    (defect,) = changes.mass_change_defects(ledger, TINY, announced=set())
+    assert defect.startswith("FAR: 3 unannounced removed notes")
+
+
+def test_evaluate_far_index_states():
+    ledger = _far_ledger(content_changed=[_far_rec("91.155")])
+    report = changes.evaluate({FAR: ledger}, aim_docs=None, thresholds={FAR: TINY})
+    assert report.lines[-1] == (
+        "  eCFR amendment index: none archived for 2026-09-03 → 2026-09-15; "
+        "thresholds count every change"
+    )
+    report = changes.evaluate(
+        {FAR: ledger}, aim_docs=None, far_index="archived amendment index x is bad",
+        thresholds={FAR: TINY},
+    )
+    assert report.change_note == ["FAR: archived amendment index x is bad"]
+    index = AmendmentIndex("2026-09-03", "2026-09-15", frozenset({"cfr-14-91.155"}), frozenset())
+    report = changes.evaluate(
+        {FAR: ledger}, aim_docs=None, far_index=index, thresholds={FAR: TINY}
+    )
+    assert report.change_note == [] and report.mass == []
+    assert "  eCFR amendment index (2026-09-03 → 2026-09-15): 1 amended, 0 removed" in report.lines

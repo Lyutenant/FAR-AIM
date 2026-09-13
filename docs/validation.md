@@ -449,6 +449,28 @@ are what the AIM content threshold counts. An announced paragraph also
 explains its section note (a section's hash covers its paragraphs), and
 chapter 0 itself is explained by definition.
 
+**FAR amendment-index cross-check (category 7, eCFR side).** `fetch ecfr`
+archives the versioner's own amendment index for the previously accepted
+issue → the new one (`versions/title-14.json?issue_date[gte]=…&[lte]=…`,
+paged; entries dated the accepted issue itself are dropped because that
+issue's XML already carried them) as `versions-since-<accepted>.json`
+beside the XML, checksummed in `metadata.json` — a first acceptance or a
+same-version correction records `null`. An index download failure fails
+the fetch. On a FAR edition transition, `diff` reads the archived
+index(es) joining the *published* issue to the planned one (walking back
+through locally accepted-but-unpublished issues when a gate tripped on
+consecutive days; a checksum mismatch is a failure, a missing file means
+"none archived — thresholds count every change"), maps each entry to a
+stable id with `models.cfr` (`91.155` → `cfr-14-91.155`, `Appendix A to
+Part 91` → `cfr-14-part-91-appendix-A`) and compares with the ledger.
+Failures: an entry the layer does not have and never had (plan §32.2),
+and a non-empty index none of whose documents changed (the full-title
+XML lags the index — a half-rebuilt daily snapshot). Reported: announced
+but unchanged documents, announced removals still present, and content
+changes or removals the index does not name — those unexplained ones are
+what the FAR thresholds count, so a large announced rule passes while
+unexplained churn trips.
+
 **Overrides.** `--accept-mass-change` and
 `--accept-change-note-mismatch` on `diff` and `update` turn the matching
 failures into `accepted (...)` lines (also listed in the update summary);
@@ -456,4 +478,5 @@ the ledger and reports are always printed. The empty-output condition has
 no override. Tests: `tests/test_changes.py` (ledger, thresholds,
 change-note reader on the Change 3 fixture, verdicts) and the
 `test_update_*`/`test_diff_*` gate tests in `tests/test_cli.py` (pipeline
-tests patch `changes.THRESHOLDS` to fixture-sized values).
+tests patch `changes.THRESHOLDS` to fixture-sized values); the fetcher's
+index archival is covered in `tests/test_ecfr_source.py`.

@@ -2644,9 +2644,13 @@ already cross-checked at fetch time.
    network traffic; everything reads the snapshot and the vault).
    **Shipped 2026-09-12** (`far_aim.changes`; docs/validation.md,
    docs/maintenance.md).
-2. eCFR amendment-index archival in `fetch ecfr` and the FAR cross-check;
-   until it lands, FAR thresholds count every content change, so an
-   issue on the scale of 2025-04-24 needs `--accept-mass-change` once.
+2. eCFR amendment-index archival in `fetch ecfr` and the FAR cross-check.
+   **Shipped 2026-09-13.** Refinements found in implementation: the API
+   accepts `issue_date[gte]`/`[lte]` only (not `gt`), so entries dated
+   the accepted issue are dropped client-side; pages are server-sized
+   (`page=N`); consecutive locally accepted issues chain their indexes
+   back to the published one; announced removals count as explained for
+   the removal threshold too.
 
 ## 38.9 Exit criteria
 

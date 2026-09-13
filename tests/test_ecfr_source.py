@@ -9,6 +9,7 @@ import errno
 import hashlib
 import json
 import os
+import re
 import stat
 from pathlib import Path
 
@@ -66,11 +67,48 @@ class Upstream:
         self.titles_requests = 0
         self.xml_requests = 0
         self.fail_first_xml_with: int | None = None
+        # The versioner's amendment index (plan §38.4): every entry is served,
+        # filtered by issue_date[gte]/[lte] and paged like the real API.
+        self.versions: list[dict] = []
+        self.versions_page_size = 1000
+        self.versions_queries: list[dict[str, str]] = []
+        self.fail_versions_with: int | None = None
 
     def handler(self, request: httpx.Request) -> httpx.Response:
         if request.url.path == "/api/versioner/v1/titles.json":
             self.titles_requests += 1
             return httpx.Response(200, json=self.titles)
+        if request.url.path == "/api/versioner/v1/versions/title-14.json":
+            params = dict(request.url.params)
+            self.versions_queries.append(params)
+            if self.fail_versions_with is not None:
+                return httpx.Response(self.fail_versions_with)
+            gte, lte = params.get("issue_date[gte]"), params.get("issue_date[lte]")
+            if gte is None or lte is None:
+                return httpx.Response(200, json={"errors": "Invalid date params provided"})
+            # Entries without a real issue date are served unfiltered so
+            # malformed-entry tests reach the validator.
+            matching = [
+                v
+                for v in self.versions
+                if not isinstance(v.get("issue_date"), str)
+                or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", v["issue_date"])
+                or gte <= v["issue_date"] <= lte
+            ]
+            size = self.versions_page_size
+            page = int(params.get("page", "1"))
+            total_pages = max(1, -(-len(matching) // size))
+            payload = {
+                "meta": {
+                    "title": "14",
+                    "result_count": str(len(matching)),
+                    "page": str(page),
+                    "per_page": str(size),
+                    "total_pages": str(total_pages),
+                },
+                "content_versions": matching[(page - 1) * size : page * size],
+            }
+            return httpx.Response(200, json=payload)
         if request.url.path == f"/api/versioner/v1/full/{self.issue_date}/title-14.xml":
             self.xml_requests += 1
             if self.fail_first_xml_with is not None and self.xml_requests == 1:
@@ -718,6 +756,8 @@ def test_new_version_clears_stale_canonical_hash(config):
     def handler(request: httpx.Request) -> httpx.Response:
         if request.url.path == "/api/versioner/v1/titles.json":
             return httpx.Response(200, json=upstream.titles)
+        if request.url.path == "/api/versioner/v1/versions/title-14.json":
+            return upstream.handler(request)  # the (empty) amendment index
         if request.url.path == f"/api/versioner/v1/full/{new_date}/title-14.xml":
             return httpx.Response(
                 200, content=SAMPLE_XML, headers={"Content-Type": "application/xml"}
@@ -955,3 +995,134 @@ def test_missing_registry_fails(tmp_path):
     upstream = Upstream()
     with pytest.raises(ecfr.FetchError, match="source registry missing"):
         fetch(Config.load(tmp_path), upstream)
+
+
+# ---------------------------------------------------------------- amendment index
+
+
+def amendment(
+    identifier: str,
+    issue_date: str,
+    *,
+    kind: str = "section",
+    part: str = "1",
+    removed: bool = False,
+) -> dict:
+    return {
+        "date": issue_date,
+        "amendment_date": issue_date,
+        "issue_date": issue_date,
+        "identifier": identifier,
+        "name": f"§ {identifier}",
+        "part": part,
+        "substantive": True,
+        "removed": removed,
+        "subpart": None,
+        "title": "14",
+        "type": kind,
+    }
+
+
+def test_first_acceptance_archives_no_amendment_index(config):
+    upstream = Upstream()
+    result = fetch(config, upstream)
+    metadata = json.loads((result.xml_path.parent / "metadata.json").read_text())
+    assert metadata["amendment_index"] is None
+    assert upstream.versions_queries == []
+    assert not list(result.xml_path.parent.glob("versions-since-*.json"))
+
+
+def test_new_issue_archives_the_amendment_index_since_the_accepted_issue(config):
+    upstream = Upstream()
+    first = fetch(config, upstream)
+    upstream.issue_date = "2026-09-15"
+    upstream.titles = titles_payload("2026-09-15")
+    upstream.versions = [
+        amendment("1.1", ISSUE_DATE),  # the accepted issue's own version: already published
+        amendment("1.2", "2026-09-01"),
+        amendment("1.2", "2026-09-15"),  # amended twice in the window: the latest wins
+        amendment("1.3", "2026-09-15", removed=True),
+        amendment("Appendix A to Part 1", "2026-09-10", kind="appendix"),
+        amendment("1.9", "2026-12-01"),  # beyond the new issue (never served by the real API)
+    ]
+    upstream.versions_page_size = 2
+
+    result = fetch(config, upstream, now=lambda: "2026-09-16T00:00:00Z")
+    assert result.downloaded and result.version == "2026-09-15"
+    assert [q["page"] for q in upstream.versions_queries] == ["1", "2", "3"]
+    assert all(
+        q["issue_date[gte]"] == ISSUE_DATE and q["issue_date[lte]"] == "2026-09-15"
+        for q in upstream.versions_queries
+    )
+    index_path = result.xml_path.parent / f"versions-since-{ISSUE_DATE}.json"
+    index = json.loads(index_path.read_text())
+    assert (index["since"], index["until"]) == (ISSUE_DATE, "2026-09-15")
+    assert index["provider"] == "ecfr"
+    entries = [(e["identifier"], e["issue_date"], e["removed"]) for e in index["content_versions"]]
+    assert entries == [
+        ("Appendix A to Part 1", "2026-09-10", False),
+        ("1.2", "2026-09-15", False),
+        ("1.3", "2026-09-15", True),
+    ]
+    metadata = json.loads((result.xml_path.parent / "metadata.json").read_text())
+    assert metadata["amendment_index"] == {
+        "since": ISSUE_DATE,
+        "file": index_path.name,
+        "sha256": ecfr.sha256_of(index_path),
+    }
+    assert first.xml_path.exists()  # the earlier snapshot is untouched
+
+    # Re-verification of the accepted issue keeps the record without re-downloading.
+    again = fetch(config, upstream, now=lambda: "2026-09-17T00:00:00Z")
+    assert not again.downloaded
+    assert len(upstream.versions_queries) == 3
+    metadata_path = result.xml_path.parent / "metadata.json"
+    metadata_path.unlink()
+    fetch(config, upstream, now=lambda: "2026-09-18T00:00:00Z")
+    assert json.loads(metadata_path.read_text())["amendment_index"] is None  # lost with the file
+
+
+def test_amendment_index_failure_blocks_acceptance(config):
+    upstream = Upstream()
+    fetch(config, upstream)
+    upstream.issue_date = "2026-09-15"
+    upstream.titles = titles_payload("2026-09-15")
+    upstream.fail_versions_with = 500
+    with pytest.raises(ecfr.FetchError, match="amendment index"):
+        fetch(config, upstream, now=lambda: "2026-09-16T00:00:00Z")
+    state = SourceManifest.load(config.manifest_path).sources["ecfr_title_14"]
+    assert state.accepted_version == ISSUE_DATE
+    assert not (config.raw_dir / "ecfr" / "2026-09-15" / "metadata.json").exists()
+
+
+@pytest.mark.parametrize(
+    "bad",
+    [
+        {**amendment("1.2", "2026-09-15"), "type": "table"},
+        {**amendment("1.2", "2026-09-15"), "removed": "no"},
+        {k: v for k, v in amendment("1.2", "2026-09-15").items() if k != "issue_date"},
+        {**amendment("1.2", "2026-09-15"), "issue_date": "soon"},
+    ],
+    ids=["unknown-type", "removed-not-bool", "missing-issue-date", "bad-issue-date"],
+)
+def test_malformed_amendment_entries_fail_closed(config, bad):
+    upstream = Upstream()
+    fetch(config, upstream)
+    upstream.issue_date = "2026-09-15"
+    upstream.titles = titles_payload("2026-09-15")
+    upstream.versions = [bad]
+    with pytest.raises(ecfr.FetchError, match="malformed eCFR amendment entry"):
+        fetch(config, upstream, now=lambda: "2026-09-16T00:00:00Z")
+
+
+def test_amendment_index_record_shape():
+    good = {
+        "since": ISSUE_DATE,
+        "file": f"versions-since-{ISSUE_DATE}.json",
+        "sha256": "sha256:" + "0" * 64,
+    }
+    assert ecfr.amendment_index_record(good) == good
+    assert ecfr.amendment_index_record(None) is None
+    assert ecfr.amendment_index_record({**good, "file": "other.json"}) is None
+    assert ecfr.amendment_index_record({**good, "sha256": "abc"}) is None
+    assert ecfr.amendment_index_record({**good, "extra": 1}) is None
