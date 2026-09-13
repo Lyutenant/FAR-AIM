@@ -129,6 +129,23 @@ something.
   through the project `.venv`, per the repository workflow rule.
 - **Nothing is auto-merged** (plan §32.7): a human reviews the PR, and a
   massive unexplained diff is a reason to reject, not merge.
+- **Change gates (plan §38; docs/validation.md):** `diff` also prints a
+  per-corpus change ledger (content-changed / provenance-only / added /
+  removed / moved, plus the AIM Explanation of Changes cross-check on an
+  AIM edition transition) and fails on a mass change above the
+  data-informed thresholds, a content-free AIM/PCG edition, or a
+  change-note mismatch. The run then stops at `far-aim diff` with the
+  vault untouched, no PR opens, and — because the update failed with
+  downloads on disk — the AIM/PCG snapshots ride in the run's artifact.
+  Every later daily run fails the same way until an operator resolves it,
+  which is the intended quarantine. **Recovery is local, like a raw-hash
+  mismatch:** read the ledger and the `error: change gate:` lines in the
+  run log, inspect the artifact if needed, and either fix the parser (the
+  next run then passes on its own) or, after reviewing the vault diff,
+  re-run locally with `far-aim update --accept-mass-change` and/or
+  `--accept-change-note-mismatch`, then push. The next daily run compares
+  against the newly published vault and is clean. An empty planned corpus
+  is never accepted.
 - **Raw snapshot archival (plan §6.2):** the AIM/PCG downloads in
   `data/raw` are uploaded as a workflow artifact when the run **failed**
   with downloads on disk (a quarantined mismatch, or a new edition whose

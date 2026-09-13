@@ -355,9 +355,8 @@ phrasing (`tests/test_citations.py`); the glossary matcher
 the parsed PCG so a stale entry fails both the test and the build. Links
 are emitted only for notes that exist (`tests/test_aim_generate.py`,
 `tests/test_generate.py`, `tests/test_pcg_generate.py`), and the same
-zero-broken-links and byte-idempotency checks cover them. Remaining
-categories land with their corresponding phases (change gates and the FAA
-change-note cross-check: Phase 8).
+zero-broken-links and byte-idempotency checks cover them. Categories 5
+and 7 are the change gates below.
 
 ## Current implementation status (Phase 9)
 
@@ -389,3 +388,72 @@ loosening any existing one:
 - **Separability is tested.** Removing `data/enrichment/` and rebuilding
   prunes `Concepts/` and every derived section and leaves every other byte
   of the vault unchanged (`tests/test_enrichment.py`, `tests/test_cli.py`).
+
+## Change gates (categories 5 and 7; plan §38)
+
+`far-aim diff` — the step `update` runs between `parse` and `build-vault`
+— compares the freshly planned vault with the published one and evaluates
+the change gates in `far_aim.changes`. A tripped gate fails `diff`, so
+`update` stops there with the vault untouched (plan §32.13); in CI the run
+fails, no PR opens, and the AIM/PCG downloads ride in the run's artifact
+(docs/maintenance.md has the recovery procedure).
+
+**The change ledger.** Every *document* note (FAR sections and appendices,
+AIM sections, paragraphs and appendices, PCG terms) is paired by path with
+the note on disk and classified by frontmatter `canonical_hash`:
+unchanged, provenance-only (bytes differ, hash equal — an eCFR issue bump
+with no amendment), content-changed (hash differs), added, removed, or
+moved (a removed and an added note with byte-identical `## Official Text`,
+paired greedily in citation order — an AIM renumbering cascade reads as
+moves, plan §14.2). Index notes carry aggregate hashes and are excluded.
+The vault is the "before" side because CI has no local canonical layers;
+the hashes it compares were written from canonical JSON. A corpus with
+nothing published yet has no ledger and no gates.
+
+**Mass-change thresholds (category 5).** A count trips when it exceeds
+`max(floor, share × published)`; when an announcement source explains
+some content changes (the AIM cross-check below), only the unexplained
+ones count.
+
+| Corpus | removed (net of moves) | content-changed | added |
+|---|---|---|---|
+| FAR | 1 %, floor 25 | 5 %, floor 100 | 5 %, floor 100 |
+| AIM | 5 %, floor 10 | 10 %, floor 25 | 10 %, floor 25 |
+| PCG | 2 %, floor 15 | 10 %, floor 50 | 10 %, floor 50 |
+
+Data (eCFR versioner API, Title 14, issue dates 2025-06-01 → 2026-09-03,
+34 issues): median 3 amended documents per issue, 90th percentile ≈ 44,
+then 67, 68, 207 (2026-03-10) and one outlier of 610 (2025-04-24, the
+Parts 121/135 amendment, 9.3 % of the title); the largest removal was 15
+documents at once (Part 1216 and its appendix, 2026-08-17). The AIM values
+rest on Change 3 (six announced paragraphs); the PCG has no history yet.
+**Both are provisional: recalibrate after the first real AIM/PCG edition
+the pipeline processes.** Two conditions trip regardless of thresholds: a
+previously published corpus that plans zero notes (never overridable),
+and an AIM or PCG edition transition that changes no note's content (the
+stale-edge-cache signature; the eCFR is exempt, plan §32.6).
+
+**AIM change-note cross-check (category 7).** On an AIM edition
+transition, chapter 0's Explanation of Changes (already parsed lossless) is
+read for its `Effective:` date, the paragraphs its lettered entries
+announce (`a. 4-7-4. HEADING`), and the locations its explanation text
+mentions (`paragraph 5-2-9`, `FIG 4-3-1` → section 4-3, `Appendix 3`,
+`Chapter 7, Section 3`; en dashes normalized for matching only). Failures:
+the note's effective date differs from the accepted edition's (stale page
+mix); an announced paragraph the layer does not have and never had
+(plan §32.2); no announced paragraph changed at all; chapter 0 off the
+grammar. Reported, never fatal: announced or mentioned locations with no
+change, and content changes neither announced nor mentioned (`Entire
+Publication` editorial changes are normal) — those unexplained changes
+are what the AIM content threshold counts. An announced paragraph also
+explains its section note (a section's hash covers its paragraphs), and
+chapter 0 itself is explained by definition.
+
+**Overrides.** `--accept-mass-change` and
+`--accept-change-note-mismatch` on `diff` and `update` turn the matching
+failures into `accepted (...)` lines (also listed in the update summary);
+the ledger and reports are always printed. The empty-output condition has
+no override. Tests: `tests/test_changes.py` (ledger, thresholds,
+change-note reader on the Change 3 fixture, verdicts) and the
+`test_update_*`/`test_diff_*` gate tests in `tests/test_cli.py` (pipeline
+tests patch `changes.THRESHOLDS` to fixture-sized values).

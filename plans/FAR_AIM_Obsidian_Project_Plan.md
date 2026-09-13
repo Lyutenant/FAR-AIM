@@ -1273,6 +1273,8 @@ Examples:
 
 Exact thresholds should be data-informed rather than arbitrary.
 
+> **Design (2026-09-12):** §38 — change ledger, thresholds and override.
+
 ## 17.6 Determinism
 
 Run generation twice.
@@ -1284,6 +1286,8 @@ The second run must produce no diff.
 When the FAA publishes an explanation/change document identifying altered AIM paragraphs, use it as an additional validation signal.
 
 Do not assume the list is necessarily a perfect machine-readable diff, but compare it against detected changes and flag major discrepancies.
+
+> **Design (2026-09-12):** §38.4 — AIM Explanation of Changes and eCFR amendment-index cross-checks.
 
 ---
 
@@ -2362,4 +2366,298 @@ subpart's own definitions section.
 ✓ Self-scoped sections (§ 91.227) and a source's own terms link nowhere
 ✓ Denied terms link nowhere; a stale gate entry fails the build
 ✓ Rebuild is byte-idempotent; validate passes
+```
+
+---
+
+# 38. Design — Change Gates (Mass-Change Guardrails and Change-Note Cross-Checks)
+
+Added 2026-09-12, after Phases 0–9 shipped. This section is the design of
+record for the two validation categories the plan requires but Phase 8 did
+not build: **change integrity** (§17.5) and the **FAA change-note
+cross-check** (§17.7). It refines §14.2, §14.4, §16.1 and §25.1 without
+changing them.
+
+Today `far-aim update` publishes whatever the parsers accept. A parser
+regression that drops half the AIM, an FAA HTML redesign that rewrites
+every paragraph's canonical text, or a snapshot assembled from a stale
+edge cache would reach the daily PR with nothing but the vault diff stat
+to alert a reviewer. These gates make such a run **fail before
+`build-vault`**, preserving the last known-good vault (§32.13), while a
+routine amendment or a large-but-announced rule passes and is reviewed in
+the PR as before (§32.7).
+
+## 38.1 Placement and ownership
+
+- Both gates run inside the existing `diff` step of `update`
+  (`fetch×3 → parse×3 → enrich → diff → build-vault → validate`). `diff`
+  stops being a pure report: it still prints adds/rewrites/removals, but
+  it now also prints a **change ledger** per corpus and exits non-zero
+  when a gate trips, which stops `update` at `far-aim diff` with the
+  vault untouched. Nothing is written by the gates; `build-vault` and
+  `validate` are unchanged.
+- The "before" side is the **published vault on disk**, never a local
+  canonical layer: CI runs on a fresh checkout whose `data/normalized/`
+  is empty, and the committed vault is the compiled output of the
+  previously accepted layers (§3.2). The comparison keys are the things
+  the vault already pins deterministically: the stable citation in the
+  file name (§9 naming policy) and the `canonical_hash` every FAR, AIM
+  and PCG note carries in its frontmatter (§14.4). The "after" side is
+  the in-memory plan `_plan_generated_vault` already renders for `diff`
+  and `validate`.
+- Code lives in one new module, `far_aim.changes`: the ledger, the
+  thresholds, the announcement readers and the two gate evaluators. The
+  CLI only wires flags and prints. Thresholds are code constants with
+  their data justification beside them (§38.3), not a data file: they
+  are engineering guardrails, not curation.
+- Announcement sources (§38.4) are official upstream content, archived
+  with the raw snapshot they describe, never fetched at gate time:
+  `diff` is offline and deterministic given the snapshot and the vault.
+
+## 38.2 The change ledger
+
+For each corpus (FAR, AIM, PCG) the ledger classifies every generated
+document note — FAR sections and appendices, AIM sections, paragraphs
+and appendices, PCG terms, each carrying its own `canonical_hash` — by
+pairing the planned note with the on-disk note at the same path:
+
+| Class | Rule |
+|---|---|
+| **unchanged** | bytes identical |
+| **provenance-only** | bytes differ, `canonical_hash` equal (an eCFR issue bump with no Title 14 amendment rewrites every FAR note this way) |
+| **content-changed** | `canonical_hash` differs |
+| **added** | planned, not on disk |
+| **removed** | on disk (generator-owned by frontmatter), not planned |
+| **moved** | a removed note and an added note of the same corpus whose `## Official Text` sections are byte-identical (heading may differ and is reported); paired greedily in citation order, each note at most once |
+
+Moves implement §14.2's renumbering rule: an AIM cascade that shifts
+`4-1-10 … 4-1-23` up by one is reported as thirteen moves, not thirteen
+removals and thirteen additions, and paragraphs whose only change is a
+cross-reference to a moved paragraph are content-changed (their text
+really did change). The ledger covers **document notes only**, selected
+by frontmatter kind (FAR `regulation`/appendix, AIM section, paragraph
+and appendix, PCG term). Part, chapter and corpus index notes also carry
+a `canonical_hash`, but it is an aggregate over their children and would
+double-count; they, `Home`, `Source Status`, concept notes and figure
+assets stay outside the ledger, and `diff` keeps listing them in its
+existing add/rewrite/remove report.
+
+A corpus with **no** generated notes on disk (first build, or a corpus
+being added) has no ledger and no gates: there is nothing to protect.
+
+The ledger prints one block per corpus in the `update` log, which the PR
+body already carries in full:
+
+```text
+changes (FAR, vs published 2026-09-03): 6,544 notes → 6,546 planned
+  content-changed 44   provenance-only 6,498   added 3   removed 1   moved 0
+  announced by eCFR 2026-09-03 → 2026-09-17: 44 changed, 1 removed
+  unannounced content changes: 2  (120.7, 135.1)
+  announced but unchanged: 0
+```
+
+## 38.3 Mass-change gate (§17.5)
+
+A count trips the gate when it exceeds `max(floor, share × published)`,
+where `published` is the number of ledger notes on disk for that corpus.
+When an announcement source is available (§38.4) the counted quantity is
+the **unannounced** part only — a rule that amends 610 sections and says
+so is large but explained, and must not block CI; an unexplained 610 is
+exactly what the gate is for.
+
+| Corpus | removed (net of moves) | content-changed | added |
+|---|---|---|---|
+| FAR (≈ 6,544 notes) | 1 % (≈ 65), floor 25 | 5 % (≈ 327), floor 100 | 5 %, floor 100 |
+| AIM (≈ 485 notes) | 5 % (≈ 24), floor 10 | 10 % (≈ 48), floor 25 | 10 %, floor 25 |
+| PCG (≈ 1,559 notes) | 2 % (≈ 31), floor 15 | 10 % (≈ 156), floor 50 | 10 %, floor 50 |
+
+Data behind the numbers (eCFR versioner API, Title 14, issue dates
+2025-06-01 → 2026-09-03, 34 issues): median 3 amended documents per
+issue, 90th percentile ≈ 44, then 67, 68, 207 (2026-03-10) and one
+outlier of 610 (2025-04-24, the Parts 121/135 amendment, 9.3 % of the
+title). The largest removal was 15 documents at once (Part 1216 and its
+appendix, 2026-08-17). So the FAR content threshold sits above every
+observed *announced* issue except the outlier, which the announcement
+source explains, and the removal threshold sits at four times the largest
+observed removal. The AIM figures come from AIM Change 3 (six announced
+paragraphs plus editorial changes across the publication); the PCG has no
+change history yet. Both are provisional: the first real AIM/PCG edition
+processed by the pipeline is the calibration point, and the thresholds
+are to be revisited then (recorded in docs/validation.md).
+
+Two further conditions trip regardless of thresholds:
+
+- **Empty output** — a previously published corpus plans zero notes.
+  Never overridable; removing a corpus is done by removing its source,
+  not by accepting an empty parse (§25.1).
+- **Provenance-only edition** — an AIM or PCG edition transition (the
+  corpus index note's version fields change) in which *no* ledger note is
+  content-changed, added, removed or moved. An FAA edition that changes
+  nothing is a snapshot assembled from stale pages, not a real edition
+  (the 2026-08-18 mixed-cache incident, docs/maintenance.md). The eCFR is
+  exempt: an issue date with no Title 14 amendment is routine (§32.6).
+
+Floors keep tiny fixture corpora from tripping on a single note; unit
+tests pass thresholds explicitly and pipeline tests patch the table to
+fixture-sized values.
+
+## 38.4 Announced-change cross-checks (§17.7)
+
+Each source's own change announcement is compared with the ledger. The
+announcement is read from archived official content, so the check is a
+property of the accepted snapshot.
+
+### AIM — Explanation of Changes
+
+Chapter 0's lone section (`aim-0-0`, already parsed lossless) is read from
+the **new** layer by `changes.read_aim_change_note`, which recognizes
+structure without altering text (§32.3):
+
+- the `Effective: <date>` line ⇒ the edition the note describes;
+- lettered entries `a. …`, `b. …` whose title lines carry one or more
+  `N-N-N. HEADING` citations ⇒ **announced paragraphs**; title lines
+  without a citation (`Editorial Changes`, `Entire Publication`) ⇒
+  categories with no paragraph claim;
+- citations inside explanation text (`paragraph 5-2-9`, `FIG 4-3-1`,
+  `TBL 4-16 in Appendix 4`, `Appendix 3`) ⇒ **mentioned** locations,
+  resolved to the containing paragraph, section or appendix; en/em
+  dashes are normalized for recognition only (`5–1–1`).
+
+The cross-check runs only on an AIM edition transition (§38.3 defines
+it). Verdicts:
+
+| # | Condition | Effect |
+|---|---|---|
+| A1 | `Effective:` date ≠ the accepted edition's effective date | **fail** — the change note is stale: the snapshot mixes editions |
+| A2 | an announced paragraph is neither in the new layer nor in the ledger's removed/moved set | **fail** — the FAA cites content the parse does not have (§32.2) |
+| A3 | the announced set is non-empty and none of it is content-changed, added, removed or moved | **fail** — the edition's changes were not captured |
+| A4 | unannounced and unmentioned content changes exceed the AIM content threshold of §38.3 | **fail** — structural churn, not editorial |
+| A5 | announced or mentioned locations with no detected change | **report** (the FAA lists a paragraph for a change made elsewhere) |
+| A6 | content changes neither announced nor mentioned | **report**, always listed — `Entire Publication` editorial changes are normal |
+
+An announced or mentioned paragraph also explains its section note (an
+AIM section's canonical hash covers its paragraphs), and chapter 0's own
+section is explained by definition — it changes with every edition.
+
+A chapter 0 section that does not follow the grammar (no `Effective:`
+line, no lettered entries) fails the cross-check with the offending
+block quoted: an FAA layout change is a parser change to review, not a
+reason to skip the check (§25.1).
+
+### FAR — eCFR amendment index
+
+The versioner API's `versions/title-14.json?issue_date[gt]=<accepted>&issue_date[lte]=<new>`
+lists every section and appendix amended between two issue dates, with a
+`removed` flag. `fetch ecfr` downloads it alongside the full-title XML
+whenever a previously accepted issue exists and archives it in the
+snapshot directory as `versions-since-<accepted>.json` (checksummed in
+`metadata.json` like the XML; reconstructible from the point-in-time API,
+so not committed, §6.2). The gate reads that file; it is never fetched at
+gate time.
+
+| # | Condition | Effect |
+|---|---|---|
+| F1 | an amended identifier is neither in the new layer nor removed/moved in the ledger | **fail** — the amendment index names content the parse lacks |
+| F2 | the index is non-empty and none of its identifiers changed | **fail** — the full-title XML lags the amendment index (a half-rebuilt daily snapshot) |
+| F3 | unannounced content changes exceed the FAR content threshold | **fail** (§38.3 counts only unannounced changes once this file exists) |
+| F4 | amended identifiers with no detected change; unannounced changes | **report** — eCFR editorial corrections and editorial-note updates create no version |
+
+The mapping from eCFR identifiers (`91.155`, `Appendix A to Part 91`) to
+stable ids reuses `models.cfr`; an identifier the mapping cannot place is
+a **fail** with the identifier quoted, never silently dropped.
+
+### PCG
+
+The FAA publishes no per-term change list for the PCG; the corpus is
+gated by thresholds alone. The PCG index page's edition summary is
+already cross-checked at fetch time.
+
+## 38.5 Override, CI behaviour and recovery
+
+- `far-aim diff` and `far-aim update` gain `--accept-mass-change` (§38.3
+  thresholds and the provenance-only-edition condition) and
+  `--accept-change-note-mismatch` (§38.4 A1–A4, F1–F3). Each flag turns
+  its gate's failures into loud `accepted:` lines in the log; the ledger
+  and reports are always printed. The empty-output condition has no
+  override.
+- A tripped gate in the daily workflow behaves like today's raw-hash
+  mismatch: `update` fails at `far-aim diff`, no PR opens, the tree
+  carries the accepted manifest and parsed layers but the vault is
+  untouched, and the raw AIM/PCG downloads are uploaded as the run's
+  artifact (existing rule: failed with downloads on disk). Every
+  subsequent daily run fails the same way until an operator resolves it,
+  which is the intended quarantine (§32.7, §32.13).
+- Resolution is local, as for raw-hash mismatches: the operator reads the
+  ledger and reports in the run log, inspects the artifact if needed, and
+  either fixes the parser (the run then passes on its own) or re-runs
+  `far-aim update --accept-mass-change` / `--accept-change-note-mismatch`
+  locally, reviews the vault diff and pushes. Once the published vault
+  reflects the new versions, the next daily run compares against it and
+  is clean. Nothing is ever auto-merged.
+- The `update summary:` gains one line per corpus with the ledger totals
+  and, when a gate was overridden, the flag used.
+
+## 38.6 Validation and tests
+
+- Unit tests for the ledger over synthetic plans: each class of §38.2,
+  greedy move pairing, notes without `canonical_hash` excluded.
+- Fixture tests in `tests/test_cli.py` built on the existing
+  `mock_upstream` harness: (a) removing sections from the eCFR fixture
+  beyond an injected threshold stops `update` at `diff` with the vault
+  byte-identical; (b) a renumbered AIM section is reported as moves and
+  passes; (c) an AIM fixture whose chapter 0 `Effective:` line lags the
+  edition fails A1; (d) an announced paragraph missing from the fixture
+  fails A2; (e) an edition that changes only chapter 0 fails the
+  provenance-only-edition condition; (f) each override flag turns the
+  matching failure into an `accepted:` line and the pipeline completes;
+  (g) an empty planned corpus fails with or without flags; (h) the FAR
+  amendment-index file, when present, narrows the counted changes to
+  unannounced ones and F1/F2 fail on a fixture whose index names an
+  unparsed section.
+- The chapter 0 reader gets a fixture test on the archived Change 3 page
+  (six announced paragraphs, `Editorial Changes` and `Entire Publication`
+  categories, `FIG 4-3-1` / `TBL 4-16` / `Appendix 3` mentions, the
+  en-dash `5–1–1`).
+- `validate`, byte-idempotency and the existing `test_update_*` exit
+  criteria are unaffected: a no-change run has an all-`unchanged` ledger
+  and trips nothing; a provenance-only eCFR bump has an all
+  `provenance-only` ledger and trips nothing.
+- docs/validation.md moves categories 5 and 7 from "lands with Phase 8"
+  to implemented, with the threshold table and its data; docs/maintenance.md
+  gains the recovery procedure of §38.5; AGENTS.md status is updated.
+
+## 38.7 Invariants applied
+
+| Invariant | How the gates honour it |
+|---|---|
+| §32.2 | A2/F1 turn "the FAA says this paragraph changed and we do not have it" into a failure instead of an omission. |
+| §32.3 | The change-note reader recognizes structure; official text is never rewritten (dash normalization is recognition-only). |
+| §32.4 | The vault is used as the *before* snapshot because it is the compiled output of the accepted canonical layers; `canonical_hash` in frontmatter is what is compared, not Markdown prose. |
+| §32.6 | Provenance-only rewrites are classified by canonical hash and never count toward a threshold. |
+| §32.7 | Large explained changes pass to the PR; large unexplained ones cannot reach it. |
+| §32.10 | Gates write nothing; a no-change run prints an all-unchanged ledger and leaves a clean tree. |
+| §32.13 | Every gate failure stops before `build-vault`, keeping the last known-good vault; the empty-output case cannot be overridden. |
+
+## 38.8 Implementation order
+
+1. Ledger + mass-change thresholds + AIM change-note cross-check (no new
+   network traffic; everything reads the snapshot and the vault).
+   **Shipped 2026-09-12** (`far_aim.changes`; docs/validation.md,
+   docs/maintenance.md).
+2. eCFR amendment-index archival in `fetch ecfr` and the FAR cross-check;
+   until it lands, FAR thresholds count every content change, so an
+   issue on the scale of 2025-04-24 needs `--accept-mass-change` once.
+
+## 38.9 Exit criteria
+
+```text
+✓ Daily no-change run: all-unchanged ledger, nothing tripped, clean tree
+✓ Provenance-only eCFR issue bump: all provenance-only, nothing tripped
+✓ Fixture dropping half the AIM: update stops at diff, vault byte-identical
+✓ Renumbering cascade reported as moves, not removals
+✓ Stale chapter 0 (Effective date lags the edition) fails A1
+✓ Announced paragraph absent from the parse fails A2
+✓ Override flags print `accepted:` lines; empty output has no override
+✓ Change 3 fixture: six announced paragraphs and every mention recognized
+✓ Amendment index archived with the eCFR snapshot; unannounced-only counting
 ```

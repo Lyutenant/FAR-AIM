@@ -1,10 +1,12 @@
 import json
 import os
+import re
 import shutil
 
 import httpx
 import pytest
 
+from far_aim import changes
 from far_aim.cli import EXIT_ERROR, EXIT_NOT_IMPLEMENTED, EXIT_OK, main
 from far_aim.config import Config
 from far_aim.manifest import SourceManifest, SourceState
@@ -2653,3 +2655,285 @@ def test_build_vault_renders_concepts_and_removes_them_cleanly(tmp_path, capsys)
     assert (concepts / "My Notes.md").exists()
     after = {p: b for p, b in _vault_bytes(config).items() if p.name != "My Notes.md"}
     assert after == before
+
+
+# ---------------------------------------------------------------------------
+# change gates (plan §38)
+# ---------------------------------------------------------------------------
+
+TINY_THRESHOLDS = changes.CorpusThresholds(
+    changes.Threshold(0.5, 1), changes.Threshold(0.5, 1), changes.Threshold(0.5, 1)
+)
+
+
+def _updated_root(tmp_path, capsys, mock_upstream) -> Config:
+    """A root whose vault was published by one full `update` of the fixture upstreams."""
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    _write_empty_gate(config)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    capsys.readouterr()
+    return config
+
+
+def _bump_ecfr(mock_upstream, xml: bytes, issue_date: str = "2026-09-15") -> None:
+    mock_upstream.issue_date = issue_date
+    mock_upstream.titles = titles_payload(issue_date)
+    mock_upstream.xml = xml
+
+
+def _bump_aim_edition(mock_upstream) -> None:
+    """Upstream publishes AIM Change 4 (publications page + index summary); pages untouched."""
+    aim_entry = (
+        "Aeronautical Information Manual (<abbr>AIM</abbr>) Basic with Change 1, 2 and 3</a> "
+        "<small>(<abbr>HTML</abbr>)</small> <small>(effective 7/9/2026)</small>"
+    )
+    replaced = mock_upstream.aim.publications.replace(
+        aim_entry, aim_entry.replace("1, 2 and 3", "1, 2, 3 and 4").replace("7/9/2026", "1/1/2027")
+    )
+    assert replaced != mock_upstream.aim.publications
+    mock_upstream.aim.publications = replaced
+    mock_upstream.aim.pages["index.html"] = (
+        mock_upstream.aim.pages["index.html"]
+        .replace(b"<strong>Change:</strong> Change 3", b"<strong>Change:</strong> Change 4")
+        .replace(b"<strong>Effective:</strong> 7/9/2026", b"<strong>Effective:</strong> 1/1/2027")
+    )
+
+
+def _announce(mock_upstream, paragraph: str, effective: str = "January 1, 2027") -> None:
+    """Rewrite the fixture's Explanation of Changes to announce one fixture paragraph."""
+    page = mock_upstream.aim.pages["chap0_section_0.html"]
+    # The FAA sets the date off with an en space (U+2002); the parser collapses it.
+    stale = "Effective:\u2002July 9, 2026".encode()
+    assert stale in page
+    page = page.replace(stale, f"Effective: {effective}".encode())
+    page = re.sub(rb"\d{1,2}-\d{1,2}-\d{1,3}\. ", f"{paragraph}. ".encode(), page)
+    mock_upstream.aim.pages["chap0_section_0.html"] = page
+
+
+def _edit_4_1_9(mock_upstream) -> None:
+    page = mock_upstream.aim.pages["chap4_section_1.html"]
+    edited = page.replace(
+        b"There is no substitute for alertness", b"There is no substitute for vigilance"
+    )
+    assert edited != page
+    mock_upstream.aim.pages["chap4_section_1.html"] = edited
+
+
+def test_update_no_change_and_provenance_bump_print_quiet_ledgers(
+    tmp_path, capsys, mock_upstream
+):
+    config = _updated_root(tmp_path, capsys, mock_upstream)
+    # First build: nothing published yet → no ledger, no gate.
+    assert main(["--root", str(tmp_path), "diff"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "changes (FAR, vs published 2026-08-19): 3 notes → 3 planned" in out
+    assert "content-changed 0   provenance-only 0   added 0   removed 0   moved 0" in out
+    # A provenance-only eCFR issue bump rewrites every FAR note under an equal hash.
+    _bump_ecfr(mock_upstream, mock_upstream.xml)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "changes (FAR, vs published 2026-08-19): 3 notes → 3 planned" in out
+    assert "content-changed 0   provenance-only 3   added 0   removed 0   moved 0" in out
+    assert "FAR changes: content-changed 0, provenance-only 3, added 0, removed 0, moved 0" in out
+    assert "AIM changes: content-changed 0, provenance-only 0" in out
+    assert "PCG changes: content-changed 0, provenance-only 0" in out
+    assert "accepted (" not in out
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    assert config.vault_dir.joinpath("FAR", "Part 001", "1.1.md").exists()
+
+
+def test_update_mass_removal_trips_the_gate_and_the_override_publishes(
+    tmp_path, capsys, mock_upstream, monkeypatch
+):
+    config = _updated_root(tmp_path, capsys, mock_upstream)
+    vault_before = _vault_bytes(config)
+    xml = mock_upstream.xml
+    for number in ("1.2", "1.3"):
+        start = xml.index(f'<DIV8 N="{number}"'.encode())
+        end = xml.index(b"</DIV8>", start) + len(b"</DIV8>\n")
+        xml = xml[:start] + xml[end:]
+    monkeypatch.setattr(ecfr, "MIN_SECTION_COUNT", 1)
+    monkeypatch.setitem(changes.THRESHOLDS, changes.FAR, TINY_THRESHOLDS)
+    _bump_ecfr(mock_upstream, xml)
+
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_ERROR
+    captured = capsys.readouterr()
+    assert "content-changed 0   provenance-only 1   added 0   removed 2   moved 0" in captured.out
+    assert "remove: FAR/Part 001/1.2.md" in captured.out
+    assert (
+        "error: change gate: FAR: 2 removed notes, above 2 = max(floor 1, 50% of 3); "
+        "review the ledger above and re-run with --accept-mass-change" in captured.err
+    )
+    assert "update stopped at `far-aim diff`" in captured.err
+    assert _vault_bytes(config) == vault_before  # last known-good output preserved
+
+    # The interrupted publication resumes on the next run and is still gated.
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_ERROR
+    captured = capsys.readouterr()
+    assert "resuming the interrupted update" in captured.out
+    assert "update stopped at `far-aim diff`" in captured.err
+    assert _vault_bytes(config) == vault_before
+
+    assert main(["--root", str(tmp_path), "update", "--accept-mass-change"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "accepted (--accept-mass-change): FAR: 2 removed notes" in out
+    assert "FAR changes: content-changed 0, provenance-only 1, added 0, removed 2, moved 0" in out
+    assert not (config.vault_dir / "FAR" / "Part 001" / "1.2.md").exists()
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    assert "nothing to do" in capsys.readouterr().out
+
+
+def test_update_renumbered_section_is_a_move_not_a_removal(
+    tmp_path, capsys, mock_upstream, monkeypatch
+):
+    _updated_root(tmp_path, capsys, mock_upstream)
+    xml = mock_upstream.xml.replace(b'<DIV8 N="1.3"', b'<DIV8 N="1.4"').replace(
+        "<HEAD>§ 1.3   Rules of construction.</HEAD>".encode(),
+        "<HEAD>§ 1.4   Rules of construction.</HEAD>".encode(),
+    )
+    assert xml != mock_upstream.xml
+    # Any removal at all would trip; a move is not a removal (plan §14.2).
+    strict = changes.CorpusThresholds(
+        changes.Threshold(0.0, 0), changes.Threshold(0.5, 1), changes.Threshold(0.5, 1)
+    )
+    monkeypatch.setitem(changes.THRESHOLDS, changes.FAR, strict)
+    _bump_ecfr(mock_upstream, xml)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "content-changed 0   provenance-only 2   added 0   removed 0   moved 1" in out
+    assert "moved: 14 CFR § 1.3 → 14 CFR § 1.4" in out
+    assert "FAR changes: content-changed 0, provenance-only 2, added 0, removed 0, moved 1" in out
+
+
+def test_update_aim_edition_cross_check_passes_when_announced_change_is_captured(
+    tmp_path, capsys, mock_upstream
+):
+    config = _updated_root(tmp_path, capsys, mock_upstream)
+    _bump_aim_edition(mock_upstream)
+    _announce(mock_upstream, "4-1-9")
+    _edit_4_1_9(mock_upstream)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "changes (AIM, vs published 2026-07-09-change-3):" in out
+    # 4-1-9, its section note (whose hash covers its paragraphs) and chapter 0 itself.
+    assert "content-changed 3   provenance-only 8   added 0   removed 0   moved 0" in out
+    assert (
+        "  Explanation of Changes (effective 2027-01-01): 1 announced paragraph(s), "
+        "8 mention(s), 2 categories" in out
+    )
+    # The fixture's explanation text still mentions Change 3's locations.
+    assert (
+        "  announced or mentioned but unchanged: appendix 3, appendix 4, paragraph 5-1-1, "
+        "paragraph 5-1-17, paragraph 5-2-9, paragraph 5-4-5, section 4-3, section 7-3" in out
+    )
+    assert "  content changes neither announced nor mentioned: 0\n" in out
+    assert "aim: 2026-07-09-change-3 → 2027-01-01-change-4 (canonical content changed)" in out
+    assert "accepted (" not in out
+    note = (config.vault_dir / "AIM" / "Chapter 04" / "4-1-9.md").read_text(encoding="utf-8")
+    assert "no substitute for vigilance" in note and 'effective_date: "2027-01-01"' in note
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+
+
+def test_update_aim_edition_announcing_an_unparsed_paragraph_fails(
+    tmp_path, capsys, mock_upstream
+):
+    config = _updated_root(tmp_path, capsys, mock_upstream)
+    vault_before = _vault_bytes(config)
+    _bump_aim_edition(mock_upstream)
+    _announce(mock_upstream, "4-7-4")  # a paragraph the fixture corpus never had
+    _edit_4_1_9(mock_upstream)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_ERROR
+    captured = capsys.readouterr()
+    assert "announces paragraph(s) the parsed layer does not have and never had: 4-7-4" in (
+        captured.err
+    )
+    assert "none of the announced paragraphs (4-7-4) shows a canonical change" in captured.err
+    assert "the change note is stale" not in captured.err
+    assert "update stopped at `far-aim diff`" in captured.err
+    assert _vault_bytes(config) == vault_before
+
+
+def test_update_stale_change_note_and_content_free_edition_need_both_overrides(
+    tmp_path, capsys, mock_upstream
+):
+    config = _updated_root(tmp_path, capsys, mock_upstream)
+    vault_before = _vault_bytes(config)
+    _bump_aim_edition(mock_upstream)  # every page, chapter 0 included, is the old edition's
+
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_ERROR
+    captured = capsys.readouterr()
+    assert (
+        "the Explanation of Changes is effective 2026-07-09 but the accepted edition is "
+        "effective 2027-01-01 — the change note is stale" in captured.err
+    )
+    assert (
+        "AIM: edition 2026-07-09-change-3 → 2027-01-01-change-4 changes no note's content"
+        in captured.err
+    )
+    assert _vault_bytes(config) == vault_before
+
+    root = ["--root", str(tmp_path), "update"]
+    assert main([*root, "--accept-change-note-mismatch"]) == EXIT_ERROR
+    captured = capsys.readouterr()
+    assert "accepted (--accept-change-note-mismatch): AIM: the Explanation of Changes" in (
+        captured.out
+    )
+    assert "changes no note's content" in captured.err
+    assert _vault_bytes(config) == vault_before
+
+    assert main([*root, "--accept-change-note-mismatch", "--accept-mass-change"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "accepted (--accept-mass-change): AIM: edition" in out
+    # The edition was accepted and parsed by the first (gated) run, so this
+    # run's manifest transition is empty; the ledger lines tell the story.
+    assert "aim: unchanged (2027-01-01-change-4)" in out
+    assert "  accepted (--accept-change-note-mismatch): AIM: the Explanation of Changes" in out
+    assert "AIM changes: content-changed 0, provenance-only" in out
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    assert "nothing to do" in capsys.readouterr().out
+
+
+def test_update_content_free_pcg_edition_fails(tmp_path, capsys, mock_upstream):
+    config = _updated_root(tmp_path, capsys, mock_upstream)
+    vault_before = _vault_bytes(config)
+    pcg_entry = (
+        "Pilot/Controller Glossary Basic with Change 1, 2 and 3</a> "
+        "<small>(<abbr>HTML</abbr>)</small> <small>(effective 7/9/2026)</small>"
+    )
+    replaced = mock_upstream.aim.publications.replace(
+        pcg_entry, pcg_entry.replace("1, 2 and 3", "1, 2, 3 and 4").replace("7/9/2026", "1/1/2027")
+    )
+    assert replaced != mock_upstream.aim.publications
+    mock_upstream.aim.publications = replaced
+    mock_upstream.pcg.pages["index.html"] = (
+        mock_upstream.pcg.pages["index.html"]
+        .replace(b"<p>Change: 3</p>", b"<p>Change: 4</p>")
+        .replace(b"<p>Effective: 7/9/26</p>", b"<p>Effective: 1/1/27</p>")
+    )
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_ERROR
+    captured = capsys.readouterr()
+    assert (
+        "PCG: edition 2026-07-09-change-3 → 2027-01-01-change-4 changes no note's content"
+        in captured.err
+    )
+    assert _vault_bytes(config) == vault_before
+
+
+def test_diff_empty_corpus_is_never_accepted(tmp_path, capsys, mock_upstream, monkeypatch):
+    _updated_root(tmp_path, capsys, mock_upstream)
+    real = changes.build_ledgers
+
+    def hollow_pcg(vault_dir, planned):
+        ledgers = real(vault_dir, planned)
+        ledgers[changes.PCG].planned = 0
+        return ledgers
+
+    monkeypatch.setattr(changes, "build_ledgers", hollow_pcg)
+    flags = ["--accept-mass-change", "--accept-change-note-mismatch"]
+    assert main(["--root", str(tmp_path), "diff", *flags]) == EXIT_ERROR
+    captured = capsys.readouterr()
+    assert "error: change gate: PCG:" in captured.err
+    assert "an empty parse is never published" in captured.err

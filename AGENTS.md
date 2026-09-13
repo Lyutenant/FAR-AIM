@@ -267,3 +267,24 @@ build). Full build: 97 sources / 1,467 definitions; 19,784 links from
 id, unique per note; `_verify_plan` rejects a generated block link
 without its anchor. Settled: sources list no own terms; self-scoped
 definitions sections are skipped, not guessed.
+Change gates (2026-09-12; design plan §38, rules docs/validation.md,
+recovery docs/maintenance.md): `far-aim diff` — between `parse` and
+`build-vault` in `update` — now prints a per-corpus **change ledger**
+(`far_aim.changes`: the planned vault vs the published one, paired by
+citation and classified by frontmatter `canonical_hash` into unchanged /
+provenance-only / content-changed / added / removed / moved, where a move
+is byte-identical `## Official Text` under a new citation) and fails on:
+a mass change above data-informed thresholds (FAR removed 1 % / content
+5 %, AIM 5 % / 10 %, PCG 2 % / 10 %, with floors; AIM/PCG values are
+provisional until the first real edition), an AIM/PCG edition that
+changes no note's content (stale-cache signature), an AIM Explanation of
+Changes whose effective date lags the edition, that announces a
+paragraph the layer never had, or none of whose announced paragraphs
+changed. Unannounced AIM changes are reported and are what the AIM
+content threshold counts. Overrides: `--accept-mass-change`,
+`--accept-change-note-mismatch` (on `diff` and `update`, resolved locally
+like a raw-hash mismatch); an empty planned corpus is never accepted.
+The vault is the "before" side by design (CI has no local canonical
+layers); increment 2 of §38 (eCFR amendment-index archival + FAR
+cross-check) is not built yet, so FAR thresholds count every content
+change for now.

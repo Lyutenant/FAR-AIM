@@ -25,7 +25,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from xml.etree import ElementTree
 
-from far_aim import __version__
+from far_aim import __version__, changes
 from far_aim.config import Config
 from far_aim.generate import BuildError
 from far_aim.generate import aim_notes as generate_aim_notes
@@ -104,7 +104,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="derive the related-links layer (data/enrichment/related.json) from the "
         "canonical FAR and AIM layers",
     )
-    sub.add_parser("diff", help="structural diff between accepted source versions")
+    diff = sub.add_parser(
+        "diff",
+        help="structural diff and change gates: the planned vault vs the published one",
+    )
+    _add_gate_flags(diff)
     sub.add_parser("build-vault", help="generate the Obsidian vault from canonical data")
     update = sub.add_parser(
         "update", help="run the full check→fetch→parse→enrich→diff→generate→validate sequence"
@@ -116,7 +120,24 @@ def build_parser() -> argparse.ArgumentParser:
         "content is re-verified against the pinned raw hashes (used by CI, where the "
         "FAA can edit pages without bumping the edition)",
     )
+    _add_gate_flags(update)
     return parser
+
+
+def _add_gate_flags(command: argparse.ArgumentParser) -> None:
+    """The change-gate overrides shared by `diff` and `update` (plan §38.5)."""
+    command.add_argument(
+        "--accept-mass-change",
+        action="store_true",
+        help="publish despite a mass-change threshold or a content-free edition "
+        "(plan §38.3); the ledger is still printed — review it first",
+    )
+    command.add_argument(
+        "--accept-change-note-mismatch",
+        action="store_true",
+        help="publish despite a mismatch between the AIM Explanation of Changes and the "
+        "detected changes (plan §38.4)",
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -1882,10 +1903,11 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
             file=sys.stderr,
         )
         return EXIT_ERROR
-    planned = _plan_generated_vault(config, manifest, state)
-    if isinstance(planned, str):
-        print(f"error: {planned}", file=sys.stderr)
+    plan = _plan_generated_vault(config, manifest, state)
+    if isinstance(plan, str):
+        print(f"error: {plan}", file=sys.stderr)
         return EXIT_ERROR
+    planned = plan.files
     for path, data in sorted(planned.items()):
         if not path.exists():
             print(f"error: vault is missing generated note {path}", file=sys.stderr)
@@ -1908,10 +1930,18 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
     return EXIT_OK
 
 
+@dataclass(frozen=True)
+class VaultPlan:
+    """The complete generated vault rendered in memory, plus the layers it came from."""
+
+    files: dict[Path, bytes]  # on-disk paths → bytes
+    aim_docs: dict[str, dict] | None  # the verified AIM layer, when built
+
+
 def _plan_generated_vault(
     config: Config, manifest: SourceManifest, state: SourceState
-) -> dict[Path, bytes] | str:
-    """The complete generated-vault plan as on-disk paths → bytes, or a defect.
+) -> VaultPlan | str:
+    """The complete generated-vault plan, or a defect.
 
     Shared by ``validate`` and ``diff``: loads and verifies every canonical
     layer, renders the whole plan in memory, and touches nothing.
@@ -1950,7 +1980,10 @@ def _plan_generated_vault(
         )
     except BuildError as exc:
         return str(exc)
-    return {config.vault_dir.joinpath(*parts): data for parts, data in plan.items()}
+    return VaultPlan(
+        files={config.vault_dir.joinpath(*parts): data for parts, data in plan.items()},
+        aim_docs=aim.docs if aim is not None else None,
+    )
 
 
 def _stale_generated_on_disk(config: Config, planned: dict[Path, bytes]) -> list[Path]:
@@ -2000,8 +2033,14 @@ def _stale_generated_on_disk(config: Config, planned: dict[Path, bytes]) -> list
 # ---------------------------------------------------------------------------
 
 
-def cmd_diff(config: Config) -> int:
-    """Structural diff: the on-disk generated vault vs a freshly planned one.
+def cmd_diff(
+    config: Config,
+    *,
+    accept_mass_change: bool = False,
+    accept_change_note_mismatch: bool = False,
+    summary: list[str] | None = None,
+) -> int:
+    """Structural diff and change gates: the on-disk generated vault vs a freshly planned one.
 
     Run between ``parse`` and ``build-vault`` (as ``far-aim update`` does),
     the vault on disk still reflects the previously accepted versions while
@@ -2012,7 +2051,14 @@ def cmd_diff(config: Config) -> int:
     of a corpus, which the cap keeps bounded and the update summary's
     "canonical content unchanged" explains), and **remove** (upstream
     removals — the changes a reviewer must see before publication; plan
-    §32.7). Read-only; differences are reported, never an error.
+    §32.7). Then the change gates of plan §38 run over the per-corpus
+    ledger (:mod:`far_aim.changes`): a mass change above the data-informed
+    thresholds, a content-free edition, or an AIM edition whose Explanation
+    of Changes disagrees with the detected changes fails the command — and
+    so stops ``update`` before ``build-vault`` — unless the matching
+    override flag accepts it after review. An empty planned corpus is never
+    accepted. Read-only either way. ``summary`` collects one totals line
+    per corpus (and any accepted defect) for ``update``'s summary.
     """
     path = config.manifest_path
     if not path.exists():
@@ -2020,7 +2066,12 @@ def cmd_diff(config: Config) -> int:
         return EXIT_ERROR
     try:
         with exclusive_lock(fetch_lock_path(config)):
-            return _diff_locked(config)
+            return _diff_locked(
+                config,
+                accept_mass_change=accept_mass_change,
+                accept_change_note_mismatch=accept_change_note_mismatch,
+                summary=summary if summary is not None else [],
+            )
     except FetchError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return EXIT_ERROR
@@ -2032,7 +2083,13 @@ def cmd_diff(config: Config) -> int:
 _DIFF_LIST_LIMIT = 50
 
 
-def _diff_locked(config: Config) -> int:
+def _diff_locked(
+    config: Config,
+    *,
+    accept_mass_change: bool,
+    accept_change_note_mismatch: bool,
+    summary: list[str],
+) -> int:
     try:
         manifest = SourceManifest.load(config.manifest_path)
     except ManifestError as exc:
@@ -2046,10 +2103,11 @@ def _diff_locked(config: Config) -> int:
             file=sys.stderr,
         )
         return EXIT_ERROR
-    planned = _plan_generated_vault(config, manifest, state)
-    if isinstance(planned, str):
-        print(f"error: {planned}", file=sys.stderr)
+    plan = _plan_generated_vault(config, manifest, state)
+    if isinstance(plan, str):
+        print(f"error: {plan}", file=sys.stderr)
         return EXIT_ERROR
+    planned = plan.files
     to_add = sorted(p for p in planned if not p.exists())
     to_rewrite = sorted(p for p in planned if p.exists() and p.read_bytes() != planned[p])
     to_remove = _stale_generated_on_disk(config, planned)
@@ -2067,7 +2125,51 @@ def _diff_locked(config: Config) -> int:
         f"diff: {len(to_add)} to add, {len(to_rewrite)} to rewrite, "
         f"{len(to_remove)} to remove ({len(planned)} files planned)"
     )
-    return EXIT_OK
+    return _change_gates(
+        config,
+        plan,
+        accept_mass_change=accept_mass_change,
+        accept_change_note_mismatch=accept_change_note_mismatch,
+        summary=summary,
+    )
+
+
+def _change_gates(
+    config: Config,
+    plan: VaultPlan,
+    *,
+    accept_mass_change: bool,
+    accept_change_note_mismatch: bool,
+    summary: list[str],
+) -> int:
+    """Print the change ledger and decide the gates (plan §38.3–§38.5)."""
+    ledgers = changes.build_ledgers(config.vault_dir, plan.files)
+    report = changes.evaluate(ledgers, aim_docs=plan.aim_docs)
+    for line in report.lines:
+        print(line)
+    for corpus, totals in report.summaries.items():
+        summary.append(f"{corpus} changes: {totals}")
+    blocked = False
+    for defect in report.fatal:
+        print(f"error: change gate: {defect}", file=sys.stderr)
+        blocked = True
+    for defects, accepted, flag in (
+        (report.mass, accept_mass_change, "--accept-mass-change"),
+        (report.change_note, accept_change_note_mismatch, "--accept-change-note-mismatch"),
+    ):
+        for defect in defects:
+            if accepted:
+                line = f"accepted ({flag}): {defect}"
+                print(line)
+                summary.append(line)
+            else:
+                print(
+                    f"error: change gate: {defect}; review the ledger above and re-run "
+                    f"with {flag} to publish anyway",
+                    file=sys.stderr,
+                )
+                blocked = True
+    return EXIT_ERROR if blocked else EXIT_OK
 
 
 # ---------------------------------------------------------------------------
@@ -2337,7 +2439,13 @@ def _reverify_accepted_content(config: Config, path: Path) -> int:
     return EXIT_OK
 
 
-def cmd_update(config: Config, *, reverify: bool = False) -> int:
+def cmd_update(
+    config: Config,
+    *,
+    reverify: bool = False,
+    accept_mass_change: bool = False,
+    accept_change_note_mismatch: bool = False,
+) -> int:
     """Check upstream and, when a source changed, run the full pipeline.
 
     The automated-maintenance entry point (plan §22 Phase 8). Discovery and
@@ -2355,7 +2463,9 @@ def cmd_update(config: Config, *, reverify: bool = False) -> int:
     the local raw cache in a fresh environment), every layer parsed, the
     vault rebuilt and validated, stopping at the first failing step so a
     fetch/parse/validation defect blocks publication and preserves the last
-    known-good output (plan §32.13). The summary reports each source's
+    known-good output (plan §32.13) — the change gates in ``diff`` included
+    (plan §38; the two ``accept_*`` overrides pass through to it). The
+    summary reports each source's
     version transition and whether canonical content actually changed — a
     new eCFR issue date with no Title 14 amendments is provenance-only
     (plan §32.6), though the vault still rewrites per-note provenance.
@@ -2433,6 +2543,7 @@ def cmd_update(config: Config, *, reverify: bool = False) -> int:
         name: (state.accepted_version, state.canonical_hash)
         for name, state in manifest.sources.items()
     }
+    gate_summary: list[str] = []
     steps = [
         ("fetch ecfr", lambda: cmd_fetch_ecfr(config, force=False)),
         ("fetch aim", lambda: cmd_fetch_aim(config, force=False)),
@@ -2447,8 +2558,18 @@ def cmd_update(config: Config, *, reverify: bool = False) -> int:
         # Structural diff before generation (plan §22 Phase 8): the vault
         # on disk still shows the old versions, the layers the new — the
         # report of adds/rewrites/removals lands in the update log the PR
-        # carries, so removals are explicit before publication.
-        ("diff", lambda: cmd_diff(config)),
+        # carries, so removals are explicit before publication — and the
+        # change gates (plan §38) stop the run here on a mass change or a
+        # change-note mismatch, with the vault untouched.
+        (
+            "diff",
+            lambda: cmd_diff(
+                config,
+                accept_mass_change=accept_mass_change,
+                accept_change_note_mismatch=accept_change_note_mismatch,
+                summary=gate_summary,
+            ),
+        ),
         ("build-vault", lambda: cmd_build_vault(config)),
         ("validate", lambda: cmd_validate(config)),
     ]
@@ -2488,6 +2609,8 @@ def cmd_update(config: Config, *, reverify: bool = False) -> int:
             print(f"  {name}: resumed publication of {state.accepted_version}")
         else:
             print(f"  {name}: unchanged ({state.accepted_version})")
+    for line in gate_summary:
+        print(f"  {line}")
     return EXIT_OK
 
 
@@ -2523,9 +2646,18 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "enrich":
         return cmd_enrich(config)
     if args.command == "diff":
-        return cmd_diff(config)
+        return cmd_diff(
+            config,
+            accept_mass_change=args.accept_mass_change,
+            accept_change_note_mismatch=args.accept_change_note_mismatch,
+        )
     if args.command == "update":
-        return cmd_update(config, reverify=args.reverify)
+        return cmd_update(
+            config,
+            reverify=args.reverify,
+            accept_mass_change=args.accept_mass_change,
+            accept_change_note_mismatch=args.accept_change_note_mismatch,
+        )
 
     corpus = getattr(args, "corpus", None)
     phase = NOT_IMPLEMENTED_PHASE[(args.command, corpus)]
