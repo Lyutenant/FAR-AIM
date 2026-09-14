@@ -12,3 +12,4 @@ title: "Source Status"
 | eCFR Title 14 | 2026-08-19 |
 | AIM | not yet ingested |
 | Pilot/Controller Glossary | not yet ingested |
+| Private Pilot Airplane ACS | not yet ingested |

@@ -525,6 +525,8 @@ def build_source_status(sources: dict[str, object]) -> Note:
         if effective and change is not None:
             edition = "Basic" if change == 0 else f"Change {change}"
             return f"{edition} — effective {effective}"
+        if accepted and effective:
+            return f"{accepted} — effective {effective}"
         if accepted:
             return accepted
         if effective:
@@ -535,6 +537,7 @@ def build_source_status(sources: dict[str, object]) -> Note:
         ("eCFR Title 14", current_through("ecfr_title_14")),
         ("AIM", current_through("aim")),
         ("Pilot/Controller Glossary", current_through("pcg")),
+        ("Private Pilot Airplane ACS", current_through("acs_private_airplane")),
     ]
     table = "\n".join(
         [
@@ -557,7 +560,12 @@ def build_source_status(sources: dict[str, object]) -> Note:
 
 
 def build_home(
-    *, has_aim: bool, has_pcg: bool, has_concepts: bool = False, has_definitions: bool = False
+    *,
+    has_aim: bool,
+    has_pcg: bool,
+    has_concepts: bool = False,
+    has_definitions: bool = False,
+    has_acs: bool = False,
 ) -> Note:
     """``vault/Home.md`` — the vault's entry point and reader's guide (plan §22 Phase 7).
 
@@ -573,6 +581,11 @@ def build_home(
         sources.append("- [[AIM|Aeronautical Information Manual]]")
     if has_pcg:
         sources.append("- [[PCG|Pilot/Controller Glossary]]")
+    if has_acs:
+        sources.append(
+            "- [[ACS Private Pilot Airplane|Private Pilot for Airplane Category Airman "
+            "Certification Standards (ACS)]]"
+        )
     sources.append(f"- [[{SOURCE_STATUS_STEM}]] — the editions this vault is built from")
 
     # Orientation: what each folder is, who writes it, and when to open it.
@@ -590,6 +603,13 @@ def build_home(
         generated.append(
             "- `PCG/` — the Pilot/Controller Glossary, one note per term, named "
             "by the term. Definitions as controllers and the AIM use them."
+        )
+    if has_acs:
+        generated.append(
+            "- `ACS/` — the Private Pilot for Airplane Category Airman Certification "
+            "Standards, one note per Task named by its code (`PA.I.A`), every "
+            "Knowledge, Risk Management and Skill element verbatim. What the "
+            "knowledge test samples and the checkride examines."
         )
     if has_concepts:
         generated.append(
@@ -657,6 +677,12 @@ def build_home(
         "- **Follow the links at the bottom** of a note before searching: "
         "the cross-references are what the text itself points to.",
     ]
+    if has_acs:
+        finding.append(
+            "- **Search an ACS code** (`PA.I.A.K1`) from a knowledge-test report "
+            "to land on the element itself, inside its Task, with the regulations "
+            "the Task references."
+        )
 
     writing = [
         "- Write in [[Study]], add a page under [[Topics]], or copy the "

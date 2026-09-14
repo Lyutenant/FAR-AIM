@@ -294,3 +294,40 @@ index), fails; announced but unchanged / unannounced changes are
 reported, and FAR thresholds count only unannounced changes and
 removals, so a large announced rule passes while unexplained churn
 trips. Locally accepted-but-unpublished issues chain their indexes.
+Phase 10 (Private Pilot exam-prep layer; design of record plan §39,
+2026-09-13): **10a shipped 2026-09-13** — the Private Pilot Airplane ACS
+is the fourth source (`far-aim fetch acs` / `parse acs`; manifest key
+`acs_private_airplane`, version = document number `FAA-S-ACS-6C`,
+snapshot `data/raw/acs/{document-number}/` = the PDF + `metadata.json`,
+`raw_hash` = the PDF's SHA-256, archive it off-repo like the AIM's). The
+FAA publishes it only as a PDF, so this is the plan's one bounded
+deviation from HTML-first ingestion: `pypdf` is pinned exactly in
+`pyproject.toml`, read in layout mode (plain mode re-orders label
+letters), repaired by three wording-preserving rules (space runs,
+possessive-apostrophe kerning gap, line-final hyphen join), and recorded
+as `source.extractor` in every document (provenance, outside the hash;
+`validate` refuses a layer extracted by another version).
+`far_aim.parsers.acs` is a line grammar (page furniture verified and
+dropped, five fixed front-matter sections, Area → Task → References /
+Objective / Note → Knowledge / Risk Management / Skills → coded elements
+with contiguous numbering and nested sub-elements, appendices as
+heading / text / note / list / preformatted blocks) with lossless
+capture, a Table-of-Contents cross-check, and a Major Enhancements
+cross-check (added codes present; removed codes absent or `[Archived]`
+placeholders, bidirectionally). FAA-S-ACS-6C: 12 areas, 61 tasks, 1,192
+elements, 3 appendices. `vault/ACS/Private Pilot Airplane/` (77 notes):
+`PA.I.A.md` per Task (code = stem = citation; the title is **never an
+alias** because "Pilot Qualifications"/"Night Operations" name curated
+notes), `PA.I.md` per Area, `ACS Appendix N.md`, and the index `ACS
+Private Pilot Airplane.md`; every element line is `**PA.I.A.K1** text
+^pa-i-a-k1` (block id = code lowercased with dashes), References link
+the FAR parts/AIM the vault holds, Glossary Terms via the PCG gate.
+Change gates: ACS is a fourth ledger corpus (tasks + appendices;
+thresholds removed 10 % / content 25 %, floors 5 / 10, provisional) whose
+edition cross-check reads the parsed Major Enhancements. Docs:
+docs/data-model.md, docs/validation.md, docs/vault.md, docs/source-policy.md.
+Not built yet (10b–10d): `data/enrichment/acs-map.json`,
+`ppl-study.json`, `vault/Prep/`; `Study/` stays the reader's untouched
+folder. Test fixtures: `tests/fixtures/acs/` (the FAA page's ACS table
+verbatim; a 35-page subset of the real PDF — `REQUIRE_COMPLETE=False`
+relaxes the whole-document checks to the areas present).

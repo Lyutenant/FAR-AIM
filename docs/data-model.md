@@ -229,6 +229,59 @@ block matches the AIM's (`provider: faa`, `publication: pcg`, edition
 label/date/change, the document's own page URL — a term's anchor — and the
 snapshot tree hash), excluded from `canonical_hash`.
 
+## Canonical ACS model (implemented, Phase 10a)
+
+`far-aim parse acs` writes one JSON document per Area of Operation
+(`data/normalized/acs/area-01.json` … `area-12.json`), one per appendix
+(`appendix-1.json` … `appendix-3.json`) and one for the publication
+(`publication.json`), with the same deterministic serialization as the
+other layers. The source is the FAA's PDF (plan §39.2 — the one bounded
+deviation from HTML-first ingestion): text is read with the pinned
+`pypdf` in layout mode and repaired by exactly three wording-preserving
+rules (collapsed space runs, the kerning gap before a possessive
+apostrophe closed, a line-final hyphen joined to its continuation); every
+document's `source` block records the extractor (`extractor:
+pypdf/6.18.1`), excluded from `canonical_hash` like the rest of the
+provenance, and `far-aim validate` refuses a layer whose extractor is not
+the installed one.
+
+**The element code is the citation** (`far_aim.models.acs`): area
+`acs-PA.I`, task `acs-PA.I.A`, publication `acs-pa`, appendix
+`acs-pa-appendix-1`. An **area** (`acs_area`) carries `code`, `roman`,
+`number`, the verbatim `heading` and `title`, and an ordered `tasks`
+list. A **task** (`acs_task`) carries `code`, `letter`, the verbatim
+`heading`, `title`, `classes` (the `(ASEL, AMEL)` suffix parsed from the
+title; empty means all classes), `references_text` verbatim plus typed
+`references` (`cfr_parts` resolved through the shared citation
+recognizer; `aim`, `handbook`, `advisory_circular`, `other` kept as text),
+`objective`, `notes`, and three sections — `knowledge`, `risk`, `skills` —
+each with the label and lead-in verbatim and an ordered `elements` list:
+`code`, `kind`, `number`, `sub` (`a`, `b` … for sub-elements, whose text
+keeps its `a.` marker and which name their `parent`), `text`. Codes must
+agree with their area, task and section and number contiguously;
+`[Archived]` placeholders are kept as elements. The **publication**
+(`acs_publication`) holds the cover (document number, title, edition
+date, publisher), the Foreword and Introduction as blocks, the Revision
+History table (`columns`, `rows`), the Major Enhancements page as
+`changes` (every bullet verbatim, plus the `added` and `removed` code
+lists — the ACS's own change note), the Table of Contents as `group` and
+`entry` records, and the area/appendix listing. An **appendix**
+(`acs_appendix`) is a flat block list: `heading`, `text` (paragraphs
+re-flowed from wrapped lines — justified text, so a short line ends a
+paragraph), `note` (`Note:` callouts), `list` (bullets), and
+`preformatted` — the PDF's tables and indented listings kept line by line
+with their column layout rather than guessed into cells.
+
+Gates before anything is returned: **lossless capture** (word multiset
+of every surviving line = word multiset of every canonical field; page
+numbers — roman then arabic, checked sequential — and running headers —
+checked against the container parsed on that page — are the only lines
+dropped), the **contents cross-check** (the Table of Contents names
+exactly the areas, tasks and appendix section headings parsed), the
+**change-note cross-check** (every code the Major Enhancements list as
+added exists; every code listed as removed is absent or an `[Archived]`
+placeholder, and every placeholder is listed) and unique ids.
+
 ## Source manifest (implemented)
 
 `data/manifests/sources.json`, schema version 1:

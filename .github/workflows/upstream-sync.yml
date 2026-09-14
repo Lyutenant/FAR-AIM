@@ -63,7 +63,7 @@ jobs:
         id: raw
         if: ${{ !cancelled() }}
         run: |
-          if [ -d data/raw/aim ] || [ -d data/raw/pcg ]; then
+          if [ -d data/raw/aim ] || [ -d data/raw/pcg ] || [ -d data/raw/acs ]; then
             echo "present=true" >> "$GITHUB_OUTPUT"
           else
             echo "present=false" >> "$GITHUB_OUTPUT"
@@ -92,6 +92,7 @@ jobs:
           path: |
             data/raw/aim
             data/raw/pcg
+            data/raw/acs
           retention-days: 90
           if-no-files-found: error
 
@@ -119,7 +120,7 @@ jobs:
             git diff --cached --stat -- vault | tail -3
             echo '```'
             echo
-            echo "Raw AIM/PCG snapshots for this edition are attached to the"
+            echo "Raw AIM/PCG/ACS snapshots for this edition are attached to the"
             echo "workflow run as an artifact — archive them durably outside"
             echo "the repository before the artifact expires (plan §6.2)."
             echo

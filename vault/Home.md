@@ -14,6 +14,7 @@ Reference notes generated from official U.S. aviation sources, plus a curated st
 - [[Title 14|Title 14, Code of Federal Regulations (the FARs)]]
 - [[AIM|Aeronautical Information Manual]]
 - [[PCG|Pilot/Controller Glossary]]
+- [[ACS Private Pilot Airplane|Private Pilot for Airplane Category Airman Certification Standards (ACS)]]
 - [[Source Status]] — the editions this vault is built from
 
 ## What is here
@@ -25,6 +26,7 @@ Generated:
 - `FAR/` — Title 14 CFR, one note per section named by citation (`91.155`), plus one index per part. This is the regulation itself.
 - `AIM/` — the Aeronautical Information Manual, one note per paragraph named by citation (`4-1-9`), figures embedded. Procedures and guidance, not regulation.
 - `PCG/` — the Pilot/Controller Glossary, one note per term, named by the term. Definitions as controllers and the AIM use them.
+- `ACS/` — the Private Pilot for Airplane Category Airman Certification Standards, one note per Task named by its code (`PA.I.A`), every Knowledge, Risk Management and Skill element verbatim. What the knowledge test samples and the checkride examines.
 - `Concepts/` — one note per study concept: what it builds on, and the regulations, AIM guidance and glossary terms that define it. Rendered from the curated concept graph, so edit the graph, not the notes. Start at the [[Concept Map]] for a suggested study order.
 
 Curated:
@@ -53,6 +55,7 @@ Every regulation and AIM paragraph note has the same shape, top to bottom:
 - **Search** any citation (`91.155`, `AIM 4-1-9`) or heading — citation forms and headings are note aliases, so the quick switcher finds a section by number or by name.
 - **Backlinks** on any note list every note that cites it — open a glossary term or a definition to see everything that depends on it.
 - **Follow the links at the bottom** of a note before searching: the cross-references are what the text itself points to.
+- **Search an ACS code** (`PA.I.A.K1`) from a knowledge-test report to land on the element itself, inside its Task, with the regulations the Task references.
 
 ## Writing your own notes
 

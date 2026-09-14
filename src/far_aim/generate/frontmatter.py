@@ -100,6 +100,33 @@ _PCG_INDEX_KEYS = (
     "cssclasses",
 )
 
+# ACS notes (plan §39.2): the element code is the citation; edition provenance
+# is the document number (``source_version``) plus the FAA-listed effective
+# date. Task titles are display text only, never aliases (§39.1).
+_ACS_TASK_KEYS = (
+    "id",
+    "type",
+    "citation",
+    "area",
+    "task",
+    "source",
+    "source_version",
+    "effective_date",
+    "canonical_hash",
+    "generated",
+    "title",
+    "aliases",
+    "tags",
+    "cssclasses",
+)
+_ACS_AREA_KEYS = tuple(key for key in _ACS_TASK_KEYS if key not in ("task", "cssclasses"))
+_ACS_APPENDIX_KEYS = tuple(
+    key if key != "area" else "appendix" for key in _ACS_TASK_KEYS if key != "task"
+)
+_ACS_INDEX_KEYS = tuple(
+    key for key in _ACS_TASK_KEYS if key not in ("area", "task", "aliases", "cssclasses")
+)
+
 # Concept notes (plan §36.2): curated-content, generated-file study aids.
 _CONCEPT_KEYS = ("id", "type", "area", "generated", "title", "tags")
 _CONCEPT_INDEX_KEYS = ("id", "type", "generated", "title", "tags")
@@ -123,6 +150,10 @@ SCHEMAS: dict[str, tuple[tuple[str, ...], frozenset[str]]] = {
     "aim_index": (_AIM_INDEX_KEYS, frozenset(_AIM_INDEX_KEYS) - {"tags"}),
     "pcg": (_PCG_TERM_KEYS, frozenset(_PCG_TERM_KEYS) - {"aliases", "tags"}),
     "pcg_index": (_PCG_INDEX_KEYS, frozenset(_PCG_INDEX_KEYS) - {"tags"}),
+    "acs_task": (_ACS_TASK_KEYS, frozenset(_ACS_TASK_KEYS) - {"aliases", "tags"}),
+    "acs_area": (_ACS_AREA_KEYS, frozenset(_ACS_AREA_KEYS) - {"aliases", "tags"}),
+    "acs_appendix": (_ACS_APPENDIX_KEYS, frozenset(_ACS_APPENDIX_KEYS) - {"aliases", "tags"}),
+    "acs_index": (_ACS_INDEX_KEYS, frozenset(_ACS_INDEX_KEYS) - {"tags"}),
     "concept": (_CONCEPT_KEYS, frozenset(_CONCEPT_KEYS) - {"tags"}),
     "concept_index": (_CONCEPT_INDEX_KEYS, frozenset(_CONCEPT_INDEX_KEYS) - {"tags"}),
 }
@@ -147,6 +178,7 @@ _KEY_TYPES: dict[str, type | tuple[type, ...]] = {
     "generated": bool,
     "title": str,
     "area": str,
+    "task": str,
     "aliases": list,
     "tags": list,
     "cssclasses": list,
@@ -157,6 +189,7 @@ _KIND_KEY_TYPES: dict[str, dict[str, type | tuple[type, ...]]] = {
     "aim": {"section": int},
     "aim_section": {"section": int},
     "aim_appendix": {"appendix": int},
+    "acs_appendix": {"appendix": int},
 }
 
 

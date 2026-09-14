@@ -335,6 +335,48 @@ vault/PCG/
   heading alias that case-folds to a glossary term (e.g. "Wake Turbulence")
   is dropped by the existing global alias-uniqueness rule (plan §17.4).
 
+## ACS (Phase 10a)
+
+```text
+vault/ACS/Private Pilot Airplane/
+├── ACS Private Pilot Airplane.md   # publication index
+├── PA.I.md … PA.XII.md             # one index per Area of Operation
+├── PA.I.A.md … PA.XII.B.md         # one note per Task
+└── ACS Appendix 1.md … 3.md        # appendices
+```
+
+- The code is the citation (plan §9, §39.1): `PA.I.A` is the stem, the
+  `citation` property and the H1's first half; the Task title is the
+  `title` property and the rest of the H1 but **never an alias** —
+  "Pilot Qualifications", "Night Operations" and "Emergency Operations"
+  already name curated collection and concept notes, and the ACS must not
+  claim them. Areas are `PA.I`, appendices `ACS Appendix N`; the
+  publication index is `ACS Private Pilot Airplane`.
+- Task note body: H1, the Source callout (document number, edition date,
+  FAA effective date, and the PDF link opened at the task's own page),
+  the area link and the classes the task applies to, `## References`
+  (verbatim, then links for the CFR parts and the AIM the vault holds —
+  handbooks and advisory circulars stay text), `## Objective`, any
+  `Note:` callouts, then `## Knowledge`, `## Risk Management` and
+  `## Skills`: the lead-in verbatim and one list item per element,
+  `**PA.I.A.K1** text ^pa-i-a-k1`, sub-elements nested under their
+  parent. The block id is the code lowercased with dashes (Obsidian block
+  ids allow only letters, digits and dashes); the code itself stays on the
+  line, so a search for `PA.I.A.K1` lands on the element and
+  `[[PA.I.A#^pa-i-a-k1]]` links it. `## Glossary Terms` follows as on AIM
+  notes when the PCG is built.
+- Area notes list their tasks; appendix notes render the parsed blocks
+  (`### ` headings, paragraphs, `Note` callouts, bullet lists, and
+  fenced `text` blocks for the PDF's tables, kept in their column layout).
+  The publication index renders the cover data, Foreword, Revision
+  History (a pipe table), the Major Enhancements with every added or
+  removed code as a block link to its element (plain when the layer no
+  longer holds it), the Introduction, every Area with its Tasks, and the
+  appendices.
+- `Home.md` links the ACS index, describes `ACS/`, and tells the reader
+  to search a knowledge-test-report code; `Source Status.md` gains a
+  `Private Pilot Airplane ACS` row (document number and effective date).
+
 ## Home and the curated layer (Phase 7)
 
 - `Home.md` is a generated root note (`type: home`): links to each built

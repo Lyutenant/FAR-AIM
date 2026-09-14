@@ -21,16 +21,27 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from far_aim.config import Config
-from far_aim.generate import BuildError, aim_notes, concept_notes, enrich, naming, notes, pcg_notes
+from far_aim.generate import (
+    BuildError,
+    acs_notes,
+    aim_notes,
+    concept_notes,
+    enrich,
+    naming,
+    notes,
+    pcg_notes,
+)
 from far_aim.generate.aim_markdown import collect_asset_names
 from far_aim.generate.aim_markdown import collect_text as collect_aim_text
 from far_aim.generate.enrich import EnrichmentLayer
 from far_aim.generate.frontmatter import emit_frontmatter, frontmatter_defect
 from far_aim.links import definitions, glossary, semantic
 from far_aim.links.citations import collect_text as collect_far_text
+from far_aim.models import acs as acs_model
 from far_aim.models import aim as aim_model
 from far_aim.models import cfr as cfr_model
 from far_aim.models import pcg as pcg_model
+from far_aim.parsers import acs as acs_parser
 from far_aim.parsers import aim as aim_parser
 from far_aim.parsers import ecfr as ecfr_parser
 from far_aim.parsers import pcg as pcg_parser
@@ -67,6 +78,11 @@ class Registry:
     # PCG: id → (stem, display) link targets and note count.
     pcg_targets: dict[str, tuple[str, str]] = field(default_factory=dict)
     pcg_note_count: int = 0
+    # ACS (plan §39): id → (stem, display) link targets, note count, and every
+    # element code the layer holds (block-link targets on task notes).
+    acs_targets: dict[str, tuple[str, str]] = field(default_factory=dict)
+    acs_note_count: int = 0
+    acs_element_codes: set[str] = field(default_factory=set)
     # Enrichment (plan §36): concept note count (incl. the Concept Map) and
     # the curated stems on disk registered as link targets only.
     concept_note_count: int = 0
@@ -89,6 +105,40 @@ class PcgLayer:
     docs: dict[str, dict]
     title_hash: str
     gate: glossary.Gate = field(default_factory=glossary.Gate)
+
+
+@dataclass(frozen=True)
+class AcsLayer:
+    """The verified canonical ACS layer (plan §39.2)."""
+
+    docs: dict[str, dict]
+    title_hash: str
+
+
+def _iter_acs_documents(docs: dict[str, dict]):
+    """(kind, document) for every ACS note-bearing document, in document order."""
+    areas = sorted(
+        (d for d in docs.values() if d.get("document_type") == acs_model.DOCUMENT_TYPE_AREA),
+        key=lambda d: d["number"],
+    )
+    for area in areas:
+        yield "area", area
+        for task in area["tasks"]:
+            yield "task", task
+    appendices = sorted(
+        (d for d in docs.values() if d.get("document_type") == acs_model.DOCUMENT_TYPE_APPENDIX),
+        key=lambda d: d["number"],
+    )
+    for appendix in appendices:
+        yield "appendix", appendix
+    for key, doc in docs.items():
+        kind = doc.get("document_type")
+        if kind not in (
+            acs_model.DOCUMENT_TYPE_AREA,
+            acs_model.DOCUMENT_TYPE_APPENDIX,
+            acs_model.DOCUMENT_TYPE_PUBLICATION,
+        ):
+            raise BuildError(f"unknown ACS document type {kind!r} in {key!r}")
 
 
 def _iter_pcg_terms(docs: dict[str, dict]):
@@ -220,6 +270,7 @@ def build_registry(
     aim: AimLayer | None = None,
     pcg: PcgLayer | None = None,
     enrichment: EnrichmentLayer | None = None,
+    acs: AcsLayer | None = None,
 ) -> Registry:
     """Pass 1: stems, link targets, and alias candidates for every note.
 
@@ -248,6 +299,8 @@ def build_registry(
         _register_aim(registry, seen, citation_aliases, heading_candidates, aim)
     if pcg is not None:
         _register_pcg(registry, seen, citation_aliases, heading_candidates, pcg)
+    if acs is not None:
+        _register_acs(registry, seen, citation_aliases, acs)
     for part, doc in docs.items():
         folder = naming.part_folder_name(part)
         stem = naming.part_index_stem(part)
@@ -412,6 +465,39 @@ def _register_pcg(
             heading_candidates[term_doc["id"]] = term
 
 
+def _register_acs(
+    registry: Registry,
+    seen: dict[str, str],
+    citation_aliases: dict[str, list[str]],
+    acs: AcsLayer,
+) -> None:
+    """ACS notes are named by code; titles are display text, never aliases (§39.1)."""
+    folder = (acs_notes.ACS_DIR, acs_notes.ACS_FOLDER)
+    index_stem = acs_notes.ACS_INDEX_STEM
+    _add_stem(registry, seen, index_stem, (*folder, f"{index_stem}.md"))
+    registry.acs_note_count += 1
+    for kind, doc in _iter_acs_documents(acs.docs):
+        registry.acs_note_count += 1
+        if kind == "area":
+            stem = acs_notes.area_stem(doc["code"])
+            display = acs_notes.area_display(doc)
+        elif kind == "task":
+            stem = acs_notes.task_stem(doc["code"])
+            display = f"{doc['code']} — {doc['title']}"
+            for section in ("knowledge", "risk", "skills"):
+                for element in doc[section]["elements"]:
+                    code = element["code"]
+                    if code in registry.acs_element_codes:
+                        raise BuildError(f"ACS element code {code} appears twice")
+                    registry.acs_element_codes.add(code)
+        else:
+            stem = acs_notes.appendix_stem(doc["number"])
+            display = acs_notes.appendix_display(doc)
+        _add_stem(registry, seen, stem, (*folder, f"{stem}.md"))
+        registry.acs_targets[doc["id"]] = (stem, display)
+        citation_aliases[doc["id"]] = []
+
+
 def _resolve_alias_collisions(
     registry: Registry,
     citation_aliases: dict[str, list[str]],
@@ -459,6 +545,7 @@ def plan_vault(
     pcg: PcgLayer | None = None,
     enrichment: EnrichmentLayer | None = None,
     definitions_gate: definitions.DefinitionsGate | None = None,
+    acs: AcsLayer | None = None,
 ) -> dict[tuple[str, ...], bytes]:
     """Render the complete vault in memory and verify it (nothing written).
 
@@ -468,7 +555,7 @@ def plan_vault(
     when ``docs`` hold a definitions source (an empty gate otherwise stands
     in, for partial builds and tests).
     """
-    registry = build_registry(docs, aim, pcg, enrichment)
+    registry = build_registry(docs, aim, pcg, enrichment, acs)
     plan: dict[tuple[str, ...], bytes] = {}
     related = _verified_related(enrichment, registry, title_hash, aim)
     related_targets = {**registry.far_targets, **registry.aim_targets}
@@ -519,9 +606,13 @@ def plan_vault(
             has_pcg=pcg is not None,
             has_concepts=has_concepts,
             has_definitions=definition_links is not None,
+            has_acs=acs is not None,
         )
     )
 
+    glossary_index = (
+        glossary.GlossaryIndex.build(pcg.docs, pcg.gate) if pcg is not None else None
+    )
     if aim is not None:
         targets = registry.aim_targets
         far = aim_notes.FarTargets(
@@ -529,10 +620,8 @@ def plan_vault(
             parts=frozenset(registry.part_numbers),
         )
         glossary_links = None
-        if pcg is not None:
-            glossary_links = aim_notes.GlossaryLinks(
-                glossary.GlossaryIndex.build(pcg.docs, pcg.gate), registry.pcg_targets
-            )
+        if pcg is not None and glossary_index is not None:
+            glossary_links = aim_notes.GlossaryLinks(glossary_index, registry.pcg_targets)
         for kind, doc in _iter_aim_documents(aim.docs):
             aliases = registry.aliases[doc["id"]]
             if kind == "chapter":
@@ -574,6 +663,36 @@ def plan_vault(
             add(pcg_notes.build_term_note(term_doc, aliases, registry.pcg_targets, refer_targets))
         add(pcg_notes.build_pcg_index(pcg.docs, pcg.title_hash))
 
+    if acs is not None:
+        publication = next(
+            d
+            for d in acs.docs.values()
+            if d["document_type"] == acs_model.DOCUMENT_TYPE_PUBLICATION
+        )
+        context = acs_notes.AcsContext(
+            publication=publication,
+            far=acs_notes.FarTargets(parts=frozenset(registry.part_numbers)),
+            aim_index_stem=aim_notes.AIM_INDEX_STEM if aim is not None else None,
+            glossary=(
+                acs_notes.GlossaryLinks(glossary_index, registry.pcg_targets)
+                if glossary_index is not None
+                else None
+            ),
+        )
+        for kind, doc in _iter_acs_documents(acs.docs):
+            aliases = registry.aliases[doc["id"]]
+            if kind == "area":
+                add(acs_notes.build_area_note(doc, aliases, publication))
+                for task in doc["tasks"]:
+                    add(acs_notes.build_task_note(task, doc, registry.aliases[task["id"]], context))
+            elif kind == "appendix":
+                add(acs_notes.build_appendix_note(doc, aliases, publication))
+        add(
+            acs_notes.build_acs_index(
+                acs.docs, acs.title_hash, frozenset(registry.acs_element_codes)
+            )
+        )
+
     if has_concepts:
         assert enrichment is not None and enrichment.concepts is not None
         graph = enrichment.concepts
@@ -606,7 +725,7 @@ def plan_vault(
             add(concept_notes.build_concept_note(concept, graph, concept_targets))
         add(concept_notes.build_concept_map(graph))
 
-    _verify_plan(plan, registry, docs, aim, pcg)
+    _verify_plan(plan, registry, docs, aim, pcg, acs)
     return plan
 
 
@@ -711,14 +830,17 @@ def _verify_plan(
     docs: dict[str, dict],
     aim: AimLayer | None,
     pcg: PcgLayer | None = None,
+    acs: AcsLayer | None = None,
 ) -> None:
-    """Phase 3/4/5 exit-criteria gates, enforced before any write."""
+    """Phase 3/4/5/10 exit-criteria gates, enforced before any write."""
     # + title index, source status, and home
     expected = len(docs) + registry.section_count + registry.appendix_count + 3
     if aim is not None:
         expected += registry.aim_note_count + len(registry.aim_assets) + 1  # + ledger
     if pcg is not None:
         expected += registry.pcg_note_count
+    if acs is not None:
+        expected += registry.acs_note_count
     expected += registry.concept_note_count
     if len(plan) != expected:
         raise BuildError(f"planned {len(plan)} files, expected {expected}")
@@ -742,6 +864,11 @@ def _verify_plan(
             raise BuildError(
                 f"walked {walked} PCG terms but the canonical layer holds {parsed}"
             )
+    if acs is not None:
+        parsed = sum(acs_parser.count_tasks(doc) for doc in acs.docs.values())
+        walked = sum(1 for kind, _ in _iter_acs_documents(acs.docs) if kind == "task")
+        if walked != parsed:
+            raise BuildError(f"walked {walked} ACS tasks but the canonical layer holds {parsed}")
     bodies = {
         parts: data.decode("utf-8") for parts, data in plan.items() if is_note_path(parts)
     }
@@ -878,6 +1005,7 @@ def sync_vault(config: Config, plan: dict[tuple[str, ...], bytes]) -> SyncStats:
         vault / aim_notes.AIM_DIR,
         vault / pcg_notes.PCG_DIR,
         vault / concept_notes.CONCEPTS_DIR,
+        vault / acs_notes.ACS_DIR,
     ]
     vault.mkdir(parents=True, exist_ok=True)
     backup_root = Path(tempfile.mkdtemp(dir=vault, prefix=".sync-backup-"))
@@ -967,9 +1095,10 @@ def build_vault(
     pcg: PcgLayer | None = None,
     enrichment: EnrichmentLayer | None = None,
     definitions_gate: definitions.DefinitionsGate | None = None,
+    acs: AcsLayer | None = None,
 ) -> SyncStats:
     """Plan, verify, and sync the whole vault; raises BuildError on any defect."""
     plan = plan_vault(
-        docs, version, title_hash, sources, aim, pcg, enrichment, definitions_gate
+        docs, version, title_hash, sources, aim, pcg, enrichment, definitions_gate, acs
     )
     return sync_vault(config, plan)

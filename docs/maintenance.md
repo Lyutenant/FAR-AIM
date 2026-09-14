@@ -9,8 +9,9 @@ changes into a pull request.
 
 ## `far-aim update`
 
-1. **Discovery first.** All three upstreams are polled (eCFR issue date,
-   FAA AIM/PCG editions) with the same guards as `check --remote`: an
+1. **Discovery first.** All four upstreams are polled (eCFR issue date,
+   FAA AIM/PCG editions, the ACS document number on the FAA ACS page)
+   with the same guards as `check --remote`: an
    upstream that reports an *older* version than accepted, or that
    re-labels/relocates the accepted edition, is an error — never
    auto-resolved (`--force` exists only on `fetch`, for a human).
@@ -26,7 +27,8 @@ changes into a pull request.
    `canonical_hash` (parse never completed), a `Source Status.md` that no
    longer byte-matches the manifest's accepted state (the vault predates
    a version acceptance), or a corpus index note (`Title 14.md`,
-   `AIM.md`, `PCG.md`) pinning a different `canonical_hash` than the
+   `AIM.md`, `PCG.md`, `ACS Private Pilot Airplane.md`) pinning a
+   different `canonical_hash` than the
    manifest records (a same-version correction — `fetch --force` +
    re-parse — that was never published). And whenever the local
    canonical layers are on disk,
@@ -51,10 +53,10 @@ changes into a pull request.
    mid-run gets accepted during re-verification: the manifest is
    reloaded afterwards, so that freshly accepted state resumes into
    publication in the same run rather than exiting "nothing to do".
-4. **Full pipeline on change.** Otherwise it runs `fetch ecfr/aim/pcg`
+4. **Full pipeline on change.** Otherwise it runs `fetch ecfr/aim/pcg/acs`
    (unchanged sources re-verify their archive, or re-download and verify
    against the pinned `raw_hash` in a fresh environment), `parse` for all
-   three layers, `enrich` (re-derives `data/enrichment/related.json` from
+   four layers, `enrich` (re-derives `data/enrichment/related.json` from
    the fresh layers so derived links never lag the content — plan §36.4,
    docs/enrichment.md), `diff`, `build-vault`, then `validate` — stopping
    at the first failing step. A fetch/parse/validation defect therefore blocks

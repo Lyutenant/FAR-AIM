@@ -358,6 +358,66 @@ are emitted only for notes that exist (`tests/test_aim_generate.py`,
 zero-broken-links and byte-idempotency checks cover them. Categories 5
 and 7 are the change gates below.
 
+## Current implementation status (Phase 10a)
+
+`far-aim fetch acs` enforces category 1 for the FAA-published Private
+Pilot Airplane ACS PDF (plan §39.2): discovery from the FAA ACS page's
+document table (exactly one row titled `Private Pilot for Airplane
+Category`, its document number, an FAA-origin PDF link, a publication
+date and an `Effective …` status date), strict PDF validation before
+acceptance (`%PDF-` header, readable and unencrypted, ≥ 60 pages, a text
+layer whose cover page names the listed document number — the PDF link is
+edition-agnostic, so this is the cross-check that the file matches the
+listing — and ≥ 800 element codes across the pages; FAA-S-ACS-6C has 87
+pages and 1,301). The snapshot (the PDF plus `metadata.json`) is archived
+under `data/raw/acs/{document-number}/` with the PDF's SHA-256 as
+`raw_hash`; `verify_snapshot` recomputes the counts, and quarantine,
+superseded-snapshot handling, listing-pin reconciliation (label, URL and
+effective date), rollback refusal (document numbers order by base and
+revision letter) and the external-archive reminder match the PCG fetcher.
+
+`far-aim parse acs` enforces categories 2, 3 and 6 for the ACS canonical
+layer; the whole FAA-S-ACS-6C document (12 Areas of Operation, 61 Tasks,
+1,192 elements, 3 appendices) parses losslessly:
+
+- **Structural integrity** — a grammar over layout-mode lines
+  (`far_aim.parsers.acs`): page furniture is the only thing ever dropped
+  and is verified (page numbers sequential, running headers equal to the
+  container parsed on the page); front matter must be exactly the five
+  known sections; every task must carry References, Objective and the
+  three element sections in order; element codes must match their area,
+  task and section and number contiguously; sub-elements must follow
+  their parent with sequential letters. Anything off-grammar raises
+  `ParseError`.
+- **Text integrity** — three documented extraction repairs and nothing
+  else; every surviving word lands in exactly one canonical field
+  (lossless-capture multiset); the Table of Contents must name exactly
+  the areas, tasks and appendix headings parsed; the Major Enhancements
+  page must agree with the elements (added codes present, removed codes
+  absent or `[Archived]`, every placeholder listed). Fixture tests cover
+  the page-subset PDF end to end and the grammar's error paths on
+  synthetic streams.
+- **Determinism / fail closed** — the same `cli.LayerSpec` machinery
+  (staging swap, `.acs-previous` recovery, deep re-verification, manifest
+  `canonical_hash` after the layer is on disk); `far-aim validate`
+  verifies root types `acs_publication`/`acs_area`/`acs_appendix`, nested
+  tasks, provenance pinned to the manifest (document number, label,
+  effective date, PDF URL opened at the document's own page) and the
+  extractor version, so a `pypdf` upgrade forces a re-parse whose text
+  differences surface as a reviewed content change (plan §32.6).
+
+`far-aim build-vault` / `far-aim validate` extend categories 4 and 6 to
+the ACS: the fetch-accepted-but-unparsed window refuses to build, ACS
+stems (codes) join the global namespace while task titles are never
+aliases, every generated link and block link (`[[PA.I.B#^pa-i-b-k1e]]`)
+resolves, and rebuilds are byte-idempotent. The change gates treat the
+ACS as a fourth corpus: document notes are tasks and appendices, paired
+by code; thresholds are wide (removed 10 % / content 25 %, floors 5 / 10)
+and count only unannounced changes on a document transition, where the
+Major Enhancements page is cross-checked like the AIM's Explanation of
+Changes (a named Task the layer never had, or none of the named Tasks
+changing, fails; `--accept-change-note-mismatch` overrides).
+
 ## Current implementation status (Phase 9)
 
 The enrichment layer (plan §36, docs/enrichment.md) adds gates without

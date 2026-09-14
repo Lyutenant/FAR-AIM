@@ -11,6 +11,10 @@ requires-python = ">=3.12"
 license = { text = "MIT" }
 dependencies = [
     "httpx>=0.27",
+    # Pinned exactly: the ACS is a PDF and pypdf is its extractor of record —
+    # a version bump can change extracted text, which must surface as a
+    # reviewed content change, never drift in silently (plan §39.2).
+    "pypdf==6.18.1",
 ]
 
 [project.optional-dependencies]

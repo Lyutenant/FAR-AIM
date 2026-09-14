@@ -10,11 +10,14 @@ from far_aim import changes
 from far_aim.cli import EXIT_ERROR, EXIT_NOT_IMPLEMENTED, EXIT_OK, main
 from far_aim.config import Config
 from far_aim.manifest import SourceManifest, SourceState
+from far_aim.parsers import acs as acs_parser
 from far_aim.parsers import aim as aim_parser
 from far_aim.parsers import pcg as pcg_parser
+from far_aim.sources import acs as acs_src
 from far_aim.sources import aim as aim_source
 from far_aim.sources import ecfr
 from far_aim.sources import pcg as pcg_src
+from tests.test_acs_source import AcsUpstream
 from tests.test_aim_source import FIXTURE_APPENDICES, FIXTURE_CHAPTERS, AimUpstream
 from tests.test_aim_source import VERSION as AIM_VERSION
 from tests.test_ecfr_source import FIXTURES as FIXTURES_DIR
@@ -105,12 +108,15 @@ def mock_upstream(monkeypatch):
     upstream = Upstream()
     upstream.aim = AimUpstream()
     upstream.pcg = PcgUpstream()
+    upstream.acs = AcsUpstream()
 
     def handler(request: httpx.Request) -> httpx.Response:
         if request.url.host == "www.ecfr.gov":
             return upstream.handler(request)
         if request.url.path.startswith(PcgUpstream.PREFIX):
             return upstream.pcg.handler(request)
+        if request.url.path.startswith(AcsUpstream.PAGE_PATH):
+            return upstream.acs.handler(request)
         return upstream.aim.handler(request)
 
     def client() -> httpx.Client:
@@ -136,6 +142,11 @@ def mock_upstream(monkeypatch):
     monkeypatch.setattr(pcg_src, "REQUIRED_LETTERS", PCG_LETTERS)
     monkeypatch.setattr(pcg_src.time, "sleep", lambda _s: None)
     monkeypatch.setattr(pcg_parser, "REQUIRE_RESOLVED_REFERENCES", False)
+    monkeypatch.setattr(acs_src, "make_client", client)
+    monkeypatch.setattr(acs_src, "MIN_PAGES", 10)
+    monkeypatch.setattr(acs_src, "MIN_ELEMENTS", 100)
+    monkeypatch.setattr(acs_src.time, "sleep", lambda _s: None)
+    monkeypatch.setattr(acs_parser, "REQUIRE_COMPLETE", False)
     return upstream
 
 
@@ -151,6 +162,44 @@ def test_fetch_ecfr_end_to_end(tmp_path, capsys, mock_upstream):
     assert main(["--root", str(tmp_path), "fetch", "ecfr"]) == EXIT_OK
     assert "unchanged" in capsys.readouterr().out
     assert mock_upstream.xml_requests == 1
+
+
+def test_fetch_and_parse_acs_end_to_end(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "fetch", "acs"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "accepted: ACS Private Pilot for Airplane Category (FAA-S-ACS-6C)" in out
+    assert (config.raw_dir / "acs" / "FAA-S-ACS-6C" / "private_airplane_acs_6.pdf").exists()
+    assert main(["--root", str(tmp_path), "fetch", "acs"]) == EXIT_OK
+    assert "unchanged" in capsys.readouterr().out
+    assert mock_upstream.acs.requests[AcsUpstream.PDF_PATH] == 1
+    assert main(["--root", str(tmp_path), "parse", "acs"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert "parsed ACS FAA-S-ACS-6C: 3 areas of operation, 12 tasks, 212 elements" in out
+    assert sorted(p.name for p in (config.normalized_dir / "acs").glob("*.json")) == [
+        "appendix-1.json", "appendix-2.json", "appendix-3.json",
+        "area-01.json", "area-11.json", "area-12.json", "publication.json",
+    ]
+    state = SourceManifest.load(config.manifest_path).sources["acs_private_airplane"]
+    assert state.canonical_hash is not None
+    assert main(["--root", str(tmp_path), "parse", "acs", "--part", "61"]) == EXIT_ERROR
+    assert "--part applies to `parse ecfr` only" in capsys.readouterr().err
+
+
+def test_validate_rejects_a_layer_from_another_extractor(tmp_path, capsys, mock_upstream):
+    config = Config.load(tmp_path)
+    SourceManifest.default().save(config.manifest_path)
+    assert main(["--root", str(tmp_path), "fetch", "acs"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "parse", "acs"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    capsys.readouterr()
+    path = config.normalized_dir / "acs" / "area-01.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data["source"]["extractor"] = "pypdf/0.0.0"
+    path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
+    assert "is not the installed extractor" in capsys.readouterr().err
 
 
 def test_fetch_ecfr_without_registry_fails(tmp_path, capsys, mock_upstream):
@@ -1338,6 +1387,12 @@ def test_full_title_vault_build(tmp_path, capsys):
             pytest.skip("manifest records a PCG layer that is not on disk")
         os.symlink(_NORMALIZED.parent / "pcg", config.normalized_dir / "pcg")
         expected_total += _pcg_file_count(_NORMALIZED.parent / "pcg")
+    if manifest.sources["acs_private_airplane"].canonical_hash is not None:
+        # The ACS layer rides along too (Phase 10a).
+        if not (_NORMALIZED.parent / "acs").is_dir():
+            pytest.skip("manifest records an ACS layer that is not on disk")
+        os.symlink(_NORMALIZED.parent / "acs", config.normalized_dir / "acs")
+        expected_total += _acs_file_count(_NORMALIZED.parent / "acs")
     enrichment_dir = _REPO_ROOT / "data" / "enrichment"
     if enrichment_dir.is_dir():
         # The committed enrichment layer rides along (Phase 9): concept
@@ -1427,6 +1482,18 @@ def _aim_file_count(layer_dir) -> int:
         for section in doc.get("sections", []):
             notes += 1 + len(section["paragraphs"])
     return notes + len(aim_asset_hashes(docs)) + 1  # + asset ledger
+
+
+def _acs_file_count(layer_dir) -> int:
+    """Generated ACS notes: one per area, task and appendix, plus the index."""
+    total = 1
+    for path in layer_dir.glob("*.json"):
+        doc = json.loads(path.read_text(encoding="utf-8"))
+        if doc["document_type"] == "acs_area":
+            total += 1 + len(doc["tasks"])
+        elif doc["document_type"] == "acs_appendix":
+            total += 1
+    return total
 
 
 def _pcg_file_count(layer_dir) -> int:

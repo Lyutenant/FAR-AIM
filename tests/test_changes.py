@@ -554,3 +554,80 @@ def test_evaluate_far_index_states():
     )
     assert report.change_note == [] and report.mass == []
     assert "  eCFR amendment index (2026-09-03 → 2026-09-15): 1 amended, 0 removed" in report.lines
+
+
+# ---------------------------------------------------------------------------
+# ACS — Major Enhancements cross-check (plan §39.2)
+# ---------------------------------------------------------------------------
+
+
+def _acs_rec(code: str, **fm) -> NoteRecord:
+    return _rec(f"{code}.md", "acs_task", citation=code, **fm)
+
+
+def _acs_ledger(**lists) -> Ledger:
+    ledger = Ledger(
+        corpus=changes.ACS,
+        published=64,
+        planned=64,
+        index_before={"source_version": "FAA-S-ACS-6B"},
+        index_after={"source_version": "FAA-S-ACS-6C"},
+    )
+    for name, records in lists.items():
+        setattr(ledger, name, records)
+    return ledger
+
+
+def test_acs_change_note_is_read_from_the_publication_document():
+    docs = {
+        "publication": {
+            "document_type": "acs_publication",
+            "changes": {"added": ["PA.I.B.K1e", "PA.II.A.S4"], "removed": ["PA.III.A.R3"]},
+        }
+    }
+    note = changes.read_acs_change_note(docs)
+    assert note is not None
+    assert note.tasks == {"PA.I.B", "PA.II.A", "PA.III.A"}
+    assert changes.read_acs_change_note({"area-01": {"document_type": "acs_area"}}) is None
+
+
+def test_cross_check_acs_verdicts():
+    note = changes.AcsChangeNote(added=("PA.I.B.K1e", "PA.II.A.S4"), removed=("PA.III.A.R3",))
+    ledger = _acs_ledger(
+        content_changed=[_acs_rec("PA.I.B"), _acs_rec("PA.IV.A")],
+        unchanged=[_acs_rec("PA.II.A"), _acs_rec("PA.III.A")],
+    )
+    outcome = changes.cross_check_acs(note, ledger)
+    assert outcome.defects == []
+    assert outcome.explained == {ledger.content_changed[0].path}
+    assert any("named but unchanged: PA.II.A, PA.III.A" in line for line in outcome.report)
+    assert any("Tasks the page does not name: 1 (PA.IV.A)" in line for line in outcome.report)
+    # A named task the layer never had fails; so does a note none of whose tasks changed.
+    missing = changes.cross_check_acs(note, _acs_ledger(content_changed=[_acs_rec("PA.I.B")]))
+    assert any("never had: PA.II.A, PA.III.A" in d for d in missing.defects)
+    quiet = changes.cross_check_acs(
+        note, _acs_ledger(unchanged=[_acs_rec(c) for c in ("PA.I.B", "PA.II.A", "PA.III.A")])
+    )
+    assert any("were not captured" in d for d in quiet.defects)
+
+
+def test_evaluate_runs_the_acs_cross_check_only_on_a_document_transition():
+    docs = {
+        "publication": {
+            "document_type": "acs_publication",
+            "changes": {"added": ["PA.I.B.K1e"], "removed": []},
+        }
+    }
+    ledger = _acs_ledger(content_changed=[_acs_rec("PA.I.B")])
+    report = changes.evaluate({changes.ACS: ledger}, aim_docs=None, acs_docs=docs)
+    assert report.change_note == [] and report.mass == []
+    assert any("Major Enhancements: 1 code(s) added" in line for line in report.lines)
+    # No publication document to cross-check ⇒ an overridable change-note defect.
+    report = changes.evaluate({changes.ACS: ledger}, aim_docs=None, acs_docs={})
+    assert any("no publication document" in d for d in report.change_note)
+    # Same document number ⇒ no cross-check, thresholds count every change.
+    same = _acs_ledger(content_changed=[_acs_rec(f"PA.I.{c}") for c in "ABCDEFGHIJKLMNOPQ"])
+    same.index_before = same.index_after
+    report = changes.evaluate({changes.ACS: same}, aim_docs=None, acs_docs=docs)
+    assert report.change_note == []
+    assert any("17 content-changed notes, above 16" in d for d in report.mass)

@@ -22,6 +22,17 @@ Full specification: plan §5 (sources), §6 (acquisition), §26 (etiquette).
   are held to the same origin; the index page's own edition summary must
   agree before anything is downloaded. Pages are the index navigation's chapter, section
   and appendix pages; figures are every `images/*` file those pages embed.
+- **ACS (Private Pilot Airplane):** discovered from the FAA ACS page —
+  `https://www.faa.gov/training_testing/testing/acs` — whose document
+  table lists each standard with its number (`Private Pilot for Airplane
+  Category (FAA-S-ACS-6C)`), publication date and `Effective …` status;
+  the document number is the version. The FAA publishes the ACS **only as
+  a PDF**, so this source is the plan's one bounded deviation from
+  HTML-first ingestion (plan §39.2): the PDF must carry a text layer (no
+  OCR, ever), its cover page must name the listed document number (the
+  link `private_airplane_acs_6.pdf` is edition-agnostic), the archived
+  artifact is the PDF byte-for-byte, and the extractor of record is the
+  exactly pinned `pypdf` recorded in every document's provenance.
 - Never scrape commercial FAR/AIM publishers (ASA, Sporty's, Gleim, …).
 
 ## Raw snapshot storage (plan §6.2 — decided)
@@ -38,9 +49,11 @@ Full specification: plan §5 (sources), §6 (acquisition), §26 (etiquette).
   a tree hash over every file's checksum. The PCG snapshot is
   `data/raw/pcg/{effective-date}-change-{n}/{pages,metadata.json}` (~1.1 MB
   — the index page plus one page per glossary letter; no figures), archived
-  and tree-hashed the same way. `far-aim fetch aim` / `fetch pcg` print a
-  reminder on every acceptance; the archive step itself is operational and
-  not automated here. HTML pages are archived as served except for the
+  and tree-hashed the same way. The ACS snapshot is
+  `data/raw/acs/{document-number}/{private_airplane_acs_6.pdf,metadata.json}`
+  (~0.7 MB), identified by the PDF's SHA-256. `far-aim fetch aim` /
+  `fetch pcg` / `fetch acs` print a reminder on every acceptance; the
+  archive step itself is operational and not automated here. HTML pages are archived as served except for the
   Akamai bot-manager script pair the CDN injects with per-download values
   (stripped before archiving/hashing — CDN instrumentation, not FAA
   content), and every corpus request carries a one-off cache-busting query

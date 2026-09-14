@@ -1,6 +1,6 @@
 """Command-line interface for the far-aim pipeline (plan §18).
 
-Implemented: `check`, `validate`, `fetch ecfr|aim|pcg`, `parse ecfr|aim|pcg`,
+Implemented: `check`, `validate`, `fetch ecfr|aim|pcg|acs`, `parse ecfr|aim|pcg|acs`,
 `enrich`, `diff`, `build-vault`, `update`. The remaining command is a
 registered stub that exits with code 2 until its phase is implemented.
 
@@ -28,6 +28,7 @@ from xml.etree import ElementTree
 from far_aim import __version__, changes
 from far_aim.config import Config
 from far_aim.generate import BuildError
+from far_aim.generate import acs_notes as generate_acs_notes
 from far_aim.generate import aim_notes as generate_aim_notes
 from far_aim.generate import build as generate_build
 from far_aim.generate import concept_notes as generate_concept_notes
@@ -38,12 +39,15 @@ from far_aim.links import glossary, semantic
 from far_aim.links.concepts import ConceptGraph
 from far_aim.log import setup_logging
 from far_aim.manifest import ManifestError, SourceManifest, SourceState
+from far_aim.models import acs as acs_model
 from far_aim.models import aim as aim_model
 from far_aim.models import cfr as cfr_model
 from far_aim.models import pcg as pcg_model
+from far_aim.parsers import acs as acs_parser
 from far_aim.parsers import aim as aim_parser
 from far_aim.parsers import ecfr as ecfr_parser
 from far_aim.parsers import pcg as pcg_parser
+from far_aim.sources import acs as acs_source
 from far_aim.sources import aim as aim_source
 from far_aim.sources import ecfr
 from far_aim.sources import pcg as pcg_source
@@ -53,7 +57,7 @@ EXIT_OK = 0
 EXIT_ERROR = 1
 EXIT_NOT_IMPLEMENTED = 2
 
-CORPORA = ("ecfr", "aim", "pcg")
+CORPORA = ("ecfr", "aim", "pcg", "acs")
 
 NOT_IMPLEMENTED_PHASE = {
     ("normalize", None): "Phase 2",
@@ -408,6 +412,84 @@ AIM_SPEC = LayerSpec(
     source_defect=_aim_source_defect,
 )
 
+def _acs_source_defect(doc: dict, source: dict, state: SourceState) -> str | None:
+    """Every provenance field the ACS notes render must match the manifest,
+    and the layer must have been extracted by the pinned extractor (plan §39.2)."""
+    expected = {
+        "provider": "faa",
+        "publication": "acs",
+        "source_version": state.accepted_version,
+        "edition_label": state.edition_label,
+        "effective_date": state.effective_date,
+        "raw_checksum": state.raw_hash,
+    }
+    defect = _expected_source_fields(source, expected)
+    if defect is not None:
+        return defect
+    if source.get("extractor") != acs_parser.EXTRACTOR:
+        return (
+            f"source extractor {source.get('extractor')!r} is not the installed extractor "
+            f"({acs_parser.EXTRACTOR}); re-run `far-aim parse acs`"
+        )
+    return _acs_url_defect(doc, source.get("url"), state.source_url)
+
+
+def _acs_url_defect(doc: dict, url: object, pdf_url: str | None) -> str | None:
+    """A document's ``source.url`` is the accepted PDF, opened at its own page."""
+    if not isinstance(pdf_url, str) or not isinstance(url, str):
+        return f"source url {url!r} cannot be checked against the manifest ({pdf_url!r})"
+    base, _, fragment = url.partition("#")
+    if base != pdf_url:
+        return f"source url {url!r} is not the accepted PDF ({pdf_url!r})"
+    kind = doc.get("document_type")
+    if kind == acs_model.DOCUMENT_TYPE_PUBLICATION:
+        return None if not fragment else f"source url {url!r} is not the bare PDF URL"
+    page = doc.get("page")
+    if fragment != f"page={page}" or not isinstance(page, int) or page < 1:
+        return f"source url {url!r} does not open the document's own page ({page!r})"
+    return None
+
+
+def _acs_doc_key(doc: dict) -> str | None:
+    kind = doc.get("document_type")
+    if kind == acs_model.DOCUMENT_TYPE_PUBLICATION:
+        return "publication"
+    if kind == acs_model.DOCUMENT_TYPE_AREA and isinstance(doc.get("number"), int):
+        return f"area-{doc['number']:02d}"
+    if kind == acs_model.DOCUMENT_TYPE_APPENDIX and isinstance(doc.get("number"), int):
+        return f"appendix-{doc['number']}"
+    return None
+
+
+ACS_SPEC = LayerSpec(
+    name="acs",
+    source_name=acs_source.SOURCE_NAME,
+    label="ACS",
+    fetch_command="fetch acs",
+    parse_command="parse acs",
+    root_types=frozenset(
+        {
+            acs_model.DOCUMENT_TYPE_PUBLICATION,
+            acs_model.DOCUMENT_TYPE_AREA,
+            acs_model.DOCUMENT_TYPE_APPENDIX,
+        }
+    ),
+    hashed_types=frozenset(
+        {
+            acs_model.DOCUMENT_TYPE_PUBLICATION,
+            acs_model.DOCUMENT_TYPE_AREA,
+            acs_model.DOCUMENT_TYPE_TASK,
+            acs_model.DOCUMENT_TYPE_APPENDIX,
+        }
+    ),
+    file_glob="*.json",
+    file_noun="document files",
+    key_noun="document",
+    doc_key=_acs_doc_key,
+    filename=lambda key: f"{key}.json",
+    source_defect=_acs_source_defect,
+)
+
 PCG_SPEC = LayerSpec(
     name="pcg",
     source_name=pcg_source.SOURCE_NAME,
@@ -488,7 +570,12 @@ def cmd_check(config: Config, *, remote: bool = False) -> int:
         except FetchError as exc:
             print(f"error: pcg: {exc}", file=sys.stderr)
             pcg_discovery = None
-    if discovery is None or aim_discovery is None or pcg_discovery is None:
+        try:
+            acs_discovery = acs_source.discover_acs(client)
+        except FetchError as exc:
+            print(f"error: {acs_source.SOURCE_NAME}: {exc}", file=sys.stderr)
+            acs_discovery = None
+    if None in (discovery, aim_discovery, pcg_discovery, acs_discovery):
         code = EXIT_ERROR
     if discovery is not None:
         code = max(code, _report_ecfr_remote(manifest, discovery))
@@ -496,6 +583,8 @@ def cmd_check(config: Config, *, remote: bool = False) -> int:
         code = max(code, _report_aim_remote(manifest, aim_discovery))
     if pcg_discovery is not None:
         code = max(code, _report_pcg_remote(manifest, pcg_discovery))
+    if acs_discovery is not None:
+        code = max(code, _report_acs_remote(manifest, acs_discovery))
     return code
 
 
@@ -591,6 +680,41 @@ def _report_pcg_remote(manifest: SourceManifest, discovery: pcg_source.PcgDiscov
     return EXIT_OK
 
 
+def _report_acs_remote(manifest: SourceManifest, discovery: acs_source.AcsDiscovery) -> int:
+    name = acs_source.SOURCE_NAME
+    state = manifest.sources[name]
+    listed = f"{discovery.label} (effective {discovery.effective_date})"
+    if state.accepted_version == discovery.version:
+        if not acs_source.listing_matches_pins(state, discovery):
+            print(
+                f"error: {name}: FAA now lists the accepted document {discovery.version} as "
+                f"{discovery.label!r} at {discovery.pdf_url!r} (accepted as "
+                f"{state.edition_label!r} at {state.source_url!r}); `fetch acs` will "
+                "refuse this without --force.",
+                file=sys.stderr,
+            )
+            return EXIT_ERROR
+        print(f"{name}: up to date ({listed})")
+    elif (
+        state.accepted_version is not None
+        and acs_source.DOCUMENT_NUMBER_RE.match(state.accepted_version) is not None
+        and acs_source.document_number_key(discovery.version)
+        < acs_source.document_number_key(state.accepted_version)
+    ):
+        print(
+            f"error: {name}: FAA lists {listed}, older than accepted "
+            f"{state.accepted_version}; `fetch acs` will refuse this without --force.",
+            file=sys.stderr,
+        )
+        return EXIT_ERROR
+    else:
+        print(
+            f"{name}: update available — FAA lists {listed}, "
+            f"accepted {state.accepted_version or 'none'}"
+        )
+    return EXIT_OK
+
+
 # ---------------------------------------------------------------------------
 # fetch
 # ---------------------------------------------------------------------------
@@ -671,6 +795,33 @@ def cmd_fetch_pcg(config: Config, *, force: bool) -> int:
         )
     else:
         print(f"unchanged: PCG {edition} already accepted; cached snapshot verified")
+    return EXIT_OK
+
+
+def cmd_fetch_acs(config: Config, *, force: bool) -> int:
+    try:
+        result = acs_source.fetch_acs(config, force=force)
+    except (FetchError, ManifestError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    except OSError as exc:
+        print(f"error: filesystem failure during fetch: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    edition = f"{result.label} (effective {result.effective_date})"
+    if result.downloaded:
+        print(f"accepted: ACS {edition}")
+        print(f"  archive:  {result.pdf_path}")
+        print(f"  checksum: {result.raw_hash}")
+        print(
+            f"  size:     {result.byte_count} bytes, {result.page_count} pages, "
+            f"{result.element_count} element codes"
+        )
+        print(
+            "note: the FAA offers no point-in-time access — archive this snapshot "
+            "outside the repository (plan §6.2)."
+        )
+    else:
+        print(f"unchanged: ACS {edition} already accepted; cached snapshot verified")
     return EXIT_OK
 
 
@@ -961,6 +1112,93 @@ def _parse_pcg_locked(config: Config) -> int:
     terms = sum(pcg_parser.count_terms(d) for d in docs.values())
     summary = f"parsed PCG {state.accepted_version}: {letters} letters, {terms} terms"
     return _publish_normalized_layer(config, manifest, docs, PCG_SPEC, summary)
+
+
+def cmd_parse_acs(config: Config) -> int:
+    """Parse the accepted ACS PDF into canonical area/appendix JSON (Phase 10a)."""
+    try:
+        with exclusive_lock(fetch_lock_path(config)):
+            return _parse_acs_locked(config)
+    except FetchError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    except OSError as exc:
+        print(f"error: filesystem failure during parse: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+
+
+def _acs_snapshot(config: Config, state: SourceState) -> tuple[Path, dict] | str:
+    """The verified accepted ACS snapshot directory and its metadata, or a defect."""
+    if state.accepted_version is None or state.raw_hash is None:
+        return "no accepted ACS snapshot; run `far-aim fetch acs` first"
+    snapshot_dir = config.raw_dir / "acs" / state.accepted_version
+    if not snapshot_dir.is_dir():
+        return f"archived snapshot missing: {snapshot_dir}; run `far-aim fetch acs`"
+    if not acs_source.verify_snapshot(
+        snapshot_dir, version=state.accepted_version, raw_hash=state.raw_hash
+    ):
+        return (
+            f"archived snapshot {snapshot_dir} is incomplete or does not match the accepted "
+            "checksum; run `far-aim fetch acs` to restore it"
+        )
+    metadata = acs_source.load_metadata(snapshot_dir)
+    assert metadata is not None
+    return snapshot_dir, metadata
+
+
+def _parse_acs_locked(config: Config) -> int:
+    try:
+        manifest = SourceManifest.load(config.manifest_path)
+    except ManifestError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+    state = manifest.sources[acs_source.SOURCE_NAME]
+    snapshot = _acs_snapshot(config, state)
+    if isinstance(snapshot, str):
+        print(f"error: {snapshot}", file=sys.stderr)
+        return EXIT_ERROR
+    snapshot_dir, metadata = snapshot
+    pinned = {
+        "edition_label": state.edition_label,
+        "effective_date": state.effective_date,
+        "pdf_url": state.source_url,
+    }
+    for key, value in pinned.items():
+        if value is None or metadata.get(key) != value:
+            print(
+                f"error: snapshot metadata {key} {metadata.get(key)!r} does not match the "
+                f"manifest ({value!r}); run `far-aim fetch acs` to re-accept the document",
+                file=sys.stderr,
+            )
+            return EXIT_ERROR
+    source = {
+        "provider": "faa",
+        "publication": "acs",
+        "source_version": state.accepted_version,
+        "edition_label": state.edition_label,
+        "effective_date": state.effective_date,
+        "url": state.source_url,
+        "retrieved_at": metadata["retrieved_at"],
+        "raw_checksum": state.raw_hash,
+    }
+    _recover_normalized_layer(config, state, ACS_SPEC)
+    try:
+        docs = acs_parser.build_acs_docs(snapshot_dir, metadata, source)
+    except acs_parser.ParseError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        print("note: nothing was written; last known-good output preserved.", file=sys.stderr)
+        return EXIT_ERROR
+    areas = sum(1 for d in docs.values() if d["document_type"] == acs_model.DOCUMENT_TYPE_AREA)
+    appendices = sum(
+        1 for d in docs.values() if d["document_type"] == acs_model.DOCUMENT_TYPE_APPENDIX
+    )
+    tasks = sum(acs_parser.count_tasks(d) for d in docs.values())
+    elements = sum(acs_parser.count_elements(d) for d in docs.values())
+    summary = (
+        f"parsed ACS {state.accepted_version}: {areas} areas of operation, {tasks} tasks, "
+        f"{elements} elements, {appendices} appendices ({acs_parser.EXTRACTOR})"
+    )
+    return _publish_normalized_layer(config, manifest, docs, ACS_SPEC, summary)
 
 
 # ---------------------------------------------------------------------------
@@ -1453,7 +1691,7 @@ def _validate_locked(config: Config) -> int:
         print(f"error: {exc}", file=sys.stderr)
         return EXIT_ERROR
     print(f"ok: manifest schema valid ({path})")
-    for spec in (ECFR_SPEC, AIM_SPEC, PCG_SPEC):
+    for spec in (ECFR_SPEC, AIM_SPEC, PCG_SPEC, ACS_SPEC):
         code = _validate_normalized_layer(config, manifest, spec)
         if code != EXIT_OK:
             return code
@@ -1688,6 +1926,47 @@ def _pcg_layer_pending_defect(config: Config, manifest: SourceManifest) -> str |
     )
 
 
+def _acs_layer(config: Config, manifest: SourceManifest) -> generate_build.AcsLayer | str | None:
+    """The verified ACS layer; None when the ACS is not parsed yet."""
+    state = manifest.sources[acs_source.SOURCE_NAME]
+    if state.accepted_version is None or state.canonical_hash is None:
+        return None
+    docs = _load_verified_docs(config, state, ACS_SPEC)
+    if isinstance(docs, str):
+        return docs
+    return generate_build.AcsLayer(docs=docs, title_hash=state.canonical_hash)
+
+
+def _vault_has_generated_acs(config: Config) -> bool:
+    """True when generator-owned ACS notes are on disk."""
+    vault_acs = config.vault_dir / generate_acs_notes.ACS_DIR
+    if not vault_acs.is_dir():
+        return False
+    return any(generate_build.is_generated_note(p) for p in sorted(vault_acs.rglob("*.md")))
+
+
+def _acs_layer_pending_defect(config: Config, manifest: SourceManifest) -> str | None:
+    """Same rule as the AIM and PCG (plan §32.13): between ``fetch acs`` accepting
+    a newer document and ``parse acs`` publishing it, a build would delete the
+    last known-good ACS notes as stale — refuse instead."""
+    if not _vault_has_generated_acs(config):
+        return None
+    state = manifest.sources[acs_source.SOURCE_NAME]
+    if state.canonical_hash is not None:
+        return None
+    if state.accepted_version is not None:
+        return (
+            f"the vault holds generated ACS notes but the accepted ACS document "
+            f"{state.accepted_version} has not been parsed yet; run `far-aim parse acs` "
+            "first (building now would delete the existing ACS notes)"
+        )
+    return (
+        "the vault holds generated ACS notes but the manifest records no accepted ACS "
+        "snapshot; run `far-aim fetch acs` and `far-aim parse acs`, or remove "
+        f"{config.vault_dir / generate_acs_notes.ACS_DIR} deliberately"
+    )
+
+
 # ---------------------------------------------------------------------------
 # enrichment layer (Phase 9, plan §36)
 # ---------------------------------------------------------------------------
@@ -1877,6 +2156,7 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
     vault_aim = config.vault_dir / generate_aim_notes.AIM_DIR
     vault_pcg = config.vault_dir / generate_pcg_notes.PCG_DIR
     vault_concepts = config.vault_dir / generate_concept_notes.CONCEPTS_DIR
+    vault_acs = config.vault_dir / generate_acs_notes.ACS_DIR
     status_path = config.vault_dir / f"{generate_notes.SOURCE_STATUS_STEM}.md"
     home_path = config.vault_dir / f"{generate_notes.HOME_STEM}.md"
     # A vault "exists" only if any generator-owned note does. Directory
@@ -1889,7 +2169,7 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
         generate_build.is_generated_note(p) for p in (status_path, home_path)
     ) or any(
         generate_build.is_generated_note(p)
-        for root in (vault_far, vault_aim, vault_pcg, vault_concepts)
+        for root in (vault_far, vault_aim, vault_pcg, vault_concepts, vault_acs)
         if root.is_dir()
         for p in sorted(root.rglob("*.md"))
     )
@@ -1936,6 +2216,7 @@ class VaultPlan:
 
     files: dict[Path, bytes]  # on-disk paths → bytes
     aim_docs: dict[str, dict] | None  # the verified AIM layer, when built
+    acs_docs: dict[str, dict] | None = None  # the verified ACS layer, when built
 
 
 def _plan_generated_vault(
@@ -1952,6 +2233,7 @@ def _plan_generated_vault(
     for pending in (
         _aim_layer_pending_defect(config, manifest),
         _pcg_layer_pending_defect(config, manifest),
+        _acs_layer_pending_defect(config, manifest),
     ):
         if pending is not None:
             return pending
@@ -1961,6 +2243,9 @@ def _plan_generated_vault(
     pcg = _pcg_layer(config, manifest)
     if isinstance(pcg, str):
         return pcg
+    acs = _acs_layer(config, manifest)
+    if isinstance(acs, str):
+        return acs
     enrichment = _enrichment_layer(config)
     if isinstance(enrichment, str):
         return enrichment
@@ -1977,12 +2262,14 @@ def _plan_generated_vault(
             pcg,
             enrichment,
             definitions_gate,
+            acs,
         )
     except BuildError as exc:
         return str(exc)
     return VaultPlan(
         files={config.vault_dir.joinpath(*parts): data for parts, data in plan.items()},
         aim_docs=aim.docs if aim is not None else None,
+        acs_docs=acs.docs if acs is not None else None,
     )
 
 
@@ -2000,6 +2287,7 @@ def _stale_generated_on_disk(config: Config, planned: dict[Path, bytes]) -> list
         generate_aim_notes.AIM_DIR,
         generate_pcg_notes.PCG_DIR,
         generate_concept_notes.CONCEPTS_DIR,
+        generate_acs_notes.ACS_DIR,
     )
     for root_name in corpus_dirs:
         root = config.vault_dir / root_name
@@ -2153,7 +2441,9 @@ def _change_gates(
         far_index = changes.amendment_chain(
             config.raw_dir, str(far.edition_before), str(far.edition_after)
         )
-    report = changes.evaluate(ledgers, aim_docs=plan.aim_docs, far_index=far_index)
+    report = changes.evaluate(
+        ledgers, aim_docs=plan.aim_docs, far_index=far_index, acs_docs=plan.acs_docs
+    )
     for line in report.lines:
         print(line)
     for corpus, totals in report.summaries.items():
@@ -2230,6 +2520,7 @@ def _build_vault_locked(config: Config) -> int:
     for pending in (
         _aim_layer_pending_defect(config, manifest),
         _pcg_layer_pending_defect(config, manifest),
+        _acs_layer_pending_defect(config, manifest),
     ):
         if pending is not None:
             print(f"error: {pending}", file=sys.stderr)
@@ -2242,6 +2533,10 @@ def _build_vault_locked(config: Config) -> int:
     if isinstance(pcg, str):
         print(f"error: {pcg}", file=sys.stderr)
         return EXIT_ERROR
+    acs = _acs_layer(config, manifest)
+    if isinstance(acs, str):
+        print(f"error: {acs}", file=sys.stderr)
+        return EXIT_ERROR
     enrichment = _enrichment_layer(config)
     if isinstance(enrichment, str):
         print(f"error: {enrichment}", file=sys.stderr)
@@ -2250,6 +2545,8 @@ def _build_vault_locked(config: Config) -> int:
         print("note: no accepted AIM canonical layer; the vault will not cover the AIM.")
     if pcg is None:
         print("note: no accepted PCG canonical layer; the vault will not cover the PCG.")
+    if acs is None:
+        print("note: no accepted ACS canonical layer; the vault will not cover the ACS.")
     if enrichment is None:
         print("note: no enrichment layer (data/enrichment); no concept notes or derived links.")
     definitions_gate = _definitions_gate(config, docs)
@@ -2267,6 +2564,7 @@ def _build_vault_locked(config: Config) -> int:
             pcg,
             enrichment,
             definitions_gate,
+            acs,
         )
     except BuildError as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -2333,6 +2631,14 @@ def _update_resume_reason(config: Config, manifest: SourceManifest) -> str | Non
             pcg_source.SOURCE_NAME,
             (generate_pcg_notes.PCG_DIR, f"{generate_pcg_notes.PCG_INDEX_STEM}.md"),
         ),
+        (
+            acs_source.SOURCE_NAME,
+            (
+                generate_acs_notes.ACS_DIR,
+                generate_acs_notes.ACS_FOLDER,
+                f"{generate_acs_notes.ACS_INDEX_STEM}.md",
+            ),
+        ),
     ):
         recorded = manifest.sources[source_name].canonical_hash
         if recorded is None:
@@ -2375,7 +2681,7 @@ def _note_canonical_hash(path: Path) -> str | None:
 
 def _normalized_layers_present(config: Config) -> bool:
     """True when any normalized canonical layer files exist locally."""
-    for spec in (ECFR_SPEC, AIM_SPEC, PCG_SPEC):
+    for spec in (ECFR_SPEC, AIM_SPEC, PCG_SPEC, ACS_SPEC):
         out_dir = spec.out_dir(config)
         if out_dir.is_dir() and any(out_dir.glob(spec.file_glob)):
             return True
@@ -2412,6 +2718,7 @@ def _reverify_accepted_content(config: Config, path: Path) -> int:
         ("fetch ecfr", lambda: cmd_fetch_ecfr(config, force=False)),
         ("fetch aim", lambda: cmd_fetch_aim(config, force=False)),
         ("fetch pcg", lambda: cmd_fetch_pcg(config, force=False)),
+        ("fetch acs", lambda: cmd_fetch_acs(config, force=False)),
     ):
         print(f"==> far-aim {label}")
         code = step()
@@ -2494,6 +2801,7 @@ def cmd_update(
             discovery = ecfr.discover_title14(client)
             aim_discovery = aim_source.discover_aim(client)
             pcg_discovery = pcg_source.discover_pcg(client)
+            acs_discovery = acs_source.discover_acs(client)
         except FetchError as exc:
             # Network failure is not "source removed" (plan §25.3): report
             # it and leave the last known-good corpus untouched.
@@ -2504,6 +2812,7 @@ def cmd_update(
         _report_ecfr_remote(manifest, discovery),
         _report_aim_remote(manifest, aim_discovery),
         _report_pcg_remote(manifest, pcg_discovery),
+        _report_acs_remote(manifest, acs_discovery),
     )
     if code != EXIT_OK:
         # Upstream rollback or altered provenance pins: never auto-resolved
@@ -2514,6 +2823,7 @@ def cmd_update(
         ecfr.SOURCE_NAME: discovery.latest_issue_date,
         aim_source.SOURCE_NAME: aim_discovery.version,
         pcg_source.SOURCE_NAME: pcg_discovery.version,
+        acs_source.SOURCE_NAME: acs_discovery.version,
     }
     changed = [name for name, v in latest.items() if manifest.sources[name].accepted_version != v]
     if not changed:
@@ -2557,9 +2867,11 @@ def cmd_update(
         ("fetch ecfr", lambda: cmd_fetch_ecfr(config, force=False)),
         ("fetch aim", lambda: cmd_fetch_aim(config, force=False)),
         ("fetch pcg", lambda: cmd_fetch_pcg(config, force=False)),
+        ("fetch acs", lambda: cmd_fetch_acs(config, force=False)),
         ("parse ecfr", lambda: cmd_parse_ecfr(config, None)),
         ("parse aim", lambda: cmd_parse_aim(config)),
         ("parse pcg", lambda: cmd_parse_pcg(config)),
+        ("parse acs", lambda: cmd_parse_acs(config)),
         # Derived links are recomputed from the freshly parsed layers so a
         # stale related.json never reaches the vault (plan §36.4); the
         # vault diff in the PR is where the changed suggestions are reviewed.
@@ -2643,13 +2955,16 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_fetch_aim(config, force=args.force)
     if args.command == "fetch" and args.corpus == "pcg":
         return cmd_fetch_pcg(config, force=args.force)
+    if args.command == "fetch" and args.corpus == "acs":
+        return cmd_fetch_acs(config, force=args.force)
     if args.command == "parse" and args.corpus == "ecfr":
         return cmd_parse_ecfr(config, args.parts)
-    if args.command == "parse" and args.corpus in ("aim", "pcg"):
+    if args.command == "parse" and args.corpus in ("aim", "pcg", "acs"):
         if args.parts:
             print("error: --part applies to `parse ecfr` only", file=sys.stderr)
             return EXIT_ERROR
-        return cmd_parse_aim(config) if args.corpus == "aim" else cmd_parse_pcg(config)
+        commands = {"aim": cmd_parse_aim, "pcg": cmd_parse_pcg, "acs": cmd_parse_acs}
+        return commands[args.corpus](config)
     if args.command == "build-vault":
         return cmd_build_vault(config)
     if args.command == "enrich":

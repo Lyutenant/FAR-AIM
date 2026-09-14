@@ -32,6 +32,7 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
+from far_aim.generate import acs_notes as generate_acs_notes
 from far_aim.generate import aim_notes as generate_aim_notes
 from far_aim.generate import notes as generate_notes
 from far_aim.generate import pcg_notes as generate_pcg_notes
@@ -42,17 +43,24 @@ from far_aim.sources.common import sha256_of
 FAR = "FAR"
 AIM = "AIM"
 PCG = "PCG"
-CORPORA = (FAR, AIM, PCG)
+ACS = "ACS"
+CORPORA = (FAR, AIM, PCG, ACS)
 
 _CORPUS_DIRS = {
     FAR: generate_notes.FAR_DIR,
     AIM: generate_aim_notes.AIM_DIR,
     PCG: generate_pcg_notes.PCG_DIR,
+    ACS: generate_acs_notes.ACS_DIR,
 }
 _INDEX_NOTES = {
     FAR: (generate_notes.FAR_DIR, f"{generate_notes.TITLE_INDEX_STEM}.md"),
     AIM: (generate_aim_notes.AIM_DIR, f"{generate_aim_notes.AIM_INDEX_STEM}.md"),
     PCG: (generate_pcg_notes.PCG_DIR, f"{generate_pcg_notes.PCG_INDEX_STEM}.md"),
+    ACS: (
+        generate_acs_notes.ACS_DIR,
+        generate_acs_notes.ACS_FOLDER,
+        f"{generate_acs_notes.ACS_INDEX_STEM}.md",
+    ),
 }
 # Frontmatter ``type`` values of the notes the ledger covers (plan §38.2) —
 # the values the notes carry, which differ from the generator's internal
@@ -61,6 +69,7 @@ DOCUMENT_KINDS = {
     FAR: frozenset({"regulation", "appendix"}),
     AIM: frozenset({"aim", "aim_section", "aim_appendix"}),
     PCG: frozenset({"glossary"}),
+    ACS: frozenset({"acs_task", "acs_appendix"}),
 }
 
 OFFICIAL_TEXT_HEADING = "## Official Text"
@@ -393,10 +402,14 @@ class CorpusThresholds:
 # 2026-09: median 3 amended documents per issue, p90 ≈ 44, outliers 207 and
 # 610, largest removal 15; AIM Change 3: six announced paragraphs). AIM and
 # PCG values are provisional until the first real edition calibrates them.
+# ACS (plan §39.2): 64 document notes (61 tasks, 3 appendices) and editions
+# years apart — FAA-S-ACS-6C touched 105 codes across most tasks — so the
+# thresholds are wide and, like the AIM's, count only *unannounced* changes.
 THRESHOLDS: dict[str, CorpusThresholds] = {
     FAR: CorpusThresholds(Threshold(0.01, 25), Threshold(0.05, 100), Threshold(0.05, 100)),
     AIM: CorpusThresholds(Threshold(0.05, 10), Threshold(0.10, 25), Threshold(0.10, 25)),
     PCG: CorpusThresholds(Threshold(0.02, 15), Threshold(0.10, 50), Threshold(0.10, 50)),
+    ACS: CorpusThresholds(Threshold(0.10, 5), Threshold(0.25, 10), Threshold(0.25, 10)),
 }
 
 
@@ -688,6 +701,83 @@ def _listed(items) -> str:
 
 
 # ---------------------------------------------------------------------------
+# ACS — Major Enhancements (plan §39.2)
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class AcsChangeNote:
+    """What the ACS's Major Enhancements page announces, as task codes."""
+
+    added: tuple[str, ...]  # element codes listed as added
+    removed: tuple[str, ...]  # element codes listed as removed and archived
+
+    @property
+    def tasks(self) -> frozenset[str]:
+        return frozenset(
+            generate_acs_notes.task_code_of(code) for code in (*self.added, *self.removed)
+        )
+
+
+def read_acs_change_note(acs_docs: dict[str, dict]) -> AcsChangeNote | None:
+    """The parsed layer's Major Enhancements, if the layer has a publication document."""
+    for doc in acs_docs.values():
+        if doc.get("document_type") == "acs_publication":
+            changes = doc.get("changes") or {}
+            return AcsChangeNote(
+                added=tuple(changes.get("added", ())), removed=tuple(changes.get("removed", ()))
+            )
+    return None
+
+
+def cross_check_acs(note: AcsChangeNote, ledger: Ledger) -> CrossCheck:
+    """An ACS edition transition against its own change note.
+
+    The Major Enhancements page names the element codes added and removed;
+    every named Task must exist in the new layer (or have been removed),
+    and at least one of them must show a canonical change — otherwise the
+    new edition's changes were not captured. Task notes named by the page
+    count as explained for the thresholds.
+    """
+    result = CrossCheck()
+    after = {r.citation for r in ledger.after_records()}
+    gone = {r.citation for r in ledger.removed} | {m.before.citation for m in ledger.moved}
+    changed = (
+        {r.citation for r in ledger.content_changed}
+        | {r.citation for r in ledger.added}
+        | {m.after.citation for m in ledger.moved}
+        | gone
+    )
+    announced = sorted(note.tasks)
+    missing = [t for t in announced if t not in after and t not in gone]
+    if missing:
+        result.defects.append(
+            "ACS: the Major Enhancements name element codes in Task(s) the parsed layer does "
+            f"not have and never had: {_listed(missing)} (plan §32.2)"
+        )
+    if announced and not any(t in changed for t in announced):
+        result.defects.append(
+            f"ACS: none of the {len(announced)} Task(s) the Major Enhancements name shows a "
+            "canonical change — the edition's changes were not captured"
+        )
+    quiet = [t for t in announced if t not in changed]
+    result.explained = {r.path for r in ledger.content_changed if r.citation in note.tasks}
+    unexplained = [r for r in ledger.content_changed if r.citation not in note.tasks]
+    result.report.append(
+        f"  Major Enhancements: {len(note.added)} code(s) added, {len(note.removed)} removed, "
+        f"across {len(announced)} Task(s)"
+    )
+    result.report.append(
+        "  named but unchanged: " + (_listed(quiet) if quiet else "none")
+    )
+    result.report.append(
+        f"  content changes in Tasks the page does not name: {len(unexplained):,}"
+        + (f" ({_listed(r.citation for r in unexplained)})" if unexplained else "")
+    )
+    return result
+
+
+# ---------------------------------------------------------------------------
 # FAR — eCFR amendment index (plan §38.4)
 # ---------------------------------------------------------------------------
 
@@ -875,6 +965,7 @@ def evaluate(
     aim_docs: dict[str, dict] | None,
     far_index: AmendmentIndex | None | str = None,
     thresholds: dict[str, CorpusThresholds] | None = None,
+    acs_docs: dict[str, dict] | None = None,
 ) -> GateReport:
     """Run every gate over the ledgers (plan §38.3–§38.4).
 
@@ -935,5 +1026,17 @@ def evaluate(
                     report.lines.extend(outcome.report)
                     report.change_note.extend(outcome.defects)
                     explained = outcome.explained
+        if corpus == ACS and ledger.edition_changed:
+            note = read_acs_change_note(acs_docs or {})
+            if note is None:
+                report.change_note.append(
+                    "ACS: the parsed layer has no publication document (Major Enhancements) "
+                    "to cross-check"
+                )
+            else:
+                outcome = cross_check_acs(note, ledger)
+                report.lines.extend(outcome.report)
+                report.change_note.extend(outcome.defects)
+                explained = outcome.explained
         report.mass.extend(mass_change_defects(ledger, thresholds[corpus], announced=explained))
     return report

@@ -1720,6 +1720,13 @@ Possible features:
 
 All enrichment must remain separate from authoritative text.
 
+## Phase 10 — Private Pilot exam-prep layer
+
+Design of record: §39 (added 2026-09-13). Four increments — the ACS as an
+authoritative source (10a), the curated study gloss with its verbatim-
+numbers gate and the generated `Prep/` notes (10b, 10c), and the drills:
+oral-prep scenarios and an Anki export (10d).
+
 ---
 
 # 23. Private Pilot Study Layer
@@ -2664,4 +2671,504 @@ already cross-checked at fetch time.
 ✓ Override flags print `accepted:` lines; empty output has no override
 ✓ Change 3 fixture: six announced paragraphs and every mention recognized
 ✓ Amendment index archived with the eCFR snapshot; unannounced-only counting
+```
+
+---
+
+# 39. Design — Private Pilot Exam-Prep Layer (Phase 10: ACS source, study gloss, drills)
+
+Added 2026-09-13, after Phases 0–9 and §37/§38 shipped. This section is the
+design of record for the "Study" products of §30 (Private Pilot mode,
+oral-exam prep, scenario questions, flashcards, spaced repetition) and for
+the first §4.4 later addition, the Airman Certification Standards. It
+refines §12.3, §13, §23 and §36 without changing them.
+
+## 39.0 Purpose and the two questions it answers
+
+The vault today is organized the way the *sources* are organized (parts,
+chapters, letters) plus a curated topic layer (§23, §36). A student
+preparing for the Private Pilot knowledge test and the practical test's
+oral portion needs two things the vault does not yet give:
+
+1. **Citation → meaning.** "What is § 61.5 about, and why do I care?" The
+   official heading ("Certificates and ratings issued under this part") is
+   accurate and unmemorable; nothing says *this is the list of certificate
+   and rating types, which is why a private certificate and an instrument
+   rating are different things*.
+2. **Topic → citation.** "Can I take a friend up tonight?" has no landing
+   spot finer than a collection page. Neither does an ACS code from a
+   knowledge-test report.
+
+Both exams are organized by one document, the **Private Pilot for Airplane
+Category Airman Certification Standards** (FAA-S-ACS-6C, November 2023).
+Its Knowledge and Risk Management elements are what the knowledge test
+samples; the Airman Knowledge Test Report lists the ACS codes of every
+missed question; and Appendix 1 of the ACS requires the evaluator to test
+"any elements in which the applicant was shown to be deficient on the
+knowledge test" during the oral. The exam-prep layer is therefore
+organized by the ACS, not by our own topic names.
+
+**Honest scope limit.** The FAR/AIM covers the regulatory and procedural
+part of the knowledge test. Aerodynamics, systems, performance charts,
+weight and balance and weather theory come from FAA-H-8083-25 (PHAK),
+FAA-H-8083-3 (AFH) and FAA-H-8083-28 (Aviation Weather Handbook); the ACS
+task references say so explicitly (Task I.F, I.G, I.H). Those handbooks
+are not sources yet (§4.4). The layer must make this gap visible
+(§39.6 coverage report) rather than paper over it.
+
+## 39.1 Placement and ownership
+
+```text
+data/manifests/sources.json      # gains source "acs_private_airplane" (Phase 10a)
+data/raw/acs/FAA-S-ACS-6C/       # gitignored: private_airplane_acs_6.pdf + metadata.json
+data/normalized/acs/private-airplane.json   # gitignored, reconstructible, hash pinned
+
+data/enrichment/
+├── acs-map.json         # committed, curated: ACS element → FAR/AIM/PCG/concept stems
+└── ppl-study.json       # committed, curated: per-citation study gloss, numbers,
+                         #   questions, oral scenarios, reading-path stages
+
+vault/
+├── ACS/Private Pilot Airplane/     # generated, generator-owned, AUTHORITATIVE
+│   ├── ACS Private Pilot Airplane.md   # publication index (edition, areas)
+│   ├── PA.I.md … PA.XII.md             # one index per Area of Operation
+│   ├── PA.I.A.md … PA.XII.B.md         # one note per Task, elements verbatim
+│   └── Appendix 1.md … Appendix 3.md   # flat block lists, like FAR appendices
+├── Prep/Private Pilot/             # generated, generator-owned, ENRICHMENT
+│   ├── Private Pilot Prep.md           # entry point, linked from Home
+│   ├── Part 61 Map.md, Part 91 Map.md  # number-pattern maps (§39.4.1)
+│   ├── Numbers Sheet.md                # every tested threshold, linked (§39.4.2)
+│   ├── Where Do I Look.md              # question → citation index by ACS Task (§39.4.3)
+│   ├── Oral Prep/<Roman> <Area title>.md   # scenario bank per Area (§39.4.4)
+│   ├── Reading Path.md                 # pre-solo / solo XC / checkride (§39.4.5)
+│   ├── ACS Checklist.md                # copy into Study/ and tick (§39.4.6)
+│   └── anki/private-pilot.txt          # Anki text import, stable GUIDs (§39.5)
+└── FAR/…, AIM/…                    # covered notes gain one labelled study callout
+```
+
+- The ACS is an **authoritative source** (provenance, raw archive,
+  canonical JSON, `canonical_hash`, change ledger) and gets its own
+  generator-owned root like FAR/AIM/PCG. Everything else in this section is
+  **enrichment** under `data/enrichment/` and obeys §36.1: malformed
+  curation fails the build; a missing file means the feature is absent and
+  nothing else changes; deleting `data/enrichment/` yields a vault with no
+  study layer and no other difference (§20.4 separability test).
+- `vault/Prep/` is a new owned root: stale generated notes are pruned,
+  curated files parked inside are kept with a warning, and `validate`
+  byte-compares it. It is *not* `vault/Study/`: `Study` is the reader's
+  freeform folder that the generator never writes (Home's contract, §36.1
+  `CURATED_ENTRIES`), and that stays true.
+- Names. ACS notes are named by **code only** (`PA.I.A.md`, alias
+  `PA.I.A`, heading `PA.I.A — Pilot Qualifications`), per the §9 naming
+  policy. Task titles are **display text, never aliases**: "Pilot
+  Qualifications", "Night Operations" and "Emergency Operations" already
+  exist as collection or concept stems, and the ACS must not claim them.
+  Prep notes are enrichment output and carry titles, like `Concepts/`.
+  Every new stem joins the global stem/alias namespace check (§17.4).
+
+## 39.2 The ACS as a source (Phase 10a)
+
+**Discovery.** The FAA ACS page
+(`https://www.faa.gov/training_testing/testing/acs`) lists each standard
+as text (`Private Pilot for Airplane Category (FAA-S-ACS-6C)`) with a PDF
+link (`/training_testing/testing/acs/private_airplane_acs_6.pdf`). The
+link is edition-agnostic, so the **version is the document number** read
+from the page and cross-checked against the PDF's cover page at fetch
+time and against its Revision History table at parse time (the AIM's
+index-summary cross-check pattern, §14.2). Mismatch fails the fetch. The
+FAA page is fetched through the `sources.common` machinery (cache-busting
+applies); the PDF is archived byte-for-byte under
+`data/raw/acs/{document-number}/` with `raw_hash` = the PDF's SHA-256,
+and the same "archive outside the repo" reminder as the AIM (§6.2) —
+there is no point-in-time FAA archive. The listing's effective date is
+pinned with the label and URL: a relisting of the accepted document
+under any of them changed is refused without `--force`.
+
+**PDF ingestion — a deliberate, bounded deviation from §5.3.** §5.3 says
+PDF extraction must not be the normal ingestion path, because HTML
+preserves hierarchy and PDF layout is fragile. The ACS exists *only* as a
+PDF, so the deviation is unavoidable; it is bounded as follows:
+
+- The PDF has a text layer (verified 2026-09-13 with pypdf 6: element codes
+  extract intact). No OCR, ever; a scanned edition fails the fetch. Text
+  is read in pypdf's **layout mode** — plain mode re-orders a label's
+  first letter (``eferences: R``) and shuffles the change-note grid —
+  and repaired by exactly three wording-preserving rules: runs of spaces
+  collapse (justified text, table cells), the kerning gap before a
+  possessive apostrophe closes (``manufacturer ’s``), and a line-final
+  hyphen joins its continuation without a space (``pilot-in-`` /
+  ``command``). Verified against plain mode word-for-word: nothing else
+  differs.
+- Extraction uses one pinned pure-Python library (`pypdf`, exact version in
+  `pyproject.toml`), recorded in the canonical `source` block as
+  `extractor: pypdf/<version>` — it is provenance, excluded from
+  `canonical_hash` like other volatile fields (§7). A library upgrade that
+  changes extracted text is therefore visible as a content change and is
+  reviewed like an upstream edit (§32.6), never silently absorbed.
+- Grammar over lines, never a guess: page furniture (sequential page
+  numbers, running headers verified against the container parsed on the
+  page) is the only text ever dropped; the front matter must be exactly
+  the five known sections; every task must carry `References:`,
+  `Objective:` and the three element sections in order (`Risk` /
+  `Management:` arrives split over two lines); element codes must agree
+  with their area, task and section and number contiguously, sub-elements
+  following their parent with sequential letters; anything else between
+  two tasks is a parse error (§32.2 — never silently dropped), not a
+  warning. Appendices are prose blocks — headings, paragraphs re-flowed
+  from justified lines, `Note:` callouts, bullets — and the PDF's tables
+  are kept **preformatted** line by line rather than guessed into cells.
+- Lossless-capture verification (docs/validation.md pattern): every
+  extracted non-empty line, minus the running header/footer and page
+  number, must be accounted for by exactly one canonical field; the
+  Table of Contents must name exactly the areas and tasks parsed; every
+  element code must be unique and contiguous within its task
+  (`K1, K2, …`, `K1a, K1b, …`); the Table of Contents must also name
+  exactly the appendix section headings parsed; and the "Major
+  Enhancements" page must agree with the elements — every added code
+  present, every removed code absent or kept as an `[Archived]`
+  placeholder (the document keeps the numbering), and every placeholder
+  listed — the ACS's own change note, cross-checked like the AIM's
+  Explanation of Changes (§38.4).
+
+**Canonical model** (`data/normalized/acs/private-airplane.json`,
+documented in docs/data-model.md when built):
+
+```json
+{
+  "id": "acs-private-airplane",
+  "document_number": "FAA-S-ACS-6C",
+  "title": "Private Pilot for Airplane Category Airman Certification Standards",
+  "edition_date": "2023-11",
+  "supersedes": "FAA-S-ACS-6B",
+  "front_matter": [ … blocks: Foreword, Revision History table, Major Enhancements … ],
+  "areas": [
+    {"id": "acs-PA.I", "roman": "I", "title": "Preflight Preparation",
+     "tasks": [
+       {"id": "acs-PA.I.A", "code": "PA.I.A", "letter": "A", "title": "Pilot Qualifications",
+        "classes": [],                       // e.g. ["ASEL", "AMEL"] when the title restricts
+        "references_text": "14 CFR parts 61, 68, 91; AC 68-1; FAA-H-8083-2, …",
+        "references": [{"kind": "cfr_part", "part": "61"}, …, {"kind": "handbook", "id": "FAA-H-8083-25"}],
+        "objective": "To determine the applicant exhibits …",
+        "notes": ["If K2 is selected, …"],
+        "elements": [
+          {"code": "PA.I.A.K1", "kind": "knowledge", "number": 1, "sub": null,
+           "text": "Certification requirements, recent flight experience, and recordkeeping."},
+          {"code": "PA.I.B.K1a", "kind": "knowledge", "number": 1, "sub": "a",
+           "text": "Location and expiration dates of required aircraft certificates", "parent": "PA.I.B.K1"}
+        ]}
+     ]}
+  ],
+  "appendices": [ {"id": "acs-appendix-1", "title": "…", "content": [ …flat blocks… ]} ],
+  "canonical_hash": "sha256:…"
+}
+```
+
+`references` are parsed with the existing citation recognizer
+(`links.citations`) — CFR parts and the AIM resolve to Tier 1 links
+(`[[Part 61]]`, `[[AIM]]`); handbooks, ACs, charts and NOTAMs stay as
+verbatim text (`kind: handbook | advisory_circular | other`) until they
+are sources. `references_text` is kept verbatim so nothing is lost when
+the recognizer does not understand a token.
+
+**Rendering** (`vault/ACS/Private Pilot Airplane/`):
+
+- Task note: frontmatter `type: acs-task`, `code`, `area`, `document_number`,
+  `canonical_hash`, `cssclasses: [far-aim-text]`; a Source callout naming
+  the edition and linking the FAA PDF; `## References` (Tier 1 links plus
+  verbatim text); `## Objective`; notes; `## Knowledge`,
+  `## Risk Management`, `## Skills` as nested list items (§7 hierarchy
+  rendering) where every element line begins with its code verbatim and
+  carries the block id `^pa-i-a-k1` (Obsidian block ids allow only letters,
+  digits and dashes — the dotted code cannot be the id, but it is on the
+  line, so a search for `PA.I.A.K1` lands on it); `## Where to study
+  (curated)` rendered from `acs-map.json` (§39.3); `## Glossary Terms` via
+  the PCG gate exactly as AIM notes get them (§12.2, Tier 2).
+- Area index: the Area's tasks with class restrictions; publication index:
+  edition, revision history, link to Appendix notes and, when present, to
+  `Private Pilot Prep`.
+- Change ledger (§38.2): ACS notes are paired by code and classified like
+  the others; thresholds provisional (removed 10 % / content 25 %, floors
+  as §38.3) because the ACS is small and editions are rare; the Major
+  Enhancements cross-check above is the announced-change gate.
+- `update` gains the ACS in each fan-out (`fetch×4 → parse×4 → …`);
+  `check --remote` polls the ACS page like the AIM's.
+
+## 39.3 Element → source map (`acs-map.json`)
+
+Curated, human-readable, one record per ACS element or task:
+
+```json
+{
+  "schema": 1,
+  "elements": {
+    "PA.I.A.K1": {"far": ["61.3", "61.23", "61.56", "61.57", "61.51"], "aim": [], "pcg": [],
+                  "concepts": ["Recent Flight Experience", "Logbooks and Required Pilot Documents"]},
+    "PA.I.E.K1": {"far": ["91.126", "91.127", "91.129", "91.130", "91.131", "91.135", "91.155"],
+                  "aim": ["3-1-4", "3-2-1", "3-2-3", "3-2-4", "3-2-5", "3-2-6"], "pcg": ["CONTROLLED AIRSPACE"]},
+    "PA.I.F.K1": {"out_of_corpus": "FAA-H-8083-25 ch. 11 — performance charts are not in the FAR/AIM"}
+  }
+}
+```
+
+Rules, enforced at build time like `concepts.json` (§36.2):
+
+- Every key is an element code that exists in the accepted ACS edition; a
+  code the edition dropped fails the build (a map must never point at an
+  archived element silently). Every stem must exist in the accepted
+  corpora.
+- Every **Knowledge and Risk** element of the mapped ACS must appear
+  either with at least one stem or with an `out_of_corpus` reason; Skill
+  elements are optional. This is what makes coverage measurable
+  (§39.6) — the map can be incomplete only loudly.
+- Sub-elements (`K1a`) may inherit their parent's stems when absent.
+- The map is Tier 3 (§12.3): explicit, curated, ranked above anything
+  derived. It is Claude-drafted and reviewed like the concept graph; the
+  ACS note's `## Where to study (curated)` section is labelled as such.
+
+## 39.4 Study gloss and drills (`ppl-study.json`)
+
+One curated file, keyed by the stem of a FAR section or AIM paragraph,
+from which *every* prep note and every flashcard is generated so the
+directions cannot drift apart:
+
+```json
+{
+  "schema": 1,
+  "entries": {
+    "61.57": {
+      "gist": "Recency: three takeoffs and landings in the preceding 90 days before carrying passengers; at night they must be to a full stop, in the same category, class and type.",
+      "why": "The examiner's favourite currency question, and the rule you will actually apply every month.",
+      "numbers": [
+        {"value": "90 days", "quote": "within the preceding 90 days", "where": "(a)(1)"},
+        {"value": "3 takeoffs and 3 landings", "quote": "at least 3 takeoffs and 3 landings", "where": "(a)(1)"},
+        {"value": "1 hour after sunset to 1 hour before sunrise", "quote": "beginning 1 hour after sunset and ending 1 hour before sunrise", "where": "(b)(1)"}
+      ],
+      "traps": ["Night currency uses the sunset/sunrise window, not the Part 1 civil-twilight definition of night (§ 1.1) nor the position-light rule (§ 91.209)."],
+      "questions": [
+        {"q": "Can I take a friend up tonight?", "a": "Only with three full-stop night landings in the last 90 days.", "cite": ["61.57"]}
+      ],
+      "mnemonics": [],
+      "acs": ["PA.I.A.K1", "PA.I.A.R1", "PA.XI.A.K1"],
+      "stage": "checkride",
+      "review": "unreviewed"
+    },
+    "3-2-6": { "gist": "…", "acs": ["PA.I.E.K1"], "stage": "solo-xc", "review": "unreviewed" }
+  },
+  "oral": {
+    "PA.I.A": [
+      {"scenario": "You last flew 95 days ago, in daylight. Your friend wants to go up at 2100 tonight. Legal?",
+       "answer": "No — no passengers until three takeoffs and landings, and for night they must be full stop within the preceding 90 days.",
+       "cite": ["61.57"], "find_it": "Part 61 subpart A, the 61.5x range"}
+    ]
+  },
+  "stages": {"pre-solo": "…", "solo-xc": "…", "checkride": "…"}
+}
+```
+
+Rules, enforced at build time:
+
+- Every entry key is an existing FAR section/appendix or AIM paragraph
+  stem; every `cite` and every `acs` code resolves; every `stage` is one
+  of the declared stages.
+- **Verbatim-numbers gate.** Each `numbers[].quote` must occur verbatim in
+  the cited note's official text, inside the paragraph named by `where`
+  when given. The gate turns the class of error most likely to hurt a
+  student — a wrong number in a summary — into a build failure, in the
+  spirit of §38: the pipeline cannot verify a gist, but it can verify
+  that the number the gist rests on is the number the rule says.
+- `gist`, `why`, `traps`, `questions`, `oral` are the curator's own words,
+  never quoted as official text (§32.1, §32.3); the renderer labels every
+  occurrence. Mnemonics (ARROW, AVIATE, ATOMATOFLAMES/FLAPS, IMSAFE, PAVE)
+  are conventional training-community devices and are labelled as such —
+  they are not FAA text and must not be attributed to it.
+- `review` is `unreviewed` until a human has checked the entry against
+  the official text (§20.4 `review_status`); `Private Pilot Prep` reports
+  the counts so review debt is visible, not buried.
+
+### 39.4.1 Number-pattern maps
+
+Generated from canonical subpart structure plus the entries above — no
+extra curation. `Part 61 Map.md` and `Part 91 Map.md` list each subpart
+with its heading and section range (Part 61 subpart A = 61.1–61.60
+"General", E = 61.102–61.120 "Private Pilots"; Part 91 subpart B =
+91.101–91.199 "Flight Rules", C = 91.201–91.299 "Equipment, Instrument,
+and Certificate Requirements", E = 91.401–91.421 "Maintenance…"), marks
+the subparts that contain studied sections, and lists those sections with
+their gists. The map teaches the reader to guess where a rule lives before
+looking — the way pilots actually navigate the FAR.
+
+### 39.4.2 Numbers Sheet
+
+One table, grouped by ACS Area, one row per `numbers[]` item: the value,
+the rule in one clause (from the gist), and a link to the exact paragraph
+(`[[91.151#…]]` where the paragraph can be anchored; otherwise the
+section). Backed by the verbatim-numbers gate.
+
+### 39.4.3 Where Do I Look
+
+`questions[]` from every entry, grouped by ACS Area and Task via `acs`,
+each row: plain-English question → the citations. A second, alphabetical
+"by number" table lists every covered citation with its gist (the
+citation → meaning direction). Both are the same data rendered twice.
+
+### 39.4.4 Oral Prep
+
+One note per Area of Operation from `oral`: the ACS Tasks in that Area
+with their Knowledge and Risk element codes (verbatim, from the ACS
+layer), and under each Task the scenarios: question, short answer, links,
+and the "find it" hint. The answer is a study aid; the scenario ends at
+the official text. No scenario is ever presented as an FAA question; the
+real knowledge-test bank is not public and is not imitated.
+
+### 39.4.5 Reading Path
+
+Three stages (`pre-solo`, `solo-xc`, `checkride`) from `stages`, each
+listing its entries in citation order with gists and the ACS Tasks it
+unlocks, so the vault follows the logbook rather than the regulation's
+structure. Every entry belongs to exactly one stage (checked).
+
+### 39.4.6 ACS Checklist
+
+A generated checklist of every Task with its Knowledge and Risk elements,
+meant to be **copied into `Study/`** and ticked there. The generator never
+writes to `Study/`, so progress marks survive rebuilds; the generated copy
+is a template and says so.
+
+### 39.4.7 Study callout on covered notes
+
+Each covered FAR section, FAR appendix or AIM paragraph note gains one
+callout after the Source callout and before `## Official Text`:
+
+```markdown
+> [!study] Private Pilot study aid — curated, not official text
+> **Gist:** Recency: three takeoffs and landings … full stop at night.
+> **Why it matters:** …
+> **Numbers:** 90 days · 3 takeoffs and 3 landings · 1 hour after sunset to 1 hour before sunrise
+> **Watch out:** Night currency uses the sunset/sunrise window, not …
+> **ACS:** [[PA.I.A#^pa-i-a-k1|PA.I.A.K1]] · [[PA.XI.A#^pa-xi-a-k1|PA.XI.A.K1]] · Stage: checkride
+```
+
+Placed first because the reader should meet the gist before the text, and
+labelled so it is never mistaken for it. The callout type `study` gets a
+distinct colour in the committed CSS snippet. Uncovered notes are
+byte-identical to today (§36.1 separability).
+
+## 39.5 Flashcards
+
+`build-vault` writes `vault/Prep/Private Pilot/anki/private-pilot.txt`, an
+Anki text import (header lines `#separator:tab`, `#html:true`,
+`#guid column:1`, `#notetype column:2`, `#deck column:3`,
+`#tags column:…`) using only Anki's built-in note types (Basic, Basic
+(and reversed card), Cloze) so no add-on is needed. Card kinds, all from
+`ppl-study.json`:
+
+- citation → gist (reversed: gist → citation);
+- each `questions[]` item → answer + citation;
+- cloze over each `numbers[]` value inside its gist sentence;
+- ACS element → the stems that answer it (from `acs-map.json`).
+
+GUIDs are stable hashes of `(stem, card kind, index)`, so re-importing a
+regenerated file updates card text in place and keeps review history; the
+file is deterministic and byte-compared by `validate` like any asset.
+Decks are named per ACS Area. Review state lives in Anki, never in the
+vault — the Obsidian Spaced Repetition plugin was considered and rejected
+for the generated layer because it writes scheduling comments into the
+notes it reads, which breaks §32.10 idempotence; a reader who prefers it
+can copy cards into `Study/`.
+
+## 39.6 Coverage report and validation
+
+`far-aim validate` (and `build-vault`'s plan verification) add:
+
+- ACS layer: lossless capture, code uniqueness/contiguity, Major
+  Enhancements cross-check, TOC cross-check, references parsed or kept
+  verbatim (§39.2).
+- `acs-map.json`: every K/R element mapped or `out_of_corpus`; every stem
+  and code resolves; no stale codes.
+- `ppl-study.json`: stems/cites/codes/stages resolve; verbatim-numbers
+  gate; one stage per entry; ≥1 question per entry; oral scenarios cite
+  resolvable stems.
+- Namespace: ACS codes, Prep titles and the `study` callout anchors join
+  the global stem/alias/heading-alias checks.
+- Separability: `tests/` gains the "delete `data/enrichment/acs-map.json`
+  and `ppl-study.json`, rebuild, only the Prep root and the callouts
+  differ" test, alongside the existing one for concepts.
+
+`Private Pilot Prep.md` prints the **coverage report**: K/R elements
+mapped / out-of-corpus / unmapped (unmapped is a build error, so the
+number shown is always 0, but the out-of-corpus list is the honest
+statement of what the vault cannot teach), entries by stage, and review
+counts. A student reading it knows exactly which ACS elements need the
+handbooks.
+
+## 39.7 Invariants applied
+
+- §32.1/§32.3: gists, answers and scenarios are labelled study aids; the
+  ACS text is rendered verbatim; the verbatim-numbers gate ties every
+  quoted threshold to official text.
+- §32.2: ACS parse errors fail; nothing is dropped for being hard to
+  extract.
+- §32.4/§32.10: prep notes and the Anki file are compiled from committed
+  curation and canonical JSON; rebuilds are byte-identical; no timestamps.
+- §32.5: `Study/` remains untouched; the checklist is copied, not written.
+- §32.6/§32.7: an extractor upgrade or ACS edition change surfaces as a
+  reviewed content change through the ledger, never auto-merged.
+- §32.8: ACS notes carry document number, edition and `canonical_hash`.
+- §32.11: the curated map (Tier 3) is rendered separately from and ranked
+  above `## Related (derived)`.
+- §32.12: everything in §39.3–§39.5 lives under `data/enrichment/` and is
+  deletable without touching authoritative output.
+- §32.13: any gate failure preserves the last published vault.
+
+## 39.8 Implementation order
+
+1. **Phase 10a — ACS source.** `fetch acs`, `parse acs`, `vault/ACS/`,
+   ledger + Major Enhancements cross-check, `update`/`check` wiring,
+   fixtures, docs (data-model, validation, vault, maintenance,
+   source-policy). Ships alone; no enrichment yet. **Shipped
+   2026-09-13.** Refinements found in implementation: manifest key
+   `acs_private_airplane`, version = document number, snapshot dir named
+   by it; layout-mode extraction with three repairs (the plain-mode
+   label re-ordering never reaches the parser); the running-header /
+   page-number verification; a page-boundary rule (a blank line is
+   inserted at a page break unless the text plainly continues) and a
+   short-line rule for paragraphing justified prose; the effective date
+   pinned alongside label and URL; `validate` refusing a layer extracted
+   by a version other than the installed `pypdf`; the ACS ledger
+   thresholds set wide (removed 10 % / content 25 %, floors 5 / 10,
+   provisional until the first real edition) since FAA-S-ACS-6C alone
+   touched 105 codes across most tasks.
+2. **Phase 10b — schema and first batch.** `acs-map.json` and
+   `ppl-study.json` loaders and gates, the study callout, the two Part
+   maps, Numbers Sheet, Where Do I Look, `Private Pilot Prep` with the
+   coverage report. Content: the full K/R map (every element mapped or
+   out-of-corpus) and ~15 entries across currency, airspace and VFR
+   minimums, so the reading experience is judged before the rest is
+   written.
+3. **Phase 10c — full gloss.** Entries for every FAR section and AIM
+   paragraph the Private Pilot collection links today (100 sections,
+   203 paragraphs as of 2026-09-13), pruned to what the ACS map actually
+   references; stages assigned; Reading Path.
+4. **Phase 10d — drills.** Oral Prep scenario bank, Anki export, ACS
+   Checklist template, CSS for the `study` callout, Home links.
+5. **Follow-ups, not in scope:** PHAK / AFH / Aviation Weather Handbook as
+   sources (would close most `out_of_corpus` gaps; PDF-only, large, needs
+   the §39.2 discipline at scale); Instrument Rating ACS and layer (the
+   design generalizes: one ACS document per certificate, one map, one
+   study file); AC 61-65 endorsements.
+
+## 39.9 Exit criteria
+
+```text
+✓ `fetch acs` discovers FAA-S-ACS-6C from the FAA page, archives the PDF, cross-checks the cover
+✓ `parse acs` is lossless; 12 areas, every task and element code; Major Enhancements codes verified
+✓ vault/ACS/ renders every element verbatim with a searchable code and block id
+✓ Every ACS Knowledge/Risk element is mapped or explicitly out-of-corpus; report on Prep index
+✓ A missed-question ACS code pasted into Obsidian search lands on the element and its sources
+✓ Every quoted number in the study file occurs verbatim in the paragraph it cites
+✓ Covered FAR/AIM notes carry one labelled callout; uncovered notes byte-identical
+✓ Part 61 / Part 91 maps, Numbers Sheet, Where Do I Look, Oral Prep, Reading Path generated
+✓ Anki import file deterministic, stable GUIDs, built-in note types only
+✓ Deleting the two enrichment files removes exactly the Prep root and the callouts
+✓ No-change rebuild: zero diff; `update` fans out over four sources
 ```

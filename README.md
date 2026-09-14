@@ -6,6 +6,7 @@ vault from authoritative U.S. aviation sources:
 - **FAR** — Title 14 of the eCFR (official eCFR API)
 - **AIM** — FAA Aeronautical Information Manual (FAA HTML edition)
 - **PCG** — Pilot/Controller Glossary (FAA HTML edition)
+- **ACS** — Private Pilot for Airplane Category Airman Certification Standards (FAA PDF)
 
 Architecture: `raw source → canonical JSON → generated Markdown`. The canonical
 JSON layer, not Markdown, is the source of truth. Authoritative text is never
@@ -57,6 +58,43 @@ paraphrased or AI-generated. Full specification:
   rendered as a clearly labelled `## Related (derived)` section. Fully
   separable from the authoritative layers — see docs/enrichment.md.
 
+- **Phase 10a** — the Private Pilot Airplane ACS as a fourth source
+  (`far-aim fetch acs`, `parse acs`, `build-vault`): the FAA publishes it
+  only as a PDF, so this is the plan's one bounded deviation from
+  HTML-first ingestion — a pinned `pypdf` extractor recorded in every
+  document's provenance, a text-layer and cover-page check before
+  acceptance, and a line grammar with lossless capture, contents and
+  change-note cross-checks. FAA-S-ACS-6C parses into 12 Areas of
+  Operation, 61 Tasks, 1,192 elements and 3 appendices, rendered under
+  `vault/ACS/Private Pilot Airplane/` (77 notes) — one note per Task
+  named by its code (`PA.I.A`), every element verbatim and searchable by
+  code (`PA.I.A.K1`, the codes a knowledge-test report prints), with the
+  referenced FAR parts linked. `update` and the daily sync cover it like
+  the other sources; its change gate cross-checks the ACS's own Major
+  Enhancements page.
+
+## Roadmap — Phase 10: Private Pilot exam-prep layer
+
+Design of record is plan §39; 10a shipped 2026-09-13 (above). The goal
+is a vault a student can study from for the Private Pilot knowledge test
+and the oral portion of the practical test, organized the way both exams
+are: by the ACS.
+
+- **10b/10c — study gloss**: one curated file (`data/enrichment/ppl-study.json`)
+  keyed by citation — gist, why it matters, key numbers, traps, plain-English
+  questions, ACS codes — rendered as a labelled *study aid* callout on each
+  covered FAR/AIM note plus generated `vault/Prep/Private Pilot/` notes:
+  Part 61 / Part 91 number-pattern maps, a Numbers Sheet, a "Where Do I
+  Look" index by ACS Task, and a Reading Path (pre-solo → solo XC →
+  checkride). Every quoted number must occur verbatim in the paragraph it
+  cites or the build fails. A curated ACS element → FAR/AIM map makes
+  coverage measurable: every Knowledge/Risk element is mapped or listed as
+  out-of-corpus (aerodynamics, performance, weather theory live in the FAA
+  handbooks, which are not sources yet).
+- **10d — drills**: an oral-prep scenario bank per Area of Operation and a
+  deterministic Anki import file with stable GUIDs; review state stays in
+  Anki so rebuilds remain byte-identical.
+
 ## Using the vault
 
 Open `vault/` as an Obsidian vault and start at `Home.md`: it explains what
@@ -72,8 +110,9 @@ own notes without them being overwritten by a rebuild.
   reconstructed; only its checksums are committed). `far-aim fetch aim`
   prints this reminder on every acceptance. Currently awaiting external
   archive: `data/raw/aim/2026-07-09-change-3/` (~61 MB — pages, figures,
-  metadata) and `data/raw/pcg/2026-07-09-change-3/` (~1.1 MB — pages,
-  metadata); tree hashes recorded in `data/manifests/sources.json`.
+  metadata), `data/raw/pcg/2026-07-09-change-3/` (~1.1 MB — pages,
+  metadata) and `data/raw/acs/FAA-S-ACS-6C/` (~0.7 MB — the PDF plus
+  metadata); hashes recorded in `data/manifests/sources.json`.
 - eCFR snapshots need no external archive: any accepted issue is exactly
   reconstructible from the eCFR point-in-time API given the manifest's
   (version, checksum) pair.
@@ -93,8 +132,10 @@ python3 -m venv .venv                 # requires Python 3.12+
 .venv/bin/far-aim parse aim          # canonical JSON for the accepted AIM
 .venv/bin/far-aim fetch pcg          # fetch + archive current PCG HTML edition
 .venv/bin/far-aim parse pcg          # canonical JSON for the accepted PCG
+.venv/bin/far-aim fetch acs          # fetch + archive the current Private Pilot Airplane ACS PDF
+.venv/bin/far-aim parse acs          # canonical JSON for the accepted ACS
 .venv/bin/far-aim enrich             # derive data/enrichment/related.json (Phase 9)
-.venv/bin/far-aim build-vault        # render vault/FAR, AIM, PCG and Concepts
+.venv/bin/far-aim build-vault        # render vault/FAR, AIM, PCG, ACS and Concepts
 .venv/bin/far-aim validate           # verify manifest, canonical layers, vault
 .venv/bin/far-aim update             # the whole sequence, only when upstream changed
 ```
@@ -105,7 +146,7 @@ python3 -m venv .venv                 # requires Python 3.12+
 - `tests/` — pytest suite (`tests/fixtures/` for source fixtures)
 - `data/manifests/` — committed source-state registry; `data/links/` — committed,
   human-maintained link curation (the PCG glossary gate); `data/raw/` is a gitignored cache
-- `vault/` — generated Obsidian vault (`FAR/`, `AIM/` incl. figure assets, `PCG/`)
+- `vault/` — generated Obsidian vault (`FAR/`, `AIM/` incl. figure assets, `PCG/`, `ACS/`)
 - `plans/` — project specification
 - `docs/` — architecture and policy notes
 
@@ -115,9 +156,10 @@ The pipeline code, tests, documentation, and the curated vault notes
 (`vault/Collections/`, `vault/Topics/`, `vault/Study/`, `vault/Home.md`) are
 released under the [MIT License](LICENSE).
 
-The generated notes under `vault/FAR/`, `vault/AIM/` and `vault/PCG/` reproduce
-the text and figures of the eCFR Title 14, the FAA Aeronautical Information
-Manual and the Pilot/Controller Glossary. These are works of the United States
+The generated notes under `vault/FAR/`, `vault/AIM/`, `vault/PCG/` and
+`vault/ACS/` reproduce the text and figures of the eCFR Title 14, the FAA
+Aeronautical Information Manual, the Pilot/Controller Glossary and the
+Private Pilot for Airplane Category Airman Certification Standards. These are works of the United States
 Government and are in the public domain (17 U.S.C. § 105); the MIT License
 does not apply to them and grants no rights over them. They are provided for
 reference only — the official publications remain the authoritative source,

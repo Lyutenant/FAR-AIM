@@ -1,6 +1,15 @@
 {
   "schema_version": 1,
   "sources": {
+    "acs_private_airplane": {
+      "accepted_version": "FAA-S-ACS-6C",
+      "canonical_hash": "sha256:e37953cc24ae47515d7b02fa73d3420fcb00f99005bd77fb28213559f1c55785",
+      "edition_label": "Private Pilot for Airplane Category (FAA-S-ACS-6C)",
+      "effective_date": "2024-05-31",
+      "last_checked_at": "2026-09-14T00:49:10Z",
+      "raw_hash": "sha256:46ed6625723b0b7f37b3274cdb5170519f88baf28aec1f925286ef24909ea824",
+      "source_url": "https://www.faa.gov/training_testing/testing/acs/private_airplane_acs_6.pdf"
+    },
     "aim": {
       "accepted_version": "2026-07-09-change-3",
       "canonical_hash": "sha256:61b8dca47ca3df540efec41f901223b067fe4eece9c3deaadafd4c83c5ed7e71",

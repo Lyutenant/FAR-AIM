@@ -22,7 +22,7 @@ _FSYNC_DIR_UNSUPPORTED = frozenset(
     {errno.EINVAL, errno.ENOTSUP, errno.EOPNOTSUPP, errno.EBADF, errno.EACCES, errno.EPERM}
 )
 
-KNOWN_SOURCES = ("ecfr_title_14", "aim", "pcg")
+KNOWN_SOURCES = ("ecfr_title_14", "aim", "pcg", "acs_private_airplane")
 
 
 class ManifestError(ValueError):
