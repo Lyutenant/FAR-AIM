@@ -1407,9 +1407,13 @@ def test_full_title_vault_build(tmp_path, capsys):
             concepts = json.loads((enrichment_dir / "concepts.json").read_text(encoding="utf-8"))
             expected_total += len(concepts["concepts"]) + 1  # + Concept Map
         if (enrichment_dir / "ppl-study.json").exists():
-            # Phase 10b/10c: the Prep index, the Part 61 and Part 91 maps, the
-            # Numbers Sheet, Where Do I Look and the Reading Path.
-            expected_total += 6
+            # Phase 10b–10d: the Prep index, the Part 61 and Part 91 maps, the
+            # Numbers Sheet, Where Do I Look, the Reading Path, the ACS
+            # Checklist, one Oral Prep note per Area with scenarios, and the
+            # Anki export.
+            guide = json.loads((enrichment_dir / "ppl-study.json").read_text(encoding="utf-8"))
+            oral_areas = {code.split(".")[1] for code in guide.get("oral", {})}
+            expected_total += 8 + len(oral_areas)
 
     assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
     out = capsys.readouterr().out

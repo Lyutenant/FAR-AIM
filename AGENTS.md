@@ -355,5 +355,28 @@ declared order, entries FAR-then-AIM by citation, the ACS Tasks each
 stage's codes touch). Quotes are copied from a canonical-text dump, never
 retyped (AIM U+2010 hyphens, curly quotes). 22 map-only stems no
 collection page links remain without entries (list in
-docs/enrichment.md). Not built yet (10d): Oral Prep, Anki export, ACS
-Checklist.
+docs/enrichment.md).
+**10d shipped 2026-09-14**: `ppl-study.json` gained `oral` (Task code →
+scenarios; each `scenario`, `answer`, `cite` stems and optional
+`find_it`; a Task the ACS lacks or an unresolved cite fails the build) —
+125 scenarios under 42 Tasks, Claude-drafted. Rendered:
+`Prep/Private Pilot/Oral Prep/Oral Prep <Roman>.md` per Area with
+scenarios (stem `Oral Prep I`, not the plan's `<Roman> <Area title>`,
+because Area titles contain commas the naming policy forbids; every
+Task in the Area listed with its K/R elements as block links, then the
+scenarios); `ACS Checklist.md` (every Task's K/R elements as `- [ ]`
+items, a template to copy into `Study/`); and the Anki export
+`Prep/Private Pilot/anki/private-pilot.txt` (`prep_notes.build_anki`:
+`#separator:tab`, `#html:true`, guid/notetype/deck/front/back/tags
+columns; Basic (and reversed) citation ↔ gist, Basic question → answer +
+cites, Cloze per verified number — value blanked in the gist when it
+occurs there, else its numeral, else standalone with the quote as
+extra — and Basic ACS element → sources or out-of-corpus reason; decks
+`Private Pilot::<Roman>. <Area>`, `::General` for uncoded entries; GUID
+= sha256 of (kind, stem, index)[:16]; 1,740 cards). A generated non-note
+file proves ownership by the comment line `#far_aim_generated_export:1`
+(`build.is_generated_export`): sync refuses to overwrite a differing
+file without it, prunes stale `*.txt` under `Prep/` only with it,
+`validate` reports such files as stale. `registry.prep_export_count`
+counts it in `_verify_plan`. Phase 10 complete; follow-ups in plan
+§39.8 item 5.

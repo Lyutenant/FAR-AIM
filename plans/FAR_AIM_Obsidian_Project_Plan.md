@@ -3173,7 +3173,23 @@ handbooks.
    rather than widen the step's scope. The whole batch passed the
    verbatim gate on the first build of each of five batches.
 4. **Phase 10d — drills.** Oral Prep scenario bank, Anki export, ACS
-   Checklist template, CSS for the `study` callout, Home links.
+   Checklist template, CSS for the `study` callout, Home links. **Shipped
+   2026-09-14** (`links.study.OralScenario`, `prep_notes.build_oral_notes`,
+   `build_checklist`, `build_anki`; docs/enrichment.md, docs/vault.md):
+   125 scenarios under 42 Tasks (seaplane and multiengine Tasks left
+   empty), 1,740 Anki cards. Refinements found in implementation: Oral
+   Prep notes are named `Oral Prep <Roman>` rather than `<Roman> <Area
+   title>` because Area titles contain commas the §9 naming policy
+   forbids, and each lists every Task of the Area (elements verbatim as
+   block links) so a Task without scenarios still shows what the examiner
+   can ask; the Anki file is the first generated non-note file outside
+   the AIM assets directory, so ownership is proved by a comment line
+   Anki ignores (`#far_aim_generated_export:1`) rather than by the asset
+   ledger, and sync/validate treat `*.txt` under `Prep/` by that marker;
+   the number cloze blanks the value in the gist when it occurs there,
+   else the value's numeral, else stands alone with the verbatim quote as
+   the extra field, so every verified number yields a card without
+   inventing text; the CSS and Home links had already shipped with 10b.
 5. **Follow-ups, not in scope:** PHAK / AFH / Aviation Weather Handbook as
    sources (would close most `out_of_corpus` gaps; PDF-only, large, needs
    the §39.2 discipline at scale); Instrument Rating ACS and layer (the

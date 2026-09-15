@@ -620,9 +620,11 @@ def build_home(
         generated.append(
             "- `Prep/` — the Private Pilot exam-prep layer: [[Private Pilot Prep]] "
             "(coverage of the ACS, study entries by training stage), the Part 61 "
-            "and Part 91 number-pattern maps, a Numbers Sheet and a Where Do I "
-            "Look index. Rendered from curated files; covered regulations and "
-            "AIM paragraphs also open with a labelled study aid."
+            "and Part 91 number-pattern maps, a Numbers Sheet, a Where Do I Look "
+            "index, a Reading Path, Oral Prep scenarios per Area of Operation, an "
+            "ACS Checklist to copy into `Study/`, and an Anki import file under "
+            "`anki/`. Rendered from curated files; covered regulations and AIM "
+            "paragraphs also open with a labelled study aid."
         )
     if has_concepts:
         generated.append(

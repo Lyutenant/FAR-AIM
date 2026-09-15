@@ -2306,6 +2306,9 @@ def _stale_generated_on_disk(config: Config, planned: dict[Path, bytes]) -> list
         root = config.vault_dir / root_name
         if root.is_dir():
             on_disk.extend(sorted(root.rglob("*.md")))
+    prep_root = config.vault_dir / generate_prep_notes.PREP_DIR
+    if prep_root.is_dir():
+        on_disk.extend(p for p in sorted(prep_root.rglob("*.txt")) if p.is_file())
     for stem in (generate_notes.SOURCE_STATUS_STEM, generate_notes.HOME_STEM):
         note = config.vault_dir / f"{stem}.md"
         if note.exists():
@@ -2324,7 +2327,12 @@ def _stale_generated_on_disk(config: Config, planned: dict[Path, bytes]) -> list
         if path not in planned
         and (
             (path.parent == assets_root and path.suffix != ".md")
-            or generate_build.is_generated_note(path)
+            or (path.suffix == ".md" and generate_build.is_generated_note(path))
+            or (
+                path.suffix != ".md"
+                and path.parent != assets_root
+                and generate_build.is_generated_export(path)
+            )
         )
     ]
 

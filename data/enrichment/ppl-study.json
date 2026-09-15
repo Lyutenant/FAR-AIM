@@ -7112,5 +7112,1107 @@
       "stage": "solo-xc",
       "review": "unreviewed"
     }
+  },
+  "oral": {
+    "PA.I.A": [
+      {
+        "scenario": "You last flew 95 days ago, in daylight. A friend wants to go up with you at 2100 tonight. Legal?",
+        "answer": "No. To carry passengers you need three takeoffs and landings in the preceding 90 days, and for a night flight they must be to a full stop at night in the same category and class. Go fly three full-stop night landings alone first.",
+        "cite": [
+          "61.57"
+        ],
+        "find_it": "Part 61 subpart A, the 61.5x range: § 61.56 is the flight review, § 61.57 is recency."
+      },
+      {
+        "scenario": "Your flight review was 25 months ago but you have flown 100 hours since. May you act as PIC?",
+        "answer": "No. A flight review within the preceding 24 calendar months is required regardless of hours flown; a new certificate or rating, or a completed WINGS phase, would also satisfy it.",
+        "cite": [
+          "61.56"
+        ],
+        "find_it": "§ 61.56 — the review is dated by calendar months, not by hours."
+      },
+      {
+        "scenario": "You are 40 and got a third-class medical 4 years ago. Can you fly as a private pilot today?",
+        "answer": "Yes, until the end of the 60th calendar month after the exam, because you were under 40 on the exam date; at 40 or older it would have been 24 calendar months. Check the date on the certificate and the § 61.23 table.",
+        "cite": [
+          "61.23",
+          "61.3"
+        ],
+        "find_it": "§ 61.23(d), the duration table, keyed to age on the date of the examination."
+      },
+      {
+        "scenario": "A ramp inspector asks for your documents at the fuel pump. What do you show?",
+        "answer": "Pilot certificate, government photo ID and medical certificate (or the BasicMed items), and the logbook only if you are a student on a solo cross-country or if you carry it; § 61.51(i) requires presenting the logbook on reasonable request when you have it.",
+        "cite": [
+          "61.3",
+          "61.51"
+        ],
+        "find_it": "§ 61.3 for what you carry, § 61.51(i) for what you must present."
+      },
+      {
+        "scenario": "Your coworker offers to pay for the whole flight if you fly them to a meeting. Can you accept as a private pilot?",
+        "answer": "No. A private pilot may not act as PIC for compensation or hire; you may share expenses only pro rata, paying at least your own share, and only for fuel, oil, airport expenses and rental. Providing transportation for someone else's business purpose is the classic holding-out trap.",
+        "cite": [
+          "61.113"
+        ],
+        "find_it": "§ 61.113: privileges first, then the exceptions (b) through (i)."
+      },
+      {
+        "scenario": "You want to fly under BasicMed. What do you need and what can you not do?",
+        "answer": "A U.S. driver's license, a medical held after July 14, 2006, the physician exam on the FAA checklist every 48 months, the online course every 24 calendar months, and its certificate in your logbook. Limits: aircraft up to 6 passengers and 12,500 lb, below 18,000 ft and 250 knots, not for compensation or hire, in the United States.",
+        "cite": [
+          "61.113",
+          "68.3",
+          "61.23"
+        ],
+        "find_it": "§ 61.113(i) for the limits, Part 68 for the course and checklist."
+      },
+      {
+        "scenario": "You moved last month and forgot to tell the FAA. Any problem?",
+        "answer": "You may not exercise your certificate privileges after 30 days from the move until you notify the FAA Airman Certification Branch of the new address.",
+        "cite": [
+          "61.60"
+        ],
+        "find_it": "§ 61.60, change of address."
+      },
+      {
+        "scenario": "What does the examiner mean when asking about proficiency versus currency?",
+        "answer": "Currency is the legal minimum: flight review, three landings in 90 days, night landings. Proficiency is being able to do it well today. You can be current and unsafe; set personal minimums above the regulation.",
+        "cite": [
+          "61.57",
+          "61.56",
+          "8-1-1"
+        ]
+      }
+    ],
+    "PA.I.B": [
+      {
+        "scenario": "Show me how you know this airplane is airworthy today.",
+        "answer": "Airworthiness certificate displayed and registration aboard, operating limitations (POH, placards) available; maintenance records showing the annual within 12 calendar months, the 100-hour if it is used for hire, transponder within 24 calendar months, ELT battery, and airworthiness directive compliance; then my own preflight under § 91.7 says it is in condition for safe flight.",
+        "cite": [
+          "91.203",
+          "91.9",
+          "91.409",
+          "91.413",
+          "91.207",
+          "91.417",
+          "91.7"
+        ],
+        "find_it": "Part 91 subpart E (91.4xx) for inspections and records; § 91.203 for documents."
+      },
+      {
+        "scenario": "The annual was signed 13 months ago but the airplane has flown only 20 hours. May you fly it?",
+        "answer": "No. The annual is due every 12 calendar months regardless of hours. It may be flown only under a special flight permit to a place where the inspection can be done.",
+        "cite": [
+          "91.409",
+          "21.197"
+        ],
+        "find_it": "§ 91.409(a); the ferry permit is § 21.197."
+      },
+      {
+        "scenario": "The turn coordinator is inoperative on a day VFR flight in a Cessna 172. Can you go?",
+        "answer": "Possibly, using § 91.213(d): it is not required by § 91.205(b) for day VFR, not on the type certificate's required list, not required by an AD, and not on a minimum equipment list. Deactivate or remove it, placard it inoperative, and as PIC decide it is safe. Then it must be repaired, replaced or inspected at the next required inspection.",
+        "cite": [
+          "91.213",
+          "91.205",
+          "91.405"
+        ],
+        "find_it": "§ 91.213(d) is the four-question test; § 91.205(b) is the day VFR list."
+      },
+      {
+        "scenario": "May you change the oil and replace the tires on the club airplane you fly?",
+        "answer": "If you are a pilot who owns or operates the airplane and it is not used under Part 121, 129 or 135, yes: both are preventive maintenance in Part 43 Appendix A, and you must make the § 43.9 logbook entry with the date, description, your signature and certificate number.",
+        "cite": [
+          "43.3",
+          "43.9"
+        ],
+        "find_it": "§ 43.3(g) grants it; § 43.9 records it; Appendix A lists it."
+      },
+      {
+        "scenario": "Who is responsible for complying with an airworthiness directive, and how would you check?",
+        "answer": "The owner or operator under § 91.403; I check the AD compliance list the maintenance records must contain, with each AD's method of compliance and the next due date for recurring ADs.",
+        "cite": [
+          "91.403",
+          "91.417"
+        ]
+      },
+      {
+        "scenario": "What must be in the airplane for a night VFR flight beyond the day VFR list?",
+        "answer": "Approved position lights, an approved anticollision light system, an adequate source of electrical energy for all installed electrical and radio equipment, one spare set of fuses (or three of each kind), and if operated for hire, a landing light.",
+        "cite": [
+          "91.205",
+          "91.209"
+        ],
+        "find_it": "§ 91.205(c); § 91.209 says when to use the lights."
+      }
+    ],
+    "PA.I.C": [
+      {
+        "scenario": "Where did you get your weather this morning and does that count as a legal briefing?",
+        "answer": "A self-briefing from the aviationweather.gov Graphical Forecasts for Aviation, METARs, TAFs, winds aloft and NOTAMs, following AC 91-92; the AIM says a pilot can receive a regulatory-compliant briefing without contacting Flight Service. § 91.103 requires familiarity with all available information.",
+        "cite": [
+          "5-1-1",
+          "91.103",
+          "7-1-4"
+        ],
+        "find_it": "AIM 5-1-1 and 7-1-5 for briefings; § 91.103 for the legal duty."
+      },
+      {
+        "scenario": "The briefer says 'VFR flight not recommended'. Are you grounded?",
+        "answer": "No, it is advisory. It means the briefer judges VFR doubtful along the route; the go decision is mine, but I need a specific reason and an out before overriding it.",
+        "cite": [
+          "7-1-5"
+        ]
+      },
+      {
+        "scenario": "Decode this METAR: KPIT 091955Z 22015G25KT 3/4SM R28L/2600FT TSRA OVC010CB 18/16 A2992.",
+        "answer": "Pittsburgh, 9th at 1955Z, wind 220 true at 15 gusting 25, visibility 3/4 statute mile, RVR runway 28L 2,600 ft, thunderstorm with rain, overcast 1,000 ft cumulonimbus, temperature 18 dew point 16, altimeter 29.92. Not VFR.",
+        "cite": [
+          "7-1-28"
+        ]
+      },
+      {
+        "scenario": "An AIRMET Sierra covers your destination. What is it and what do you do?",
+        "answer": "IFR conditions or mountain obscuration expected over a wide area for a VFR pilot's purposes; check the TAF and current METARs for the destination and alternates and plan to divert or delay if the AIRMET verifies.",
+        "cite": [
+          "7-1-6"
+        ],
+        "find_it": "AIM 7-1-6: SIGMET, convective SIGMET, AIRMET, CWA."
+      },
+      {
+        "scenario": "A convective SIGMET is issued for your route. What does it imply even if it does not say so?",
+        "answer": "Severe or greater turbulence, severe icing and low-level wind shear. Stay at least 20 miles from severe storms and circumnavigate an area with 6/10 coverage.",
+        "cite": [
+          "7-1-6",
+          "7-1-27",
+          "7-1-26"
+        ]
+      },
+      {
+        "scenario": "Your tablet shows NEXRAD from FIS-B with a gap between two cells. Can you thread it?",
+        "answer": "No. FIS-B radar is minutes old, the AIM says it is not to be used for tactical avoidance, and thunderstorm hazards extend well outside the echoes. Use it strategically to go around the whole area.",
+        "cite": [
+          "4-5-9",
+          "7-1-9",
+          "7-1-27"
+        ]
+      },
+      {
+        "scenario": "The temperature and dew point at your destination are 12 and 11 with a forecast of calm winds after sunset. Concern?",
+        "answer": "A small spread and cooling favor fog or low clouds after dark; plan to arrive well before, check the TAF for BR or FG, and have an alternate with a wider spread.",
+        "cite": [
+          "7-1-28",
+          "7-1-5"
+        ]
+      }
+    ],
+    "PA.I.D": [
+      {
+        "scenario": "Plan the fuel for a 2-hour day VFR flight. What is the legal minimum and what is your own?",
+        "answer": "Legally, enough to reach the first point of intended landing plus 30 minutes at normal cruise by day (45 at night). Personally I plan to land with an hour, and I compute it from the POH cruise figures plus taxi, climb and reserve.",
+        "cite": [
+          "91.151"
+        ],
+        "find_it": "§ 91.151 for VFR; § 91.167 is the IFR rule."
+      },
+      {
+        "scenario": "Your course is 095 magnetic and you want to cruise at 6,500 ft. Legal?",
+        "answer": "Not above 3,000 ft AGL: an eastbound course (0 to 179) takes odd thousands plus 500, so 5,500 or 7,500. Below 3,000 ft AGL the rule does not apply.",
+        "cite": [
+          "91.159",
+          "3-1-5"
+        ]
+      },
+      {
+        "scenario": "What goes on a VFR flight plan and how do you activate and close it?",
+        "answer": "Aircraft identification and type, PIC name and address, departure point and time, route, altitude and true airspeed, first intended landing point and ETE, fuel in hours, souls on board. File with Flight Service or an app, activate by radio or electronically after takeoff (the tower will not), and close it on landing; search begins 30 minutes after the ETA.",
+        "cite": [
+          "91.153",
+          "5-1-5",
+          "5-1-14"
+        ],
+        "find_it": "§ 91.153 lists the contents; AIM 5-1-5 and 5-1-14 the procedures."
+      },
+      {
+        "scenario": "You are intercepted by a fighter near a TFR. What do you do?",
+        "answer": "Rock the wings and follow, call on 121.5 with identity, position and nature of flight, squawk 7700 unless told otherwise, and comply with every signal until released. Circling the runway with gear down means land here.",
+        "cite": [
+          "5-6-13",
+          "5-6-14"
+        ]
+      },
+      {
+        "scenario": "You are on flight following. Does that keep you out of restricted areas and Class B?",
+        "answer": "No. Traffic advisories are workload permitting and the pilot remains responsible for airspace: the AIM says the pilot must meet clearance and communication requirements before entering Class B, C or D, and permission for restricted airspace comes from the controlling agency.",
+        "cite": [
+          "3-2-1",
+          "4-1-15",
+          "91.133"
+        ]
+      },
+      {
+        "scenario": "Passengers are waiting and the ceiling at the destination is dropping. Walk me through PAVE.",
+        "answer": "Pilot (IMSAFE, currency), Aircraft (fuel, equipment), enVironment (weather trend, terrain, airspace, alternates, daylight) and External pressures (the waiting passengers). The pressure is the hazard; the mitigation is a decision made on the ground with a divert point and an alternate.",
+        "cite": [
+          "8-1-1",
+          "7-1-5",
+          "91.103"
+        ]
+      }
+    ],
+    "PA.I.E": [
+      {
+        "scenario": "You are at 2,500 ft MSL, 20 miles from a Class C airport whose shelf begins at 4,000 ft. Do you need to talk to anyone?",
+        "answer": "Not for the Class C, because you are below its shelf, but you are inside the Mode C veil only if it is a Class B airport; for Class C the transponder and ADS-B rule applies within and above the Class C area itself. Check whether the underlying airspace is Class E or a Class D surface area.",
+        "cite": [
+          "91.130",
+          "91.215",
+          "91.225"
+        ],
+        "find_it": "§ 91.130 for Class C; § 91.215(b) and § 91.225(d) for the equipment map."
+      },
+      {
+        "scenario": "What are the VFR minimums in Class G at 700 ft AGL at night, and in Class E at 9,500 ft?",
+        "answer": "Class G below 1,200 ft AGL at night: 3 statute miles, 500 below, 1,000 above, 2,000 horizontal (unless in the pattern under the § 91.155(b) exception). Class E below 10,000 ft: 3 miles and 500/1,000/2,000.",
+        "cite": [
+          "91.155",
+          "3-1-4"
+        ]
+      },
+      {
+        "scenario": "The tower at a Class D airport is closed for the night. What airspace is it now and what are the rules?",
+        "answer": "Usually Class E or G as the chart supplement states; without the tower the communication requirement of § 91.129 no longer applies, you self-announce on the CTAF, and left traffic applies unless right traffic is indicated.",
+        "cite": [
+          "91.129",
+          "91.127",
+          "91.126",
+          "4-1-9"
+        ]
+      },
+      {
+        "scenario": "Approach says 'radar contact, remain clear of the Class Bravo'. What may you do?",
+        "answer": "Exactly that: you are identified but not cleared. Entry requires the words 'cleared into the Class Bravo airspace' from ATC; stay outside until you hear them.",
+        "cite": [
+          "91.131",
+          "3-2-1"
+        ]
+      },
+      {
+        "scenario": "Is it legal to fly through a MOA that is active? A restricted area? A prohibited area?",
+        "answer": "MOA: yes, with extreme caution and a call to the controlling agency for advisories. Restricted: only when inactive or with permission of the using or controlling agency. Prohibited: no.",
+        "cite": [
+          "3-4-5",
+          "3-4-3",
+          "3-4-2",
+          "91.133"
+        ]
+      },
+      {
+        "scenario": "The ceiling is 900 ft overcast, visibility 4 miles, at your Class D home field. Can you depart?",
+        "answer": "Only with a special VFR clearance from the tower: at least 1 statute mile ground visibility, clear of clouds, day only unless instrument rated in an IFR airplane, and you must request it.",
+        "cite": [
+          "91.157",
+          "4-4-6"
+        ]
+      },
+      {
+        "scenario": "Where is ADS-B Out required and where is it not?",
+        "answer": "Class A, B and C, within the 30 nm Mode C veil of the Appendix D airports, above Class B or C up to 10,000 ft, Class E at and above 10,000 ft MSL except within 2,500 ft of the surface, and over the Gulf above 3,000 ft. Not in Class D, Class G, or low Class E outside a veil.",
+        "cite": [
+          "91.225",
+          "91.215"
+        ]
+      }
+    ],
+    "PA.I.F": [
+      {
+        "scenario": "Field elevation 5,000 ft, temperature 30 C. Why does the airplane take longer to get off and climb worse?",
+        "answer": "High density altitude: the POH figures assume 15 C and 29.92 at sea level; hot and high air is thin, so the engine makes less power, the propeller and wings get less air, and the same indicated speeds need a higher true airspeed and a longer ground roll. Airports at 2,000 ft or higher broadcast a density altitude advisory for this reason.",
+        "cite": [
+          "7-6-7"
+        ],
+        "find_it": "AIM 7-6-7 for density altitude; the numbers come from the POH performance section."
+      },
+      {
+        "scenario": "Where are the airspeed limitations and the weight and balance limits, and are they regulatory?",
+        "answer": "In the approved flight manual, the placards and the markings; § 91.9 makes operating within them mandatory and requires the manual to be aboard.",
+        "cite": [
+          "91.9"
+        ]
+      },
+      {
+        "scenario": "You compute a 1,800 ft ground roll but the runway is 2,000 ft with a displaced threshold. Comfortable?",
+        "answer": "No. The chart assumes a perfect technique in a new airplane; add a margin (a common rule is 50 percent), and check the declared distances and the displaced threshold in the Chart Supplement, because the landing distance available is not the pavement length.",
+        "cite": [
+          "4-3-6",
+          "2-3-3"
+        ]
+      }
+    ],
+    "PA.I.G": [
+      {
+        "scenario": "In cruise the oil pressure needle drops toward the red line with normal oil temperature. What do you do?",
+        "answer": "Treat it as an impending engine failure: reduce power, turn toward the nearest suitable airport, run the checklist, and if temperature starts rising too, plan a precautionary landing. The POH emergency section is the authority; declare with ATC if in doubt.",
+        "cite": [
+          "6-1-2",
+          "6-3-2"
+        ]
+      },
+      {
+        "scenario": "Your alternator light comes on. What fails next and what do you protect?",
+        "answer": "The battery now carries the electrical load; shed non-essential loads, expect the radios, transponder and flaps (if electric) to die when it depletes, and land at a towered field only if you can still talk; otherwise be ready for light signals.",
+        "cite": [
+          "4-2-13",
+          "4-3-13",
+          "6-4-2"
+        ]
+      },
+      {
+        "scenario": "You smell exhaust with the cabin heat on and feel a headache. What is happening?",
+        "answer": "Probable carbon monoxide from a cracked exhaust or heater shroud: heater off, vents open, land as soon as practical and seek medical attention if symptoms persist.",
+        "cite": [
+          "8-1-4"
+        ]
+      }
+    ],
+    "PA.I.H": [
+      {
+        "scenario": "You had two beers at 2100 last night and it is 0700. Legal to fly at 0800?",
+        "answer": "Eight hours have passed, so the 8-hour rule is met, but you must also not be under the influence and must be below 0.04 percent; the AIM warns you may still be impaired after 8 hours and a hangover counts. If in doubt, no.",
+        "cite": [
+          "91.17",
+          "8-1-1"
+        ],
+        "find_it": "§ 91.17 is the rule; AIM 8-1-1 is the physiology."
+      },
+      {
+        "scenario": "You have a head cold but feel fine on the ground. Go?",
+        "answer": "No. Congestion blocks the eustachian tubes and sinuses; on descent an ear or sinus block can be excruciating and damaging, and decongestants have side effects. § 61.53 also prohibits flying with a condition that would make you unable to meet the medical standards.",
+        "cite": [
+          "8-1-2",
+          "61.53"
+        ]
+      },
+      {
+        "scenario": "At 11,500 ft at night you feel euphoric and your fingertips tingle. What is it and what do you do?",
+        "answer": "Hypoxia (night vision degrades from 5,000 ft and other effects begin around 12,000), possibly compounded by hyperventilation. Go on oxygen if you have it and descend; below 10,000 by day and 5,000 at night is the AIM's recommendation.",
+        "cite": [
+          "8-1-2",
+          "8-1-3",
+          "91.211"
+        ]
+      },
+      {
+        "scenario": "Name the five hazardous attitudes and their antidotes.",
+        "answer": "Anti-authority (follow the rules, they are usually right), impulsivity (not so fast, think first), invulnerability (it could happen to me), macho (taking chances is foolish), resignation (I am not helpless, I can make a difference). Source: the Pilot's Handbook chapter on ADM, not the FAR.",
+        "cite": [
+          "8-1-1"
+        ]
+      },
+      {
+        "scenario": "You went scuba diving this morning to 40 ft with no decompression stop. When can you fly at 6,500 ft?",
+        "answer": "Wait at least 12 hours; 24 hours if the dive needed a decompression stop or if you will fly above 8,000 ft.",
+        "cite": [
+          "8-1-2"
+        ]
+      }
+    ],
+    "PA.II.A": [
+      {
+        "scenario": "Walk me through how you decided you were fit to fly this morning.",
+        "answer": "IMSAFE: no illness, no medication, manageable stress, no alcohol within 8 hours or lingering effects, rested, no emotional upset. The AIM gives it as the personal checklist.",
+        "cite": [
+          "8-1-1",
+          "91.17",
+          "61.53"
+        ]
+      },
+      {
+        "scenario": "During preflight you find a bird's nest in the cowling and a loose fuel cap. Whose call is it?",
+        "answer": "Mine: § 91.7 makes the PIC responsible for determining the aircraft is in condition for safe flight. Remove the nest and check for damage, secure the cap, and if anything is unairworthy the flight does not go.",
+        "cite": [
+          "91.7"
+        ]
+      },
+      {
+        "scenario": "What NOTAMs did you check and where would a TFR appear?",
+        "answer": "Airport NOTAM (D)s for the departure, destination and alternates (runways, lighting, obstructions), FDC NOTAMs for TFRs and procedure changes, the ARTCC NOTAMs for GPS and airspace, and the Domestic Notices for temporary SUA; TFRs are FDC NOTAMs.",
+        "cite": [
+          "5-1-3",
+          "91.103"
+        ]
+      },
+      {
+        "scenario": "Someone you do not know asks a lot of questions about your airplane and how to start it. What do you do?",
+        "answer": "Treat it as a security concern: do not leave the airplane unattended and unlocked, report suspicious activity to the airport operator or the AOPA Airport Watch line, and follow the airport's security procedures.",
+        "cite": [
+          "8-1-8"
+        ]
+      }
+    ],
+    "PA.II.B": [
+      {
+        "scenario": "What must you brief your passengers before takeoff, and when must belts be on?",
+        "answer": "How to fasten and unfasten the belt and shoulder harness, and to fasten them; belts and harnesses must be fastened for taxi, takeoff and landing, and everyone occupies an approved seat. A child under two may be held. Add the exits, the sterile cockpit expectation and what to do in an emergency.",
+        "cite": [
+          "91.107"
+        ]
+      },
+      {
+        "scenario": "Your tablet's chart database is two months old. Legal for VFR?",
+        "answer": "Legal, since no rule requires current data for VFR navigation, but the AIM says to use only current charts (revised every 56 days) and not to rely on an outdated database near critical airspace. Update it.",
+        "cite": [
+          "1-1-17",
+          "5-1-1",
+          "9-1-2"
+        ]
+      },
+      {
+        "scenario": "May your passenger use a phone or tablet in the airplane?",
+        "answer": "On a VFR Part 91 flight, § 91.21 places no restriction; under IFR the PIC must determine it does not interfere with navigation or communication equipment.",
+        "cite": [
+          "91.21"
+        ]
+      }
+    ],
+    "PA.II.C": [
+      {
+        "scenario": "The engine will not start after several attempts and smells of fuel. What do you suspect and do?",
+        "answer": "A flooded engine: follow the POH flooded-start procedure (typically mixture cut-off, throttle open, crank), watch for an induction fire (keep cranking to draw it in), and respect the starter duty cycle to avoid overheating it.",
+        "cite": [
+          "91.13"
+        ]
+      },
+      {
+        "scenario": "Before you turn the key, what are you looking at outside?",
+        "answer": "Propeller area clear of people, chocks and towbar removed, brakes held, and a 'clear prop' call with a pause; the beacon on before start signals intent. Starting with someone near the propeller is careless operation.",
+        "cite": [
+          "4-3-24",
+          "91.13"
+        ]
+      }
+    ],
+    "PA.II.D": [
+      {
+        "scenario": "Ground says 'Runway 27, taxi via Alpha, hold short of Runway 18'. Read it back and tell me what it allows.",
+        "answer": "'Runway 27 via Alpha, hold short of Runway 18.' It allows taxi along Alpha up to the runway 18 hold line and no further; crossing 18 needs an explicit clearance, and reaching 27 does not allow entering it either.",
+        "cite": [
+          "4-3-18",
+          "91.129"
+        ],
+        "find_it": "AIM 4-3-18 for taxi clearances and readbacks; § 91.129 for the Class D rules."
+      },
+      {
+        "scenario": "You see two solid and two dashed yellow lines across the taxiway with a red sign reading 9-27. Where do you stop?",
+        "answer": "On the solid-line side, with no part of the airplane past the marking, until cleared to cross or enter; the dashed side faces the runway.",
+        "cite": [
+          "2-3-5",
+          "2-3-8"
+        ]
+      },
+      {
+        "scenario": "After landing, when may you switch to ground and where is 'clear of the runway'?",
+        "answer": "When the tower tells you to contact ground; you are clear only when the whole airplane is past the runway holding position markings on the taxiway. Do not stop or turn around on the runway without approval.",
+        "cite": [
+          "4-3-21",
+          "2-3-9"
+        ]
+      },
+      {
+        "scenario": "You are unsure of the route at a large unfamiliar airport at night. What do you ask for?",
+        "answer": "Progressive taxi instructions, and I stop and set the brakes if I become disoriented; the AIM says to tell the controller immediately and never guess across a runway.",
+        "cite": [
+          "4-3-18",
+          "4-3-19"
+        ]
+      },
+      {
+        "scenario": "What do blue lights, green lights and flashing yellow lights on the ground tell you at night?",
+        "answer": "Blue: taxiway edges. Green: taxiway centerline. Flashing yellow pairs: runway guard lights at a runway holding position. A red stop bar is never crossed while lit.",
+        "cite": [
+          "2-1-10",
+          "4-3-24"
+        ]
+      },
+      {
+        "scenario": "The red in-pavement lights at the hold line are on but the tower cleared you to cross. Now what?",
+        "answer": "Stop and hold: runway status lights mean the runway is unsafe, so tell the tower you are holding for the lights and get the clearance re-confirmed. Never cross illuminated red lights.",
+        "cite": [
+          "2-1-6"
+        ]
+      }
+    ],
+    "PA.II.F": [
+      {
+        "scenario": "A Boeing 737 just took off ahead of you. When and how do you depart?",
+        "answer": "Wait for the wake interval (ask for the full 2 minutes if the tower offers less), rotate before the point where the jet rotated, climb above its flight path and turn upwind away from its track.",
+        "cite": [
+          "7-4-6",
+          "7-4-8"
+        ]
+      },
+      {
+        "scenario": "What is your plan if the engine quits at 300 ft after takeoff, and when do you brief it?",
+        "answer": "Before every takeoff: below the turnback altitude I land ahead within about 30 degrees of the nose, pitch for best glide immediately, flaps as needed, fuel and mixture off if time allows, and I brief the abort point on the runway too.",
+        "cite": [
+          "91.3",
+          "6-3-2"
+        ]
+      },
+      {
+        "scenario": "The tower changes your departure runway while you are doing the run-up. What could go wrong?",
+        "answer": "Expectation bias: taxiing to the runway you planned and briefed. Re-read the new runway back, re-brief the departure and the emergency plan for the new direction, and check the wind and the compass against the new heading before taking the runway.",
+        "cite": [
+          "4-3-18",
+          "4-3-6"
+        ]
+      }
+    ],
+    "PA.III.A": [
+      {
+        "scenario": "Make the initial call to a Class D tower 10 miles out with the ATIS.",
+        "answer": "'Springfield Tower, Cessna Three One Six Zero Foxtrot, one zero miles south at three thousand, inbound for landing with information Bravo.' Facility, full call sign, position, altitude, request, ATIS letter.",
+        "cite": [
+          "4-2-3",
+          "4-1-13",
+          "91.129"
+        ]
+      },
+      {
+        "scenario": "You lose your radio in the pattern at a towered airport. Show me the light signals you expect.",
+        "answer": "Squawk 7600, keep the pattern, watch the tower: steady green is cleared to land, flashing green return for landing, steady red give way and keep circling, flashing red airport unsafe do not land, alternating red and green extreme caution. Acknowledge by rocking the wings by day or blinking the landing light at night.",
+        "cite": [
+          "91.125",
+          "4-3-13",
+          "4-2-13",
+          "6-4-2"
+        ],
+        "find_it": "§ 91.125 is the rule; AIM 4-3-13 the table; 4-2-13 the arrival procedure."
+      },
+      {
+        "scenario": "What transponder codes should you never dial through and why?",
+        "answer": "7500 (hijack), 7600 (lost communications) and 7700 (emergency); passing through them momentarily can trigger alarms, so change codes carefully. VFR is 1200 and the transponder stays on with altitude reporting from pushback to parking.",
+        "cite": [
+          "4-1-20",
+          "91.215"
+        ]
+      },
+      {
+        "scenario": "You had a gear collapse on landing with no injuries. What are your reporting duties?",
+        "answer": "If it is an accident (substantial damage), notify the nearest NTSB office immediately and file the report within 10 days; listed incidents need immediate notification but a written report only if requested. Check NTSB Part 830 definitions.",
+        "cite": [
+          "7-7-2"
+        ]
+      },
+      {
+        "scenario": "When would you declare an emergency, and what words do you use?",
+        "answer": "As soon as I am doubtful about fuel, position, weather or the airplane: that is an urgency condition, PAN-PAN; immediate danger is MAYDAY. Then the message: who I am calling, call sign and type, the problem, weather, intentions, position and heading, altitude, fuel in minutes, souls on board.",
+        "cite": [
+          "6-1-2",
+          "6-3-1",
+          "6-3-2"
+        ]
+      }
+    ],
+    "PA.III.B": [
+      {
+        "scenario": "You arrive at a non-towered airport with a wind sock showing a light wind favoring runway 18 while someone is using 36. What do you do?",
+        "answer": "Listen on the CTAF from 10 miles, announce, and fit into the flow in use if it is safe; the traffic already in the pattern has the flow. A light wind does not justify an opposing-direction conflict; wait or conform.",
+        "cite": [
+          "4-1-9",
+          "4-3-4",
+          "91.113"
+        ]
+      },
+      {
+        "scenario": "Which way do you turn in the pattern, and how do you know if it is right traffic?",
+        "answer": "Left unless the airport shows otherwise: the segmented circle's traffic pattern indicators, the Chart Supplement, or the sectional's RP notation. § 91.126 and § 91.127 make left turns the rule.",
+        "cite": [
+          "91.126",
+          "91.127",
+          "4-3-4"
+        ]
+      },
+      {
+        "scenario": "Two aircraft are on final to the same runway, one lower. Who has the right-of-way?",
+        "answer": "The lower aircraft, but it may not use that to cut in front of or overtake an aircraft already on final; an aircraft on final or landing has the right-of-way over others in flight or on the surface.",
+        "cite": [
+          "91.113",
+          "4-3-4"
+        ]
+      },
+      {
+        "scenario": "The tower asks you to extend downwind for a jet on a 5-mile final. What are the hazards and what do you say?",
+        "answer": "Wake turbulence and losing sight of the field: stay at or above the jet's approach path and land beyond its touchdown point, keep the traffic in sight, and read back 'extend downwind, traffic in sight' or 'negative contact'. If the extension takes me into weather or terrain, say unable.",
+        "cite": [
+          "7-4-6",
+          "7-4-8",
+          "4-3-5"
+        ]
+      },
+      {
+        "scenario": "What is the AWOS telling you when it says 'clear below one two thousand'?",
+        "answer": "No clouds detected within the ceilometer's 12,000 ft range; there could be clouds above. The one-minute weather is receivable within about 25 nm below 10,000 ft on the published frequency.",
+        "cite": [
+          "7-1-10",
+          "4-3-27"
+        ]
+      }
+    ],
+    "PA.IV.A": [
+      {
+        "scenario": "The tower reports a wind shear alert with a 20-knot loss on departure. Do you go?",
+        "answer": "Not right now. A microburst or shear on climb-out can exceed the airplane's climb capability; wait a few minutes, get an update, and if departing add speed and use maximum performance.",
+        "cite": [
+          "4-3-7",
+          "7-1-24"
+        ]
+      },
+      {
+        "scenario": "Density altitude is 8,000 ft at a 4,000 ft runway. What changes in your takeoff?",
+        "answer": "Longer roll and a shallow climb: lean for best power per the POH, use the full runway, fix an abort point (a common check is 70 percent of rotation speed by half the runway), and use Vx over obstacles.",
+        "cite": [
+          "7-6-7"
+        ]
+      },
+      {
+        "scenario": "You are cleared for takeoff and see an aircraft on short final to the crossing runway. What do you do?",
+        "answer": "Hold, tell the tower, and wait for a new clearance; a clearance never relieves me of seeing and avoiding, and § 91.113 gives a landing aircraft the right-of-way.",
+        "cite": [
+          "91.113",
+          "4-3-18",
+          "4-4-15"
+        ]
+      }
+    ],
+    "PA.IV.B": [
+      {
+        "scenario": "Tower says 'cleared to land runway 27, hold short of runway 18'. Do you accept?",
+        "answer": "As a student or a pilot unfamiliar with LAHSO, no: 'unable, request full length'. Otherwise only if the published available landing distance exceeds my landing distance with margin, and I must read back the hold short.",
+        "cite": [
+          "4-3-11"
+        ]
+      },
+      {
+        "scenario": "You are high and fast on final at 300 ft. What defines a stabilized approach and when do you go around?",
+        "answer": "Constant angle, on speed, configured and trimmed with only small corrections needed by a set gate (say 300 to 500 ft); if I am not there, or a landing cannot be made in the first third of the runway, I go around immediately: full power, pitch for climb, flaps up in stages, and tell the tower.",
+        "cite": [
+          "4-3-5",
+          "4-3-2"
+        ]
+      },
+      {
+        "scenario": "A heavy just landed on the parallel runway 2,000 ft away in a light crosswind blowing toward you. Concern?",
+        "answer": "Yes. The AIM warns of vortex drift onto a parallel runway closer than 2,500 ft; stay at or above the heavy's approach path and land beyond its touchdown point, or delay.",
+        "cite": [
+          "7-4-6",
+          "7-4-5"
+        ]
+      }
+    ],
+    "PA.IV.C": [
+      {
+        "scenario": "Why do you keep the nosewheel light on a soft field and how does ground effect help?",
+        "answer": "To keep it out of the soft surface and reduce drag and the chance of nosing over; lifting off early into ground effect lets the airplane accelerate to climb speed on reduced induced drag before leaving it.",
+        "cite": [
+          "91.13"
+        ]
+      }
+    ],
+    "PA.IV.D": [
+      {
+        "scenario": "What is different about a soft-field landing and what wind consideration matters most?",
+        "answer": "Touch down as slowly as possible with the nose high and power on to cushion, keep the nosewheel off, and avoid braking; a gusty crosswind makes the slow, nose-high touchdown harder to control, so know your demonstrated crosswind and the go-around plan.",
+        "cite": [
+          "4-3-4"
+        ]
+      }
+    ],
+    "PA.IV.E": [
+      {
+        "scenario": "On a short-field takeoff with a 50 ft obstacle, which speed do you climb at and why?",
+        "answer": "Vx, best angle of climb, until clear of the obstacle, then Vy; Vx gives the most altitude per distance. The POH obstacle-clearance chart assumes that technique and the chart's conditions.",
+        "cite": [
+          "91.9"
+        ]
+      },
+      {
+        "scenario": "Your accelerate-stop distance exceeds the runway. What does that mean for the takeoff?",
+        "answer": "That if the engine fails at rotation you cannot stop on the pavement; brief an abort point well before it and consider not going.",
+        "cite": [
+          "4-3-6"
+        ]
+      }
+    ],
+    "PA.IV.F": [
+      {
+        "scenario": "You are told to land and hold short with 3,000 ft available. Your landing distance is 1,400 ft. Accept?",
+        "answer": "Only if you are current and comfortable with LAHSO, the weather is at least 1,000 and 3, and the margin is acceptable; read back 'hold short of runway 18', and if the approach becomes unstable, go around and tell the tower.",
+        "cite": [
+          "4-3-11"
+        ]
+      }
+    ],
+    "PA.IV.M": [
+      {
+        "scenario": "When would you use a forward slip and what is the fuel and pitot concern?",
+        "answer": "To lose altitude without gaining speed on a high approach or without flaps; a sustained slip can unport a fuel tank pickup and some POHs prohibit slips with full flaps or warn of tail buffet and airspeed errors, so I check the POH limitations first.",
+        "cite": [
+          "91.9"
+        ]
+      }
+    ],
+    "PA.IV.N": [
+      {
+        "scenario": "A deer runs onto the runway at 50 ft. Talk me through the go-around.",
+        "answer": "Full power immediately, carburetor heat off, pitch for a positive climb, flaps up to the go-around setting then in stages once climbing, offset to the side of the runway to keep the traffic in sight, trim, then talk to the tower or announce on the CTAF.",
+        "cite": [
+          "4-3-5"
+        ]
+      },
+      {
+        "scenario": "You go around at a towered airport without a clearance to. Is that a violation?",
+        "answer": "No; the go-around is the PIC's decision and the safe action, and § 91.3 supports it. Tell the tower as soon as you are climbing and expect a new pattern instruction.",
+        "cite": [
+          "91.3",
+          "91.123"
+        ]
+      }
+    ],
+    "PA.V.A": [
+      {
+        "scenario": "What do you do before every steep turn and why?",
+        "answer": "Clearing turns, looking below and behind the wings, verbalizing clear left and right, and choosing an altitude with recovery room; the AIM asks for clearing procedures before all turns and maneuvers.",
+        "cite": [
+          "4-4-15",
+          "91.113"
+        ]
+      }
+    ],
+    "PA.V.B": [
+      {
+        "scenario": "You are doing turns around a point at 800 ft AGL over a farm. Is that legal, and what should you check first?",
+        "answer": "Legal over sparsely populated areas if you stay 500 ft from any person, vessel, vehicle or structure and can land without undue hazard if the engine fails; over a congested area you need 1,000 ft above the highest obstacle within 2,000 ft. Check for towers, wires and MTRs on the chart.",
+        "cite": [
+          "91.119",
+          "3-5-2"
+        ]
+      }
+    ],
+    "PA.VI.A": [
+      {
+        "scenario": "Show me how you chose your checkpoints and cruising altitude for today's cross-country.",
+        "answer": "Prominent, unique features 10 to 15 miles apart; altitude by the hemispheric rule, above terrain and obstacles with glide distance in mind, below the airspace I want to avoid, with winds aloft in mind; and a time and fuel plan per leg.",
+        "cite": [
+          "91.159",
+          "91.119",
+          "3-1-5"
+        ]
+      },
+      {
+        "scenario": "The wind aloft is 270 true at 20 knots. Your course is magnetic; what do you convert and which way?",
+        "answer": "Winds aloft are true, so compute the wind correction angle on the true course, then apply variation (east is least) to get the magnetic heading, then deviation for the compass heading.",
+        "cite": [
+          "7-1-5"
+        ]
+      },
+      {
+        "scenario": "Why does the magnetic compass lead or lag in turns and what do you do about it?",
+        "answer": "Northerly turning error: it lags turning through north and leads through south, and accelerates north on easterly and westerly headings (ANDS: accelerate north, decelerate south). Use timed turns or the heading indicator and read the compass only in straight, level, unaccelerated flight.",
+        "cite": [
+          "8-1-5"
+        ]
+      }
+    ],
+    "PA.VI.B": [
+      {
+        "scenario": "You tune a VOR and the needle centers but you hear nothing. Can you use it?",
+        "answer": "No. The only positive identification is the Morse or voice ident; no ident means the station may be out of service or under maintenance.",
+        "cite": [
+          "1-1-3"
+        ]
+      },
+      {
+        "scenario": "What can your panel-mount VFR GPS not do that an IFR unit does?",
+        "answer": "It has no RAIM alerting, its database need not be current for VFR and its antenna may be poorly placed; so cross-check with pilotage and VORs and never rely on it alone.",
+        "cite": [
+          "1-1-17"
+        ]
+      },
+      {
+        "scenario": "You request flight following. What does the controller give you and what stays yours?",
+        "answer": "Traffic advisories by clock position, distance and direction when workload permits, and safety alerts; see-and-avoid, airspace, terrain and weather stay mine. When done, I tell them and squawk 1200.",
+        "cite": [
+          "4-1-15",
+          "4-1-17",
+          "4-1-18"
+        ]
+      },
+      {
+        "scenario": "Your ADS-B Out fails 20 miles from a Class C airport you want to land at. Options?",
+        "answer": "Ask the ATC facility for a deviation to continue to the airport with the inoperative unit (allowed any time); an unequipped aircraft would have needed the request an hour ahead. Tell them 'negative ADS-B'.",
+        "cite": [
+          "91.225",
+          "4-5-7"
+        ]
+      }
+    ],
+    "PA.VI.C": [
+      {
+        "scenario": "Forty minutes into a cross-country the ceiling ahead drops below your comfort. Show me the diversion.",
+        "answer": "Pick the nearest suitable airport (runway length, fuel, weather, terrain), turn toward it now using the chart's compass rose or the VOR, estimate heading, distance, time and fuel with the plotter or thumb, tell ATC or Flight Service, and update the flight plan.",
+        "cite": [
+          "6-2-1",
+          "5-1-12",
+          "4-1-3"
+        ]
+      },
+      {
+        "scenario": "You are given a heading by ATC that would take you into a cloud. What do you say?",
+        "answer": "'Unable, VFR' with the reason; a vector to a VFR aircraft is advisory and never authorizes violating the cloud clearance minimums. Then request an alternative.",
+        "cite": [
+          "4-1-17",
+          "91.123"
+        ]
+      }
+    ],
+    "PA.VI.D": [
+      {
+        "scenario": "You are lost, fuel is at one hour, and the terrain is rising. What do you do first?",
+        "answer": "Climb (better radio and radar range), confirm the heading and time since the last fix, and immediately ask for help: 121.5 or the nearest approach control, squawk 7700, say lost, give last known position, altitude, fuel in minutes; VFR radar assistance and DF steers exist for this.",
+        "cite": [
+          "6-2-1",
+          "6-3-2",
+          "4-1-3"
+        ]
+      },
+      {
+        "scenario": "Is being lost an emergency?",
+        "answer": "The AIM says you are in at least an urgency condition the moment you become doubtful of your position; declaring early is what the FAA asks for, and delay costs lives.",
+        "cite": [
+          "6-1-2"
+        ]
+      }
+    ],
+    "PA.VII.A": [
+      {
+        "scenario": "In slow flight the stall horn sounds continuously in a gust. What does the horn actually tell you?",
+        "answer": "That the wing is within a few knots or degrees of the critical angle of attack, not that a stall has occurred; recovery is always to reduce the angle of attack, and turbulence reduces the margin. The horn's range is set by the manufacturer.",
+        "cite": [
+          "91.9"
+        ]
+      }
+    ],
+    "PA.VII.B": [
+      {
+        "scenario": "You are turning base to final, overshoot, and add rudder to tighten the turn. Why is that dangerous?",
+        "answer": "A cross-controlled skidding turn at low speed can produce a stall with the inside wing dropping into an incipient spin at an altitude with no recovery room; fix an overshoot with a go-around or a coordinated turn, never with rudder alone.",
+        "cite": [
+          "4-3-5"
+        ]
+      },
+      {
+        "scenario": "What is the first action in any stall recovery?",
+        "answer": "Reduce the angle of attack: pitch down until the stall breaks, then add power, level the wings with coordinated controls and recover to a climb; power alone will not recover a stalled wing.",
+        "cite": [
+          "91.9"
+        ]
+      }
+    ],
+    "PA.VII.C": [
+      {
+        "scenario": "During a power-on stall the airplane rolls left at the break. Why, and what do you do?",
+        "answer": "Left-turning tendencies (P-factor, torque, slipstream) at high power and angle of attack; keep the ball centered with right rudder, and at the break lower the nose first, then level the wings with rudder and coordinated aileron.",
+        "cite": [
+          "91.9"
+        ]
+      }
+    ],
+    "PA.VII.D": [
+      {
+        "scenario": "What causes a spin and what is the generic recovery?",
+        "answer": "A stall with yaw. Recovery per the POH, generically PARE: power idle, ailerons neutral, rudder full opposite the rotation, elevator forward to break the stall, then neutral rudder and recover from the dive. Most training airplanes are approved for spins only in the utility category with specific loading.",
+        "cite": [
+          "91.9",
+          "91.307"
+        ]
+      }
+    ],
+    "PA.VIII.A": [
+      {
+        "scenario": "You blunder into a cloud at night. What do you do?",
+        "answer": "Believe the instruments, keep the wings level with the attitude indicator, hold altitude and heading, make a standard-rate 180-degree turn back to VMC, and tell ATC; if not instrument rated, say so and declare so radar can help you out.",
+        "cite": [
+          "6-2-1",
+          "8-1-5"
+        ]
+      }
+    ],
+    "PA.VIII.E": [
+      {
+        "scenario": "The attitude indicator shows a nose-low, steeply banked attitude and the airspeed is increasing. Recovery?",
+        "answer": "Reduce power, level the wings, then raise the nose to the horizon; for nose-high and slowing it is power up, lower the nose, then level the wings. The order avoids a spiral or a stall.",
+        "cite": [
+          "8-1-5"
+        ]
+      },
+      {
+        "scenario": "Why do instructors make you look down and then turn your head during instrument training?",
+        "answer": "To trigger the Coriolis illusion: a head movement in a prolonged turn creates the sensation of rotation in another axis. Prevention is not making sudden head movements and trusting the instruments over the inner ear.",
+        "cite": [
+          "8-1-5"
+        ]
+      }
+    ],
+    "PA.VIII.F": [
+      {
+        "scenario": "Under the hood, ATC says 'say intentions' after your flight following was terminated. Whom do you call for weather en route?",
+        "answer": "Flight Service on 122.2 or the frequency on the chart, or FIS-B on the tablet as a supplement; ATC facilities can also relay pilot reports and hazardous weather advisories.",
+        "cite": [
+          "4-2-14",
+          "4-1-3",
+          "7-1-8"
+        ]
+      }
+    ],
+    "PA.IX.A": [
+      {
+        "scenario": "When would you make an emergency descent and what limits it?",
+        "answer": "Fire, smoke, structural or pressurization problems, or a medical emergency; descend at the POH's emergency descent configuration and speed, never above Va in turbulence or Vne, with a bank to keep the load positive and the area clear.",
+        "cite": [
+          "91.9",
+          "91.3"
+        ]
+      }
+    ],
+    "PA.IX.B": [
+      {
+        "scenario": "The engine quits at 3,000 ft AGL. Talk me through it.",
+        "answer": "Pitch for best glide immediately, pick a field into the wind within glide range, run the restart flow (fuel selector, mixture, carb heat, magnetos, primer), then declare: 121.5 or the current frequency, squawk 7700, position and souls, and secure the engine before landing. ELT arms on impact; activate it manually if able.",
+        "cite": [
+          "6-3-2",
+          "6-2-2",
+          "6-2-4",
+          "91.3"
+        ]
+      },
+      {
+        "scenario": "What does your ELT do after a crash and why does its type matter?",
+        "answer": "An armed ELT activates on crash forces and transmits for at least 48 hours; a 406 MHz unit is detected by satellite within minutes with your registration, while a 121.5 unit is heard only by overflying aircraft or ATC since satellites stopped monitoring it in 2009.",
+        "cite": [
+          "6-2-4",
+          "91.207"
+        ]
+      }
+    ],
+    "PA.IX.C": [
+      {
+        "scenario": "You have carburetor ice at 2,500 ft on a humid 20 C day. How do you know and what do you do?",
+        "answer": "A gradual RPM drop with a fixed-pitch propeller and rough running; full carb heat, expect a further drop then a rise as the ice melts, leave it on, and consider that the conditions favor icing at high humidity between roughly -7 and 21 C.",
+        "cite": [
+          "7-1-19"
+        ]
+      },
+      {
+        "scenario": "Smoke appears in the cabin. What do you do and what does the AIM say about descending?",
+        "answer": "Identify the source: electrical (master off, then reintroduce circuits) or engine fire (fuel off, mixture cut, cabin heat off, land); the AIM notes an emergency requiring immediate action justifies any deviation, and smoke or fire is a case for an emergency descent.",
+        "cite": [
+          "91.3",
+          "6-1-1"
+        ]
+      },
+      {
+        "scenario": "The cabin door pops open on climb-out. Now what?",
+        "answer": "Fly the airplane: it is loud but usually changes little, do not try to close it in flight, return and land, and brief passengers not to grab at it.",
+        "cite": [
+          "91.3"
+        ]
+      }
+    ],
+    "PA.IX.D": [
+      {
+        "scenario": "How and when do you test the ELT, and what do you do before shutdown?",
+        "answer": "Analog ELTs only in the first 5 minutes after the hour, three sweeps maximum, never in flight; 406 MHz units per the manual. Before engine shutdown listen on 121.5 to catch an inadvertent activation.",
+        "cite": [
+          "6-2-4",
+          "91.207"
+        ]
+      },
+      {
+        "scenario": "You are flying over mountains in winter. What survival gear and why the 48 to 72 hours?",
+        "answer": "Water, warm clothing, shelter, signaling (mirror, PLB), fire starter and a first-aid kit: the AIM says the life expectancy of an injured survivor drops sharply in the first 24 hours and search effort depends on a filed flight plan and an ELT.",
+        "cite": [
+          "6-2-6",
+          "7-6-7"
+        ]
+      }
+    ],
+    "PA.XI.A": [
+      {
+        "scenario": "What do you need to be night current for passengers and what counts as night for that?",
+        "answer": "Three takeoffs and landings to a full stop in the preceding 90 days during the period 1 hour after sunset to 1 hour before sunrise, in the same category, class and type.",
+        "cite": [
+          "61.57"
+        ],
+        "find_it": "§ 61.57(b); note the three different definitions of night (§ 1.1, § 91.209, § 61.57)."
+      },
+      {
+        "scenario": "Which lights must be on at night and from when?",
+        "answer": "Position lights from sunset to sunrise, anticollision lights whenever operating unless the PIC decides they are a hazard; the AIM adds beacon before start, all exterior lights on the runway, landing light with the takeoff clearance.",
+        "cite": [
+          "91.209",
+          "4-3-24"
+        ]
+      },
+      {
+        "scenario": "How do you tell another aircraft's direction of flight from its lights?",
+        "answer": "Red on the left wing, green on the right, white on the tail: red on my right and green on my left means it is coming toward me; a white light alone is going away.",
+        "cite": [
+          "91.209",
+          "4-3-24"
+        ]
+      },
+      {
+        "scenario": "You are landing on a narrow runway with no VASI over dark terrain. Which illusions and what do you do?",
+        "answer": "A narrow runway and featureless terrain both make you feel high and fly a low approach; use the normal aiming point and pattern altitudes, a VASI or PAPI if any, and fly the known pitch and power.",
+        "cite": [
+          "8-1-5"
+        ]
+      },
+      {
+        "scenario": "How do you turn on the runway lights at a non-towered airport, and how do you tell the airport from the beacon?",
+        "answer": "Key the mic 7 times on the CTAF for high intensity (5 medium, 3 low), 15 minutes at a time; a white and green beacon is a lighted land airport, white and yellow is water, and a military field has two white flashes between greens.",
+        "cite": [
+          "2-1-8",
+          "2-1-9"
+        ]
+      },
+      {
+        "scenario": "How long does dark adaptation take and what defeats it?",
+        "answer": "About 30 minutes in darkness (20 under dim red light); bright white light, including your own strobes reflecting off cloud, and hypoxia above 5,000 ft degrade it. Keep interior lights low.",
+        "cite": [
+          "8-1-6",
+          "8-1-2"
+        ]
+      }
+    ],
+    "PA.XII.A": [
+      {
+        "scenario": "After landing you notice the left brake was weak. What do you do with that?",
+        "answer": "Write it up: tell the operator and record the discrepancy so maintenance can address it; § 91.405 requires discrepancies be repaired between inspections and the next pilot must know. Then secure the airplane: mixture, magnetos and master off, controls locked, chocks and tie-downs.",
+        "cite": [
+          "91.405",
+          "91.417"
+        ]
+      },
+      {
+        "scenario": "Passengers want to get out while the propeller winds down. Answer?",
+        "answer": "No one leaves until the engine is stopped and the beacon is off; I brief the ramp route away from other propellers and jet blast and escort them.",
+        "cite": [
+          "4-3-24",
+          "91.13"
+        ]
+      }
+    ]
   }
 }

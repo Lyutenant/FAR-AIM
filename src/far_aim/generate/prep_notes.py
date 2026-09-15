@@ -16,6 +16,9 @@ Pilot/`` (a generator-owned root, unlike the reader's ``Study/``):
 
 from __future__ import annotations
 
+import hashlib
+import html
+import re
 from dataclasses import dataclass, field
 
 from far_aim.generate import BuildError, acs_notes, naming
@@ -27,6 +30,7 @@ from far_aim.links.study import (
     STUDY_SOURCE,
     AcsMap,
     Coverage,
+    Number,
     StudyEntry,
     StudyGuide,
 )
@@ -62,6 +66,9 @@ class StudyContext:
     # ACS task code → (area roman, area title, task title); area roman → title.
     tasks: dict[str, tuple[str, str, str]] = field(default_factory=dict)
     areas: dict[str, str] = field(default_factory=dict)
+    # The ACS Area documents in order (tasks and elements verbatim), for the
+    # Oral Prep notes, the ACS Checklist and the element flashcards.
+    acs_areas: tuple[dict, ...] = ()
 
 
 def _cell(text: str) -> str:
@@ -158,7 +165,9 @@ def where_to_study_chunks(task: dict, acs_map: AcsMap, targets: dict[str, str]) 
 # ---------------------------------------------------------------------------
 
 
-def _prep_note(stem: str, note_id: str, title: str, chunks: list[str]) -> Note:
+def _prep_note(
+    stem: str, note_id: str, title: str, chunks: list[str], *, folder: tuple[str, ...] = ()
+) -> Note:
     frontmatter: list[tuple[str, Value]] = [
         ("id", note_id),
         ("type", "prep"),
@@ -168,7 +177,7 @@ def _prep_note(stem: str, note_id: str, title: str, chunks: list[str]) -> Note:
     ]
     return Note(
         kind="prep",
-        path_parts=(PREP_DIR, PREP_FOLDER, f"{stem}.md"),
+        path_parts=(PREP_DIR, PREP_FOLDER, *folder, f"{stem}.md"),
         frontmatter=frontmatter,
         body="\n\n".join(chunks) + "\n",
     )
@@ -227,6 +236,26 @@ def build_prep_index(context: StudyContext, present_parts: list[str]) -> Note:
                 "each, by ACS Area and Task",
                 f"- [[{READING_PATH_STEM}]] — every entry in training order, with the ACS Tasks "
                 "each stage unlocks",
+                *(
+                    [
+                        f"- [[{CHECKLIST_STEM}]] — every Task's Knowledge and Risk elements as "
+                        "checkboxes; copy it into `Study/` and tick it there",
+                        f"- `{ORAL_DIR}/` — checkride-style scenarios per Area of Operation, "
+                        "each answered and cited"
+                        + (
+                            ": "
+                            + ", ".join(
+                                f"[[{oral_stem(r)}|{r}]]" for r in context.guide.oral_areas()
+                            )
+                            if context.guide.oral_areas()
+                            else ""
+                        ),
+                    ]
+                    if context.acs_areas
+                    else []
+                ),
+                f"- `{ANKI_DIR}/{ANKI_FILE}` — a deterministic Anki import (Basic and Cloze "
+                "cards, one deck per Area) with stable GUIDs; review state stays in Anki",
             ]
         ),
     ]
@@ -488,4 +517,263 @@ def build_prep_notes(context: StudyContext, far_docs: dict[str, dict]) -> list[N
     notes.append(build_numbers_sheet(context))
     notes.append(build_lookup(context))
     notes.append(build_reading_path(context))
+    if context.acs_areas:
+        notes.append(build_checklist(context))
+        notes.extend(build_oral_notes(context))
     return notes
+
+
+# ---------------------------------------------------------------------------
+# Phase 10d: Oral Prep, ACS Checklist, Anki export (plan §39.4.4, §39.4.6, §39.5)
+# ---------------------------------------------------------------------------
+
+ORAL_DIR = "Oral Prep"
+CHECKLIST_STEM = "ACS Checklist"
+ANKI_DIR = "anki"
+ANKI_FILE = "private-pilot.txt"
+# A comment line Anki ignores; it is how the generator proves it wrote the
+# export (notes prove ownership by frontmatter, this file has none).
+EXPORT_MARKER = "#far_aim_generated_export:1"
+ANKI_DECK_ROOT = "Private Pilot"
+_ANKI_HEADER = (
+    "#separator:tab",
+    "#html:true",
+    "#guid column:1",
+    "#notetype column:2",
+    "#deck column:3",
+    "#tags column:6",
+    EXPORT_MARKER,
+)
+
+
+def oral_stem(roman: str) -> str:
+    return f"{ORAL_DIR} {roman}"
+
+
+def prep_paths(
+    present_parts: list[str], oral_areas: list[str], has_acs: bool
+) -> list[tuple[str, tuple[str, ...]]]:
+    """(stem, vault path parts) for every prep note the build plans."""
+    folder = (PREP_DIR, PREP_FOLDER)
+    paths = [(stem, (*folder, f"{stem}.md")) for stem in prep_stems(present_parts)]
+    if has_acs:
+        paths.append((CHECKLIST_STEM, (*folder, f"{CHECKLIST_STEM}.md")))
+    for roman in oral_areas:
+        stem = oral_stem(roman)
+        paths.append((stem, (*folder, ORAL_DIR, f"{stem}.md")))
+    return paths
+
+
+def anki_path() -> tuple[str, ...]:
+    return (PREP_DIR, PREP_FOLDER, ANKI_DIR, ANKI_FILE)
+
+
+def _kr_elements(task: dict) -> list[dict]:
+    return [*task["knowledge"]["elements"], *task["risk"]["elements"]]
+
+
+def _element_lines(task: dict, formatter) -> list[str]:
+    """Knowledge then Risk elements as list lines, sub-elements indented."""
+    lines: list[str] = []
+    for element in _kr_elements(task):
+        indent = "    " if element.get("sub") else ""
+        lines.append(f"{indent}- {formatter(element)}")
+    return lines
+
+
+def _task_heading(task: dict) -> str:
+    stem = acs_notes.task_stem(task["code"])
+    return f"[[{stem}|{task['code']} — {link_display(task['title'])}]]"
+
+
+def build_oral_notes(context: StudyContext) -> list[Note]:
+    """One note per Area that has scenarios (plan §39.4.4): every Task in the
+    Area with its Knowledge and Risk element codes verbatim from the ACS, and
+    under each Task the curator's scenarios, answers, citations and hints."""
+    guide = context.guide
+    assert guide is not None
+    wanted = set(guide.oral_areas())
+    notes_out: list[Note] = []
+    for area in context.acs_areas:
+        roman = area["roman"]
+        if roman not in wanted:
+            continue
+        stem = oral_stem(roman)
+        chunks = [
+            f"# Oral Prep — {roman}. {escape_md(area['title'])}",
+            _prep_callout(),
+            "Checkride-style scenarios for this Area of Operation, one section per Task. "
+            "The element codes are the ACS's own words; the scenarios and answers are the "
+            "curator's, written to be argued out loud and then checked against the official "
+            "text they cite. None of them is an FAA question.",
+        ]
+        for task in area["tasks"]:
+            chunks.append(f"## {_task_heading(task)}")
+            chunks.append(
+                "\n".join(
+                    _element_lines(
+                        task,
+                        lambda e: (
+                            f"{code_link(e['code'], context.element_codes)} {escape_md(e['text'])}"
+                        ),
+                    )
+                )
+            )
+            scenarios = guide.oral.get(task["code"], ())
+            if not scenarios:
+                chunks.append("_No scenarios yet._")
+                continue
+            for number, scenario in enumerate(scenarios, start=1):
+                lines = [
+                    f"**Scenario {number}.** {escape_md(scenario.scenario)}",
+                    f"**Answer (study aid):** {escape_md(scenario.answer)}",
+                ]
+                if scenario.find_it:
+                    lines.append(f"**Find it:** {escape_md(scenario.find_it)}")
+                if scenario.cite:
+                    lines.append(
+                        "**Cites:** " + ", ".join(link(c, context.targets) for c in scenario.cite)
+                    )
+                chunks.append("\n".join(lines))
+        notes_out.append(
+            _prep_note(
+                stem,
+                f"prep-oral-{roman.lower()}",
+                f"Oral Prep — {roman}. {area['title']}",
+                chunks,
+                folder=(ORAL_DIR,),
+            )
+        )
+    return notes_out
+
+
+def build_checklist(context: StudyContext) -> Note:
+    """Every Task with its Knowledge and Risk elements as checkboxes (plan
+    §39.4.6) — a template to copy into ``Study/``; this copy is regenerated."""
+    chunks = [
+        f"# {CHECKLIST_STEM}",
+        _callout(
+            "warning",
+            "Template — copy it before you tick it",
+            [
+                "This note is regenerated on every build, so marks made here are lost. Copy it "
+                "into `Study/` (the folder the generator never touches) and track your progress "
+                "there. Element codes and wording are the ACS's own; nothing else is added."
+            ],
+        ),
+    ]
+    for area in context.acs_areas:
+        chunks.append(f"## {area['roman']}. {escape_md(area['title'])}")
+        for task in area["tasks"]:
+            chunks.append(f"### {_task_heading(task)}")
+            chunks.append(
+                "\n".join(
+                    _element_lines(task, lambda e: f"[ ] **{e['code']}** {escape_md(e['text'])}")
+                )
+            )
+    return _prep_note(CHECKLIST_STEM, "prep-acs-checklist", CHECKLIST_STEM, chunks)
+
+
+def _anki_guid(kind: str, stem: str, index: int) -> str:
+    """Stable per (stem, card kind, index): a re-import updates cards in place."""
+    return hashlib.sha256(f"far-aim|{kind}|{stem}|{index}".encode()).hexdigest()[:16]
+
+
+def _anki_field(text: str) -> str:
+    """HTML-escaped field text with no tab or newline (the record separators)."""
+    escaped = html.escape(text, quote=True)
+    return escaped.replace("\t", " ").replace("\r", "").replace("\n", "<br>")
+
+
+def _anki_deck(roman: str, context: StudyContext) -> str:
+    if roman and roman in context.areas:
+        return f"{ANKI_DECK_ROOT}::{roman}. {context.areas[roman]}"
+    return f"{ANKI_DECK_ROOT}::General"
+
+
+def _anki_cloze(entry: StudyEntry, number: Number, display: str) -> tuple[str, str]:
+    """(Text, Back Extra) for a cloze over one number (plan §39.5): the value
+    blanked inside the gist when it occurs there, else its leading numeral,
+    else a standalone cloze; the verbatim quote is the extra."""
+    gist = _anki_field(entry.gist)
+    value = _anki_field(number.value)
+    cloze = None
+    if value in gist:
+        cloze = gist.replace(value, f"{{{{c1::{value}}}}}", 1)
+    else:
+        token = re.search(r"\d[\d,./]*", number.value)
+        if token is not None:
+            needle = _anki_field(token.group(0))
+            if re.search(rf"(?<![\d,.]){re.escape(needle)}(?![\d,.])", gist):
+                cloze = re.sub(
+                    rf"(?<![\d,.]){re.escape(needle)}(?![\d,.])",
+                    lambda _m: f"{{{{c1::{needle}}}}}",
+                    gist,
+                    count=1,
+                )
+    if cloze is None:
+        cloze = f"{_anki_field(display)}: {{{{c1::{value}}}}}"
+    where = f" {number.where}" if number.where else ""
+    extra = _anki_field(f"“{number.quote}” ({display}{where})")
+    return cloze, extra
+
+
+def build_anki(context: StudyContext) -> bytes:
+    """The Anki text import (plan §39.5): built-in note types only, one deck
+    per ACS Area, GUIDs stable across rebuilds, review state never stored."""
+    guide = context.guide
+    assert guide is not None
+    rows: list[str] = []
+
+    def row(guid: str, notetype: str, deck: str, front: str, back: str, tags: list[str]) -> None:
+        rows.append("\t".join([guid, notetype, deck, front, back, " ".join(tags)]))
+
+    ordered = sorted(guide.entries.values(), key=lambda e: (e.is_aim, naming.natural_key(e.stem)))
+    for entry in ordered:
+        display = context.targets.get(entry.stem, entry.stem)
+        deck = _anki_deck(_area_of(entry), context)
+        tags = ["far-aim", f"ppl::{entry.stage}", f"cite::{entry.stem}"]
+        row(
+            _anki_guid("gist", entry.stem, 0),
+            "Basic (and reversed card)",
+            deck,
+            _anki_field(display),
+            _anki_field(entry.gist),
+            tags,
+        )
+        for index, question in enumerate(entry.questions):
+            cites = "; ".join(context.targets.get(c, c) for c in question.cite)
+            row(
+                _anki_guid("question", entry.stem, index),
+                "Basic",
+                deck,
+                _anki_field(question.q),
+                _anki_field(question.a) + "<br><br>" + _anki_field(cites),
+                tags,
+            )
+        for index, number in enumerate(entry.numbers):
+            text, extra = _anki_cloze(entry, number, display)
+            row(_anki_guid("number", entry.stem, index), "Cloze", deck, text, extra, tags)
+    if context.acs_map is not None:
+        for area in context.acs_areas:
+            deck = _anki_deck(area["roman"], context)
+            for task in area["tasks"]:
+                for element in _kr_elements(task):
+                    entry = context.acs_map.entry_for(
+                        element["code"], element.get("parent"), task["code"]
+                    )
+                    if entry is None:
+                        continue
+                    if entry.out_of_corpus:
+                        back = f"Not in the FAR/AIM: {entry.out_of_corpus}"
+                    else:
+                        back = "<br>".join(context.targets.get(s, s) for s in entry.stems)
+                    row(
+                        _anki_guid("element", element["code"], 0),
+                        "Basic",
+                        deck,
+                        f"<b>{_anki_field(element['code'])}</b> {_anki_field(element['text'])}",
+                        _anki_field(back) if entry.out_of_corpus else back,
+                        ["far-aim", f"acs::{task['code']}"],
+                    )
+    return ("\n".join([*_ANKI_HEADER, *rows]) + "\n").encode("utf-8")

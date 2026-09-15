@@ -148,7 +148,7 @@ not summaries of the rules.
 - No enrichment code runs inside the parsers, and the canonical hashes the
   manifest pins are unaffected by anything under `data/enrichment/`.
 
-## Exam-prep layer (Phase 10b–10c; plan §39.3–§39.4)
+## Exam-prep layer (Phase 10b–10d; plan §39.3–§39.5)
 
 Two more committed files under `data/enrichment/`, loaded like the concept
 graph (malformed ⇒ build error; absent ⇒ nothing rendered) and verified
@@ -172,6 +172,10 @@ against the built layers in `plan_vault` (`links.study`):
   `questions` (`q`, `a`, `cite` stems), `mnemonics` (labelled as
   training-community devices), `acs` codes, a `stage` (declared in
   `stages`) and `review` (`unreviewed` until a human checks the wording).
+  A top-level `oral` object (Phase 10d) maps an ACS Task code to a list of
+  scenarios — `scenario`, `answer`, `cite` stems, optional `find_it` hint
+  — the curator's checkride-style questions; a Task the ACS lacks or an
+  unresolved cite fails the build.
   Gates: stems and citations must be FAR sections or AIM paragraphs the
   vault holds, codes must exist, at least one question per entry, and the
   **verbatim-numbers gate**: every `quote` must occur in the official text
@@ -192,8 +196,37 @@ Sheet` (every quoted threshold by Area, linked to its paragraph) and
 gist) and `Reading Path` (every entry in training order — the `stages`
 in declared order, each with its description, its entries sorted FAR
 sections then AIM paragraphs by citation, and the ACS Tasks those
-entries' codes touch). `Study/` remains the reader's untouched folder;
-Prep is rebuilt.
+entries' codes touch). Phase 10d adds `Oral Prep/Oral Prep <Roman>` —
+one note per Area with scenarios, listing every Task of the Area with its
+Knowledge and Risk elements verbatim as block links, then each scenario
+with its answer (labelled a study aid), hint and citations — and `ACS
+Checklist` (every Task's Knowledge and Risk elements as `- [ ]` items
+under a warning callout: copy it into `Study/` before ticking, this copy
+is regenerated). `Study/` remains the reader's untouched folder; Prep is
+rebuilt.
+
+The Anki export (plan §39.5; `prep_notes.build_anki`) is written to
+`vault/Prep/Private Pilot/anki/private-pilot.txt`: header lines
+`#separator:tab`, `#html:true`, `#guid column:1`, `#notetype column:2`,
+`#deck column:3`, `#tags column:6`, then the ownership comment
+`#far_aim_generated_export:1` (Anki ignores comment lines; the generator
+uses it to recognise its own file, since the export has no frontmatter).
+Rows are guid, note type, deck, front, back, tags. Card kinds, all from
+the two curated files and using only Anki's built-in note types: citation
+↔ gist (`Basic (and reversed card)`), each question → answer plus the
+citations it names (`Basic`), a `Cloze` per verified number — the value
+is blanked inside the gist when it occurs there, otherwise its leading
+numeral, otherwise the card is `<citation>: {{c1::value}}` — with the
+verbatim quote and paragraph as the extra field, and each mapped ACS
+Knowledge/Risk element → the notes that cover it, or the out-of-corpus
+reason (`Basic`). Decks are `Private Pilot::<Roman>. <Area title>` (an
+entry's first ACS code decides; uncoded entries go to `::General`); tags
+are `far-aim`, `ppl::<stage>`, `cite::<stem>` or `acs::<Task>`. The GUID
+is the first 16 hex digits of sha256 over `far-aim|<kind>|<stem>|<index>`,
+so a re-import of a rebuilt file updates card text in place and keeps
+review history; fields are HTML-escaped with newlines as `<br>` so no
+record separator can appear inside a field. Review state lives in Anki,
+never in the vault (§32.10).
 
 Content (Phase 10c, 2026-09-14): the guide covers every FAR section and
 AIM paragraph the Private Pilot collection links that the ACS map also
@@ -211,6 +244,13 @@ are copied from a dump of the canonical text (never typed from memory)
 because the AIM uses U+2010 hyphens (`two‐way`) and curly quotes that a
 retyped quote silently misses; a truncated dump line is never quoted
 past its visible end.
+
+Content (Phase 10d, 2026-09-14): 125 oral scenarios under 42 Tasks —
+every single-engine land Task of Areas I–IX, XI and XII; the seaplane and
+multiengine Tasks are left empty and appear in their Area's note as "No
+scenarios yet" (Area X has no note). The Anki file holds 1,740 cards.
+Scenarios are Claude-drafted like the entries; they are never presented
+as FAA questions, and each ends at the official text it cites.
 
 Separability (§32.12): deleting the two files removes exactly the Prep
 root, the callouts and the `Where to study` sections (`tests/test_study.py`).

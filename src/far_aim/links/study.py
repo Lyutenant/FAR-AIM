@@ -39,6 +39,15 @@ REVIEW_STATES = ("unreviewed", "reviewed")
 _WS_RE = re.compile(r"\s+")
 _LABEL_PATH_RE = re.compile(r"^(\([A-Za-z0-9]+\))+$")
 _LABEL_RE = re.compile(r"\([A-Za-z0-9]+\)")
+_TASK_CODE_RE = re.compile(r"^(?P<acs>[A-Z]{2,3})\.(?P<area>[IVX]+)\.(?P<task>[A-Z])$")
+
+
+def task_area(code: str) -> str:
+    """``PA.I.A`` → ``I``; raises on anything that is not a Task code."""
+    match = _TASK_CODE_RE.match(code)
+    _require(match is not None, f"not an ACS Task code: {code!r}")
+    assert match is not None
+    return match.group("area")
 
 
 def _require(condition: bool, message: str) -> None:
@@ -242,6 +251,18 @@ class Question:
 
 
 @dataclass(frozen=True)
+class OralScenario:
+    """One checkride-style scenario under an ACS Task (plan §39.4.4): the
+    curator's question and short answer, the notes that settle it, and a hint
+    for finding the rule without the vault."""
+
+    scenario: str
+    answer: str
+    cite: tuple[str, ...]
+    find_it: str | None = None
+
+
+@dataclass(frozen=True)
 class StudyEntry:
     stem: str
     gist: str
@@ -270,6 +291,8 @@ def _text(raw: object, what: str, *, allow_empty: bool = False) -> str:
 class StudyGuide:
     stages: dict[str, str] = field(default_factory=dict)  # ordered: stage → description
     entries: dict[str, StudyEntry] = field(default_factory=dict)
+    # ACS Task code → scenarios, in file order.
+    oral: dict[str, tuple[OralScenario, ...]] = field(default_factory=dict)
 
     @classmethod
     def load(cls, path: Path) -> StudyGuide:
@@ -369,7 +392,38 @@ class StudyGuide:
                 stage=stage,
                 review=review,
             )
-        return cls(stages=stages, entries=entries)
+        oral: dict[str, tuple[OralScenario, ...]] = {}
+        raw_oral = data.get("oral", {})
+        _require(isinstance(raw_oral, dict), f"{where}: oral must be an object keyed by Task code")
+        assert isinstance(raw_oral, dict)
+        for code, items in raw_oral.items():
+            o_what = f"{where}: oral[{code}]"
+            task_area(code)
+            _require(isinstance(items, list) and items, f"{o_what}: expected a non-empty list")
+            scenarios: list[OralScenario] = []
+            for index, item in enumerate(items):
+                s_what = f"{o_what}[{index}]"
+                _require(
+                    isinstance(item, dict)
+                    and set(item) <= {"scenario", "answer", "cite", "find_it"},
+                    f"{s_what}: bad shape",
+                )
+                find_it = item.get("find_it")
+                scenarios.append(
+                    OralScenario(
+                        scenario=_text(item.get("scenario"), f"{s_what}.scenario"),
+                        answer=_text(item.get("answer"), f"{s_what}.answer"),
+                        cite=_string_list(item.get("cite", []), f"{s_what}.cite"),
+                        find_it=None if find_it is None else _text(find_it, f"{s_what}.find_it"),
+                    )
+                )
+            oral[code] = tuple(scenarios)
+        return cls(stages=stages, entries=entries, oral=oral)
+
+    def oral_areas(self) -> list[str]:
+        """The Areas (roman numerals) that have at least one scenario, in ACS order."""
+        romans = {task_area(code) for code in self.oral}
+        return sorted(romans, key=acs_model.roman_to_int)
 
     def verify(
         self,
@@ -413,6 +467,21 @@ class StudyGuide:
                     f"{what}: the quote {number.quote!r} does not occur verbatim in the "
                     f"official text of {place}",
                 )
+        tasks = None if codes is None else {c.rsplit(".", 1)[0] for c in codes}
+        for code, scenarios in self.oral.items():
+            what = f"{STUDY_SOURCE}: oral[{code}]"
+            _require(
+                tasks is not None and code in tasks,
+                f"{what}: Task {code!r} is not in the accepted ACS"
+                + (" (no ACS layer is built)" if tasks is None else ""),
+            )
+            for index, scenario in enumerate(scenarios):
+                for citation in scenario.cite:
+                    _require(
+                        stem_exists("far", citation) or stem_exists("aim", citation),
+                        f"{what}[{index}]: {citation!r} is not a FAR section or AIM paragraph "
+                        "the vault holds",
+                    )
 
     def by_stage(self) -> dict[str, list[StudyEntry]]:
         out: dict[str, list[StudyEntry]] = {stage: [] for stage in self.stages}

@@ -23,6 +23,9 @@ Study material for the Private Pilot knowledge test and the oral portion of the 
 - [[Numbers Sheet]] — every tested number, each linked to the paragraph it comes from
 - [[Where Do I Look]] — plain-English questions and the citation that answers each, by ACS Area and Task
 - [[Reading Path]] — every entry in training order, with the ACS Tasks each stage unlocks
+- [[ACS Checklist]] — every Task's Knowledge and Risk elements as checkboxes; copy it into `Study/` and tick it there
+- `Oral Prep/` — checkride-style scenarios per Area of Operation, each answered and cited: [[Oral Prep I|I]], [[Oral Prep II|II]], [[Oral Prep III|III]], [[Oral Prep IV|IV]], [[Oral Prep V|V]], [[Oral Prep VI|VI]], [[Oral Prep VII|VII]], [[Oral Prep VIII|VIII]], [[Oral Prep IX|IX]], [[Oral Prep XI|XI]], [[Oral Prep XII|XII]]
+- `anki/private-pilot.txt` — a deterministic Anki import (Basic and Cloze cards, one deck per Area) with stable GUIDs; review state stays in Anki
 
 ## Coverage
 

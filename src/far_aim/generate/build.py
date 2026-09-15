@@ -88,8 +88,10 @@ class Registry:
     # the curated stems on disk registered as link targets only.
     concept_note_count: int = 0
     curated_stems: set[str] = field(default_factory=set)
-    # Phase 10b (plan §39.4): generated exam-prep notes under Prep/.
+    # Phase 10b (plan §39.4): generated exam-prep notes under Prep/, and the
+    # non-note exports there (the Anki file, plan §39.5).
     prep_note_count: int = 0
+    prep_export_count: int = 0
 
 
 @dataclass(frozen=True)
@@ -297,7 +299,7 @@ def build_registry(
     for stem, parts in notes.CURATED_ENTRIES:
         _add_stem(registry, seen, stem, parts)
     if enrichment is not None:
-        _register_enrichment(registry, seen, enrichment, docs)
+        _register_enrichment(registry, seen, enrichment, docs, acs is not None)
     if aim is not None:
         _register_aim(registry, seen, citation_aliases, heading_candidates, aim)
     if pcg is not None:
@@ -352,7 +354,11 @@ def build_registry(
 
 
 def _register_enrichment(
-    registry: Registry, seen: dict[str, str], enrichment: EnrichmentLayer, docs: dict[str, dict]
+    registry: Registry,
+    seen: dict[str, str],
+    enrichment: EnrichmentLayer,
+    docs: dict[str, dict],
+    has_acs: bool,
 ) -> None:
     """Concept notes are planned files; curated notes on disk are link targets.
 
@@ -370,11 +376,11 @@ def _register_enrichment(
         registry.curated_stems.add(stem)
     if enrichment.study is not None:
         present = [p for p in prep_notes.MAP_PARTS if p in docs]
-        for stem in prep_notes.prep_stems(present):
-            _add_stem(
-                registry, seen, stem, (prep_notes.PREP_DIR, prep_notes.PREP_FOLDER, f"{stem}.md")
-            )
+        oral_areas = enrichment.study.oral_areas() if has_acs else []
+        for stem, parts in prep_notes.prep_paths(present, oral_areas, has_acs):
+            _add_stem(registry, seen, stem, parts)
             registry.prep_note_count += 1
+        registry.prep_export_count += 1  # the Anki import file
     if enrichment.concepts is None:
         return
     map_stem = concept_notes.CONCEPT_MAP_STEM
@@ -716,6 +722,7 @@ def plan_vault(
     if study_context is not None and study_context.guide is not None:
         for note in prep_notes.build_prep_notes(study_context, docs):
             add(note)
+        plan[prep_notes.anki_path()] = prep_notes.build_anki(study_context)
 
     if has_concepts:
         assert enrichment is not None and enrichment.concepts is not None
@@ -837,10 +844,12 @@ def _study_context(
         )
     tasks: dict[str, tuple[str, str, str]] = {}
     areas: dict[str, str] = {}
+    area_docs: list[dict] = []
     if acs is not None:
         for kind, doc in _iter_acs_documents(acs.docs):
             if kind == "area":
                 areas[doc["roman"]] = doc["title"]
+                area_docs.append(doc)
                 for task in doc["tasks"]:
                     tasks[task["code"]] = (doc["roman"], doc["title"], task["title"])
     return prep_notes.StudyContext(
@@ -851,6 +860,7 @@ def _study_context(
         element_codes=frozenset(registry.acs_element_codes),
         tasks=tasks,
         areas=areas,
+        acs_areas=tuple(area_docs),
     )
 
 
@@ -967,6 +977,7 @@ def _verify_plan(
     if acs is not None:
         expected += registry.acs_note_count
     expected += registry.concept_note_count + registry.prep_note_count
+    expected += registry.prep_export_count
     if len(plan) != expected:
         raise BuildError(f"planned {len(plan)} files, expected {expected}")
     parsed_sections = sum(ecfr_parser.count_sections(doc) for doc in docs.values())
@@ -1031,6 +1042,22 @@ def write_text_atomic(path: Path, data: bytes) -> None:
     except BaseException:
         tmp_path.unlink(missing_ok=True)
         raise
+
+
+def is_generated_export(path: Path) -> bool:
+    """A non-note generated file (the Anki export) is generator-owned only if
+    it carries the export marker among its leading comment lines."""
+    try:
+        with path.open(encoding="utf-8", errors="replace") as fh:
+            for _ in range(16):
+                line = fh.readline()
+                if not line or not line.startswith("#"):
+                    return False
+                if line.rstrip("\r\n") == prep_notes.EXPORT_MARKER:
+                    return True
+    except OSError:
+        return False
+    return False
 
 
 def is_generated_note(path: Path) -> bool:
@@ -1119,6 +1146,10 @@ def sync_vault(config: Config, plan: dict[tuple[str, ...], bytes]) -> SyncStats:
                 f"curated or modified file at generated asset path {path}; move or rename "
                 "it, then rebuild"
             )
+        elif path.read_bytes() != data and not is_generated_export(path):
+            raise BuildError(
+                f"curated file at generated path {path}; move or rename it, then rebuild"
+            )
 
     stats = SyncStats()
     owned_roots = [
@@ -1149,6 +1180,13 @@ def sync_vault(config: Config, plan: dict[tuple[str, ...], bytes]) -> SyncStats:
         candidates = [
             path for root in owned_roots if root.is_dir() for path in sorted(root.rglob("*.md"))
         ]
+        # The Prep root also holds the generated Anki export (plan §39.5): a
+        # non-note file owned only if it carries the export marker.
+        prep_root = vault / prep_notes.PREP_DIR
+        if prep_root.is_dir():
+            candidates.extend(
+                p for p in sorted(prep_root.rglob("*.txt")) if p.is_file() and p not in paths
+            )
         for root_stem in (notes.SOURCE_STATUS_STEM, notes.HOME_STEM):
             root_note = vault / f"{root_stem}.md"
             if root_note.exists():
@@ -1176,8 +1214,10 @@ def sync_vault(config: Config, plan: dict[tuple[str, ...], bytes]) -> SyncStats:
                 else:
                     stats.warnings.append(f"curated file inside generated assets kept: {path}")
                     continue
-            else:
+            elif path.suffix == ".md":
                 generated_stale = is_generated_note(path)
+            else:
+                generated_stale = is_generated_export(path)
             if generated_stale:
                 backup = backup_root / f"{len(journal)}-{path.name}"
                 os.rename(path, backup)

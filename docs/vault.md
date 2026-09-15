@@ -115,8 +115,10 @@ The whole vault is planned and verified in memory (links, counts, filename
 policy, frontmatter schemas) before any write. Sync then:
 
 1. refuses to overwrite any existing file that does not carry
-   `generated: true` frontmatter (curated note at a generated path) or, for
-   assets, that the ledger does not attribute to the generator;
+   `generated: true` frontmatter (curated note at a generated path), or,
+   for assets, that the ledger does not attribute to the generator, or,
+   for the Anki export, that lacks the `#far_aim_generated_export:1`
+   comment line among its leading `#` headers (Anki ignores it);
 2. writes only changed files (0644), so a no-change rebuild is a byte-level
    no-op and `git status` stays clean;
 3. journals every write and deletion against a backup: a mid-sync
@@ -386,7 +388,12 @@ vault/Prep/Private Pilot/
 ├── Part 91 Map.md
 ├── Numbers Sheet.md        # every quoted threshold, linked to its paragraph
 ├── Where Do I Look.md      # questions → citations by ACS Task; citation → gist
-└── Reading Path.md         # every entry by training stage, with the ACS Tasks each stage touches
+├── Reading Path.md         # every entry by training stage, with the ACS Tasks each stage touches
+├── ACS Checklist.md        # every Task's K/R elements as checkboxes — copy into Study/ and tick there
+├── Oral Prep/
+│   └── Oral Prep I.md …    # one per Area with scenarios: Tasks, elements verbatim, scenarios
+└── anki/
+    └── private-pilot.txt   # Anki text import, stable GUIDs (plan §39.5)
 ```
 
 - `Prep/` is a generator-owned root (pruned and byte-compared like the
@@ -404,6 +411,16 @@ vault/Prep/Private Pilot/
   sources and per-element overrides, or the out-of-corpus reason.
 - `Home.md` describes `Prep/` and points exam candidates at
   `[[Private Pilot Prep]]`.
+- Phase 10d: `Oral Prep/Oral Prep <Roman>.md` exists for each Area with
+  at least one scenario in `ppl-study.json`'s `oral` map and lists every
+  Task of that Area (Knowledge and Risk elements as block links onto the
+  Task note) followed by the scenarios — question, answer labelled as a
+  study aid, "find it" hint, citations. `ACS Checklist.md` is a template
+  (a warning callout says so): copy it into `Study/` before ticking.
+  `anki/private-pilot.txt` is the only generated non-note file outside
+  `AIM/assets/`: stale `*.txt` files under `Prep/` are pruned only when
+  they carry the export marker, and any other `.txt` there is kept with
+  a warning like a curated note.
 
 ## Home and the curated layer (Phase 7)
 

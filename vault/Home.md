@@ -27,7 +27,7 @@ Generated:
 - `AIM/` — the Aeronautical Information Manual, one note per paragraph named by citation (`4-1-9`), figures embedded. Procedures and guidance, not regulation.
 - `PCG/` — the Pilot/Controller Glossary, one note per term, named by the term. Definitions as controllers and the AIM use them.
 - `ACS/` — the Private Pilot for Airplane Category Airman Certification Standards, one note per Task named by its code (`PA.I.A`), every Knowledge, Risk Management and Skill element verbatim. What the knowledge test samples and the checkride examines.
-- `Prep/` — the Private Pilot exam-prep layer: [[Private Pilot Prep]] (coverage of the ACS, study entries by training stage), the Part 61 and Part 91 number-pattern maps, a Numbers Sheet and a Where Do I Look index. Rendered from curated files; covered regulations and AIM paragraphs also open with a labelled study aid.
+- `Prep/` — the Private Pilot exam-prep layer: [[Private Pilot Prep]] (coverage of the ACS, study entries by training stage), the Part 61 and Part 91 number-pattern maps, a Numbers Sheet, a Where Do I Look index, a Reading Path, Oral Prep scenarios per Area of Operation, an ACS Checklist to copy into `Study/`, and an Anki import file under `anki/`. Rendered from curated files; covered regulations and AIM paragraphs also open with a labelled study aid.
 - `Concepts/` — one note per study concept: what it builds on, and the regulations, AIM guidance and glossary terms that define it. Rendered from the curated concept graph, so edit the graph, not the notes. Start at the [[Concept Map]] for a suggested study order.
 
 Curated:

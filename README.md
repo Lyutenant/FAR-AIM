@@ -93,12 +93,25 @@ paraphrased or AI-generated. Full specification:
   generated `Reading Path` note (pre-solo → solo XC → checkride, with the
   ACS Tasks each stage touches). All entries are drafted, none reviewed.
 
+- **Phase 10d** — the drills: an `oral` scenario bank in the same file
+  (125 checkride-style scenarios under 42 ACS Tasks, each answered, cited
+  and given a "find it" hint) rendered as one `Oral Prep` note per Area
+  of Operation with the Area's Knowledge and Risk elements verbatim; an
+  `ACS Checklist` template of every Task's elements as checkboxes, meant
+  to be copied into `Study/`; and a deterministic Anki import
+  (`Prep/Private Pilot/anki/private-pilot.txt`: 1,740 cards — citation ↔
+  gist, question → answer, cloze over each verified number, ACS element →
+  sources — built-in note types, one deck per Area, GUIDs stable across
+  rebuilds so review history survives a re-import). Phase 10 is complete;
+  the follow-ups below are not scheduled.
+
 ## Roadmap — Phase 10: Private Pilot exam-prep layer
 
-Design of record is plan §39; 10a and 10b shipped 2026-09-13 and 10c on
-2026-09-14 (above). The goal is a vault a student can study from for the
-Private Pilot knowledge test and the oral portion of the practical test,
-organized the way both exams are: by the ACS.
+Design of record is plan §39; all four increments shipped (10a and 10b on
+2026-09-13, 10c and 10d on 2026-09-14, above). The goal is a vault a
+student can study from for the Private Pilot knowledge test and the oral
+portion of the practical test, organized the way both exams are: by the
+ACS. The design summary is kept here for orientation.
 
 - **10b/10c — study gloss (design)**: one curated file (`data/enrichment/ppl-study.json`)
   keyed by citation — gist, why it matters, key numbers, traps, plain-English
@@ -111,9 +124,13 @@ organized the way both exams are: by the ACS.
   coverage measurable: every Knowledge/Risk element is mapped or listed as
   out-of-corpus (aerodynamics, performance, weather theory live in the FAA
   handbooks, which are not sources yet).
-- **10d — drills**: an oral-prep scenario bank per Area of Operation and a
-  deterministic Anki import file with stable GUIDs; review state stays in
-  Anki so rebuilds remain byte-identical.
+- **10d — drills**: an oral-prep scenario bank per Area of Operation, an
+  ACS Checklist template, and a deterministic Anki import file with stable
+  GUIDs; review state stays in Anki so rebuilds remain byte-identical.
+- **Follow-ups, not scheduled**: the FAA handbooks (PHAK, AFH, Aviation
+  Weather Handbook) as sources, which would close most out-of-corpus
+  elements; the Instrument Rating ACS; AC 61-65 endorsements; the 22
+  map-only stems without study entries (docs/enrichment.md).
 
 ## Using the vault
 

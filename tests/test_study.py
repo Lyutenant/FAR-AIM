@@ -78,6 +78,17 @@ STUDY = {
             "review": "reviewed",
         },
     },
+    "oral": {
+        "PA.I.A": [
+            {
+                "scenario": "You last flew 95 days ago. Passengers tonight?",
+                "answer": "Not until three landings; full stop for night.",
+                "cite": ["91.155"],
+                "find_it": "Part 61 subpart A, the 61.5x range",
+            },
+            {"scenario": "Second one.", "answer": "Short answer.", "cite": []},
+        ]
+    },
 }
 
 
@@ -145,6 +156,18 @@ def test_study_guide_shape_rules():
     assert guide.entries["4-1-15"].questions[0].cite == ("4-1-15",)  # defaults to the entry
     assert guide.entries["4-1-15"].review == "reviewed" and entry.review == "unreviewed"
     assert [e.stem for e in guide.by_stage()["solo-xc"]] == ["91.155"]
+    assert guide.oral_areas() == ["I"]
+    assert guide.oral["PA.I.A"][0].find_it == "Part 61 subpart A, the 61.5x range"
+    assert guide.oral["PA.I.A"][1].cite == () and guide.oral["PA.I.A"][1].find_it is None
+    for oral, message in (
+        ({"PA.I.A.K1": [{"scenario": "s", "answer": "a"}]}, "not an ACS Task code"),
+        ({"PA.I.A": []}, "non-empty list"),
+        ({"PA.I.A": [{"scenario": "s"}]}, "expected text"),
+        ({"PA.I.A": [{"scenario": "s", "answer": "a", "hint": "h"}]}, "bad shape"),
+    ):
+        data = {**STUDY, "oral": oral}
+        with pytest.raises(BuildError, match=message):
+            study.StudyGuide.from_data(data, where="s")
     base = {"gist": "g", "why": "w", "questions": [{"q": "q", "a": "a"}], "stage": "pre-solo"}
     for patch, message in (
         ({"stage": "checkride"}, "is not one of"),
@@ -215,6 +238,14 @@ def test_unresolved_stems_codes_and_coverage_fail(far_docs, aim_layer, pcg_layer
     bad_guide = json.loads(json.dumps(STUDY))
     bad_guide["entries"]["91.155"]["questions"][0]["cite"] = ["Part 61"]
     with pytest.raises(BuildError, match="not a FAR section or AIM paragraph the vault holds"):
+        _plan(far_docs, aim_layer, pcg_layer, acs_layer, ACS_MAP, bad_guide)
+    bad_guide = json.loads(json.dumps(STUDY))
+    bad_guide["oral"]["PA.II.A"] = [{"scenario": "s", "answer": "a"}]
+    with pytest.raises(BuildError, match="oral\\[PA.II.A\\]: Task 'PA.II.A' is not in the"):
+        _plan(far_docs, aim_layer, pcg_layer, acs_layer, ACS_MAP, bad_guide)
+    bad_guide = json.loads(json.dumps(STUDY))
+    bad_guide["oral"]["PA.I.A"][0]["cite"] = ["91.9999"]
+    with pytest.raises(BuildError, match="oral\\[PA.I.A\\]\\[0\\]: '91.9999' is not a FAR"):
         _plan(far_docs, aim_layer, pcg_layer, acs_layer, ACS_MAP, bad_guide)
 
 
@@ -287,8 +318,13 @@ def test_prep_notes_render(prep_plan):
         ("Prep", "Private Pilot", "Numbers Sheet.md"),
         ("Prep", "Private Pilot", "Where Do I Look.md"),
         ("Prep", "Private Pilot", "Reading Path.md"),
+        ("Prep", "Private Pilot", "ACS Checklist.md"),
+        ("Prep", "Private Pilot", "Oral Prep", "Oral Prep I.md"),
+        ("Prep", "Private Pilot", "anki", "private-pilot.txt"),
     }
     index = prep_plan[("Prep", "Private Pilot", "Private Pilot Prep.md")].decode()
+    assert "- [[ACS Checklist]] —" in index and "[[Oral Prep I|I]]" in index
+    assert "`anki/private-pilot.txt`" in index
     assert 'type: "prep"' in index and "generated: true" in index
     assert "| [[PA.I|I. Preflight Preparation]] |" in index
     assert "| **Total** |" in index
@@ -316,7 +352,72 @@ def test_prep_notes_render(prep_plan):
     assert "**ACS Tasks this stage touches:** [[PA.I.E|PA.I.E — National Airspace System]]" in path
     assert "- [[4-1-15|AIM 4-1-15 — Radar Traffic Information Service]] — Radar traffic" in path
     home = prep_plan[("Home.md",)].decode()
-    assert "[[Private Pilot Prep]]" in home and "`Prep/`" in home
+    assert "[[Private Pilot Prep]]" in home and "`Prep/`" in home and "Oral Prep" in home
+
+
+def test_oral_prep_and_checklist_render(prep_plan):
+    oral = prep_plan[("Prep", "Private Pilot", "Oral Prep", "Oral Prep I.md")].decode()
+    assert 'id: "prep-oral-i"' in oral and "# Oral Prep — I. Preflight Preparation" in oral
+    assert "## [[PA.I.A|PA.I.A — Pilot Qualifications]]" in oral
+    # Elements verbatim from the ACS, as block links onto the Task note.
+    assert "- [[PA.I.A#^pa-i-a-k1|PA.I.A.K1]] Certification requirements" in oral
+    assert "**Scenario 1.** You last flew 95 days ago. Passengers tonight?" in oral
+    assert "**Answer (study aid):** Not until three landings; full stop for night." in oral
+    assert "**Find it:** Part 61 subpart A, the 61.5x range" in oral
+    assert "**Cites:** [[91.155|§ 91.155 — Basic VFR weather minimums]]" in oral
+    assert "**Scenario 2.** Second one.\n**Answer (study aid):** Short answer.\n\n" in oral
+    assert "## [[PA.I.B|PA.I.B — Airworthiness Requirements]]" in oral
+    assert "_No scenarios yet._" in oral
+    checklist = prep_plan[("Prep", "Private Pilot", "ACS Checklist.md")].decode()
+    assert "> [!warning] Template — copy it before you tick it" in checklist
+    assert "## I. Preflight Preparation" in checklist
+    assert "### [[PA.I.A|PA.I.A — Pilot Qualifications]]" in checklist
+    assert "- [ ] **PA.I.A.K1** Certification requirements" in checklist
+    assert "    - [ ] **PA.I.B.K1a**" in checklist  # sub-elements nested
+    assert "**PA.I.A.S1**" not in checklist  # Knowledge and Risk only
+
+
+def test_anki_export(far_docs, aim_layer, pcg_layer, acs_layer, prep_plan):  # noqa: F811
+    data = prep_plan[("Prep", "Private Pilot", "anki", "private-pilot.txt")]
+    lines = data.decode().split("\n")
+    assert lines[:7] == [
+        "#separator:tab",
+        "#html:true",
+        "#guid column:1",
+        "#notetype column:2",
+        "#deck column:3",
+        "#tags column:6",
+        prep_notes.EXPORT_MARKER,
+    ]
+    rows = [line.split("\t") for line in lines[7:] if line]
+    assert all(len(r) == 6 for r in rows)
+    kinds = {r[1] for r in rows}
+    assert kinds == {"Basic", "Basic (and reversed card)", "Cloze"}
+    gist = next(r for r in rows if r[1] == "Basic (and reversed card)")
+    assert gist[2:] == [
+        "Private Pilot::I. Preflight Preparation",
+        "§ 91.155 — Basic VFR weather minimums",
+        "The VFR weather minimums table.",
+        "far-aim ppl::solo-xc cite::91.155",
+    ]
+    question = next(r for r in rows if r[3] == "Minimums in Class E?")
+    assert question[4].startswith("3-152.<br><br>§ 91.155 — Basic VFR weather minimums; AIM 4-1-15")
+    clozes = [r for r in rows if r[1] == "Cloze"]
+    # Value in the gist → clozed there; otherwise a standalone cloze with the quote as extra.
+    assert clozes[0][3] == "§ 91.155 — Basic VFR weather minimums: {{c1::3 SM}}"
+    assert clozes[0][4] == "“3 statute miles” (§ 91.155 — Basic VFR weather minimums)"
+    assert clozes[1][4].endswith("(§ 91.155 — Basic VFR weather minimums (c))")
+    element = next(r for r in rows if r[3].startswith("<b>PA.I.A.K1</b>"))
+    assert element[4] == "§ 91.175 — Takeoff and landing under IFR<br>KNOWN TRAFFIC"
+    outside = next(r for r in rows if r[3].startswith("<b>PA.I.B.K1</b>"))
+    assert outside[4] == "Not in the FAR/AIM: FAA-H-8083-25 — airworthiness background"
+    assert outside[2] == "Private Pilot::I. Preflight Preparation"
+    assert outside[5] == "far-aim acs::PA.I.B"
+    # Deterministic and GUID-stable across rebuilds (plan §39.5).
+    again = _plan(far_docs, aim_layer, pcg_layer, acs_layer, ACS_MAP, STUDY)
+    assert again[("Prep", "Private Pilot", "anki", "private-pilot.txt")] == data
+    guids = [r[0] for r in rows]
+    assert len(set(guids)) == len(guids) and all(len(g) == 16 for g in guids)
 
 
 def test_separability(far_docs, aim_layer, pcg_layer, acs_layer, prep_plan):  # noqa: F811
@@ -359,6 +460,19 @@ def test_sync_owns_the_prep_root(tmp_path, prep_plan):
     study_note.write_text("# mine\n", encoding="utf-8")
     sync_vault(config, prep_plan)
     assert study_note.exists()  # the reader's folder is never touched
+    # A non-note file under Prep is owned only by the export marker.
+    anki_dir = config.vault_dir / "Prep" / "Private Pilot" / "anki"
+    stale_export = anki_dir / "old.txt"
+    stale_export.write_text(f"#separator:tab\n{prep_notes.EXPORT_MARKER}\nrow\n", encoding="utf-8")
+    curated_export = anki_dir / "mine.txt"
+    curated_export.write_text("#separator:tab\nmy cards\n", encoding="utf-8")
+    stats = sync_vault(config, prep_plan)
+    assert stats.deleted == 1 and not stale_export.exists() and curated_export.exists()
+    assert any("mine.txt" in w for w in stats.warnings)
+    planned_export = anki_dir / "private-pilot.txt"
+    planned_export.write_text("#separator:tab\nhand-written\n", encoding="utf-8")
+    with pytest.raises(BuildError, match="curated file at generated path"):
+        sync_vault(config, prep_plan)
 
 
 def test_code_link_helper():
