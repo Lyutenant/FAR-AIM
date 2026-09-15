@@ -71,6 +71,20 @@ The applicant exhibits the skill to:
 
 - **PA.VI.C.S6** Promptly divert toward the destination. ^pa-vi-c-s6
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — [[91.103|§ 91.103 — Preflight action]], [[5-1-1|AIM 5-1-1 — Preflight Preparation]], [[5-1-12|AIM 5-1-12 — Change in Flight Plan]], [[4-1-17|AIM 4-1-17 — Radar Assistance to VFR Aircraft]]
+- **PA.VI.C.K1** — [[91.103|§ 91.103 — Preflight action]], [[5-1-1|AIM 5-1-1 — Preflight Preparation]], [[7-1-5|AIM 7-1-5 — Preflight Briefing]]
+- **PA.VI.C.K2** — [[91.3|§ 91.3 — Responsibility and authority of the pilot in command]], [[91.123|§ 91.123 — Compliance with ATC clearances and instructions]], [[4-4-10|AIM 4-4-10 — Adherence to Clearance]], [[6-1-1|AIM 6-1-1 — Pilot Responsibility and Authority]], [[Emergencies and Deviations]]
+- **PA.VI.C.R1** — [[91.113|§ 91.113 — Right-of-way rules: Except water operations]], [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]]
+- **PA.VI.C.R2** — not in the FAR/AIM: FAA-H-8083-2 — task management and situational awareness
+- **PA.VI.C.R3** — [[7-1-5|AIM 7-1-5 — Preflight Briefing]], [[7-1-6|AIM 7-1-6 — Inflight Aviation Weather Advisories]]
+- **PA.VI.C.R4** — [[9-1-4|AIM 9-1-4 — Selected Charts and Products Available]]
+- **PA.VI.C.R5** — [[4-1-3|AIM 4-1-3 — Flight Service Stations]], [[4-1-17|AIM 4-1-17 — Radar Assistance to VFR Aircraft]], [[6-2-1|AIM 6-2-1 — Radar Service for VFR Aircraft in Difficulty]]
+
 ## Glossary Terms
 
 - [[AIR TRAFFIC CONTROL|AIR TRAFFIC CONTROL]]

@@ -84,6 +84,15 @@ The applicant exhibits the skill to:
 
 - **PA.I.G.S2** Complete the appropriate checklist(s). ^pa-i-g-s2
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-25 ch. 7–8 (aircraft systems, flight instruments) and the POH/AFM — not in the FAR/AIM
+- **PA.I.G.K1h** — [[7-2-2|AIM 7-2-2 — Barometric Pressure Altimeter Errors]], [[7-2-3|AIM 7-2-3 — Altimeter Errors]]
+- **PA.I.G.K1l** — [[91.211|§ 91.211 — Supplemental oxygen]], [[8-1-2|AIM 8-1-2 — Effects of Altitude]]
+
 ## Glossary Terms
 
 - [[FLIGHT TEST|FLIGHT TEST]]

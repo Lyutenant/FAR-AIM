@@ -80,6 +80,13 @@ The applicant exhibits the skill to:
 
 - **PA.X.C.S11** Use single-pilot resource management (SRM) or crew resource management (CRM), as appropriate. ^pa-x-c-s11
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-3 ch. 13, FAA-H-8083-15 and the POH/AFM — engine-out flight by reference to instruments
+
 ## Glossary Terms
 
 - [[AIRSPEED|AIRSPEED]]

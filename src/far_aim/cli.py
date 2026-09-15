@@ -34,9 +34,11 @@ from far_aim.generate import build as generate_build
 from far_aim.generate import concept_notes as generate_concept_notes
 from far_aim.generate import notes as generate_notes
 from far_aim.generate import pcg_notes as generate_pcg_notes
+from far_aim.generate import prep_notes as generate_prep_notes
 from far_aim.generate.enrich import EnrichmentLayer
 from far_aim.links import glossary, semantic
 from far_aim.links.concepts import ConceptGraph
+from far_aim.links.study import AcsMap, StudyGuide
 from far_aim.log import setup_logging
 from far_aim.manifest import ManifestError, SourceManifest, SourceState
 from far_aim.models import acs as acs_model
@@ -2002,6 +2004,8 @@ def _enrichment_layer(config: Config) -> EnrichmentLayer | str | None:
         return None
     concepts: ConceptGraph | None = None
     related: semantic.RelatedIndex | None = None
+    acs_map: AcsMap | None = None
+    study: StudyGuide | None = None
     try:
         if config.concepts_path.exists():
             concepts = ConceptGraph.load(config.concepts_path)
@@ -2009,12 +2013,19 @@ def _enrichment_layer(config: Config) -> EnrichmentLayer | str | None:
             raw = semantic.RelatedIndex.load(config.related_path)
             review = semantic.Review.load(config.related_review_path)
             related = dataclasses.replace(raw, units=review.apply(raw.units))
+        # Phase 10b (plan §39.3–§39.4): verified against the layers in plan_vault.
+        if config.acs_map_path.exists():
+            acs_map = AcsMap.load(config.acs_map_path)
+        if config.study_path.exists():
+            study = StudyGuide.load(config.study_path)
     except BuildError as exc:
         return str(exc)
-    if concepts is None and related is None:
+    if concepts is None and related is None and acs_map is None and study is None:
         return None
     curated = _curated_notes(config) if concepts is not None else {}
-    return EnrichmentLayer(concepts=concepts, related=related, curated_notes=curated)
+    return EnrichmentLayer(
+        concepts=concepts, related=related, curated_notes=curated, acs_map=acs_map, study=study
+    )
 
 
 def _vault_has_generated_concepts(config: Config) -> bool:
@@ -2157,6 +2168,7 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
     vault_pcg = config.vault_dir / generate_pcg_notes.PCG_DIR
     vault_concepts = config.vault_dir / generate_concept_notes.CONCEPTS_DIR
     vault_acs = config.vault_dir / generate_acs_notes.ACS_DIR
+    vault_prep = config.vault_dir / generate_prep_notes.PREP_DIR
     status_path = config.vault_dir / f"{generate_notes.SOURCE_STATUS_STEM}.md"
     home_path = config.vault_dir / f"{generate_notes.HOME_STEM}.md"
     # A vault "exists" only if any generator-owned note does. Directory
@@ -2169,7 +2181,7 @@ def _validate_vault(config: Config, manifest: SourceManifest) -> int:
         generate_build.is_generated_note(p) for p in (status_path, home_path)
     ) or any(
         generate_build.is_generated_note(p)
-        for root in (vault_far, vault_aim, vault_pcg, vault_concepts, vault_acs)
+        for root in (vault_far, vault_aim, vault_pcg, vault_concepts, vault_acs, vault_prep)
         if root.is_dir()
         for p in sorted(root.rglob("*.md"))
     )
@@ -2288,6 +2300,7 @@ def _stale_generated_on_disk(config: Config, planned: dict[Path, bytes]) -> list
         generate_pcg_notes.PCG_DIR,
         generate_concept_notes.CONCEPTS_DIR,
         generate_acs_notes.ACS_DIR,
+        generate_prep_notes.PREP_DIR,
     )
     for root_name in corpus_dirs:
         root = config.vault_dir / root_name

@@ -15,6 +15,7 @@ from dataclasses import dataclass, field
 from far_aim.links import semantic
 from far_aim.links.concepts import ConceptGraph
 from far_aim.links.semantic import RelatedIndex
+from far_aim.links.study import AcsMap, StudyGuide
 
 # id → (stem, display) for every unit the provider may suggest.
 Targets = dict[str, tuple[str, str]]
@@ -30,6 +31,9 @@ class EnrichmentLayer:
 
     concepts: ConceptGraph | None = None
     related: RelatedIndex | None = None
+    # Phase 10b (plan §39.3–§39.4): the ACS element map and the study guide.
+    acs_map: AcsMap | None = None
+    study: StudyGuide | None = None
     # stem → vault-relative path parts of every curated note on disk
     # (``Collections/``, ``Topics/``, ``Study/``); ``see_also`` may name them.
     curated_notes: dict[str, tuple[str, ...]] = field(default_factory=dict)

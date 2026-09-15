@@ -88,6 +88,16 @@ The applicant exhibits the skill to:
 
 - **PA.IX.B.S6** Complete the appropriate checklist(s). ^pa-ix-b-s6
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-3 ch. 18 (emergency procedures) and the POH/AFM
+- **PA.IX.B.K5** — [[91.207|§ 91.207 — Emergency locator transmitters]], [[6-2-4|AIM 6-2-4 — Emergency Locator Transmitter (ELT)]], [[Emergency Locator Transmitters and Search and Rescue]]
+- **PA.IX.B.K6** — [[91.3|§ 91.3 — Responsibility and authority of the pilot in command]], [[6-1-2|AIM 6-1-2 — Emergency Condition- Request Assistance Immediately]], [[6-2-1|AIM 6-2-1 — Radar Service for VFR Aircraft in Difficulty]], [[6-2-2|AIM 6-2-2 — Transponder Emergency Operation]], [[6-3-1|AIM 6-3-1 — Distress and Urgency Communications]], [[6-3-2|AIM 6-3-2 — Obtaining Emergency Assistance]], [[Emergencies and Deviations]]
+- **PA.IX.B.R3** — [[91.113|§ 91.113 — Right-of-way rules: Except water operations]], [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]]
+
 ## Glossary Terms
 
 - [[AIR TRAFFIC CONTROL|AIR TRAFFIC CONTROL]]

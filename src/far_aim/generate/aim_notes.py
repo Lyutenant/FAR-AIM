@@ -200,6 +200,7 @@ def build_paragraph_note(
     *,
     related: enrich.RelatedIndex | None = None,
     related_targets: enrich.Targets | None = None,
+    study: str | None = None,
 ) -> Note:
     source = para["source"]
     frontmatter: list[tuple[str, Value]] = [
@@ -227,6 +228,7 @@ def build_paragraph_note(
     chunks = [
         f"# AIM {para['paragraph']} — {escape_md(para['heading'])}",
         _source_callout(source, source["url"]),
+        *([study] if study else []),  # curated study aid (plan §39.4.7)
         *_official_text_chunks(para["content"], path_parts),
         *xrefs,
         *glossary_chunks(para["content"], glossary),

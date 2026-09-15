@@ -1,0 +1,1125 @@
+{
+  "schema": 1,
+  "_comment": "Private Pilot study guide (plan §39.4). One entry per covered FAR section or AIM paragraph, keyed by its note stem: a gist and 'why it matters' in the curator's words, key numbers as verbatim quotes the build checks against the official text (paragraph `where` is a CFR label path such as (a)(1)), traps, plain-English questions with the citations that answer them, mnemonics (training-community devices, not FAA text), ACS element codes, and the training stage. Rendered as labelled study aids — never as official text. Claude-drafted 2026-09-13; every entry stays `unreviewed` until a human has checked its wording against the text.",
+  "stages": {
+    "pre-solo": "Rules you need before you fly alone: what you carry, what the aircraft carries, seat belts, lights, alcohol, right of way, the pattern.",
+    "solo-xc": "Rules for leaving the pattern: preflight action, fuel, altitudes, airspace and its weather minimums, transponders.",
+    "checkride": "Rules the examiner probes on the oral: currency, medicals and BasicMed, privileges and cost sharing, inspections, inoperative equipment, special VFR, oxygen."
+  },
+  "entries": {
+    "61.3": {
+      "gist": "What you must have on you to fly: your pilot certificate, a government photo ID and, unless BasicMed or a listed exception applies, your medical — in physical possession or readily accessible in the aircraft, and shown on request to the FAA, NTSB, TSA or any law-enforcement officer.",
+      "why": "Examiners ask what you carry, and a ramp inspection asks to see it.",
+      "traps": [
+        "“Readily accessible in the aircraft” is the standard: a certificate left at home makes the flight illegal even if you are otherwise qualified.",
+        "Student pilots need a medical for airplanes; only glider and balloon students are exempt."
+      ],
+      "questions": [
+        {
+          "q": "What documents must I have with me to fly as a private pilot?",
+          "a": "Your pilot certificate, a government photo ID, and a current medical certificate (or, under BasicMed, the course certificate and exam checklist in your logbook).",
+          "cite": [
+            "61.3",
+            "61.113"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.I.A.K4"
+      ],
+      "stage": "pre-solo",
+      "review": "unreviewed"
+    },
+    "61.23": {
+      "gist": "A private pilot needs at least a third-class medical (or BasicMed); the class you must hold depends on the privileges you exercise, and how long it lasts depends on the class and your age on the exam date (the table in paragraph (d)).",
+      "why": "The class-and-duration table is a favourite written question; the BasicMed 24-month course and 48-month exam cycle is a favourite oral one.",
+      "numbers": [
+        {
+          "value": "Third class for private pilot privileges",
+          "quote": "at least a third-class medical certificate",
+          "where": "(a)(3)"
+        },
+        {
+          "value": "BasicMed course: every 24 calendar months",
+          "quote": "during the 24 calendar months",
+          "where": "(c)(3)(i)(C)"
+        },
+        {
+          "value": "BasicMed exam: every 48 calendar months",
+          "quote": "during the 48 calendar months",
+          "where": "(c)(3)(i)(D)"
+        }
+      ],
+      "traps": [
+        "Duration runs in calendar months from the exam date, to the end of the month: under 40 at the exam, a third class lasts 60 calendar months; 40 or over, 24 (the § 61.23(d) table)."
+      ],
+      "questions": [
+        {
+          "q": "How long is my third-class medical good for?",
+          "a": "60 calendar months if you were under 40 on the exam date, 24 calendar months if you were 40 or over — per the table in § 61.23(d).",
+          "cite": [
+            "61.23"
+          ]
+        },
+        {
+          "q": "Can I fly as a private pilot on BasicMed?",
+          "a": "Yes, within § 61.113(i): no more than 6 passengers in an aircraft with at most 7 seats and 12,500 lb, below 18,000 ft MSL and 250 knots, with the medical course every 24 months and a physician's exam every 48.",
+          "cite": [
+            "61.113",
+            "61.23"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.I.A.K3",
+        "PA.I.A.K5"
+      ],
+      "stage": "pre-solo",
+      "review": "unreviewed"
+    },
+    "61.56": {
+      "gist": "A flight review every 24 calendar months: at least 1 hour of flight training and 1 hour of ground training with an authorized instructor, covering the Part 91 rules and whatever maneuvers the instructor decides, ending in a logbook endorsement. A practical test or proficiency check in that window counts instead.",
+      "why": "Being certificated is not the same as being legal to act as PIC; this is the first thing an examiner checks in your logbook.",
+      "numbers": [
+        {
+          "value": "1 hour flight + 1 hour ground",
+          "quote": "a minimum of 1 hour of flight training and 1 hour of ground training",
+          "where": "(a)"
+        },
+        {
+          "value": "24 calendar months",
+          "quote": "since the beginning of the 24th calendar month before the month in which that pilot acts as pilot in command",
+          "where": "(c)"
+        }
+      ],
+      "traps": [
+        "Calendar months: a review on 10 March 2026 is good through 31 March 2028, not through 10 March.",
+        "Passing your checkride restarts the clock (§ 61.56(d))."
+      ],
+      "questions": [
+        {
+          "q": "How often do I need a flight review, and what is in it?",
+          "a": "Every 24 calendar months: at least an hour of ground and an hour of flight with an authorized instructor, plus a logbook endorsement."
+        }
+      ],
+      "acs": [
+        "PA.I.A.K1",
+        "PA.I.A.R1"
+      ],
+      "stage": "checkride",
+      "review": "unreviewed"
+    },
+    "61.57": {
+      "gist": "Recency to carry passengers: three takeoffs and three landings in the preceding 90 days as sole manipulator in the same category, class and type; at night (1 hour after sunset to 1 hour before sunrise) they must be to a full stop, made in that window.",
+      "why": "The examiner's favourite currency question, and the rule you will actually apply every month.",
+      "numbers": [
+        {
+          "value": "3 takeoffs and 3 landings in the preceding 90 days",
+          "quote": "at least three takeoffs and three landings within the preceding 90 days",
+          "where": "(a)(1)"
+        },
+        {
+          "value": "Night window: 1 hour after sunset to 1 hour before sunrise",
+          "quote": "beginning 1 hour after sunset and ending 1 hour before sunrise",
+          "where": "(b)(1)"
+        },
+        {
+          "value": "Night: three full-stop landings in that window",
+          "quote": "three takeoffs and three landings to a full stop",
+          "where": "(b)(1)"
+        }
+      ],
+      "traps": [
+        "Night currency uses the sunset/sunrise window, not Part 1's civil-twilight definition of night (§ 1.1) and not the position-light rule (§ 91.209).",
+        "Currency is only about carrying passengers: you may fly alone to regain it (§ 61.57(a)(2))."
+      ],
+      "questions": [
+        {
+          "q": "Can I take a friend up tonight?",
+          "a": "Only if you have made three takeoffs and three full-stop landings between 1 hour after sunset and 1 hour before sunrise in the preceding 90 days, in the same category and class."
+        },
+        {
+          "q": "My last landing was 95 days ago. Can I fly?",
+          "a": "Alone, yes; with passengers, not until you have made three takeoffs and landings (§ 61.57(a))."
+        }
+      ],
+      "acs": [
+        "PA.I.A.K1",
+        "PA.I.A.R1",
+        "PA.XI.A.R5"
+      ],
+      "stage": "checkride",
+      "review": "unreviewed"
+    },
+    "61.113": {
+      "gist": "What a private pilot may not do: act as PIC for compensation or hire, or carry passengers or property for hire — with listed exceptions: flights incidental to a business, sharing pro rata expenses with passengers, charity events under § 91.146, search and location, and flying under BasicMed within the paragraph (i) limits.",
+      "why": "Every cost-sharing scenario on the oral comes back to paragraph (c), and the BasicMed limits are numbers you must know.",
+      "numbers": [
+        {
+          "value": "Pro rata share of fuel, oil, airport expenditures or rental fees only",
+          "quote": "pro rata share of the operating expenses of a flight with passengers, provided the expenses involve only fuel, oil, airport expenditures, or rental fees",
+          "where": "(c)"
+        },
+        {
+          "value": "BasicMed aircraft: at most 7 seats, 12,500 lb, 6 passengers",
+          "quote": "not more than 7 occupants, has a maximum takeoff weight of not more than 12,500 pounds, is operated with no more than 6 passengers",
+          "where": "(i)(1)"
+        },
+        {
+          "value": "BasicMed: not above 18,000 ft MSL",
+          "quote": "more than 18,000 feet above mean sea level",
+          "where": "(i)(2)(i)"
+        },
+        {
+          "value": "BasicMed: not over 250 knots indicated",
+          "quote": "exceeding 250 knots",
+          "where": "(i)(2)(iii)"
+        }
+      ],
+      "traps": [
+        "Pro rata means you pay at least your own equal share; you may never pay less, and only fuel, oil, airport expenditures and rental fees may be shared.",
+        "A logbook hour you did not pay for can itself be “compensation”; when in doubt, treat it as compensation."
+      ],
+      "questions": [
+        {
+          "q": "Can my passengers chip in for the flight?",
+          "a": "Yes, but only their pro rata share of fuel, oil, airport expenditures or rental fees, and you must pay at least your own share (§ 61.113(c))."
+        }
+      ],
+      "acs": [
+        "PA.I.A.K2",
+        "PA.I.A.K5"
+      ],
+      "stage": "checkride",
+      "review": "unreviewed"
+    },
+    "91.3": {
+      "gist": "The pilot in command is directly responsible for, and the final authority as to, the operation of the aircraft; in an in-flight emergency requiring immediate action the PIC may deviate from any Part 91 rule to the extent the emergency requires, and must send a written report only if the Administrator asks for one.",
+      "why": "Every emergency scenario on the oral ends here: you decide, you deviate as far as needed, and you report only on request.",
+      "traps": [
+        "The written report is on request only — nothing is filed automatically.",
+        "Deviation authority is limited to what the emergency requires, not a blanket licence."
+      ],
+      "questions": [
+        {
+          "q": "May I break a rule in an emergency?",
+          "a": "Yes — any rule of Part 91, to the extent the emergency requires immediate action; a written report is due only if the FAA requests it."
+        }
+      ],
+      "acs": [
+        "PA.III.A.R2",
+        "PA.VI.C.K2",
+        "PA.IX.B.K6"
+      ],
+      "stage": "pre-solo",
+      "review": "unreviewed"
+    },
+    "91.17": {
+      "gist": "No crewmember within 8 hours of drinking, while under the influence, with an alcohol concentration of 0.04 or greater, or while using any drug that affects safety; and, except in an emergency, no carrying a passenger who appears intoxicated.",
+      "why": "The 8-hour and 0.04 figures are asked on the written, and the passenger rule surprises people on the oral.",
+      "numbers": [
+        {
+          "value": "8 hours from bottle to throttle",
+          "quote": "Within 8 hours after the consumption of any alcoholic beverage",
+          "where": "(a)(1)"
+        },
+        {
+          "value": "0.04 alcohol concentration",
+          "quote": "alcohol concentration of 0.04 or greater",
+          "where": "(a)(4)"
+        }
+      ],
+      "traps": [
+        "8 hours is the regulatory floor; “under the influence” applies at any hour, and the AIM recommends more (AIM 8-1-1)."
+      ],
+      "questions": [
+        {
+          "q": "How long after drinking may I fly?",
+          "a": "At least 8 hours, and never while still under the influence or at 0.04 or more."
+        }
+      ],
+      "acs": [
+        "PA.I.H.K2"
+      ],
+      "stage": "pre-solo",
+      "review": "unreviewed"
+    },
+    "91.103": {
+      "gist": "Before every flight the PIC must become familiar with all available information: for flights away from the airport or under IFR, weather reports and forecasts, fuel requirements, alternatives and any known ATC delays; for every flight, runway lengths and takeoff and landing distance data.",
+      "why": "This is the regulatory backbone of the whole cross-country planning Task, and the phrase “all available information” is what the FAA enforces.",
+      "traps": [
+        "The list is a minimum; the opening sentence makes everything relevant to the flight your responsibility."
+      ],
+      "questions": [
+        {
+          "q": "What must I check before a cross-country?",
+          "a": "Weather reports and forecasts, fuel requirements, alternatives, known ATC delays, runway lengths and takeoff/landing performance — all available information."
+        }
+      ],
+      "mnemonics": [
+        "NWKRAFT: NOTAMs, Weather, Known ATC delays, Runway lengths, Alternates, Fuel, Takeoff and landing distances."
+      ],
+      "acs": [
+        "PA.I.C.R1",
+        "PA.I.D.K1",
+        "PA.II.A.K4"
+      ],
+      "stage": "solo-xc",
+      "review": "unreviewed"
+    },
+    "91.107": {
+      "gist": "The PIC must brief everyone on how to fasten and unfasten their safety belt and shoulder harness, notify them to fasten before surface movement, takeoff and landing, and everyone must occupy an approved seat with the belt fastened at those times; a child under two may be held.",
+      "why": "Passenger briefing is a Flight Deck Management element and the first thing the examiner watches you do.",
+      "numbers": [
+        {
+          "value": "Lap child: under 2 years",
+          "quote": "has not reached his or her second birthday",
+          "where": "(a)(3)(i)"
+        }
+      ],
+      "questions": [
+        {
+          "q": "When must seat belts be fastened?",
+          "a": "During movement on the surface, takeoff and landing; the PIC must brief on their use and then notify passengers to fasten them."
+        }
+      ],
+      "acs": [
+        "PA.II.B.K1"
+      ],
+      "stage": "pre-solo",
+      "review": "unreviewed"
+    },
+    "91.113": {
+      "gist": "See and avoid always applies. Converging: the aircraft on the right has the right of way, but balloons, gliders, airships and aircraft towing or refueling rank above powered aircraft; head-on, both alter course right; the overtaken aircraft has the right of way; aircraft landing or on final have it over others, and the lower of two approaching aircraft — but neither may abuse it.",
+      "why": "Right-of-way scenarios are guaranteed on the written and come up in every traffic-pattern discussion.",
+      "traps": [
+        "An aircraft in distress has the right of way over everything (§ 91.113(c)).",
+        "The lower aircraft on approach has the right of way but may not cut in front of one on final or overtake it."
+      ],
+      "questions": [
+        {
+          "q": "Two airplanes converge at the same altitude. Who yields?",
+          "a": "The one that sees the other on its right yields: the aircraft to the other's right has the right of way."
+        },
+        {
+          "q": "An aircraft is overtaking me. Who moves?",
+          "a": "The overtaking aircraft alters course to the right and passes well clear; the aircraft being overtaken has the right of way."
+        }
+      ],
+      "mnemonics": [
+        "Ranking, least maneuverable first: Balloon, Glider, Airship, Towing or refueling, then powered aircraft."
+      ],
+      "acs": [
+        "PA.III.B.K3",
+        "PA.III.B.R1"
+      ],
+      "stage": "pre-solo",
+      "review": "unreviewed"
+    },
+    "91.119": {
+      "gist": "Minimum safe altitudes: always high enough to make an emergency landing without undue hazard if the engine fails; over congested areas 1,000 ft above the highest obstacle within a 2,000 ft radius; elsewhere 500 ft above the surface, or over open water and sparsely populated areas no closer than 500 ft to any person, vessel, vehicle or structure.",
+      "why": "Three altitudes, three situations; the written asks them and the examiner asks which applies to your ground-reference maneuvers.",
+      "numbers": [
+        {
+          "value": "Congested area: 1,000 ft above obstacles within 2,000 ft",
+          "quote": "1,000 feet above the highest obstacle within a horizontal radius of 2,000 feet",
+          "where": "(b)"
+        },
+        {
+          "value": "Elsewhere: 500 ft above the surface",
+          "quote": "500 feet above the surface",
+          "where": "(c)"
+        },
+        {
+          "value": "Open water or sparse: 500 ft from any person, vessel, vehicle or structure",
+          "quote": "closer than 500 feet to any person, vessel, vehicle, or structure",
+          "where": "(c)"
+        }
+      ],
+      "traps": [
+        "“Except when necessary for takeoff or landing” is the only blanket exception.",
+        "The engine-failure rule in paragraph (a) applies everywhere, on top of the numbers."
+      ],
+      "questions": [
+        {
+          "q": "How low may I fly over a town?",
+          "a": "1,000 feet above the highest obstacle within a 2,000-foot horizontal radius — and never below an altitude that allows an emergency landing without undue hazard."
+        }
+      ],
+      "acs": [
+        "PA.I.D.K2",
+        "PA.V.B.R3"
+      ],
+      "stage": "solo-xc",
+      "review": "unreviewed"
+    },
+    "91.151": {
+      "gist": "Day VFR: enough fuel to fly to the first point of intended landing and then for at least 30 minutes at normal cruise; at night, at least 45 minutes.",
+      "why": "Two numbers the written asks directly and the examiner applies to your flight plan.",
+      "numbers": [
+        {
+          "value": "Day: destination + 30 minutes",
+          "quote": "at least 30 minutes",
+          "where": "(a)(1)"
+        },
+        {
+          "value": "Night: destination + 45 minutes",
+          "quote": "at least 45 minutes",
+          "where": "(a)(2)"
+        }
+      ],
+      "traps": [
+        "These are the legal minimums to begin the flight, computed considering wind and forecast weather; personal reserves should be larger."
+      ],
+      "questions": [
+        {
+          "q": "How much fuel must I have for a VFR flight?",
+          "a": "Enough to reach the first point of intended landing plus 30 minutes at normal cruise by day, 45 minutes at night."
+        }
+      ],
+      "acs": [
+        "PA.I.D.K3c",
+        "PA.I.D.R6"
+      ],
+      "stage": "solo-xc",
+      "review": "unreviewed"
+    },
+    "91.155": {
+      "gist": "Basic VFR weather minimums by airspace: 3 statute miles and 500 ft below, 1,000 ft above, 2,000 ft horizontal from clouds in Classes C, D and E below 10,000 ft; Class B is 3 miles clear of clouds; Class G by day below 1,200 ft AGL is 1 mile clear of clouds; at or above 10,000 ft MSL it is 5 miles and 1,000 below, 1,000 above, 1 mile horizontal. Plus: no VFR beneath a ceiling below 1,000 ft in a surface area, and 3 miles ground visibility to take off, land or enter the pattern there.",
+      "why": "The table is the single most-tested piece of the FAR on the private written, and paragraphs (c) and (d) are the oral's follow-up.",
+      "numbers": [
+        {
+          "value": "3 SM in Classes B, C, D and E below 10,000 ft",
+          "quote": "3 statute miles"
+        },
+        {
+          "value": "500 below, 1,000 above, 2,000 horizontal",
+          "quote": "2,000 feet horizontal"
+        },
+        {
+          "value": "5 SM at or above 10,000 ft MSL",
+          "quote": "5 statute miles"
+        },
+        {
+          "value": "At or above 10,000 ft MSL: 1,000 below, 1,000 above, 1 SM horizontal",
+          "quote": "1 statute mile horizontal"
+        },
+        {
+          "value": "Surface area: ceiling at least 1,000 ft",
+          "quote": "when the ceiling is less than 1,000 feet",
+          "where": "(c)"
+        },
+        {
+          "value": "Surface area: 3 SM ground visibility to take off, land or enter the pattern",
+          "quote": "ground visibility at that airport is at least 3 statute miles",
+          "where": "(d)(1)"
+        }
+      ],
+      "traps": [
+        "Class G at night below 1,200 ft AGL jumps to 3 miles and 500/1,000/2,000 — night Class G is treated like Class E.",
+        "“Clear of clouds” in Class B is not a distance: you may not enter them."
+      ],
+      "questions": [
+        {
+          "q": "What are the VFR minimums in Class E below 10,000 feet?",
+          "a": "3 statute miles visibility; 500 feet below, 1,000 feet above and 2,000 feet horizontal from clouds.",
+          "cite": [
+            "91.155",
+            "3-1-4"
+          ]
+        },
+        {
+          "q": "The ceiling is 800 feet at a Class D airport. Can I fly VFR there?",
+          "a": "Not beneath the ceiling within the surface area — it must be at least 1,000 feet — unless you obtain a special VFR clearance.",
+          "cite": [
+            "91.155",
+            "91.157"
+          ]
+        }
+      ],
+      "mnemonics": [
+        "3-152: 3 miles, 500 below, 1,000 above, 2,000 horizontal — the everyday minimums."
+      ],
+      "acs": [
+        "PA.I.E.K1",
+        "PA.VIII.A.R1"
+      ],
+      "stage": "solo-xc",
+      "review": "unreviewed"
+    },
+    "91.157": {
+      "gist": "Special VFR lets you operate in a surface area below basic VFR minimums with an ATC clearance, clear of clouds, with at least 1 statute mile flight visibility (and 1 mile ground visibility to take off or land); between sunrise and sunset unless you are instrument rated and the aircraft is equipped for IFR.",
+      "why": "The examiner's follow-up to any weather-minimums question, and the way home when the field goes below basic VFR.",
+      "numbers": [
+        {
+          "value": "1 SM flight visibility",
+          "quote": "flight visibility is at least 1 statute mile",
+          "where": "(b)(3)"
+        },
+        {
+          "value": "1 SM ground visibility to take off or land",
+          "quote": "ground visibility is at least 1 statute mile",
+          "where": "(c)(1)"
+        },
+        {
+          "value": "Only below 10,000 ft MSL within the surface area",
+          "quote": "below 10,000 feet MSL",
+          "where": "(a)"
+        }
+      ],
+      "traps": [
+        "You must ask for it — ATC will not offer special VFR.",
+        "Some Class B and C surface areas prohibit fixed-wing special VFR (Part 91 appendix D, section 3)."
+      ],
+      "questions": [
+        {
+          "q": "Visibility is 2 miles at my Class D airport. Can I depart VFR?",
+          "a": "Only with a special VFR clearance: at least 1 mile visibility, clear of clouds, and by day unless you are instrument rated and equipped.",
+          "cite": [
+            "91.157",
+            "4-4-6"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.I.E.K4"
+      ],
+      "stage": "checkride",
+      "review": "unreviewed"
+    },
+    "91.159": {
+      "gist": "VFR cruising altitudes apply in level flight more than 3,000 ft above the surface: on a magnetic course of 0° through 179° fly an odd thousand-foot MSL altitude plus 500 ft; on 180° through 359° fly an even thousand plus 500 ft.",
+      "why": "Asked on every written; applied on every cross-country.",
+      "numbers": [
+        {
+          "value": "Applies above 3,000 ft AGL",
+          "quote": "more than 3,000 feet above the surface"
+        },
+        {
+          "value": "East (0°–179°): odd thousands + 500",
+          "quote": "any odd thousand foot MSL altitude + 500 feet",
+          "where": "(a)(1)"
+        },
+        {
+          "value": "West (180°–359°): even thousands + 500",
+          "quote": "any even thousand foot MSL altitude + 500 feet",
+          "where": "(a)(2)"
+        }
+      ],
+      "traps": [
+        "Magnetic course, not heading — a wind-correction angle does not change your altitude.",
+        "Below 3,000 ft AGL the rule does not apply at all."
+      ],
+      "questions": [
+        {
+          "q": "I am on a course of 090 at cruise. What altitudes are legal?",
+          "a": "Odd thousands plus 500 — 3,500, 5,500, 7,500 — once you are more than 3,000 feet above the surface.",
+          "cite": [
+            "91.159",
+            "3-1-5"
+          ]
+        }
+      ],
+      "mnemonics": [
+        "East is odd."
+      ],
+      "acs": [
+        "PA.I.D.K2",
+        "PA.VI.A.K4b"
+      ],
+      "stage": "solo-xc",
+      "review": "unreviewed"
+    },
+    "91.205": {
+      "gist": "The instruments and equipment that must be installed and operable: paragraph (b) for day VFR (airspeed, altimeter, compass, tachometer, oil pressure and temperature gauges, fuel gauges, gear indicator, belts and harnesses, ELT and more), paragraph (c) adds for night VFR position lights, an anticollision light system, an adequate electrical source, spare fuses and a landing light if for hire; paragraph (d) is the IFR list. Anything inoperative goes through § 91.213.",
+      "why": "The examiner will hand you a scenario with something broken and ask whether the flight is legal; this list is the answer key.",
+      "numbers": [
+        {
+          "value": "Night: spare fuses — one set, or three of each kind",
+          "quote": "One spare set of fuses, or three spare fuses of each kind required",
+          "where": "(c)(6)"
+        },
+        {
+          "value": "Safety belt for every occupant 2 or older",
+          "quote": "each occupant 2 years of age or older",
+          "where": "(b)(13)"
+        }
+      ],
+      "questions": [
+        {
+          "q": "What extra equipment does night VFR require?",
+          "a": "Position lights, an anticollision light system, an adequate source of electrical energy, spare fuses, and a landing light if the flight is for hire."
+        }
+      ],
+      "mnemonics": [
+        "ATOMATOFLAMES for day and FLAPS for night are the classic memory aids; the rule's list is what counts."
+      ],
+      "acs": [
+        "PA.I.B.K3",
+        "PA.XI.A.K3"
+      ],
+      "stage": "pre-solo",
+      "review": "unreviewed"
+    },
+    "91.207": {
+      "gist": "Most U.S. airplanes must carry an operable automatic ELT; batteries are replaced after more than 1 cumulative hour of use or at 50 percent of their useful life, the ELT is inspected within 12 calendar months, and exemptions include training flights within 50 NM of the departure airport and up to 90 days with the ELT removed for repair.",
+      "why": "Four numbers the written and the oral both like, and a real preflight item.",
+      "numbers": [
+        {
+          "value": "Battery: more than 1 cumulative hour of use",
+          "quote": "more than 1 cumulative hour",
+          "where": "(c)(1)"
+        },
+        {
+          "value": "Battery: 50 percent of useful life",
+          "quote": "50 percent of their useful life",
+          "where": "(c)(2)"
+        },
+        {
+          "value": "Inspection: 12 calendar months",
+          "quote": "within 12 calendar months after the last inspection",
+          "where": "(d)"
+        },
+        {
+          "value": "Exempt: training within 50 NM",
+          "quote": "50-nautical mile radius",
+          "where": "(f)(3)"
+        },
+        {
+          "value": "Removed for repair: at most 90 days",
+          "quote": "more than 90 days after the ELT is initially removed",
+          "where": "(f)(10)(ii)"
+        }
+      ],
+      "questions": [
+        {
+          "q": "When must the ELT battery be replaced?",
+          "a": "After more than 1 cumulative hour of use, or when 50 percent of its useful life has expired.",
+          "cite": [
+            "91.207",
+            "6-2-4"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.IX.B.K5",
+        "PA.IX.D.K1",
+        "PA.I.B.K1b"
+      ],
+      "stage": "checkride",
+      "review": "unreviewed"
+    },
+    "91.209": {
+      "gist": "From sunset to sunrise an aircraft must show lighted position lights, and an aircraft equipped with anticollision lights must have them on at all times unless the PIC decides safety requires them off.",
+      "why": "This is one of the three “nights” — a classic oral question that trips people who only know the currency rule.",
+      "numbers": [
+        {
+          "value": "Position lights: sunset to sunrise",
+          "quote": "from sunset to sunrise",
+          "where": "(a)"
+        }
+      ],
+      "traps": [
+        "Three different nights: position lights from sunset to sunrise (here), logging night time from the end of evening civil twilight (§ 1.1), and night passenger currency from 1 hour after sunset (§ 61.57(b))."
+      ],
+      "questions": [
+        {
+          "q": "When do I need position lights on?",
+          "a": "From sunset to sunrise.",
+          "cite": [
+            "91.209",
+            "1.1",
+            "61.57"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.XI.A.K3",
+        "PA.II.D.K5"
+      ],
+      "stage": "pre-solo",
+      "review": "unreviewed"
+    },
+    "91.213": {
+      "gist": "Flying with inoperative equipment: without an MEL, a small non-turbine airplane may fly if the item is not required by the day-VFR type certification list, the aircraft's equipment list or KOEL, § 91.205 or any other rule for that kind of flight, or an AD; it is removed, or deactivated and placarded “Inoperative”, with maintenance recorded; and a pilot or mechanic determines it is no hazard.",
+      "why": "The airworthiness scenario on every checkride: something is broken — can you go?",
+      "traps": [
+        "A placard alone is not enough — the item must also be removed or deactivated, and deactivation that is maintenance must be recorded under Part 43.",
+        "If the item is required for the kind of flight you intend (night, IFR), you stay on the ground or get a special flight permit (§ 91.213(e))."
+      ],
+      "questions": [
+        {
+          "q": "The fuel gauge for one tank is dead. Can I fly?",
+          "a": "No — a fuel gauge for each tank is required by § 91.205(b), so it must be repaired or the flight needs a special flight permit.",
+          "cite": [
+            "91.213",
+            "91.205"
+          ]
+        },
+        {
+          "q": "What must happen before I fly with a broken item under § 91.213(d)?",
+          "a": "Confirm it is not required, remove or deactivate it, placard it Inoperative, record the maintenance, and have a pilot or mechanic determine it is no hazard."
+        }
+      ],
+      "acs": [
+        "PA.I.B.K3a",
+        "PA.I.B.R1",
+        "PA.II.B.R2"
+      ],
+      "stage": "checkride",
+      "review": "unreviewed"
+    },
+    "91.215": {
+      "gist": "A Mode C transponder is required in Class A, B and C airspace, within the 30 NM Mode C veil of Class B primary airports from the surface to 10,000 ft, above Class B and C to 10,000 ft, and at and above 10,000 ft MSL except within 2,500 ft of the surface; when installed and operable it must be on and replying in all controlled airspace. ADS-B Out (§ 91.225) covers the same footprint.",
+      "why": "The Mode C veil and the 10,000-foot rule are exam staples; the examiner also asks where your transponder must be on.",
+      "numbers": [
+        {
+          "value": "Mode C veil: 30 NM, surface to 10,000 ft MSL",
+          "quote": "within 30 nautical miles of an airport listed in appendix D, section 1 of this part from the surface upward to 10,000 feet MSL",
+          "where": "(b)(2)"
+        },
+        {
+          "value": "At and above 10,000 ft MSL, except within 2,500 ft of the surface",
+          "quote": "at and above 10,000 feet MSL, excluding the airspace at and below 2,500 feet above the surface",
+          "where": "(b)(5)(i)"
+        },
+        {
+          "value": "Deviation for no transponder: request 1 hour ahead",
+          "quote": "at least one hour before the proposed operation",
+          "where": "(d)(3)"
+        }
+      ],
+      "questions": [
+        {
+          "q": "Where do I need a Mode C transponder?",
+          "a": "Class A, B and C; the 30 NM Mode C veil below 10,000 ft; above Class B and C to 10,000 ft; and at or above 10,000 ft MSL outside 2,500 ft AGL — ADS-B Out has the same footprint under § 91.225.",
+          "cite": [
+            "91.215",
+            "91.225",
+            "4-1-20"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.I.B.K3",
+        "PA.III.A.K4",
+        "PA.VI.B.K4"
+      ],
+      "stage": "solo-xc",
+      "review": "unreviewed"
+    },
+    "91.409": {
+      "gist": "An annual inspection within the preceding 12 calendar months is required before any operation; an aircraft carrying persons for hire, or used to give flight instruction for hire, also needs a 100-hour inspection, which may be exceeded by up to 10 hours to reach a place where it can be done.",
+      "why": "The AVIATE list is on every oral, and the 10-hour overrun is the detail examiners probe.",
+      "numbers": [
+        {
+          "value": "Annual: within the preceding 12 calendar months",
+          "quote": "within the preceding 12 calendar months",
+          "where": "(a)"
+        },
+        {
+          "value": "100-hour: for hire, or instruction for hire",
+          "quote": "within the preceding 100 hours of time in service",
+          "where": "(b)"
+        },
+        {
+          "value": "100-hour overrun: at most 10 hours, to reach the shop",
+          "quote": "not more than 10 hours while en route",
+          "where": "(b)"
+        }
+      ],
+      "traps": [
+        "The overrun hours count against the next 100-hour interval.",
+        "An annual can stand in for a 100-hour; a 100-hour never stands in for an annual."
+      ],
+      "questions": [
+        {
+          "q": "Does a rental airplane need a 100-hour inspection?",
+          "a": "If it carries persons for hire or is used for flight instruction for hire, yes; otherwise the annual alone is required.",
+          "cite": [
+            "91.409",
+            "91.417"
+          ]
+        }
+      ],
+      "mnemonics": [
+        "AVIATE: Annual; VOR check (30 days, IFR only); 100-hour (if for hire); Altimeter and pitot-static (24 months, IFR); Transponder (24 months); ELT (12 months)."
+      ],
+      "acs": [
+        "PA.I.B.K1b"
+      ],
+      "stage": "checkride",
+      "review": "unreviewed"
+    },
+    "91.131": {
+      "gist": "Class B: an ATC clearance is required before entry; the PIC must hold at least a private pilot certificate (or be a student, recreational or sport pilot with the required training and endorsement, except at the airports listed in appendix D section 4); the aircraft needs a two-way radio, a Mode C transponder and ADS-B Out.",
+      "why": "“Cleared into the Class Bravo” is the phrase the examiner wants; the student-pilot exception is a favourite written question.",
+      "numbers": [
+        {
+          "value": "ATC clearance before entry",
+          "quote": "must receive an ATC clearance",
+          "where": "(a)(1)"
+        },
+        {
+          "value": "At least a private pilot certificate (or an endorsed student)",
+          "quote": "holds at least a private pilot certificate",
+          "where": "(b)(1)(i)"
+        }
+      ],
+      "questions": [
+        {
+          "q": "Can a student pilot fly into Class B?",
+          "a": "Only with the § 61.95 training and endorsement for that specific Class B, and never at the appendix D section 4 airports.",
+          "cite": [
+            "91.131",
+            "3-2-3"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.I.E.K1",
+        "PA.I.A.K2"
+      ],
+      "stage": "solo-xc",
+      "review": "unreviewed"
+    },
+    "91.130": {
+      "gist": "Class C adds to the Class D rules: two-way radio communications must be established with the facility providing ATC services before entry and maintained inside, and the aircraft must have a Mode C transponder and ADS-B Out.",
+      "why": "The equipment difference between Class C and D is a standard written question.",
+      "numbers": [
+        {
+          "value": "Two-way communications before entry, maintained inside",
+          "quote": "prior to entering that airspace and thereafter maintain those communications while within that airspace",
+          "where": "(c)(1)"
+        },
+        {
+          "value": "Transponder (§ 91.215) and ADS-B Out (§ 91.225)",
+          "quote": "equipped with the applicable equipment specified in § 91.215, and after January 1, 2020, § 91.225",
+          "where": "(d)"
+        }
+      ],
+      "questions": [
+        {
+          "q": "What does Class C require that Class D does not?",
+          "a": "A Mode C transponder and ADS-B Out; both require two-way communications established before entry.",
+          "cite": [
+            "91.130",
+            "3-2-4"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.I.E.K1"
+      ],
+      "stage": "solo-xc",
+      "review": "unreviewed"
+    },
+    "91.129": {
+      "gist": "Class D: establish two-way radio communications with the tower before entering and maintain them inside; a clearance is required to taxi, take off or land at a towered airport; if the radio fails in flight under VFR you may land with basic VFR weather, visual contact with the tower and a light-signal clearance.",
+      "why": "Every towered-airport question comes back to “communications established” and “clearance received”.",
+      "numbers": [
+        {
+          "value": "Two-way communications before entry, maintained inside",
+          "quote": "prior to entering that airspace and thereafter maintain those communications while within that airspace",
+          "where": "(c)(1)"
+        },
+        {
+          "value": "Clearance to use a runway or taxiway",
+          "quote": "unless an appropriate clearance is received from ATC",
+          "where": "(i)"
+        }
+      ],
+      "traps": [
+        "“Established” means the controller answered using your call sign; “aircraft calling, standby” is not established (AIM 3-2-5)."
+      ],
+      "questions": [
+        {
+          "q": "What do I need to enter Class D?",
+          "a": "Two-way radio communications established with the tower before entry — they must use your call sign — and maintained inside.",
+          "cite": [
+            "91.129",
+            "3-2-5"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.I.E.K1",
+        "PA.III.B.K1"
+      ],
+      "stage": "solo-xc",
+      "review": "unreviewed"
+    },
+    "91.117": {
+      "gist": "Speed limits: 250 knots indicated below 10,000 ft MSL; 200 knots at or below 2,500 ft AGL within 4 NM of the primary airport of a Class C or D area; 200 knots beneath a Class B area or in a VFR corridor through it.",
+      "why": "Three numbers, three places; the written asks all of them.",
+      "numbers": [
+        {
+          "value": "Below 10,000 ft MSL: 250 knots",
+          "quote": "below 10,000 feet MSL at an indicated airspeed of more than 250 knots",
+          "where": "(a)"
+        },
+        {
+          "value": "Class C/D: 200 knots within 4 NM, at or below 2,500 ft AGL",
+          "quote": "at or below 2,500 feet above the surface within 4 nautical miles of the primary airport of a Class C or Class D airspace area at an indicated airspeed of more than 200 knots",
+          "where": "(b)"
+        },
+        {
+          "value": "Under Class B or in a VFR corridor: 200 knots",
+          "quote": "at an indicated airspeed of more than 200 knots",
+          "where": "(c)"
+        }
+      ],
+      "questions": [
+        {
+          "q": "What is the speed limit under a Class B shelf?",
+          "a": "200 knots indicated."
+        }
+      ],
+      "acs": [
+        "PA.I.E.K1"
+      ],
+      "stage": "solo-xc",
+      "review": "unreviewed"
+    },
+    "91.211": {
+      "gist": "Supplemental oxygen by cabin pressure altitude: the required crew must use it above 12,500 ft MSL for any part of the flight over 30 minutes, at all times above 14,000 ft, and every occupant must be provided with it above 15,000 ft.",
+      "why": "Three altitudes the written asks and the examiner connects to hypoxia.",
+      "numbers": [
+        {
+          "value": "12,500–14,000 ft: crew after 30 minutes",
+          "quote": "above 12,500 feet (MSL) up to and including 14,000 feet (MSL)",
+          "where": "(a)(1)"
+        },
+        {
+          "value": "30 minutes",
+          "quote": "more than 30 minutes duration",
+          "where": "(a)(1)"
+        },
+        {
+          "value": "Above 14,000 ft: crew at all times",
+          "quote": "above 14,000 feet (MSL)",
+          "where": "(a)(2)"
+        },
+        {
+          "value": "Above 15,000 ft: every occupant provided with oxygen",
+          "quote": "above 15,000 feet (MSL)",
+          "where": "(a)(3)"
+        }
+      ],
+      "questions": [
+        {
+          "q": "When must I use oxygen?",
+          "a": "As required crew: above 12,500 ft MSL after 30 minutes and at all times above 14,000; above 15,000 every occupant must be provided with it.",
+          "cite": [
+            "91.211",
+            "8-1-2"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.I.G.K1l",
+        "PA.I.H.K1a",
+        "PA.IX.C.K4"
+      ],
+      "stage": "checkride",
+      "review": "unreviewed"
+    },
+    "3-2-6": {
+      "gist": "Class E is controlled airspace with no communication or clearance requirement for VFR: transition areas begin at 700 ft AGL (magenta vignette) or 1,200 ft AGL (blue vignette) around airports with instrument procedures, Class E otherwise starts at 14,500 ft MSL, and Federal airways are Class E from 1,200 ft AGL up to 18,000 ft.",
+      "why": "The vignette colours are the chart-reading question every written asks.",
+      "numbers": [
+        {
+          "value": "Transition areas: 700 ft AGL (magenta) or 1,200 ft AGL (blue)",
+          "quote": "700 feet AGL (shown as magenta vignette on sectional charts) or 1,200 feet AGL (blue vignette)"
+        },
+        {
+          "value": "Default floor 14,500 ft MSL",
+          "quote": "extending upward from 14,500 feet MSL to, but not including, 18,000 feet MSL"
+        },
+        {
+          "value": "Federal airways: 1,200 ft AGL to 18,000 ft MSL",
+          "quote": "extend upward from 1,200 feet AGL to, but not including,18,000 feet MSL"
+        }
+      ],
+      "questions": [
+        {
+          "q": "Do I need to talk to anyone to fly through Class E?",
+          "a": "No — VFR in Class E below 10,000 ft has no communication or equipment requirement; only the weather minimums change.",
+          "cite": [
+            "3-2-6",
+            "91.127"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.I.E.K1"
+      ],
+      "stage": "solo-xc",
+      "review": "unreviewed"
+    },
+    "3-2-3": {
+      "gist": "Class B surrounds the busiest airports, typically from the surface to 10,000 ft MSL in tailored layers; an ATC clearance is required to enter, VFR aircraft receive separation inside, cloud clearance is simply clear of clouds, and the 30 NM Mode C veil surrounds the primary airport.",
+      "why": "Knowing what a clearance sounds like keeps you out of the most expensive airspace violation there is.",
+      "numbers": [
+        {
+          "value": "Typically surface to 10,000 ft MSL",
+          "quote": "from the surface to 10,000 feet MSL"
+        },
+        {
+          "value": "Mode C veil: 30 NM",
+          "quote": "within 30 nautical miles of an airport listed in Appendix D"
+        }
+      ],
+      "questions": [
+        {
+          "q": "How do I know I am cleared into Class B?",
+          "a": "Only when ATC says “cleared into the Class Bravo airspace”; radar contact or a squawk code is not a clearance.",
+          "cite": [
+            "3-2-3",
+            "91.131"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.I.E.K1"
+      ],
+      "stage": "solo-xc",
+      "review": "unreviewed"
+    },
+    "3-2-4": {
+      "gist": "Class C is usually a 5 NM core from the surface and a 10 NM shelf from about 1,200 ft, both up to 4,000 ft above the airport, with a 20 NM outer area where services continue but participation is voluntary; two-way communications (your call sign used) before entry, transponder and ADS-B Out required.",
+      "why": "The dimensions and the “standby” rule are both tested.",
+      "numbers": [
+        {
+          "value": "Surface to 4,000 ft above the airport",
+          "quote": "from the surface to 4,000 feet above the airport elevation"
+        },
+        {
+          "value": "Core: 5 NM radius",
+          "quote": "5 NM radius core surface area"
+        },
+        {
+          "value": "Shelf: 10 NM radius",
+          "quote": "10 NM radius shelf area"
+        },
+        {
+          "value": "Outer area: 20 NM",
+          "quote": "20 NM from the primary Class C airspace airport"
+        }
+      ],
+      "questions": [
+        {
+          "q": "The controller says “aircraft calling, standby”. May I enter Class C?",
+          "a": "No — communications are established only when the controller uses your call sign; “[call sign], standby” is enough, “aircraft calling, standby” is not.",
+          "cite": [
+            "3-2-4",
+            "91.130"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.I.E.K1"
+      ],
+      "stage": "solo-xc",
+      "review": "unreviewed"
+    },
+    "3-2-5": {
+      "gist": "Class D surrounds towered airports, usually from the surface to 2,500 ft above field elevation; two-way communications before entry (your call sign used), no separation services for VFR, and when a part-time tower closes the area reverts to Class E or Class G as the Chart Supplement states.",
+      "why": "The part-time tower question is a favourite: what airspace is it at night?",
+      "numbers": [
+        {
+          "value": "Surface to 2,500 ft above the airport",
+          "quote": "from the surface to 2,500 feet above the airport elevation"
+        }
+      ],
+      "questions": [
+        {
+          "q": "The tower closes at night. What is the airspace then?",
+          "a": "It reverts to Class E or Class G as the Chart Supplement's airport entry states — check it before you go.",
+          "cite": [
+            "3-2-5",
+            "91.129"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.I.E.K1",
+        "PA.III.B.K1"
+      ],
+      "stage": "solo-xc",
+      "review": "unreviewed"
+    },
+    "4-3-3": {
+      "gist": "The standard traffic pattern: enter in level flight abeam midfield at pattern altitude (1,000 ft AGL for propeller aircraft unless the Chart Supplement says otherwise), all turns left unless RP is charted, turn crosswind beyond the departure end within 300 ft of pattern altitude, complete the turn to final at least 1/4 mile out, depart straight out or with a 45° turn beyond the departure end.",
+      "why": "Pattern entry, altitudes and turn direction are asked on the written and demonstrated on every flight.",
+      "numbers": [
+        {
+          "value": "Pattern altitude: 1,000 ft AGL (propeller)",
+          "quote": "1,000 feet above ground level (AGL)"
+        },
+        {
+          "value": "Large and turbine: 1,500 ft AGL or 500 above the pattern",
+          "quote": "not less than 1,500 feet AGL or 500 feet above the established pattern altitude"
+        },
+        {
+          "value": "Turn final at least 1/4 mile out",
+          "quote": "Complete turn to final at least 1/4 mile from the runway"
+        },
+        {
+          "value": "Turn crosswind within 300 ft of pattern altitude",
+          "quote": "within 300 feet of pattern altitude"
+        }
+      ],
+      "questions": [
+        {
+          "q": "What altitude is the traffic pattern?",
+          "a": "1,000 feet AGL for propeller aircraft unless the Chart Supplement publishes another; large and turbine aircraft fly 1,500 feet AGL.",
+          "cite": [
+            "4-3-3",
+            "91.126"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.III.B.K2",
+        "PA.V.B.K4"
+      ],
+      "stage": "pre-solo",
+      "review": "unreviewed"
+    },
+    "4-1-20": {
+      "gist": "Squawk 1200 for VFR with altitude reporting on; the transponder and ADS-B Out stay on from pushback to parking, ident only when asked, never squawk 7777, and avoid passing through 7500, 7600 or 7700 when changing codes.",
+      "why": "The emergency codes are on every written; the ground-operation rule is a common oral question.",
+      "numbers": [
+        {
+          "value": "VFR: 1200",
+          "quote": "Code 1200"
+        },
+        {
+          "value": "7500 hijack, 7600 lost communications, 7700 emergency",
+          "quote": "Codes 7500, 7600 or 7700"
+        },
+        {
+          "value": "Never 7777 (military interceptors)",
+          "quote": "Code 7777"
+        }
+      ],
+      "questions": [
+        {
+          "q": "What do I squawk VFR, and what are the emergency codes?",
+          "a": "1200; 7500 for hijack, 7600 for radio failure, 7700 for an emergency.",
+          "cite": [
+            "4-1-20",
+            "6-2-2"
+          ]
+        }
+      ],
+      "acs": [
+        "PA.III.A.K4",
+        "PA.VI.B.K4"
+      ],
+      "stage": "pre-solo",
+      "review": "unreviewed"
+    }
+  }
+}

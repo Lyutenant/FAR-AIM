@@ -56,3 +56,10 @@ The applicant exhibits the skill to:
 - **PA.II.C.S1** Position the airplane properly considering structures, other aircraft, wind, and the safety of nearby persons and property. ^pa-ii-c-s1
 
 - **PA.II.C.S2** Complete the appropriate checklist(s). ^pa-ii-c-s2
+
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-3 ch. 2 and the POH/AFM — engine starting

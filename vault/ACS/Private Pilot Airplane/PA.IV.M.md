@@ -103,6 +103,17 @@ The applicant exhibits the skill to:
 
 - **PA.IV.M.S9** Maintain a ground track aligned with the runway center/landing path. ^pa-iv-m-s9
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-3 ch. 9 and the POH/AFM — the forward slip
+- **PA.IV.M.R2b** — [[7-1-22|AIM 7-1-22 — Wind Shear PIREPs]], [[4-3-7|AIM 4-3-7 — Low Level Wind Shear/Microburst Detection Systems]]
+- **PA.IV.M.R2d** — [[7-4-5|AIM 7-4-5 — Operations Problem Areas]], [[7-4-6|AIM 7-4-6 — Vortex Avoidance Procedures]], [[7-4-8|AIM 7-4-8 — Pilot Responsibility]], [[Wake Turbulence Avoidance]]
+- **PA.IV.M.R3b** — [[4-3-11|AIM 4-3-11 — Pilot Responsibilities When Conducting Land and Hold Short Operations (LAHSO)]]
+- **PA.IV.M.R4** — [[91.113|§ 91.113 — Right-of-way rules: Except water operations]], [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]], [[8-1-8|AIM 8-1-8 — Judgment Aspects of Collision Avoidance]]
+
 ## Glossary Terms
 
 - [[AIRSPEED|AIRSPEED]]

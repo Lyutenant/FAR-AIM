@@ -86,6 +86,16 @@ The applicant exhibits the skill to:
 
 - **PA.V.B.S7** Maintain altitude ±100 feet; maintain airspeed ±10 knots. ^pa-v-b-s7
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-3 ch. 7 — ground reference maneuvers
+- **PA.V.B.K4** — [[4-3-3|AIM 4-3-3 — Traffic Patterns]], [[Traffic Pattern Procedures]]
+- **PA.V.B.R2** — [[91.113|§ 91.113 — Right-of-way rules: Except water operations]], [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]]
+- **PA.V.B.R3** — [[91.119|§ 91.119 — Minimum safe altitudes: General]]
+
 ## Glossary Terms
 
 - [[AIRSPEED|AIRSPEED]]

@@ -69,3 +69,17 @@ The applicant exhibits the skill to:
 - **PA.II.B.S3** Properly program and manage the aircraft’s automation, as applicable. ^pa-ii-b-s3
 
 - **PA.II.B.S4** Appropriately manage risks by utilizing ADM, including SRM/CRM. ^pa-ii-b-s4
+
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — [[91.103|§ 91.103 — Preflight action]], [[91.105|§ 91.105 — Flight crewmembers at stations]], [[91.107|§ 91.107 — Use of safety belts, shoulder harnesses, and child restraint systems]], [[Passengers and Safety Belts]]
+- **PA.II.B.K1** — [[91.107|§ 91.107 — Use of safety belts, shoulder harnesses, and child restraint systems]], [[91.105|§ 91.105 — Flight crewmembers at stations]], [[Passengers and Safety Belts]]
+- **PA.II.B.K2** — not in the FAR/AIM: FAA-H-8083-3 ch. 1 and AC 120-71 — checklist discipline
+- **PA.II.B.K3** — [[1-1-17|AIM 1-1-17 — Global Positioning System (GPS)]], [[9-1-2|AIM 9-1-2 — Obtaining Aeronautical Charts]], [[9-1-3|AIM 9-1-3 — Safety Alerts, Charting Notices, and Data Product Notices]], [[5-1-3|AIM 5-1-3 — Notice to Airmen (NOTAM) System]]
+- **PA.II.B.K4** — not in the FAR/AIM: FAA-H-8083-3 ch. 2 and the POH/AFM — securing items and cargo
+- **PA.II.B.R1** — [[91.21|§ 91.21 — Portable electronic devices]]
+- **PA.II.B.R2** — [[91.213|§ 91.213 — Inoperative instruments and equipment]]
+- **PA.II.B.R3** — not in the FAR/AIM: FAA-H-8083-2 — passenger distractions and a sterile flight deck

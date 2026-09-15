@@ -73,14 +73,29 @@ paraphrased or AI-generated. Full specification:
   the other sources; its change gate cross-checks the ACS's own Major
   Enhancements page.
 
+- **Phase 10b** — the curated exam-prep layer: `data/enrichment/acs-map.json`
+  maps every ACS Knowledge and Risk element to the notes that cover it or
+  states why the vault cannot (the build fails on an element that is
+  neither); `data/enrichment/ppl-study.json` holds the study guide — gist,
+  why it matters, key numbers, traps, questions, ACS codes and a training
+  stage per covered section or paragraph — under a verbatim-numbers gate
+  (every quoted number must occur in the official text it cites).
+  Rendered as a labelled study callout on covered FAR/AIM notes, a
+  `Where to study` section on ACS Task notes, and `vault/Prep/Private
+  Pilot/` (coverage report, Part 61 and Part 91 maps, Numbers Sheet,
+  Where Do I Look). First batch: 32 entries, 76 verified numbers, all
+  764 Knowledge/Risk elements resolved (247 mapped, 517 out of corpus).
+
 ## Roadmap — Phase 10: Private Pilot exam-prep layer
 
-Design of record is plan §39; 10a shipped 2026-09-13 (above). The goal
-is a vault a student can study from for the Private Pilot knowledge test
-and the oral portion of the practical test, organized the way both exams
-are: by the ACS.
+Design of record is plan §39; 10a and 10b shipped 2026-09-13 (above). The
+goal is a vault a student can study from for the Private Pilot knowledge
+test and the oral portion of the practical test, organized the way both
+exams are: by the ACS.
 
-- **10b/10c — study gloss**: one curated file (`data/enrichment/ppl-study.json`)
+- **10c — full gloss**: entries for every section and paragraph the
+  Private Pilot collection links, stages assigned, a Reading Path note.
+- **10b/10c — study gloss (design)**: one curated file (`data/enrichment/ppl-study.json`)
   keyed by citation — gist, why it matters, key numbers, traps, plain-English
   questions, ACS codes — rendered as a labelled *study aid* callout on each
   covered FAR/AIM note plus generated `vault/Prep/Private Pilot/` notes:
@@ -145,8 +160,11 @@ python3 -m venv .venv                 # requires Python 3.12+
 - `src/far_aim/` — pipeline package (CLI, config, manifest, sources, parsers, generator)
 - `tests/` — pytest suite (`tests/fixtures/` for source fixtures)
 - `data/manifests/` — committed source-state registry; `data/links/` — committed,
-  human-maintained link curation (the PCG glossary gate); `data/raw/` is a gitignored cache
-- `vault/` — generated Obsidian vault (`FAR/`, `AIM/` incl. figure assets, `PCG/`, `ACS/`)
+  human-maintained link curation (the PCG glossary gate); `data/enrichment/` —
+  committed curation (concept graph, ACS map, study guide) and derived links;
+  `data/raw/` is a gitignored cache
+- `vault/` — generated Obsidian vault (`FAR/`, `AIM/` incl. figure assets, `PCG/`, `ACS/`,
+  `Concepts/`, `Prep/`) plus the curated `Collections/`, `Topics/`, `Study/`
 - `plans/` — project specification
 - `docs/` — architecture and policy notes
 

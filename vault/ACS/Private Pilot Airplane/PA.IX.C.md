@@ -84,3 +84,11 @@ The applicant exhibits the skill to:
 - **PA.IX.C.S1** Determine appropriate action for simulated emergencies specified by the evaluator, from at least three of the elements or sub-elements listed in K1 through K5. ^pa-ix-c-s1
 
 - **PA.IX.C.S2** Complete the appropriate checklist(s). ^pa-ix-c-s2
+
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-3 ch. 18, FAA-H-8083-25 ch. 7 and the POH/AFM — system malfunctions
+- **PA.IX.C.K4** — [[91.211|§ 91.211 — Supplemental oxygen]], [[8-1-2|AIM 8-1-2 — Effects of Altitude]]

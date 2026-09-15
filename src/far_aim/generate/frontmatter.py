@@ -156,6 +156,8 @@ SCHEMAS: dict[str, tuple[tuple[str, ...], frozenset[str]]] = {
     "acs_index": (_ACS_INDEX_KEYS, frozenset(_ACS_INDEX_KEYS) - {"tags"}),
     "concept": (_CONCEPT_KEYS, frozenset(_CONCEPT_KEYS) - {"tags"}),
     "concept_index": (_CONCEPT_INDEX_KEYS, frozenset(_CONCEPT_INDEX_KEYS) - {"tags"}),
+    # Exam-prep notes (plan §39.4): curated-content, generator-owned.
+    "prep": (_CONCEPT_INDEX_KEYS, frozenset(_CONCEPT_INDEX_KEYS) - {"tags"}),
 }
 
 _KEY_TYPES: dict[str, type | tuple[type, ...]] = {

@@ -67,6 +67,19 @@ The applicant exhibits the skill to:
 
 - **PA.VI.D.S5** Select an appropriate course of action. ^pa-vi-d-s5
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — [[6-2-1|AIM 6-2-1 — Radar Service for VFR Aircraft in Difficulty]], [[6-3-1|AIM 6-3-1 — Distress and Urgency Communications]], [[6-3-2|AIM 6-3-2 — Obtaining Emergency Assistance]], [[4-1-17|AIM 4-1-17 — Radar Assistance to VFR Aircraft]]
+- **PA.VI.D.K1** — [[1-1-3|AIM 1-1-3 — VHF Omni-directional Range (VOR)]], [[1-1-17|AIM 1-1-17 — Global Positioning System (GPS)]], [[6-2-1|AIM 6-2-1 — Radar Service for VFR Aircraft in Difficulty]]
+- **PA.VI.D.K2** — [[6-2-1|AIM 6-2-1 — Radar Service for VFR Aircraft in Difficulty]], [[6-2-2|AIM 6-2-2 — Transponder Emergency Operation]], [[6-3-1|AIM 6-3-1 — Distress and Urgency Communications]], [[6-3-2|AIM 6-3-2 — Obtaining Emergency Assistance]], [[4-1-3|AIM 4-1-3 — Flight Service Stations]]
+- **PA.VI.D.R1** — [[91.113|§ 91.113 — Right-of-way rules: Except water operations]], [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]]
+- **PA.VI.D.R2** — not in the FAR/AIM: FAA-H-8083-2 — task management and situational awareness
+- **PA.VI.D.R3** — not in the FAR/AIM: FAA-H-8083-25 ch. 16 — keeping the flight log
+- **PA.VI.D.R4** — [[91.3|§ 91.3 — Responsibility and authority of the pilot in command]], [[6-1-2|AIM 6-1-2 — Emergency Condition- Request Assistance Immediately]], [[6-3-1|AIM 6-3-1 — Distress and Urgency Communications]], [[Emergencies and Deviations]]
+
 ## Glossary Terms
 
 - [[ATC|ATC]]

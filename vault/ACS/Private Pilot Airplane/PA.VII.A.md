@@ -70,6 +70,15 @@ The applicant exhibits the skill to:
 
 - **PA.VII.A.S5** Maintain the specified altitude, ±100 feet; specified heading, ±10°; airspeed, +10/-0 knots; and specified angle of bank, ±10°. ^pa-vii-a-s5
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-3 ch. 5 (slow flight, stalls, spins) and FAA-H-8083-25 ch. 5 — aerodynamics and technique
+- **PA.VII.A.R4** — [[7-1-24|AIM 7-1-24 — Microbursts]]
+- **PA.VII.A.R5** — [[91.113|§ 91.113 — Right-of-way rules: Except water operations]], [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]]
+
 ## Glossary Terms
 
 - [[AIRSPEED|AIRSPEED]]

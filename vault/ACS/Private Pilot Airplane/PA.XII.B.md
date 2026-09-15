@@ -73,3 +73,12 @@ The applicant exhibits the skill to:
 - **PA.XII.B.S4** Conduct a postflight inspection and document discrepancies and servicing requirements, if any. ^pa-xii-b-s4
 
 - **PA.XII.B.S5** Secure the seaplane considering the effect of wind, waves, and changes in water level, or comply with applicable after landing, parking, and securing procedures if operating an amphibious airplane on land. ^pa-xii-b-s5
+
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-23 — mooring, docking, anchoring, beaching and ramping a seaplane
+- **PA.XII.B.K5** — [[91.405|§ 91.405 — Maintenance required]], [[91.417|§ 91.417 — Maintenance records]]
+- **PA.XII.B.R3** — [[2-3-15|AIM 2-3-15 — Security Identification Display Area (SIDA)]]

@@ -75,6 +75,16 @@ The applicant exhibits the skill to:
 
 - **PA.VIII.B.S3** Level off at the assigned altitude and maintain altitude ±200 feet, heading ±20°, and airspeed ±10 knots. ^pa-viii-b-s3
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-15 (Instrument Flying Handbook) — attitude instrument flying
+- **PA.VIII.B.R1** — [[91.155|§ 91.155 — Basic VFR weather minimums]], [[8-1-5|AIM 8-1-5 — Illusions in Flight]], [[8-1-6|AIM 8-1-6 — Vision in Flight]]
+- **PA.VIII.B.R2** — [[6-1-2|AIM 6-1-2 — Emergency Condition- Request Assistance Immediately]], [[6-2-1|AIM 6-2-1 — Radar Service for VFR Aircraft in Difficulty]]
+- **PA.VIII.B.R3** — [[91.113|§ 91.113 — Right-of-way rules: Except water operations]], [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]]
+
 ## Glossary Terms
 
 - [[AIRSPEED|AIRSPEED]]

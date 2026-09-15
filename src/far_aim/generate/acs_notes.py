@@ -106,6 +106,10 @@ class AcsContext:
     far: FarTargets = FarTargets()
     aim_index_stem: str | None = None
     glossary: GlossaryLinks | None = None
+    # Phase 10b (plan §39.3): the curated element map and the stem → display
+    # targets its links resolve against; rendered by ``prep_notes``.
+    study_map: object | None = None
+    study_targets: dict[str, str] | None = None
 
 
 def edition_text(source: dict, publication: dict) -> str:
@@ -243,6 +247,14 @@ def build_task_note(task: dict, area: dict, aliases: list[str], context: AcsCont
     chunks.extend(_section_chunks("Knowledge", task["knowledge"]))
     chunks.extend(_section_chunks("Risk Management", task["risk"]))
     chunks.extend(_section_chunks("Skills", task["skills"]))
+    if context.study_map is not None:
+        from far_aim.generate import prep_notes
+
+        chunks.extend(
+            prep_notes.where_to_study_chunks(
+                task, context.study_map, context.study_targets or {}  # type: ignore[arg-type]
+            )
+        )
     chunks.extend(_glossary_chunks(task_texts(task), context.glossary))
     return Note(
         kind="acs_task",

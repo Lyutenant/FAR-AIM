@@ -229,6 +229,7 @@ def build_section_note(
     definitions_index: definitions.DefinitionIndex | None = None,
     related: enrich.RelatedIndex | None = None,
     related_targets: enrich.Targets | None = None,
+    study: str | None = None,
 ) -> Note:
     part = sec["part"]
     section = sec["section"]
@@ -265,6 +266,9 @@ def build_section_note(
     chunks = [
         f"# {head} — {escape_md(disp)}",
         _source_callout(version, ecfr_doc_url(version, sec)),
+        # The curated study aid (plan §39.4.7) precedes the text it summarizes,
+        # labelled so it is never mistaken for it.
+        *([study] if study else []),
         *_official_text_chunks(sec["content"], reserved=sec["reserved"]),
     ]
     source_notes = _source_notes_chunks(
@@ -566,6 +570,7 @@ def build_home(
     has_concepts: bool = False,
     has_definitions: bool = False,
     has_acs: bool = False,
+    has_prep: bool = False,
 ) -> Note:
     """``vault/Home.md`` — the vault's entry point and reader's guide (plan §22 Phase 7).
 
@@ -610,6 +615,14 @@ def build_home(
             "Standards, one note per Task named by its code (`PA.I.A`), every "
             "Knowledge, Risk Management and Skill element verbatim. What the "
             "knowledge test samples and the checkride examines."
+        )
+    if has_prep:
+        generated.append(
+            "- `Prep/` — the Private Pilot exam-prep layer: [[Private Pilot Prep]] "
+            "(coverage of the ACS, study entries by training stage), the Part 61 "
+            "and Part 91 number-pattern maps, a Numbers Sheet and a Where Do I "
+            "Look index. Rendered from curated files; covered regulations and "
+            "AIM paragraphs also open with a labelled study aid."
         )
     if has_concepts:
         generated.append(
@@ -720,6 +733,12 @@ def build_home(
             if has_concepts
             else "Pick a [[Collections|collection]] for your certificate and read"
             " its subject pages in order; every page ends at the official text."
+        )
+        + (
+            " Preparing for the Private Pilot written or checkride: start at"
+            " [[Private Pilot Prep]]."
+            if has_prep
+            else ""
         ),
         "## Reading a note",
         "Every regulation"

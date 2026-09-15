@@ -80,6 +80,22 @@ The applicant exhibits the skill to:
 
 - **PA.VI.B.S7** Maintain the selected altitude, ±200 feet and heading, ±15°. ^pa-vi-b-s7
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — [[1-1-1|AIM 1-1-1 — General]], [[1-1-3|AIM 1-1-3 — VHF Omni-directional Range (VOR)]], [[1-1-17|AIM 1-1-17 — Global Positioning System (GPS)]], [[4-1-17|AIM 4-1-17 — Radar Assistance to VFR Aircraft]], [[4-1-18|AIM 4-1-18 — Terminal Radar Services for VFR Aircraft]], [[4-1-20|AIM 4-1-20 — Transponder and ADS-B Out Operation]]
+- **PA.VI.B.K1** — [[1-1-2|AIM 1-1-2 — Nondirectional Radio Beacon (NDB)]], [[1-1-3|AIM 1-1-3 — VHF Omni-directional Range (VOR)]], [[1-1-4|AIM 1-1-4 — VOR Receiver Check]], [[1-1-7|AIM 1-1-7 — Distance Measuring Equipment (DME)]], [[1-1-8|AIM 1-1-8 — NAVAID Service Volumes]]
+- **PA.VI.B.K2** — [[1-1-17|AIM 1-1-17 — Global Positioning System (GPS)]], [[1-1-18|AIM 1-1-18 — Wide Area Augmentation System (WAAS)]], [[1-2-1|AIM 1-2-1 — General]], [[1-2-4|AIM 1-2-4 — Recognizing, Mitigating, and Adapting to GPS Jamming and/or Spoofing]]
+- **PA.VI.B.K3** — [[4-1-15|AIM 4-1-15 — Radar Traffic Information Service]], [[4-1-16|AIM 4-1-16 — Safety Alert]], [[4-1-17|AIM 4-1-17 — Radar Assistance to VFR Aircraft]], [[4-1-18|AIM 4-1-18 — Terminal Radar Services for VFR Aircraft]], [[ATC Facilities and Services for VFR Aircraft]]
+- **PA.VI.B.K4** — [[91.215|§ 91.215 — ATC transponder and altitude reporting equipment and use]], [[91.225|§ 91.225 — Automatic Dependent Surveillance-Broadcast (ADS-B) Out equipment and use]], [[4-1-20|AIM 4-1-20 — Transponder and ADS-B Out Operation]], [[4-5-7|AIM 4-5-7 — Automatic Dependent Surveillance-Broadcast (ADS-B) Services]], [[Transponders and ADS-B Out]]
+- **PA.VI.B.R1** — not in the FAR/AIM: FAA-H-8083-25 ch. 8 — automation and autoflight management
+- **PA.VI.B.R2** — not in the FAR/AIM: FAA-H-8083-2 — task management and situational awareness
+- **PA.VI.B.R3** — [[1-1-8|AIM 1-1-8 — NAVAID Service Volumes]], [[1-1-17|AIM 1-1-17 — Global Positioning System (GPS)]]
+- **PA.VI.B.R4** — [[1-1-13|AIM 1-1-13 — User Reports Requested on NAVAID Outages]], [[1-1-17|AIM 1-1-17 — Global Positioning System (GPS)]], [[1-2-4|AIM 1-2-4 — Recognizing, Mitigating, and Adapting to GPS Jamming and/or Spoofing]]
+- **PA.VI.B.R5** — not in the FAR/AIM: AC 91-78 and the EFB's own documentation — electronic flight bags
+
 ## Glossary Terms
 
 - [[ADS-B|ADS-B]]

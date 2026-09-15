@@ -120,6 +120,35 @@ The applicant exhibits the skill to:
 
 - **PA.I.C.S3** Correlate weather information to make a go/no-go decision. ^pa-i-c-s3
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — [[91.103|§ 91.103 — Preflight action]], [[7-1-1|AIM 7-1-1 — National Weather Service Aviation Weather Service Program]], [[7-1-2|AIM 7-1-2 — FAA Weather Services]], [[7-1-3|AIM 7-1-3 — Use of Aviation Weather Products]], [[7-1-4|AIM 7-1-4 — Graphical Forecasts for Aviation (GFA)]], [[7-1-5|AIM 7-1-5 — Preflight Briefing]], [[7-1-6|AIM 7-1-6 — Inflight Aviation Weather Advisories]], [[7-1-18|AIM 7-1-18 — Pilot Weather Reports (PIREPs)]], [[7-1-28|AIM 7-1-28 — Key to Aerodrome Forecast (TAF) and Aviation Routine Weather Report (METAR)]], [[Aviation Weather Services]]
+- **PA.I.C.K1** — [[7-1-1|AIM 7-1-1 — National Weather Service Aviation Weather Service Program]], [[7-1-2|AIM 7-1-2 — FAA Weather Services]], [[7-1-5|AIM 7-1-5 — Preflight Briefing]], [[4-1-3|AIM 4-1-3 — Flight Service Stations]]
+- **PA.I.C.K2** — [[7-1-3|AIM 7-1-3 — Use of Aviation Weather Products]], [[7-1-4|AIM 7-1-4 — Graphical Forecasts for Aviation (GFA)]], [[7-1-5|AIM 7-1-5 — Preflight Briefing]], [[7-1-6|AIM 7-1-6 — Inflight Aviation Weather Advisories]], [[7-1-28|AIM 7-1-28 — Key to Aerodrome Forecast (TAF) and Aviation Routine Weather Report (METAR)]]
+- **PA.I.C.K2a** — [[7-1-28|AIM 7-1-28 — Key to Aerodrome Forecast (TAF) and Aviation Routine Weather Report (METAR)]], [[7-1-18|AIM 7-1-18 — Pilot Weather Reports (PIREPs)]]
+- **PA.I.C.K2b** — not in the FAR/AIM: FAA-H-8083-28 (Aviation Weather Handbook) — the surface analysis and ceiling/visibility charts
+- **PA.I.C.K2c** — [[7-1-28|AIM 7-1-28 — Key to Aerodrome Forecast (TAF) and Aviation Routine Weather Report (METAR)]]
+- **PA.I.C.K2d** — [[7-1-4|AIM 7-1-4 — Graphical Forecasts for Aviation (GFA)]]
+- **PA.I.C.K2e** — not in the FAR/AIM: FAA-H-8083-28 — the winds and temperatures aloft forecast (FB)
+- **PA.I.C.K2f** — not in the FAR/AIM: FAA-H-8083-28 — the Convective Outlook
+- **PA.I.C.K2g** — [[7-1-6|AIM 7-1-6 — Inflight Aviation Weather Advisories]], [[7-1-8|AIM 7-1-8 — Inflight Weather Advisory Broadcasts]]
+- **PA.I.C.K3** — not in the FAR/AIM: FAA-H-8083-25 ch. 12 and FAA-H-8083-28 — weather theory
+- **PA.I.C.K3b** — [[7-1-22|AIM 7-1-22 — Wind Shear PIREPs]], [[7-1-24|AIM 7-1-24 — Microbursts]], [[7-6-7|AIM 7-6-7 — Mountain Flying]]
+- **PA.I.C.K3g** — [[7-1-21|AIM 7-1-21 — PIREPs Relating to Turbulence]], [[7-1-23|AIM 7-1-23 — Clear Air Turbulence (CAT) PIREPs]]
+- **PA.I.C.K3h** — [[7-1-26|AIM 7-1-26 — Thunderstorms]], [[7-1-27|AIM 7-1-27 — Thunderstorm Flying]], [[7-1-24|AIM 7-1-24 — Microbursts]]
+- **PA.I.C.K3i** — [[7-1-19|AIM 7-1-19 — PIREPs Relating to Airframe Icing]], [[7-1-20|AIM 7-1-20 — Definitions of Inflight Icing Terms]]
+- **PA.I.C.K3l** — [[7-1-25|AIM 7-1-25 — PIREPs Relating to Volcanic Ash Activity]]
+- **PA.I.C.K4** — [[7-1-9|AIM 7-1-9 — Flight Information Services (FIS)]], [[4-5-9|AIM 4-5-9 — Flight Information Service- Broadcast (FIS-B)]]
+- **PA.I.C.R1** — [[91.103|§ 91.103 — Preflight action]], [[7-1-5|AIM 7-1-5 — Preflight Briefing]]
+- **PA.I.C.R1c** — [[7-1-19|AIM 7-1-19 — PIREPs Relating to Airframe Icing]], [[7-1-21|AIM 7-1-21 — PIREPs Relating to Turbulence]], [[7-1-6|AIM 7-1-6 — Inflight Aviation Weather Advisories]]
+- **PA.I.C.R2** — [[7-1-3|AIM 7-1-3 — Use of Aviation Weather Products]], [[7-1-9|AIM 7-1-9 — Flight Information Services (FIS)]]
+- **PA.I.C.R2a** — [[7-1-9|AIM 7-1-9 — Flight Information Services (FIS)]]
+- **PA.I.C.R2b** — [[7-1-3|AIM 7-1-3 — Use of Aviation Weather Products]]
+- **PA.I.C.R2c** — [[7-1-8|AIM 7-1-8 — Inflight Weather Advisory Broadcasts]], [[7-1-9|AIM 7-1-9 — Flight Information Services (FIS)]], [[7-1-12|AIM 7-1-12 — ATC Inflight Weather Avoidance Assistance]]
+
 ## Glossary Terms
 
 - [[AIRMEN'S METEOROLOGICAL INFORMATION (AIRMET)|AIRMEN'S METEOROLOGICAL INFORMATION (AIRMET)]]

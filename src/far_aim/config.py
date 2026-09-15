@@ -67,6 +67,16 @@ class Config:
         return self.enrichment_dir / "related-review.json"
 
     @property
+    def acs_map_path(self) -> Path:
+        """Curated ACS element → source map (plan §39.3)."""
+        return self.enrichment_dir / "acs-map.json"
+
+    @property
+    def study_path(self) -> Path:
+        """Curated Private Pilot study guide (plan §39.4)."""
+        return self.enrichment_dir / "ppl-study.json"
+
+    @property
     def manifest_path(self) -> Path:
         return self.manifests_dir / "sources.json"
 

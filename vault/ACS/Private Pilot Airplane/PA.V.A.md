@@ -77,6 +77,15 @@ The applicant exhibits the skill to:
 
 - **PA.V.A.S5** Maintain the entry altitude ±100 feet, airspeed ±10 knots, bank ±5°, and roll out on the entry heading ±10°. ^pa-v-a-s5
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-3 ch. 10 and FAA-H-8083-25 ch. 5 — steep turns and load factor
+- **PA.V.A.R2** — [[91.113|§ 91.113 — Right-of-way rules: Except water operations]], [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]]
+- **PA.V.A.R3** — [[91.119|§ 91.119 — Minimum safe altitudes: General]]
+
 ## Glossary Terms
 
 - [[AIRSPEED|AIRSPEED]]

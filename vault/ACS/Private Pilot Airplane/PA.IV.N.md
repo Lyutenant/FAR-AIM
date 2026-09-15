@@ -87,6 +87,16 @@ The applicant exhibits the skill to:
 
 - **PA.IV.N.S9** Use runway incursion avoidance procedures, if applicable. ^pa-iv-n-s9
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-3 ch. 9 and the POH/AFM — the go-around
+- **PA.IV.N.R5** — [[91.113|§ 91.113 — Right-of-way rules: Except water operations]], [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]], [[8-1-8|AIM 8-1-8 — Judgment Aspects of Collision Avoidance]]
+- **PA.IV.N.R8** — [[4-3-18|AIM 4-3-18 — Taxiing]]
+- **PA.IV.N.R9** — [[4-3-11|AIM 4-3-11 — Pilot Responsibilities When Conducting Land and Hold Short Operations (LAHSO)]]
+
 ## Glossary Terms
 
 - [[LAHSO|LAHSO]]

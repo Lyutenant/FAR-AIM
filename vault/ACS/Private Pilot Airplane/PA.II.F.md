@@ -69,6 +69,15 @@ The applicant exhibits the skill to:
 
 - **PA.II.F.S5** Verify that engine parameters and airplane configuration are suitable. ^pa-ii-f-s5
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-3 ch. 2 and the POH/AFM — the before-takeoff check
+- **PA.II.F.R2** — [[4-3-6|AIM 4-3-6 — Use of Runways/Declared Distances]]
+- **PA.II.F.R3** — [[7-4-1|AIM 7-4-1 — General]], [[7-4-5|AIM 7-4-5 — Operations Problem Areas]], [[7-4-6|AIM 7-4-6 — Vortex Avoidance Procedures]], [[7-4-8|AIM 7-4-8 — Pilot Responsibility]], [[Wake Turbulence Avoidance]]
+
 ## Glossary Terms
 
 - [[AIR TRAFFIC CONTROL|AIR TRAFFIC CONTROL]]

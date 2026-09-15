@@ -63,6 +63,20 @@ The applicant exhibits the skill to:
 
 - **PA.I.A.S1** Apply requirements to act as pilot-in-command (PIC) under Visual Flight Rules (VFR) in a scenario given by the evaluator. ^pa-i-a-s1
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — [[61.3|§ 61.3 — Requirement for certificates, ratings, privileges, and authorizations]], [[61.23|§ 61.23 — Medical certificates: Requirement and duration]], [[61.51|§ 61.51 — Pilot logbooks]], [[61.56|§ 61.56 — Flight review]], [[61.57|§ 61.57 — Recent flight experience: Pilot in command]], [[61.113|§ 61.113 — Private pilot privileges and limitations: Pilot in command]], [[Part 61]], [[Pilot Certificates and Ratings]], [[Recent Flight Experience]], [[Medical Certification]], [[Logbooks and Required Pilot Documents]], [[Private Pilot Eligibility and Privileges]]
+- **PA.I.A.K1** — [[61.51|§ 61.51 — Pilot logbooks]], [[61.56|§ 61.56 — Flight review]], [[61.57|§ 61.57 — Recent flight experience: Pilot in command]], [[61.103|§ 61.103 — Eligibility requirements: General]], [[61.109|§ 61.109 — Aeronautical experience]], [[Recent Flight Experience]], [[Logbooks and Required Pilot Documents]]
+- **PA.I.A.K2** — [[61.113|§ 61.113 — Private pilot privileges and limitations: Pilot in command]], [[61.31|§ 61.31 — Type rating requirements, additional training, and authorization requirements]], [[91.131|§ 91.131 — Operations in Class B airspace]], [[Private Pilot Eligibility and Privileges]], [[Additional Aircraft Endorsements]]
+- **PA.I.A.K3** — [[61.23|§ 61.23 — Medical certificates: Requirement and duration]], [[61.53|§ 61.53 — Prohibition on operations during medical deficiency]], [[Part 67]], [[Medical Certification]]
+- **PA.I.A.K4** — [[61.3|§ 61.3 — Requirement for certificates, ratings, privileges, and authorizations]], [[61.51|§ 61.51 — Pilot logbooks]], [[91.203|§ 91.203 — Civil aircraft: Certifications required]], [[Logbooks and Required Pilot Documents]], [[Aircraft Documents and Flight Manual]]
+- **PA.I.A.K5** — [[61.113|§ 61.113 — Private pilot privileges and limitations: Pilot in command]], [[61.23|§ 61.23 — Medical certificates: Requirement and duration]], [[Part 68]], [[68.3|§ 68.3 — Medical education course requirements]], [[68.5|§ 68.5 — Comprehensive medical examination]], [[Medical Certification]]
+- **PA.I.A.R1** — [[61.56|§ 61.56 — Flight review]], [[61.57|§ 61.57 — Recent flight experience: Pilot in command]], [[Recent Flight Experience]]
+- **PA.I.A.R2** — [[61.31|§ 61.31 — Type rating requirements, additional training, and authorization requirements]], [[Additional Aircraft Endorsements]]
+
 ## Glossary Terms
 
 - [[VFR|VFR]]

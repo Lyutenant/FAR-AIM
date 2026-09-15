@@ -67,3 +67,11 @@
 .markdown-preview-view.far-aim-text table ul ul > li {
   margin-inline-start: var(--far-aim-indent);
 }
+
+/* Study aids (Phase 10b): the `[!study]` callout that opens a covered FAR
+ * section or AIM paragraph note is the curator's summary, never official
+ * text. A distinct colour keeps that boundary visible at a glance. */
+.callout[data-callout="study"] {
+  --callout-color: 158, 92, 214;
+  --callout-icon: lucide-graduation-cap;
+}

@@ -90,6 +90,13 @@ The applicant exhibits the skill to:
 
 - **PA.X.B.S8** Advance power smoothly on the operating engine and accelerate to VSSE/VYSE, as appropriate, +10/-5 knots during recovery. ^pa-x-b-s8
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-3 ch. 13 (transition to multiengine airplanes), FAA-P-8740-66 and the POH/AFM
+
 ## Glossary Terms
 
 - [[AIRSPEED|AIRSPEED]]

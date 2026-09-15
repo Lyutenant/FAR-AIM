@@ -89,6 +89,32 @@ The applicant exhibits the skill to:
 
 - **PA.I.H.S2** Perform self-assessment, including fitness for flight and personal minimums, for actual flight or a scenario given by the evaluator. ^pa-i-h-s2
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — [[8-1-1|AIM 8-1-1 — Fitness For Flight]], [[Aeromedical Factors]]
+- **PA.I.H.K1** — [[8-1-1|AIM 8-1-1 — Fitness For Flight]], [[8-1-2|AIM 8-1-2 — Effects of Altitude]], [[8-1-3|AIM 8-1-3 — Hyperventilation in Flight]], [[8-1-4|AIM 8-1-4 — Carbon Monoxide Poisoning in Flight]], [[8-1-5|AIM 8-1-5 — Illusions in Flight]], [[8-1-6|AIM 8-1-6 — Vision in Flight]]
+- **PA.I.H.K1a** — [[91.211|§ 91.211 — Supplemental oxygen]], [[8-1-2|AIM 8-1-2 — Effects of Altitude]]
+- **PA.I.H.K1b** — [[8-1-3|AIM 8-1-3 — Hyperventilation in Flight]]
+- **PA.I.H.K1c** — [[8-1-2|AIM 8-1-2 — Effects of Altitude]]
+- **PA.I.H.K1d** — [[8-1-5|AIM 8-1-5 — Illusions in Flight]]
+- **PA.I.H.K1e** — not in the FAR/AIM: FAA-H-8083-25 ch. 17 — motion sickness
+- **PA.I.H.K1f** — [[8-1-4|AIM 8-1-4 — Carbon Monoxide Poisoning in Flight]]
+- **PA.I.H.K1g** — [[8-1-1|AIM 8-1-1 — Fitness For Flight]]
+- **PA.I.H.K1h** — [[8-1-1|AIM 8-1-1 — Fitness For Flight]]
+- **PA.I.H.K1i** — not in the FAR/AIM: FAA-H-8083-25 ch. 17 — dehydration and nutrition
+- **PA.I.H.K1j** — not in the FAR/AIM: FAA-H-8083-25 ch. 17 — hypothermia
+- **PA.I.H.K1k** — [[8-1-5|AIM 8-1-5 — Illusions in Flight]], [[8-1-6|AIM 8-1-6 — Vision in Flight]]
+- **PA.I.H.K1l** — [[8-1-2|AIM 8-1-2 — Effects of Altitude]]
+- **PA.I.H.K2** — [[91.17|§ 91.17 — Alcohol or drugs]], [[91.19|§ 91.19 — Carriage of narcotic drugs, marihuana, and depressant or stimulant drugs or substances]], [[61.15|§ 61.15 — Offenses involving alcohol or drugs]], [[61.16|§ 61.16 — Refusal to submit to an alcohol test or to furnish test results]], [[8-1-1|AIM 8-1-1 — Fitness For Flight]], [[Alcohol and Drugs]]
+- **PA.I.H.K3** — [[8-1-1|AIM 8-1-1 — Fitness For Flight]], [[Alcohol and Drugs]]
+- **PA.I.H.K4** — not in the FAR/AIM: FAA-H-8083-2 and FAA-H-8083-25 ch. 2 — aeronautical decision-making, CRM and SRM
+- **PA.I.H.R2** — not in the FAR/AIM: FAA-H-8083-25 ch. 2 — the five hazardous attitudes and their antidotes
+- **PA.I.H.R3** — not in the FAR/AIM: FAA-H-8083-2 — situational awareness and task management
+- **PA.I.H.R4** — not in the FAR/AIM: FAA-H-8083-2 — confirmation and expectation bias
+
 ## Glossary Terms
 
 - [[MINIMUMS|MINIMUMS]]

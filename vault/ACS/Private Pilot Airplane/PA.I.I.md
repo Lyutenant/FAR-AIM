@@ -100,3 +100,15 @@ The applicant exhibits the skill to:
 - **PA.I.I.S5** Explain how float and hull construction can affect seaplane performance. ^pa-i-i-s5
 
 - **PA.I.I.S6** Describe how to correct for porpoising and skipping. ^pa-i-i-s6
+
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-23 (Seaplane, Skiplane, and Float/Ski Equipped Helicopter Operations Handbook) and the USCG Navigation Rules — seaplane operations
+- **PA.I.I.K4** — [[7-6-9|AIM 7-6-9 — Seaplane Safety]]
+- **PA.I.I.K5** — [[7-6-9|AIM 7-6-9 — Seaplane Safety]]
+- **PA.I.I.K6** — [[91.115|§ 91.115 — Right-of-way rules: Water operations]], [[7-6-9|AIM 7-6-9 — Seaplane Safety]]
+- **PA.I.I.K7** — [[7-6-9|AIM 7-6-9 — Seaplane Safety]]
+- **PA.I.I.R3** — [[91.115|§ 91.115 — Right-of-way rules: Water operations]], [[7-6-9|AIM 7-6-9 — Seaplane Safety]]

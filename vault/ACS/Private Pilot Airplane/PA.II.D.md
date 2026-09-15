@@ -91,6 +91,25 @@ The applicant exhibits the skill to:
 
 - **PA.II.D.S8** Position the airplane properly relative to hold lines. ^pa-ii-d-s8
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — [[4-3-18|AIM 4-3-18 — Taxiing]], [[4-3-19|AIM 4-3-19 — Taxi During Low Visibility]], [[4-3-20|AIM 4-3-20 — Standard Taxi Routes]], [[4-3-21|AIM 4-3-21 — Exiting the Runway After Landing]], [[2-3-1|AIM 2-3-1 — General]], [[2-3-5|AIM 2-3-5 — Holding Position Markings]], [[Taxiing and Runway Incursion Avoidance]], [[Airport Markings Signs and Lighting]]
+- **PA.II.D.K1** — [[5-1-3|AIM 5-1-3 — Notice to Airmen (NOTAM) System]], [[4-3-18|AIM 4-3-18 — Taxiing]], [[9-1-4|AIM 9-1-4 — Selected Charts and Products Available]], [[NOTAMs]]
+- **PA.II.D.K2** — [[91.123|§ 91.123 — Compliance with ATC clearances and instructions]], [[91.129|§ 91.129 — Operations in Class D airspace]], [[4-3-18|AIM 4-3-18 — Taxiing]], [[5-2-4|AIM 5-2-4 — Taxi Clearance]], [[4-4-10|AIM 4-4-10 — Adherence to Clearance]]
+- **PA.II.D.K3** — [[2-3-3|AIM 2-3-3 — Runway Markings]], [[2-3-4|AIM 2-3-4 — Taxiway Markings]], [[2-3-5|AIM 2-3-5 — Holding Position Markings]], [[2-3-7|AIM 2-3-7 — Airport Signs]], [[2-3-8|AIM 2-3-8 — Mandatory Instruction Signs]], [[2-3-9|AIM 2-3-9 — Location Signs]], [[2-3-10|AIM 2-3-10 — Direction Signs]], [[2-1-4|AIM 2-1-4 — Runway Edge Light Systems]], [[2-1-10|AIM 2-1-10 — Taxiway Lights]], [[Airport Markings Signs and Lighting]]
+- **PA.II.D.K4** — [[4-3-4|AIM 4-3-4 — Visual Indicators at Airports Without an Operating Control Tower]]
+- **PA.II.D.K5** — [[91.209|§ 91.209 — Aircraft lights]], [[4-3-24|AIM 4-3-24 — Use of Aircraft Lights]]
+- **PA.II.D.K6** — [[4-3-18|AIM 4-3-18 — Taxiing]]
+- **PA.II.D.K6a** — [[4-3-18|AIM 4-3-18 — Taxiing]], [[4-3-20|AIM 4-3-20 — Standard Taxi Routes]]
+- **PA.II.D.K6b** — [[4-3-14|AIM 4-3-14 — Communications]], [[4-1-9|AIM 4-1-9 — Traffic Advisory Practices at Airports Without Operating Control Towers]], [[4-2-14|AIM 4-2-14 — Communications for VFR Flights]]
+- **PA.II.D.K6c** — [[91.129|§ 91.129 — Operations in Class D airspace]], [[4-3-18|AIM 4-3-18 — Taxiing]], [[4-3-21|AIM 4-3-21 — Exiting the Runway After Landing]], [[2-3-5|AIM 2-3-5 — Holding Position Markings]]
+- **PA.II.D.K6d** — [[4-3-24|AIM 4-3-24 — Use of Aircraft Lights]], [[2-1-10|AIM 2-1-10 — Taxiway Lights]]
+- **PA.II.D.K6e** — [[4-3-19|AIM 4-3-19 — Taxi During Low Visibility]]
+- **PA.II.D.R4** — [[4-3-18|AIM 4-3-18 — Taxiing]], [[2-3-5|AIM 2-3-5 — Holding Position Markings]], [[2-1-6|AIM 2-1-6 — Runway Status Light (RWSL) System]]
+
 ## Glossary Terms
 
 - [[AIR TRAFFIC CONTROL|AIR TRAFFIC CONTROL]]

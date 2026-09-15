@@ -70,3 +70,10 @@ The applicant exhibits the skill to:
 - **PA.I.F.S1** Compute the weight and balance, correct out-of-CG loading errors and determine if the weight and balance remains within limits during all phases of flight. ^pa-i-f-s1
 
 - **PA.I.F.S2** Use the appropriate airplane performance charts, tables, and data. ^pa-i-f-s2
+
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-25 ch. 5 (aerodynamics), ch. 10–11 (weight and balance, performance) and the POH/AFM — not in the FAR/AIM

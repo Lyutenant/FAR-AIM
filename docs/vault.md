@@ -377,6 +377,33 @@ vault/ACS/Private Pilot Airplane/
   to search a knowledge-test-report code; `Source Status.md` gains a
   `Private Pilot Airplane ACS` row (document number and effective date).
 
+## Prep and study callouts (Phase 10b)
+
+```text
+vault/Prep/Private Pilot/
+├── Private Pilot Prep.md   # entry point: coverage of the ACS, entries by stage
+├── Part 61 Map.md          # subparts, section ranges, studied sections with gists
+├── Part 91 Map.md
+├── Numbers Sheet.md        # every quoted threshold, linked to its paragraph
+└── Where Do I Look.md      # questions → citations by ACS Task; citation → gist
+```
+
+- `Prep/` is a generator-owned root (pruned and byte-compared like the
+  corpora), distinct from the reader's `Study/`. Its notes carry
+  `type: prep` and render only the curator's words from
+  `data/enrichment/ppl-study.json` and `acs-map.json` (docs/enrichment.md),
+  each linking the official note rather than restating it.
+- Every covered FAR section and AIM paragraph note opens with a
+  `> [!study] Private Pilot study aid — curated, not official text`
+  callout between the Source callout and `## Official Text`: gist, why it
+  matters, numbers, traps, mnemonics, ACS element block links and the
+  training stage. The callout type is coloured by the committed CSS
+  snippet so the boundary with official text stays visible.
+- ACS Task notes gain `## Where to study (curated)`: the Task's default
+  sources and per-element overrides, or the out-of-corpus reason.
+- `Home.md` describes `Prep/` and points exam candidates at
+  `[[Private Pilot Prep]]`.
+
 ## Home and the curated layer (Phase 7)
 
 - `Home.md` is a generated root note (`type: home`): links to each built

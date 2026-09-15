@@ -77,3 +77,25 @@ The applicant is able to identify, assess, and mitigate risk associated with:
 ## Skills
 
 The applicant exhibits the skill to:\[Intentionally left blank].
+
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — [[91.209|§ 91.209 — Aircraft lights]], [[91.205|§ 91.205 — Powered civil aircraft with standard U.S. airworthiness certificates: Instrument and equipment requirements]], [[61.57|§ 61.57 — Recent flight experience: Pilot in command]], [[8-1-6|AIM 8-1-6 — Vision in Flight]], [[8-1-5|AIM 8-1-5 — Illusions in Flight]], [[4-3-24|AIM 4-3-24 — Use of Aircraft Lights]], [[Night Operations]]
+- **PA.XI.A.K1** — [[8-1-6|AIM 8-1-6 — Vision in Flight]]
+- **PA.XI.A.K2** — [[2-1-1|AIM 2-1-1 — Approach Light Systems (ALS)]], [[2-1-4|AIM 2-1-4 — Runway Edge Light Systems]], [[2-1-5|AIM 2-1-5 — In-runway Lighting]], [[2-1-8|AIM 2-1-8 — Pilot Control of Airport Lighting]], [[2-1-9|AIM 2-1-9 — Airport/Heliport Beacons]], [[2-1-10|AIM 2-1-10 — Taxiway Lights]], [[2-2-1|AIM 2-2-1 — Aeronautical Light Beacons]], [[2-2-3|AIM 2-2-3 — Obstruction Lights]], [[Airport Markings Signs and Lighting]]
+- **PA.XI.A.K3** — [[91.205|§ 91.205 — Powered civil aircraft with standard U.S. airworthiness certificates: Instrument and equipment requirements]], [[91.209|§ 91.209 — Aircraft lights]], [[Required VFR Equipment]]
+- **PA.XI.A.K4** — not in the FAR/AIM: FAA-H-8083-3 ch. 11 — personal equipment for night flight
+- **PA.XI.A.K5** — [[8-1-6|AIM 8-1-6 — Vision in Flight]]
+- **PA.XI.A.K6** — [[4-3-18|AIM 4-3-18 — Taxiing]], [[4-3-24|AIM 4-3-24 — Use of Aircraft Lights]], [[2-1-10|AIM 2-1-10 — Taxiway Lights]]
+- **PA.XI.A.K7** — [[91.209|§ 91.209 — Aircraft lights]], [[4-3-24|AIM 4-3-24 — Use of Aircraft Lights]]
+- **PA.XI.A.K8** — [[8-1-5|AIM 8-1-5 — Illusions in Flight]]
+- **PA.XI.A.R1** — [[91.113|§ 91.113 — Right-of-way rules: Except water operations]], [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]], [[8-1-8|AIM 8-1-8 — Judgment Aspects of Collision Avoidance]]
+- **PA.XI.A.R2** — not in the FAR/AIM: FAA-H-8083-2 — task management and situational awareness
+- **PA.XI.A.R3** — [[8-1-5|AIM 8-1-5 — Illusions in Flight]], [[8-1-6|AIM 8-1-6 — Vision in Flight]]
+- **PA.XI.A.R4** — [[4-3-18|AIM 4-3-18 — Taxiing]]
+- **PA.XI.A.R5** — [[61.57|§ 61.57 — Recent flight experience: Pilot in command]], [[Recent Flight Experience]]
+- **PA.XI.A.R6** — [[7-1-5|AIM 7-1-5 — Preflight Briefing]], [[7-6-7|AIM 7-6-7 — Mountain Flying]]
+- **PA.XI.A.R7** — [[91.205|§ 91.205 — Powered civil aircraft with standard U.S. airworthiness certificates: Instrument and equipment requirements]], [[91.213|§ 91.213 — Inoperative instruments and equipment]]

@@ -93,6 +93,28 @@ The applicant exhibits the skill to:
 
 - **PA.I.D.S5** Use an electronic flight bag (EFB), if applicable. ^pa-i-d-s5
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — [[91.103|§ 91.103 — Preflight action]], [[91.151|§ 91.151 — Fuel requirements for flight in VFR conditions]], [[91.153|§ 91.153 — VFR flight plan: Information required]], [[91.159|§ 91.159 — VFR cruising altitude or flight level]], [[91.119|§ 91.119 — Minimum safe altitudes: General]], [[5-1-1|AIM 5-1-1 — Preflight Preparation]], [[5-1-3|AIM 5-1-3 — Notice to Airmen (NOTAM) System]], [[5-1-5|AIM 5-1-5 — Flight Plan - VFR Flights]], [[Preflight Action and VFR Fuel]], [[VFR Flight Plans]], [[NOTAMs]]
+- **PA.I.D.K1** — [[91.103|§ 91.103 — Preflight action]], [[5-1-1|AIM 5-1-1 — Preflight Preparation]], [[3-4-1|AIM 3-4-1 — General]], [[3-5-2|AIM 3-5-2 — Military Training Routes]], [[3-5-3|AIM 3-5-3 — Temporary Flight Restrictions]], [[Special Use and Other Airspace]]
+- **PA.I.D.K1a** — not in the FAR/AIM: AC 91-78 and the EFB's own documentation — electronic flight bags
+- **PA.I.D.K2** — [[91.119|§ 91.119 — Minimum safe altitudes: General]], [[91.159|§ 91.159 — VFR cruising altitude or flight level]], [[91.121|§ 91.121 — Altimeter settings]], [[3-1-5|AIM 3-1-5 — VFR Cruising Altitudes and Flight Levels]], [[7-2-1|AIM 7-2-1 — General]], [[Minimum Safe and VFR Cruising Altitudes]]
+- **PA.I.D.K3** — not in the FAR/AIM: FAA-H-8083-25 ch. 16 — flight computer and navigation calculations
+- **PA.I.D.K3c** — [[91.151|§ 91.151 — Fuel requirements for flight in VFR conditions]], [[Preflight Action and VFR Fuel]]
+- **PA.I.D.K4** — [[91.153|§ 91.153 — VFR flight plan: Information required]], [[5-1-5|AIM 5-1-5 — Flight Plan - VFR Flights]], [[VFR Flight Plans]]
+- **PA.I.D.K5** — [[91.153|§ 91.153 — VFR flight plan: Information required]], [[5-1-5|AIM 5-1-5 — Flight Plan - VFR Flights]], [[5-1-12|AIM 5-1-12 — Change in Flight Plan]], [[5-1-13|AIM 5-1-13 — Change in Proposed Departure Time]], [[5-1-14|AIM 5-1-14 — Closing VFR/DVFR Flight Plans]], [[VFR Flight Plans]]
+- **PA.I.D.K6** — [[5-6-13|AIM 5-6-13 — Interception Procedures]], [[5-6-14|AIM 5-6-14 — Interception Signals]], [[National Security Airspace and ADIZ]]
+- **PA.I.D.R1** — [[8-1-1|AIM 8-1-1 — Fitness For Flight]], [[Aeromedical Factors]]
+- **PA.I.D.R2** — [[91.7|§ 91.7 — Civil aircraft airworthiness]], [[91.103|§ 91.103 — Preflight action]]
+- **PA.I.D.R3** — [[91.103|§ 91.103 — Preflight action]], [[7-1-5|AIM 7-1-5 — Preflight Briefing]], [[5-1-3|AIM 5-1-3 — Notice to Airmen (NOTAM) System]]
+- **PA.I.D.R4** — not in the FAR/AIM: FAA-H-8083-2 (Risk Management Handbook) — the PAVE model's external pressures
+- **PA.I.D.R5** — [[4-1-1|AIM 4-1-1 — Air Route Traffic Control Centers]], [[4-1-17|AIM 4-1-17 — Radar Assistance to VFR Aircraft]], [[4-1-18|AIM 4-1-18 — Terminal Radar Services for VFR Aircraft]]
+- **PA.I.D.R6** — [[91.151|§ 91.151 — Fuel requirements for flight in VFR conditions]]
+- **PA.I.D.R7** — not in the FAR/AIM: AC 91-78 and the EFB's own documentation — electronic flight bags
+
 ## Glossary Terms
 
 - [[AIR TRAFFIC CONTROL|AIR TRAFFIC CONTROL]]

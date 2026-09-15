@@ -92,6 +92,14 @@ The applicant exhibits the skill to:
 
 - **PA.VII.B.S11** Use single-pilot resource management (SRM) or crew resource management (CRM), as appropriate. ^pa-vii-b-s11
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-3 ch. 5 (slow flight, stalls, spins), AC 61-67 and FAA-H-8083-25 ch. 5 — aerodynamics and technique
+- **PA.VII.B.R7** — [[91.113|§ 91.113 — Right-of-way rules: Except water operations]], [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]]
+
 ## Glossary Terms
 
 - [[AIRSPEED|AIRSPEED]]

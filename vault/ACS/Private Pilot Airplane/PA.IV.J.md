@@ -88,6 +88,14 @@ The applicant exhibits the skill to:
 
 - **PA.IV.J.S9** Maintain directional control throughout the approach and landing. ^pa-iv-j-s9
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-23 and the POH/AFM — seaplane takeoffs and landings
+- **PA.IV.J.R4** — [[91.113|§ 91.113 — Right-of-way rules: Except water operations]], [[91.115|§ 91.115 — Right-of-way rules: Water operations]], [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]]
+
 ## Glossary Terms
 
 - [[AIRSPEED|AIRSPEED]]

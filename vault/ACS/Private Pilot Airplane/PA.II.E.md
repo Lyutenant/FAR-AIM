@@ -91,6 +91,17 @@ The applicant exhibits the skill to:
 
 - **PA.II.E.S10** Comply with applicable taxi elements in Task D if the practical test is conducted in an amphibious airplane. ^pa-ii-e-s10
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-23 — taxiing and sailing a seaplane
+- **PA.II.E.K1** — [[9-1-4|AIM 9-1-4 — Selected Charts and Products Available]], [[5-1-3|AIM 5-1-3 — Notice to Airmen (NOTAM) System]]
+- **PA.II.E.K2** — [[91.123|§ 91.123 — Compliance with ATC clearances and instructions]]
+- **PA.II.E.K6b** — [[4-1-9|AIM 4-1-9 — Traffic Advisory Practices at Airports Without Operating Control Towers]]
+- **PA.II.E.R4** — [[91.115|§ 91.115 — Right-of-way rules: Water operations]], [[7-6-9|AIM 7-6-9 — Seaplane Safety]]
+
 ## Glossary Terms
 
 - [[DESIRED COURSE|DESIRED COURSE]]

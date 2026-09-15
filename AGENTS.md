@@ -326,8 +326,26 @@ Change gates: ACS is a fourth ledger corpus (tasks + appendices;
 thresholds removed 10 % / content 25 %, floors 5 / 10, provisional) whose
 edition cross-check reads the parsed Major Enhancements. Docs:
 docs/data-model.md, docs/validation.md, docs/vault.md, docs/source-policy.md.
-Not built yet (10b–10d): `data/enrichment/acs-map.json`,
-`ppl-study.json`, `vault/Prep/`; `Study/` stays the reader's untouched
-folder. Test fixtures: `tests/fixtures/acs/` (the FAA page's ACS table
+Test fixtures: `tests/fixtures/acs/` (the FAA page's ACS table
 verbatim; a 35-page subset of the real PDF — `REQUIRE_COMPLETE=False`
 relaxes the whole-document checks to the areas present).
+**10b shipped 2026-09-13** (docs/enrichment.md, docs/vault.md;
+`far_aim.links.study`, `far_aim.generate.prep_notes`):
+`data/enrichment/acs-map.json` (task-level defaults + element overrides;
+sub-elements inherit parents; archived placeholders exempt; every K/R
+element must resolve to stems or an `out_of_corpus` reason — coverage
+today 764 elements, 247 mapped, 517 out of corpus, mostly maneuvers and
+handbook material) and `data/enrichment/ppl-study.json` (32 entries,
+stages pre-solo / solo-xc / checkride, 76 numbers each verified verbatim
+against the cited paragraph — FAR `where` label paths like `(a)(1)`;
+AIM entries check the whole paragraph; all entries `unreviewed`). Both
+Claude-drafted. Rendered: `[!study]` callout between Source and Official
+Text on covered FAR section / AIM paragraph notes, `## Where to study
+(curated)` on ACS Task notes, and the generator-owned
+`vault/Prep/Private Pilot/` (Private Pilot Prep, Part 61 Map, Part 91
+Map, Numbers Sheet, Where Do I Look; `type: prep`). A map without an ACS
+layer, a stale code, an unresolved stem, an uncovered element or a
+non-verbatim quote fails the build. Settled: mnemonics are labelled as
+training-community devices, never FAA text; `Study/` untouched. Not built
+yet (10c–10d): the full gloss, Reading Path, Oral Prep, Anki export,
+ACS Checklist.

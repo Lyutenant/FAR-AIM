@@ -78,6 +78,25 @@ The applicant exhibits the skill to:
 
 - **PA.III.A.S3** Acknowledge radio communications and comply with ATC instructions or as directed by the evaluator. ^pa-iii-a-s3
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — [[91.123|§ 91.123 — Compliance with ATC clearances and instructions]], [[4-2-1|AIM 4-2-1 — General]], [[4-2-2|AIM 4-2-2 — Radio Technique]], [[4-2-3|AIM 4-2-3 — Contact Procedures]], [[4-3-13|AIM 4-3-13 — Traffic Control Light Signals]], [[4-3-14|AIM 4-3-14 — Communications]], [[ATC Communications]]
+- **PA.III.A.K1** — [[4-2-1|AIM 4-2-1 — General]], [[4-1-11|AIM 4-1-11 — Designated UNICOM/MULTICOM Frequencies]], [[4-1-9|AIM 4-1-9 — Traffic Advisory Practices at Airports Without Operating Control Towers]], [[9-1-4|AIM 9-1-4 — Selected Charts and Products Available]]
+- **PA.III.A.K2** — [[91.123|§ 91.123 — Compliance with ATC clearances and instructions]], [[4-2-1|AIM 4-2-1 — General]], [[4-2-2|AIM 4-2-2 — Radio Technique]], [[4-2-3|AIM 4-2-3 — Contact Procedures]], [[4-2-4|AIM 4-2-4 — Aircraft Call Signs]], [[4-2-7|AIM 4-2-7 — Phonetic Alphabet]], [[4-2-8|AIM 4-2-8 — Figures]], [[4-2-9|AIM 4-2-9 — Altitudes and Flight Levels]], [[4-2-14|AIM 4-2-14 — Communications for VFR Flights]]
+- **PA.III.A.K3** — [[91.125|§ 91.125 — ATC light signals]], [[4-3-13|AIM 4-3-13 — Traffic Control Light Signals]]
+- **PA.III.A.K4** — [[91.215|§ 91.215 — ATC transponder and altitude reporting equipment and use]], [[4-1-20|AIM 4-1-20 — Transponder and ADS-B Out Operation]], [[6-2-2|AIM 6-2-2 — Transponder Emergency Operation]], [[Transponders and ADS-B Out]]
+- **PA.III.A.K5** — [[91.126|§ 91.126 — Operating on or in the vicinity of an airport in Class G airspace]], [[91.127|§ 91.127 — Operating on or in the vicinity of an airport in Class E airspace]], [[91.129|§ 91.129 — Operations in Class D airspace]], [[91.185|§ 91.185 — IFR operations: Two-way radio communications failure]], [[6-4-1|AIM 6-4-1 — Two‐way Radio Communications Failure]], [[6-4-2|AIM 6-4-2 — Transponder Operation During Two‐way Communications Failure]], [[4-2-13|AIM 4-2-13 — Communications with Tower when Aircraft Transmitter or Receiver or Both are Inoperative]], [[4-3-13|AIM 4-3-13 — Traffic Control Light Signals]]
+- **PA.III.A.K6** — [[4-2-13|AIM 4-2-13 — Communications with Tower when Aircraft Transmitter or Receiver or Both are Inoperative]], [[6-4-1|AIM 6-4-1 — Two‐way Radio Communications Failure]]
+- **PA.III.A.K7** — [[4-1-15|AIM 4-1-15 — Radar Traffic Information Service]], [[4-1-16|AIM 4-1-16 — Safety Alert]], [[4-1-17|AIM 4-1-17 — Radar Assistance to VFR Aircraft]], [[4-1-18|AIM 4-1-18 — Terminal Radar Services for VFR Aircraft]], [[6-2-1|AIM 6-2-1 — Radar Service for VFR Aircraft in Difficulty]], [[ATC Facilities and Services for VFR Aircraft]]
+- **PA.III.A.K8** — [[7-7-2|AIM 7-7-2 — Aircraft Accident and Incident Reporting]], [[Accident and Incident Reporting]]
+- **PA.III.A.K9** — [[2-1-6|AIM 2-1-6 — Runway Status Light (RWSL) System]]
+- **PA.III.A.R1** — [[4-2-1|AIM 4-2-1 — General]], [[4-2-2|AIM 4-2-2 — Radio Technique]]
+- **PA.III.A.R2** — [[91.3|§ 91.3 — Responsibility and authority of the pilot in command]], [[6-1-2|AIM 6-1-2 — Emergency Condition- Request Assistance Immediately]], [[6-3-1|AIM 6-3-1 — Distress and Urgency Communications]], [[Emergencies and Deviations]]
+- **PA.III.A.R4** — [[4-2-1|AIM 4-2-1 — General]], [[4-2-3|AIM 4-2-3 — Contact Procedures]]
+
 ## Glossary Terms
 
 - [[AERONAUTICAL INFORMATION MANUAL (AIM)|AERONAUTICAL INFORMATION MANUAL (AIM)]]

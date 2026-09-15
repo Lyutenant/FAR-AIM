@@ -74,6 +74,23 @@ The applicant exhibits the skill to:
 
 - **PA.IX.D.S3** Simulate ballistic parachute deployment procedures, if equipped. ^pa-ix-d-s3
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — [[91.207|§ 91.207 — Emergency locator transmitters]], [[6-2-4|AIM 6-2-4 — Emergency Locator Transmitter (ELT)]], [[6-2-6|AIM 6-2-6 — Search and Rescue]], [[Emergency Locator Transmitters and Search and Rescue]]
+- **PA.IX.D.K1** — [[91.207|§ 91.207 — Emergency locator transmitters]], [[6-2-4|AIM 6-2-4 — Emergency Locator Transmitter (ELT)]]
+- **PA.IX.D.K2** — not in the FAR/AIM: The POH/AFM and the extinguisher's own placards — fire extinguisher use
+- **PA.IX.D.K3** — not in the FAR/AIM: FAA-H-8083-25 ch. 17 and FAA survival guidance — survival gear by environment
+- **PA.IX.D.K3b** — [[7-6-7|AIM 7-6-7 — Mountain Flying]]
+- **PA.IX.D.K3c** — [[91.205|§ 91.205 — Powered civil aircraft with standard U.S. airworthiness certificates: Instrument and equipment requirements]], [[91.509|§ 91.509 — Survival equipment for overwater operations]], [[6-3-3|AIM 6-3-3 — Ditching Procedures]], [[6-2-6|AIM 6-2-6 — Search and Rescue]]
+- **PA.IX.D.K4** — not in the FAR/AIM: The POH/AFM — ballistic parachute deployment
+- **PA.IX.D.K5** — not in the FAR/AIM: The POH/AFM — emergency auto-land systems
+- **PA.IX.D.R1** — not in the FAR/AIM: FAA-H-8083-25 ch. 17 and FAA survival guidance — survival for 48 to 72 hours
+- **PA.IX.D.R2** — not in the FAR/AIM: The POH/AFM — ballistic parachute deployment
+- **PA.IX.D.R3** — not in the FAR/AIM: The POH/AFM — emergency auto-land systems
+
 ## Glossary Terms
 
 - [[ELT|ELT]]

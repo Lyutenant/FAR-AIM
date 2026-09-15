@@ -88,6 +88,14 @@ The applicant exhibits the skill to:
 
 - **PA.IX.F.S10** Complete the appropriate checklist(s). ^pa-ix-f-s10
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-3 ch. 13 (transition to multiengine airplanes), FAA-P-8740-66 and the POH/AFM
+- **PA.IX.F.R2** — [[91.113|§ 91.113 — Right-of-way rules: Except water operations]], [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]]
+
 ## Glossary Terms
 
 - [[AIRSPEED|AIRSPEED]]

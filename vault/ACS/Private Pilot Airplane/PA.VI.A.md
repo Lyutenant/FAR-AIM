@@ -91,6 +91,17 @@ The applicant exhibits the skill to:
 
 - **PA.VI.A.S7** Maintain the selected altitude, ±200 feet and heading, ±15°. ^pa-vi-a-s7
 
+## Where to study (curated)
+
+> [!info] Curated map
+> From `data/enrichment/acs-map.json` (plan §39.3): where the vault covers each Knowledge and Risk element, or why it cannot. A study aid, not FAA text; sub-elements follow their parent unless listed.
+
+- **All Knowledge and Risk elements** — not in the FAR/AIM: FAA-H-8083-25 ch. 16 — pilotage, dead reckoning and the flight computer
+- **PA.VI.A.K3** — [[9-1-4|AIM 9-1-4 — Selected Charts and Products Available]], [[9-1-5|AIM 9-1-5 — General Description of Each Chart Series]]
+- **PA.VI.A.K4b** — [[91.119|§ 91.119 — Minimum safe altitudes: General]], [[91.159|§ 91.159 — VFR cruising altitude or flight level]], [[3-1-5|AIM 3-1-5 — VFR Cruising Altitudes and Flight Levels]], [[Minimum Safe and VFR Cruising Altitudes]]
+- **PA.VI.A.R1** — [[91.113|§ 91.113 — Right-of-way rules: Except water operations]], [[4-4-15|AIM 4-4-15 — Use of Visual Clearing Procedures and Scanning Techniques]]
+- **PA.VI.A.R3** — [[91.151|§ 91.151 — Fuel requirements for flight in VFR conditions]]
+
 ## Glossary Terms
 
 - [[AIRSPEED|AIRSPEED]]

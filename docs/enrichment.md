@@ -148,6 +148,52 @@ not summaries of the rules.
 - No enrichment code runs inside the parsers, and the canonical hashes the
   manifest pins are unaffected by anything under `data/enrichment/`.
 
+## Exam-prep layer (Phase 10b; plan §39.3–§39.4)
+
+Two more committed files under `data/enrichment/`, loaded like the concept
+graph (malformed ⇒ build error; absent ⇒ nothing rendered) and verified
+against the built layers in `plan_vault` (`links.study`):
+
+- **`acs-map.json`** — where the vault covers each ACS Knowledge and Risk
+  element, or why it cannot. `tasks[PA.I.A]` is a Task's default for every
+  K/R element; `elements[PA.I.A.K1]` overrides one element; a sub-element
+  inherits its parent's entry. Each entry lists `far` (section, part or
+  appendix stems), `aim` (paragraph stems), `pcg` (term stems) and
+  `concepts` (concept titles), or an `out_of_corpus` reason (the FAA
+  handbooks, the POH/AFM). Gates: every named code must exist in the
+  accepted ACS, every stem must be a generated note, and **every**
+  Knowledge/Risk element (archived placeholders excepted) must resolve to
+  stems or a reason — so the coverage table on `Private Pilot Prep` is
+  the honest statement of what the vault can and cannot teach. Rendered as
+  `## Where to study (curated)` on each ACS Task note.
+- **`ppl-study.json`** — one entry per covered FAR section or AIM
+  paragraph, keyed by stem: `gist`, `why`, `numbers` (`value`, verbatim
+  `quote`, optional CFR paragraph `where` such as `(a)(1)`), `traps`,
+  `questions` (`q`, `a`, `cite` stems), `mnemonics` (labelled as
+  training-community devices), `acs` codes, a `stage` (declared in
+  `stages`) and `review` (`unreviewed` until a human checks the wording).
+  Gates: stems and citations must be FAR sections or AIM paragraphs the
+  vault holds, codes must exist, at least one question per entry, and the
+  **verbatim-numbers gate**: every `quote` must occur in the official text
+  of the cited note — inside the paragraph `where` names for FAR sections
+  (AIM entries quote the whole paragraph) — or the build fails. The
+  pipeline cannot verify a gist, but it can verify that every number a
+  gist rests on is the number the rule says.
+
+Rendering (`generate/prep_notes.py`): a `[!study]` callout after the Source
+callout of every covered FAR section and AIM paragraph note (gist, why,
+numbers, traps, mnemonics, ACS block links, stage — styled purple by the
+CSS snippet); and the generator-owned `vault/Prep/Private Pilot/`:
+`Private Pilot Prep` (coverage per Area, entries by stage, review counts),
+`Part 61 Map` and `Part 91 Map` (subparts, section ranges, studied
+sections with gists — the number pattern pilots navigate by), `Numbers
+Sheet` (every quoted threshold by Area, linked to its paragraph) and
+`Where Do I Look` (questions → citations by ACS Task, then citation →
+gist). `Study/` remains the reader's untouched folder; Prep is rebuilt.
+
+Separability (§32.12): deleting the two files removes exactly the Prep
+root, the callouts and the `Where to study` sections (`tests/test_study.py`).
+
 ## Follow-up: embedding provider
 
 The record format is provider-neutral (`provider.id`/`version` per file).

@@ -3144,7 +3144,16 @@ handbooks.
    coverage report. Content: the full K/R map (every element mapped or
    out-of-corpus) and ~15 entries across currency, airspace and VFR
    minimums, so the reading experience is judged before the rest is
-   written.
+   written. **Shipped 2026-09-13** (`links.study`, `generate.prep_notes`;
+   docs/enrichment.md). Refinements found in implementation: the map
+   gained **Task-level defaults** (`tasks[PA.IV.A]`) so a maneuver Task
+   whose knowledge lives in the handbooks is one line, with per-element
+   overrides and parent inheritance for sub-elements; `[Archived]`
+   placeholders are exempt from the coverage requirement; AIM entries
+   quote against the whole paragraph (no `where`); the first batch grew
+   to 32 entries and 76 verified numbers because the verbatim gate made
+   them cheap to add. Coverage of FAA-S-ACS-6C: 764 K/R elements, 247
+   mapped, 517 out of corpus — the honest size of the handbook gap.
 3. **Phase 10c — full gloss.** Entries for every FAR section and AIM
    paragraph the Private Pilot collection links today (100 sections,
    203 paragraphs as of 2026-09-13), pruned to what the ACS map actually

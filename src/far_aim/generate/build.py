@@ -30,12 +30,13 @@ from far_aim.generate import (
     naming,
     notes,
     pcg_notes,
+    prep_notes,
 )
 from far_aim.generate.aim_markdown import collect_asset_names
 from far_aim.generate.aim_markdown import collect_text as collect_aim_text
 from far_aim.generate.enrich import EnrichmentLayer
 from far_aim.generate.frontmatter import emit_frontmatter, frontmatter_defect
-from far_aim.links import definitions, glossary, semantic
+from far_aim.links import definitions, glossary, semantic, study
 from far_aim.links.citations import collect_text as collect_far_text
 from far_aim.models import acs as acs_model
 from far_aim.models import aim as aim_model
@@ -87,6 +88,8 @@ class Registry:
     # the curated stems on disk registered as link targets only.
     concept_note_count: int = 0
     curated_stems: set[str] = field(default_factory=set)
+    # Phase 10b (plan §39.4): generated exam-prep notes under Prep/.
+    prep_note_count: int = 0
 
 
 @dataclass(frozen=True)
@@ -294,7 +297,7 @@ def build_registry(
     for stem, parts in notes.CURATED_ENTRIES:
         _add_stem(registry, seen, stem, parts)
     if enrichment is not None:
-        _register_enrichment(registry, seen, enrichment)
+        _register_enrichment(registry, seen, enrichment, docs)
     if aim is not None:
         _register_aim(registry, seen, citation_aliases, heading_candidates, aim)
     if pcg is not None:
@@ -349,7 +352,7 @@ def build_registry(
 
 
 def _register_enrichment(
-    registry: Registry, seen: dict[str, str], enrichment: EnrichmentLayer
+    registry: Registry, seen: dict[str, str], enrichment: EnrichmentLayer, docs: dict[str, dict]
 ) -> None:
     """Concept notes are planned files; curated notes on disk are link targets.
 
@@ -365,6 +368,13 @@ def _register_enrichment(
         seen[folded] = stem
         registry.stems[stem] = enrichment.curated_notes[stem]
         registry.curated_stems.add(stem)
+    if enrichment.study is not None:
+        present = [p for p in prep_notes.MAP_PARTS if p in docs]
+        for stem in prep_notes.prep_stems(present):
+            _add_stem(
+                registry, seen, stem, (prep_notes.PREP_DIR, prep_notes.PREP_FOLDER, f"{stem}.md")
+            )
+            registry.prep_note_count += 1
     if enrichment.concepts is None:
         return
     map_stem = concept_notes.CONCEPT_MAP_STEM
@@ -558,6 +568,13 @@ def plan_vault(
     registry = build_registry(docs, aim, pcg, enrichment, acs)
     plan: dict[tuple[str, ...], bytes] = {}
     related = _verified_related(enrichment, registry, title_hash, aim)
+    study_context = _study_context(enrichment, registry, docs, aim, acs)
+    callouts: dict[str, str] = {}
+    if study_context is not None and study_context.guide is not None:
+        callouts = {
+            stem: prep_notes.study_callout(entry, study_context)
+            for stem, entry in study_context.guide.entries.items()
+        }
     related_targets = {**registry.far_targets, **registry.aim_targets}
     definition_links = definitions.DefinitionLinks.build(docs, definitions_gate)
 
@@ -583,6 +600,7 @@ def plan_vault(
                         ),
                         related=related,
                         related_targets=related_targets,
+                        study=callouts.get(child["section"]),
                     )
                 )
             else:
@@ -607,12 +625,11 @@ def plan_vault(
             has_concepts=has_concepts,
             has_definitions=definition_links is not None,
             has_acs=acs is not None,
+            has_prep=study_context is not None and study_context.guide is not None,
         )
     )
 
-    glossary_index = (
-        glossary.GlossaryIndex.build(pcg.docs, pcg.gate) if pcg is not None else None
-    )
+    glossary_index = glossary.GlossaryIndex.build(pcg.docs, pcg.gate) if pcg is not None else None
     if aim is not None:
         targets = registry.aim_targets
         far = aim_notes.FarTargets(
@@ -638,6 +655,7 @@ def plan_vault(
                         glossary_links,
                         related=related,
                         related_targets=related_targets,
+                        study=callouts.get(doc["paragraph"]),
                     )
                 )
             else:
@@ -678,6 +696,8 @@ def plan_vault(
                 if glossary_index is not None
                 else None
             ),
+            study_map=study_context.acs_map if study_context is not None else None,
+            study_targets=study_context.targets if study_context is not None else None,
         )
         for kind, doc in _iter_acs_documents(acs.docs):
             aliases = registry.aliases[doc["id"]]
@@ -693,14 +713,20 @@ def plan_vault(
             )
         )
 
+    if study_context is not None and study_context.guide is not None:
+        for note in prep_notes.build_prep_notes(study_context, docs):
+            add(note)
+
     if has_concepts:
         assert enrichment is not None and enrichment.concepts is not None
         graph = enrichment.concepts
         concept_targets = concept_notes.ConceptTargets(
             far={
                 **{stem: display for stem, display in registry.far_targets.values()},
-                **{naming.part_index_stem(part): naming.part_index_stem(part)
-                   for part in registry.part_numbers},
+                **{
+                    naming.part_index_stem(part): naming.part_index_stem(part)
+                    for part in registry.part_numbers
+                },
             },
             aim={
                 **{stem: display for stem, display in registry.aim_targets.values()},
@@ -727,6 +753,105 @@ def plan_vault(
 
     _verify_plan(plan, registry, docs, aim, pcg, acs)
     return plan
+
+
+def _study_context(
+    enrichment: EnrichmentLayer | None,
+    registry: Registry,
+    docs: dict[str, dict],
+    aim: AimLayer | None,
+    acs: AcsLayer | None,
+) -> prep_notes.StudyContext | None:
+    """Verify the curated exam-prep files against the built layers (plan §39.6).
+
+    Every stem they name must be a generated note, every ACS code an element
+    of the accepted ACS, every Knowledge/Risk element covered, and every
+    quoted number verbatim in the official text it cites — or the build
+    fails before anything is written (§32.13).
+    """
+    if enrichment is None or (enrichment.acs_map is None and enrichment.study is None):
+        return None
+    by_kind: dict[str, set[str]] = {"far": set(), "aim": set(), "pcg": set(), "concepts": set()}
+    targets: dict[str, str] = {}
+    for stem, parts in registry.stems.items():
+        root = parts[0]
+        if root == notes.FAR_DIR:
+            by_kind["far"].add(stem)
+            targets.setdefault(stem, stem)
+        elif root == aim_notes.AIM_DIR and parts[-1].endswith(".md"):
+            by_kind["aim"].add(stem)
+            targets.setdefault(stem, stem)
+        elif root == pcg_notes.PCG_DIR:
+            by_kind["pcg"].add(stem)
+            targets.setdefault(stem, stem)
+    for stem, display in registry.far_targets.values():
+        targets[stem] = display
+    for stem, display in registry.aim_targets.values():
+        targets[stem] = display
+    for stem, display in registry.pcg_targets.values():
+        targets[stem] = display
+    if enrichment.concepts is not None:
+        for concept in enrichment.concepts.concepts:
+            by_kind["concepts"].add(concept.title)
+            targets[concept.title] = concept.title
+
+    def stem_exists(kind: str, stem: str) -> bool:
+        return stem in by_kind.get(kind, set())
+
+    far_sections = {
+        child["section"]: child
+        for doc in docs.values()
+        for child in _iter_documents(doc)
+        if child["document_type"] == cfr_model.DOCUMENT_TYPE_SECTION
+    }
+    aim_paragraphs = (
+        {
+            doc["paragraph"]: doc
+            for kind, doc in _iter_aim_documents(aim.docs)
+            if kind == "paragraph"
+        }
+        if aim is not None
+        else {}
+    )
+
+    def official_text(stem: str, where: str | None) -> str | None:
+        if stem in far_sections:
+            return study.far_paragraph_text(far_sections[stem], where, collect_far_text)
+        if stem in aim_paragraphs and where is None:
+            return " ".join(collect_aim_text(aim_paragraphs[stem]["content"]))
+        return None
+
+    coverage: tuple[study.Coverage, ...] = ()
+    if enrichment.acs_map is not None:
+        if acs is None:
+            raise BuildError(
+                f"{study.ACS_MAP_SOURCE} is present but no ACS layer is built; run "
+                "`far-aim fetch acs` and `far-aim parse acs`, or remove the map"
+            )
+        coverage = tuple(enrichment.acs_map.verify(acs.docs, stem_exists))
+    if enrichment.study is not None:
+        enrichment.study.verify(
+            stem_exists=stem_exists,
+            official_text=official_text,
+            acs_codes=registry.acs_element_codes if acs is not None else None,
+        )
+    tasks: dict[str, tuple[str, str, str]] = {}
+    areas: dict[str, str] = {}
+    if acs is not None:
+        for kind, doc in _iter_acs_documents(acs.docs):
+            if kind == "area":
+                areas[doc["roman"]] = doc["title"]
+                for task in doc["tasks"]:
+                    tasks[task["code"]] = (doc["roman"], doc["title"], task["title"])
+    return prep_notes.StudyContext(
+        guide=enrichment.study,
+        acs_map=enrichment.acs_map,
+        coverage=coverage,
+        targets=targets,
+        element_codes=frozenset(registry.acs_element_codes),
+        tasks=tasks,
+        areas=areas,
+    )
 
 
 def _verified_related(
@@ -841,7 +966,7 @@ def _verify_plan(
         expected += registry.pcg_note_count
     if acs is not None:
         expected += registry.acs_note_count
-    expected += registry.concept_note_count
+    expected += registry.concept_note_count + registry.prep_note_count
     if len(plan) != expected:
         raise BuildError(f"planned {len(plan)} files, expected {expected}")
     parsed_sections = sum(ecfr_parser.count_sections(doc) for doc in docs.values())
@@ -861,17 +986,13 @@ def _verify_plan(
         parsed = sum(pcg_parser.count_terms(doc) for doc in pcg.docs.values())
         walked = registry.pcg_note_count - 1  # minus the PCG index note
         if walked != parsed:
-            raise BuildError(
-                f"walked {walked} PCG terms but the canonical layer holds {parsed}"
-            )
+            raise BuildError(f"walked {walked} PCG terms but the canonical layer holds {parsed}")
     if acs is not None:
         parsed = sum(acs_parser.count_tasks(doc) for doc in acs.docs.values())
         walked = sum(1 for kind, _ in _iter_acs_documents(acs.docs) if kind == "task")
         if walked != parsed:
             raise BuildError(f"walked {walked} ACS tasks but the canonical layer holds {parsed}")
-    bodies = {
-        parts: data.decode("utf-8") for parts, data in plan.items() if is_note_path(parts)
-    }
+    bodies = {parts: data.decode("utf-8") for parts, data in plan.items() if is_note_path(parts)}
     for parts, body in bodies.items():
         for target in _WIKILINK_TARGET_RE.findall(body):
             if target not in registry.stems:
@@ -1006,6 +1127,7 @@ def sync_vault(config: Config, plan: dict[tuple[str, ...], bytes]) -> SyncStats:
         vault / pcg_notes.PCG_DIR,
         vault / concept_notes.CONCEPTS_DIR,
         vault / acs_notes.ACS_DIR,
+        vault / prep_notes.PREP_DIR,
     ]
     vault.mkdir(parents=True, exist_ok=True)
     backup_root = Path(tempfile.mkdtemp(dir=vault, prefix=".sync-backup-"))
@@ -1025,10 +1147,7 @@ def sync_vault(config: Config, plan: dict[tuple[str, ...], bytes]) -> SyncStats:
 
         # Stale generated notes (an upstream removal) go; anything else stays.
         candidates = [
-            path
-            for root in owned_roots
-            if root.is_dir()
-            for path in sorted(root.rglob("*.md"))
+            path for root in owned_roots if root.is_dir() for path in sorted(root.rglob("*.md"))
         ]
         for root_stem in (notes.SOURCE_STATUS_STEM, notes.HOME_STEM):
             root_note = vault / f"{root_stem}.md"
