@@ -1407,9 +1407,9 @@ def test_full_title_vault_build(tmp_path, capsys):
             concepts = json.loads((enrichment_dir / "concepts.json").read_text(encoding="utf-8"))
             expected_total += len(concepts["concepts"]) + 1  # + Concept Map
         if (enrichment_dir / "ppl-study.json").exists():
-            # Phase 10b: the Prep index, the Part 61 and Part 91 maps, the
-            # Numbers Sheet and Where Do I Look.
-            expected_total += 5
+            # Phase 10b/10c: the Prep index, the Part 61 and Part 91 maps, the
+            # Numbers Sheet, Where Do I Look and the Reading Path.
+            expected_total += 6
 
     assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
     out = capsys.readouterr().out

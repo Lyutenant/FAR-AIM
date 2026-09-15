@@ -86,15 +86,20 @@ paraphrased or AI-generated. Full specification:
   Where Do I Look). First batch: 32 entries, 76 verified numbers, all
   764 Knowledge/Risk elements resolved (247 mapped, 517 out of corpus).
 
+- **Phase 10c** — the full gloss: an entry for every FAR section and AIM
+  paragraph the Private Pilot collection links and the ACS map references
+  (206 entries — 60 sections, 146 paragraphs — 552 verbatim-verified
+  numbers, 218 questions), each assigned a training stage, plus the
+  generated `Reading Path` note (pre-solo → solo XC → checkride, with the
+  ACS Tasks each stage touches). All entries are drafted, none reviewed.
+
 ## Roadmap — Phase 10: Private Pilot exam-prep layer
 
-Design of record is plan §39; 10a and 10b shipped 2026-09-13 (above). The
-goal is a vault a student can study from for the Private Pilot knowledge
-test and the oral portion of the practical test, organized the way both
-exams are: by the ACS.
+Design of record is plan §39; 10a and 10b shipped 2026-09-13 and 10c on
+2026-09-14 (above). The goal is a vault a student can study from for the
+Private Pilot knowledge test and the oral portion of the practical test,
+organized the way both exams are: by the ACS.
 
-- **10c — full gloss**: entries for every section and paragraph the
-  Private Pilot collection links, stages assigned, a Reading Path note.
 - **10b/10c — study gloss (design)**: one curated file (`data/enrichment/ppl-study.json`)
   keyed by citation — gist, why it matters, key numbers, traps, plain-English
   questions, ACS codes — rendered as a labelled *study aid* callout on each

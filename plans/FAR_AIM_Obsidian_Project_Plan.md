@@ -3157,7 +3157,21 @@ handbooks.
 3. **Phase 10c — full gloss.** Entries for every FAR section and AIM
    paragraph the Private Pilot collection links today (100 sections,
    203 paragraphs as of 2026-09-13), pruned to what the ACS map actually
-   references; stages assigned; Reading Path.
+   references; stages assigned; Reading Path. **Shipped 2026-09-14**
+   (`prep_notes.build_reading_path`): 206 entries — 60 FAR sections and
+   146 AIM paragraphs, every collection-linked stem the map references —
+   552 verified numbers, 218 questions, 119 traps, 25 mnemonics; stages
+   pre-solo 71 / solo-xc 91 / checkride 44; all `unreviewed`. Refinements
+   found in implementation: the Reading Path lists each stage's entries
+   FAR sections first then AIM paragraphs, each by citation, and closes
+   the stage with the ACS Tasks its entries' codes touch (so a stage reads
+   as "what this unlocks"); quotes are copied from a dump of the
+   canonical text rather than typed, because the AIM's U+2010 hyphens
+   and curly quotes defeat a retyped quote and the gate would reject it;
+   22 map-only stems that no collection page links (§ 21.175 …, AIM
+   1-1-1 …; listed in docs/enrichment.md) were left for a later batch
+   rather than widen the step's scope. The whole batch passed the
+   verbatim gate on the first build of each of five batches.
 4. **Phase 10d — drills.** Oral Prep scenario bank, Anki export, ACS
    Checklist template, CSS for the `study` callout, Home links.
 5. **Follow-ups, not in scope:** PHAK / AFH / Aviation Weather Handbook as

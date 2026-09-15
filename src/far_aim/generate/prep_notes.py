@@ -11,6 +11,7 @@ Pilot/`` (a generator-owned root, unlike the reader's ``Study/``):
     Part 91 Map.md
     Numbers Sheet.md        # every quoted threshold, linked to its paragraph
     Where Do I Look.md      # plain-English questions → citations, by ACS Task
+    Reading Path.md         # the entries in training order: pre-solo → solo XC → checkride
 """
 
 from __future__ import annotations
@@ -37,6 +38,7 @@ PREP_FOLDER = "Private Pilot"
 PREP_INDEX_STEM = "Private Pilot Prep"
 NUMBERS_STEM = "Numbers Sheet"
 LOOKUP_STEM = "Where Do I Look"
+READING_PATH_STEM = "Reading Path"
 MAP_PARTS = ("61", "91")
 STUDY_CALLOUT = "study"
 """Obsidian callout type of the study aid; styled by the committed CSS snippet."""
@@ -223,6 +225,8 @@ def build_prep_index(context: StudyContext, present_parts: list[str]) -> Note:
                 "comes from",
                 f"- [[{LOOKUP_STEM}]] — plain-English questions and the citation that answers "
                 "each, by ACS Area and Task",
+                f"- [[{READING_PATH_STEM}]] — every entry in training order, with the ACS Tasks "
+                "each stage unlocks",
             ]
         ),
     ]
@@ -427,8 +431,54 @@ def build_lookup(context: StudyContext) -> Note:
     return _prep_note(LOOKUP_STEM, "prep-where-do-i-look", LOOKUP_STEM, chunks)
 
 
+def build_reading_path(context: StudyContext) -> Note:
+    """The entries in training order (plan §39.4.5): each stage in citation order
+    with gists, and the ACS Tasks the stage's entries name."""
+    guide = context.guide
+    assert guide is not None
+    chunks = [
+        f"# {READING_PATH_STEM}",
+        _prep_callout(),
+        "The study entries in the order training meets them, so the vault follows your "
+        "logbook rather than the regulation's numbering. Read a stage's entries in order; "
+        "each ends at the official text. Every entry belongs to exactly one stage.",
+    ]
+    for stage, entries in guide.by_stage().items():
+        chunks.append(f"## {escape_md(stage)}")
+        chunks.append(escape_md(guide.stages[stage]))
+        if not entries:
+            chunks.append("Nothing filed here yet.")
+            continue
+        ordered = sorted(entries, key=lambda e: (e.is_aim, naming.natural_key(e.stem)))
+        chunks.append(
+            "\n".join(f"- {_entry_link(e, context)} — {escape_md(e.gist)}" for e in ordered)
+        )
+        tasks = sorted(
+            {acs_notes.task_code_of(c) for e in entries for c in e.acs}, key=_task_sort_key
+        )
+        if tasks:
+            named = ", ".join(
+                f"[[{acs_notes.task_stem(t)}|{t} — {escape_md(context.tasks[t][2])}]]"
+                for t in tasks
+                if t in context.tasks
+            )
+            chunks.append(f"**ACS Tasks this stage touches:** {named}")
+    return _prep_note(READING_PATH_STEM, "prep-reading-path", READING_PATH_STEM, chunks)
+
+
+def _task_sort_key(code: str) -> tuple[int, str]:
+    _, roman, letter = code.split(".")
+    return (acs_model.roman_to_int(roman), letter)
+
+
 def prep_stems(present_parts: list[str]) -> list[str]:
-    return [PREP_INDEX_STEM, *(part_map_stem(p) for p in present_parts), NUMBERS_STEM, LOOKUP_STEM]
+    return [
+        PREP_INDEX_STEM,
+        *(part_map_stem(p) for p in present_parts),
+        NUMBERS_STEM,
+        LOOKUP_STEM,
+        READING_PATH_STEM,
+    ]
 
 
 def build_prep_notes(context: StudyContext, far_docs: dict[str, dict]) -> list[Note]:
@@ -437,4 +487,5 @@ def build_prep_notes(context: StudyContext, far_docs: dict[str, dict]) -> list[N
     notes.extend(build_part_map(p, far_docs[p], context) for p in present)
     notes.append(build_numbers_sheet(context))
     notes.append(build_lookup(context))
+    notes.append(build_reading_path(context))
     return notes

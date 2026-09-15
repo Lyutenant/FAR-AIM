@@ -377,7 +377,7 @@ vault/ACS/Private Pilot Airplane/
   to search a knowledge-test-report code; `Source Status.md` gains a
   `Private Pilot Airplane ACS` row (document number and effective date).
 
-## Prep and study callouts (Phase 10b)
+## Prep and study callouts (Phase 10b–10c)
 
 ```text
 vault/Prep/Private Pilot/
@@ -385,7 +385,8 @@ vault/Prep/Private Pilot/
 ├── Part 61 Map.md          # subparts, section ranges, studied sections with gists
 ├── Part 91 Map.md
 ├── Numbers Sheet.md        # every quoted threshold, linked to its paragraph
-└── Where Do I Look.md      # questions → citations by ACS Task; citation → gist
+├── Where Do I Look.md      # questions → citations by ACS Task; citation → gist
+└── Reading Path.md         # every entry by training stage, with the ACS Tasks each stage touches
 ```
 
 - `Prep/` is a generator-owned root (pruned and byte-compared like the

@@ -335,17 +335,25 @@ relaxes the whole-document checks to the areas present).
 sub-elements inherit parents; archived placeholders exempt; every K/R
 element must resolve to stems or an `out_of_corpus` reason — coverage
 today 764 elements, 247 mapped, 517 out of corpus, mostly maneuvers and
-handbook material) and `data/enrichment/ppl-study.json` (32 entries,
-stages pre-solo / solo-xc / checkride, 76 numbers each verified verbatim
-against the cited paragraph — FAR `where` label paths like `(a)(1)`;
-AIM entries check the whole paragraph; all entries `unreviewed`). Both
+handbook material) and `data/enrichment/ppl-study.json` (stages
+pre-solo / solo-xc / checkride; numbers verified verbatim against the
+cited paragraph — FAR `where` label paths like `(a)(1)`; AIM entries
+check the whole paragraph; all entries `unreviewed`). Both
 Claude-drafted. Rendered: `[!study]` callout between Source and Official
 Text on covered FAR section / AIM paragraph notes, `## Where to study
 (curated)` on ACS Task notes, and the generator-owned
 `vault/Prep/Private Pilot/` (Private Pilot Prep, Part 61 Map, Part 91
-Map, Numbers Sheet, Where Do I Look; `type: prep`). A map without an ACS
+Map, Numbers Sheet, Where Do I Look, Reading Path; `type: prep`). A map without an ACS
 layer, a stale code, an unresolved stem, an uncovered element or a
 non-verbatim quote fails the build. Settled: mnemonics are labelled as
-training-community devices, never FAA text; `Study/` untouched. Not built
-yet (10c–10d): the full gloss, Reading Path, Oral Prep, Anki export,
-ACS Checklist.
+training-community devices, never FAA text; `Study/` untouched.
+**10c shipped 2026-09-14**: the full gloss — 206 entries (60 FAR
+sections, 146 AIM paragraphs: every collection-linked stem the map
+references), 552 verified numbers, stages assigned (71 / 91 / 44), and
+the generated `Reading Path` (`prep_notes.build_reading_path`; stages in
+declared order, entries FAR-then-AIM by citation, the ACS Tasks each
+stage's codes touch). Quotes are copied from a canonical-text dump, never
+retyped (AIM U+2010 hyphens, curly quotes). 22 map-only stems no
+collection page links remain without entries (list in
+docs/enrichment.md). Not built yet (10d): Oral Prep, Anki export, ACS
+Checklist.

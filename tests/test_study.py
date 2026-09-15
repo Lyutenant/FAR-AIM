@@ -286,6 +286,7 @@ def test_prep_notes_render(prep_plan):
         ("Prep", "Private Pilot", "Part 91 Map.md"),
         ("Prep", "Private Pilot", "Numbers Sheet.md"),
         ("Prep", "Private Pilot", "Where Do I Look.md"),
+        ("Prep", "Private Pilot", "Reading Path.md"),
     }
     index = prep_plan[("Prep", "Private Pilot", "Private Pilot Prep.md")].decode()
     assert 'type: "prep"' in index and "generated: true" in index
@@ -310,6 +311,10 @@ def test_prep_notes_render(prep_plan):
     radar = "[[4-1-15|AIM 4-1-15 — Radar Traffic Information Service]]"
     assert f"| Minimums in Class E? | 3-152. | {minimums}, {radar} |" in lookup
     assert "## By citation" in lookup
+    path = prep_plan[("Prep", "Private Pilot", "Reading Path.md")].decode()
+    assert path.index("## pre-solo") < path.index("## solo-xc")
+    assert "**ACS Tasks this stage touches:** [[PA.I.E|PA.I.E — National Airspace System]]" in path
+    assert "- [[4-1-15|AIM 4-1-15 — Radar Traffic Information Service]] — Radar traffic" in path
     home = prep_plan[("Home.md",)].decode()
     assert "[[Private Pilot Prep]]" in home and "`Prep/`" in home
 

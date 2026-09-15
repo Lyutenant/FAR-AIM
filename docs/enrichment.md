@@ -148,7 +148,7 @@ not summaries of the rules.
 - No enrichment code runs inside the parsers, and the canonical hashes the
   manifest pins are unaffected by anything under `data/enrichment/`.
 
-## Exam-prep layer (Phase 10b; plan §39.3–§39.4)
+## Exam-prep layer (Phase 10b–10c; plan §39.3–§39.4)
 
 Two more committed files under `data/enrichment/`, loaded like the concept
 graph (malformed ⇒ build error; absent ⇒ nothing rendered) and verified
@@ -189,7 +189,28 @@ CSS snippet); and the generator-owned `vault/Prep/Private Pilot/`:
 sections with gists — the number pattern pilots navigate by), `Numbers
 Sheet` (every quoted threshold by Area, linked to its paragraph) and
 `Where Do I Look` (questions → citations by ACS Task, then citation →
-gist). `Study/` remains the reader's untouched folder; Prep is rebuilt.
+gist) and `Reading Path` (every entry in training order — the `stages`
+in declared order, each with its description, its entries sorted FAR
+sections then AIM paragraphs by citation, and the ACS Tasks those
+entries' codes touch). `Study/` remains the reader's untouched folder;
+Prep is rebuilt.
+
+Content (Phase 10c, 2026-09-14): the guide covers every FAR section and
+AIM paragraph the Private Pilot collection links that the ACS map also
+references — 206 entries (60 FAR sections, 146 AIM paragraphs), 552
+verbatim-verified numbers, 218 questions, 119 traps, 25 mnemonics;
+stages pre-solo 71, solo-xc 91, checkride 44. Of the 235 FAR/AIM stems
+the ACS map names, 205 have an entry; the rest are part-index stems
+(`Part 39`, `Part 43 Appendix A`, …, which are not sections) and 22
+map-only stems no collection page links (§§ 21.175, 21.181, 21.197,
+21.199, 43.9, 68.5, 91.139, 91.185, 91.319, 91.509; AIM 1-1-1, 1-2-1,
+1-2-4, 2-1-1, 2-3-1, 2-3-15, 3-3-1, 3-3-2, 5-2-4, 5-6-10, 7-1-25,
+7-6-9) — candidates for a later batch. Every entry is Claude-drafted and
+`review: unreviewed`; the gate proves the quotes, not the gists. Quotes
+are copied from a dump of the canonical text (never typed from memory)
+because the AIM uses U+2010 hyphens (`two‐way`) and curly quotes that a
+retyped quote silently misses; a truncated dump line is never quoted
+past its visible end.
 
 Separability (§32.12): deleting the two files removes exactly the Prep
 root, the callouts and the `Where to study` sections (`tests/test_study.py`).
