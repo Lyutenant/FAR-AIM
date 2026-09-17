@@ -6,7 +6,7 @@ title_number: 14
 part: 121
 appendix: "Appendix K"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:e946286729f563337778c23bbd35c124d257f8fbdd2b98a9202d4fd25e90eb8f"
 generated: true
 title: "Appendix K to Part 121—Performance Requirements for Certain Turbopropeller Powered Airplanes"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix K to Part 121—Performance Requirements for Certain Turbopropeller Powered Airplanes
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-121)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-121)
 
 ## Official Text
 

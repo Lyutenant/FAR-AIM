@@ -6,7 +6,7 @@ title_number: 14
 part: 27
 appendix: "Appendix C"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:baef869f12f317371aed3bf18f568751c3b4c9dcffc727dea47db177515e2a8d"
 generated: true
 title: "Appendix C to Part 27—Criteria for Category A"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix C to Part 27—Criteria for Category A
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-27)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-27)
 
 ## Official Text
 

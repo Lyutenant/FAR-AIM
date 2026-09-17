@@ -6,7 +6,7 @@ title_number: 14
 part: 141
 appendix: "Appendix H"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:491af01d5cab648bfee0f41bfd361fe8f7b7adb2ad8402bba5890fbd8f80eb56"
 generated: true
 title: "Appendix H to Part 141—Ground Instructor Certification Course"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix H to Part 141—Ground Instructor Certification Course
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-141)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-141)
 
 ## Official Text
 

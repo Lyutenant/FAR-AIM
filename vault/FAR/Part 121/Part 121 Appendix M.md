@@ -6,7 +6,7 @@ title_number: 14
 part: 121
 appendix: "Appendix M"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:d6a4ca96877a7cd82359d55a078b961b9eb4b4e10667d7817c2b06feb1c1980d"
 generated: true
 title: "Appendix M to Part 121—Airplane Flight Recorder Specifications"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix M to Part 121—Airplane Flight Recorder Specifications
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-121)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-121)
 
 ## Official Text
 

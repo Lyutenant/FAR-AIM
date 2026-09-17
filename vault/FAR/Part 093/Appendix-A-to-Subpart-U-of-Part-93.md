@@ -6,7 +6,7 @@ title_number: 14
 part: 93
 appendix: "Appendix-A-to-Subpart-U-of-Part-93"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:b1dca9821903fa4a18a2addf272e40a2c16077469aba2b7a65a093bb38cb6fd2"
 generated: true
 title: "Appendix A to Subpart U of Part 93—GCNP Quiet Aircraft Technology Designation"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix A to Subpart U of Part 93—GCNP Quiet Aircraft Technology Designation
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-93)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-93)
 
 ## Official Text
 

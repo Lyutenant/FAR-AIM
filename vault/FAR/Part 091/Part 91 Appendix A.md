@@ -6,7 +6,7 @@ title_number: 14
 part: 91
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:1c377c472bb3a45e350bd0e85a6e699e87a84e172818b6528b1f3e99ba2e559e"
 generated: true
 title: "Appendix A to Part 91—Category II Operations: Manual, Instruments, Equipment, and Maintenance"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix A to Part 91—Category II Operations: Manual, Instruments, Equipment, and Maintenance
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-91)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-91)
 
 ## Official Text
 

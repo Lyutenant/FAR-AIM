@@ -6,7 +6,7 @@ title_number: 14
 part: 1204
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:d642d7f0ca943fe09f89d463a199a2b2186a21bb68169c1d7f74c153cdc63c5b"
 generated: true
 title: "Appendix A to Part 1204—Items To Cover in Memoranda of Agreement"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix A to Part 1204—Items To Cover in Memoranda of Agreement
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-1204)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-1204)
 
 ## Official Text
 

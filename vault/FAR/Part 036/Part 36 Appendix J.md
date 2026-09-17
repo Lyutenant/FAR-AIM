@@ -6,7 +6,7 @@ title_number: 14
 part: 36
 appendix: "Appendix J"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:bddaf87c55b56c82195a98bac6d1797aa8dce9623467f2537a4dbba1588957c7"
 generated: true
 title: "Appendix J to Part 36—Alternative Noise Certification Procedure for Helicopters Under Subpart H Having a Maximum Certificated Takeoff Weight of Not More Than 7,000 Pounds"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix J to Part 36—Alternative Noise Certification Procedure for Helicopters Under Subpart H Having a Maximum Certificated Takeoff Weight of Not More Than 7,000 Pounds
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-36)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-36)
 
 ## Official Text
 

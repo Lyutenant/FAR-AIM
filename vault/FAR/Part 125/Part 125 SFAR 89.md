@@ -6,7 +6,7 @@ title_number: 14
 part: 125
 appendix: "SFAR 89"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:88c43ec3a3cc05b3e2750790c6190596c9cd36549673ecec05dbc4804e2afac2"
 generated: true
 title: "Special Federal Aviation Regulation No. 89"
@@ -20,7 +20,7 @@ cssclasses:
 # Special Federal Aviation Regulation No. 89
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-125)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-125)
 
 ## Source Notes
 

@@ -6,7 +6,7 @@ title_number: 14
 part: 21
 appendix: "SFAR 88"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:8c6150c1399cb4d78bb2d90f932c01fd3b437eea5102c5cf0910f7820b1446af"
 generated: true
 title: "Special Federal Aviation Regulation No. 88—Fuel Tank System Fault Tolerance Evaluation Requirements"
@@ -22,7 +22,7 @@ cssclasses:
 # Special Federal Aviation Regulation No. 88—Fuel Tank System Fault Tolerance Evaluation Requirements
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-21)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-21)
 
 ## Official Text
 

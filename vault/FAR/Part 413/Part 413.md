@@ -5,7 +5,7 @@ citation: "14 CFR Part 413"
 title_number: 14
 part: 413
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:f9b858112cc534040b64b3bf98cc7d573236655b1e832dbef15e38086169454a"
 generated: true
 title: "LICENSE APPLICATION PROCEDURES"
@@ -16,7 +16,7 @@ tags:
 # Part 413 — LICENSE APPLICATION PROCEDURES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-413)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-413)
 > CHAPTER III—COMMERCIAL SPACE TRANSPORTATION, FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—LICENSING
 

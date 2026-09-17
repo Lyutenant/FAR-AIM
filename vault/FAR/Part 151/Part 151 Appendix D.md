@@ -6,7 +6,7 @@ title_number: 14
 part: 151
 appendix: "Appendix D"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:0248ee7dade35f680712585c2fe851182268a441f17612f79b3a78d69961a89d"
 generated: true
 title: "Appendix D to Part 151"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix D to Part 151
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-151)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-151)
 
 ## Official Text
 

@@ -6,7 +6,7 @@ title_number: 14
 part: 121
 appendix: "Appendix L"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:207710c5bf112535e2e6bf5ef20e05d7c88925363ceec1981bfaed64b05080fb"
 generated: true
 title: "Appendix L to Part 121—Type Certification Regulations Made Previously Effective"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix L to Part 121—Type Certification Regulations Made Previously Effective
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-121)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-121)
 
 ## Official Text
 
