@@ -210,7 +210,10 @@ ruff + full pytest and open/update an `upstream-sync` PR
 (body: update summary + vault diff stat + full log) — never auto-merged
 (plan §32.7). FAA page edits without an edition bump fail the daily
 raw_hash re-verification by design (quarantine rides in the artifact);
-resolve locally with `fetch --force`. The first scheduled run
+resolve locally with `fetch --force`. The eCFR versioner's daily import
+(`meta.import_in_progress`) is polled on its own bounded clock
+(`ecfr.IMPORT_POLL_*`, ~1 h) after it sank the 2026-09-18 run in 14 s;
+a run that times out touches nothing. The first scheduled run
 (2026-09-05) exposed two CDN behaviours now neutralised in the AIM/PCG
 fetchers (`sources.common`): Akamai's per-download script injection is
 stripped from HTML before archiving/hashing (CDN instrumentation, not

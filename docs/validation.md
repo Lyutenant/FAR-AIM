@@ -34,7 +34,10 @@ regulatory material; on failure, preserve the last known-good output.
 `far-aim fetch ecfr` enforces category 1 (source integrity) for the eCFR
 download before accepting a snapshot: discovery waits out (and ultimately
 fails on) `meta.import_in_progress` so a half-rebuilt daily snapshot is
-never accepted; then HTTP 200 + XML content type, Content-Length agreement
+never accepted — polled on its own clock (`ecfr.IMPORT_POLL_SECONDS` ×
+`IMPORT_POLL_ATTEMPTS`, about an hour) because the versioner's daily import
+outlasts the transport backoff (the 2026-09-18 CI run gave up after 14 s);
+then HTTP 200 + XML content type, Content-Length agreement
 (a malformed header is a controlled failure, not a traceback), XML
 well-formedness end-to-end, expected `<ECFR>`
 root element, and data-informed truncation floors (≥ 4 MB, ≥ 4,000

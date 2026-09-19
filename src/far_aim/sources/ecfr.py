@@ -96,6 +96,13 @@ def amendment_index_url(since: str, until: str, page: int = 1) -> str:
 AMENDMENT_INDEX_TYPES = frozenset({"section", "appendix"})
 _AMENDMENT_ENTRY_KEYS = ("identifier", "type", "part", "removed", "issue_date")
 MAX_AMENDMENT_PAGES = 50
+# The versioner rebuilds its daily snapshot in a maintenance window that can
+# last well beyond the transport backoff (the 2026-09-18 scheduled run found
+# the import still running at 13:36 UTC and gave up after four retries
+# spanning 14 s). ``meta.import_in_progress`` is therefore polled on its own
+# slower, bounded clock; transport failures keep the short backoff.
+IMPORT_POLL_SECONDS = 60.0
+IMPORT_POLL_ATTEMPTS = 60
 
 
 def amendment_index_filename(since: str) -> str:
@@ -247,16 +254,34 @@ def discover_title14(client: httpx.Client, *, sleep: Sleep | None = None) -> Tit
             payload = response.json()
         except ValueError as exc:
             raise FetchError(f"eCFR titles endpoint returned invalid JSON: {exc}") from exc
-        # While the versioner rebuilds its daily snapshot, the title entries
-        # may describe a stale or partially imported version that would still
-        # pass the coarse size/section-count gate. Wait for the import to
-        # finish; fail closed if it never does (plan §32.13).
-        meta = payload.get("meta") if isinstance(payload, dict) else None
-        if isinstance(meta, dict) and meta.get("import_in_progress"):
-            raise RetryableError("eCFR import in progress (meta.import_in_progress=true)")
         return payload
 
-    payload = retrying(attempt, what="eCFR titles.json", sleep=sleep)
+    # While the versioner rebuilds its daily snapshot, the title entries may
+    # describe a stale or partially imported version that would still pass
+    # the coarse size/section-count gate. Wait for the import to finish on
+    # the import clock (IMPORT_POLL_*), not the transport backoff; fail
+    # closed if it never does (plan §32.13).
+    for poll in range(IMPORT_POLL_ATTEMPTS):
+        if poll:
+            log.info(
+                "eCFR titles.json: import in progress; polling again in %.0fs (%d/%d)",
+                IMPORT_POLL_SECONDS,
+                poll + 1,
+                IMPORT_POLL_ATTEMPTS,
+            )
+            sleep(IMPORT_POLL_SECONDS)
+        payload = retrying(attempt, what="eCFR titles.json", sleep=sleep)
+        meta = payload.get("meta") if isinstance(payload, dict) else None
+        if not (isinstance(meta, dict) and meta.get("import_in_progress")):
+            break
+        log.warning("eCFR titles.json: eCFR import in progress (meta.import_in_progress=true)")
+    else:
+        raise FetchError(
+            "eCFR titles.json: eCFR import in progress (meta.import_in_progress=true) "
+            f"after {IMPORT_POLL_ATTEMPTS} polls over "
+            f"{IMPORT_POLL_SECONDS * (IMPORT_POLL_ATTEMPTS - 1) / 60:.0f} min; "
+            "the versioner has not finished its daily import — retry later"
+        )
 
     titles = payload.get("titles") if isinstance(payload, dict) else None
     if not isinstance(titles, list):

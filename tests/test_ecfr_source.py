@@ -259,18 +259,46 @@ def test_discover_waits_for_import_in_progress_to_clear():
         discovery = ecfr.discover_title14(client, sleep=delays.append)
     assert discovery.latest_issue_date == ISSUE_DATE
     assert calls == 3
-    assert delays == [2.0, 4.0]
+    # The import window is polled on its own slower clock, not the
+    # transport backoff (the 2026-09-18 CI run gave up after 14 s while the
+    # versioner was still importing).
+    assert delays == [ecfr.IMPORT_POLL_SECONDS, ecfr.IMPORT_POLL_SECONDS]
+    assert ecfr.IMPORT_POLL_SECONDS * (ecfr.IMPORT_POLL_ATTEMPTS - 1) >= 30 * 60
+
+
+def test_discover_transport_errors_keep_short_backoff_while_import_runs():
+    calls = 0
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            return httpx.Response(503)
+        payload = titles_payload(ISSUE_DATE)
+        payload["meta"]["import_in_progress"] = calls == 1
+        return httpx.Response(200, json=payload)
+
+    delays: list[float] = []
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        discovery = ecfr.discover_title14(client, sleep=delays.append)
+    assert discovery.latest_issue_date == ISSUE_DATE
+    assert calls == 3
+    assert delays == [ecfr.IMPORT_POLL_SECONDS, 2.0]
 
 
 def test_discover_fails_closed_if_import_never_finishes():
     payload = titles_payload(ISSUE_DATE)
     payload["meta"]["import_in_progress"] = True
     upstream = Upstream(titles=payload)
+    delays: list[float] = []
     with (
         upstream.client() as client,
-        pytest.raises(ecfr.FetchError, match="import in progress"),
+        pytest.raises(ecfr.FetchError, match="import in progress") as excinfo,
     ):
-        ecfr.discover_title14(client, sleep=no_sleep)
+        ecfr.discover_title14(client, sleep=delays.append)
+    assert len(delays) == ecfr.IMPORT_POLL_ATTEMPTS - 1
+    assert set(delays) == {ecfr.IMPORT_POLL_SECONDS}
+    assert "retry later" in str(excinfo.value)
 
 
 def test_discover_gives_up_after_retries():

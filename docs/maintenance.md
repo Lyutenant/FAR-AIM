@@ -91,6 +91,15 @@ artifact; investigate it (`diff -rq` against the archived snapshot, then
 deliberately with `far-aim fetch aim --force` (or `pcg`, `ecfr`) and
 commit the manifest change.
 
+A second expected transient: the eCFR versioner's daily import. While it
+runs, `titles.json` reports `meta.import_in_progress: true` and discovery
+refuses to trust the title entries. The 2026-09-18 scheduled run hit this
+at 13:36 UTC and failed after the four transport-style retries (14 s in
+total); discovery now polls the flag on its own clock (about an hour,
+`ecfr.IMPORT_POLL_SECONDS` × `IMPORT_POLL_ATTEMPTS`) before failing
+closed with a `retry later` message. Such a failure touches nothing; the
+next day's run (or a manual `workflow_dispatch`) simply tries again.
+
 Two CDN behaviours that would otherwise trip this check on every run are
 neutralised by the AIM/PCG fetchers (`sources.common`), found when the
 first scheduled run (2026-09-05) failed:
