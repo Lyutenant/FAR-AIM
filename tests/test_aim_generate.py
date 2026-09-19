@@ -229,6 +229,24 @@ def _cell(*blocks: dict, **attrs) -> dict:
     return {"blocks": list(blocks), **attrs}
 
 
+def test_table_inside_a_list_item_is_never_a_pipe_table():
+    # Regression: a nested pipe table loses its last column in Obsidian (the
+    # list's residual indentation becomes an empty first cell).
+    table = {
+        "type": "table",
+        "number": None,
+        "title": None,
+        "header_rows": [[_cell(_text("A")), _cell(_text("B"))]],
+        "rows": [[_cell(_text("1")), _cell(_text("2"))]],
+        "foot_rows": [],
+    }
+    assert render_aim_blocks([table]) == ["| A | B |\n| --- | --- |\n| 1 | 2 |"]
+    listed = {"type": "list", "level": 1, "items": [{"blocks": [_text("See:"), table]}]}
+    [chunk] = render_aim_blocks([listed])
+    assert "| A |" not in chunk
+    assert "    <table>" in chunk and "<tr><td><p>1</p></td><td><p>2</p></td></tr>" in chunk
+
+
 def test_render_pipe_table_with_image_cells():
     table = {
         "type": "table",

@@ -16,8 +16,10 @@ Why this is safe at every depth (CommonMark §5.2): a ``- `` marker at column
 ``INDENT`` sits at ``4d + 4``, which is inside the item (``>= 4d + 2``) and
 short of the indented-code threshold (``< 4d + 6``). After the list
 container strips its indentation, every child line has exactly two residual
-spaces — fine for HTML blocks (which allow three), pipe tables, ``>``
-callouts, embeds and hard-break continuations. Composition is purely
+spaces — fine for HTML blocks (which allow three), ``>`` callouts, embeds
+and hard-break continuations, but **not for pipe tables**: Obsidian's table
+tokenizer turns the two spaces into an empty first cell and drops the last
+column, so the renderers emit every table inside a list item as raw HTML. Composition is purely
 relative: an item indents chunks that are already rendered, so a grandchild
 ends up at eight columns only because its parent was wrapped first, and a
 list rendered inside a callout body starts at the callout's own column

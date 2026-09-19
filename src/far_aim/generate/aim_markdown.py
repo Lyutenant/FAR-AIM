@@ -24,7 +24,8 @@ deterministic formatting ones. Design mirrors the FAR renderer:
 - **Figures** embed the archived asset (``![[file]]``) beneath a caption
   line; bare images (form reproductions) embed the same way.
 - **Tables** render as pipe tables when every cell is a single line of text
-  (single header row, no spans) and as inline HTML otherwise; a list inside
+  (single header row, no spans) *and the table is not inside a list item*,
+  and as inline HTML otherwise; a list inside
   an HTML cell is a nested ``<ul>`` whose items carry the same bold markers.
 
 Every block type must have a renderer; an unknown type raises (plan §32.2).
@@ -120,16 +121,16 @@ def _render_list(block: dict, asset_prefix: str) -> list[str]:
         else:
             head = marker
             rest = blocks
-        chunks.append(list_item(head, render_aim_blocks(rest, asset_prefix)))
+        chunks.append(list_item(head, render_aim_blocks(rest, asset_prefix, True)))
     return chunks
 
 
-def _render_note(block: dict, asset_prefix: str) -> list[str]:
+def _render_note(block: dict, asset_prefix: str, nested: bool = False) -> list[str]:
     callout = CALLOUT_KINDS.get(block["kind"])
     if callout is None:
         raise BuildError(f"unknown note kind {block['kind']!r}")
     lines = [f"> [!{callout}] {escape_md(block['title'].replace(chr(10), ' '))}"]
-    inner = render_aim_blocks(block["blocks"], asset_prefix)
+    inner = render_aim_blocks(block["blocks"], asset_prefix, nested)
     if inner:
         lines.append(_quote(inner))
     return ["\n".join(lines)]
@@ -316,12 +317,14 @@ def _render_html_table(block: dict, asset_prefix: str) -> str:
     return "\n".join(lines)
 
 
-def _render_table(block: dict, asset_prefix: str) -> list[str]:
+def _render_table(block: dict, asset_prefix: str, nested: bool = False) -> list[str]:
     chunks = []
     caption_parts = _caption(block.get("number"), block.get("title"))
     if caption_parts:
         chunks.append(" ".join(caption_parts))
-    if _pipe_safe(block):
+    # Nested in a list item, a pipe table loses its last column in Obsidian
+    # (``generate.markdown._render_table``); raw HTML is immune.
+    if _pipe_safe(block) and not nested:
         chunks.append(_render_pipe_table(block))
     else:
         chunks.append(_render_html_table(block, asset_prefix))
@@ -340,23 +343,27 @@ def asset_prefix_for(path_parts: tuple[str, ...]) -> str:
     return "../" * (len(path_parts) - 2) + "assets"
 
 
-def render_aim_blocks(blocks: list[dict], asset_prefix: str = "../assets") -> list[str]:
+def render_aim_blocks(
+    blocks: list[dict], asset_prefix: str = "../assets", nested: bool = False
+) -> list[str]:
     """Render AIM blocks to Markdown chunks (each chunk joined with blank lines).
 
     ``asset_prefix`` is the note-relative path to the assets directory, used
     only where wikilink embeds cannot be (images inside HTML tables).
+    ``nested`` is true for blocks rendered inside a list item, where tables
+    are always HTML.
     """
     chunks: list[str] = []
     for block in blocks:
         kind = block.get("type")
         if kind == "table":
-            chunks.extend(_render_table(block, asset_prefix))
+            chunks.extend(_render_table(block, asset_prefix, nested))
             continue
         if kind == "list":
             chunks.extend(_render_list(block, asset_prefix))
             continue
         if kind == "note":
-            chunks.extend(_render_note(block, asset_prefix))
+            chunks.extend(_render_note(block, asset_prefix, nested))
             continue
         renderer = _RENDERERS.get(kind)
         if renderer is None:

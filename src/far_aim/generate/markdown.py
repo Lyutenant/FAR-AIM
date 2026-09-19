@@ -68,7 +68,7 @@ def _run_in(*pieces: str) -> str:
     return " ".join(piece for piece in pieces if piece)
 
 
-def _render_paragraph(block: dict, ids: BlockIds = None) -> list[str]:
+def _render_paragraph(block: dict, ids: BlockIds = None, nested: bool = False) -> list[str]:
     label = block.get("label")
     subject = block.get("subject")
     text = block.get("text") or ""
@@ -77,25 +77,24 @@ def _render_paragraph(block: dict, ids: BlockIds = None) -> list[str]:
         f"*{escape_md(subject)}*" if subject else "",
         escape_md(text) if text else "",
     )
-    children = render_blocks(block.get("children") or [], ids)
     if not head:
         # Nothing to head an item with (never seen in Title 14): the children
         # take this level themselves rather than hanging off an empty item.
-        return children
-    return [list_item(head, children)]
+        return render_blocks(block.get("children") or [], ids, nested)
+    return [list_item(head, render_blocks(block.get("children") or [], ids, True))]
 
 
-def _render_definition(block: dict, ids: BlockIds = None) -> list[str]:
+def _render_definition(block: dict, ids: BlockIds = None, nested: bool = False) -> list[str]:
     head = _run_in(f"*{escape_md(block['term'])}*", escape_md(block["text"]))
     block_id = ids.get(id(block)) if ids else None
     if block_id:
         # An Obsidian block id (``^def-night``) so other notes can link the
         # definition itself; markup, not wording — Reading View hides it.
         head = f"{head} ^{block_id}"
-    return [list_item(head, render_blocks(block.get("children") or [], ids))]
+    return [list_item(head, render_blocks(block.get("children") or [], ids, True))]
 
 
-def _render_text(block: dict, ids: BlockIds = None) -> list[str]:
+def _render_text(block: dict, ids: BlockIds = None, nested: bool = False) -> list[str]:
     text = block.get("text") or ""
     if not text:
         return []
@@ -104,14 +103,14 @@ def _render_text(block: dict, ids: BlockIds = None) -> list[str]:
     return [escape_md(text)]
 
 
-def _render_heading(block: dict, ids: BlockIds = None) -> list[str]:
+def _render_heading(block: dict, ids: BlockIds = None, nested: bool = False) -> list[str]:
     prefix = _HEADING_PREFIX.get(block["level"])
     if prefix is None:
         raise BuildError(f"unknown heading level {block['level']!r}")
     return [f"{prefix} {escape_md(block['text'])}"]
 
 
-def _render_example(block: dict, ids: BlockIds = None) -> list[str]:
+def _render_example(block: dict, ids: BlockIds = None, nested: bool = False) -> list[str]:
     heading = block.get("heading")
     lines = [_run_in(f"*{escape_md(heading)}*" if heading else "", escape_md(block["text"]))]
     if block.get("amendment_notes"):
@@ -122,7 +121,7 @@ def _render_example(block: dict, ids: BlockIds = None) -> list[str]:
     return lines
 
 
-def _render_image(block: dict, ids: BlockIds = None) -> list[str]:
+def _render_image(block: dict, ids: BlockIds = None, nested: bool = False) -> list[str]:
     # A link, not an embed: hotlinking source graphics is off-limits
     # (plan §4.2); archiving them as vault assets is later-phase work.
     src = block["src"]
@@ -130,7 +129,7 @@ def _render_image(block: dict, ids: BlockIds = None) -> list[str]:
     return [f"[eCFR graphic {basename}]({graphic_url(src)})"]
 
 
-def _render_math(block: dict, ids: BlockIds = None) -> list[str]:
+def _render_math(block: dict, ids: BlockIds = None, nested: bool = False) -> list[str]:
     chunks = [_render_image({"src": src})[0] for src in block.get("images") or []]
     text = block.get("text") or ""
     if text:
@@ -138,21 +137,21 @@ def _render_math(block: dict, ids: BlockIds = None) -> list[str]:
     return chunks
 
 
-def _render_extract(block: dict, ids: BlockIds = None) -> list[str]:
-    inner = render_blocks(block["blocks"], ids)
+def _render_extract(block: dict, ids: BlockIds = None, nested: bool = False) -> list[str]:
+    inner = render_blocks(block["blocks"], ids, nested)
     return [_quote(inner)] if inner else []
 
 
-def _render_footnote(block: dict, ids: BlockIds = None) -> list[str]:
-    inner = render_blocks(block["blocks"], ids)
+def _render_footnote(block: dict, ids: BlockIds = None, nested: bool = False) -> list[str]:
+    inner = render_blocks(block["blocks"], ids, nested)
     return [_quote(inner)] if inner else []
 
 
-def _render_note(block: dict, ids: BlockIds = None) -> list[str]:
+def _render_note(block: dict, ids: BlockIds = None, nested: bool = False) -> list[str]:
     heading = block.get("heading")
     title = f" {escape_md(heading)}" if heading else ""
     lines = [f"> [!note]{title}"]
-    inner = render_blocks(block.get("blocks") or [], ids)
+    inner = render_blocks(block.get("blocks") or [], ids, nested)
     if inner:
         lines.append(_quote(inner))
     return ["\n".join(lines)]
@@ -221,12 +220,17 @@ def _render_html_table(block: dict) -> str:
     return "\n".join(lines)
 
 
-def _render_table(block: dict, ids: BlockIds = None) -> list[str]:
+def _render_table(block: dict, ids: BlockIds = None, nested: bool = False) -> list[str]:
     chunks = []
     caption = block.get("caption")
     if caption:
         chunks.append(f"*{escape_md(caption)}*")
-    if _pipe_safe(block):
+    # Inside a list item a pipe table is never safe in Obsidian: once the list
+    # strips its own indentation each row keeps two leading spaces, which
+    # Obsidian's table tokenizer reads as an empty first cell — every column
+    # shifts right and the last one is cut off (the delimiter row still sets
+    # the column count). Raw HTML is immune, so nested tables always use it.
+    if _pipe_safe(block) and not nested:
         chunks.append(_render_pipe_table(block))
     else:
         chunks.append(_render_html_table(block))
@@ -248,17 +252,18 @@ _RENDERERS = {
 }
 
 
-def render_blocks(blocks: list[dict], ids: BlockIds = None) -> list[str]:
+def render_blocks(blocks: list[dict], ids: BlockIds = None, nested: bool = False) -> list[str]:
     """Render blocks to Markdown chunks (each chunk joined with blank lines).
 
     ``ids`` maps ``id(block)`` of definition blocks to the Obsidian block id
     to append (``links.definitions.block_ids``); without it definitions
-    render unanchored.
+    render unanchored. ``nested`` is true for blocks rendered inside a list
+    item, where a table must not be a pipe table (see ``_render_table``).
     """
     chunks: list[str] = []
     for block in blocks:
         renderer = _RENDERERS.get(block.get("type"))
         if renderer is None:
             raise BuildError(f"no renderer for block type {block.get('type')!r}")
-        chunks.extend(renderer(block, ids))
+        chunks.extend(renderer(block, ids, nested))
     return chunks

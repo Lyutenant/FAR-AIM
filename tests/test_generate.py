@@ -328,6 +328,26 @@ def test_simple_table_renders_pipes():
     ]
 
 
+def test_table_inside_a_list_item_is_never_a_pipe_table():
+    # Regression: Obsidian reads the two spaces a list leaves before a nested
+    # pipe row as an empty first cell, shifting every column right and cutting
+    # the last one off (§ 91.155 lost "Distance from clouds").
+    note = {"type": "note", "heading": "Note:", "blocks": [dict(_SIMPLE_TABLE)]}
+    tree = {
+        "type": "paragraph",
+        "label": "(a)",
+        "text": "See table:",
+        "children": [dict(_SIMPLE_TABLE), note],
+    }
+    [chunk] = render_blocks([tree])
+    assert "| A |" not in chunk
+    assert chunk.count("    <table>") == 1 and chunk.count("    > <table>") == 1
+    assert "<tr><td>1</td><td>with | pipe</td></tr>" in chunk
+    # A top-level callout keeps its pipe table: nothing precedes the pipe there.
+    [callout] = render_blocks([note])
+    assert "> | A | B |" in callout
+
+
 def test_table_caption_precedes_table():
     table = dict(_SIMPLE_TABLE, caption="Weather minimums")
     out = render_blocks([table])

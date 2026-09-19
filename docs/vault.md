@@ -76,8 +76,14 @@ is dropped globally whenever two notes would share it (plan §17.4; e.g.
 - **Official wording is verbatim**, subject only to Markdown escaping;
   unknown block types fail the build rather than being dropped.
 - **Tables** render as pipe tables when safe (single header row, no
-  col/rowspans, rectangular, no newlines in cells) and as inline HTML
-  tables otherwise — both lossless, both rendered by Obsidian.
+  col/rowspans, rectangular, no newlines in cells) *and not inside a list
+  item*, and as inline HTML tables otherwise — both lossless, both rendered
+  by Obsidian. A table nested under a paragraph is always HTML: after the
+  list strips its indentation each pipe row keeps two leading spaces, which
+  Obsidian's table tokenizer (unlike CommonMark/GFM) reads as an empty
+  first cell, shifting the columns right and dropping the last one
+  (§ 91.155 lost "Distance from clouds", 2026-09-19). The AIM renderer
+  follows the same rule.
 - **Cross-references** are extracted deterministically from official text
   (`§ 91.157`, `§§ 91.101 through 91.135` endpoints, `14 CFR 121.317(c)`
   lists) and listed as wikilinks only when the target section exists in the
@@ -306,7 +312,8 @@ vault/AIM/
   with a warning — the same contract as curated notes.
 - **Tables** render as pipe tables when every cell is one line of text or a
   single image (embeds work inside cells) with a single header row and no
-  spans, and as inline HTML otherwise (lists inside a cell are nested
+  spans — and the table is not inside a list item (see the FAR rule above) —
+  and as inline HTML otherwise (lists inside a cell are nested
   `<ul>` items led by their bold markers, boxes marker-led `<p>` runs; image cells use `<img src="../assets/…">`, a
   path relative to the note's own directory — TBL 7-1-10 is the one such
   table).

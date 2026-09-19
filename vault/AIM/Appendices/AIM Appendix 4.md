@@ -226,33 +226,38 @@ Appendix 4. FAA Form 7233-4 - International Flight Plan
 
         **TBL 4-5** *Item 18. PBN/ Specifications (Include as many of the applicable descriptors, up to a maximum of 8 entries (not more than 16 characters).*
 
-        | PBN/ | RNAV SPECIFICATIONS |
-        | --- | --- |
-        | A1 | RNAV 10 (RNP 10) |
-        | B1 | RNAV 5 all permitted sensors |
-        | B2 | RNAV 5 GNSS |
-        | B3 | RNAV 5 DME/DME |
-        | B4 | RNAV 5 VOR/DME |
-        | B5 | RNAV 5 INS or IRS |
-        | B6 | RNAV 5 LORAN C |
-        | C1 | RNAV 2 all permitted sensors |
-        | C2 | RNAV 2 GNSS |
-        | C3 | RNAV 2 DME/DME |
-        | C4 | RNAV 2 DME/DME/IRU |
-        | D1 | RNAV 1 all permitted sensors |
-        | D2 | RNAV 1 GNSS |
-        | D3 | RNAV 1 DME/DME |
-        | D4 | RNAV 1 DME/DME/IRU |
-        | PBN/ | RNP SPECIFICATIONS |
-        | L1 | RNP 4 |
-        | O1 | Basic RNP 1 all permitted sensors |
-        | O2 | Basic RNP 1 GNSS |
-        | O3 | Basic RNP 1 DME/DME |
-        | O4 | Basic RNP 1 DME/DME/IRU |
-        | S1 | RNP APCH |
-        | S2 | RNP APCH with BARO-VNAV |
-        | T1 | RNP AR APCH with RF (special authorization required) |
-        | T2 | RNP AR APCH without RF (special authorization required) |
+        <table>
+        <thead>
+        <tr><th><p>PBN/</p></th><th><p>RNAV SPECIFICATIONS</p></th></tr>
+        </thead>
+        <tbody>
+        <tr><td><p>A1</p></td><td><p>RNAV 10 (RNP 10)</p></td></tr>
+        <tr><td><p>B1</p></td><td><p>RNAV 5 all permitted sensors</p></td></tr>
+        <tr><td><p>B2</p></td><td><p>RNAV 5 GNSS</p></td></tr>
+        <tr><td><p>B3</p></td><td><p>RNAV 5 DME/DME</p></td></tr>
+        <tr><td><p>B4</p></td><td><p>RNAV 5 VOR/DME</p></td></tr>
+        <tr><td><p>B5</p></td><td><p>RNAV 5 INS or IRS</p></td></tr>
+        <tr><td><p>B6</p></td><td><p>RNAV 5 LORAN C</p></td></tr>
+        <tr><td><p>C1</p></td><td><p>RNAV 2 all permitted sensors</p></td></tr>
+        <tr><td><p>C2</p></td><td><p>RNAV 2 GNSS</p></td></tr>
+        <tr><td><p>C3</p></td><td><p>RNAV 2 DME/DME</p></td></tr>
+        <tr><td><p>C4</p></td><td><p>RNAV 2 DME/DME/IRU</p></td></tr>
+        <tr><td><p>D1</p></td><td><p>RNAV 1 all permitted sensors</p></td></tr>
+        <tr><td><p>D2</p></td><td><p>RNAV 1 GNSS</p></td></tr>
+        <tr><td><p>D3</p></td><td><p>RNAV 1 DME/DME</p></td></tr>
+        <tr><td><p>D4</p></td><td><p>RNAV 1 DME/DME/IRU</p></td></tr>
+        <tr><td><p>PBN/</p></td><td><p>RNP SPECIFICATIONS</p></td></tr>
+        <tr><td><p>L1</p></td><td><p>RNP 4</p></td></tr>
+        <tr><td><p>O1</p></td><td><p>Basic RNP 1 all permitted sensors</p></td></tr>
+        <tr><td><p>O2</p></td><td><p>Basic RNP 1 GNSS</p></td></tr>
+        <tr><td><p>O3</p></td><td><p>Basic RNP 1 DME/DME</p></td></tr>
+        <tr><td><p>O4</p></td><td><p>Basic RNP 1 DME/DME/IRU</p></td></tr>
+        <tr><td><p>S1</p></td><td><p>RNP APCH</p></td></tr>
+        <tr><td><p>S2</p></td><td><p>RNP APCH with BARO-VNAV</p></td></tr>
+        <tr><td><p>T1</p></td><td><p>RNP AR APCH with RF (special authorization required)</p></td></tr>
+        <tr><td><p>T2</p></td><td><p>RNP AR APCH without RF (special authorization required)</p></td></tr>
+        </tbody>
+        </table>
 
         > [!note] NOTE-
         > - **1.** PBN Codes B1-B6 indicates RNAV 5 capability. The FAA considers these B codes to be synonymous and qualifying for point-to-point routing but not for assignment to the PBN routes shown in the table.
@@ -306,11 +311,16 @@ Appendix 4. FAA Form 7233-4 - International Flight Plan
 
             **TBL 4-6** *Radio Navigation Capabilities*
 
-            | Capability | Item 10a | Item 18 NAV/ |
-            | --- | --- | --- |
-            | VOR | O |  |
-            | DME | D |  |
-            | TACAN | T |  |
+            <table>
+            <thead>
+            <tr><th><p>Capability</p></th><th><p>Item 10a</p></th><th><p>Item 18 NAV/</p></th></tr>
+            </thead>
+            <tbody>
+            <tr><td><p>VOR</p></td><td><p>O</p></td><td></td></tr>
+            <tr><td><p>DME</p></td><td><p>D</p></td><td></td></tr>
+            <tr><td><p>TACAN</p></td><td><p>T</p></td><td></td></tr>
+            </tbody>
+            </table>
 
             **TBL 4-7** *Area Navigation Capabilities*
 
@@ -340,10 +350,15 @@ Appendix 4. FAA Form 7233-4 - International Flight Plan
 
         **TBL 4-8** *Mode C*
 
-        | Capability | Item 10b |
-        | --- | --- |
-        | Transponder with no Mode C | A |
-        | Transponder with Mode C | C |
+        <table>
+        <thead>
+        <tr><th><p>Capability</p></th><th><p>Item 10b</p></th></tr>
+        </thead>
+        <tbody>
+        <tr><td><p>Transponder with no Mode C</p></td><td><p>A</p></td></tr>
+        <tr><td><p>Transponder with Mode C</p></td><td><p>C</p></td></tr>
+        </tbody>
+        </table>
 
         • International flights must file in accordance with relevant AIPs and regional supplements. Include one of the Mode S codes in TBL 4-9, if appropriate.
 
@@ -352,15 +367,20 @@ Appendix 4. FAA Form 7233-4 - International Flight Plan
 
         **TBL 4-9** *Mode S*
 
-        | Capability | Aircraft ID | Altitude Encoding | Item 10b |
-        | --- | --- | --- | --- |
-        | Mode S Transponder | No | No | X |
-        | Mode S Transponder | No | Yes | P |
-        | Mode S Transponder | Yes | No | I |
-        | Mode S Transponder | Yes | Yes | S |
-        | Mode S Transponder with Extended Squitter | Yes | Yes | E |
-        | Enhanced Mode S Transponder | Yes | Yes | H |
-        | Enhanced Mode S Transponder with Extended Squitter | Yes | Yes | L |
+        <table>
+        <thead>
+        <tr><th><p>Capability</p></th><th><p>Aircraft ID</p></th><th><p>Altitude Encoding</p></th><th><p>Item 10b</p></th></tr>
+        </thead>
+        <tbody>
+        <tr><td><p>Mode S Transponder</p></td><td><p>No</p></td><td><p>No</p></td><td><p>X</p></td></tr>
+        <tr><td><p>Mode S Transponder</p></td><td><p>No</p></td><td><p>Yes</p></td><td><p>P</p></td></tr>
+        <tr><td><p>Mode S Transponder</p></td><td><p>Yes</p></td><td><p>No</p></td><td><p>I</p></td></tr>
+        <tr><td><p>Mode S Transponder</p></td><td><p>Yes</p></td><td><p>Yes</p></td><td><p>S</p></td></tr>
+        <tr><td><p>Mode S Transponder with Extended Squitter</p></td><td><p>Yes</p></td><td><p>Yes</p></td><td><p>E</p></td></tr>
+        <tr><td><p>Enhanced Mode S Transponder</p></td><td><p>Yes</p></td><td><p>Yes</p></td><td><p>H</p></td></tr>
+        <tr><td><p>Enhanced Mode S Transponder with Extended Squitter</p></td><td><p>Yes</p></td><td><p>Yes</p></td><td><p>L</p></td></tr>
+        </tbody>
+        </table>
 
         (d) ADS-B Capabilities (Item 10b, Item 18 SUR/ and Item 18 CODE/)
 
@@ -372,12 +392,17 @@ Appendix 4. FAA Form 7233-4 - International Flight Plan
 
         **TBL 4-10** *ADS-B Capabilities*
 
-        | Capability | Item 10b | Item 18 SUR/ |
-        | --- | --- | --- |
-        | 1090 ES Out Capability | B1 | A2 |
-        | 1090 ES Out and In Capability | B2 | A2 |
-        | UAT Out Capability | U1 | A2 |
-        | UAT Out and In Capability | U2 | A2 |
+        <table>
+        <thead>
+        <tr><th><p>Capability</p></th><th><p>Item 10b</p></th><th><p>Item 18 SUR/</p></th></tr>
+        </thead>
+        <tbody>
+        <tr><td><p>1090 ES Out Capability</p></td><td><p>B1</p></td><td><p>A2</p></td></tr>
+        <tr><td><p>1090 ES Out and In Capability</p></td><td><p>B2</p></td><td><p>A2</p></td></tr>
+        <tr><td><p>UAT Out Capability</p></td><td><p>U1</p></td><td><p>A2</p></td></tr>
+        <tr><td><p>UAT Out and In Capability</p></td><td><p>U2</p></td><td><p>A2</p></td></tr>
+        </tbody>
+        </table>
 
         - **(a)** Voice Communication Capabilities (Item 10a)
 
@@ -385,14 +410,19 @@ Appendix 4. FAA Form 7233-4 - International Flight Plan
 
             **TBL 4-11** *Voice Communication Capabilities*
 
-            | Capability | Item 10a |
-            | --- | --- |
-            | VHF Radio | V |
-            | UHF Radio | U |
-            | HF Radio | H |
-            | VHF Radio (8.33 kHZ Spacing) | Y |
-            | ATC SATVOICE (INMARSAT) | M1 |
-            | ATC SATVOICE (Iridium) | M3 |
+            <table>
+            <thead>
+            <tr><th><p>Capability</p></th><th><p>Item 10a</p></th></tr>
+            </thead>
+            <tbody>
+            <tr><td><p>VHF Radio</p></td><td><p>V</p></td></tr>
+            <tr><td><p>UHF Radio</p></td><td><p>U</p></td></tr>
+            <tr><td><p>HF Radio</p></td><td><p>H</p></td></tr>
+            <tr><td><p>VHF Radio (8.33 kHZ Spacing)</p></td><td><p>Y</p></td></tr>
+            <tr><td><p>ATC SATVOICE (INMARSAT)</p></td><td><p>M1</p></td></tr>
+            <tr><td><p>ATC SATVOICE (Iridium)</p></td><td><p>M3</p></td></tr>
+            </tbody>
+            </table>
 
         - **(b)** Approach Aid Capabilities (Item 10a).
 
@@ -402,12 +432,17 @@ Appendix 4. FAA Form 7233-4 - International Flight Plan
 
             **TBL 4-12** *Approach Aid Capabilities*
 
-            | Capability | Item 10a |
-            | --- | --- |
-            | ILS | L |
-            | MLS | K |
-            | LPV Approach (APV with SBAS) (WAAS) | B |
-            | GBAS Landing System (LAAS) | A |
+            <table>
+            <thead>
+            <tr><th><p>Capability</p></th><th><p>Item 10a</p></th></tr>
+            </thead>
+            <tbody>
+            <tr><td><p>ILS</p></td><td><p>L</p></td></tr>
+            <tr><td><p>MLS</p></td><td><p>K</p></td></tr>
+            <tr><td><p>LPV Approach (APV with SBAS) (WAAS)</p></td><td><p>B</p></td></tr>
+            <tr><td><p>GBAS Landing System (LAAS)</p></td><td><p>A</p></td></tr>
+            </tbody>
+            </table>
 
     - **20.** Performance-Based Navigation Routes (Item 10a, Item 18 PBN/, Item 18 NAV/)- When planning to fly routes that require PBN capability, file the appropriate capability as shown in TBL 4-13.
 
@@ -564,21 +599,26 @@ Appendix 4. FAA Form 7233-4 - International Flight Plan
 
             **TBL 4-18** *Special Handling*
 
-            | Special Handling | Item 18 STS/ |
-            | --- | --- |
-            | Flight operating in accordance with an altitude reservation | ALTRV |
-            | Flight approved for exemption from ATFM measures by the appropriate ATS authority | ATFMX |
-            | Fire Fighting | FFR |
-            | Flight check for calibration of NAVAIDS | FLTCK |
-            | Flight carrying hazardous material(s) | HAZMAT |
-            | Flight with Head of State status | HEAD |
-            | Medical flight declared by medical authorities | HOSP |
-            | Flight operating on a humanitarian mission | HUM |
-            | Flight for which a military entity assumes responsibility for separation of military aircraft | MARSA |
-            | Life critical medical emergency evacuation | MEDEVAC |
-            | Non-RVSM capable flight intending to operate in RVSM airspace | NONRVSM |
-            | Flight engaged in a search and rescue mission | SAR |
-            | Flight engaged in military, customs, or police services | STATE |
+            <table>
+            <thead>
+            <tr><th><p>Special Handling</p></th><th><p>Item 18 STS/</p></th></tr>
+            </thead>
+            <tbody>
+            <tr><td><p>Flight operating in accordance with an altitude reservation</p></td><td><p>ALTRV</p></td></tr>
+            <tr><td><p>Flight approved for exemption from ATFM measures by the appropriate ATS authority</p></td><td><p>ATFMX</p></td></tr>
+            <tr><td><p>Fire Fighting</p></td><td><p>FFR</p></td></tr>
+            <tr><td><p>Flight check for calibration of NAVAIDS</p></td><td><p>FLTCK</p></td></tr>
+            <tr><td><p>Flight carrying hazardous material(s)</p></td><td><p>HAZMAT</p></td></tr>
+            <tr><td><p>Flight with Head of State status</p></td><td><p>HEAD</p></td></tr>
+            <tr><td><p>Medical flight declared by medical authorities</p></td><td><p>HOSP</p></td></tr>
+            <tr><td><p>Flight operating on a humanitarian mission</p></td><td><p>HUM</p></td></tr>
+            <tr><td><p>Flight for which a military entity assumes responsibility for separation of military aircraft</p></td><td><p>MARSA</p></td></tr>
+            <tr><td><p>Life critical medical emergency evacuation</p></td><td><p>MEDEVAC</p></td></tr>
+            <tr><td><p>Non-RVSM capable flight intending to operate in RVSM airspace</p></td><td><p>NONRVSM</p></td></tr>
+            <tr><td><p>Flight engaged in a search and rescue mission</p></td><td><p>SAR</p></td></tr>
+            <tr><td><p>Flight engaged in military, customs, or police services</p></td><td><p>STATE</p></td></tr>
+            </tbody>
+            </table>
 
         - **(b)** Any other requests for special handling must be made in Item 18 RMK/.
 
