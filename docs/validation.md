@@ -543,3 +543,14 @@ change-note reader on the Change 3 fixture, verdicts) and the
 `test_update_*`/`test_diff_*` gate tests in `tests/test_cli.py` (pipeline
 tests patch `changes.THRESHOLDS` to fixture-sized values); the fetcher's
 index archival is covered in `tests/test_ecfr_source.py`.
+
+**Change history (plan §38.10).** Once the gates pass, `diff --record`
+(what `update` runs) appends every edition transition the ledgers show to
+the committed `data/changes/history.json`: the classified notes with an
+`announced` flag from the cross-check (absent when no change record was
+available), the provenance-only count, a summary of the change record,
+and any override flag used. The same transition recorded twice is
+byte-identical (a resumed `update` is idempotent); a first build and a
+same-version correction record nothing. `build-vault` and `validate`
+render `What Changed.md` from it, so a malformed file fails both, and an
+edited history shows up as a vault mismatch. Plain `diff` stays read-only.

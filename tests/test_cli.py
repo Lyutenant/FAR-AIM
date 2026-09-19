@@ -1236,7 +1236,7 @@ def test_build_vault_generates_and_is_idempotent(tmp_path, capsys):
     capsys.readouterr()
     assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
     out = capsys.readouterr().out
-    assert "19 written" in out
+    assert "20 written" in out
     assert (config.vault_dir / "FAR" / "Part 091" / "91.155.md").exists()
     assert (config.vault_dir / "FAR" / "Part 091" / "Part 91.md").exists()
     assert (config.vault_dir / "FAR" / "Title 14.md").exists()
@@ -1305,7 +1305,7 @@ def test_build_vault_deletes_stale_generated_note(tmp_path, capsys):
 def test_validate_checks_vault(tmp_path, capsys):
     config = _built_vault(tmp_path, capsys)
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
-    assert "ok: vault matches canonical layer (19 notes)" in capsys.readouterr().out
+    assert "ok: vault matches canonical layer (20 notes)" in capsys.readouterr().out
 
     # A hand-edited generated note fails validation.
     note = config.vault_dir / "FAR" / "Part 091" / "91.155.md"
@@ -1371,7 +1371,7 @@ def test_full_title_vault_build(tmp_path, capsys):
         _MANIFEST.parent.parent / "links" / "part1-definitions-gate.json", config.part1_gate_path
     )
     aim_state = manifest.sources["aim"]
-    expected_total = 6773  # + Home.md since Phase 7
+    expected_total = 6774  # + Home.md (Phase 7) and What Changed.md
     if aim_state.canonical_hash is not None:
         # The AIM layer and its archived figures ride along (Phase 4).
         aim_raw = _NORMALIZED.parent.parent / "raw" / "aim"
@@ -1424,7 +1424,7 @@ def test_full_title_vault_build(tmp_path, capsys):
     assert len(part_folders) == 226
     # Every part has an index note (Phase 3 exit criterion).
     assert all(any(p.name.startswith("Part ") for p in d.glob("*.md")) for d in part_folders)
-    assert len(list(far.rglob("*.md"))) + 2 == 6773  # + Source Status.md and Home.md at the root
+    assert len(list(far.rglob("*.md"))) + 3 == 6774  # + Source Status, Home, What Changed
     assert (far / "Title 14.md").exists()
     assert (config.vault_dir / "Source Status.md").exists()
     assert (config.vault_dir / "Home.md").exists()
@@ -2633,7 +2633,7 @@ def test_enrich_writes_related_links_and_is_idempotent(tmp_path, capsys):
     assert "## Related (derived)" in (far / "91.175.md").read_text(encoding="utf-8")
     assert "## Related (derived)" not in (far / "91.155.md").read_text(encoding="utf-8")
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
-    assert "vault matches canonical layer (19 notes)" in capsys.readouterr().out
+    assert "vault matches canonical layer (20 notes)" in capsys.readouterr().out
 
 
 def test_enrich_review_overlay_is_validated_and_applied(tmp_path, capsys):
@@ -2696,7 +2696,7 @@ def test_build_vault_renders_concepts_and_removes_them_cleanly(tmp_path, capsys)
     config.concepts_path.write_text(json.dumps(_fixture_concepts()), encoding="utf-8")
     assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
     out = capsys.readouterr().out
-    assert "22 notes" in out and "4 written" in out  # 3 concept files + Home
+    assert "23 notes" in out and "4 written" in out  # 3 concept files + Home
     concepts = config.vault_dir / "Concepts"
     assert sorted(p.name for p in concepts.iterdir()) == [
         "Concept Map.md",
@@ -2709,7 +2709,7 @@ def test_build_vault_renders_concepts_and_removes_them_cleanly(tmp_path, capsys)
     home = (config.vault_dir / "Home.md").read_text(encoding="utf-8")
     assert "[[Concept Map]]" in home
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
-    assert "(22 notes)" in capsys.readouterr().out
+    assert "(23 notes)" in capsys.readouterr().out
 
     # A curated note parked inside Concepts/ survives; a reference to a
     # section the slice lacks fails the build before anything is written.
@@ -3062,6 +3062,96 @@ def test_update_announced_mass_removal_passes_the_gate(
     assert "accepted (" not in out
     assert not (config.vault_dir / "FAR" / "Part 001" / "1.2.md").exists()
     assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+
+
+def test_update_records_the_transition_in_the_change_history(
+    tmp_path, capsys, mock_upstream, monkeypatch
+):
+    """`update` writes data/changes/history.json; What Changed renders it (plan §38.10)."""
+    config = _updated_root(tmp_path, capsys, mock_upstream)
+    monkeypatch.setattr(ecfr, "MIN_SECTION_COUNT", 1)
+    what_changed = config.vault_dir / "What Changed.md"
+    assert "No edition transition has been recorded yet." in what_changed.read_text()
+    assert not config.history_path.exists()  # a first build is no transition
+    home = (config.vault_dir / "Home.md").read_text(encoding="utf-8")
+    assert "- [[What Changed]] — what each accepted edition changed" in home
+
+    # § 1.3 amended, as the amendment index announces.
+    xml = mock_upstream.xml.replace(
+        b"Rules of construction.</HEAD>", b"Rules of construction (amended).</HEAD>"
+    )
+    mock_upstream.versions = [_amendment("1.3")]
+    _bump_ecfr(mock_upstream, xml)
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert f"change history: FAR {ISSUE_DATE} → 2026-09-15 recorded in" in out
+    data = json.loads(config.history_path.read_text(encoding="utf-8"))
+    [transition] = data["transitions"]
+    assert (transition["corpus"], transition["before"], transition["after"]) == (
+        "FAR",
+        ISSUE_DATE,
+        "2026-09-15",
+    )
+    assert transition["content_changed"] == [
+        {"stem": "1.3", "citation": "14 CFR § 1.3", "announced": True}
+    ]
+    assert transition["provenance_only"] == 2 and transition["removed"] == []
+    assert transition["announcement"]["record"] == "eCFR amendment index"
+    assert transition["announcement"]["amended"] == 1
+    note = what_changed.read_text(encoding="utf-8")
+    assert f"### {ISSUE_DATE} → 2026-09-15" in note
+    assert (
+        "- [[1.3|14 CFR § 1.3]] — announced · [compare on eCFR]"
+        f"(https://www.ecfr.gov/compare/2026-09-15/to/{ISSUE_DATE}/title-14/section-1.3)"
+    ) in note
+    assert "The eCFR amendment index (2026-08-19 → 2026-09-15) names 1 amended" in note
+
+    # Published state: nothing to do, the history untouched, validation clean.
+    recorded = config.history_path.read_bytes()
+    assert main(["--root", str(tmp_path), "update"]) == EXIT_OK
+    assert "nothing to do" in capsys.readouterr().out
+    assert config.history_path.read_bytes() == recorded
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+
+
+def test_diff_records_only_on_request_and_a_malformed_history_fails_the_build(
+    tmp_path, capsys, mock_upstream, monkeypatch
+):
+    config = _updated_root(tmp_path, capsys, mock_upstream)
+    monkeypatch.setattr(ecfr, "MIN_SECTION_COUNT", 1)
+    mock_upstream.versions = [_amendment("1.2", removed=True)]
+    _bump_ecfr(mock_upstream, _xml_without(mock_upstream.xml, "1.2"))
+    assert main(["--root", str(tmp_path), "fetch", "ecfr"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "parse", "ecfr"]) == EXIT_OK
+    assert main(["--root", str(tmp_path), "enrich"]) == EXIT_OK
+    capsys.readouterr()
+    # Plain `diff` is read-only.
+    assert main(["--root", str(tmp_path), "diff"]) == EXIT_OK
+    assert "change history:" not in capsys.readouterr().out
+    assert not config.history_path.exists()
+    assert main(["--root", str(tmp_path), "diff", "--record"]) == EXIT_OK
+    out = capsys.readouterr().out
+    assert f"change history: FAR {ISSUE_DATE} → 2026-09-15 recorded in" in out
+    # Recording again is byte-identical.
+    recorded = config.history_path.read_bytes()
+    assert main(["--root", str(tmp_path), "diff", "--record"]) == EXIT_OK
+    assert "already recorded in" in capsys.readouterr().out
+    assert config.history_path.read_bytes() == recorded
+    [transition] = json.loads(recorded)["transitions"]
+    assert transition["removed"] == [
+        {"stem": "1.2", "citation": "14 CFR § 1.2", "announced": True}
+    ]
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_OK
+    note = (config.vault_dir / "What Changed.md").read_text(encoding="utf-8")
+    assert "**Removed (1)**\n\n- 14 CFR § 1.2 — announced\n" in note
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_OK
+    capsys.readouterr()
+
+    # A malformed history fails the build (plan §32.13) and validation.
+    config.history_path.write_text("{}", encoding="utf-8")
+    assert main(["--root", str(tmp_path), "build-vault"]) == EXIT_ERROR
+    assert "expected schema 1" in capsys.readouterr().err
+    assert main(["--root", str(tmp_path), "validate"]) == EXIT_ERROR
 
 
 def test_update_amendment_index_naming_unparsed_content_fails(tmp_path, capsys, mock_upstream):

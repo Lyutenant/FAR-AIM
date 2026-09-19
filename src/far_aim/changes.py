@@ -602,6 +602,10 @@ class CrossCheck:
     defects: list[str] = field(default_factory=list)
     report: list[str] = field(default_factory=list)
     explained: set[Path] = field(default_factory=set)  # content-changed notes the note covers
+    # JSON-ready summary of the change record for the change history
+    # (:mod:`far_aim.history`): what it announced and what it named that
+    # did not change.
+    announcement: dict[str, object] = field(default_factory=dict)
 
 
 def _matches(record: NoteRecord, wanted: set[Location]) -> bool:
@@ -670,6 +674,13 @@ def cross_check_aim(note: ChangeNote, ledger: Ledger) -> CrossCheck:
     )
     unexplained = [r for r in ledger.content_changed if not _matches(r, claimed)]
     result.explained = {r.path for r in ledger.content_changed if _matches(r, claimed)}
+    result.announcement = {
+        "record": "AIM Explanation of Changes",
+        "effective_date": note.effective_date,
+        "announced": len(note.announced),
+        "mentioned": len(note.mentioned),
+        "unchanged": quiet,
+    }
     result.report.append(
         f"  Explanation of Changes (effective {note.effective_date}): "
         f"{len(note.announced)} announced paragraph(s), {len(note.mentioned)} mention(s), "
@@ -763,6 +774,13 @@ def cross_check_acs(note: AcsChangeNote, ledger: Ledger) -> CrossCheck:
     quiet = [t for t in announced if t not in changed]
     result.explained = {r.path for r in ledger.content_changed if r.citation in note.tasks}
     unexplained = [r for r in ledger.content_changed if r.citation not in note.tasks]
+    result.announcement = {
+        "record": "ACS Major Enhancements",
+        "added": len(note.added),
+        "removed": len(note.removed),
+        "tasks": len(announced),
+        "unchanged": quiet,
+    }
     result.report.append(
         f"  Major Enhancements: {len(note.added)} code(s) added, {len(note.removed)} removed, "
         f"across {len(announced)} Task(s)"
@@ -922,6 +940,15 @@ def cross_check_far(index: AmendmentIndex, ledger: Ledger) -> CrossCheck:
     }
     unexplained = [r for r in ledger.content_changed if _stable_id(r) not in index.announced]
     unexplained_removed = [r for r in ledger.removed if _stable_id(r) not in index.announced]
+    citations = {_stable_id(r): r.citation for r in (*ledger.after_records(), *ledger.removed)}
+    result.announcement = {
+        "record": "eCFR amendment index",
+        "since": index.since,
+        "until": index.until,
+        "amended": len(index.amended),
+        "removed": len(index.removed),
+        "unchanged": [citations.get(s, s) for s in quiet],
+    }
     result.report.append(
         f"  eCFR amendment index ({index.since} → {index.until}): "
         f"{len(index.amended):,} amended, {len(index.removed):,} removed"
@@ -957,6 +984,7 @@ class GateReport:
     mass: list[str] = field(default_factory=list)  # --accept-mass-change
     change_note: list[str] = field(default_factory=list)  # --accept-change-note-mismatch
     summaries: dict[str, str] = field(default_factory=dict)  # corpus → totals line
+    cross_checks: dict[str, CrossCheck] = field(default_factory=dict)  # corpus → outcome
 
 
 def evaluate(
@@ -1006,6 +1034,7 @@ def evaluate(
                 )
             else:
                 outcome = cross_check_far(far_index, ledger)
+                report.cross_checks[corpus] = outcome
                 report.lines.extend(outcome.report)
                 report.change_note.extend(outcome.defects)
                 explained = outcome.explained
@@ -1023,6 +1052,7 @@ def evaluate(
                     )
                 else:
                     outcome = cross_check_aim(note, ledger)
+                    report.cross_checks[corpus] = outcome
                     report.lines.extend(outcome.report)
                     report.change_note.extend(outcome.defects)
                     explained = outcome.explained
@@ -1035,6 +1065,7 @@ def evaluate(
                 )
             else:
                 outcome = cross_check_acs(note, ledger)
+                report.cross_checks[corpus] = outcome
                 report.lines.extend(outcome.report)
                 report.change_note.extend(outcome.defects)
                 explained = outcome.explained

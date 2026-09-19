@@ -36,6 +36,7 @@ from far_aim.generate import notes as generate_notes
 from far_aim.generate import pcg_notes as generate_pcg_notes
 from far_aim.generate import prep_notes as generate_prep_notes
 from far_aim.generate.enrich import EnrichmentLayer
+from far_aim.history import History, load_history, transition_from_ledger
 from far_aim.links import glossary, semantic
 from far_aim.links.concepts import ConceptGraph
 from far_aim.links.study import AcsMap, StudyGuide
@@ -115,6 +116,13 @@ def build_parser() -> argparse.ArgumentParser:
         help="structural diff and change gates: the planned vault vs the published one",
     )
     _add_gate_flags(diff)
+    diff.add_argument(
+        "--record",
+        action="store_true",
+        help="when the gates pass, record each edition transition the ledger shows in the "
+        "committed change history (data/changes/history.json), which the What Changed "
+        "note is rendered from; `update` always records",
+    )
     sub.add_parser("build-vault", help="generate the Obsidian vault from canonical data")
     update = sub.add_parser(
         "update", help="run the full check→fetch→parse→enrich→diff→generate→validate sequence"
@@ -2035,6 +2043,19 @@ def _vault_has_generated_concepts(config: Config) -> bool:
     return any(generate_build.is_generated_note(p) for p in sorted(root.rglob("*.md")))
 
 
+def _history_layer(config: Config) -> History | str:
+    """The committed change history (plan §38), or a defect message.
+
+    ``data/changes/history.json`` absent means no transition recorded yet —
+    the What Changed note then says so; a malformed file fails the build
+    (plan §32.13) rather than rendering a partial history.
+    """
+    try:
+        return load_history(config.history_path)
+    except ValueError as exc:
+        return str(exc)
+
+
 def cmd_enrich(config: Config) -> int:
     """Compute ``data/enrichment/related.json`` from the verified layers (plan §36.3).
 
@@ -2264,6 +2285,9 @@ def _plan_generated_vault(
     definitions_gate = _definitions_gate(config, docs)
     if isinstance(definitions_gate, str):
         return definitions_gate
+    history = _history_layer(config)
+    if isinstance(history, str):
+        return history
     try:
         plan = generate_build.plan_vault(
             docs,
@@ -2275,6 +2299,7 @@ def _plan_generated_vault(
             enrichment,
             definitions_gate,
             acs,
+            history,
         )
     except BuildError as exc:
         return str(exc)
@@ -2348,6 +2373,7 @@ def cmd_diff(
     accept_mass_change: bool = False,
     accept_change_note_mismatch: bool = False,
     summary: list[str] | None = None,
+    record: bool = False,
 ) -> int:
     """Structural diff and change gates: the on-disk generated vault vs a freshly planned one.
 
@@ -2366,8 +2392,13 @@ def cmd_diff(
     of Changes disagrees with the detected changes fails the command — and
     so stops ``update`` before ``build-vault`` — unless the matching
     override flag accepts it after review. An empty planned corpus is never
-    accepted. Read-only either way. ``summary`` collects one totals line
-    per corpus (and any accepted defect) for ``update``'s summary.
+    accepted. Read-only unless ``record``: then every edition transition the
+    ledger shows is written, once the gates pass, to the committed change
+    history (``data/changes/history.json``, :mod:`far_aim.history`) that the
+    What Changed note is rendered from — the same transition recorded twice
+    is byte-identical, so a resumed ``update`` stays idempotent. ``summary``
+    collects one totals line per corpus (and any accepted defect) for
+    ``update``'s summary.
     """
     path = config.manifest_path
     if not path.exists():
@@ -2380,6 +2411,7 @@ def cmd_diff(
                 accept_mass_change=accept_mass_change,
                 accept_change_note_mismatch=accept_change_note_mismatch,
                 summary=summary if summary is not None else [],
+                record=record,
             )
     except FetchError as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -2398,6 +2430,7 @@ def _diff_locked(
     accept_mass_change: bool,
     accept_change_note_mismatch: bool,
     summary: list[str],
+    record: bool,
 ) -> int:
     try:
         manifest = SourceManifest.load(config.manifest_path)
@@ -2440,6 +2473,7 @@ def _diff_locked(
         accept_mass_change=accept_mass_change,
         accept_change_note_mismatch=accept_change_note_mismatch,
         summary=summary,
+        record=record,
     )
 
 
@@ -2450,6 +2484,7 @@ def _change_gates(
     accept_mass_change: bool,
     accept_change_note_mismatch: bool,
     summary: list[str],
+    record: bool = False,
 ) -> int:
     """Print the change ledger and decide the gates (plan §38.3–§38.5)."""
     ledgers = changes.build_ledgers(config.vault_dir, plan.files)
@@ -2473,6 +2508,7 @@ def _change_gates(
     for defect in report.fatal:
         print(f"error: change gate: {defect}", file=sys.stderr)
         blocked = True
+    overrides: dict[str, set[str]] = {}  # corpus → override flags it needed
     for defects, accepted, flag in (
         (report.mass, accept_mass_change, "--accept-mass-change"),
         (report.change_note, accept_change_note_mismatch, "--accept-change-note-mismatch"),
@@ -2482,6 +2518,7 @@ def _change_gates(
                 line = f"accepted ({flag}): {defect}"
                 print(line)
                 summary.append(line)
+                overrides.setdefault(defect.split(":", 1)[0], set()).add(flag)
             else:
                 print(
                     f"error: change gate: {defect}; review the ledger above and re-run "
@@ -2489,7 +2526,41 @@ def _change_gates(
                     file=sys.stderr,
                 )
                 blocked = True
-    return EXIT_ERROR if blocked else EXIT_OK
+    if blocked:
+        return EXIT_ERROR
+    if record:
+        return _record_transitions(config, ledgers, report, overrides)
+    return EXIT_OK
+
+
+def _record_transitions(
+    config: Config,
+    ledgers: dict[str, changes.Ledger],
+    report: changes.GateReport,
+    overrides: dict[str, set[str]],
+) -> int:
+    """Append every edition transition the ledgers show to the change history."""
+    history = _history_layer(config)
+    if isinstance(history, str):
+        print(f"error: {history}", file=sys.stderr)
+        return EXIT_ERROR
+    recorded: list[str] = []
+    for corpus, ledger in ledgers.items():
+        if not ledger.edition_changed:
+            continue
+        transition = transition_from_ledger(
+            ledger,
+            report.cross_checks.get(corpus),
+            tuple(sorted(overrides.get(corpus, ()))),
+        )
+        history.record(transition)
+        recorded.append(f"{corpus} {transition.before} → {transition.after}")
+    if not recorded:
+        return EXIT_OK
+    written = history.save(config.history_path)
+    state = "recorded in" if written else "already recorded in"
+    print(f"change history: {', '.join(recorded)} {state} {config.history_path}")
+    return EXIT_OK
 
 
 # ---------------------------------------------------------------------------
@@ -2574,6 +2645,10 @@ def _build_vault_locked(config: Config) -> int:
     if isinstance(definitions_gate, str):
         print(f"error: {definitions_gate}", file=sys.stderr)
         return EXIT_ERROR
+    history = _history_layer(config)
+    if isinstance(history, str):
+        print(f"error: {history}", file=sys.stderr)
+        return EXIT_ERROR
     try:
         stats = generate_build.build_vault(
             config,
@@ -2586,6 +2661,7 @@ def _build_vault_locked(config: Config) -> int:
             enrichment,
             definitions_gate,
             acs,
+            history,
         )
     except BuildError as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -2910,6 +2986,7 @@ def cmd_update(
                 accept_mass_change=accept_mass_change,
                 accept_change_note_mismatch=accept_change_note_mismatch,
                 summary=gate_summary,
+                record=True,
             ),
         ),
         ("build-vault", lambda: cmd_build_vault(config)),
@@ -2995,6 +3072,7 @@ def main(argv: list[str] | None = None) -> int:
             config,
             accept_mass_change=args.accept_mass_change,
             accept_change_note_mismatch=args.accept_change_note_mismatch,
+            record=args.record,
         )
     if args.command == "update":
         return cmd_update(

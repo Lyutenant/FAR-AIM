@@ -2673,6 +2673,41 @@ already cross-checked at fetch time.
 ✓ Amendment index archived with the eCFR snapshot; unannounced-only counting
 ```
 
+## 38.10 Change history and the What Changed note
+
+Added 2026-09-19, after the first real eCFR issue transition (2026-09-03
+→ 2026-09-15) showed that the ledger's verdict lived only in a merged PR
+body: a vault reader had no way to see what an accepted edition changed.
+This is the "what changed?" view of §30 (Reference).
+
+- **Canonical record:** `data/changes/history.json` (committed;
+  `far_aim.history`), one entry per accepted edition transition keyed by
+  (corpus, before, after): totals, every content-changed / added /
+  removed / moved note by stem and citation, a per-note `announced` flag
+  from the §38.4 cross-check (absent when no change record was
+  available), a summary of that change record, and any §38.5 override
+  flag used. Markdown is compiled from it (§32.4), so a clean checkout
+  re-renders the same note.
+- **Written by** `far-aim diff --record`, which `update` runs between
+  `parse` and `build-vault`, only after the gates pass. Recording the
+  same transition again is byte-identical (a resumed `update` stays
+  idempotent, §32.10); a first build and a same-version correction are
+  not transitions and record nothing. Plain `diff` stays read-only. The
+  sync workflow stages `data/changes` in its PR.
+- **Rendered as** `vault/What Changed.md` (kind `changelog`; linked from
+  Home beside Source Status): per corpus, newest first, each transition's
+  totals, announcement summary and note list. A note links to its current
+  note only while it still exists (older entries may name notes since
+  removed — plain text, so no generated link is ever broken); removed
+  notes are never linked; a changed FAR section also links the eCFR's
+  compare page for the two issues.
+- **Fails closed:** a malformed history fails `build-vault` and
+  `validate` (§32.13); an edited history is a vault mismatch.
+- **Backfill:** the three FAR transitions accepted before this shipped
+  (2026-08-19 → 08-24 → 09-03 → 09-15) were reconstructed once from the
+  committed vaults in git history and freshly downloaded amendment
+  indexes, with the same ledger and cross-check code.
+
 ---
 
 # 39. Design — Private Pilot Exam-Prep Layer (Phase 10: ACS source, study gloss, drills)

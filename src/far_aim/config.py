@@ -77,6 +77,16 @@ class Config:
         return self.enrichment_dir / "ppl-study.json"
 
     @property
+    def changes_dir(self) -> Path:
+        """Committed change history (plan §38): the edition transitions the
+        pipeline accepted, as the change ledger classified them."""
+        return self.data_dir / "changes"
+
+    @property
+    def history_path(self) -> Path:
+        return self.changes_dir / "history.json"
+
+    @property
     def manifest_path(self) -> Path:
         return self.manifests_dir / "sources.json"
 

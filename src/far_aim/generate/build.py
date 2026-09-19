@@ -36,6 +36,7 @@ from far_aim.generate.aim_markdown import collect_asset_names
 from far_aim.generate.aim_markdown import collect_text as collect_aim_text
 from far_aim.generate.enrich import EnrichmentLayer
 from far_aim.generate.frontmatter import emit_frontmatter, frontmatter_defect
+from far_aim.history import History
 from far_aim.links import definitions, glossary, semantic, study
 from far_aim.links.citations import collect_text as collect_far_text
 from far_aim.models import acs as acs_model
@@ -293,6 +294,7 @@ def build_registry(
     )
     _add_stem(registry, seen, notes.SOURCE_STATUS_STEM, (f"{notes.SOURCE_STATUS_STEM}.md",))
     _add_stem(registry, seen, notes.HOME_STEM, (f"{notes.HOME_STEM}.md",))
+    _add_stem(registry, seen, notes.WHAT_CHANGED_STEM, (f"{notes.WHAT_CHANGED_STEM}.md",))
     # Curated entry notes are link targets, not planned files: registering
     # them lets generated notes link there and keeps their names out of the
     # alias namespace (a heading alias equal to "Collections" must drop).
@@ -562,6 +564,7 @@ def plan_vault(
     enrichment: EnrichmentLayer | None = None,
     definitions_gate: definitions.DefinitionsGate | None = None,
     acs: AcsLayer | None = None,
+    history: History | None = None,
 ) -> dict[tuple[str, ...], bytes]:
     """Render the complete vault in memory and verify it (nothing written).
 
@@ -623,6 +626,7 @@ def plan_vault(
                 )
     add(notes.build_title_index(docs, version, title_hash))
     add(notes.build_source_status(sources))
+    add(notes.build_what_changed(history if history is not None else History(), registry.stems))
     has_concepts = enrichment is not None and enrichment.concepts is not None
     add(
         notes.build_home(
@@ -968,8 +972,8 @@ def _verify_plan(
     acs: AcsLayer | None = None,
 ) -> None:
     """Phase 3/4/5/10 exit-criteria gates, enforced before any write."""
-    # + title index, source status, and home
-    expected = len(docs) + registry.section_count + registry.appendix_count + 3
+    # + title index, source status, home, and what changed
+    expected = len(docs) + registry.section_count + registry.appendix_count + 4
     if aim is not None:
         expected += registry.aim_note_count + len(registry.aim_assets) + 1  # + ledger
     if pcg is not None:
@@ -1187,7 +1191,7 @@ def sync_vault(config: Config, plan: dict[tuple[str, ...], bytes]) -> SyncStats:
             candidates.extend(
                 p for p in sorted(prep_root.rglob("*.txt")) if p.is_file() and p not in paths
             )
-        for root_stem in (notes.SOURCE_STATUS_STEM, notes.HOME_STEM):
+        for root_stem in (notes.SOURCE_STATUS_STEM, notes.HOME_STEM, notes.WHAT_CHANGED_STEM):
             root_note = vault / f"{root_stem}.md"
             if root_note.exists():
                 candidates.append(root_note)
@@ -1255,9 +1259,10 @@ def build_vault(
     enrichment: EnrichmentLayer | None = None,
     definitions_gate: definitions.DefinitionsGate | None = None,
     acs: AcsLayer | None = None,
+    history: History | None = None,
 ) -> SyncStats:
     """Plan, verify, and sync the whole vault; raises BuildError on any defect."""
     plan = plan_vault(
-        docs, version, title_hash, sources, aim, pcg, enrichment, definitions_gate, acs
+        docs, version, title_hash, sources, aim, pcg, enrichment, definitions_gate, acs, history
     )
     return sync_vault(config, plan)

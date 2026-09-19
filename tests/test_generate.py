@@ -533,8 +533,8 @@ def test_slice_plan_shape(slice_plan):
     assert ("Home.md",) in paths
     assert ("FAR", "Part 091", "Part 91.md") in paths
     assert ("FAR", "Part 091", "91.155.md") in paths
-    # 1 part index + 11 sections + 4 appendices + title + status + home
-    assert len(slice_plan) == 19
+    # 1 part index + 11 sections + 4 appendices + title + status + home + what changed
+    assert len(slice_plan) == 20
 
 
 def test_cross_reference_only_links_in_corpus(slice_plan):

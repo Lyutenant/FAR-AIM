@@ -1,0 +1,235 @@
+{
+  "schema": 1,
+  "transitions": [
+    {
+      "corpus": "FAR",
+      "before": "2026-08-19",
+      "after": "2026-08-24",
+      "published": 6544,
+      "planned": 6544,
+      "unchanged": 0,
+      "provenance_only": 6544,
+      "content_changed": [],
+      "added": [],
+      "removed": [],
+      "moved": [],
+      "announcement": {
+        "record": "eCFR amendment index",
+        "since": "2026-08-19",
+        "until": "2026-08-24",
+        "amended": 0,
+        "removed": 0,
+        "unchanged": []
+      }
+    },
+    {
+      "corpus": "FAR",
+      "before": "2026-08-24",
+      "after": "2026-09-03",
+      "published": 6544,
+      "planned": 6544,
+      "unchanged": 0,
+      "provenance_only": 6532,
+      "content_changed": [
+        {
+          "stem": "71.1",
+          "citation": "14 CFR § 71.1",
+          "announced": true
+        },
+        {
+          "stem": "71.15",
+          "citation": "14 CFR § 71.15",
+          "announced": true
+        },
+        {
+          "stem": "71.31",
+          "citation": "14 CFR § 71.31",
+          "announced": true
+        },
+        {
+          "stem": "71.33",
+          "citation": "14 CFR § 71.33",
+          "announced": true
+        },
+        {
+          "stem": "71.41",
+          "citation": "14 CFR § 71.41",
+          "announced": true
+        },
+        {
+          "stem": "71.5",
+          "citation": "14 CFR § 71.5",
+          "announced": true
+        },
+        {
+          "stem": "71.51",
+          "citation": "14 CFR § 71.51",
+          "announced": true
+        },
+        {
+          "stem": "71.61",
+          "citation": "14 CFR § 71.61",
+          "announced": true
+        },
+        {
+          "stem": "71.71",
+          "citation": "14 CFR § 71.71",
+          "announced": true
+        },
+        {
+          "stem": "71.901",
+          "citation": "14 CFR § 71.901",
+          "announced": true
+        },
+        {
+          "stem": "234.4",
+          "citation": "14 CFR § 234.4",
+          "announced": true
+        },
+        {
+          "stem": "413.17",
+          "citation": "14 CFR § 413.17",
+          "announced": true
+        }
+      ],
+      "added": [],
+      "removed": [],
+      "moved": [],
+      "announcement": {
+        "record": "eCFR amendment index",
+        "since": "2026-08-24",
+        "until": "2026-09-03",
+        "amended": 12,
+        "removed": 0,
+        "unchanged": []
+      }
+    },
+    {
+      "corpus": "FAR",
+      "before": "2026-09-03",
+      "after": "2026-09-15",
+      "published": 6544,
+      "planned": 6544,
+      "unchanged": 0,
+      "provenance_only": 6523,
+      "content_changed": [
+        {
+          "stem": "47.1",
+          "citation": "14 CFR § 47.1",
+          "announced": true
+        },
+        {
+          "stem": "47.19",
+          "citation": "14 CFR § 47.19",
+          "announced": true
+        },
+        {
+          "stem": "47.31",
+          "citation": "14 CFR § 47.31",
+          "announced": true
+        },
+        {
+          "stem": "47.39",
+          "citation": "14 CFR § 47.39",
+          "announced": true
+        },
+        {
+          "stem": "47.5",
+          "citation": "14 CFR § 47.5",
+          "announced": true
+        },
+        {
+          "stem": "49.11",
+          "citation": "14 CFR § 49.11",
+          "announced": true
+        },
+        {
+          "stem": "49.17",
+          "citation": "14 CFR § 49.17",
+          "announced": true
+        },
+        {
+          "stem": "49.21",
+          "citation": "14 CFR § 49.21",
+          "announced": true
+        },
+        {
+          "stem": "49.33",
+          "citation": "14 CFR § 49.33",
+          "announced": true
+        },
+        {
+          "stem": "61.14",
+          "citation": "14 CFR § 61.14",
+          "announced": true
+        },
+        {
+          "stem": "Part 61 Appendix A",
+          "citation": "14 CFR Part 61, Appendix A",
+          "announced": true
+        },
+        {
+          "stem": "71.1",
+          "citation": "14 CFR § 71.1",
+          "announced": true
+        },
+        {
+          "stem": "71.15",
+          "citation": "14 CFR § 71.15",
+          "announced": true
+        },
+        {
+          "stem": "71.31",
+          "citation": "14 CFR § 71.31",
+          "announced": true
+        },
+        {
+          "stem": "71.33",
+          "citation": "14 CFR § 71.33",
+          "announced": true
+        },
+        {
+          "stem": "71.41",
+          "citation": "14 CFR § 71.41",
+          "announced": true
+        },
+        {
+          "stem": "71.5",
+          "citation": "14 CFR § 71.5",
+          "announced": true
+        },
+        {
+          "stem": "71.51",
+          "citation": "14 CFR § 71.51",
+          "announced": true
+        },
+        {
+          "stem": "71.61",
+          "citation": "14 CFR § 71.61",
+          "announced": true
+        },
+        {
+          "stem": "71.71",
+          "citation": "14 CFR § 71.71",
+          "announced": true
+        },
+        {
+          "stem": "71.901",
+          "citation": "14 CFR § 71.901",
+          "announced": true
+        }
+      ],
+      "added": [],
+      "removed": [],
+      "moved": [],
+      "announcement": {
+        "record": "eCFR amendment index",
+        "since": "2026-09-03",
+        "until": "2026-09-15",
+        "amended": 21,
+        "removed": 0,
+        "unchanged": []
+      }
+    }
+  ]
+}

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
 from far_aim.generate import BuildError, enrich, naming
 from far_aim.generate.frontmatter import Value
@@ -18,10 +19,14 @@ from far_aim.generate.markdown import ECFR_BASE_URL, escape_md, render_blocks
 from far_aim.links import citations as cites
 from far_aim.links import definitions
 
+if TYPE_CHECKING:  # the history module imports the ledger, which imports this module
+    from far_aim.history import History, Transition
+
 FAR_DIR = "FAR"
 TITLE_INDEX_STEM = "Title 14"
 SOURCE_STATUS_STEM = "Source Status"
 HOME_STEM = "Home"
+WHAT_CHANGED_STEM = "What Changed"
 
 # Curated entry notes (Phase 7): committed, user-editable notes the generator
 # links to but never writes. Their stems are registered as link targets so the
@@ -563,6 +568,156 @@ def build_source_status(sources: dict[str, object]) -> Note:
     )
 
 
+_CORPUS_LABELS = {
+    "FAR": "FAR — Title 14 CFR",
+    "AIM": "AIM — Aeronautical Information Manual",
+    "PCG": "PCG — Pilot/Controller Glossary",
+    "ACS": "ACS — Private Pilot Airplane Airman Certification Standards",
+}
+
+
+def _edition_link(corpus: str, version: str) -> str:
+    if corpus == "FAR":
+        return f"[{version}]({ECFR_BASE_URL}/on/{version}/title-14)"
+    return version
+
+
+def _compare_link(corpus: str, stem: str, before: str, after: str) -> str | None:
+    """The eCFR's side-by-side view of a section across the two issues.
+
+    The eCFR canonicalises the compare URL as newer → older. Only whole
+    sections have such a page; appendices, ranges and part-local numbers
+    do not, and other corpora offer no point-in-time access at all.
+    """
+    if corpus != "FAR" or not _SECTION_URL_RE.match(stem):
+        return None
+    return f"[compare on eCFR]({ECFR_BASE_URL}/compare/{after}/to/{before}/title-14/section-{stem})"
+
+
+def _announcement_line(t: Transition) -> str:
+    a = t.announcement
+    if a is None:
+        return (
+            "No change record was available for this transition, so every change "
+            "counted as unexplained."
+        )
+    unchanged = a.get("unchanged")
+    quiet = "none"
+    if isinstance(unchanged, list) and unchanged:
+        quiet = ", ".join(str(x) for x in unchanged)
+    record = str(a.get("record", "change record"))
+    if record == "eCFR amendment index":
+        head = (
+            f"The eCFR amendment index ({a.get('since')} → {a.get('until')}) names "
+            f"{a.get('amended', 0):,} amended and {a.get('removed', 0):,} removed document(s)"
+        )
+    elif record == "AIM Explanation of Changes":
+        head = (
+            f"The Explanation of Changes (effective {a.get('effective_date')}) announces "
+            f"{a.get('announced', 0):,} paragraph(s) and mentions {a.get('mentioned', 0):,}"
+        )
+    elif record == "ACS Major Enhancements":
+        head = (
+            f"The Major Enhancements page names {a.get('added', 0):,} element code(s) added and "
+            f"{a.get('removed', 0):,} removed across {a.get('tasks', 0):,} Task(s)"
+        )
+    else:
+        head = f"The {record} was cross-checked"
+    return f"{head}; announced but unchanged: {quiet}."
+
+
+def _flag(announced: bool | None) -> str:
+    if announced is None:
+        return ""
+    return " — announced" if announced else " — **not announced**"
+
+
+def _render_transition(t: Transition, stems) -> list[str]:
+    def link(stem: str, citation: str) -> str:
+        text = escape_md(citation)
+        return f"[[{stem}|{link_display(citation)}]]" if stem in stems else text
+
+    lines = [
+        f"### {t.before} → {t.after}",
+        "",
+        f"Edition {_edition_link(t.corpus, t.after)}: {t.published:,} published notes → "
+        f"{t.planned:,} planned; content-changed {len(t.content_changed):,}, "
+        f"provenance-only {t.provenance_only:,}, added {len(t.added):,}, "
+        f"removed {len(t.removed):,}, moved {len(t.moved):,}.",
+        "",
+        _announcement_line(t),
+    ]
+    if t.accepted:
+        flags = ", ".join(f"`{f}`" for f in t.accepted)
+        lines += ["", f"Published over a change gate with {flags} (plan §38.5)."]
+    if not t.any_content_change:
+        lines += ["", "No note's official text changed."]
+    if t.content_changed:
+        lines += ["", f"**Content changed ({len(t.content_changed):,})**", ""]
+        for n in t.content_changed:
+            compare = _compare_link(t.corpus, n.stem, t.before, t.after)
+            lines.append(
+                f"- {link(n.stem, n.citation)}{_flag(n.announced)}"
+                + (f" · {compare}" if compare else "")
+            )
+    if t.added:
+        lines += ["", f"**Added ({len(t.added):,})**", ""]
+        lines += [f"- {link(n.stem, n.citation)}" for n in t.added]
+    if t.removed:
+        lines += ["", f"**Removed ({len(t.removed):,})**", ""]
+        lines += [f"- {escape_md(n.citation)}{_flag(n.announced)}" for n in t.removed]
+    if t.moved:
+        lines += ["", f"**Moved ({len(t.moved):,})**", ""]
+        lines += [
+            f"- {link(m.stem, m.citation)} — was {escape_md(m.from_citation)}" for m in t.moved
+        ]
+    return lines
+
+
+def build_what_changed(history: History, stems) -> Note:
+    """``vault/What Changed.md`` — the accepted edition transitions, note by note.
+
+    Compiled from the committed change history (plan §38; ``data/changes/
+    history.json``), which ``far-aim diff --record`` writes from the change
+    ledger. A changed note links to its current note only while that note
+    still exists (``stems``); older transitions may name notes since
+    removed, which stay plain text so no generated link is ever broken.
+    """
+    intro = (
+        "Every edition transition this vault has accepted, newest first per source, as "
+        "the change ledger classified it when the new edition was compared with the "
+        "published vault: a note is **content-changed** when the canonical hash of its "
+        "official text moved, **provenance-only** when only the edition label did. "
+        "*Announced* means the source's own change record — the eCFR amendment index, "
+        "the AIM Explanation of Changes, the ACS Major Enhancements — names it; an "
+        "unannounced change is real but unexplained by the source. "
+        f"[[{SOURCE_STATUS_STEM}]] shows the editions in force."
+    )
+    sections: list[str] = [f"# {WHAT_CHANGED_STEM}", "", intro]
+    any_corpus = False
+    for corpus, label in _CORPUS_LABELS.items():
+        transitions = history.for_corpus(corpus)
+        if not transitions:
+            continue
+        any_corpus = True
+        sections += ["", f"## {label}"]
+        for t in transitions:
+            sections += ["", *_render_transition(t, stems)]
+    if not any_corpus:
+        sections += ["", "No edition transition has been recorded yet."]
+    return Note(
+        kind="changelog",
+        path_parts=(f"{WHAT_CHANGED_STEM}.md",),
+        frontmatter=[
+            ("id", "what-changed"),
+            ("type", "changelog"),
+            ("generated", True),
+            ("title", WHAT_CHANGED_STEM),
+        ],
+        body="\n".join(sections) + "\n",
+    )
+
+
 def build_home(
     *,
     has_aim: bool,
@@ -592,6 +747,9 @@ def build_home(
             "Certification Standards (ACS)]]"
         )
     sources.append(f"- [[{SOURCE_STATUS_STEM}]] — the editions this vault is built from")
+    sources.append(
+        f"- [[{WHAT_CHANGED_STEM}]] — what each accepted edition changed, note by note"
+    )
 
     # Orientation: what each folder is, who writes it, and when to open it.
     generated = [

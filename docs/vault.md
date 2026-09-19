@@ -11,6 +11,7 @@ and the known limitations.
 vault/
 ├── Home.md                   # generated entry point (Phase 7)
 ├── Source Status.md          # manifest-derived currency table
+├── What Changed.md           # accepted edition transitions, note by note (plan §38.10)
 ├── .obsidian/                # minimal committed config (workspace gitignored)
 ├── Collections/              # curated (Phase 7): study collections
 │   ├── Collections.md
@@ -42,7 +43,7 @@ vault/
 Frontmatter is hand-emitted YAML in a fixed key order with every string
 JSON-double-quoted (deterministic bytes; `91.155` and dates would otherwise
 be misread by YAML). Schema-checked per note kind (`regulation`,
-`appendix`, `index`, `status`, `home`) before anything is written. No volatile
+`appendix`, `index`, `status`, `home`, `changelog`) before anything is written. No volatile
 timestamps ever appear in notes (plan §32.10) — `retrieved_at` and
 `last_checked_at` live only in the manifest.
 
@@ -108,6 +109,27 @@ is dropped globally whenever two notes would share it (plan §17.4; e.g.
   the eCFR graphic path — not embedded/hotlinked images, and not yet
   archived assets. Downloading eCFR graphics into the vault remains
   later-phase work; AIM figures are archived and embedded (see below).
+
+## What Changed (plan §38.10)
+
+`vault/What Changed.md` (kind `changelog`, linked from Home beside Source
+Status) is compiled from the committed change history
+`data/changes/history.json` (`far_aim.history`), which `far-aim diff
+--record` — and therefore every `update` — writes from the change ledger
+once the gates pass: one entry per accepted edition transition (corpus,
+before, after), never for a first build or a same-version correction.
+Per corpus, newest first, each transition lists its totals, what the
+source's own change record announced (the eCFR amendment index, the AIM
+Explanation of Changes, the ACS Major Enhancements, or "no change record
+was available"), any override flag it was published with, and then every
+content-changed, added, removed and moved note by citation. A changed
+note links to its note only while that note still exists in the plan
+(older transitions may name notes since removed, which stay plain text so
+no generated link is ever broken); a changed FAR section also links the
+eCFR's side-by-side compare page for the two issues (`/compare/{new}/to/
+{old}/title-14/section-N`, the order the eCFR canonicalises to). Removed
+notes are never linked. Absent history ⇒ the note says none is recorded;
+a malformed file fails the build.
 
 ## Regeneration safety (plan §32.5, §32.13)
 

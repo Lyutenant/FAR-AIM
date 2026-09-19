@@ -127,7 +127,8 @@ something.
 
 - **Schedule:** daily (`cron: 17 9 * * *`) plus `workflow_dispatch`.
 - **No-change run:** `update` says `nothing to do`, the change-detection
-  step finds a clean `data/manifests` + `vault`, and the job ends green
+  step finds a clean `data/manifests` + `data/enrichment` + `data/changes`
+  + `vault`, and the job ends green
   with no commit, branch, or PR.
 - **Changed run:** the gate re-runs `ruff` and the full `pytest` suite
   (the fetched + parsed layers are on disk, so the full-title build test
@@ -160,6 +161,12 @@ something.
   amendment index beside each accepted snapshot, so a large *announced*
   rule passes the thresholds and only unexplained churn trips them; the
   run log's `eCFR amendment index (…)` lines show what the index named.
+- **Change history (plan §38.10):** when the gates pass, `diff` records
+  each edition transition in `data/changes/history.json`, which
+  `build-vault` renders as `vault/What Changed.md` — the reader's view
+  of the same ledger the PR log prints. The workflow stages
+  `data/changes` with the manifest, enrichment and vault, so the PR
+  carries the entry for the edition it publishes.
 - **Raw snapshot archival (plan §6.2):** the AIM/PCG downloads in
   `data/raw` are uploaded as a workflow artifact when the run **failed**
   with downloads on disk (a quarantined mismatch, or a new edition whose

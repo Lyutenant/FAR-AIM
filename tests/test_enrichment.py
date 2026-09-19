@@ -365,8 +365,8 @@ def test_plan_renders_concepts_and_derived_links(slice_docs):
         curated_notes={"Cross-Country Flight": ("Topics", "Cross-Country Flight.md")},
     )
     plan = _plan(slice_docs, layer)
-    # 19 slice notes + 2 concepts + Concept Map
-    assert len(plan) == 22
+    # 20 slice notes + 2 concepts + Concept Map
+    assert len(plan) == 23
     concept = _note(plan, "VFR Visibility Rules.md")
     assert concept.startswith('---\nid: "concept-vfr-minimums"\ntype: "concept"\narea: "Weather"\n')
     assert "> [!note] Curated concept" in concept

@@ -16,6 +16,7 @@ Reference notes generated from official U.S. aviation sources, plus a curated st
 - [[PCG|Pilot/Controller Glossary]]
 - [[ACS Private Pilot Airplane|Private Pilot for Airplane Category Airman Certification Standards (ACS)]]
 - [[Source Status]] — the editions this vault is built from
+- [[What Changed]] — what each accepted edition changed, note by note
 
 ## What is here
 

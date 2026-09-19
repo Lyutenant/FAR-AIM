@@ -72,7 +72,7 @@ jobs:
       - name: Detect changes
         id: detect
         run: |
-          if [ -n "$(git status --porcelain -- data/manifests data/enrichment vault)" ]; then
+          if [ -n "$(git status --porcelain -- data/manifests data/enrichment data/changes vault)" ]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -115,7 +115,7 @@ jobs:
             echo '```'
             echo
             echo "### Vault diff"
-            git add -A -- data/manifests data/enrichment vault
+            git add -A -- data/manifests data/enrichment data/changes vault
             echo '```text'
             git diff --cached --stat -- vault | tail -3
             echo '```'
@@ -146,5 +146,6 @@ jobs:
           add-paths: |
             data/manifests
             data/enrichment
+            data/changes
             vault
           delete-branch: true

@@ -13,6 +13,7 @@ Reference notes generated from official U.S. aviation sources, plus a curated st
 
 - [[Title 14|Title 14, Code of Federal Regulations (the FARs)]]
 - [[Source Status]] — the editions this vault is built from
+- [[What Changed]] — what each accepted edition changed, note by note
 
 ## What is here
 

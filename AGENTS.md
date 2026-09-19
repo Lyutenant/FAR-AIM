@@ -297,6 +297,18 @@ index), fails; announced but unchanged / unannounced changes are
 reported, and FAR thresholds count only unannounced changes and
 removals, so a large announced rule passes while unexplained churn
 trips. Locally accepted-but-unpublished issues chain their indexes.
+Change history (2026-09-19; plan §38.10, docs/vault.md, docs/validation.md):
+`far-aim diff --record` (what `update` runs) appends each accepted
+edition transition, once the gates pass, to the committed
+`data/changes/history.json` (`far_aim.history`: classified notes with
+per-note `announced` flags, change-record summary, override flags;
+re-recording is byte-identical; first builds and same-version
+corrections record nothing) and `build-vault` renders it as
+`vault/What Changed.md` (kind `changelog`, linked from Home): per
+corpus, newest first, every content-changed/added/removed/moved note
+by citation, linked only while the note still exists, FAR sections
+also to the eCFR compare page. Malformed history fails the build. The
+three pre-existing FAR transitions were backfilled from git history.
 Phase 10 (Private Pilot exam-prep layer; design of record plan §39,
 2026-09-13): **10a shipped 2026-09-13** — the Private Pilot Airplane ACS
 is the fourth source (`far-aim fetch acs` / `parse acs`; manifest key
