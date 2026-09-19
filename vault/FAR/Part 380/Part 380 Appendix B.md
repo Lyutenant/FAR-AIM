@@ -6,7 +6,7 @@ title_number: 14
 part: 380
 appendix: "Appendix B"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:526735f33965ef65adfe986159a3c5b0eee5f2f1a3e95f05cebd901972e5660f"
 generated: true
 title: "Appendix B to Part 380—Public Charter Operators's Surety Trust Agreement"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix B to Part 380—Public Charter Operators's Surety Trust Agreement
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-380)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-380)
 
 ## Official Text
 

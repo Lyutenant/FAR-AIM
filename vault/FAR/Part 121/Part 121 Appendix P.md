@@ -6,7 +6,7 @@ title_number: 14
 part: 121
 appendix: "Appendix P"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:6eeb3a048c658027a376248b85a827df65a9437dc71633513c89a44171bf383c"
 generated: true
 title: "Appendix P to Part 121—Requirements for ETOPS and Polar Operations"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix P to Part 121—Requirements for ETOPS and Polar Operations
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-121)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-121)
 
 ## Official Text
 

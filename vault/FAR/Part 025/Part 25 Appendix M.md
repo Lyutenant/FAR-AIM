@@ -6,7 +6,7 @@ title_number: 14
 part: 25
 appendix: "Appendix M"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:6908ff6d280af799443f772849eaf9bd7b13a6521f2b8b2035e0ab72be3eb0b2"
 generated: true
 title: "Appendix M to Part 25—Fuel Tank System Flammability Reduction Means"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix M to Part 25—Fuel Tank System Flammability Reduction Means
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-25)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-25)
 
 ## Official Text
 

@@ -6,7 +6,7 @@
       "canonical_hash": "sha256:e37953cc24ae47515d7b02fa73d3420fcb00f99005bd77fb28213559f1c55785",
       "edition_label": "Private Pilot for Airplane Category (FAA-S-ACS-6C)",
       "effective_date": "2024-05-31",
-      "last_checked_at": "2026-09-14T00:49:10Z",
+      "last_checked_at": "2026-09-17T14:20:03Z",
       "raw_hash": "sha256:46ed6625723b0b7f37b3274cdb5170519f88baf28aec1f925286ef24909ea824",
       "source_url": "https://www.faa.gov/training_testing/testing/acs/private_airplane_acs_6.pdf"
     },
@@ -16,15 +16,15 @@
       "change": 3,
       "edition_label": "Basic with Change 1, 2 and 3",
       "effective_date": "2026-07-09",
-      "last_checked_at": "2026-09-05T21:57:34Z",
+      "last_checked_at": "2026-09-17T14:18:12Z",
       "raw_hash": "sha256:e21d9b52679713e9e3bf79783cf3195bf0b793e4046306ccf38a977e081fab37",
       "source_url": "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/index.html"
     },
     "ecfr_title_14": {
-      "accepted_version": "2026-09-03",
-      "canonical_hash": "sha256:ac07400a0014f27af24f79a7046ab8f9a78d3cf2af4a0340e5bcb934802bf9c3",
-      "last_checked_at": "2026-09-05T21:57:34Z",
-      "raw_hash": "sha256:0ee5253f17cd38a4385a6b337273f5427941f377aa2a535e6e81c7851d3fb345"
+      "accepted_version": "2026-09-15",
+      "canonical_hash": "sha256:8841c897eb53e94390553ebb19a3c8ae2ce2e06a15feb7472d4d1c82c120348f",
+      "last_checked_at": "2026-09-17T14:18:11Z",
+      "raw_hash": "sha256:f2b2c5f98c036dad694f8b5259af4a2b325aef278bcdbc947aeec1db148213c1"
     },
     "pcg": {
       "accepted_version": "2026-07-09-change-3",
@@ -32,7 +32,7 @@
       "change": 3,
       "edition_label": "Basic with Change 1, 2 and 3",
       "effective_date": "2026-07-09",
-      "last_checked_at": "2026-09-05T21:57:34Z",
+      "last_checked_at": "2026-09-17T14:19:57Z",
       "raw_hash": "sha256:30f86f5628ce27e641d5848ca94ccff47c6b288726cbfe0c4d348f3520712da4",
       "source_url": "https://www.faa.gov/air_traffic/publications/atpubs/pcg_html/index.html"
     }

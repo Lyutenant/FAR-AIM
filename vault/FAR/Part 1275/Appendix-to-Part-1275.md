@@ -6,7 +6,7 @@ title_number: 14
 part: 1275
 appendix: "Appendix-to-Part-1275"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:53d31d8accfe6095f81b058efccb9cdd375b3cba9928f6d151d941ff31b3a780"
 generated: true
 title: "Appendix to Part 1275—Research Misconduct"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix to Part 1275—Research Misconduct
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-1275)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-1275)
 
 ## Official Text
 

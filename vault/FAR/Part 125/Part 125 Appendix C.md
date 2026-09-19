@@ -6,7 +6,7 @@ title_number: 14
 part: 125
 appendix: "Appendix C"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:4b72904a77a17afed4c70dfe009a9315259a4d01182fc231470dc4795b511102"
 generated: true
 title: "Appendix C to Part 125—Ice Protection"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix C to Part 125—Ice Protection
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-125)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-125)
 
 ## Official Text
 

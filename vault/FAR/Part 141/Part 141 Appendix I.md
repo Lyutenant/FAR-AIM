@@ -6,7 +6,7 @@ title_number: 14
 part: 141
 appendix: "Appendix I"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:6515fe733b96b678b9792bfb2cf35ee973a6fed009fc890179e7cb2dc1625557"
 generated: true
 title: "Appendix I to Part 141—Additional Aircraft Category and/or Class Rating Course"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix I to Part 141—Additional Aircraft Category and/or Class Rating Course
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-141)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-141)
 
 ## Official Text
 

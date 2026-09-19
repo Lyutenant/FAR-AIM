@@ -6,7 +6,7 @@ title_number: 14
 part: 141
 appendix: "Appendix L"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:824aedc0f62fc240d2adcd1ab172f69bee286740d70861a28defdee612019fed"
 generated: true
 title: "Appendix L to Part 141—Pilot Ground School Course"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix L to Part 141—Pilot Ground School Course
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-141)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-141)
 
 ## Official Text
 

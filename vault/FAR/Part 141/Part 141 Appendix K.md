@@ -6,7 +6,7 @@ title_number: 14
 part: 141
 appendix: "Appendix K"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:9be8508e6ab00b245d5360655a3fe499865f5d917eebf51b030b599727ae0c3d"
 generated: true
 title: "Appendix K to Part 141—Special Preparation Courses"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix K to Part 141—Special Preparation Courses
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-141)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-141)
 
 ## Official Text
 

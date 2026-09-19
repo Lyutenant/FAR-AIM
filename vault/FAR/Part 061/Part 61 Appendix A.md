@@ -6,8 +6,8 @@ title_number: 14
 part: 61
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-09-03"
-canonical_hash: "sha256:195437ea938caa71e62c2222532f77523fb1143c784eeb72c24e1a990ce6867b"
+source_version: "2026-09-15"
+canonical_hash: "sha256:a82d093102e57e0d98527a625e0bf9f813b7663d800ea97be2857276a1f747b1"
 generated: true
 title: "Appendix A to Part 61—Airman Certification Standards and Practical Test Standards"
 aliases:
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix A to Part 61—Airman Certification Standards and Practical Test Standards
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-61)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-61)
 
 ## Official Text
 
@@ -45,14 +45,14 @@ cssclasses:
 | Private Pilot Certificate; Lighter-Than-Air Category—Airship Rating, Lighter-Than-Air Category—Balloon Rating | FAA-S-8081-17A, Private Pilot Practical Test Standards for Lighter-Than-Air Category, November 2023. |
 | Private Pilot Certificate; Powered Parachute Category—Land Rating, Powered Parachute Category—Sea Rating, Weight-Shift-Control Aircraft Category—Land Rating, Weight-Shift-Control Aircraft Category—Sea Rating | FAA-S-8081-32A, Private Pilot Practical Test Standards for Powered Parachute Category and Weight-Shift-Control Category, November 2023. |
 | Recreational Pilot Certificate; Airplane Category—Single-Engine Land Rating, Airplane Category—Single-Engine Sea Rating, Rotorcraft Category—Helicopter Rating, Rotorcraft Category—Gyroplane Rating | FAA-S-8081-3B, Recreational Pilot Practical Test Standards for Airplane Category and Rotorcraft Category, November 2023. |
-| Sport Pilot Certificate; Airplane Category—Single-Engine Land Privileges, Airplane Category—Single-Engine Sea Privileges, Rotorcraft Category—Gyroplane Privileges, Glider Category | FAA-S-8081-29A, Sport Pilot and Sport Pilot Flight Instructor Rating Practical Test Standards for Airplane Category, Rotorcraft Category, and Glider Category, November 2023. |
+| Sport Pilot Certificate; Airplane Category—Single-Engine Land Privileges, Airplane Category—Single-Engine Sea Privileges, Rotorcraft Category—Gyroplane Privileges, Glider Category | FAA-S-8081-29B, Sport Pilot and Flight Instructors with a Sport Pilot Rating Practical Test Standards for Airplane Category, Rotorcraft Category Gyroplane, and Glider Category, June 2026. |
 | Flight Instructor Certificate with a Sport Pilot Rating; Airplane Category—Single-Engine Privileges, Rotorcraft Category—Gyroplane Privileges, Glider Category |  |
 | Sport Pilot Certificate; Rotorcraft Category—Helicopter Privilege—Simplified Flight Controls | FAA-S-ACS-26, Sport Pilot for Rotorcraft Category Helicopter—Simplified Flight Controls Privilege Airman Certification Standards, July 2025. |
 | Flight Instructor Certificate with a Sport Pilot Rating; Rotorcraft Helicopter—Simplified Flight Controls | FAA-S-ACS-31, Flight Instructor with a Sport Pilot Rating for Rotorcraft Category Helicopter—Simplified Flight Controls Privilege Airman Certification Standards, July 2025. |
-| Sport Pilot Certificate; Lighter-Than-Air Category—Airship Privileges, Lighter-Than-Air Category—Balloon Privileges | FAA-S-8081-30A, Sport Pilot and Sport Pilot Flight Instructor Rating Practical Test Standards for Lighter-Than-Air Category, November 2023. |
+| Sport Pilot Certificate; Lighter-Than-Air Category—Airship Privileges, Lighter-Than-Air Category—Balloon Privileges | FAA-S-8081-30B, Sport Pilot and Flight Instructors with a Sport Pilot Rating Practical Test Standards for Lighter-Than-Air Category, June 2026. |
 | Flight Instructor Certificate with a Sport Pilot Rating; Lighter-Than-Air Category—Airship Privileges, Lighter-Than-Air Category—Balloon Privileges |  |
-| Sport Pilot Certificate; Powered Parachute Category—Land Privileges, Powered Parachute Category—Sea Privileges, Weight-Shift-Control Aircraft Category—Land Privileges, Weight-Shift-Control Aircraft Category—Sea Privileges | FAA-S-8081-31A, Sport Pilot and Sport Pilot Flight Instructor Rating Practical Test Standards for Powered Parachute Category and Weight-Shift-Control Category, November 2023. |
-| Flight Instructor Certificate with a Sport Pilot Rating; Powered Parachute Category Privileges, Weight-Shift-Control Aircraft Category Privileges. |  |
+| Sport Pilot Certificate; Powered Parachute Category—Land Privileges, Powered Parachute Category—Sea Privileges, Weight-Shift-Control Aircraft Category—Land Privileges, Weight-Shift-Control Aircraft Category—Sea Privileges | FAA-S-8081-31B, Sport Pilot and Flight Instructors with a Sport Pilot Rating Practical Test Standards for Powered Parachute Category and Weight-Shift-Control Aircraft Category, June 2026. |
+| Flight Instructor Certificate with a Sport Pilot Rating; Powered Parachute Category Privileges, Weight-Shift-Control Aircraft Category Privileges |  |
 | Instrument Rating—Airplane Instrument Proficiency Check—Airplane | FAA-S-ACS-8C, Instrument Rating—Airplane Airman Certification Standards, November 2023. |
 | Instrument Rating—Helicopter Instrument Proficiency Check—Helicopter | FAA-S-ACS-14, Instrument Rating—Helicopter Airman Certification Standards, November 2023. |
 | Instrument Rating—Powered-Lift Instrument Proficiency Check—Powered-Lift | FAA-S-ACS-3, Instrument Rating—Powered-Lift Airman Certification Standards, November 2023. |
@@ -74,7 +74,7 @@ cssclasses:
 
 **Citations:**
 
-\[Docket FAA-2023-1377, Amdt. 61-159, 90 FR 35217, July 24, 2025]
+\[Docket FAA-2023-1377, Amdt. 61-159, 90 FR 35217, July 24, 2025, as amended by Docket FAA-2025-3519, Amdt. 61-161, 91 FR 58020, 91 FR 58020, Sept. 14, 2026]
 
 ## Explicit Cross-References
 

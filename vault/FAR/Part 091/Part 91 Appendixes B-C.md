@@ -6,7 +6,7 @@ title_number: 14
 part: 91
 appendix: "Appendixes B-C"
 source: "ecfr"
-source_version: "2026-09-03"
+source_version: "2026-09-15"
 canonical_hash: "sha256:0aa18f0e5f20eea3d48121657d207dde4f3843bbcdf1dd4834b5a8a944c930c4"
 generated: true
 title: "Appendixes B—C [Reserved]"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendixes B—C \[Reserved]
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-03 — [view on eCFR](https://www.ecfr.gov/on/2026-09-03/title-14/part-91)
+> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-91)
 
 ## Official Text
 
