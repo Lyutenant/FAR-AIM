@@ -5,8 +5,8 @@ citation: "14 CFR Part 121"
 title_number: 14
 part: 121
 source: "ecfr"
-source_version: "2026-09-15"
-canonical_hash: "sha256:cd9060f923fce5af46bd66c363b2b1266ddcf5ac7c302fb6d31db5c060f46428"
+source_version: "2026-09-29"
+canonical_hash: "sha256:2de1219783dc42f00884a644092b04c635bb7eb01098a610ac3e4b0479ff6678"
 generated: true
 title: "OPERATING REQUIREMENTS: DOMESTIC, FLAG, AND SUPPLEMENTAL OPERATIONS"
 tags:
@@ -16,7 +16,7 @@ tags:
 # Part 121 — OPERATING REQUIREMENTS: DOMESTIC, FLAG, AND SUPPLEMENTAL OPERATIONS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-121)
+> eCFR Title 14, issue 2026-09-29 — [view on eCFR](https://www.ecfr.gov/on/2026-09-29/title-14/part-121)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER G—AIR CARRIERS AND OPERATORS FOR COMPENSATION OR HIRE: CERTIFICATION AND OPERATIONS
 
@@ -195,7 +195,7 @@ tags:
 - [[121.321|§ 121.321 — Operations in icing]]
 - [[121.323|§ 121.323 — Instruments and equipment for operations at night]]
 - [[121.325|§ 121.325 — Instruments and equipment for operations under IFR or over-the-top]]
-- [[121.326|§ 121.326 — xxx]]
+- [[121.326|§ 121.326 — Radio Altimeter Systems]]
 - [[121.327|§ 121.327 — Supplemental oxygen: Reciprocating engine powered airplanes]]
 - [[121.329|§ 121.329 — Supplemental oxygen for sustenance: Turbine engine powered airplanes]]
 - [[121.331|§ 121.331 — Supplemental oxygen requirements for pressurized cabin airplanes: Reciprocating engine powered airplanes]]

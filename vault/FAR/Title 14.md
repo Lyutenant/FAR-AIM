@@ -4,8 +4,8 @@ type: "index"
 citation: "14 CFR"
 title_number: 14
 source: "ecfr"
-source_version: "2026-09-15"
-canonical_hash: "sha256:8841c897eb53e94390553ebb19a3c8ae2ce2e06a15feb7472d4d1c82c120348f"
+source_version: "2026-09-29"
+canonical_hash: "sha256:6bf46ed5041fa3ad53f539d88e7eca72af3716c3fd7f79ec6326d9f015c49c62"
 generated: true
 title: "Aeronautics and Space"
 tags:
@@ -15,7 +15,7 @@ tags:
 # Title 14 — Aeronautics and Space
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14)
+> eCFR Title 14, issue 2026-09-29 — [view on eCFR](https://www.ecfr.gov/on/2026-09-29/title-14)
 
 ## CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 

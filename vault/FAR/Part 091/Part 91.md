@@ -5,8 +5,8 @@ citation: "14 CFR Part 91"
 title_number: 14
 part: 91
 source: "ecfr"
-source_version: "2026-09-15"
-canonical_hash: "sha256:fd1200fdbd1e1f0d8a1448ed55c6c4cefc3adeb8426eac17c379845cd3bdb03d"
+source_version: "2026-09-29"
+canonical_hash: "sha256:ab6bf6d789eecb8ed91712a7b258c08b70dd4d062b37ebdea85ddf27d4ed10e9"
 generated: true
 title: "GENERAL OPERATING AND FLIGHT RULES"
 tags:
@@ -16,7 +16,7 @@ tags:
 # Part 91 — GENERAL OPERATING AND FLIGHT RULES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-91)
+> eCFR Title 14, issue 2026-09-29 — [view on eCFR](https://www.ecfr.gov/on/2026-09-29/title-14/part-91)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER F—AIR TRAFFIC AND GENERAL OPERATING RULES
 
@@ -130,7 +130,7 @@ tags:
 - [[91.215|§ 91.215 — ATC transponder and altitude reporting equipment and use]]
 - [[91.217|§ 91.217 — Data correspondence between automatically reported pressure altitude data and the pilot's altitude reference]]
 - [[91.219|§ 91.219 — Altitude alerting system or device: Turbojet-powered civil airplanes]]
-- [[91.220|§ 91.220 — xxx]]
+- [[91.220|§ 91.220 — Radio Altimeter Systems]]
 - [[91.221|§ 91.221 — Traffic alert and collision avoidance system equipment and use]]
 - [[91.223|§ 91.223 — Terrain awareness and warning system]]
 - [[91.225|§ 91.225 — Automatic Dependent Surveillance-Broadcast (ADS-B) Out equipment and use]]

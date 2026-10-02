@@ -5,7 +5,7 @@ citation: "14 CFR Part 49"
 title_number: 14
 part: 49
 source: "ecfr"
-source_version: "2026-09-15"
+source_version: "2026-09-29"
 canonical_hash: "sha256:8318152967b9a6293822decbaef1a7dd94de0da0220cd126fe0780b11bb2c220"
 generated: true
 title: "RECORDING OF AIRCRAFT TITLES AND SECURITY DOCUMENTS"
@@ -16,7 +16,7 @@ tags:
 # Part 49 — RECORDING OF AIRCRAFT TITLES AND SECURITY DOCUMENTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-49)
+> eCFR Title 14, issue 2026-09-29 — [view on eCFR](https://www.ecfr.gov/on/2026-09-29/title-14/part-49)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 
