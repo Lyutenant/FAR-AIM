@@ -230,6 +230,43 @@
         "removed": 0,
         "unchanged": []
       }
+    },
+    {
+      "corpus": "FAR",
+      "before": "2026-09-15",
+      "after": "2026-09-29",
+      "published": 6544,
+      "planned": 6544,
+      "unchanged": 0,
+      "provenance_only": 6541,
+      "content_changed": [
+        {
+          "stem": "91.220",
+          "citation": "14 CFR § 91.220",
+          "announced": true
+        },
+        {
+          "stem": "121.326",
+          "citation": "14 CFR § 121.326",
+          "announced": true
+        },
+        {
+          "stem": "129.16",
+          "citation": "14 CFR § 129.16",
+          "announced": true
+        }
+      ],
+      "added": [],
+      "removed": [],
+      "moved": [],
+      "announcement": {
+        "record": "eCFR amendment index",
+        "since": "2026-09-15",
+        "until": "2026-09-29",
+        "amended": 3,
+        "removed": 0,
+        "unchanged": []
+      }
     }
   ]
 }

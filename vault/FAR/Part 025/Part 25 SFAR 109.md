@@ -6,7 +6,7 @@ title_number: 14
 part: 25
 appendix: "SFAR 109"
 source: "ecfr"
-source_version: "2026-09-15"
+source_version: "2026-09-29"
 canonical_hash: "sha256:e064c04529af522b3d4073c7aab14d83c8f255407c8666dcf118697bd69e8390"
 generated: true
 title: "Special Federal Aviation Regulation No. 109"
@@ -22,7 +22,7 @@ cssclasses:
 # Special Federal Aviation Regulation No. 109
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-25)
+> eCFR Title 14, issue 2026-09-29 — [view on eCFR](https://www.ecfr.gov/on/2026-09-29/title-14/part-25)
 
 ## Official Text
 

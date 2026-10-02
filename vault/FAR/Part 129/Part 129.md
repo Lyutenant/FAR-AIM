@@ -5,8 +5,8 @@ citation: "14 CFR Part 129"
 title_number: 14
 part: 129
 source: "ecfr"
-source_version: "2026-09-15"
-canonical_hash: "sha256:79e03ccc51f07bd94473dde280075c3404a41281ed3553746641c369b34f17fe"
+source_version: "2026-09-29"
+canonical_hash: "sha256:5fad947731578ac32bacf59fc854e15722a0889414260a0876e9c24d1a23a475"
 generated: true
 title: "OPERATIONS: FOREIGN AIR CARRIERS AND FOREIGN OPERATORS OF U.S.-REGISTERED AIRCRAFT ENGAGED IN COMMON CARRIAGE"
 tags:
@@ -16,7 +16,7 @@ tags:
 # Part 129 — OPERATIONS: FOREIGN AIR CARRIERS AND FOREIGN OPERATORS OF U.S.-REGISTERED AIRCRAFT ENGAGED IN COMMON CARRIAGE
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-15 — [view on eCFR](https://www.ecfr.gov/on/2026-09-15/title-14/part-129)
+> eCFR Title 14, issue 2026-09-29 — [view on eCFR](https://www.ecfr.gov/on/2026-09-29/title-14/part-129)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER G—AIR CARRIERS AND OPERATORS FOR COMPENSATION OR HIRE: CERTIFICATION AND OPERATIONS
 
@@ -38,7 +38,7 @@ tags:
 - [[129.13|§ 129.13 — Airworthiness and registration certificates]]
 - [[129.14|§ 129.14 — Maintenance program and minimum equipment list requirements for U.S.-registered aircraft]]
 - [[129.15|§ 129.15 — Flightcrew member certificates]]
-- [[129.16|§ 129.16 — xxx]]
+- [[129.16|§ 129.16 — Radio Altimeter Systems]]
 - [[129.17|§ 129.17 — Aircraft communication and navigation equipment for operations under IFR or over the top]]
 - [[129.18|§ 129.18 — Collision avoidance system]]
 - [[129.19|§ 129.19 — Air traffic rules and procedures]]
