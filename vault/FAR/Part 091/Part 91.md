@@ -5,7 +5,7 @@ citation: "14 CFR Part 91"
 title_number: 14
 part: 91
 source: "ecfr"
-source_version: "2026-09-29"
+source_version: "2026-10-15"
 canonical_hash: "sha256:ab6bf6d789eecb8ed91712a7b258c08b70dd4d062b37ebdea85ddf27d4ed10e9"
 generated: true
 title: "GENERAL OPERATING AND FLIGHT RULES"
@@ -16,7 +16,7 @@ tags:
 # Part 91 — GENERAL OPERATING AND FLIGHT RULES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-29 — [view on eCFR](https://www.ecfr.gov/on/2026-09-29/title-14/part-91)
+> eCFR Title 14, issue 2026-10-15 — [view on eCFR](https://www.ecfr.gov/on/2026-10-15/title-14/part-91)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER F—AIR TRAFFIC AND GENERAL OPERATING RULES
 
