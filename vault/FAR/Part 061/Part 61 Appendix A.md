@@ -6,7 +6,7 @@ title_number: 14
 part: 61
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-09-29"
+source_version: "2026-10-15"
 canonical_hash: "sha256:a82d093102e57e0d98527a625e0bf9f813b7663d800ea97be2857276a1f747b1"
 generated: true
 title: "Appendix A to Part 61—Airman Certification Standards and Practical Test Standards"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix A to Part 61—Airman Certification Standards and Practical Test Standards
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-29 — [view on eCFR](https://www.ecfr.gov/on/2026-09-29/title-14/part-61)
+> eCFR Title 14, issue 2026-10-15 — [view on eCFR](https://www.ecfr.gov/on/2026-10-15/title-14/part-61)
 
 ## Official Text
 

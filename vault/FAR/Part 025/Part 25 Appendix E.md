@@ -6,7 +6,7 @@ title_number: 14
 part: 25
 appendix: "Appendix E"
 source: "ecfr"
-source_version: "2026-09-29"
+source_version: "2026-10-15"
 canonical_hash: "sha256:99a7f48e4d347a1260926ad2e019cb64d29391becc3aa1a9e15cea03ff2472f2"
 generated: true
 title: "Appendix E to Part 25"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix E to Part 25
 
 > [!info] Source
-> eCFR Title 14, issue 2026-09-29 — [view on eCFR](https://www.ecfr.gov/on/2026-09-29/title-14/part-25)
+> eCFR Title 14, issue 2026-10-15 — [view on eCFR](https://www.ecfr.gov/on/2026-10-15/title-14/part-25)
 
 ## Official Text
 

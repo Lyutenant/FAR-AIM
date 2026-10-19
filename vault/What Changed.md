@@ -11,6 +11,16 @@ Every edition transition this vault has accepted, newest first per source, as th
 
 ## FAR — Title 14 CFR
 
+### 2026-09-29 → 2026-10-15
+
+Edition [2026-10-15](https://www.ecfr.gov/on/2026-10-15/title-14): 6,544 published notes → 6,544 planned; content-changed 1, provenance-only 6,543, added 0, removed 0, moved 0.
+
+The eCFR amendment index (2026-09-29 → 2026-10-15) names 1 amended and 0 removed document(s); announced but unchanged: none.
+
+**Content changed (1)**
+
+- [[234.4|14 CFR § 234.4]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-10-15/to/2026-09-29/title-14/section-234.4)
+
 ### 2026-09-15 → 2026-09-29
 
 Edition [2026-09-29](https://www.ecfr.gov/on/2026-09-29/title-14): 6,544 published notes → 6,544 planned; content-changed 3, provenance-only 6,541, added 0, removed 0, moved 0.

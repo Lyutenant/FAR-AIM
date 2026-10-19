@@ -267,6 +267,33 @@
         "removed": 0,
         "unchanged": []
       }
+    },
+    {
+      "corpus": "FAR",
+      "before": "2026-09-29",
+      "after": "2026-10-15",
+      "published": 6544,
+      "planned": 6544,
+      "unchanged": 0,
+      "provenance_only": 6543,
+      "content_changed": [
+        {
+          "stem": "234.4",
+          "citation": "14 CFR § 234.4",
+          "announced": true
+        }
+      ],
+      "added": [],
+      "removed": [],
+      "moved": [],
+      "announcement": {
+        "record": "eCFR amendment index",
+        "since": "2026-09-29",
+        "until": "2026-10-15",
+        "amended": 1,
+        "removed": 0,
+        "unchanged": []
+      }
     }
   ]
 }
