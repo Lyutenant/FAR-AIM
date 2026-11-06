@@ -5,7 +5,7 @@ citation: "AIM"
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:61b8dca47ca3df540efec41f901223b067fe4eece9c3deaadafd4c83c5ed7e71"
+canonical_hash: "sha256:1a7d7777e0a6a404d404f2e339ac8b0ab16cb99c0958edc1a7eac2060afb60c1"
 generated: true
 title: "Aeronautical Information Manual"
 tags:

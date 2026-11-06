@@ -7,7 +7,7 @@ section: 5
 source: "faa"
 effective_date: "2026-07-09"
 change: 3
-canonical_hash: "sha256:96d962948da4e5e23c05d2994ce927a03cd97b39add825121536158a9ff68a66"
+canonical_hash: "sha256:31276dbb4f8bcd512b55b6bc22e10ce432a63ef3b119b7861d92277663ab6745"
 generated: true
 title: "Aircraft Rescue and Fire Fighting Communications"
 aliases:

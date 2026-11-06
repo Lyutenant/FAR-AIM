@@ -179,7 +179,6 @@
     "aim0603_fig192_recovered.svg": "sha256:6558b5ffab4dd4f425972f891b2820ed49c8b08d25abce43354cc90c80cd8ca3",
     "aim0603_fig193_recovered.svg": "sha256:ec7d113a45f2d76c12b6e157bfbf99a7fd9308451317824d384c78f6f2a0f245",
     "aim0603_fig194_recovered.svg": "sha256:e59dcfec6b67d103905f95bd7f745c6860246469ef2452ed5f8f6533cc3193ed",
-    "aim0605_fig197_recovered.svg": "sha256:994862304534f972a005b5f911f5a15931bd4ee459021c72bc30e7d60dcf17de",
     "aim0701_15x1530.png": "sha256:bf251be1bbd9e26318ca907378e36f7b4058447028937db7f15633107d64ba6d",
     "aim0701_15x1531.png": "sha256:13c54d1cf301295539a7ef48447553e9214d46cfaf574daa6836c070c73ab3fc",
     "aim0701_15x1532.png": "sha256:7225e845cfed429b1ab6c8179879441a9a667176628aa58c80e90e55cdd99d31",
@@ -270,6 +269,9 @@
     "aimapd1_floating1.png": "sha256:dd4705437e72ba1be530196125cab99e5ca0229899f02b97b0c31b578d22769b",
     "aimapd4_At_Anchor0.png": "sha256:b456aa6664cf2abcec9942450d75a4f0d8ee1cec97ae8a1f9254b927402d7571",
     "aimapd4_At_Anchor1.png": "sha256:79ffd55c851bcabcf78bb032bb54f0c2bbfa0b522f11bdf36761e0d905eb33f7",
-    "aimapd5_At_Anchor0.png": "sha256:363bb22e2482574fc2c6bbe8c176fe39f62634a6dddc1be81892ec7234f394a0"
+    "aimapd5_At_Anchor0.png": "sha256:363bb22e2482574fc2c6bbe8c176fe39f62634a6dddc1be81892ec7234f394a0",
+    "fig_6_5_1_reccomend_evacuation.png": "sha256:cf5492fa50b7a00e080ebab6b1910db04eae3441d545c1638c45506e8f9cec88",
+    "fig_6_5_2_recommend_stop.png": "sha256:ae75f5fa6d9613dc42131dc0502047bed0d04e10fcc992a65b6b36232bb1a11b",
+    "fig_6_5_3_emergency_contained.png": "sha256:f7361b19d58bf795d4bcf126975de9a90499a4b8e7197899fb88db119fdb59f6"
   }
 }
