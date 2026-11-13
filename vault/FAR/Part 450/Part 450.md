@@ -5,8 +5,8 @@ citation: "14 CFR Part 450"
 title_number: 14
 part: 450
 source: "ecfr"
-source_version: "2026-10-15"
-canonical_hash: "sha256:a49ad692c5f148a4593915f933f4336b8b407e63ecbbf819001f937ee0b7a42e"
+source_version: "2026-11-10"
+canonical_hash: "sha256:cfc91cb6c8a994233610d733064839a699e05a9b4a7750d669a7d22ab020a559"
 generated: true
 title: "LAUNCH AND REENTRY LICENSE REQUIREMENTS"
 tags:
@@ -16,13 +16,13 @@ tags:
 # Part 450 — LAUNCH AND REENTRY LICENSE REQUIREMENTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-10-15 — [view on eCFR](https://www.ecfr.gov/on/2026-10-15/title-14/part-450)
+> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-450)
 > CHAPTER III—COMMERCIAL SPACE TRANSPORTATION, FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—LICENSING
 
-**Authority:** 51 U.S.C. 50901-50923.
+**Authority:** 51 U.S.C. chapter 509.
 
-**Source:** Docket No. FAA-2019-0229, Amdt. 450-2, 85 FR 79719, Dec. 10, 202085 FR 79739, Dec. 10, 2020, unless otherwise noted.
+**Source:** Docket No. FAA-2019-0229, Amdt. 450-2, 85 FR 79719, Dec. 10, 2020; 85 FR 79739, Dec. 10, 2020, unless otherwise noted.
 
 ## Contents
 
@@ -101,7 +101,7 @@ tags:
 - [[450.201|§ 450.201 — Responsibility for public safety and safety of property]]
 - [[450.203|§ 450.203 — Compliance]]
 - [[450.205|§ 450.205 — Financial responsibility requirements]]
-- [[450.207|§ 450.207 — Human spaceflight requirements]]
+- [[450.207|§ 450.207 — Human space flight requirements]]
 - [[450.209|§ 450.209 — Compliance monitoring]]
 - [[450.211|§ 450.211 — Continuing accuracy of license application; application for modification of license]]
 - [[450.213|§ 450.213 — Pre-flight reporting]]

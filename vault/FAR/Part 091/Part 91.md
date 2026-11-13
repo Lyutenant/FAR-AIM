@@ -5,8 +5,8 @@ citation: "14 CFR Part 91"
 title_number: 14
 part: 91
 source: "ecfr"
-source_version: "2026-10-15"
-canonical_hash: "sha256:ab6bf6d789eecb8ed91712a7b258c08b70dd4d062b37ebdea85ddf27d4ed10e9"
+source_version: "2026-11-10"
+canonical_hash: "sha256:6657878efaa015223505da6210c9218b02bc8070a82ca704e7e65079aa181c69"
 generated: true
 title: "GENERAL OPERATING AND FLIGHT RULES"
 tags:
@@ -16,11 +16,15 @@ tags:
 # Part 91 — GENERAL OPERATING AND FLIGHT RULES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-10-15 — [view on eCFR](https://www.ecfr.gov/on/2026-10-15/title-14/part-91)
+> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-91)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER F—AIR TRAFFIC AND GENERAL OPERATING RULES
 
 **Authority:** 49 U.S.C. 106(f), 40101, 40103, 40105, 40113, 40120, 44101, 44111, 44701, 44704, 44709, 44711, 44712, 44715,44716, 44717, 44722, 44740, 46306, 46315, 46316, 46504, 46506-46507, 47122, 47508,47528-47531, 47534; Pub. L. 112-95, 126 Stat. 11; Pub. L. 114-190, 130 Stat. 615 (49 U.S.C. 44703 note); sec. 828, Pub. L. 118-63, 138 Stat. 1330 (49 U.S.C. 44703 note); articles 12 and 29 of the Convention on International Civil Aviation, 61 Stat. 1180.
+
+**Amendment notes:**
+
+Link to an amendment published at 91 FR 72405, Nov. 10, 2026.
 
 ## Contents
 

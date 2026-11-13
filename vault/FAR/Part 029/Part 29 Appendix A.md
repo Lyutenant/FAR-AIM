@@ -6,7 +6,7 @@ title_number: 14
 part: 29
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-10-15"
+source_version: "2026-11-10"
 canonical_hash: "sha256:db181cfb4844e87158e04a09aa7ee1f0620d1d66103dd5c3951bea1e511a68f8"
 generated: true
 title: "Appendix A to Part 29—Instructions for Continued Airworthiness"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix A to Part 29—Instructions for Continued Airworthiness
 
 > [!info] Source
-> eCFR Title 14, issue 2026-10-15 — [view on eCFR](https://www.ecfr.gov/on/2026-10-15/title-14/part-29)
+> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-29)
 
 ## Official Text
 

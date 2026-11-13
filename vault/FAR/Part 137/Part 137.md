@@ -5,8 +5,8 @@ citation: "14 CFR Part 137"
 title_number: 14
 part: 137
 source: "ecfr"
-source_version: "2026-10-15"
-canonical_hash: "sha256:a48ddd94554fc8ef57bdd0eeedea52f91bc7c332be9647a075dd482bd31fe186"
+source_version: "2026-11-10"
+canonical_hash: "sha256:68d0390d4fa8f28da67fc28903cea7a4a8df4873bcc84bd380402faf4b831e36"
 generated: true
 title: "AGRICULTURAL AIRCRAFT OPERATIONS"
 tags:
@@ -16,11 +16,15 @@ tags:
 # Part 137 — AGRICULTURAL AIRCRAFT OPERATIONS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-10-15 — [view on eCFR](https://www.ecfr.gov/on/2026-10-15/title-14/part-137)
+> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-137)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER G—AIR CARRIERS AND OPERATORS FOR COMPENSATION OR HIRE: CERTIFICATION AND OPERATIONS
 
 **Authority:** 49 U.S.C. 106(g), 40103, 40113, 44701-44702.
+
+**Amendment notes:**
+
+Link to an amendment published at 91 FR 72407, Nov. 10, 2026.
 
 **Source:** Docket 1464, 30 FR 8106, June 24, 1965, unless otherwise noted.
 
