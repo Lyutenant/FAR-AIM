@@ -197,9 +197,8 @@ def collect_text(blocks: Iterable[dict]) -> Iterator[str]:
             yield from collect_text(block.get("blocks") or [])
         elif kind in ("extract", "footnote"):
             yield from collect_text(block.get("blocks") or [])
-        elif kind == "math":
-            if block.get("text"):
-                yield block["text"]
+        elif kind == "math" and block.get("text"):
+            yield block["text"]
         # image: no text content
 
 

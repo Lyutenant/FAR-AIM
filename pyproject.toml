@@ -20,7 +20,11 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest>=8",
-    "ruff>=0.6",
+    # Pinned exactly: CI installs the dev extras fresh on every scheduled run,
+    # and the lint step only runs when an upstream edition is accepted — a
+    # floating ruff can go stale unnoticed and then block the one sync PR
+    # that matters (2026-11-11: ruff 0.17 widened SIM102). Upgrade deliberately.
+    "ruff==0.17.4",
 ]
 
 [project.scripts]
