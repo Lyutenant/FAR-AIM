@@ -6,7 +6,7 @@ title_number: 14
 part: 125
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-10-15"
+source_version: "2026-11-10"
 canonical_hash: "sha256:4e7403367bf0cfb62caef5ea54347cd0651491a15aed8bceda8cdef76d515262"
 generated: true
 title: "Appendix A to Part 125—Additional Emergency Equipment"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix A to Part 125—Additional Emergency Equipment
 
 > [!info] Source
-> eCFR Title 14, issue 2026-10-15 — [view on eCFR](https://www.ecfr.gov/on/2026-10-15/title-14/part-125)
+> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-125)
 
 ## Official Text
 

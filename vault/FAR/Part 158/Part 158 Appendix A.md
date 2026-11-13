@@ -6,7 +6,7 @@ title_number: 14
 part: 158
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-10-15"
+source_version: "2026-11-10"
 canonical_hash: "sha256:ace6d4a2474369fe502c9b76e1bf45c3337ba287be89cf1e0933f970beb93b05"
 generated: true
 title: "Appendix A to Part 158—Assurances"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix A to Part 158—Assurances
 
 > [!info] Source
-> eCFR Title 14, issue 2026-10-15 — [view on eCFR](https://www.ecfr.gov/on/2026-10-15/title-14/part-158)
+> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-158)
 
 ## Official Text
 

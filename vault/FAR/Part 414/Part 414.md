@@ -5,8 +5,8 @@ citation: "14 CFR Part 414"
 title_number: 14
 part: 414
 source: "ecfr"
-source_version: "2026-10-15"
-canonical_hash: "sha256:ac725e6d44c49dae68ecf865b4c3320b8c4e4dfe0dc530a3cae6cbe152fbd7dc"
+source_version: "2026-11-10"
+canonical_hash: "sha256:8c449820ddede3cbf7661f02b81761484613978eb1ed5abd9a1d4afe6ab8d4ab"
 generated: true
 title: "SAFETY ELEMENT APPROVALS"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 414 — SAFETY ELEMENT APPROVALS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-10-15 — [view on eCFR](https://www.ecfr.gov/on/2026-10-15/title-14/part-414)
+> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-414)
 > CHAPTER III—COMMERCIAL SPACE TRANSPORTATION, FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—LICENSING
 
-**Authority:** 51 U.S.C. 50901-50923.
+**Authority:** 51 U.S.C. chapter 509.
 
 **Source:** Doc. No. FAA-2019-0229, Amdt. 414-4, 85 FR 79711, Dec. 10, 2020, unless otherwise noted.
 

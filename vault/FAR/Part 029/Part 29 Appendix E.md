@@ -6,7 +6,7 @@ title_number: 14
 part: 29
 appendix: "Appendix E"
 source: "ecfr"
-source_version: "2026-10-15"
+source_version: "2026-11-10"
 canonical_hash: "sha256:e64b6f4b660b375fc7b5a09f623b5db07b08cfef30a913597a8efff5b2d774ff"
 generated: true
 title: "Appendix E to Part 29—HIRF Environments and Equipment HIRF Test Levels"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix E to Part 29—HIRF Environments and Equipment HIRF Test Levels
 
 > [!info] Source
-> eCFR Title 14, issue 2026-10-15 — [view on eCFR](https://www.ecfr.gov/on/2026-10-15/title-14/part-29)
+> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-29)
 
 ## Official Text
 

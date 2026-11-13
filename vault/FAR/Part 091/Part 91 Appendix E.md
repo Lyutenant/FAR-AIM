@@ -6,7 +6,7 @@ title_number: 14
 part: 91
 appendix: "Appendix E"
 source: "ecfr"
-source_version: "2026-10-15"
+source_version: "2026-11-10"
 canonical_hash: "sha256:8ff2c896b4f105616c7e278f4081c6b229c8ba90f982db8c9425b637aa079421"
 generated: true
 title: "Appendix E to Part 91—Airplane Flight Recorder Specifications"
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix E to Part 91—Airplane Flight Recorder Specifications
 
 > [!info] Source
-> eCFR Title 14, issue 2026-10-15 — [view on eCFR](https://www.ecfr.gov/on/2026-10-15/title-14/part-91)
+> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-91)
 
 ## Official Text
 
