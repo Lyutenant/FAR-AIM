@@ -5,8 +5,8 @@ citation: "14 CFR Part 26"
 title_number: 14
 part: 26
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:83e592e779e3c2a3a14e59dd2ac7882f7d4f810566160f884475551e6dcddf34"
+source_version: "2026-11-23"
+canonical_hash: "sha256:b6c57ba11677918b02dff7831963ff0f78ca661a92d6f88892832b92fcd8a6c5"
 generated: true
 title: "CONTINUED AIRWORTHINESS AND SAFETY IMPROVEMENTS FOR TRANSPORT CATEGORY AIRPLANES"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 26 — CONTINUED AIRWORTHINESS AND SAFETY IMPROVEMENTS FOR TRANSPORT CATEGORY AIRPLANES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-26)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-26)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 
-**Authority:** 49 U.S.C. 106(g), 40113, 44701, 44702 and 44704.
+**Authority:** 49 U.S.C. 106(f), 40113, 44701, 44702 and 44704.
 
 **Source:** Docket No. FAA-2004-18379, 72 FR 63409, Nov. 8, 2007, unless otherwise noted.
 

@@ -5,8 +5,8 @@ citation: "14 CFR Part 161"
 title_number: 14
 part: 161
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:3a6ef5837c680d752b62a1ac221a23ca559cf25b1b53a7251af65ca522c2e1e8"
+source_version: "2026-11-23"
+canonical_hash: "sha256:c190607b1a266ad327573433bee9576282098b1d8f312cb60a5b7bc6773232f7"
 generated: true
 title: "NOTICE AND APPROVAL OF AIRPORT NOISE AND ACCESS RESTRICTIONS"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 161 — NOTICE AND APPROVAL OF AIRPORT NOISE AND ACCESS RESTRICTIONS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-161)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-161)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER I—AIRPORTS
 
-**Authority:** 49 U.S.C. 106(g), 47523-47527, 47533.
+**Authority:** 49 U.S.C. 106(f), 47523-47527, 47533.
 
 **Source:** Docket 26432, 56 FR 48698, Sept. 25, 1991, unless otherwise noted.
 

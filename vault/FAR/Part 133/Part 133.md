@@ -5,8 +5,8 @@ citation: "14 CFR Part 133"
 title_number: 14
 part: 133
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:b4227c31c6433678ffc25c71a3b46196880b28bd2b07d640d804898618fe5920"
+source_version: "2026-11-23"
+canonical_hash: "sha256:a9487c59ca94562175c7eb1b60ca55171d754dd9b29ffedb8ec689ee1a4f99d5"
 generated: true
 title: "ROTORCRAFT EXTERNAL-LOAD OPERATIONS"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 133 — ROTORCRAFT EXTERNAL-LOAD OPERATIONS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-133)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-133)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER G—AIR CARRIERS AND OPERATORS FOR COMPENSATION OR HIRE: CERTIFICATION AND OPERATIONS
 
-**Authority:** 49 U.S.C. 106(g), 40113, 44701-44702.
+**Authority:** 49 U.S.C. 106(f), 40113, 44701-44702.
 
 **Source:** Docket 1529, 29 FR 603, Jan. 24, 1964, unless otherwise noted.
 

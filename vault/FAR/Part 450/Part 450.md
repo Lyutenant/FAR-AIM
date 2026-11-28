@@ -5,8 +5,8 @@ citation: "14 CFR Part 450"
 title_number: 14
 part: 450
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:cfc91cb6c8a994233610d733064839a699e05a9b4a7750d669a7d22ab020a559"
+source_version: "2026-11-23"
+canonical_hash: "sha256:9ba33f0e789385492de85a510f0841f34991687ccfa4791bb36b8f90b79915d5"
 generated: true
 title: "LAUNCH AND REENTRY LICENSE REQUIREMENTS"
 tags:
@@ -16,7 +16,7 @@ tags:
 # Part 450 — LAUNCH AND REENTRY LICENSE REQUIREMENTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-450)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-450)
 > CHAPTER III—COMMERCIAL SPACE TRANSPORTATION, FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—LICENSING
 

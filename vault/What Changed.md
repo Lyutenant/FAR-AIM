@@ -11,6 +11,39 @@ Every edition transition this vault has accepted, newest first per source, as th
 
 ## FAR — Title 14 CFR
 
+### 2026-11-10 → 2026-11-23
+
+Edition [2026-11-23](https://www.ecfr.gov/on/2026-11-23/title-14): 6,544 published notes → 6,544 planned; content-changed 24, provenance-only 6,520, added 0, removed 0, moved 0.
+
+The eCFR amendment index (2026-11-10 → 2026-11-23) names 84 amended and 0 removed document(s); announced but unchanged: 14 CFR § 11.201, 14 CFR § 13.301, 14 CFR § 21.27, 14 CFR § 21.4, 14 CFR § 25.101, 14 CFR § 25.109, 14 CFR § 25.1093, 14 CFR § 25.1323, 14 CFR § 25.1391, 14 CFR § 25.1393, 14 CFR § 25.1395, 14 CFR § 25.1401, 14 CFR § 25.143, 14 CFR § 25.1435, 14 CFR § 25.397, 14 CFR § 25.405, 14 CFR § 25.415, 14 CFR § 25.509, 14 CFR § 25.779, 14 CFR § 25.807, 14 CFR § 25.815, 14 CFR § 25.851, 14 CFR § 26.21, 14 CFR § 26.35, 14 CFR § 26.39, 14 CFR § 26.5, 14 CFR § 27.1391, 14 CFR § 27.1393, 14 CFR § 27.1395, 14 CFR § 27.1401, 14 CFR § 27.621, 14 CFR § 29.1391, 14 CFR § 29.1393, 14 CFR § 29.1395, 14 CFR § 29.1401, 14 CFR § 29.621, 14 CFR § 29.807, 14 CFR § 29.815, 14 CFR § 29.853, 14 CFR § 31.65, 14 CFR § 33.68, 14 CFR § 33.76, 14 CFR § 33.77, 14 CFR § 34.23, 14 CFR § 34.25, 14 CFR § 34.60, 14 CFR § 34.71, 14 CFR § 47.17, 14 CFR § 49.15, 14 CFR Part 25, Appendix F, 14 CFR Part 25, Appendix K, 14 CFR Part 25, Appendix L, 14 CFR Part 25, Appendix N, 14 CFR Part 27, Appendix D, 14 CFR Part 29, Appendix E, 14 CFR Part 33, Appendix B, 14 CFR Part 33, Appendix D, 14 CFR Part 36, Appendix A, 14 CFR Part 36, Appendix H, 14 CFR Part 43, Appendix E.
+
+**Content changed (24)**
+
+- [[1.1|14 CFR § 1.1]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-1.1)
+- [[13.210|14 CFR § 13.210]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-13.210)
+- [[13.43|14 CFR § 13.43]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-13.43)
+- [[17.15|14 CFR § 17.15]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-17.15)
+- [[17.27|14 CFR § 17.27]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-17.27)
+- [[17.59|14 CFR § 17.59]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-17.59)
+- [[29.1337|14 CFR § 29.1337]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-29.1337)
+- [[Part 43 Appendix A|14 CFR Part 43, Appendix A]] — announced
+- [[61.29|14 CFR § 61.29]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-61.29)
+- [[61.411|14 CFR § 61.411]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-61.411)
+- [[61.415|14 CFR § 61.415]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-61.415)
+- [[63.16|14 CFR § 63.16]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-63.16)
+- [[65.101|14 CFR § 65.101]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-65.101)
+- [[65.16|14 CFR § 65.16]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-65.16)
+- [[67.401|14 CFR § 67.401]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-67.401)
+- [[67.407|14 CFR § 67.407]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-67.407)
+- [[67.409|14 CFR § 67.409]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-67.409)
+- [[73.19|14 CFR § 73.19]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-73.19)
+- [[91.225|14 CFR § 91.225]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-91.225)
+- [[91.511|14 CFR § 91.511]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-91.511)
+- [[120.117|14 CFR § 120.117]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-120.117)
+- [[120.225|14 CFR § 120.225]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-120.225)
+- [[151.1|14 CFR § 151.1]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-151.1)
+- [[450.117|14 CFR § 450.117]] — announced · [compare on eCFR](https://www.ecfr.gov/compare/2026-11-23/to/2026-11-10/title-14/section-450.117)
+
 ### 2026-10-15 → 2026-11-10
 
 Edition [2026-11-10](https://www.ecfr.gov/on/2026-11-10/title-14): 6,544 published notes → 6,544 planned; content-changed 20, provenance-only 6,524, added 0, removed 0, moved 0.

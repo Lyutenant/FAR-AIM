@@ -5,8 +5,8 @@ citation: "14 CFR Part 97"
 title_number: 14
 part: 97
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:2fda018080c71d32895687e5411bdf6e116f48dd2e7687d43a814bacc9b1e6c4"
+source_version: "2026-11-23"
+canonical_hash: "sha256:ed18a76648be12002652d05c6ba71bf3bf2acd2ef4ff0ed7789526a3840dcb1a"
 generated: true
 title: "STANDARD INSTRUMENT PROCEDURES"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 97 — STANDARD INSTRUMENT PROCEDURES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-97)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-97)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER F—AIR TRAFFIC AND GENERAL OPERATING RULES
 
-**Authority:** 49 U.S.C. 106(f), 106(g), 40103, 40106, 40113, 40114, 40120, 44502, 44514, 44701, 44719, and 44721-44722.
+**Authority:** 49 U.S.C. 106(f), 40103, 40106, 40113, 40114, 40120, 44502, 44514, 44701, 44719, and 44721-44722.
 
 **Source:** Docket 1580, 28 FR 6719, June 29, 1963, unless otherwise noted.
 

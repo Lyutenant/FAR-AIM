@@ -5,8 +5,8 @@ citation: "14 CFR Part 38"
 title_number: 14
 part: 38
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:f310ee873c0dada72efc7dcb5be051c4b185ea2876b03c67affce9c4388e7add"
+source_version: "2026-11-23"
+canonical_hash: "sha256:f6e1ecde6fd1161645541ad89ccb4b69181648ce8e7c3fc1b6e2c61f33d5fe41"
 generated: true
 title: "AIRPLANE FUEL EFFICIENCY CERTIFICATION"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 38 — AIRPLANE FUEL EFFICIENCY CERTIFICATION
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-38)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-38)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 
-**Authority:** 42 U.S.C. 4321 et seq., 7572; 49 U.S.C. 106(g), 40113, 44701-44702, 44704; 49 CFR 1.83(c)
+**Authority:** 42 U.S.C. 4321, et seq., 7572; 49 U.S.C. 106(f), 40113, 44701-44702, 44704; 49 CFR 1.83(c).
 
 **Source:** Docket No. FAA-2022-0241, Amdt. No. 21-107, 89 FR 12654, Feb. 16, 2024, unless otherwise noted.
 

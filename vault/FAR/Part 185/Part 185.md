@@ -5,8 +5,8 @@ citation: "14 CFR Part 185"
 title_number: 14
 part: 185
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:202951b99bdc5e1fa1ab1c626cc0628b95bc6dfe295956e0ab5ba42102128bee"
+source_version: "2026-11-23"
+canonical_hash: "sha256:5dbb39f4c473fbfe6cb1c8adeefd3527f85346dff30cfcac3e1b631b54c2fe0f"
 generated: true
 title: "TESTIMONY BY EMPLOYEES AND PRODUCTION OF RECORDS IN LEGAL PROCEEDINGS, AND SERVICE OF LEGAL PROCESS AND PLEADINGS"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 185 — TESTIMONY BY EMPLOYEES AND PRODUCTION OF RECORDS IN LEGAL PROCEEDINGS, AND SERVICE OF LEGAL PROCESS AND PLEADINGS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-185)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-185)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER K—ADMINISTRATIVE REGULATIONS
 
-**Authority:** 49 U.S.C. 106(g), 40113-40114, 46104; 49 CFR part 9.
+**Authority:** 49 U.S.C. 106(f), 40113-40114, 46104; 49 CFR part 9.
 
 **Source:** Docket 9900, 34 FR 16622, Oct. 17, 1969, unless otherwise noted.
 

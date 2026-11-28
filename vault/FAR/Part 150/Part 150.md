@@ -5,8 +5,8 @@ citation: "14 CFR Part 150"
 title_number: 14
 part: 150
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:d4a0b4e646108f0ad14a97d3bf66f784bb5e031d434112cfdf83a7b66f85406f"
+source_version: "2026-11-23"
+canonical_hash: "sha256:dd488283892711364d90f1639102dc05f36d1fe76da1c0d53027619430c5c33b"
 generated: true
 title: "AIRPORT NOISE COMPATIBILITY PLANNING"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 150 — AIRPORT NOISE COMPATIBILITY PLANNING
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-150)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-150)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER I—AIRPORTS
 
-**Authority:** 49 U.S.C. 106(g), 40113, 44715, 47101, 47501-47504.
+**Authority:** 49 U.S.C. 106(f), 40113, 44715, 47101, 47501-47504.
 
 **Source:** Docket 18691, 49 FR 49269, Dec. 18, 1984, unless otherwise noted.
 

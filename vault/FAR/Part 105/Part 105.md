@@ -5,8 +5,8 @@ citation: "14 CFR Part 105"
 title_number: 14
 part: 105
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:3d67527ecbd3da1ddc7d6dd10c3ff238ef8bc27733cb1efcf5c8281b88cac552"
+source_version: "2026-11-23"
+canonical_hash: "sha256:776af005cea37d3952019d12f1a0bd0e1bb609538a5f6b9ea24bd9b279164f50"
 generated: true
 title: "PARACHUTE OPERATIONS"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 105 — PARACHUTE OPERATIONS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-105)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-105)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER F—AIR TRAFFIC AND GENERAL OPERATING RULES
 
-**Authority:** 49 U.S.C. 106(g), 40113-40114, 44701-44702, 44721.
+**Authority:** 49 U.S.C. 106(f), 40113-40114, 44701-44702, 44721.
 
 **Source:** Docket FAA-1999-5483, 66 FR 23553, May 9, 2001, unless otherwise noted.
 

@@ -5,8 +5,8 @@ citation: "14 CFR Part 48"
 title_number: 14
 part: 48
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:42a2bca8699ded3dc9fc992fb226d5ca9ecd0167c368576ad94a480bd5dbf576"
+source_version: "2026-11-23"
+canonical_hash: "sha256:67ea2012eb56c8121f090c4b89458a3043b3c3344c18991311d6f1c64f27454c"
 generated: true
 title: "REGISTRATION AND MARKING REQUIREMENTS FOR SMALL UNMANNED AIRCRAFT"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 48 — REGISTRATION AND MARKING REQUIREMENTS FOR SMALL UNMANNED AIRCRAFT
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-48)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-48)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 
-**Authority:** 49 U.S.C. 106(f), 106(g), 40101, 40103, 40113-40114, 41703, 44101-44103, 44105-44106, 44110-44113, 44809(f), 45302, 45305, 46104, 46301, 46306.
+**Authority:** 49 U.S.C. 106(f), 40101, 40103, 40113-40114, 41703, 44101-44103, 44105-44106, 44110-44113, 44809(f), 45302, 45305, 46104, 46301, 46306.
 
 **Source:** Doc. No. FAA-2015-7396; Amdt. No. 48-1; 80 FR 78645, Dec. 16, 2015, unless otherwise noted.
 

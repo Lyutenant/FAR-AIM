@@ -5,8 +5,8 @@ citation: "14 CFR Part 34"
 title_number: 14
 part: 34
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:4c7f46f70d29b382dc6cb6c5596a4a9577773ab939caafb21836b1fb0cee9772"
+source_version: "2026-11-23"
+canonical_hash: "sha256:2a1ac2bbb17a3e44d65e12ff3e0ac56bd6a5e4268478a3e83c7a361d97c5c285"
 generated: true
 title: "FUEL VENTING AND EXHAUST EMISSION REQUIREMENTS FOR TURBINE ENGINE POWERED AIRPLANES"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 34 — FUEL VENTING AND EXHAUST EMISSION REQUIREMENTS FOR TURBINE ENGINE POWERED AIRPLANES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-34)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-34)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 
-**Authority:** 42 U.S.C. 4321 et seq., 7572; 49 U.S.C. 106(g), 40113, 44701-44702, 44704, 44714.
+**Authority:** 42 U.S.C. 4321, et seq., 7572; 49 U.S.C. 106(f), 40113, 44701-44702, 44704, 44714.
 
 **Source:** Docket No. 25613, 55 FR 32861, Aug. 10, 1990, unless otherwise noted.
 

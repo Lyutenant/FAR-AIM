@@ -5,8 +5,8 @@ citation: "14 CFR Part 25"
 title_number: 14
 part: 25
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:0413d5929c88dc02d3534ff5eff82d295c9acd1df0bc9fa8fccc3f3fc685b305"
+source_version: "2026-11-23"
+canonical_hash: "sha256:435fb6600ce3f15818f4c4b7adbf470bc0dec154223cbcd539d4c522d65ae505"
 generated: true
 title: "AIRWORTHINESS STANDARDS: TRANSPORT CATEGORY AIRPLANES"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 25 — AIRWORTHINESS STANDARDS: TRANSPORT CATEGORY AIRPLANES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-25)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-25)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 
-**Authority:** 49 U.S.C. 106(f), 106(g), 40113, 44701, 44702 and 44704; Pub. L. 115-254, 132 Stat 3281 (49 U.S.C. 44903 note).
+**Authority:** 49 U.S.C. 106(f), 40113, 44701-44702, 44704, Pub. L. 113-53, 127 Stat. 584 (49 U.S.C. 44703) note.
 
 **Source:** Docket No. 5066, 29 FR 18291, Dec. 24, 1964, unless otherwise noted.
 

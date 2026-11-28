@@ -5,8 +5,8 @@ citation: "14 CFR Part 23"
 title_number: 14
 part: 23
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:6c80f0a5a4567fffccf913029d8fc58abcbf72d4c78d1f6cae18b7bb0ffb99c7"
+source_version: "2026-11-23"
+canonical_hash: "sha256:b58964b2d5dd1656255a92107465b456969b7405e8f0c5881a6679041055cb72"
 generated: true
 title: "AIRWORTHINESS STANDARDS: NORMAL CATEGORY AIRPLANES"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 23 — AIRWORTHINESS STANDARDS: NORMAL CATEGORY AIRPLANES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-23)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-23)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 
-**Authority:** 49 U.S.C. 106(f), 106(g), 40113, 44701-44702, 44704, Pub. L. 113-53, 127 Stat. 584 (49 U.S.C. 44704) note.
+**Authority:** 49 U.S.C. 106(f), 40113, 44701-44702, 44704, Pub. L. 113-53, 127 Stat. 584 (49 U.S.C. 44704) note.
 
 **Source:** Doc. No. FAA-2015-1621, Amdt. 23-64, 81 FR 96689, Dec. 30, 2016, unless otherwise noted.
 

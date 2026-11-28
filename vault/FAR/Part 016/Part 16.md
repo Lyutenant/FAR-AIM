@@ -5,8 +5,8 @@ citation: "14 CFR Part 16"
 title_number: 14
 part: 16
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:da3f25186849f00e001cc2c9bab6ba3471ac179401a07de9ed5f7c59b6d78b05"
+source_version: "2026-11-23"
+canonical_hash: "sha256:f435a670b7a12a2819f564fa2508bfb112eb44467a9a84ae842a9d8921a73c9c"
 generated: true
 title: "RULES OF PRACTICE FOR FEDERALLY-ASSISTED AIRPORT ENFORCEMENT PROCEEDINGS"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 16 — RULES OF PRACTICE FOR FEDERALLY-ASSISTED AIRPORT ENFORCEMENT PROCEEDINGS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-16)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-16)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER B—PROCEDURAL RULES
 
-**Authority:** 49 U.S.C. 106(g), 322, 1110, 1111, 1115, 1116, 1718(a) and (b), 1719, 1723, 1726, 1727, 40103(e), 40113, 40116, 44502(b), 46101, 46104, 46110, 47104, 47106(e), 47107, 47108, 47111(d), 47122, 47123-47125, 47133, 47151-47153, 48103.
+**Authority:** 49 U.S.C. 106(f), 322, 1110, 1111, 1115, 1116, 1718(a) and (b), 1719, 1723, 1726, 1727, 40103(e), 40113, 40116, 44502(b), 46101, 46104, 46110, 47104, 47106(e), 47107, 47108, 47111(d), 47122, 47123-47125, 47133, 47151-47153, 48103.
 
 **Source:** Docket No. 27783, 61 FR 54004, Oct. 16, 1996, unless otherwise noted.
 

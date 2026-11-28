@@ -5,8 +5,8 @@ citation: "14 CFR Part 73"
 title_number: 14
 part: 73
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:f27bc304d021349f7fabdbde4749fc6805c2dc899be54aa02e8a7fd48e90b729"
+source_version: "2026-11-23"
+canonical_hash: "sha256:6b7e1e2c364afca0f6756f791a9740e01b94f7eda8ac4297c9c19904aa925b40"
 generated: true
 title: "SPECIAL USE AIRSPACE"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 73 — SPECIAL USE AIRSPACE
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-73)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-73)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER E—AIRSPACE
 
-**Authority:** 49 U.S.C. 106(f), 106(g); 40103, 40113, 40120; E.O. 10854, 24 FR 9565, 3 CFR, 1959-1963 Comp., p. 389.
+**Authority:** 49 U.S.C. 106(f), 40103, 40113, 40120; E.O. 10854, 24 FR 9565, 3 CFR, 1959-1963 Comp., p.389.
 
 **Source:** 46 FR 779, Jan. 2, 1981, unless otherwise noted.
 

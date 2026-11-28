@@ -5,8 +5,8 @@ citation: "14 CFR Part 31"
 title_number: 14
 part: 31
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:662a4770f8ccec5624bbde9d8387d1aea9930b504424ac4691f97c5e5915e94d"
+source_version: "2026-11-23"
+canonical_hash: "sha256:90305f30c3db88e069591bf744c6b8347f6913f9e61866b0fb4356fca57edce1"
 generated: true
 title: "AIRWORTHINESS STANDARDS: MANNED FREE BALLOONS"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 31 — AIRWORTHINESS STANDARDS: MANNED FREE BALLOONS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-31)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-31)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 
-**Authority:** 49 U.S.C. 106(g), 40113, 44701-44702, 44704.
+**Authority:** 49 U.S.C. 106(f), 40113, 44701-44702, 44704.
 
 **Source:** Docket No. 1437, 29 FR 8258, July 1, 1964, as amended by Amdt. 31-1, 29 FR 14563, Oct. 24, 1964, unless otherwise noted.
 

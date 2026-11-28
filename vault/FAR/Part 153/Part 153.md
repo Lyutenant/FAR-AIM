@@ -5,8 +5,8 @@ citation: "14 CFR Part 153"
 title_number: 14
 part: 153
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:a4c4add86d1956764723531de1e06f7469e58ec6023258224fe04a0d72c7458f"
+source_version: "2026-11-23"
+canonical_hash: "sha256:d9000e37714cbdc2a54b8b9a4f8bb9046c3d60e91a80b288087d7369f5d299df"
 generated: true
 title: "AIRPORT OPERATIONS"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 153 — AIRPORT OPERATIONS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-153)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-153)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER I—AIRPORTS
 
-**Authority:** 49 U.S.C. 106(g), 40113, and 44701.
+**Authority:** 49 U.S.C. 106(f), 40113, and 44701.
 
 **Source:** Docket FAA-2007-29237, 73 FR 47827, Aug. 15, 2008, unless otherwise noted.
 

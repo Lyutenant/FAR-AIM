@@ -5,8 +5,8 @@ citation: "14 CFR Part 39"
 title_number: 14
 part: 39
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:b605b5cd184c9f16026b3a0f541d8ddda47135f64180284d119d16dbf01e7a30"
+source_version: "2026-11-23"
+canonical_hash: "sha256:a1283145d55b9ad1ff98c78394eefc28847d35dca1def661191f2030a41aebe3"
 generated: true
 title: "AIRWORTHINESS DIRECTIVES"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 39 — AIRWORTHINESS DIRECTIVES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-39)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-39)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 
-**Authority:** 49 U.S.C. 106(g), 40113, 44701.
+**Authority:** 49 U.S.C. 106(f), 40113, 44701.
 
 **Source:** Docket No. FAA-2000-8460, 67 FR 48003, July 22, 2002, unless otherwise noted.
 

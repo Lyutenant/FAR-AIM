@@ -5,8 +5,8 @@ citation: "14 CFR Part 183"
 title_number: 14
 part: 183
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:5dd675779e9293f913223434bf4f990c41ee2a984f631223dd3b017d69fbfe87"
+source_version: "2026-11-23"
+canonical_hash: "sha256:762280f548723e34de2d7298c8826035557916486e22ab1c1ddcedd107fd5bfc"
 generated: true
 title: "REPRESENTATIVES OF THE ADMINISTRATOR"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 183 — REPRESENTATIVES OF THE ADMINISTRATOR
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-183)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-183)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER K—ADMINISTRATIVE REGULATIONS
 
-**Authority:** 31 U.S.C. 9701; 49 U.S.C. 106(f), 106(g), 40113, 44702, 45303.
+**Authority:** 31 U.S.C. 9701; 49 U.S.C. 106(f), 40113, 44702, 45303.
 
 **Source:** Docket 1151, 27 FR 4951, May 26, 1962, unless otherwise noted.
 

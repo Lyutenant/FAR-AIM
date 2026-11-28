@@ -5,8 +5,8 @@ citation: "14 CFR Part 1"
 title_number: 14
 part: 1
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:3034ae8da938ee9db1817402317776859e6a3c20f495e0db34fdd22740fafa58"
+source_version: "2026-11-23"
+canonical_hash: "sha256:e44ce2ba2a68d4eaaaed16b0138994535f85faa9852d0603a1c46da782d7d054"
 generated: true
 title: "DEFINITIONS AND ABBREVIATIONS"
 tags:
@@ -16,7 +16,7 @@ tags:
 # Part 1 — DEFINITIONS AND ABBREVIATIONS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-1)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-1)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER A—DEFINITIONS AND GENERAL REQUIREMENTS
 

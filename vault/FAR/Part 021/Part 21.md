@@ -5,8 +5,8 @@ citation: "14 CFR Part 21"
 title_number: 14
 part: 21
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:07911bc58b681932442eb01b4e22c9d7cf01d79f9b8a7c917148b40efb9eb9b9"
+source_version: "2026-11-23"
+canonical_hash: "sha256:0291068d72ecd16a6edafbca610ed5f1be4f178d19dbadc1b2625fb1af9e7213"
 generated: true
 title: "CERTIFICATION PROCEDURES FOR PRODUCTS AND ARTICLES"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 21 — CERTIFICATION PROCEDURES FOR PRODUCTS AND ARTICLES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-21)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-21)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—AIRCRAFT
 
-**Authority:** 42 U.S.C. 7572; 49 U.S.C. 106(f), 40105, 40113, 44701-44702, 44704, 44707, 44709, 44711, 44713, 44715, 45303.
+**Authority:** 42 U.S.C. 7572; 49 U.S.C. 106(f), 40105, 40113, 44701-44702, 44704, 44707, 44709, 44711, 44713, 44715, 45303; sec. 102, Pub. L. 116-260, 134 Stat. 2309 (49 U.S.C. 44701 note).
 
 **Editorial Notes:** 1\. For miscellaneous amendments to cross references in this 21 see Amdt. 21-10, 31 FR 9211, July 6, 1966. 2. Nomenclature changes to part 21 appear at 74 FR 53384, Oct. 16, 2009.
 
