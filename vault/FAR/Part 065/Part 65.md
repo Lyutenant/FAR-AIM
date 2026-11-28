@@ -5,8 +5,8 @@ citation: "14 CFR Part 65"
 title_number: 14
 part: 65
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:a7e170a7f280d588bc23030cea75b60f16b4f40c0331b8acf7c3969298c976c4"
+source_version: "2026-11-23"
+canonical_hash: "sha256:c2ad704eeae8f077d5ae0bc37544147b171ff10034c5f2099f3d36d67fbc2580"
 generated: true
 title: "CERTIFICATION: AIRMEN OTHER THAN FLIGHT CREWMEMBERS"
 tags:
@@ -16,7 +16,7 @@ tags:
 # Part 65 — CERTIFICATION: AIRMEN OTHER THAN FLIGHT CREWMEMBERS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-65)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-65)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER D—AIRMEN
 

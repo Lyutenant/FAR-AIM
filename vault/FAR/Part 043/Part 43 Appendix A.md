@@ -6,8 +6,8 @@ title_number: 14
 part: 43
 appendix: "Appendix A"
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:a6456640ae337b84657629c7d26b4861bbc5f2f26905ea4106d9343b74eb29ea"
+source_version: "2026-11-23"
+canonical_hash: "sha256:d6d45fed56133687e988c4d7f9711e550df44f391bb3868811e380d53cee8d33"
 generated: true
 title: "Appendix A to Part 43—Major Alterations, Major Repairs, and Preventive Maintenance"
 aliases:
@@ -22,7 +22,7 @@ cssclasses:
 # Appendix A to Part 43—Major Alterations, Major Repairs, and Preventive Maintenance
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-43)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-43)
 
 ## Official Text
 
@@ -258,7 +258,7 @@ cssclasses:
 
 (ii) The inspections and maintenance tasks are performed in accordance with instructions contained by the special inspection and preventive maintenance program approved as part of the aircraft's type design or supplemental type design.
 
-(31) Removing and replacing self-contained, front instrument panel-mounted navigation and communication devices that employ tray-mounted connectors that connect the unit when the unit is installed into the instrument panel, (excluding automatic flight control systems, transponders, and microwave frequency distance measuring equipment (DME)). The approved unit must be designed to be readily and repeatedly removed and replaced, and pertinent instructions must be provided. Prior to the unit's intended use, and operational check must be performed in accordance with the applicable sections of part 91 of this chapter.
+(31) Removing and replacing self-contained, front instrument panel-mounted navigation and communication devices that employ tray-mounted connectors that connect the unit when the unit is installed into the instrument panel, (excluding automatic flight control systems, transponders, and microwave frequency distance measuring equipment (DME)). The approved unit must be designed to be readily and repeatedly removed and replaced, and pertinent instructions must be provided. Prior to the unit's intended use, an operational check must be performed in accordance with the applicable sections of part 91 of this chapter.
 
 ## Source Notes
 
@@ -266,7 +266,7 @@ cssclasses:
 
 **Citations:**
 
-\[Doc. No. 1993, 29 FR 5451, Apr. 23, 1964, as amended by Amdt. 43-14, 37 FR 14291, June 19, 1972; Amdt. 43-23, 47 FR 41086, Sept. 16, 1982; Amdt. 43-24, 49 FR 44602, Nov. 7, 1984; Amdt. 43-25, 51 FR 40703, Nov. 7, 1986; Amdt. 43-27, 52 FR 17277, May 6, 1987; Amdt. 43-34, 57 FR 41369, Sept. 9, 1992; Amdt. 43-36, 61 FR 19501, May 1, 1996; Amdt. 43-45, 77 FR 71096, Nov. 29, 2012; Docket No. FAA-2021-0237, Amdt. No. 43-52, 87 FR 31414, May 24, 2022]
+\[Doc. No. 1993, 29 FR 5451, Apr. 23, 1964, as amended by Amdt. 43-14, 37 FR 14291, June 19, 1972; Amdt. 43-23, 47 FR 41086, Sept. 16, 1982; Amdt. 43-24, 49 FR 44602, Nov. 7, 1984; Amdt. 43-25, 51 FR 40703, Nov. 7, 1986; Amdt. 43-27, 52 FR 17277, May 6, 1987; Amdt. 43-34, 57 FR 41369, Sept. 9, 1992; Amdt. 43-36, 61 FR 19501, May 1, 1996; Amdt. 43-45, 77 FR 71096, Nov. 29, 2012; Docket No. FAA-2021-0237, Amdt. No. 43-52, 87 FR 31414, May 24, 2022; Amdt. No. 43-65, 91 FR 75447, Nov. 23, 2026]
 
 ## Explicit Cross-References
 

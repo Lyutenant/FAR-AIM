@@ -5,8 +5,8 @@ citation: "14 CFR Part 13"
 title_number: 14
 part: 13
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:4a38d4e292b467c7b6444c15f18e1709601df5bdb7a904250fd9eb86db4a6674"
+source_version: "2026-11-23"
+canonical_hash: "sha256:506f26ab2295cf0370fcabbbc49090ff9747ab463f6329ac8614988aa58c0952"
 generated: true
 title: "INVESTIGATIVE AND ENFORCEMENT PROCEDURES"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 13 — INVESTIGATIVE AND ENFORCEMENT PROCEDURES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-13)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-13)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER B—PROCEDURAL RULES
 
-**Authority:** 18 U.S.C. 6002; 28 U.S.C. 2461 note; 49 U.S.C. 106(g), 5121-5124, 40113-40114, 44103-44106, 44701-44704, 44709-44710, 44713, 44725, 44742, 44802 (note), 46101-46111, 46301, 46302 (for a violation of 49 U.S.C. 46504), 46304-46316, 46318-46320, 46501-46502, 46504, 46507, 47106, 47107, 47111, 47122, 47306, 47531-47532; 49 CFR 1.83.
+**Authority:** 18 U.S.C. 6002; 28 U.S.C. 2461 note; 49 U.S.C. 106(f), 5121-5124, 40113-40114, 44103-44106, 44701-44704, 44709-44710, 44713, 44725, 44742, 44802 (note), 46101-46111, 46301, 46302 (for a violation of 49 U.S.C. 46504), 46304-46316, 46318-46320, 46501-46502, 46504, 46507, 47106, 47107, 47111, 47122, 47306, 47531-47532; 49 CFR 1.83.
 
 **Source:** Docket No. 18884, 44 FR 63723, Nov. 5, 1979, unless otherwise noted.
 

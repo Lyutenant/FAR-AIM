@@ -5,8 +5,8 @@ citation: "14 CFR Part 151"
 title_number: 14
 part: 151
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:5201a5a811ba086c91ed33ad3be5c69c55876236be89ea3dc1bd9a00419f22df"
+source_version: "2026-11-23"
+canonical_hash: "sha256:6e41c526bab691e98e3ba51fd308896ccb858d55003f2042359248b399970f74"
 generated: true
 title: "FEDERAL AID TO AIRPORTS"
 tags:
@@ -16,15 +16,17 @@ tags:
 # Part 151 — FEDERAL AID TO AIRPORTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-151)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-151)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER I—AIRPORTS
+
+**Authority:** 49 U.S.C. 106(f), 40113, 47151, 47153.
+
+**Source:** Docket 1329, 27 FR 12349, Dec. 13, 1962, unless otherwise noted.
 
 ## Contents
 
 ### Subpart A — General Requirements
-
-**Authority:** 49 U.S.C. 106(g), 40113, 47151, 47153.
 
 - [[151.1|§ 151.1 — Applicability]]
 - [[151.3|§ 151.3 — National Airport Plan]]
@@ -36,10 +38,6 @@ tags:
 - [[151.15|§ 151.15 — Federal-aid Airport Program: Policy affecting runway or taxiway remarking]]
 
 ### Subpart B — Rules and Procedures for Airport Development Projects
-
-**Authority:** 49 U.S.C. 106(g), 40113, 47151, 47153.
-
-**Source:** Docket 1329, 27 FR 12351, Dec. 13, 1962, unless otherwise noted.
 
 - [[151.21|§ 151.21 — Procedures: Application; general information]]
 - [[151.23|§ 151.23 — Procedures: Application; funding information]]
@@ -72,10 +70,6 @@ tags:
 
 ### Subpart C — Project Programming Standards
 
-**Authority:** 49 U.S.C. 106(g), 40113, 47151, 47153.
-
-**Source:** Docket 1329, 27 FR 12357 Dec. 13, 1962, unless otherwise noted.
-
 - [[151.71|§ 151.71 — Applicability]]
 - [[151.72|§ 151.72 — Incorporation by reference of technical guidelines in Advisory Circulars]]
 - [[151.73|§ 151.73 — Land acquisition]]
@@ -96,8 +90,6 @@ tags:
 - [[151.99|§ 151.99 — Modifications of programming standards]]
 
 ### Subpart D — Rules and Procedures for Advance Planning and Engineering Proposals
-
-**Authority:** 49 U.S.C. 106(g), 40113, 47151, 47153.
 
 **Source:** Docket 6227, 30 FR 8040, June 23, 1965, unless otherwise noted.
 

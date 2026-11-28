@@ -5,8 +5,8 @@ citation: "14 CFR Part 61"
 title_number: 14
 part: 61
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:448560ee5a10990d64cc13e47405b820a7140cd5154d988e60debe6da083c35c"
+source_version: "2026-11-23"
+canonical_hash: "sha256:b6af5a1c1a989a98aefb1c933a75391bf98594966d07b9fcaeea00b4f0f19ba4"
 generated: true
 title: "CERTIFICATION: PILOTS, FLIGHT INSTRUCTORS, AND GROUND INSTRUCTORS"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 61 — CERTIFICATION: PILOTS, FLIGHT INSTRUCTORS, AND GROUND INSTRUCTORS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-61)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-61)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER D—AIRMEN
 
-**Authority:** 49 U.S.C. 106(f), 40113, 44701-44703, 44707, 44709-44711, 44729, 44903, 45102-45103, 45301-45302.
+**Authority:** 49 U.S.C. 106(f), 40113, 44701- 44703, 44707, 44709-44711, 44729, 44903, 45102-45103, 45301-45302; sec. 2307, Pub. L. 114-190, 130 Stat. 615 (49 U.S.C. 44703 note); sec. 318, Pub. L. 115-254, 132 Stat. 3186 (49 U.S.C. 44703 note); sec. 820, Pub. L. 118-63, 138 Stat. 1330 (49 U.S.C. 44939 note); secs. 815 and 828, Pub. L. 118-63, 138 Stat. 1328, 1336 (49 U.S.C. 44703 note).
 
 **Source:** Docket 25910, 62 FR 16298, Apr. 4, 1997, unless otherwise noted.
 

@@ -5,8 +5,8 @@ citation: "14 CFR Part 193"
 title_number: 14
 part: 193
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:e659aa6f78cc2dff5c51cdd9a7aacf2b377a5ccad97b32118de7334effbe8947"
+source_version: "2026-11-23"
+canonical_hash: "sha256:4fab5f2b519e3f22f0d85a4afbe54276bacb884398f2af24167cb513e3565328"
 generated: true
 title: "PROTECTION OF VOLUNTARILY SUBMITTED INFORMATION"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 193 — PROTECTION OF VOLUNTARILY SUBMITTED INFORMATION
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-193)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-193)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER K—ADMINISTRATIVE REGULATIONS
 
-**Authority:** 49 U.S.C. 106(g), 40113, 40123.
+**Authority:** 49 U.S.C. 106(f), 40113, 40123.
 
 **Source:** 66 FR 33805, June 25, 2001, unless otherwise noted.
 

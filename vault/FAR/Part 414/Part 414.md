@@ -5,7 +5,7 @@ citation: "14 CFR Part 414"
 title_number: 14
 part: 414
 source: "ecfr"
-source_version: "2026-11-10"
+source_version: "2026-11-23"
 canonical_hash: "sha256:8c449820ddede3cbf7661f02b81761484613978eb1ed5abd9a1d4afe6ab8d4ab"
 generated: true
 title: "SAFETY ELEMENT APPROVALS"
@@ -16,7 +16,7 @@ tags:
 # Part 414 — SAFETY ELEMENT APPROVALS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-414)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-414)
 > CHAPTER III—COMMERCIAL SPACE TRANSPORTATION, FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER C—LICENSING
 

@@ -5,8 +5,8 @@ citation: "14 CFR Part 187"
 title_number: 14
 part: 187
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:7381e0cdb3358798800eab0c4ffc8eff781874e23b81153c47795da7e576c3d6"
+source_version: "2026-11-23"
+canonical_hash: "sha256:89a15cb50462fd60ef3bedcf205cdb0e8e9389870725cc3c653d34c52e6eb6e1"
 generated: true
 title: "FEES"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 187 — FEES
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-187)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-187)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER K—ADMINISTRATIVE REGULATIONS
 
-**Authority:** 31 U.S.C. 9701; 49 U.S.C. 106(f), 106(g), 106(l)(6), 40104-40105, 40109, 40113-40114, 44702, 45301.
+**Authority:** 31 U.S.C. 9701; 49 U.S.C. 106(f), 106(l)(6), 40104-40105, 40109, 40113-40114, 44702, 45301.
 
 **Source:** Docket 8347, 32 FR 12051, Aug. 22, 1967, unless otherwise noted.
 

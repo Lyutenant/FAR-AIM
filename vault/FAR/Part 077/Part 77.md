@@ -5,8 +5,8 @@ citation: "14 CFR Part 77"
 title_number: 14
 part: 77
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:b154044f9fc622f4c62c294cf45a0a11134d2aeb40e579968ff0fdfec30759b7"
+source_version: "2026-11-23"
+canonical_hash: "sha256:1e3dd6372f058355e077ca2dc28290585b4e7458633940a6b2cf4322c8d8fce3"
 generated: true
 title: "SAFE, EFFICIENT USE, AND PRESERVATION OF THE NAVIGABLE AIRSPACE"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 77 — SAFE, EFFICIENT USE, AND PRESERVATION OF THE NAVIGABLE AIRSPACE
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-77)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-77)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER E—AIRSPACE
 
-**Authority:** 49 U.S.C. 106 (g), 40103, 40113-40114, 44502, 44701, 44718, 46101-46102, 46104.
+**Authority:** 49 U.S.C. 106(f), 40103, 40113-40114, 44502, 44701, 44718, 46101-46102, 46104.
 
 **Source:** Docket FAA-2006-25002, 75 FR 42303, July 21, 2010, unless otherwise noted.
 

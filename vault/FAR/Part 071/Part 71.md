@@ -5,8 +5,8 @@ citation: "14 CFR Part 71"
 title_number: 14
 part: 71
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:58f363f0fb71350facd509073a2e1f02b4b7ff0f429e7e031e0af1eca70fa90f"
+source_version: "2026-11-23"
+canonical_hash: "sha256:297152a3c8272dadf003ae2811d7470a7558f8d88309bf1f81443f3bff6f2a52"
 generated: true
 title: "DESIGNATION OF CLASS A, B, C, D, AND E AIRSPACE AREAS; AIR TRAFFIC SERVICE ROUTES; AND REPORTING POINTS"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 71 — DESIGNATION OF CLASS A, B, C, D, AND E AIRSPACE AREAS; AIR TRAFFIC SERVICE ROUTES; AND REPORTING POINTS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-71)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-71)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER E—AIRSPACE
 
-**Authority:** 49 U.S.C. 106(f), 106(g), 40103, 40113, 40120; E.O. 10854, 24 FR 9565, 3 CFR, 1959-1963 Comp., p.389.
+**Authority:** 49 U.S.C. 106(f), 40103, 40113, 40120; E.O. 10854, 24 FR 9565, 3 CFR, 1959-1963 Comp., p.389.
 
 **Source:** Amdt. 71-14, 56 FR 65654, Dec. 17, 1991, unless otherwise noted.
 

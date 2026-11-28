@@ -525,6 +525,209 @@
           "14 CFR Part 91, Appendix F"
         ]
       }
+    },
+    {
+      "corpus": "FAR",
+      "before": "2026-11-10",
+      "after": "2026-11-23",
+      "published": 6544,
+      "planned": 6544,
+      "unchanged": 0,
+      "provenance_only": 6520,
+      "content_changed": [
+        {
+          "stem": "1.1",
+          "citation": "14 CFR § 1.1",
+          "announced": true
+        },
+        {
+          "stem": "13.210",
+          "citation": "14 CFR § 13.210",
+          "announced": true
+        },
+        {
+          "stem": "13.43",
+          "citation": "14 CFR § 13.43",
+          "announced": true
+        },
+        {
+          "stem": "17.15",
+          "citation": "14 CFR § 17.15",
+          "announced": true
+        },
+        {
+          "stem": "17.27",
+          "citation": "14 CFR § 17.27",
+          "announced": true
+        },
+        {
+          "stem": "17.59",
+          "citation": "14 CFR § 17.59",
+          "announced": true
+        },
+        {
+          "stem": "29.1337",
+          "citation": "14 CFR § 29.1337",
+          "announced": true
+        },
+        {
+          "stem": "Part 43 Appendix A",
+          "citation": "14 CFR Part 43, Appendix A",
+          "announced": true
+        },
+        {
+          "stem": "61.29",
+          "citation": "14 CFR § 61.29",
+          "announced": true
+        },
+        {
+          "stem": "61.411",
+          "citation": "14 CFR § 61.411",
+          "announced": true
+        },
+        {
+          "stem": "61.415",
+          "citation": "14 CFR § 61.415",
+          "announced": true
+        },
+        {
+          "stem": "63.16",
+          "citation": "14 CFR § 63.16",
+          "announced": true
+        },
+        {
+          "stem": "65.101",
+          "citation": "14 CFR § 65.101",
+          "announced": true
+        },
+        {
+          "stem": "65.16",
+          "citation": "14 CFR § 65.16",
+          "announced": true
+        },
+        {
+          "stem": "67.401",
+          "citation": "14 CFR § 67.401",
+          "announced": true
+        },
+        {
+          "stem": "67.407",
+          "citation": "14 CFR § 67.407",
+          "announced": true
+        },
+        {
+          "stem": "67.409",
+          "citation": "14 CFR § 67.409",
+          "announced": true
+        },
+        {
+          "stem": "73.19",
+          "citation": "14 CFR § 73.19",
+          "announced": true
+        },
+        {
+          "stem": "91.225",
+          "citation": "14 CFR § 91.225",
+          "announced": true
+        },
+        {
+          "stem": "91.511",
+          "citation": "14 CFR § 91.511",
+          "announced": true
+        },
+        {
+          "stem": "120.117",
+          "citation": "14 CFR § 120.117",
+          "announced": true
+        },
+        {
+          "stem": "120.225",
+          "citation": "14 CFR § 120.225",
+          "announced": true
+        },
+        {
+          "stem": "151.1",
+          "citation": "14 CFR § 151.1",
+          "announced": true
+        },
+        {
+          "stem": "450.117",
+          "citation": "14 CFR § 450.117",
+          "announced": true
+        }
+      ],
+      "added": [],
+      "removed": [],
+      "moved": [],
+      "announcement": {
+        "record": "eCFR amendment index",
+        "since": "2026-11-10",
+        "until": "2026-11-23",
+        "amended": 84,
+        "removed": 0,
+        "unchanged": [
+          "14 CFR § 11.201",
+          "14 CFR § 13.301",
+          "14 CFR § 21.27",
+          "14 CFR § 21.4",
+          "14 CFR § 25.101",
+          "14 CFR § 25.109",
+          "14 CFR § 25.1093",
+          "14 CFR § 25.1323",
+          "14 CFR § 25.1391",
+          "14 CFR § 25.1393",
+          "14 CFR § 25.1395",
+          "14 CFR § 25.1401",
+          "14 CFR § 25.143",
+          "14 CFR § 25.1435",
+          "14 CFR § 25.397",
+          "14 CFR § 25.405",
+          "14 CFR § 25.415",
+          "14 CFR § 25.509",
+          "14 CFR § 25.779",
+          "14 CFR § 25.807",
+          "14 CFR § 25.815",
+          "14 CFR § 25.851",
+          "14 CFR § 26.21",
+          "14 CFR § 26.35",
+          "14 CFR § 26.39",
+          "14 CFR § 26.5",
+          "14 CFR § 27.1391",
+          "14 CFR § 27.1393",
+          "14 CFR § 27.1395",
+          "14 CFR § 27.1401",
+          "14 CFR § 27.621",
+          "14 CFR § 29.1391",
+          "14 CFR § 29.1393",
+          "14 CFR § 29.1395",
+          "14 CFR § 29.1401",
+          "14 CFR § 29.621",
+          "14 CFR § 29.807",
+          "14 CFR § 29.815",
+          "14 CFR § 29.853",
+          "14 CFR § 31.65",
+          "14 CFR § 33.68",
+          "14 CFR § 33.76",
+          "14 CFR § 33.77",
+          "14 CFR § 34.23",
+          "14 CFR § 34.25",
+          "14 CFR § 34.60",
+          "14 CFR § 34.71",
+          "14 CFR § 47.17",
+          "14 CFR § 49.15",
+          "14 CFR Part 25, Appendix F",
+          "14 CFR Part 25, Appendix K",
+          "14 CFR Part 25, Appendix L",
+          "14 CFR Part 25, Appendix N",
+          "14 CFR Part 27, Appendix D",
+          "14 CFR Part 29, Appendix E",
+          "14 CFR Part 33, Appendix B",
+          "14 CFR Part 33, Appendix D",
+          "14 CFR Part 36, Appendix A",
+          "14 CFR Part 36, Appendix H",
+          "14 CFR Part 43, Appendix E"
+        ]
+      }
     }
   ]
 }

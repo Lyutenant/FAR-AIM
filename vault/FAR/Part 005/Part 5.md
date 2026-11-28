@@ -5,8 +5,8 @@ citation: "14 CFR Part 5"
 title_number: 14
 part: 5
 source: "ecfr"
-source_version: "2026-11-10"
-canonical_hash: "sha256:599fdb2c46e44574793d15a22fdcbcdf9c961824f5bda2543522dff76b60b138"
+source_version: "2026-11-23"
+canonical_hash: "sha256:91c8ebd3ff0ede3532098e05e48a6213c341eea04d0e1c25a8df519675924465"
 generated: true
 title: "SAFETY MANAGEMENT SYSTEMS"
 tags:
@@ -16,11 +16,11 @@ tags:
 # Part 5 — SAFETY MANAGEMENT SYSTEMS
 
 > [!info] Source
-> eCFR Title 14, issue 2026-11-10 — [view on eCFR](https://www.ecfr.gov/on/2026-11-10/title-14/part-5)
+> eCFR Title 14, issue 2026-11-23 — [view on eCFR](https://www.ecfr.gov/on/2026-11-23/title-14/part-5)
 > CHAPTER I—FEDERAL AVIATION ADMINISTRATION, DEPARTMENT OF TRANSPORTATION
 > SUBCHAPTER A—DEFINITIONS AND GENERAL REQUIREMENTS
 
-**Authority:** 49 U.S.C. 106(f), 106(g), 40101, 40113, 40119, 41706, 44101, 44701-44702, 44705, 44709-44711, 44713, 44716-44717, 44722, 46105; Sec. 102, Pub. L. 116-260, 134 Stat. 2309; Sec 215, Pub. L. 111-216, 124 Stat. 2366.
+**Authority:** 49 U.S.C. 106(f), 40101, 40113, 40119, 41706, 44101, 44701-44702, 44705, 44709-44711, 44713, 44716-44717, 44722, 46105; Sec. 102, Pub. L. 116-260, 134 Stat. 2309; Sec 215, Pub. L. 111-216, 124 Stat. 2366.
 
 **Source:** Doc. No. FAA-2009-0671, Amdt. 5-1, 80 FR 1326, Jan. 8, 2015, unless otherwise noted.
 
